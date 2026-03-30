@@ -10,6 +10,10 @@ export default function HabitatPage() {
   const location = useLocation()
   const weather = useWeather(location.lat, location.lon)
   
+  // Allow manual location override
+  const [manualLocation, setManualLocation] = useState(null)
+  const [showLocationPicker, setShowLocationPicker] = useState(false)
+  
   // Family preferences
   const [preferences, setPreferences] = useState({
     youngestAge: 5,
@@ -20,8 +24,11 @@ export default function HabitatPage() {
     prefersFreeParking: true,
   })
 
+  // Use manual location if set, otherwise use detected location
+  const activeLocation = manualLocation || (location.lat ? location : null)
+  
   const { hikes: recommendedHikes, weatherAssessment, message, isReady } = useRecommendations(
-    location,
+    activeLocation,
     weather,
     preferences
   )
@@ -29,6 +36,16 @@ export default function HabitatPage() {
   const togglePreference = (key) => {
     setPreferences(prev => ({ ...prev, [key]: !prev[key] }))
   }
+
+  // Manual location presets for common areas
+  const locationPresets = [
+    { name: 'Denver Metro', lat: 39.7392, lon: -104.9903 },
+    { name: 'Boulder', lat: 40.0150, lon: -105.2705 },
+    { name: 'Colorado Springs', lat: 38.8339, lon: -104.8214 },
+    { name: 'Fort Collins', lat: 40.5853, lon: -105.0844 },
+    { name: 'Estes Park (RMNP)', lat: 40.3772, lon: -105.5217 },
+    { name: 'Golden', lat: 39.7555, lon: -105.2211 },
+  ]
 
   return (
     <div className="min-h-screen bg-cream pt-24 pb-12 px-4">
@@ -70,30 +87,65 @@ export default function HabitatPage() {
                 <p className="font-sans font-medium text-ink">
                   {location.loading ? (
                     <span className="text-inkl italic">Finding you...</span>
-                  ) : location.city ? (
+                  ) : location.city && !manualLocation ? (
                     location.city
+                  ) : manualLocation ? (
+                    <span className="text-olive">Manual: {manualLocation.name}</span>
                   ) : location.error ? (
                     <span className="text-terra">{location.error}</span>
                   ) : (
-                    <span className="text-inkl italic">Enable location</span>
+                    <span className="text-inkl italic">Select location below</span>
                   )}
                 </p>
               </div>
             </div>
 
-            {/* Weather Quick View */}
-            <div className="flex items-center gap-4">
-              {weather.temp !== null && (
-                <div className="flex items-center gap-2 bg-white/60 rounded-full px-4 py-2">
-                  <span className="text-2xl">{weatherAssessment?.icon || '🌤️'}</span>
-                  <div>
-                    <p className="font-sans font-medium text-ink">{weather.temp}°F</p>
-                    <p className="font-sans text-xs text-inkl">{weatherAssessment?.label || 'Loading...'}</p>
-                  </div>
-                </div>
-              )}
-            </div>
+            {/* Location Picker Toggle */}
+            <button
+              onClick={() => setShowLocationPicker(!showLocationPicker)}
+              className="px-4 py-2 bg-ember text-white rounded-full font-sans text-sm hover:bg-terra transition-colors"
+            >
+              {showLocationPicker ? 'Hide Locations' : 'Change Location'}
+            </button>
           </div>
+          
+          {/* Location Picker Dropdown */}
+          {showLocationPicker && (
+            <div className="mt-4 pt-4 border-t border-inkll/20">
+              <p className="font-sans text-sm text-inkl mb-3">Choose an area to find nearby trails:</p>
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2">
+                <button
+                  onClick={() => {
+                    setManualLocation(null)
+                    setShowLocationPicker(false)
+                  }}
+                  className={`px-3 py-2 rounded-lg border font-sans text-sm transition-all ${
+                    !manualLocation && location.lat
+                      ? 'bg-ember text-white border-ember'
+                      : 'bg-white border-inkll/20 text-ink hover:border-ember'
+                  }`}
+                >
+                  📍 Auto-detect
+                </button>
+                {locationPresets.map((preset) => (
+                  <button
+                    key={preset.name}
+                    onClick={() => {
+                      setManualLocation({ ...preset, city: preset.name, lat: preset.lat, lon: preset.lon })
+                      setShowLocationPicker(false)
+                    }}
+                    className={`px-3 py-2 rounded-lg border font-sans text-sm transition-all ${
+                      manualLocation?.name === preset.name
+                        ? 'bg-ember text-white border-ember'
+                        : 'bg-white border-inkll/20 text-ink hover:border-ember'
+                    }`}
+                  >
+                    {preset.name}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
         </motion.div>
 
         {/* Family Preferences */}
@@ -199,7 +251,19 @@ export default function HabitatPage() {
         </motion.div>
 
         {/* Recommendations */}
-        {isReady ? (
+        {!activeLocation ? (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="bg-blush/50 rounded-2xl p-12 text-center"
+          >
+            <span className="text-5xl mb-4 block">🗺️</span>
+            <h3 className="font-serif text-2xl text-ink mb-2">Select Your Location</h3>
+            <p className="font-sans text-inkl mb-6">
+              Enable location access or pick an area above to see personalized trail recommendations.
+            </p>
+          </motion.div>
+        ) : isReady ? (
           <>
             {/* Weather Assessment Message */}
             {weatherAssessment && (
@@ -306,13 +370,25 @@ export default function HabitatPage() {
               </motion.div>
             )}
           </>
-        ) : (
+        ) : location.loading ? (
           <div className="flex items-center justify-center py-20">
             <div className="text-center">
               <div className="w-12 h-12 border-4 border-ember/30 border-t-ember rounded-full animate-spin mx-auto mb-4"></div>
               <p className="font-sans text-inkl">Finding your perfect trails...</p>
             </div>
           </div>
+        ) : (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="bg-blush/50 rounded-2xl p-12 text-center"
+          >
+            <span className="text-5xl mb-4 block">🗺️</span>
+            <h3 className="font-serif text-2xl text-ink mb-2">Select Your Location</h3>
+            <p className="font-sans text-inkl mb-6">
+              Enable location access or pick an area above to see personalized trail recommendations.
+            </p>
+          </motion.div>
         )}
 
         {/* Why This Works */}

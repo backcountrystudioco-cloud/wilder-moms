@@ -86,7 +86,7 @@ export default function HikeCard({ hike, index = 0 }) {
             {hike.distanceLabel}
           </span>
           <span className="px-3 py-1 rounded-full bg-blush text-inkl font-sans text-sm">
-            {hike.duration}
+            {hike.durationLabel}
           </span>
         </div>
 
