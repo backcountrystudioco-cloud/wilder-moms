@@ -134,26 +134,36 @@ export default function Nav() {
         </div>
       </div>
 
-      {/* Mobile Nav Links */}
-      <div className="md:hidden px-4 pb-4">
-        <div className="flex items-center gap-4 overflow-x-auto pb-2">
+      {/* Mobile Nav Links - Always Visible */}
+      <div className="md:hidden border-t border-inkll/20 mt-2">
+        <div className="flex items-center justify-around gap-4 px-4 py-3">
           <Link
             to="/explore"
-            className="font-sans font-medium text-sm whitespace-nowrap text-ink hover:text-ember transition-colors"
+            className="flex flex-col items-center gap-1 font-sans font-medium text-sm text-ink hover:text-ember transition-colors"
           >
-            Explore
+            <span>🔍</span>
+            <span>Explore</span>
           </Link>
           <Link
             to="/builds"
-            className="font-sans font-medium text-sm whitespace-nowrap text-ink hover:text-ember transition-colors"
+            className="flex flex-col items-center gap-1 font-sans font-medium text-sm text-ink hover:text-ember transition-colors"
           >
-            Builds
+            <span>🔨</span>
+            <span>Builds</span>
           </Link>
           <Link
             to="/activities"
-            className="font-sans font-medium text-sm whitespace-nowrap text-ink hover:text-ember transition-colors"
+            className="flex flex-col items-center gap-1 font-sans font-medium text-sm text-ink hover:text-ember transition-colors"
           >
-            Activities
+            <span>⭐</span>
+            <span>Activities</span>
+          </Link>
+          <Link
+            to="/profile"
+            className="flex flex-col items-center gap-1 font-sans font-medium text-sm text-ink hover:text-ember transition-colors"
+          >
+            <span>👤</span>
+            <span>Profile</span>
           </Link>
         </div>
       </div>
