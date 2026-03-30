@@ -437,11 +437,13 @@ export default function ProfilePage() {
                 `}
               >
                 <span>{tab.label}</span>
-                <span className={`text-xs px-1.5 py-0.5 rounded-full ${
-                  activeTab === tab.id ? 'bg-white/20' : 'bg-blush'
-                }`}>
-                  {tab.count}
-                </span>
+                {tab.count !== null && (
+                  <span className={`text-xs px-1.5 py-0.5 rounded-full ${
+                    activeTab === tab.id ? 'bg-white/20' : 'bg-blush'
+                  }`}>
+                    {tab.count}
+                  </span>
+                )}
               </button>
             ))}
           </nav>
