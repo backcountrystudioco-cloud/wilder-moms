@@ -4,9 +4,9 @@ import { useLocation } from '../hooks/useLocation'
 import { useWeather } from '../hooks/useWeather'
 import WeatherWidget from './WeatherWidget'
 import HikeCard from './HikeCard'
-import CraftCard from '../BaseCamp/CraftCard'
+import CraftCard from '../basecamp/CraftCard'
 import { hikes, hikeStates, hikeDifficulties, hikeDurations, hikeShadeLevels, hikeParkingTypes, hikeFeatures } from './hikes'
-import { crafts } from '../BaseCamp/crafts'
+import { crafts } from '../basecamp/crafts'
 
 export default function ExplorePage() {
   const location = useLocation()
