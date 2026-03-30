@@ -18,12 +18,11 @@ function App() {
       <Routes>
       <Route path="/" element={<HomePage />} />
       <Route element={<AppLayout />}>
-        <Route path="/explore" element={<ExplorePage />} />
         <Route path="/habitat" element={<HabitatPage />} />
-        <Route path="/builds" element={<BuildsPage />} />
-        <Route path="/builds/:buildId" element={<BuildDetailPage />} />
-        <Route path="/activities" element={<ActivitiesPage />} />
-        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/basecamp" element={<BuildsPage />} />
+        <Route path="/basecamp/:buildId" element={<BuildDetailPage />} />
+        <Route path="/basecamp/activities" element={<ActivitiesPage />} />
+        <Route path="/village" element={<ProfilePage />} />
         <Route path="/blueprint" element={<BlueprintPage />} />
       </Route>
       </Routes>

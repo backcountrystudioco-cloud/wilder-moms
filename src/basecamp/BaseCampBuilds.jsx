@@ -131,7 +131,7 @@ function BuildCard({ build, index }) {
       className="bg-white rounded-2xl overflow-hidden shadow-lg shadow-ink/5 flex flex-col"
     >
       {/* Thumb Header - Links to Builds Page */}
-      <Link to="/builds" className={`${build.thumbGradient} p-5 relative block`}>
+      <Link to="/basecamp" className={`${build.thumbGradient} p-5 relative block`}>
         <span className="absolute top-3 right-3 bg-white/20 backdrop-blur-sm text-white text-xs font-medium px-2 py-1 rounded-full">
           {build.badge}
         </span>
@@ -246,7 +246,7 @@ export default function BaseCampBuilds() {
         {/* View All Builds Link */}
         <div className="text-center mt-12">
           <Link
-            to="/builds"
+            to="/basecamp"
             className="inline-flex items-center gap-2 bg-ember text-white px-8 py-3 rounded-full font-medium text-lg hover:bg-terra transition-colors"
           >
             View All Builds

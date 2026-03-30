@@ -58,7 +58,7 @@ export default function Nav() {
           <div className="hidden md:flex items-center gap-8">
             {/* The Habitat - Explore */}
             <Link
-              to="/explore"
+              to="/habitat"
               className="font-sans font-medium text-sm uppercase tracking-[0.08em] text-ink hover:text-ember transition-colors"
             >
               The Habitat
@@ -85,13 +85,13 @@ export default function Nav() {
                     onMouseLeave={() => setBaseCampDropdownOpen(false)}
                   >
                     <Link
-                      to="/builds"
+                      to="/basecamp"
                       className="block px-4 py-2 font-sans text-sm text-ink hover:bg-blush/50 hover:text-ember"
                     >
                       Builds
                     </Link>
                     <Link
-                      to="/activities"
+                      to="/basecamp/activities"
                       className="block px-4 py-2 font-sans text-sm text-ink hover:bg-blush/50 hover:text-ember"
                     >
                       Activities
@@ -103,7 +103,7 @@ export default function Nav() {
 
             {/* The Village - Profile/Community */}
             <Link
-              to="/profile"
+              to="/village"
               className="font-sans font-medium text-sm uppercase tracking-[0.08em] text-ink hover:text-ember transition-colors"
             >
               The Village
@@ -136,26 +136,26 @@ export default function Nav() {
                       Pack Lists
                     </Link>
                     <Link
-                      to="/profile"
+                      to="/village"
                       className="block px-4 py-2 font-sans text-sm text-ink hover:bg-blush/50 hover:text-ember"
                     >
                       Hiking Lists
                     </Link>
                     <Link
-                      to="/profile"
+                      to="/village"
                       className="block px-4 py-2 font-sans text-sm text-ink hover:bg-blush/50 hover:text-ember"
                     >
                       Camping Lists
                     </Link>
                     <div className="border-t border-inkll/10 my-1" />
                     <Link
-                      to="/profile"
+                      to="/village"
                       className="block px-4 py-2 font-sans text-sm text-ink hover:bg-blush/50 hover:text-ember"
                     >
                       Day Hike Essentials
                     </Link>
                     <Link
-                      to="/profile"
+                      to="/village"
                       className="block px-4 py-2 font-sans text-sm text-ink hover:bg-blush/50 hover:text-ember"
                     >
                       Weather & Alerts
@@ -197,25 +197,25 @@ export default function Nav() {
       <div className="md:hidden border-t border-inkll/20 mt-2">
         <div className="flex items-center justify-around gap-4 px-4 py-3">
           <Link
-            to="/explore"
+            to="/habitat"
             className="flex flex-col items-center gap-1 font-sans font-medium text-sm text-ink hover:text-ember transition-colors"
           >
             <span>Explore</span>
           </Link>
           <Link
-            to="/builds"
+            to="/basecamp"
             className="flex flex-col items-center gap-1 font-sans font-medium text-sm text-ink hover:text-ember transition-colors"
           >
             <span>Builds</span>
           </Link>
           <Link
-            to="/activities"
+            to="/basecamp/activities"
             className="flex flex-col items-center gap-1 font-sans font-medium text-sm text-ink hover:text-ember transition-colors"
           >
             <span>Activities</span>
           </Link>
           <Link
-            to="/profile"
+            to="/village"
             className="flex flex-col items-center gap-1 font-sans font-medium text-sm text-ink hover:text-ember transition-colors"
           >
             <span>Village</span>
