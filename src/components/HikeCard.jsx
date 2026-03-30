@@ -119,6 +119,36 @@ export default function HikeCard({ hike, index = 0 }) {
               Paved
             </span>
           )}
+          {hike.restrooms && (
+            <span className="px-2 py-0.5 rounded bg-purple-100 text-purple-800 font-sans text-xs" title="Restrooms Available">
+              Restrooms
+            </span>
+          )}
+        </div>
+
+        {/* Quick Info Row */}
+        <div className="flex items-center gap-3 mb-3 text-xs text-inkl">
+          {/* Parking */}
+          <span className="flex items-center gap-1">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
+            </svg>
+            {hike.parking === 'free' ? 'Free Parking' : hike.parking === 'free_limited' ? 'Free/Limited' : 'Paid Parking'}
+          </span>
+          {/* Duration */}
+          <span className="flex items-center gap-1">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            {hike.durationLabel}
+          </span>
+          {/* Shade */}
+          <span className="flex items-center gap-1">
+            {hike.shadeLevel === 'low' && '☀️'}
+            {hike.shadeLevel === 'medium' && '⛅'}
+            {hike.shadeLevel === 'high' && '🌲'}
+            {hike.shadeLevel === 'low' ? 'Full Sun' : hike.shadeLevel === 'medium' ? 'Partial Shade' : 'Heavy Shade'}
+          </span>
         </div>
 
         {/* Description */}

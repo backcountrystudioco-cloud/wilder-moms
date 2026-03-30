@@ -5,7 +5,7 @@ import { useWeather } from '../hooks/useWeather'
 import WeatherWidget from '../components/WeatherWidget'
 import HikeCard from '../components/HikeCard'
 import CraftCard from '../components/CraftCard'
-import { hikes, hikeStates, hikeDifficulties, hikeFeatures } from '../data/hikes'
+import { hikes, hikeStates, hikeDifficulties, hikeDurations, hikeShadeLevels, hikeParkingTypes, hikeFeatures } from '../data/hikes'
 import { crafts } from '../data/crafts'
 
 export default function ExplorePage() {
@@ -37,6 +37,9 @@ export default function ExplorePage() {
   // ========== HIKE FILTERING & SORTING ==========
   const [selectedState, setSelectedState] = useState('')
   const [selectedDifficulty, setSelectedDifficulty] = useState('')
+  const [selectedDuration, setSelectedDuration] = useState('')
+  const [selectedShade, setSelectedShade] = useState('')
+  const [selectedParking, setSelectedParking] = useState('')
   const [selectedFeatures, setSelectedFeatures] = useState([])
   const [sortBy, setSortBy] = useState('distance')
 
@@ -51,11 +54,14 @@ export default function ExplorePage() {
   const clearHikeFilters = () => {
     setSelectedState('')
     setSelectedDifficulty('')
+    setSelectedDuration('')
+    setSelectedShade('')
+    setSelectedParking('')
     setSelectedFeatures([])
     setSortBy('distance')
   }
 
-  const hasActiveHikeFilters = selectedState || selectedDifficulty || selectedFeatures.length > 0
+  const hasActiveHikeFilters = selectedState || selectedDifficulty || selectedDuration || selectedShade || selectedParking || selectedFeatures.length > 0
 
   // Filter and sort hikes
   const filteredHikes = useMemo(() => {
@@ -69,6 +75,33 @@ export default function ExplorePage() {
     // Filter by difficulty
     if (selectedDifficulty) {
       result = result.filter(h => h.difficulty === selectedDifficulty)
+    }
+
+    // Filter by duration
+    if (selectedDuration) {
+      const dur = hikeDurations.find(d => d.id === selectedDuration)
+      if (dur) {
+        result = result.filter(h => {
+          if (dur.max && dur.min) {
+            return h.duration >= dur.min && h.duration < dur.max
+          } else if (dur.max) {
+            return h.duration < dur.max
+          } else if (dur.min) {
+            return h.duration >= dur.min
+          }
+          return true
+        })
+      }
+    }
+
+    // Filter by shade level
+    if (selectedShade) {
+      result = result.filter(h => h.shadeLevel === selectedShade)
+    }
+
+    // Filter by parking type
+    if (selectedParking) {
+      result = result.filter(h => h.parking === selectedParking)
     }
 
     // Filter by features (all must match)
@@ -89,18 +122,22 @@ export default function ExplorePage() {
       case 'age':
         result.sort((a, b) => a.ageMin - b.ageMin)
         break
+      case 'duration':
+        result.sort((a, b) => a.duration - b.duration)
+        break
       default:
         break
     }
 
     return result
-  }, [selectedState, selectedDifficulty, selectedFeatures, sortBy])
+  }, [selectedState, selectedDifficulty, selectedDuration, selectedShade, selectedParking, selectedFeatures, sortBy])
 
   const getSortLabel = (sort) => {
     switch (sort) {
       case 'distance': return 'Shortest'
       case 'elevation': return 'Lowest Elev.'
       case 'age': return 'Youngest Ages'
+      case 'duration': return 'Quickest'
       default: return sort
     }
   }
@@ -179,6 +216,7 @@ export default function ExplorePage() {
                     className="px-3 py-1.5 rounded-full bg-white text-ink font-sans text-sm border border-inkll/20 focus:outline-none focus:ring-2 focus:ring-ember"
                   >
                     <option value="distance">{getSortLabel('distance')}</option>
+                    <option value="duration">{getSortLabel('duration')}</option>
                     <option value="elevation">{getSortLabel('elevation')}</option>
                     <option value="age">{getSortLabel('age')}</option>
                   </select>
@@ -239,6 +277,96 @@ export default function ExplorePage() {
                         }`}
                       >
                         {diff}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Duration Filters */}
+                <div className="mb-4">
+                  <p className="font-sans text-sm text-inkl mb-2 uppercase tracking-wide">Duration</p>
+                  <div className="flex gap-2 flex-wrap">
+                    <button
+                      onClick={() => setSelectedDuration('')}
+                      className={`px-4 py-2 rounded-full font-sans text-sm transition-all ${
+                        selectedDuration === ''
+                          ? 'bg-ember text-white'
+                          : 'bg-white text-ink hover:bg-blush'
+                      }`}
+                    >
+                      Any
+                    </button>
+                    {hikeDurations.map(dur => (
+                      <button
+                        key={dur.id}
+                        onClick={() => setSelectedDuration(dur.id)}
+                        className={`px-4 py-2 rounded-full font-sans text-sm transition-all ${
+                          selectedDuration === dur.id
+                            ? 'bg-ember text-white'
+                            : 'bg-white text-ink hover:bg-blush'
+                        }`}
+                      >
+                        {dur.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Shade Level Filters */}
+                <div className="mb-4">
+                  <p className="font-sans text-sm text-inkl mb-2 uppercase tracking-wide">Shade</p>
+                  <div className="flex gap-2 flex-wrap">
+                    <button
+                      onClick={() => setSelectedShade('')}
+                      className={`px-4 py-2 rounded-full font-sans text-sm transition-all ${
+                        selectedShade === ''
+                          ? 'bg-ember text-white'
+                          : 'bg-white text-ink hover:bg-blush'
+                      }`}
+                    >
+                      Any
+                    </button>
+                    {hikeShadeLevels.map(shade => (
+                      <button
+                        key={shade.id}
+                        onClick={() => setSelectedShade(shade.id)}
+                        className={`px-4 py-2 rounded-full font-sans text-sm transition-all ${
+                          selectedShade === shade.id
+                            ? 'bg-ember text-white'
+                            : 'bg-white text-ink hover:bg-blush'
+                        }`}
+                      >
+                        {shade.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Parking Filters */}
+                <div className="mb-4">
+                  <p className="font-sans text-sm text-inkl mb-2 uppercase tracking-wide">Parking</p>
+                  <div className="flex gap-2 flex-wrap">
+                    <button
+                      onClick={() => setSelectedParking('')}
+                      className={`px-4 py-2 rounded-full font-sans text-sm transition-all ${
+                        selectedParking === ''
+                          ? 'bg-ember text-white'
+                          : 'bg-white text-ink hover:bg-blush'
+                      }`}
+                    >
+                      Any
+                    </button>
+                    {hikeParkingTypes.map(park => (
+                      <button
+                        key={park.id}
+                        onClick={() => setSelectedParking(park.id)}
+                        className={`px-4 py-2 rounded-full font-sans text-sm transition-all ${
+                          selectedParking === park.id
+                            ? 'bg-ember text-white'
+                            : 'bg-white text-ink hover:bg-blush'
+                        }`}
+                      >
+                        {park.label}
                       </button>
                     ))}
                   </div>
