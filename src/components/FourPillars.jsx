@@ -7,36 +7,36 @@ const pillars = [
     accent: 'bg-ember',
     numeral: 'I',
     label: 'THE VILLAGE',
-    title: 'You\'re not alone on this trail',
+    title: "You shouldn't have to do this alone. And with us, you won't.",
     description:
-      'Connect with a community that gets it — from muddy stroller battles to triumphant summit moments. Share stories, find trail friends, and discover that the best adventures are the ones you don\'t have to solo.',
+      "Somewhere between the school run and the witching hour, modern motherhood got very lonely. The neighbor who used to knock on the door stopped knocking. The village that was supposed to show up never quite did. Wilder Moms is where it shows up. Real moms, nearby, who want to get outside just as badly as you do. Who will meet you at the trailhead, hold the baby, and not judge the snack situation. You bring yourself. We'll bring the rest.",
     cta: { label: 'Join the Village', to: '/profile', icon: null }
   },
   {
     accent: 'bg-olive',
     numeral: 'II',
     label: 'THE HABITAT',
-    title: 'Find trails that fit your family',
+    title: "Finding the right trail shouldn't take longer than the hike.",
     description:
-      'Whether you\'ve got a newborn in a carrier or a toddler who refuses to walk, AI-powered trail matching considers elevation, terrain, stroller-friendliness, and crowd levels to surface walks that actually work for where you are right now.',
+      "You don't need another generic list of 'family-friendly trails.' You need the right trail for your specific kids, today, with a double stroller and a four-year-old who loses it after 45 minutes. We know your family. We know the nap window, the meltdown threshold, the need for a bathroom within the first mile. Every suggestion is built around your real life — not a stock photo version of it.",
     cta: { label: 'Explore Trails', to: '/explore', icon: null }
   },
   {
     accent: 'bg-gold',
     numeral: 'III',
     label: 'THE BASE CAMP',
-    title: 'Bring nature home',
+    title: "Staying home doesn't mean giving up on nature.",
     description:
-      'When the trail isn\'t calling, bring the outdoors in. Seasonal nature crafts, pressing flowers from your last hike, sensory bins with natural materials, and curated activity kits delivered to your door — because the spirit of adventure doesn\'t need a backpack.',
+      "Some days the adventure is making it to the kitchen table. And that's okay. The Base Camp is for those days. Pressing the flowers you found last Sunday. Building a nature table with pinecones from your coat pocket. Letting your kid paint rocks while you drink your coffee warm for once. Nature isn't just out there — it's something you can bring inside, keep alive, and make part of every single day.",
     cta: { label: 'See Builds & Activities', to: '/builds', icon: null }
   },
   {
     accent: 'bg-slate',
     numeral: 'IV',
     label: 'THE BLUEPRINT',
-    title: 'Safety and preparation, finally simple',
+    title: 'Leave the house ready. Come home safe.',
     description:
-      'Leave no trace meets peace of mind. AI-generated pack lists tailored to your family\'s needs, live location sharing for group hikes, real-time weather windows, and offline maps so you can explore with confidence — and focus on the moments that matter.',
+      "The thing stopping most moms from getting outside isn't wanting to — it's the mental load of preparing for it. What do I pack? Is this trail safe to do alone? What if something goes wrong? We answer all of it before you even put on your boots. Smart pack lists for your exact trip. Offline maps so you never lose signal and your nerve. Live location with the people who love you. We handle the logistics so you can just go.",
     cta: { label: 'See Pack Lists', to: '/blueprint', icon: null }
   }
 ]
