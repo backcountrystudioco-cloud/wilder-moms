@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false)
-  const [buildsDropdownOpen, setBuildsDropdownOpen] = useState(false)
+  const [baseCampDropdownOpen, setBaseCampDropdownOpen] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -55,73 +55,73 @@ export default function Nav() {
 
           {/* Desktop Nav Links */}
           <div className="hidden md:flex items-center gap-8">
-            {/* App Navigation Links */}
+            {/* The Habitat - Explore */}
             <Link
               to="/explore"
               className="font-sans font-medium text-sm uppercase tracking-[0.08em] text-ink hover:text-ember transition-colors"
             >
-              Explore
+              The Habitat
             </Link>
 
-            {/* Builds with Dropdown */}
+            {/* The Base Camp - Builds & Activities Dropdown */}
             <div className="relative">
-              <Link
-                to="/builds"
+              <button
                 className="font-sans font-medium text-sm uppercase tracking-[0.08em] text-ink hover:text-ember transition-colors inline-flex items-center gap-1"
-                onMouseEnter={() => setBuildsDropdownOpen(true)}
+                onMouseEnter={() => setBaseCampDropdownOpen(true)}
               >
-                Builds
+                The Base Camp
                 <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
-              </Link>
+              </button>
               <AnimatePresence>
-                {buildsDropdownOpen && (
+                {baseCampDropdownOpen && (
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
                     className="absolute top-full left-0 mt-2 w-48 bg-cream shadow-lg rounded-lg border border-inkll/10 py-2"
-                    onMouseLeave={() => setBuildsDropdownOpen(false)}
+                    onMouseLeave={() => setBaseCampDropdownOpen(false)}
                   >
                     <Link
                       to="/builds"
                       className="block px-4 py-2 font-sans text-sm text-ink hover:bg-blush/50 hover:text-ember"
                     >
-                      All Builds
+                      Builds
                     </Link>
-                    <a
-                      href="#builds"
-                      onClick={(e) => handleNavClick(e, 'builds')}
+                    <Link
+                      to="/activities"
                       className="block px-4 py-2 font-sans text-sm text-ink hover:bg-blush/50 hover:text-ember"
                     >
-                      Build Guides
-                    </a>
+                      Activities
+                    </Link>
                   </motion.div>
                 )}
               </AnimatePresence>
             </div>
 
+            {/* The Village - Profile/Community */}
             <Link
-              to="/activities"
+              to="/profile"
               className="font-sans font-medium text-sm uppercase tracking-[0.08em] text-ink hover:text-ember transition-colors"
             >
-              Activities
+              The Village
             </Link>
+
             {/* Landing Page Links */}
             <a
-              href="#platform"
-              onClick={(e) => handleNavClick(e, 'platform')}
-              className="font-sans font-medium text-sm uppercase tracking-[0.08em] text-ink hover:text-ember transition-colors"
-            >
-              The Platform
-            </a>
-            <a
-              href="#mission"
-              onClick={(e) => handleNavClick(e, 'mission')}
+              href="#pillars"
+              onClick={(e) => handleNavClick(e, 'pillars')}
               className="font-sans font-medium text-sm uppercase tracking-[0.08em] text-ink hover:text-ember transition-colors"
             >
               Our Mission
+            </a>
+            <a
+              href="#waitlist"
+              onClick={(e) => handleNavClick(e, 'waitlist')}
+              className="font-sans font-medium text-sm uppercase tracking-[0.08em] text-ink hover:text-ember transition-colors"
+            >
+              Join
             </a>
           </div>
 
@@ -143,15 +143,15 @@ export default function Nav() {
             to="/explore"
             className="flex flex-col items-center gap-1 font-sans font-medium text-sm text-ink hover:text-ember transition-colors"
           >
-            <span>🔍</span>
-            <span>Explore</span>
+            <span>🌿</span>
+            <span>Habitat</span>
           </Link>
           <Link
             to="/builds"
             className="flex flex-col items-center gap-1 font-sans font-medium text-sm text-ink hover:text-ember transition-colors"
           >
-            <span>🔨</span>
-            <span>Builds</span>
+            <span>🏕️</span>
+            <span>Base Camp</span>
           </Link>
           <Link
             to="/activities"
@@ -164,8 +164,8 @@ export default function Nav() {
             to="/profile"
             className="flex flex-col items-center gap-1 font-sans font-medium text-sm text-ink hover:text-ember transition-colors"
           >
-            <span>👤</span>
-            <span>Profile</span>
+            <span>👥</span>
+            <span>Village</span>
           </Link>
         </div>
       </div>
