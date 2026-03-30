@@ -1,10 +1,10 @@
 import { useState, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import { useUser } from '../context/UserContext'
-import { hikes } from '../habitat/hikes'
-import { crafts } from '../basecamp/crafts'
-import { builds } from '../basecamp/builds'
-import { packLists } from '../blueprint/packLists'
+import { hikes } from '../Habitat/hikes'
+import { crafts } from '../BaseCamp/crafts'
+import { builds } from '../BaseCamp/builds'
+import { packLists } from '../Blueprint/packLists'
 
 const ageGroups = ['0-2', '3-5', '6-9', '10+']
 const numericAgeGroups = {

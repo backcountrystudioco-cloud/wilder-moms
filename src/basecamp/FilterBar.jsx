@@ -1,4 +1,4 @@
-import { ageRanges, categories, locations } from '../basecamp/activities'
+import { ageRanges, categories, locations } from '../BaseCamp/activities'
 
 function FilterBar({ 
   selectedAge, 
