@@ -217,9 +217,9 @@ export default function ProfilePage() {
   const savedBuildItems = builds.filter(b => savedBuilds.includes(b.id))
 
   const tabs = [
-    { id: 'hikes', label: 'Hikes', count: savedHikes.length, icon: '🏔️' },
-    { id: 'crafts', label: 'Crafts', count: savedCrafts.length, icon: '🎨' },
-    { id: 'builds', label: 'Builds', count: savedBuilds.length, icon: '🔨' }
+    { id: 'hikes', label: 'Hikes', count: savedHikes.length, icon: null },
+    { id: 'crafts', label: 'Crafts', count: savedCrafts.length, icon: null },
+    { id: 'builds', label: 'Builds', count: savedBuilds.length, icon: null }
   ]
 
   return (
@@ -266,7 +266,7 @@ export default function ProfilePage() {
         {/* Pack Lists Section */}
         <section className="mb-12">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="font-serif text-2xl text-ink">📋 Pack Lists</h2>
+            <h2 className="font-serif text-2xl text-ink">Pack Lists</h2>
           </div>
 
           {/* Pack List Tabs */}
@@ -279,7 +279,7 @@ export default function ProfilePage() {
                   : 'bg-blush/50 text-inkl hover:bg-blush'
               }`}
             >
-              🥾 Hiking
+              Hiking
             </button>
             <button
               onClick={() => setPackListTab('camping')}
@@ -289,7 +289,7 @@ export default function ProfilePage() {
                   : 'bg-blush/50 text-inkl hover:bg-blush'
               }`}
             >
-              ⛺ Camping
+              Camping
             </button>
             <button
               onClick={() => setPackListTab('essentials')}
@@ -299,7 +299,7 @@ export default function ProfilePage() {
                   : 'bg-blush/50 text-inkl hover:bg-blush'
               }`}
             >
-              🏔️ Day Hike Essentials
+              Day Hike Essentials
             </button>
           </div>
 
@@ -358,7 +358,6 @@ export default function ProfilePage() {
                   }
                 `}
               >
-                <span>{tab.icon}</span>
                 <span>{tab.label}</span>
                 <span className={`text-xs px-1.5 py-0.5 rounded-full ${
                   activeTab === tab.id ? 'bg-white/20' : 'bg-blush'

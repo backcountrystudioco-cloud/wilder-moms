@@ -16,7 +16,7 @@ export default function BlueprintPage() {
         {/* Header */}
         <header className="mb-8">
           <h1 className="font-serif text-4xl md:text-5xl text-ink mb-4">
-            📋 The Blueprint
+            The Blueprint
           </h1>
           <p className="font-sans text-inkl text-lg">
             Pack lists tailored to your family — organized by age group so everyone has what they need.
@@ -33,7 +33,7 @@ export default function BlueprintPage() {
                 : 'bg-blush/50 text-inkl hover:bg-blush'
             }`}
           >
-            🥾 Hiking Lists
+            Hiking Lists
           </button>
           <button
             onClick={() => setActiveTab('camping')}
@@ -43,7 +43,7 @@ export default function BlueprintPage() {
                 : 'bg-blush/50 text-inkl hover:bg-blush'
             }`}
           >
-            ⛺ Camping Lists
+            Camping Lists
           </button>
           <button
             onClick={() => setActiveTab('essentials')}
@@ -53,7 +53,7 @@ export default function BlueprintPage() {
                 : 'bg-blush/50 text-inkl hover:bg-blush'
             }`}
           >
-            🏔️ Day Hike Essentials
+            Day Hike Essentials
           </button>
         </div>
 

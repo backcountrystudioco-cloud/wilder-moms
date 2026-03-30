@@ -10,7 +10,7 @@ const pillars = [
     title: 'You\'re not alone on this trail',
     description:
       'Connect with a community that gets it — from muddy stroller battles to triumphant summit moments. Share stories, find trail friends, and discover that the best adventures are the ones you don\'t have to solo.',
-    cta: { label: 'Join the Village', to: '/profile', icon: '👥' }
+    cta: { label: 'Join the Village', to: '/profile', icon: null }
   },
   {
     accent: 'bg-olive',
@@ -19,7 +19,7 @@ const pillars = [
     title: 'Find trails that fit your family',
     description:
       'Whether you\'ve got a newborn in a carrier or a toddler who refuses to walk, AI-powered trail matching considers elevation, terrain, stroller-friendliness, and crowd levels to surface walks that actually work for where you are right now.',
-    cta: { label: 'Explore Trails', to: '/explore', icon: '🌿' }
+    cta: { label: 'Explore Trails', to: '/explore', icon: null }
   },
   {
     accent: 'bg-gold',
@@ -28,7 +28,7 @@ const pillars = [
     title: 'Bring nature home',
     description:
       'When the trail isn\'t calling, bring the outdoors in. Seasonal nature crafts, pressing flowers from your last hike, sensory bins with natural materials, and curated activity kits delivered to your door — because the spirit of adventure doesn\'t need a backpack.',
-    cta: { label: 'See Builds & Activities', to: '/builds', icon: '🏕️' }
+    cta: { label: 'See Builds & Activities', to: '/builds', icon: null }
   },
   {
     accent: 'bg-slate',
@@ -37,7 +37,7 @@ const pillars = [
     title: 'Safety and preparation, finally simple',
     description:
       'Leave no trace meets peace of mind. AI-generated pack lists tailored to your family\'s needs, live location sharing for group hikes, real-time weather windows, and offline maps so you can explore with confidence — and focus on the moments that matter.',
-    cta: { label: 'See Pack Lists', to: '/blueprint', icon: '📋' }
+    cta: { label: 'See Pack Lists', to: '/blueprint', icon: null }
   }
 ]
 
@@ -107,7 +107,6 @@ const FourPillars = () => {
                 to={pillar.cta.to}
                 className={`inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full font-sans text-sm font-medium text-white transition-colors ${pillar.accent} hover:opacity-90`}
               >
-                <span>{pillar.cta.icon}</span>
                 {pillar.cta.label}
               </Link>
             </div>

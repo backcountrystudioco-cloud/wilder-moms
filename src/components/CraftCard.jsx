@@ -31,7 +31,7 @@ export default function CraftCard({ craft, index = 0 }) {
         <span className={`absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-sans font-medium ${
           craft.indoor ? 'bg-blush text-inkl' : 'bg-parchment text-forest'
         }`}>
-          {craft.indoor ? '🏠 Indoor' : '🌳 Outdoor'}
+          {craft.indoor ? 'Indoor' : 'Outdoor'}
         </span>
         {/* Save Button */}
         <button

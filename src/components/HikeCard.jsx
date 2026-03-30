@@ -149,9 +149,6 @@ export default function HikeCard({ hike, index = 0 }) {
           </span>
           {/* Shade */}
           <span className="flex items-center gap-1">
-            {hike.shadeLevel === 'low' && '☀️'}
-            {hike.shadeLevel === 'medium' && '⛅'}
-            {hike.shadeLevel === 'high' && '🌲'}
             {hike.shadeLevel === 'low' ? 'Full Sun' : hike.shadeLevel === 'medium' ? 'Partial Shade' : 'Heavy Shade'}
           </span>
         </div>

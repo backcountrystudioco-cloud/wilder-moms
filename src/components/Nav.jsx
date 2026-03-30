@@ -133,32 +133,32 @@ export default function Nav() {
                       to="/blueprint"
                       className="block px-4 py-2 font-sans text-sm text-ink hover:bg-blush/50 hover:text-ember"
                     >
-                      📋 Pack Lists
+                      Pack Lists
                     </Link>
                     <Link
                       to="/profile"
                       className="block px-4 py-2 font-sans text-sm text-ink hover:bg-blush/50 hover:text-ember"
                     >
-                      🥾 Hiking Lists
+                      Hiking Lists
                     </Link>
                     <Link
                       to="/profile"
                       className="block px-4 py-2 font-sans text-sm text-ink hover:bg-blush/50 hover:text-ember"
                     >
-                      ⛺ Camping Lists
+                      Camping Lists
                     </Link>
                     <div className="border-t border-inkll/10 my-1" />
                     <Link
                       to="/profile"
                       className="block px-4 py-2 font-sans text-sm text-ink hover:bg-blush/50 hover:text-ember"
                     >
-                      🏔️ Day Hike Essentials
+                      Day Hike Essentials
                     </Link>
                     <Link
                       to="/profile"
                       className="block px-4 py-2 font-sans text-sm text-ink hover:bg-blush/50 hover:text-ember"
                     >
-                      🌤️ Weather & Alerts
+                      Weather & Alerts
                     </Link>
                   </motion.div>
                 )}
@@ -200,35 +200,30 @@ export default function Nav() {
             to="/explore"
             className="flex flex-col items-center gap-1 font-sans font-medium text-sm text-ink hover:text-ember transition-colors"
           >
-            <span>🌿</span>
-            <span>Habitat</span>
+            <span>Explore</span>
           </Link>
           <Link
             to="/builds"
             className="flex flex-col items-center gap-1 font-sans font-medium text-sm text-ink hover:text-ember transition-colors"
           >
-            <span>🏕️</span>
-            <span>Base Camp</span>
+            <span>Builds</span>
           </Link>
           <Link
             to="/activities"
             className="flex flex-col items-center gap-1 font-sans font-medium text-sm text-ink hover:text-ember transition-colors"
           >
-            <span>⭐</span>
             <span>Activities</span>
           </Link>
           <Link
             to="/profile"
             className="flex flex-col items-center gap-1 font-sans font-medium text-sm text-ink hover:text-ember transition-colors"
           >
-            <span>👥</span>
             <span>Village</span>
           </Link>
           <Link
             to="/blueprint"
             className="flex flex-col items-center gap-1 font-sans font-medium text-sm text-ink hover:text-ember transition-colors"
           >
-            <span>📋</span>
             <span>Blueprint</span>
           </Link>
         </div>

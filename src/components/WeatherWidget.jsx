@@ -42,13 +42,15 @@ export default function WeatherWidget({ onToggle, showingHikes }) {
       {!isLoading && !error && (
         <div className="flex items-center justify-between flex-wrap gap-4">
           <div className="flex items-center gap-4">
-            {/* Weather Emoji */}
+            {/* Weather Icon */}
             <motion.div
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              className="w-14 h-14 bg-cream rounded-full flex items-center justify-center text-3xl"
+              className="w-14 h-14 bg-cream rounded-full flex items-center justify-center"
             >
-              {weather.emoji}
+              <svg className="w-8 h-8 text-ember" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+              </svg>
             </motion.div>
 
             {/* Location & Weather Info */}
@@ -69,11 +71,11 @@ export default function WeatherWidget({ onToggle, showingHikes }) {
             {/* Good for Hiking Badge */}
             {weather.isGoodForHiking ? (
               <span className="px-3 py-1.5 rounded-full bg-olive/20 text-forest font-sans text-sm font-medium">
-                Good for hiking! ☀️
+                Good for hiking!
               </span>
             ) : (
               <span className="px-3 py-1.5 rounded-full bg-peach/30 text-inkl font-sans text-sm font-medium">
-                Try indoor crafts 🎨
+                Try indoor crafts
               </span>
             )}
 
