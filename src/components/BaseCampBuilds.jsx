@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import { useScrollReveal, fadeUpVariants } from '../hooks/useScrollReveal'
 
 const builds = [
@@ -129,8 +130,8 @@ function BuildCard({ build, index }) {
       whileHover={{ y: -4 }}
       className="bg-white rounded-2xl overflow-hidden shadow-lg shadow-ink/5 flex flex-col"
     >
-      {/* Thumb Header */}
-      <div className={`${build.thumbGradient} p-5 relative`}>
+      {/* Thumb Header - Links to Builds Page */}
+      <Link to="/builds" className={`${build.thumbGradient} p-5 relative block`}>
         <span className="absolute top-3 right-3 bg-white/20 backdrop-blur-sm text-white text-xs font-medium px-2 py-1 rounded-full">
           {build.badge}
         </span>
@@ -140,7 +141,7 @@ function BuildCard({ build, index }) {
         <h3 className="font-serif text-xl text-white leading-snug">
           {build.title}
         </h3>
-      </div>
+      </Link>
 
       {/* Body */}
       <div className="p-5 flex flex-col flex-1">
@@ -240,6 +241,19 @@ export default function BaseCampBuilds() {
           {builds.map((build, index) => (
             <BuildCard key={build.id} build={build} index={index} />
           ))}
+        </div>
+
+        {/* View All Builds Link */}
+        <div className="text-center mt-12">
+          <Link
+            to="/builds"
+            className="inline-flex items-center gap-2 bg-ember text-white px-8 py-3 rounded-full font-medium text-lg hover:bg-terra transition-colors"
+          >
+            View All Builds
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </Link>
         </div>
       </div>
     </section>
