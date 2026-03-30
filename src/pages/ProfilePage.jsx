@@ -4,6 +4,7 @@ import { useUser } from '../context/UserContext'
 import { hikes } from '../data/hikes'
 import { crafts } from '../data/crafts'
 import { builds } from '../data/builds'
+import { packLists } from '../data/packLists'
 
 const ageGroups = ['0-2', '3-5', '6-9', '10+']
 const interestOptions = ['Hiking', 'Crafts', 'Building', 'Nature', 'Animals', 'Water', 'Art', 'Music']
@@ -208,6 +209,7 @@ export default function ProfilePage() {
   } = useUser()
 
   const [activeTab, setActiveTab] = useState('hikes')
+  const [packListTab, setPackListTab] = useState('hiking')
 
   // Get saved items data
   const savedHikeItems = hikes.filter(h => savedHikes.includes(h.id))
@@ -259,6 +261,81 @@ export default function ProfilePage() {
               />
             ))}
           </div>
+        </section>
+
+        {/* Pack Lists Section */}
+        <section className="mb-12">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="font-serif text-2xl text-ink">📋 Pack Lists</h2>
+          </div>
+
+          {/* Pack List Tabs */}
+          <div className="flex gap-2 mb-6">
+            <button
+              onClick={() => setPackListTab('hiking')}
+              className={`px-4 py-2 rounded-full font-sans text-sm font-medium transition-all flex items-center gap-2 ${
+                packListTab === 'hiking'
+                  ? 'bg-ember text-white'
+                  : 'bg-blush/50 text-inkl hover:bg-blush'
+              }`}
+            >
+              🥾 Hiking
+            </button>
+            <button
+              onClick={() => setPackListTab('camping')}
+              className={`px-4 py-2 rounded-full font-sans text-sm font-medium transition-all flex items-center gap-2 ${
+                packListTab === 'camping'
+                  ? 'bg-ember text-white'
+                  : 'bg-blush/50 text-inkl hover:bg-blush'
+              }`}
+            >
+              ⛺ Camping
+            </button>
+            <button
+              onClick={() => setPackListTab('essentials')}
+              className={`px-4 py-2 rounded-full font-sans text-sm font-medium transition-all flex items-center gap-2 ${
+                packListTab === 'essentials'
+                  ? 'bg-ember text-white'
+                  : 'bg-blush/50 text-inkl hover:bg-blush'
+              }`}
+            >
+              🏔️ Day Hike Essentials
+            </button>
+          </div>
+
+          {/* Pack Lists Grid */}
+          {packListTab === 'essentials' ? (
+            <div className="bg-white rounded-2xl p-6 shadow-sm border border-inkll/10">
+              <h3 className="font-serif text-xl text-ink mb-4">Day Hike Essentials</h3>
+              <ul className="space-y-2">
+                {packLists.dayHikeEssentials.map((item, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <span className="w-5 h-5 rounded-full bg-olive text-white flex items-center justify-center text-xs flex-shrink-0 mt-0.5">✓</span>
+                    <span className="text-inkl">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {(packListTab === 'hiking' ? packLists.hiking : packLists.camping).map((group, i) => (
+                <div key={i} className="bg-white rounded-2xl p-5 shadow-sm border border-inkll/10">
+                  <h3 className="font-serif text-lg text-ember mb-3">{group.ageGroup}</h3>
+                  <ul className="space-y-1.5">
+                    {group.items.slice(0, 6).map((item, j) => (
+                      <li key={j} className="flex items-start gap-2 text-sm text-inkl">
+                        <span className="w-1.5 h-1.5 rounded-full bg-ember mt-1.5 flex-shrink-0" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                  {group.items.length > 6 && (
+                    <p className="text-xs text-inkll mt-2">+{group.items.length - 6} more items</p>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
         </section>
 
         {/* Saved Items Section */}
