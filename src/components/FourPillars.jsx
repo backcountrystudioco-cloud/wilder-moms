@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useScrollReveal, fadeUpVariants } from '../hooks/useScrollReveal'
 
@@ -8,7 +9,8 @@ const pillars = [
     label: 'THE VILLAGE',
     title: 'You\'re not alone on this trail',
     description:
-      'Connect with a community that gets it — from muddy stroller battles to triumphant summit moments. Share stories, find trail friends, and discover that the best adventures are the ones you don\'t have to take solo.'
+      'Connect with a community that gets it — from muddy stroller battles to triumphant summit moments. Share stories, find trail friends, and discover that the best adventures are the ones you don\'t have to take solo.',
+    cta: { label: 'Join the Village', to: '/profile', icon: '👥' }
   },
   {
     accent: 'bg-olive',
@@ -16,7 +18,8 @@ const pillars = [
     label: 'THE HABITAT',
     title: 'Find trails that fit your family',
     description:
-      'Whether you\'ve got a newborn in a carrier or a toddler who refuses to walk, AI-powered trail matching considers elevation, terrain, stroller-friendliness, and crowd levels to surface walks that actually work for where you are right now.'
+      'Whether you\'ve got a newborn in a carrier or a toddler who refuses to walk, AI-powered trail matching considers elevation, terrain, stroller-friendliness, and crowd levels to surface walks that actually work for where you are right now.',
+    cta: { label: 'Explore Trails', to: '/explore', icon: '🌿' }
   },
   {
     accent: 'bg-gold',
@@ -24,7 +27,8 @@ const pillars = [
     label: 'THE BASE CAMP',
     title: 'Bring nature home',
     description:
-      'When the trail isn\'t calling, bring the outdoors in. Seasonal nature crafts, pressing flowers from your last hike, sensory bins with natural materials, and curated activity kits delivered to your door — because the spirit of adventure doesn\'t need a backpack.'
+      'When the trail isn\'t calling, bring the outdoors in. Seasonal nature crafts, pressing flowers from your last hike, sensory bins with natural materials, and curated activity kits delivered to your door — because the spirit of adventure doesn\'t need a backpack.',
+    cta: { label: 'See Builds & Activities', to: '/builds', icon: '🏕️' }
   },
   {
     accent: 'bg-slate',
@@ -32,7 +36,8 @@ const pillars = [
     label: 'THE BLUEPRINT',
     title: 'Safety and preparation, finally simple',
     description:
-      'Leave no trace meets peace of mind. AI-generated pack lists tailored to your family\'s needs, live location sharing for group hikes, real-time weather windows, and offline maps so you can explore with confidence — and focus on the moments that matter.'
+      'Leave no trace meets peace of mind. AI-generated pack lists tailored to your family\'s needs, live location sharing for group hikes, real-time weather windows, and offline maps so you can explore with confidence — and focus on the moments that matter.',
+    cta: { label: 'Join the Village', to: '/profile', icon: '👥' }
   }
 ]
 
@@ -42,7 +47,7 @@ const FourPillars = () => {
   return (
     <section id="pillars" ref={ref} className="bg-cream py-20 px-4">
       <div className="max-w-6xl mx-auto">
-        {/* Section eye and title */}
+        {/* Section header */}
         <motion.div
           className="text-center mb-12"
           initial="hidden"
@@ -93,9 +98,18 @@ const FourPillars = () => {
               </h3>
 
               {/* Description */}
-              <p className="font-sans text-inkl text-sm leading-relaxed flex-grow">
+              <p className="font-sans text-inkl text-sm leading-relaxed flex-grow mb-4">
                 {pillar.description}
               </p>
+
+              {/* CTA Button */}
+              <Link
+                to={pillar.cta.to}
+                className={`inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full font-sans text-sm font-medium text-white transition-colors ${pillar.accent} hover:opacity-90`}
+              >
+                <span>{pillar.cta.icon}</span>
+                {pillar.cta.label}
+              </Link>
             </div>
           ))}
         </motion.div>
