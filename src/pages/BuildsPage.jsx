@@ -19,6 +19,7 @@ export default function BuildsPage() {
       case 'Climbing Structures': return 'bg-[#464F5F]'
       case 'Water Play': return 'bg-[#5A3C00]'
       case 'Cozy Hideouts': return 'bg-[#B43C1E]'
+      case 'Weekend Builds': return 'bg-[#8C1E00]'
       default: return 'bg-ember'
     }
   }
