@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false)
   const [baseCampDropdownOpen, setBaseCampDropdownOpen] = useState(false)
+  const [blueprintDropdownOpen, setBlueprintDropdownOpen] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -107,6 +108,58 @@ export default function Nav() {
             >
               The Village
             </Link>
+
+            {/* The Blueprint - Pack Lists Dropdown */}
+            <div className="relative">
+              <button
+                className="font-sans font-medium text-sm uppercase tracking-[0.08em] text-ink hover:text-ember transition-colors inline-flex items-center gap-1"
+                onMouseEnter={() => setBlueprintDropdownOpen(true)}
+              >
+                The Blueprint
+                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <AnimatePresence>
+                {blueprintDropdownOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    className="absolute top-full left-0 mt-2 w-56 bg-cream shadow-lg rounded-lg border border-inkll/10 py-2 z-50"
+                    onMouseLeave={() => setBlueprintDropdownOpen(false)}
+                  >
+                    <p className="px-4 py-1 text-xs text-inkl uppercase tracking-wide">Pack Lists by Age</p>
+                    <Link
+                      to="/profile"
+                      className="block px-4 py-2 font-sans text-sm text-ink hover:bg-blush/50 hover:text-ember"
+                    >
+                      Hiking Lists (Toddlers → Teens)
+                    </Link>
+                    <Link
+                      to="/profile"
+                      className="block px-4 py-2 font-sans text-sm text-ink hover:bg-blush/50 hover:text-ember"
+                    >
+                      Camping Lists (Toddlers → Teens)
+                    </Link>
+                    <div className="border-t border-inkll/10 my-1" />
+                    <p className="px-4 py-1 text-xs text-inkl uppercase tracking-wide">Safety</p>
+                    <Link
+                      to="/profile"
+                      className="block px-4 py-2 font-sans text-sm text-ink hover:bg-blush/50 hover:text-ember"
+                    >
+                      Day Hike Essentials
+                    </Link>
+                    <Link
+                      to="/profile"
+                      className="block px-4 py-2 font-sans text-sm text-ink hover:bg-blush/50 hover:text-ember"
+                    >
+                      Weather & Alerts
+                    </Link>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
 
             {/* Landing Page Links */}
             <a
