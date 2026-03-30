@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useScrollReveal, fadeUpVariants } from '../hooks/useScrollReveal'
+import { packLists, ageGroups } from '../data/packLists'
 
 const pillars = [
   {
@@ -38,20 +39,13 @@ const pillars = [
     title: 'Safety and preparation, finally simple',
     description:
       'Leave no trace meets peace of mind. AI-generated pack lists tailored to your family\'s needs, live location sharing for group hikes, real-time weather windows, and offline maps so you can explore with confidence — and focus on the moments that matter.',
-    hasDropdown: true,
-    dropdownItems: [
-      { label: 'All Pack Lists', to: '/profile' },
-      { label: 'Hiking Lists by Age', to: '/profile', subLabel: 'Toddlers → Teens' },
-      { label: 'Camping Lists by Age', to: '/profile', subLabel: 'Toddlers → Teens' },
-      { label: 'Day Hike Essentials', to: '/profile' },
-      { label: 'Weather & Safety', to: '/profile' },
-    ]
+    isBlueprint: true,
   }
 ]
 
 const FourPillars = () => {
   const [ref, isVisible] = useScrollReveal()
-  const [blueprintDropdownOpen, setBlueprintDropdownOpen] = useState(false)
+  const [activeBlueprintTab, setActiveBlueprintTab] = useState('hiking')
 
   return (
     <section id="pillars" ref={ref} className="bg-cream py-20 px-4">
@@ -86,9 +80,7 @@ const FourPillars = () => {
           {pillars.map((pillar, index) => (
             <div
               key={pillar.label}
-              className="bg-white p-6 flex flex-col hover:shadow-lg hover:-translate-y-1 transition-all duration-300 relative"
-              onMouseEnter={() => pillar.hasDropdown && setBlueprintDropdownOpen(true)}
-              onMouseLeave={() => pillar.hasDropdown && setBlueprintDropdownOpen(false)}
+              className="bg-white p-6 flex flex-col hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
             >
               {/* 3px top accent bar */}
               <div className={`h-[3px] ${pillar.accent} mb-6`} />
@@ -113,42 +105,42 @@ const FourPillars = () => {
                 {pillar.description}
               </p>
 
-              {/* Blueprint Dropdown */}
-              {pillar.hasDropdown ? (
-                <div className="relative">
-                  <button
-                    className={`w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full font-sans text-sm font-medium text-white transition-colors ${pillar.accent} hover:opacity-90`}
-                  >
-                    <span>📋</span>
-                    See Pack Lists
-                    <svg className="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </button>
-                  
-                  <AnimatePresence>
-                    {blueprintDropdownOpen && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 10 }}
-                        className="absolute bottom-full left-0 right-0 mb-2 bg-cream shadow-lg rounded-lg border border-inkll/10 py-2 z-10"
-                      >
-                        {pillar.dropdownItems.map((item, i) => (
-                          <Link
-                            key={i}
-                            to={item.to}
-                            className="block px-4 py-2 font-sans text-sm text-ink hover:bg-blush/50 hover:text-ember transition-colors"
-                          >
-                            <span className="font-medium">{item.label}</span>
-                            {item.subLabel && (
-                              <span className="block text-xs text-inkl">{item.subLabel}</span>
-                            )}
-                          </Link>
-                        ))}
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+              {/* Blueprint Section */}
+              {pillar.isBlueprint ? (
+                <div className="space-y-3">
+                  {/* Tabs */}
+                  <div className="flex gap-1 bg-blush/50 rounded-full p-1">
+                    <button
+                      onClick={() => setActiveBlueprintTab('hiking')}
+                      className={`flex-1 py-1.5 px-3 rounded-full text-xs font-medium transition-colors ${
+                        activeBlueprintTab === 'hiking'
+                          ? 'bg-ember text-white'
+                          : 'text-ink hover:text-ember'
+                      }`}
+                    >
+                      🥾 Hiking
+                    </button>
+                    <button
+                      onClick={() => setActiveBlueprintTab('camping')}
+                      className={`flex-1 py-1.5 px-3 rounded-full text-xs font-medium transition-colors ${
+                        activeBlueprintTab === 'camping'
+                          ? 'bg-ember text-white'
+                          : 'text-ink hover:text-ember'
+                      }`}
+                    >
+                      ⛺ Camping
+                    </button>
+                  </div>
+
+                  {/* Age Groups */}
+                  <div className="space-y-2">
+                    {(activeBlueprintTab === 'hiking' ? packLists.hiking : packLists.camping).map((group, i) => (
+                      <div key={i} className="bg-cream/50 rounded-lg p-2">
+                        <p className="font-sans text-xs font-medium text-ember mb-1">{group.ageGroup}</p>
+                        <p className="font-sans text-[10px] text-inkl line-clamp-2">{group.items.slice(0, 3).join(' • ')}...</p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               ) : (
                 <Link
