@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { fadeUpVariants } from '../hooks/useScrollReveal'
 import { useUser } from '../context/UserContext'
@@ -17,11 +18,15 @@ const difficultyLabels = {
 const stateColors = {
   'Washington': 'bg-blue-100 text-blue-800',
   'Colorado': 'bg-amber-100 text-amber-800',
+  'Oregon': 'bg-teal-100 text-teal-800',
+  'Utah': 'bg-orange-100 text-orange-800',
+  'Texas': 'bg-red-100 text-red-800',
 }
 
 export default function HikeCard({ hike, index = 0 }) {
   const { savedHikes, toggleSavedHike } = useUser()
   const isSaved = savedHikes.includes(hike.id)
+  const [isExpanded, setIsExpanded] = useState(false)
   
   const getDirectionsUrl = () => {
     return `https://www.google.com/maps/dir/?api=1&destination=${hike.lat},${hike.lon}`
@@ -152,9 +157,17 @@ export default function HikeCard({ hike, index = 0 }) {
         </div>
 
         {/* Description */}
-        <p className="text-inkl font-sans text-sm leading-relaxed mb-4 line-clamp-2">
-          {hike.description}
-        </p>
+        <div className="mb-4">
+          <p className={`text-inkl font-sans text-sm leading-relaxed ${isExpanded ? '' : 'line-clamp-2'}`}>
+            {hike.description}
+          </p>
+          <button
+            onClick={() => setIsExpanded(!isExpanded)}
+            className="text-ember font-sans text-sm font-medium hover:text-terra transition-colors"
+          >
+            {isExpanded ? 'Show less' : 'Read more'}
+          </button>
+        </div>
 
         {/* Get Directions Button */}
         <a
