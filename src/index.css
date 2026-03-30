@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    background-color: #FAF6EE;
+    color: #3C1E00;
+  }
+}
+
+@layer utilities {
+  .font-serif {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+  }
+}

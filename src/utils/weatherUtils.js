@@ -1,0 +1,95 @@
+/**
+ * Get human-readable weather description from WMO weather code
+ * @param {number} code - WMO weather code
+ * @returns {string} Human-readable description
+ */
+export function getWeatherDescription(code) {
+  const descriptions = {
+    0: 'Clear',
+    1: 'Mainly Clear',
+    2: 'Partly Cloudy',
+    3: 'Overcast',
+    45: 'Foggy',
+    48: 'Rime Fog',
+    51: 'Light Drizzle',
+    53: 'Moderate Drizzle',
+    55: 'Dense Drizzle',
+    56: 'Freezing Drizzle',
+    57: 'Dense Freezing Drizzle',
+    61: 'Slight Rain',
+    63: 'Moderate Rain',
+    65: 'Heavy Rain',
+    66: 'Freezing Rain',
+    67: 'Heavy Freezing Rain',
+    71: 'Slight Snowfall',
+    73: 'Moderate Snowfall',
+    75: 'Heavy Snowfall',
+    77: 'Snow Grains',
+    80: 'Slight Rain Showers',
+    81: 'Moderate Rain Showers',
+    82: 'Violent Rain Showers',
+    85: 'Slight Snow Showers',
+    86: 'Heavy Snow Showers',
+    95: 'Thunderstorm',
+    96: 'Thunderstorm with Slight Hail',
+    99: 'Thunderstorm with Heavy Hail',
+  };
+
+  return descriptions[code] || 'Unknown';
+}
+
+/**
+ * Determine if weather is good for hiking
+ * Good conditions: clear, partly cloudy, fog AND temp between 40-95°F
+ * @param {number} code - WMO weather code
+ * @param {number} tempF - Temperature in Fahrenheit
+ * @returns {boolean}
+ */
+export function isGoodWeatherForHiking(code, tempF) {
+  // Good weather codes: clear (0), mainly clear (1), partly cloudy (2), fog (45, 48)
+  const goodCodes = [0, 1, 2, 45, 48];
+  const isGoodCondition = goodCodes.includes(code);
+  const isGoodTemp = tempF >= 40 && tempF <= 95;
+
+  return isGoodCondition && isGoodTemp;
+}
+
+/**
+ * Get appropriate emoji for weather condition
+ * @param {number} code - WMO weather code
+ * @returns {string} Emoji
+ */
+export function getWeatherEmoji(code) {
+  const emojis = {
+    0: '☀️',  // Clear
+    1: '🌤️', // Mainly Clear
+    2: '⛅',  // Partly Cloudy
+    3: '☁️',  // Overcast
+    45: '🌫️', // Foggy
+    48: '🌫️', // Rime Fog
+    51: '🌧️', // Light Drizzle
+    53: '🌧️', // Moderate Drizzle
+    55: '🌧️', // Dense Drizzle
+    56: '🌧️', // Freezing Drizzle
+    57: '🌧️', // Dense Freezing Drizzle
+    61: '🌧️', // Slight Rain
+    63: '🌧️', // Moderate Rain
+    65: '🌧️', // Heavy Rain
+    66: '🌧️', // Freezing Rain
+    67: '🌧️', // Heavy Freezing Rain
+    71: '🌨️', // Slight Snowfall
+    73: '🌨️', // Moderate Snowfall
+    75: '❄️',  // Heavy Snowfall
+    77: '🌨️', // Snow Grains
+    80: '🌦️', // Slight Rain Showers
+    81: '🌦️', // Moderate Rain Showers
+    82: '⛈️',  // Violent Rain Showers
+    85: '🌨️', // Slight Snow Showers
+    86: '❄️',  // Heavy Snow Showers
+    95: '⛈️',  // Thunderstorm
+    96: '⛈️',  // Thunderstorm with Slight Hail
+    99: '⛈️',  // Thunderstorm with Heavy Hail
+  };
+
+  return emojis[code] || '❓';
+}
