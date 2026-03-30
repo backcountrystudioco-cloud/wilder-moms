@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import { useUser } from '../context/UserContext'
 import { hikes } from '../habitat/hikes'
@@ -7,15 +7,96 @@ import { builds } from '../basecamp/builds'
 import { packLists } from '../blueprint/packLists'
 
 const ageGroups = ['0-2', '3-5', '6-9', '10+']
+const numericAgeGroups = {
+  '0-2': { min: 0, max: 2 },
+  '3-5': { min: 3, max: 5 },
+  '6-9': { min: 6, max: 9 },
+  '10+': { min: 10, max: 99 }
+}
 const interestOptions = ['Hiking', 'Crafts', 'Building', 'Nature', 'Animals', 'Water', 'Art', 'Music']
+
+function PreferenceToggle({ enabled, onToggle, trueLabel, falseLabel, icon }) {
+  return (
+    <button
+      onClick={onToggle}
+      className={`px-4 py-2 rounded-full font-sans text-sm font-medium transition-all flex items-center gap-2 ${
+        enabled
+          ? 'bg-ember text-white'
+          : 'bg-blush/50 text-inkl hover:bg-blush'
+      }`}
+    >
+      {icon && <span>{icon}</span>}
+      {enabled ? trueLabel : falseLabel}
+    </button>
+  )
+}
+
+function FamilyProfileCard({ familyName, onFamilyNameChange }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="bg-white rounded-xl p-6 shadow-sm border border-inkll/10"
+    >
+      <h3 className="font-serif text-xl text-ink mb-4">Family Profile</h3>
+      <div>
+        <label className="block text-xs font-medium text-inkll uppercase tracking-wider mb-2">
+          Family Name
+        </label>
+        <input
+          type="text"
+          value={familyName}
+          onChange={(e) => onFamilyNameChange(e.target.value)}
+          placeholder="The Wilson Family"
+          className="w-full px-3 py-2 rounded-lg border border-inkll/20 bg-cream text-ink placeholder:text-inkll/50 focus:outline-none focus:ring-2 focus:ring-ember/30 focus:border-ember transition-all"
+        />
+      </div>
+    </motion.div>
+  )
+}
+
+function PreferencesCard({ preferences, onTogglePreference }) {
+  const preferenceItems = [
+    { key: 'hasStroller', icon: '🚼', trueLabel: 'Stroller needed', falseLabel: 'No stroller' },
+    { key: 'wantsWater', icon: '💧', trueLabel: 'Water features', falseLabel: 'No water needed' },
+    { key: 'wantsViews', icon: '🏔️', trueLabel: 'Scenic views', falseLabel: 'Any trail' },
+    { key: 'wantsDogs', icon: '🐕', trueLabel: 'Dogs welcome', falseLabel: 'No dogs' },
+    { key: 'prefersFreeParking', icon: '🅿️', trueLabel: 'Free parking', falseLabel: 'Paid OK' },
+  ]
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="bg-white rounded-xl p-6 shadow-sm border border-inkll/10"
+    >
+      <h3 className="font-serif text-xl text-ink mb-4">Trail Preferences</h3>
+      <p className="font-sans text-sm text-inkl mb-4">
+        These preferences help us recommend the best trails for your family.
+      </p>
+      <div className="flex flex-wrap gap-2">
+        {preferenceItems.map(item => (
+          <PreferenceToggle
+            key={item.key}
+            enabled={preferences[item.key]}
+            onToggle={() => onTogglePreference(item.key)}
+            trueLabel={item.trueLabel}
+            falseLabel={item.falseLabel}
+            icon={item.icon}
+          />
+        ))}
+      </div>
+    </motion.div>
+  )
+}
 
 function KidCard({ kid, onUpdate, onRemove, canRemove }) {
   const [isExpanded, setIsExpanded] = useState(true)
 
   const handleInterestToggle = (interest) => {
-    const newInterests = kid.interests.includes(interest)
+    const newInterests = (kid.interests || []).includes(interest)
       ? kid.interests.filter(i => i !== interest)
-      : [...kid.interests, interest]
+      : [...(kid.interests || []), interest]
     onUpdate(kid.id, 'interests', newInterests)
   }
 
@@ -32,6 +113,11 @@ function KidCard({ kid, onUpdate, onRemove, canRemove }) {
           className="flex items-center gap-2 text-left"
         >
           <span className="font-serif text-lg text-ink">{kid.name || 'Untitled Kid'}</span>
+          {(kid.ageGroup || kid.age) && (
+            <span className="px-2 py-0.5 rounded-full bg-peach/30 text-inkl text-xs font-sans">
+              {kid.ageGroup || kid.age}
+            </span>
+          )}
           <motion.svg
             animate={{ rotate: isExpanded ? 180 : 0 }}
             transition={{ duration: 0.2 }}
@@ -83,8 +169,8 @@ function KidCard({ kid, onUpdate, onRemove, canRemove }) {
                 Age Group
               </label>
               <select
-                value={kid.age}
-                onChange={(e) => onUpdate(kid.id, 'age', e.target.value)}
+                value={kid.ageGroup || kid.age || ''}
+                onChange={(e) => onUpdate(kid.id, 'ageGroup', e.target.value)}
                 className="w-full px-3 py-2 rounded-lg border border-inkll/20 bg-cream text-ink focus:outline-none focus:ring-2 focus:ring-ember/30 focus:border-ember transition-all"
               >
                 <option value="">Select age</option>
@@ -106,7 +192,7 @@ function KidCard({ kid, onUpdate, onRemove, canRemove }) {
                   key={interest}
                   onClick={() => handleInterestToggle(interest)}
                   className={`px-3 py-1 rounded-full text-sm font-sans transition-all ${
-                    kid.interests.includes(interest)
+                    (kid.interests || []).includes(interest)
                       ? 'bg-ember text-white'
                       : 'bg-blush/50 text-inkl hover:bg-blush'
                   }`}
@@ -203,18 +289,68 @@ function EmptyState({ type }) {
 
 export default function ProfilePage() {
   const { 
+    familyName, setFamilyName,
     kids, addKid, removeKid, updateKid,
     savedHikes, savedCrafts, savedBuilds,
-    toggleSavedHike, toggleSavedCraft, toggleSavedBuild
+    toggleSavedHike, toggleSavedCraft, toggleSavedBuild,
+    preferences, togglePreference
   } = useUser()
 
   const [activeTab, setActiveTab] = useState('hikes')
   const [packListTab, setPackListTab] = useState('hiking')
+  const [hikesViewMode, setHikesViewMode] = useState('all') // 'all' or 'byAge'
 
   // Get saved items data
   const savedHikeItems = hikes.filter(h => savedHikes.includes(h.id))
   const savedCraftItems = crafts.filter(c => savedCrafts.includes(c.id))
   const savedBuildItems = builds.filter(b => savedBuilds.includes(b.id))
+
+  // Organize hikes by child's age fit
+  const hikesByAgeFit = useMemo(() => {
+    const grouped = {}
+    kids.forEach(kid => {
+      const ageGroup = kid.ageGroup || kid.age
+      if (!ageGroup) return
+      
+      if (!grouped[ageGroup]) {
+        grouped[ageGroup] = {
+          ageGroup,
+          hikes: []
+        }
+      }
+    })
+    
+    // Add hikes that fit each child's age group
+    savedHikeItems.forEach(hike => {
+      kids.forEach(kid => {
+        const ageGroup = kid.ageGroup || kid.age
+        if (!ageGroup) return
+        
+        const range = numericAgeGroups[ageGroup]
+        if (range && hike.ageMin >= range.min && hike.ageMax <= range.max) {
+          if (!grouped[ageGroup].hikes.find(h => h.id === hike.id)) {
+            grouped[ageGroup].hikes.push(hike)
+          }
+        }
+      })
+    })
+    
+    return grouped
+  }, [savedHikeItems, kids])
+
+  // Get hikes that fit all kids (universal)
+  const universalHikes = useMemo(() => {
+    if (kids.length === 0) return savedHikeItems
+    return savedHikeItems.filter(hike => {
+      return kids.every(kid => {
+        const ageGroup = kid.ageGroup || kid.age
+        if (!ageGroup) return true
+        const range = numericAgeGroups[ageGroup]
+        if (!range) return true
+        return hike.ageMin >= range.min && hike.ageMax <= range.max
+      })
+    })
+  }, [savedHikeItems, kids])
 
   const tabs = [
     { id: 'hikes', label: 'Hikes', count: savedHikes.length, icon: null },
@@ -231,9 +367,23 @@ export default function ProfilePage() {
             Your Profile
           </h1>
           <p className="font-sans text-inkl text-lg">
-            Manage your kids&apos; profiles and track your saved adventures.
+            Manage your family profile and track your saved adventures.
           </p>
         </header>
+
+        {/* Family Profile Section */}
+        <section className="mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <FamilyProfileCard 
+              familyName={familyName}
+              onFamilyNameChange={setFamilyName}
+            />
+            <PreferencesCard 
+              preferences={preferences}
+              onTogglePreference={togglePreference}
+            />
+          </div>
+        </section>
 
         {/* My Kids Section */}
         <section className="mb-12">
@@ -340,10 +490,12 @@ export default function ProfilePage() {
 
         {/* Saved Items Section */}
         <section>
-          <h2 className="font-serif text-2xl text-ink mb-4">Saved Items</h2>
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="font-serif text-2xl text-ink">Saved Items</h2>
+          </div>
           
           {/* Tab Navigation */}
-          <nav className="flex gap-2 mb-6" role="tablist">
+          <nav className="flex gap-2 mb-4" role="tablist">
             {tabs.map(tab => (
               <button
                 key={tab.id}
@@ -368,6 +520,32 @@ export default function ProfilePage() {
             ))}
           </nav>
 
+          {/* Hikes View Mode Toggle */}
+          {activeTab === 'hikes' && savedHikeItems.length > 0 && (
+            <div className="flex gap-2 mb-6">
+              <button
+                onClick={() => setHikesViewMode('all')}
+                className={`px-3 py-1.5 rounded-full font-sans text-xs font-medium transition-all ${
+                  hikesViewMode === 'all'
+                    ? 'bg-ink text-white'
+                    : 'bg-blush/50 text-inkl hover:bg-blush'
+                }`}
+              >
+                All Saved ({savedHikeItems.length})
+              </button>
+              <button
+                onClick={() => setHikesViewMode('byAge')}
+                className={`px-3 py-1.5 rounded-full font-sans text-xs font-medium transition-all ${
+                  hikesViewMode === 'byAge'
+                    ? 'bg-ink text-white'
+                    : 'bg-blush/50 text-inkl hover:bg-blush'
+                }`}
+              >
+                By Child's Age
+              </button>
+            </div>
+          )}
+
           {/* Tab Content */}
           <motion.div
             key={activeTab}
@@ -377,16 +555,70 @@ export default function ProfilePage() {
           >
             {activeTab === 'hikes' && (
               savedHikeItems.length > 0 ? (
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {savedHikeItems.map(hike => (
-                    <SavedItemCard
-                      key={hike.id}
-                      item={hike}
-                      type="hike"
-                      onRemove={toggleSavedHike}
-                    />
-                  ))}
-                </div>
+                hikesViewMode === 'all' ? (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {savedHikeItems.map(hike => (
+                      <SavedItemCard
+                        key={hike.id}
+                        item={hike}
+                        type="hike"
+                        onRemove={toggleSavedHike}
+                      />
+                    ))}
+                  </div>
+                ) : (
+                  // Organized by child's age fit
+                  <div className="space-y-6">
+                    {/* Universal hikes (fit all kids) */}
+                    {universalHikes.length > 0 && (
+                      <div>
+                        <h3 className="font-serif text-lg text-ink mb-3 flex items-center gap-2">
+                          <span className="w-2 h-2 rounded-full bg-olive" />
+                          Great for Everyone
+                        </h3>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                          {universalHikes.map(hike => (
+                            <SavedItemCard
+                              key={hike.id}
+                              item={hike}
+                              type="hike"
+                              onRemove={toggleSavedHike}
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                    
+                    {/* Hikes organized by each child's age group */}
+                    {Object.values(hikesByAgeFit).map(group => {
+                      // Skip if already shown in universal
+                      const groupHikes = group.hikes.filter(h => !universalHikes.find(u => u.id === h.id))
+                      if (groupHikes.length === 0) return null
+                      
+                      const kid = kids.find(k => (k.ageGroup || k.age) === group.ageGroup)
+                      const kidName = kid?.name || 'Unknown'
+                      
+                      return (
+                        <div key={group.ageGroup}>
+                          <h3 className="font-serif text-lg text-ink mb-3 flex items-center gap-2">
+                            <span className="w-2 h-2 rounded-full bg-peach" />
+                            {kidName}'s Adventures (Ages {group.ageGroup})
+                          </h3>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            {groupHikes.map(hike => (
+                              <SavedItemCard
+                                key={hike.id}
+                                item={hike}
+                                type="hike"
+                                onRemove={toggleSavedHike}
+                              />
+                            ))}
+                          </div>
+                        </div>
+                      )
+                    })}
+                  </div>
+                )
               ) : (
                 <EmptyState type="hikes" />
               )
