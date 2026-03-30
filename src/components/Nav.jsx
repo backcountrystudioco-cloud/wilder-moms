@@ -134,11 +134,27 @@ export default function Nav() {
         </div>
       </div>
 
-      {/* Mobile Nav Links Hidden - Only Logo + CTA visible */}
+      {/* Mobile Nav Links */}
       <div className="md:hidden px-4 pb-4">
-        <div className="flex items-center justify-between">
-          {/* Logo + Wordmark already shown above */}
-          {/* CTA already shown above */}
+        <div className="flex items-center gap-4 overflow-x-auto pb-2">
+          <Link
+            to="/explore"
+            className="font-sans font-medium text-sm whitespace-nowrap text-ink hover:text-ember transition-colors"
+          >
+            Explore
+          </Link>
+          <Link
+            to="/builds"
+            className="font-sans font-medium text-sm whitespace-nowrap text-ink hover:text-ember transition-colors"
+          >
+            Builds
+          </Link>
+          <Link
+            to="/activities"
+            className="font-sans font-medium text-sm whitespace-nowrap text-ink hover:text-ember transition-colors"
+          >
+            Activities
+          </Link>
         </div>
       </div>
     </motion.nav>
