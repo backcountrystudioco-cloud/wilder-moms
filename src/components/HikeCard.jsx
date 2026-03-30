@@ -3,15 +3,20 @@ import { fadeUpVariants } from '../hooks/useScrollReveal'
 import { useUser } from '../context/UserContext'
 
 const difficultyColors = {
-  easy: 'bg-olive/20 text-forest',
-  moderate: 'bg-gold/20 text-ink',
-  challenging: 'bg-ember/20 text-ember',
+  easy: 'bg-olive/20 text-forest border-olive',
+  moderate: 'bg-gold/20 text-ink border-gold',
+  challenging: 'bg-ember/20 text-ember border-ember',
 }
 
 const difficultyLabels = {
   easy: 'Easy',
   moderate: 'Moderate',
   challenging: 'Hard',
+}
+
+const stateColors = {
+  'Washington': 'bg-blue-100 text-blue-800',
+  'Colorado': 'bg-amber-100 text-amber-800',
 }
 
 export default function HikeCard({ hike, index = 0 }) {
@@ -31,52 +36,52 @@ export default function HikeCard({ hike, index = 0 }) {
       custom={index}
       className="bg-cream rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-inkll/10"
     >
-      {/* Image */}
-      <div className="relative h-48 overflow-hidden">
-        <img
-          src={hike.imageUrl}
-          alt={hike.title}
-          className="w-full h-full object-cover"
-          onError={(e) => {
-            e.target.src = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800'
-          }}
-        />
-        {/* Difficulty Badge */}
-        <span className={`absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-sans font-medium ${difficultyColors[hike.difficulty]}`}>
-          {difficultyLabels[hike.difficulty]}
-        </span>
-        {/* Save Button */}
-        <button
-          onClick={() => toggleSavedHike(hike.id)}
-          className={`absolute top-3 right-3 p-2 rounded-full transition-all ${
-            isSaved 
-              ? 'bg-ember text-white' 
-              : 'bg-white/80 text-inkl hover:bg-white hover:text-ember'
-          }`}
-          aria-label={isSaved ? 'Remove from saved' : 'Save hike'}
-        >
-          <svg className="w-5 h-5" fill={isSaved ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-          </svg>
-        </button>
+      {/* Color-coded header based on difficulty */}
+      <div className={`relative p-4 border-b-4 ${difficultyColors[hike.difficulty].replace('/20', '')}`}>
+        <div className="flex items-start justify-between">
+          <div className="flex-1">
+            {/* State badge */}
+            <span className={`inline-block px-2 py-0.5 rounded text-xs font-sans font-medium mb-2 ${stateColors[hike.state]}`}>
+              {hike.state}
+            </span>
+            {/* Title */}
+            <h3 className="font-serif text-xl text-ink mb-1">
+              {hike.title}
+            </h3>
+            {/* Region */}
+            <p className="text-inkl/70 font-sans text-sm">
+              {hike.region}
+            </p>
+          </div>
+          {/* Save Button */}
+          <button
+            onClick={() => toggleSavedHike(hike.id)}
+            className={`p-2 rounded-full transition-all ${
+              isSaved 
+                ? 'bg-ember text-white' 
+                : 'bg-white/80 text-ink hover:bg-white hover:text-ember'
+            }`}
+            aria-label={isSaved ? 'Remove from saved' : 'Save hike'}
+          >
+            <svg className="w-5 h-5" fill={isSaved ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+            </svg>
+          </button>
+        </div>
       </div>
 
       {/* Content */}
       <div className="p-5">
-        {/* Title */}
-        <h3 className="font-serif text-xl text-ink mb-3">
-          {hike.title}
-        </h3>
-
-        {/* Stats Row */}
+        {/* Difficulty & Stats Row */}
         <div className="flex items-center gap-2 mb-3 flex-wrap">
-          {/* Distance & Duration Pill */}
-          <span className="px-3 py-1 rounded-full bg-peach/20 text-inkl font-sans text-sm">
-            {hike.distance} · {hike.duration}
+          <span className={`px-3 py-1 rounded-full text-xs font-sans font-medium border ${difficultyColors[hike.difficulty]}`}>
+            {difficultyLabels[hike.difficulty]}
           </span>
-          {/* Elevation */}
+          <span className="px-3 py-1 rounded-full bg-peach/20 text-inkl font-sans text-sm">
+            {hike.distanceLabel}
+          </span>
           <span className="px-3 py-1 rounded-full bg-blush text-inkl font-sans text-sm">
-            ↑ {hike.elevation}
+            {hike.duration}
           </span>
         </div>
 
@@ -85,6 +90,35 @@ export default function HikeCard({ hike, index = 0 }) {
           <span className="text-inkl font-sans text-sm">
             Ages: <span className="font-medium text-ink">{hike.ageRange}</span>
           </span>
+        </div>
+
+        {/* Feature Badges */}
+        <div className="flex flex-wrap gap-1.5 mb-4">
+          {hike.strollerFriendly && (
+            <span className="px-2 py-0.5 rounded bg-slate/20 text-slate font-sans text-xs" title="Stroller Friendly">
+              Stroller OK
+            </span>
+          )}
+          {hike.dogsAllowed && (
+            <span className="px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-sans text-xs" title="Dogs Allowed">
+              Dogs OK
+            </span>
+          )}
+          {hike.hasWater && (
+            <span className="px-2 py-0.5 rounded bg-blue-100 text-blue-800 font-sans text-xs" title="Water Features">
+              Water
+            </span>
+          )}
+          {hike.hasViews && (
+            <span className="px-2 py-0.5 rounded bg-olive/20 text-forest font-sans text-xs" title="Scenic Views">
+              Views
+            </span>
+          )}
+          {hike.isPaved && (
+            <span className="px-2 py-0.5 rounded bg-gray-200 text-gray-700 font-sans text-xs" title="Paved Path">
+              Paved
+            </span>
+          )}
         </div>
 
         {/* Description */}

@@ -7,10 +7,12 @@ import BuildsPage from './pages/BuildsPage'
 import BuildDetailPage from './pages/BuildDetailPage'
 import ActivitiesPage from './pages/ActivitiesPage'
 import ProfilePage from './pages/ProfilePage'
+import LaunchPopup from './components/LaunchPopup'
 
 function App() {
   return (
     <UserProvider>
+      <LaunchPopup />
       <Routes>
       <Route path="/" element={<HomePage />} />
       <Route element={<AppLayout />}>
