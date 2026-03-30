@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { packLists } from '../data/packLists'
+import { packLists } from './packLists'
 
 export default function BlueprintPage() {
   const [activeTab, setActiveTab] = useState('hiking')

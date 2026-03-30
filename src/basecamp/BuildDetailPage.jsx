@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { getBuildById, getRelatedBuilds } from '../data/builds'
-import BuildCard from '../components/BuildCard'
+import { getBuildById, getRelatedBuilds } from './builds'
+import BuildCard from './BuildCard'
 
 const difficultyColors = {
   easy: 'bg-olive text-white',

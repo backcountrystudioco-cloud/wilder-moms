@@ -1,8 +1,8 @@
 import { useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import FilterBar from '../components/FilterBar'
-import ActivityCard from '../components/ActivityCard'
-import { activities } from '../data/activities'
+import FilterBar from './FilterBar'
+import ActivityCard from './ActivityCard'
+import { activities } from './activities'
 
 function ActivitiesPage() {
   const [selectedAge, setSelectedAge] = useState('')

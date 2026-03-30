@@ -3,8 +3,8 @@ import { motion } from 'framer-motion'
 import { useLocation } from '../hooks/useLocation'
 import { useWeather } from '../hooks/useWeather'
 import { useRecommendations } from '../hooks/useRecommendations'
-import HikeCard from '../components/HikeCard'
-import WeatherWidget from '../components/WeatherWidget'
+import HikeCard from './HikeCard'
+import WeatherWidget from './WeatherWidget'
 
 export default function HabitatPage() {
   const location = useLocation()

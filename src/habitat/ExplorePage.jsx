@@ -2,11 +2,11 @@ import { useState, useEffect, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import { useLocation } from '../hooks/useLocation'
 import { useWeather } from '../hooks/useWeather'
-import WeatherWidget from '../components/WeatherWidget'
-import HikeCard from '../components/HikeCard'
-import CraftCard from '../components/CraftCard'
-import { hikes, hikeStates, hikeDifficulties, hikeDurations, hikeShadeLevels, hikeParkingTypes, hikeFeatures } from '../data/hikes'
-import { crafts } from '../data/crafts'
+import WeatherWidget from './WeatherWidget'
+import HikeCard from './HikeCard'
+import CraftCard from '../basecamp/CraftCard'
+import { hikes, hikeStates, hikeDifficulties, hikeDurations, hikeShadeLevels, hikeParkingTypes, hikeFeatures } from './hikes'
+import { crafts } from '../basecamp/crafts'
 
 export default function ExplorePage() {
   const location = useLocation()

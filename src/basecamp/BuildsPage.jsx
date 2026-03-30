@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react'
 import { motion } from 'framer-motion'
-import { builds, buildCategories, getBuildsByCategory } from '../data/builds'
-import BuildCard from '../components/BuildCard'
+import { builds, buildCategories, getBuildsByCategory } from './builds'
+import BuildCard from './BuildCard'
 import { fadeUpVariants } from '../hooks/useScrollReveal'
 
 export default function BuildsPage() {

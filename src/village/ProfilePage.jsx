@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useUser } from '../context/UserContext'
-import { hikes } from '../data/hikes'
-import { crafts } from '../data/crafts'
-import { builds } from '../data/builds'
-import { packLists } from '../data/packLists'
+import { hikes } from '../habitat/hikes'
+import { crafts } from '../basecamp/crafts'
+import { builds } from '../basecamp/builds'
+import { packLists } from '../blueprint/packLists'
 
 const ageGroups = ['0-2', '3-5', '6-9', '10+']
 const interestOptions = ['Hiking', 'Crafts', 'Building', 'Nature', 'Animals', 'Water', 'Art', 'Music']
