@@ -1,14 +1,57 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { packLists } from './packLists'
+import QuantityCalculator from './QuantityCalculator'
+import SmartChecklist from './SmartChecklist'
+import QuickTemplates from './QuickTemplates'
+import AdventureProfileBuilder from './AdventureProfileBuilder'
+import SmartOmissions from './SmartOmissions'
+import TripDifficultySlider from './TripDifficultySlider'
+import OftenForgotten from './OftenForgotten'
+import PackLightChallenge from './PackLightChallenge'
+import SeasonalWeather from './SeasonalWeather'
+import GearYouMightBorrow from './GearYouMightBorrow'
+import SaveCloneTrips from './SaveCloneTrips'
+import BabyCarrierTypes from './BabyCarrierTypes'
 
 export default function BlueprintPage() {
-  const [activeTab, setActiveTab] = useState('hiking')
+  const [activeTab, setActiveTab] = useState('smart')
   const [expandedAge, setExpandedAge] = useState(null)
+  const [myList, setMyList] = useState([])
+  const [checkedItems, setCheckedItems] = useState([])
+  const [tripType, setTripType] = useState('day')
+  const [difficultyAdditions, setDifficultyAdditions] = useState([])
 
   const toggleAge = (index) => {
     setExpandedAge(expandedAge === index ? null : index)
   }
+
+  const handleGenerateFromProfile = (items) => {
+    setMyList(items)
+    setCheckedItems([])
+    setActiveTab('mylist')
+  }
+
+  const handleAddItems = (items) => {
+    setMyList((prev) => [...new Set([...prev, ...items])])
+  }
+
+  const handleToggleItem = (index) => {
+    setCheckedItems((prev) =>
+      prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
+    )
+  }
+
+  const handleDifficultyChange = ({ additions }) => {
+    setDifficultyAdditions(additions || [])
+  }
+
+  const handleLoadTrip = (items) => {
+    setMyList(items)
+    setCheckedItems([])
+  }
+
+  const computedMyList = [...myList, ...difficultyAdditions.filter(a => !myList.some(m => m.toLowerCase().includes(a.toLowerCase())))]
 
   return (
     <div className="min-h-screen bg-cream pt-24 pb-12 px-4">
@@ -23,8 +66,28 @@ export default function BlueprintPage() {
           </p>
         </header>
 
-        {/* Tabs */}
-        <div className="flex gap-2 mb-8 flex-wrap">
+        {/* Main Tabs */}
+        <div className="flex gap-2 mb-6 flex-wrap">
+          <button
+            onClick={() => setActiveTab('smart')}
+            className={`px-5 py-2.5 rounded-full font-sans text-sm font-medium transition-all ${
+              activeTab === 'smart'
+                ? 'bg-ember text-white'
+                : 'bg-blush/50 text-inkl hover:bg-blush'
+            }`}
+          >
+            Smart Builder
+          </button>
+          <button
+            onClick={() => setActiveTab('mylist')}
+            className={`px-5 py-2.5 rounded-full font-sans text-sm font-medium transition-all ${
+              activeTab === 'mylist'
+                ? 'bg-ember text-white'
+                : 'bg-blush/50 text-inkl hover:bg-blush'
+            }`}
+          >
+            My Pack List {myList.length > 0 && `(${myList.length})`}
+          </button>
           <button
             onClick={() => setActiveTab('hiking')}
             className={`px-5 py-2.5 rounded-full font-sans text-sm font-medium transition-all ${
@@ -53,9 +116,90 @@ export default function BlueprintPage() {
                 : 'bg-blush/50 text-inkl hover:bg-blush'
             }`}
           >
-            Day Hike Essentials
+            Essentials
+          </button>
+          <button
+            onClick={() => setActiveTab('carriers')}
+            className={`px-5 py-2.5 rounded-full font-sans text-sm font-medium transition-all ${
+              activeTab === 'carriers'
+                ? 'bg-ember text-white'
+                : 'bg-blush/50 text-inkl hover:bg-blush'
+            }`}
+          >
+            Baby Carriers
           </button>
         </div>
+
+        {/* Smart Builder Tab */}
+        {activeTab === 'smart' && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="space-y-6"
+          >
+            <AdventureProfileBuilder onGenerate={handleGenerateFromProfile} />
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <SeasonalWeather onAddItems={handleAddItems} />
+              <GearYouMightBorrow />
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <TripDifficultySlider onDifficultyChange={handleDifficultyChange} />
+              <QuantityCalculator adults={2} kids={1} onChange={() => {}} />
+            </div>
+
+            <QuickTemplates onAddItems={handleAddItems} availableItems={myList} />
+
+            <BabyCarrierTypes />
+          </motion.div>
+        )}
+
+        {/* My Pack List Tab */}
+        {activeTab === 'mylist' && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="space-y-6"
+          >
+            <SaveCloneTrips
+              currentList={computedMyList}
+              onLoadTrip={handleLoadTrip}
+            />
+
+            <PackLightChallenge
+              totalItems={computedMyList.length}
+              tripType={tripType}
+            />
+
+            <OftenForgotten
+              checkedItems={checkedItems}
+              allItems={computedMyList}
+            />
+
+            <SmartOmissions
+              checkedItems={checkedItems}
+              allItems={computedMyList}
+            />
+
+            <SmartChecklist
+              items={computedMyList}
+              checkedItems={checkedItems}
+              onToggle={handleToggleItem}
+              title="My Pack List"
+              listType="mylist"
+            />
+
+            <div className="flex gap-3">
+              <button
+                onClick={() => setMyList([])}
+                className="px-4 py-2 bg-ember/10 text-ember rounded-xl font-sans text-sm font-medium hover:bg-ember/20 transition-colors"
+              >
+                Clear List
+              </button>
+            </div>
+          </motion.div>
+        )}
 
         {/* Day Hike Essentials */}
         {activeTab === 'essentials' && (
@@ -77,9 +221,30 @@ export default function BlueprintPage() {
           </motion.div>
         )}
 
+        {/* Baby Carriers */}
+        {activeTab === 'carriers' && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
+            <BabyCarrierTypes />
+          </motion.div>
+        )}
+
         {/* Hiking or Camping Lists by Age */}
         {(activeTab === 'hiking' || activeTab === 'camping') && (
           <div className="space-y-4">
+            <div className="flex gap-3 mb-4">
+              <select
+                value={tripType}
+                onChange={(e) => setTripType(e.target.value)}
+                className="px-4 py-2 bg-white rounded-xl font-sans text-sm text-ink border border-inkll/30 focus:outline-none focus:ring-2 focus:ring-olive"
+              >
+                <option value="day">Day Hike</option>
+                <option value="overnight">Overnight</option>
+              </select>
+            </div>
+
             {(activeTab === 'hiking' ? packLists.hiking : packLists.camping).map((group, index) => (
               <motion.div
                 key={group.ageGroup}
@@ -115,6 +280,18 @@ export default function BlueprintPage() {
                   className="overflow-hidden"
                 >
                   <div className="px-5 pb-5 border-t border-inkll/10 pt-4">
+                    <div className="flex justify-end mb-3">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          handleAddItems(group.items)
+                          setActiveTab('mylist')
+                        }}
+                        className="px-3 py-1.5 bg-olive text-white rounded-lg font-sans text-xs font-medium hover:bg-forest transition-colors"
+                      >
+                        + Add All to My List
+                      </button>
+                    </div>
                     <ul className="space-y-2">
                       {group.items.map((item, i) => (
                         <li key={i} className="flex items-start gap-3">
