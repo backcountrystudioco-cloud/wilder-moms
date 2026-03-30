@@ -2,625 +2,640 @@ export const buildCategories = [
   'All',
   'Mud Kitchens',
   'Garden Beds',
-  'Nature Tables',
-  'Bird Houses',
-  'Outdoor Seating',
-  'Water Play'
+  'Nature Play',
+  'Climbing Structures',
+  'Water Play',
+  'Cozy Hideouts'
 ]
 
 export const builds = [
   // MUD KITCHENS
   {
-    id: 'mud-kitchen-basic',
-    title: 'Basic Mud Kitchen',
+    id: 'mud-kitchen-one-board',
+    title: 'The One-Board Mud Kitchen',
     category: 'Mud Kitchens',
     difficulty: 'easy',
-    timeEstimate: '2-3 hours',
-    ageRange: '2-5',
-    cost: '$20-40',
-    description: 'A backyard mud kitchen is the single best investment in hours of independent, sensory-rich play. This basic version uses a wooden pallet and simple materials.',
-    tools: ['Hammer', 'Saw', 'Drill', 'Screwdriver', 'Sandpaper', 'Measuring tape'],
+    timeEstimate: '30 minutes',
+    ageRange: '2-6',
+    cost: '$5-10',
+    description: 'One board, two cinder blocks, and imagination. This is the mud kitchen stripped to its essence — and it works beautifully.',
+    tools: ['Drill', 'Sandpaper'],
     materials: [
-      { name: 'Wooden pallet', quantity: '1', link: 'https://www.facebook.com/marketplace' },
-      { name: 'Exterior screws', quantity: '1 box', link: 'https://www.homedepot.com' },
-      { name: 'Metal basin or tub', quantity: '1', link: 'https://www.dollarstore.com' },
-      { name: '2x4 lumber', quantity: '4 pieces', link: 'https://www.homedepot.com' },
-      { name: 'Outdoor paint', quantity: '1 quart', link: 'https://www.michaels.com' }
+      { name: 'Cinder blocks', quantity: '2', link: 'https://www.homedepot.com' },
+      { name: 'Plank or old door', quantity: '1', link: 'https://www.facebook.com/marketplace' },
+      { name: 'Large metal pan', quantity: '1', link: 'https://www.dollarstore.com' },
+      { name: 'Screws', quantity: '4', link: 'https://www.homedepot.com' }
     ],
     steps: [
-      { title: 'Prepare the pallet', description: 'Sand any rough edges on the pallet to prevent splinters. Check for loose nails and secure or remove them.' },
-      { title: 'Cut the lumber', description: 'Cut 2x4s to create leg supports - two 24" pieces and two 20" pieces for an A-frame design.' },
-      { title: 'Assemble the frame', description: 'Attach the leg supports to the pallet using exterior screws. Ensure the structure is stable and level.' },
-      { title: 'Add the basin', description: 'Secure the metal tub or basin to the pallet top using screws through the bottom. Make sure it cannot be pulled off.' },
-      { title: 'Paint and finish', description: 'Apply outdoor paint in fun colors. Let dry completely before letting kids use it.' },
-      { title: 'Stock the kitchen', description: 'Add old pots, pans, wooden spoons, mason jars, and kitchen tools. Real utensils beat plastic every time.' }
+      { title: 'Set the cinder blocks', description: 'Place two cinder blocks 18 inches apart. The holes should face sideways so kids can peek through.' },
+      { title: 'Sand the plank', description: 'Sand any rough spots on your plank. Round the corners so they aren\'t sharp.' },
+      { title: 'Set the counter', description: 'Rest the plank across the cinder blocks. That\'s it — no screws needed if the fit is snug.' },
+      { title: 'Add the pan', description: 'Screw the pan lightly to the plank so it won\'t tip. Leave room to work around it.' },
+      { title: 'Let them play', description: 'Add old cups, pitchers, and spoons. Hook up a hose nearby and let the mud flow.' }
     ],
     tips: [
-      'Use child-safe tools for assembly',
-      'Seal wood to last longer outdoors',
-      'Add a hose adapter for water play',
-      'Let kids help paint it their favorite color'
+      'Cinder blocks come in different widths — find the right plank length',
+      'Kids can help gather the "ingredients"',
+      'The holes in cinder blocks are perfect for sticking sticks and spoons',
+      'Doubles as a lemonade stand'
     ],
     imageUrl: 'https://images.unsplash.com/photo-1476673160081-cf065607f449?w=800',
-    relatedBuilds: ['mud-kitchen-deluxe', 'mud-kitchen-portable']
+    relatedBuilds: ['mud-kitchen-table']
   },
   {
-    id: 'mud-kitchen-deluxe',
-    title: 'Deluxe Mud Kitchen',
-    category: 'Mud Kitchens',
-    difficulty: 'medium',
-    timeEstimate: '4-6 hours',
-    ageRange: '2-8',
-    cost: '$60-100',
-    description: 'A larger, multi-station mud kitchen with running water, multiple basins, and plenty of counter space for young chefs.',
-    tools: ['Hammer', 'Saw', 'Drill', 'Screwdriver', 'Sandpaper', 'PVC cutter', 'Adjustable wrench'],
-    materials: [
-      { name: 'Pressure-treated lumber', quantity: '8 pieces', link: 'https://www.homedepot.com' },
-      { name: 'Stainless steel sinks', quantity: '2', link: 'https://www.habitat.org/restore' },
-      { name: 'Garden hose fittings', quantity: '1 kit', link: 'https://www.homedepot.com' },
-      { name: 'PVC pipe', quantity: '10 ft', link: 'https://www.homedepot.com' },
-      { name: 'Exterior screws', quantity: '2 boxes', link: 'https://www.homedepot.com' },
-      { name: 'Waterproof wood sealer', quantity: '1 can', link: 'https://www.homedepot.com' }
-    ],
-    steps: [
-      { title: 'Design your layout', description: 'Sketch out a two-station layout with sinks on each end and counter space in between.' },
-      { title: 'Build the base frame', description: 'Construct a sturdy 4x4 frame using pressure-treated lumber. Make it 30" tall for standing play.' },
-      { title: 'Install the counters', description: 'Attach horizontal support beams, then place your counter surface on top.' },
-      { title: 'Mount the sinks', description: 'Cut holes in the counter for each sink basin. Secure with silicone sealant and screws.' },
-      { title: 'Plumb for water', description: 'Connect garden hose fittings to create a water flow system. Use PVC pipe for drainage.' },
-      { title: 'Add finishing touches', description: 'Sand all surfaces, apply wood sealer, and add hooks for hanging utensils.' }
-    ],
-    tips: [
-      'Install a shut-off valve for easy water control',
-      'Use food-grade sealant around sinks',
-      'Add a chalkboard panel for menu writing',
-      'Consider adding a lower station for toddlers'
-    ],
-    imageUrl: 'https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=800',
-    relatedBuilds: ['mud-kitchen-basic', 'mud-kitchen-portable']
-  },
-  {
-    id: 'mud-kitchen-portable',
-    title: 'Portable Mud Kitchen',
+    id: 'mud-kitchen-table',
+    title: 'Table-Top Mud Kitchen',
     category: 'Mud Kitchens',
     difficulty: 'easy',
-    timeEstimate: '1-2 hours',
-    ageRange: '2-6',
+    timeEstimate: '1 hour',
+    ageRange: '2-8',
     cost: '$15-25',
-    description: 'A lightweight, movable mud kitchen that can go anywhere - perfect for apartments, small spaces, or taking to grandma\'s house.',
-    tools: ['Drill', 'Screwdriver', 'Sandpaper', 'Jigsaw'],
+    description: 'Turn any outdoor table into a mud kitchen with this simple add-on. Features a basin, utensil holder, and mixing station.',
+    tools: ['Drill', 'Jigsaw', 'Sandpaper'],
     materials: [
-      { name: 'Large plastic storage bin', quantity: '1', link: 'https://www.target.com' },
-      { name: 'Wooden board', quantity: '1', link: 'https://www.homedepot.com' },
-      { name: 'PVC pipe legs', quantity: '4', link: 'https://www.homedepot.com' },
-      { name: 'Bungee cords', quantity: '4', link: 'https://www.amazon.com' },
-      { name: 'Small plastic bins', quantity: '3-4', link: 'https://www.dollarstore.com' }
+      { name: 'Plastic storage bin', quantity: '1', link: 'https://www.target.com' },
+      { name: 'Bungee cords', quantity: '2', link: 'https://www.amazon.com' },
+      { name: 'PVC pipe (2 inch)', quantity: '1 piece', link: 'https://www.homedepot.com' },
+      { name: 'Small buckets', quantity: '3', link: 'https://www.dollarstore.com' },
+      { name: 'Command hooks', quantity: '6', link: 'https://www.amazon.com' }
     ],
     steps: [
-      { title: 'Prepare the tub', description: 'Clean out a large plastic storage bin. Drill drainage holes in the bottom.' },
-      { title: 'Create the counter', description: 'Cut a wooden board to fit across the top of the bin as a prep surface.' },
-      { title: 'Attach legs', description: 'Cut PVC pipes to desired height and attach them to the corners of the bin.' },
-      { title: 'Add storage bins', description: 'Place smaller bins inside for sorting and organizing materials.' },
-      { title: 'Secure everything', description: 'Use bungee cords to attach the counter to the tub so it cannot be pulled off.' }
+      { title: 'Prep the bin', description: 'Drill排水孔 in the bottom of the bin. Cut a v-shape notch in one rim for pouring.' },
+      { title: 'Create the pipe utensil holder', description: 'Cut PVC pipe into 6-inch sections. Mount horizontally under the table edge.' },
+      { title: 'Attach the bin', description: 'Use bungee cords to secure the bin to the table. It should be stable but removable for cleaning.' },
+      { title: 'Add hooks', description: 'Screw command hooks along the table edge for hanging spoons, ladles, and funnels.' },
+      { title: 'Stock it up', description: 'Fill with old kitchenware — real is better than plastic.' }
     ],
     tips: [
-      'Use food-safe plastic bins for playing',
-      'Add wheels to make it even more portable',
-      'Keep extra materials in the tub for easy transport',
-      'Perfect for beach trips too!'
+      'Take it apart and hose it down in minutes',
+      'Use food-grade plastic bins only',
+      'Store in a shed when not in use',
+      'Add a tray underneath for catching spills'
     ],
     imageUrl: 'https://images.unsplash.com/photo-1518882605630-8eb700e01287?w=800',
-    relatedBuilds: ['mud-kitchen-basic', 'mud-kitchen-deluxe']
+    relatedBuilds: ['mud-kitchen-one-board']
   },
 
   // GARDEN BEDS
   {
-    id: 'raised-garden-basic',
-    title: 'Basic Raised Garden Bed',
+    id: 'pocket-garden',
+    title: 'Strawberry Pocket Garden',
     category: 'Garden Beds',
     difficulty: 'easy',
-    timeEstimate: '2-3 hours',
-    ageRange: '3-12',
-    cost: '$15-35',
-    description: 'A simple raised bed that gives kids ownership of growing their own food. Perfect for cherry tomatoes, strawberries, and more.',
-    tools: ['Drill', 'Screwdriver', 'Level', 'Tape measure', 'Saw'],
+    timeEstimate: '45 minutes',
+    ageRange: '3-10',
+    cost: '$20-30',
+    description: 'A vertical pallet garden that grows 15+ strawberry plants in the space of one square foot. Perfect for small yards and apartment balconies.',
+    tools: ['Drill', 'Hammer', 'Staple gun', 'Sandpaper'],
     materials: [
-      { name: 'Untreated 2x10 boards', quantity: '4', link: 'https://www.homedepot.com' },
-      { name: '4x4 corner posts', quantity: '4', link: 'https://www.homedepot.com' },
-      { name: 'Exterior screws', quantity: '1 box', link: 'https://www.homedepot.com' },
-      { name: 'Landscape fabric', quantity: '1 roll', link: 'https://www.homedepot.com' },
-      { name: 'Compost', quantity: '8 bags', link: 'https://www.localnursery.com' }
+      { name: 'Wooden pallet (heat treated)', quantity: '1', link: 'https://www.facebook.com/marketplace' },
+      { name: 'Landscape fabric', quantity: '2 sq ft', link: 'https://www.homedepot.com' },
+      { name: 'Staples', quantity: '1 box', link: 'https://www.homedepot.com' },
+      { name: 'Potting soil', quantity: '2 bags', link: 'https://www.localnursery.com' },
+      { name: 'Strawberry plants', quantity: '6-8', link: 'https://www.localnursery.com' }
     ],
     steps: [
-      { title: 'Pick your spot & size', description: 'Choose a spot with 6+ hours of sun. Keep beds 3-4 feet wide so kids can reach the center from either side.' },
-      { title: 'Cut the lumber', description: 'Cut boards to desired length - 4x4 feet is a great starter size.' },
-      { title: 'Build the frame', description: 'Attach boards to 4x4 corner posts. Use two screws per board end for strength.' },
-      { title: 'Level and place', description: 'Ensure the frame sits level on the ground. Adjust as needed.' },
-      { title: 'Add fabric and fill', description: 'Line the bottom with landscape fabric to prevent weeds. Fill with compost.' },
-      { title: 'Plant together', description: 'Let kids choose what to plant - cherry tomatoes, sugar snap peas, and radishes grow fast!' }
+      { title: 'Inspect the pallet', description: 'Look for the HT stamp (heat treated). Sand any rough slats.' },
+      { title: 'Line the back and sides', description: 'Staple landscape fabric to the back of the pallet, creating pockets between each slat.' },
+      { title: 'Add the bottom', description: 'Fold the fabric at the bottom to close the pocket. Staple securely.' },
+      { title: 'Fill with soil', description: 'Pack potting soil into each pocket, pressing firmly.' },
+      { title: 'Plant and water', description: 'Tuck strawberry plants into each pocket. Hang on a wall or fence.' }
     ],
     tips: [
-      'Use untreated wood for growing food',
-      'Add a bean teepee for vertical growing',
-      'Make a little sign with their name on it',
-      'Check moisture levels daily'
+      'Lay the pallet flat for 2 weeks after planting so roots establish',
+      'Hang it at eye level so kids can watch strawberries grow',
+      'Pinch off runners to get more fruit',
+      'Replace plants every 2-3 years'
     ],
     imageUrl: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800',
-    relatedBuilds: ['raised-garden-herb', 'raised-garden-elevated']
+    relatedBuilds: ['tower-garden', 'window-box']
   },
   {
-    id: 'raised-garden-herb',
-    title: 'Herb Spiral Garden',
+    id: 'tower-garden',
+    title: 'Tomato Tower',
     category: 'Garden Beds',
-    difficulty: 'medium',
-    timeEstimate: '3-4 hours',
-    ageRange: '4-12',
-    cost: '$30-50',
-    description: 'A beautiful spiral herb garden that creates multiple microclimates - perfect for teaching kids about different plant needs.',
-    tools: ['Shovel', 'Level', 'Garden rake', 'Wheelbarrow'],
+    difficulty: 'easy',
+    timeEstimate: '30 minutes',
+    ageRange: '3-12',
+    cost: '$10-15',
+    description: 'A five-gallon bucket, some twine, and a sunny spot. This tower makes growing tomatoes easy enough for a four-year-old to manage alone.',
+    tools: ['Drill', 'Scissors'],
     materials: [
-      { name: 'Stones or bricks', quantity: '50-75', link: 'https://www.homedepot.com' },
-      { name: 'Gravel', quantity: '2 bags', link: 'https://www.homedepot.com' },
-      { name: 'Topsoil', quantity: '6 bags', link: 'https://www.localnursery.com' },
-      { name: 'Compost', quantity: '4 bags', link: 'https://www.localnursery.com' },
-      { name: 'Herb plants', quantity: '8-10', link: 'https://www.localnursery.com' }
+      { name: '5-gallon bucket', quantity: '1', link: 'https://www.homedepot.com' },
+      { name: 'Tomato cage', quantity: '1', link: 'https://www.homedepot.com' },
+      { name: 'Potting mix', quantity: '1 bag', link: 'https://www.localnursery.com' },
+      { name: 'Tomato seedling', quantity: '1', link: 'https://www.localnursery.com' },
+      { name: 'Twine', quantity: '10 ft', link: 'https://www.homedepot.com' }
     ],
     steps: [
-      { title: 'Plan your spiral', description: 'Mark out a 6-foot diameter circle. The spiral will rise about 3 feet at its highest point.' },
-      { title: 'Create the base', description: 'Lay a foundation of gravel for drainage. Start placing stones in an inward-spiraling pattern.' },
-      { title: 'Build up the walls', description: 'Stack stones as you spiral inward, building higher as you go. Each level should be slightly higher than the previous.' },
-      { title: 'Fill with soil', description: 'Once walls are stable, fill the interior with a mix of topsoil and compost.' },
-      { title: 'Plant strategically', description: 'Place herbs that need more water at the bottom, drought-tolerant herbs at the top.' }
+      { title: 'Drill drainage', description: 'Drill 4-5 large holes in the bottom of the bucket.' },
+      { title: 'Add the cage', description: 'Turn the cage upside down and insert the bottom ring into the empty bucket. It should wedge in snugly.' },
+      { title: 'Fill it up', description: 'Pour potting mix into the bucket, filling to about 2 inches from the top.' },
+      { title: 'Plant the tomato', description: 'Dig a small hole in the center and plant the seedling deep — bury half the stem.' },
+      { title: 'Set and stake', description: 'Place in full sun. Tie the cage to a stake if it\'s windy.' }
     ],
     tips: [
-      'Oregano, thyme, and rosemary do well at the top',
-      'Mint, basil, and parsley prefer the bottom',
-      'Talk about how microclimates work',
-      'Let kids harvest for cooking'
+      'Water every day in hot weather',
+      'Feed weekly once flowers appear',
+      'Cherry tomatoes are easiest for kids to grow',
+      'Bring inside before first frost'
     ],
     imageUrl: 'https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?w=800',
-    relatedBuilds: ['raised-garden-basic', 'raised-garden-elevated']
+    relatedBuilds: ['pocket-garden', 'pea-pod']
   },
   {
-    id: 'raised-garden-elevated',
-    title: 'Elevated Garden Bed',
+    id: 'pea-pod',
+    title: 'Pea Pod Frame',
     category: 'Garden Beds',
-    difficulty: 'medium',
-    timeEstimate: '3-5 hours',
+    difficulty: 'easy',
+    timeEstimate: '1 hour',
     ageRange: '3-10',
-    cost: '$50-80',
-    description: 'A waist-height garden bed perfect for kids who can\'t bend down or for wheelchair accessibility. Same great growing, easier access.',
-    tools: ['Drill', 'Screwdriver', 'Saw', 'Level', 'Tape measure'],
+    cost: '$5-10',
+    description: 'A simple bamboo frame in the shape of a pea pod. Kids love crawling inside, and the peas grow up and over for easy picking.',
+    tools: ['Scissors', 'Garden twine'],
     materials: [
-      { name: 'Treated 2x6 boards', quantity: '8', link: 'https://www.homedepot.com' },
-      { name: '4x4 posts', quantity: '4', link: 'https://www.homedepot.com' },
-      { name: 'Exterior screws', quantity: '1 box', link: 'https://www.homedepot.com' },
-      { name: 'Landscape fabric', quantity: '1 roll', link: 'https://www.homedepot.com' },
-      { name: 'Elevated bed soil mix', quantity: '12 bags', link: 'https://www.localnursery.com' }
+      { name: 'Bamboo stakes (6 ft)', quantity: '6', link: 'https://www.homedepot.com' },
+      { name: 'Garden twine', quantity: '1 spool', link: 'https://www.homedepot.com' },
+      { name: 'Pea seeds', quantity: '1 packet', link: 'https://www.localnursery.com' },
+      { name: 'Chicken wire (optional)', quantity: '2 ft', link: 'https://www.homedepot.com' }
     ],
     steps: [
-      { title: 'Cut all pieces', description: 'Cut 4x4 posts to 30" height. Cut boards to desired length (4x4 feet works well).' },
-      { title: 'Assemble legs', description: 'Attach two posts at each corner using the boards as horizontal supports at top and bottom.' },
-      { title: 'Build the bed walls', description: 'Screw boards around the perimeter, stacking 4-5 high for an 8-10 inch depth.' },
-      { title: 'Add drainage', description: 'Drill several large holes in the bottom boards for water to escape.' },
-      { title: 'Line and fill', description: 'Add landscape fabric to keep soil in. Fill with premium potting mix.' }
+      { title: 'Push in the stakes', description: 'Push three stakes into the ground about 2 feet apart, curving them to meet at the top like an A-frame.' },
+      { title: 'Tie the top', description: 'Bind the three tops together with twine, forming a tunnel entrance.' },
+      { title: 'Add horizontal supports', description: 'Tie twine horizontally every 8 inches for peas to climb on.' },
+      { title: 'Plant the peas', description: 'Plant seeds on both sides of the tunnel, 2 inches deep and 3 inches apart.' },
+      { title: 'Wait and watch', description: 'Peas sprout in 7-14 days. Kids can watch them climb and form pods.' }
     ],
     tips: [
-      'Perfect for kids with limited mobility',
-      'Less bending means more gardening fun',
-      'Great for lettuce, herbs, and strawberries',
-      'Add casters for rolling!'
+      'Plant in early spring — peas love cool weather',
+      'Sugar snap peas are best for kids (eat the whole pod)',
+      'Kids love hiding inside while it grows',
+      'Harvest often to get more peas'
     ],
     imageUrl: 'https://images.unsplash.com/photo-1592419044706-39796d40f98c?w=800',
-    relatedBuilds: ['raised-garden-basic', 'raised-garden-herb']
+    relatedBuilds: ['tower-garden', 'window-box']
+  },
+  {
+    id: 'window-box',
+    title: 'Herbs on the Porch',
+    category: 'Garden Beds',
+    difficulty: 'easy',
+    timeEstimate: '45 minutes',
+    ageRange: '2-12',
+    cost: '$15-25',
+    description: 'A window box herb garden that turns cooking into an adventure. Kids pick the basil, mint, and chives while you make dinner.',
+    tools: ['Drill', 'Screwdriver'],
+    materials: [
+      { name: 'Window box', quantity: '1', link: 'https://ikea.com' },
+      { name: 'Potting mix', quantity: '1 bag', link: 'https://www.localnursery.com' },
+      { name: 'Herb seedlings', quantity: '3-4', link: 'https://www.localnursery.com' },
+      { name: 'L-brackets', quantity: '2 pairs', link: 'https://www.homedepot.com' },
+      { name: 'Slow-release fertilizer', quantity: '1 box', link: 'https://www.homedepot.com' }
+    ],
+    steps: [
+      { title: 'Choose your spot', description: 'Pick a spot that gets 6+ hours of sun. Mount brackets level.' },
+      { title: 'Drill drainage holes', description: 'Drill 3-4 holes in the bottom of the window box if there aren\'t any.' },
+      { title: 'Add soil and plants', description: 'Fill halfway with potting mix. Arrange plants and fill around them.' },
+      { title: 'Mount securely', description: 'Lift the box into the brackets. It should be level and not wobble.' },
+      { title: 'Show them how', description: 'Let kids pinch off leaves when you cook. New growth will replace them.' }
+    ],
+    tips: [
+      'Basil, mint, and chives are nearly impossible to kill',
+      'Mint likes to take over — keep it in its own pot inside the box',
+      'Pinch flowers off to keep leaves growing',
+      'Water when the soil feels dry'
+    ],
+    imageUrl: 'https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?w=800',
+    relatedBuilds: ['pocket-garden', 'tower-garden']
   },
 
-  // NATURE TABLES
+  // NATURE PLAY
   {
-    id: 'nature-table-indoor',
-    title: 'Indoor Nature Table',
-    category: 'Nature Tables',
+    id: 'bug-hotel',
+    title: 'Mason Bee Hotel',
+    category: 'Nature Play',
     difficulty: 'easy',
-    timeEstimate: '1-2 hours',
-    ageRange: '2-8',
-    cost: '$20-40',
-    description: 'A dedicated space for displaying and exploring nature treasures. Changes with the seasons and brings the outdoors in.',
-    tools: ['Drill', 'Level', 'Screwdriver'],
+    timeEstimate: '30 minutes',
+    ageRange: '3-10',
+    cost: '$5-10',
+    description: 'Mason bees are gentle, amazing pollinators — and they\'ll move into this simple hotel you can build from a log and some bamboo. No tools required.',
+    tools: ['Drill', 'Saw'],
     materials: [
-      { name: 'Wooden display tray', quantity: '1', link: 'https://www.ikea.com' },
-      { name: 'Small jars or dishes', quantity: '6-8', link: 'https://www.dollarstore.com' },
-      { name: 'Magnifying glass', quantity: '1-2', link: 'https://www.educationaltoys.com' },
-      { name: 'Nature field guide', quantity: '1', link: 'https://www.bookshop.org' },
-      { name: 'Cork board backing', quantity: '1 sheet', link: 'https://www.homedepot.com' }
+      { name: 'Short log section (6-8 inches)', quantity: '1', link: 'https://www.localtreecare.com' },
+      { name: 'Bamboo stalks', quantity: '5-8', link: 'https://www.amazon.com' },
+      { name: 'Drill bits (3/16, 5/16 inch)', quantity: '2', link: 'https://www.homedepot.com' },
+      { name: 'Twine', quantity: '1 spool', link: 'https://www.homedepot.com' },
+      { name: 'Rake', quantity: '1 bundle', link: 'https://www.homedepot.com' }
     ],
     steps: [
-      { title: 'Choose the location', description: 'Find a low table or shelf at child height with good natural light.' },
-      { title: 'Set up the display area', description: 'Place a large tray or shallow box to contain discoveries and make cleanup easy.' },
-      { title: 'Add sorting dishes', description: 'Arrange small jars and dishes for sorting treasures by type - rocks, leaves, feathers, etc.' },
-      { title: 'Include tools', description: 'Add magnifying glasses, tweezers, and a small brush for examining finds.' },
-      { title: 'Make it seasonal', description: 'Change displays with the seasons - pinecones in winter, flowers in spring, shells in summer.' }
+      { title: 'Drill holes in the log', description: 'Drill holes of different sizes (3/16 to 5/16 inch) about 3 inches deep. Leave 1 inch between holes.' },
+      { title: 'Cut the bamboo', description: 'Cut bamboo into 6-8 inch sections. Cut just above a node so the bottom is closed.' },
+      { title: 'Bundle the bamboo', description: 'Tie bamboo pieces together with twine. Leave long tails for hanging.' },
+      { title: 'Mount it up', description: 'Hang the log and bundle together on a south-facing wall 6-7 feet high.' },
+      { title: 'Add a mud source', description: 'Place a small dish of mud nearby. Mason bees need mud to seal their nests.' }
     ],
     tips: [
-      'Rotate items weekly to keep interest',
-      'Let kids lead the curation',
-      'Add identification cards for common finds',
-      'Include a sketchbook for nature journaling'
+      'Hole size matters: 3/16" for small bees, 5/16" for mason bees',
+      'Hang facing south — bees like morning sun',
+      'Don\'t drill all the way through the log',
+      'Clean holes every fall with a pipe cleaner'
     ],
-    imageUrl: 'https://images.unsplash.com/photo-1518882605630-8eb700e01287?w=800',
-    relatedBuilds: ['nature-table-outdoor', 'nature-table-mobile']
+    imageUrl: 'https://images.unsplash.com/photo-1552728089-57bdde30beb3?w=800',
+    relatedBuilds: ['rock-cairn', 'stick-sculpture']
   },
   {
-    id: 'nature-table-outdoor',
-    title: 'Outdoor Discovery Table',
-    category: 'Nature Tables',
-    difficulty: 'medium',
-    timeEstimate: '2-4 hours',
-    ageRange: '2-10',
-    cost: '$30-60',
-    description: 'A weather-resistant exploration station for outdoor discoveries. Perfect for mud, water, leaves, and all things nature.',
-    tools: ['Drill', 'Saw', 'Screwdriver', 'Sandpaper'],
+    id: 'rock-cairn',
+    title: 'Balance Rock Tower',
+    category: 'Nature Play',
+    difficulty: 'easy',
+    timeEstimate: '30 minutes',
+    ageRange: '2-12',
+    cost: '$0',
+    description: 'River rocks stacked into meditative towers. There\'s something deeply calming about finding the exact balance point — for kids and adults alike.',
+    tools: ['None'],
     materials: [
-      { name: 'Pressure-treated lumber', quantity: '6 pieces', link: 'https://www.homedepot.com' },
-      { name: 'Galvanized metal tray', quantity: '1', link: 'https://www.farmandfleet.com' },
-      { name: 'Exterior screws', quantity: '1 box', link: 'https://www.homedepot.com' },
-      { name: 'Waterproof wood sealer', quantity: '1 can', link: 'https://www.homedepot.com' },
-      { name: 'Rubber feet', quantity: '4', link: 'https://www.homedepot.com' }
+      { name: 'Smooth river rocks', quantity: '10-20', link: 'https://www.riverstones.com' },
+      { name: 'Wooden board', quantity: '1', link: 'https://www.homedepot.com' }
     ],
     steps: [
-      { title: 'Build the frame', description: 'Create a sturdy table frame using 2x4s - about 3 feet tall and 2 feet wide.' },
-      { title: 'Add the top surface', description: 'Attach a solid top made of boards with small gaps for drainage.' },
-      { title: 'Install the tray', description: 'Place the galvanized tray on top. It should sit flush or slightly below the table surface.' },
-      { title: 'Seal everything', description: 'Apply multiple coats of waterproof sealer to all wood surfaces.' },
-      { title: 'Add features', description: 'Attach hooks for tools, a small shelf for supplies, and rubber feet to prevent slipping.' }
+      { title: 'Gather rocks', description: 'Collect smooth, flat rocks from a river or garden center. Different sizes make it more interesting.' },
+      { title: 'Set up your base', description: 'Place a wide, flat board or stump as your base. Make sure it\'s stable.' },
+      { title: 'Start stacking', description: 'Find the balance point of each rock. Go slow — the magic is in the focus.' },
+      { title: 'Go higher', description: 'Use smaller rocks on top. Stack as high as you can without toppling.' },
+      { title: 'Take turns', description: 'This is a zen activity — no competition, just peaceful stacking.' }
     ],
     tips: [
-      'Perfect for water play in summer',
-      'Add sandbox sand or pea gravel to the tray',
-      'Include sieves and scoops for sorting',
-      'Shelf underneath can hold soil and supplies'
+      'Flat rocks with a center ridge are easiest to balance',
+      'Smooth river rocks from a garden center are inexpensive',
+      'Sea glass and shells work too',
+      'Display finished towers in the garden'
+    ],
+    imageUrl: 'https://images.unsplash.com/photo-1527515637462-cff94edd56f1?w=800',
+    relatedBuilds: ['stick-sculpture', 'fort-sticks']
+  },
+  {
+    id: 'stick-sculpture',
+    title: 'Stick & Twig Art',
+    category: 'Nature Play',
+    difficulty: 'easy',
+    timeEstimate: '1 hour',
+    ageRange: '4-12',
+    cost: '$0',
+    description: 'A living art frame where kids weave sticks, vines, and branches into living sculptures. As things grow, the art changes with the seasons.',
+    tools: ['Pruning shears', 'Gloves'],
+    materials: [
+      { name: '4 wooden posts (8 ft)', quantity: '4', link: 'https://www.homedepot.com' },
+      { name: 'Flexible vines or willow branches', quantity: '10-15', link: 'https://www.localnursery.com' },
+      { name: 'Twine', quantity: '1 spool', link: 'https://www.homedepot.com' },
+      { name: 'Found sticks and twigs', quantity: 'various', link: 'Your backyard' }
+    ],
+    steps: [
+      { title: 'Set the frame', description: 'Pound four posts into the ground to form a square or triangle. Go 2 feet deep.' },
+      { title: 'Weave the base', description: 'Starting at the bottom, weave horizontal lines of twine between posts.' },
+      { title: 'Add structure', description: 'Weave thicker branches horizontally every 6 inches for structure.' },
+      { title: 'Fill with found materials', description: 'Kids add sticks, twigs, pinecones — whatever they find. Weave them in.' },
+      { title: 'Let it grow', description: 'Plant climbing vines at the base. In a season, green will cover the structure.' }
+    ],
+    tips: [
+      'Morning glory and sweet peas grow fast and cover well',
+      'Let kids lead the design — it\'s their sculpture',
+      'Add strings for beans to climb',
+      'Perfect for hiding behind'
+    ],
+    imageUrl: 'https://images.unsplash.com/photo-1518882605630-8eb700e01287?w=800',
+    relatedBuilds: ['bug-hotel', 'fort-sticks']
+  },
+
+  // CLIMBING STRUCTURES
+  {
+    id: 'tire-climb',
+    title: 'Tire Climb Stack',
+    category: 'Climbing Structures',
+    difficulty: 'easy',
+    timeEstimate: '2 hours',
+    ageRange: '3-10',
+    cost: '$0-10',
+    description: 'Old tires stacked and bolted together. Free, endlessly fun, and great for burning energy. This is the jungle gym you can build in an afternoon.',
+    tools: ['Drill', 'Wrench', 'Socket set'],
+    materials: [
+      { name: 'Car tires (same size)', quantity: '4-6', link: 'https://www.tirerack.com' },
+      { name: 'Long bolts with nuts', quantity: '8', link: 'https://www.homedepot.com' },
+      { name: 'Landscape fabric', quantity: '1 roll', link: 'https://www.homedepot.com' },
+      { name: 'Rubber mats', quantity: 'optional', link: 'https://www.amazon.com' }
+    ],
+    steps: [
+      { title: 'Source tires', description: 'Ask at auto shops — they often pay to dispose of old tires. Get 4-6 matching ones.' },
+      { title: 'Clean them', description: 'Scrub tires with soap and water. Let dry completely.' },
+      { title: 'Mark and drill', description: 'Mark four points evenly around the tire edge. Drill holes through both flanges where tires will touch.' },
+      { title: 'Stack and bolt', description: 'Stack tires and insert bolts through holes. Secure with nuts on the inside.' },
+      { title: 'Prepare the ground', description: 'Place landscape fabric under and around the structure. Add rubber mats for safety.' }
+    ],
+    tips: [
+      'Lay tires flat for easier climbing',
+      'Leave the sidewalls on for better handholds',
+      'Fill center with sand to prevent water pooling',
+      'Paint bright colors with outdoor paint'
+    ],
+    imageUrl: 'https://images.unsplash.com/photo-1527515637462-cff94edd56f1?w=800',
+    relatedBuilds: ['balance-beam', 'rope-swing']
+  },
+  {
+    id: 'balance-beam',
+    title: 'Backyard Balance Beam',
+    category: 'Climbing Structures',
+    difficulty: 'easy',
+    timeEstimate: '1 hour',
+    ageRange: '3-12',
+    cost: '$10-15',
+    description: 'Three posts, one beam, infinite walks. This balance beam builds core strength and confidence — and it\'s adjustable as kids grow.',
+    tools: ['Drill', 'Level', 'Shovel'],
+    materials: [
+      { name: '4x4 post (8 ft)', quantity: '2', link: 'https://www.homedepot.com' },
+      { name: '2x6 board (10 ft)', quantity: '1', link: 'https://www.homedepot.com' },
+      { name: 'Carriage bolts', quantity: '4', link: 'https://www.homedepot.com' },
+      { name: 'Concrete mix', quantity: '2 bags', link: 'https://www.homedepot.com' },
+      { name: 'Non-toxic wood sealer', quantity: '1 can', link: 'https://www.homedepot.com' }
+    ],
+    steps: [
+      { title: 'Cut the pieces', description: 'Cut 4x4s to 30 inches. Leave the beam at 10 feet or cut to fit your space.' },
+      { title: 'Seal the wood', description: 'Apply wood sealer to all surfaces. Let dry for 48 hours.' },
+      { title: 'Dig holes', description: 'Dig two holes 2 feet deep where you want the beam ends to sit.' },
+      { title: 'Set the posts', description: 'Put posts in holes and fill with concrete. Use a level to make sure posts are plumb.' },
+      { title: 'Attach the beam', description: 'Once concrete sets, center the beam on top of posts. Drill through and bolt securely.' }
+    ],
+    tips: [
+      'Adjust height as kids grow — raise the beam',
+      'For beginners, lay the beam on the ground first',
+      'Add two beams side-by-side for relay races',
+      'Perfect for imaginary tightrope acts'
+    ],
+    imageUrl: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800',
+    relatedBuilds: ['tire-climb', 'stump-steps']
+  },
+  {
+    id: 'stump-steps',
+    title: 'Log Stepping Stones',
+    category: 'Climbing Structures',
+    difficulty: 'easy',
+    timeEstimate: '2 hours',
+    ageRange: '2-8',
+    cost: '$0-10',
+    description: 'Tree rounds at different heights create a balance course. Kids hop from stump to stump — building balance, coordination, and confidence.',
+    tools: ['Saw', 'Chainsaw', 'Sandpaper', 'Drill'],
+    materials: [
+      { name: 'Tree rounds (varying heights)', quantity: '6-8', link: 'https://www.localtreecare.com' },
+      { name: 'Exterior wood sealer', quantity: '1 can', link: 'https://www.homedepot.com' },
+      { name: 'Rubber feet', quantity: 'optional', link: 'https://www.homedepot.com' },
+      { name: 'Pea gravel', quantity: '2-3 bags', link: 'https://www.homedepot.com' }
+    ],
+    steps: [
+      { title: 'Get logs cut', description: 'Ask a tree service to cut rounds from cedar or redwood logs. Various diameters (8-16 inches) look best.' },
+      { title: 'Cut to height', description: 'Cut rounds to varying heights — 4, 6, 8, 10, and 12 inches. Make cuts level.' },
+      { title: 'Sand the tops', description: 'Sand the top surface of each round until smooth. This is where feet will land.' },
+      { title: 'Seal everything', description: 'Apply exterior sealer to all surfaces. Let cure for a week before use.' },
+      { title: 'Lay out the path', description: 'Place rounds in a winding pattern, spaced for easy hopping. Bury slightly for stability.' }
+    ],
+    tips: [
+      'Lay out before you bury — watch kids try it first',
+      'Cedar and redwood resist rot for years',
+      'Space closer together for toddlers, farther apart for older kids',
+      'Add a "finish line" stump'
+    ],
+    imageUrl: 'https://images.unsplash.com/photo-1527515637462-cff94edd56f1?w=800',
+    relatedBuilds: ['balance-beam', 'tire-climb']
+  },
+  {
+    id: 'rope-swing',
+    title: 'Tree Swing',
+    category: 'Climbing Structures',
+    difficulty: 'medium',
+    timeEstimate: '2 hours',
+    ageRange: '2-12',
+    cost: '$15-25',
+    description: 'A proper tree swing with a wooden seat that will last for years. The kind of swing you remember from childhood.',
+    tools: ['Drill', 'Saw', 'Wrench', 'Ladder'],
+    materials: [
+      { name: 'Climbing rope (1/2 inch)', quantity: '25 ft', link: 'https://www.rei.com' },
+      { name: 'Hardwood board (2x6)', quantity: '1 piece', link: 'https://www.homedepot.com' },
+      { name: 'Tree strap', quantity: '2', link: 'https://www.rei.com' },
+      { name: 'Saddle clamp', quantity: '2', link: 'https://www.homedepot.com' },
+      { name: 'Lag screw (5/16 inch)', quantity: '2', link: 'https://www.homedepot.com' }
+    ],
+    steps: [
+      { title: 'Find a branch', description: 'Look for a healthy branch at least 8 inches thick, 10-15 feet off the ground, and at least 6 feet from the trunk.' },
+      { title: 'Install straps', description: 'Wrap tree straps around the branch. Leave 2 feet of clearance on each side.' },
+      { title: 'Cut and drill the seat', description: 'Cut the board to 18 inches. Drill two holes 2 inches from each end for rope threading.' },
+      { title: 'Thread the rope', description: 'Cut rope in half. Thread through seat holes and tie secure knots underneath.' },
+      { title: 'Attach to straps', description: 'Secure ropes to tree straps with clamps. Test by giving it a good swing.' }
+    ],
+    tips: [
+      'Check the branch every spring — it grows!',
+      'Use softwood seat if you want it to weather naturally',
+      'Seat should be 2-3 feet off the ground for kids',
+      'Tire swings need more clearance'
     ],
     imageUrl: 'https://images.unsplash.com/photo-1476673160081-cf065607f449?w=800',
-    relatedBuilds: ['nature-table-indoor', 'nature-table-mobile']
-  },
-  {
-    id: 'nature-table-mobile',
-    title: 'Mobile Nature Cart',
-    category: 'Nature Tables',
-    difficulty: 'easy',
-    timeEstimate: '1-2 hours',
-    ageRange: '2-8',
-    cost: '$25-45',
-    description: 'A rolling cart that goes wherever nature calls - from the backyard to the park to grandma\'s house.',
-    tools: ['Drill', 'Screwdriver', 'Wrench'],
-    materials: [
-      { name: 'Rolling cart base', quantity: '1', link: 'https://www.ikea.com' },
-      { name: 'Small plastic containers', quantity: '6-8', link: 'https://www.dollarstore.com' },
-      { name: 'Caster wheels', quantity: '4', link: 'https://www.homedepot.com' },
-      { name: 'Bungee cords', quantity: '2', link: 'https://www.amazon.com' },
-      { name: 'Collapsible water container', quantity: '1', link: 'https://www.amazon.com' }
-    ],
-    steps: [
-      { title: 'Prepare the cart', description: 'Use a basic utility cart or repurpose an old cart. Ensure it rolls smoothly.' },
-      { title: 'Add container storage', description: 'Attach or place small containers for sorting and collecting.' },
-      { title: 'Install tool holders', description: 'Add bungee cords or hooks to hold magnifying glasses, tweezers, and brushes.' },
-      { title: 'Pack the essentials', description: 'Include collection bags, water container, field guides, and sketching supplies.' },
-      { title: 'Make it portable', description: 'Ensure everything can be secured for transport. The cart should be easy to push.' }
-    ],
-    tips: [
-      'Great for nature walks and hikes',
-      'Collapsible water container saves space',
-      'Include a small first aid kit',
-      'Add a clipboard with blank paper for sketching'
-    ],
-    imageUrl: 'https://images.unsplash.com/photo-1518882605630-8eb700e01287?w=800',
-    relatedBuilds: ['nature-table-indoor', 'nature-table-outdoor']
-  },
-
-  // BIRD HOUSES
-  {
-    id: 'birdhouse-basic',
-    title: 'Classic Birdhouse',
-    category: 'Bird Houses',
-    difficulty: 'easy',
-    timeEstimate: '1-2 hours',
-    ageRange: '3-12',
-    cost: '$10-20',
-    description: 'A simple wooden birdhouse that welcomes wrens, chickadees, and sparrows. A wonderful first building project.',
-    tools: ['Hammer', 'Saw', 'Drill', 'Screwdriver', 'Sandpaper'],
-    materials: [
-      { name: 'Cedar or pine boards', quantity: '4', link: 'https://www.homedepot.com' },
-      { name: 'Wooden dowel', quantity: '1', link: 'https://www.homedepot.com' },
-      { name: 'Exterior screws', quantity: '1 box', link: 'https://www.homedepot.com' },
-      { name: 'Non-toxic paint', quantity: '1 can', link: 'https://www.michaels.com' },
-      { name: 'Jute twine', quantity: '1 spool', link: 'https://www.homedepot.com' }
-    ],
-    steps: [
-      { title: 'Cut the pieces', description: 'Cut boards for: two side pieces (8"), front and back (9"), roof (7"), and floor (5").' },
-      { title: 'Drill the entrance', description: 'On the front piece, drill a 1" hole centered about 6" from the bottom.' },
-      { title: 'Sand all surfaces', description: 'Sand every piece smooth, especially around the entrance hole.' },
-      { title: 'Assemble the walls', description: 'Attach sides to front and back using screws. Keep seams tight.' },
-      { title: 'Add the floor and roof', description: 'Screw the floor in place. Attach roof at a slight angle for water runoff.' },
-      { title: 'Add the perch and hang', description: 'Drill a small hole below the entrance for a twig perch. Add twine for hanging.' }
-    ],
-    tips: [
-      'Leave a gap at the bottom for cleaning',
-      'Use non-toxic paint in natural colors',
-      'Hang at 5-6 feet high',
-      'Face entrance away from prevailing wind'
-    ],
-    imageUrl: 'https://images.unsplash.com/photo-1552728089-57bdde30beb3?w=800',
-    relatedBuilds: ['birdhouse-purple-martin', 'birdhouse-feeders']
-  },
-  {
-    id: 'birdhouse-purple-martin',
-    title: 'Purple Martin House',
-    category: 'Bird Houses',
-    difficulty: 'hard',
-    timeEstimate: '6-8 hours',
-    ageRange: '8-12',
-    cost: '$50-80',
-    description: 'A multi-unit apartment complex for purple martins. These colonial nesters will thank you with years of bug-free summers.',
-    tools: ['Drill', 'Saw', 'Screwdriver', 'Level', 'Measuring tape', 'Ladder'],
-    materials: [
-      { name: '4x4 pressure-treated post', quantity: '1', link: 'https://www.homedepot.com' },
-      { name: 'Exterior plywood', quantity: '2 sheets', link: 'https://www.homedepot.com' },
-      { name: 'Wooden gutters or troughs', quantity: '4', link: 'https://www.homedepot.com' },
-      { name: 'Galvanized hardware', quantity: '1 box', link: 'https://www.homedepot.com' },
-      { name: 'Aluminum reflective tape', quantity: '1 roll', link: 'https://www.amazon.com' }
-    ],
-    steps: [
-      { title: 'Set the post', description: 'Dig a 2-foot hole and set a 10-foot 4x4 post in concrete. Allow to cure fully.' },
-      { title: 'Build the platform', description: 'Create a cross-shaped platform at the top of the post to support the gourds.' },
-      { title: 'Prepare the gourds', description: 'Clean and dry gourds. Cut a 3" entrance hole 2" from the top.' },
-      { title: 'Install entrance holes', description: 'Cut openings with predator guards - a slot with a perch below.' },
-      { title: 'Mount and hang', description: 'Hang gourds from the platform using wire or rope. Space them 12" apart.' },
-      { title: 'Add predator guards', description: 'Wrap the pole with a metal guard or reflective tape to prevent snake access.' }
-    ],
-    tips: [
-      'Purple martins eat thousands of mosquitoes daily',
-      'Set up before breeding season (early spring)',
-      'They return to the same location yearly',
-      'Keep entrance holes 2.5-3 inches for purple martins'
-    ],
-    imageUrl: 'https://images.unsplash.com/photo-1552728089-57bdde30beb3?w=800',
-    relatedBuilds: ['birdhouse-basic', 'birdhouse-feeders']
-  },
-  {
-    id: 'birdhouse-feeders',
-    title: 'Bird Feeding Station',
-    category: 'Bird Houses',
-    difficulty: 'medium',
-    timeEstimate: '2-3 hours',
-    ageRange: '3-12',
-    cost: '$25-40',
-    description: 'A combination birdhouse and feeder that attracts a variety of birds. Includes seed cups and a suet cage.',
-    tools: ['Drill', 'Saw', 'Screwdriver', 'Sandpaper'],
-    materials: [
-      { name: 'Cedar boards', quantity: '4', link: 'https://www.homedepot.com' },
-      { name: 'Metal seed cups', quantity: '2', link: 'https://www.amazon.com' },
-      { name: 'Suet cage', quantity: '1', link: 'https://www.amazon.com' },
-      { name: 'Eyebolts and washers', quantity: '4', link: 'https://www.homedepot.com' },
-      { name: 'Jute rope', quantity: '10 ft', link: 'https://www.homedepot.com' }
-    ],
-    steps: [
-      { title: 'Build the basic house', description: 'Construct a simple birdhouse with slightly larger dimensions for multiple bird species.' },
-      { title: 'Install seed cups', description: 'Mount two metal seed cups on opposite sides, below the roof overhang.' },
-      { title: 'Add the suet cage', description: 'Attach a suet cage to the front or bottom of the house using screws.' },
-      { title: 'Create hanging options', description: 'Add eyebolts at the top and sides for hanging and mounting on posts.' },
-      { title: 'Sand and finish', description: 'Sand all surfaces smooth. Apply non-toxic wood stain or natural paint.' }
-    ],
-    tips: [
-      'Clean seed cups weekly',
-      'Offer different seeds to attract different species',
-      'Place near trees for cover',
-      'Sunflower seeds are a universal favorite'
-    ],
-    imageUrl: 'https://images.unsplash.com/photo-1552728089-57bdde30beb3?w=800',
-    relatedBuilds: ['birdhouse-basic', 'birdhouse-purple-martin']
-  },
-
-  // OUTDOOR SEATING
-  {
-    id: 'seating-log-stumps',
-    title: 'Natural Log Stumps',
-    category: 'Outdoor Seating',
-    difficulty: 'easy',
-    timeEstimate: '1-2 hours',
-    ageRange: '2-12',
-    cost: '$0-15',
-    description: 'Simple log stumps make charming, natural seating that blends into any garden or forest setting.',
-    tools: ['Saw', 'Chainsaw (optional)', 'Sandpaper', 'Drill'],
-    materials: [
-      { name: 'Log sections', quantity: '3-5', link: 'https://www.localtreecare.com' },
-      { name: 'Exterior wood sealer', quantity: '1 can', link: 'https://www.homedepot.com' },
-      { name: 'Rubber feet', quantity: 'optional', link: 'https://www.homedepot.com' }
-    ],
-    steps: [
-      { title: 'Source your logs', description: 'Ask a local tree service for free log sections, or find fallen wood on your property.' },
-      { title: 'Choose sizes', description: 'Select a variety of heights - 8-12 inches for kids, 16-20 inches for adults.' },
-      { title: 'Cut to height', description: 'Cut logs to desired length. Make cuts as level as possible.' },
-      { title: 'Sand the tops', description: 'Sand the top surface smooth to prevent splinters, especially important for kids.' },
-      { title: 'Seal and cure', description: 'Apply exterior wood sealer to all surfaces. Allow to cure for a week before use.' },
-      { title: 'Add rubber feet', description: 'Attach rubber feet to the bottom to prevent sinking into soil.' }
-    ],
-    tips: [
-      'Cedar and redwood naturally resist decay',
-      'Different diameters create visual interest',
-      'Leave the bark on for a rustic look',
-      'Recut periodically as the wood seasons'
-    ],
-    imageUrl: 'https://images.unsplash.com/photo-1527515637462-cff94edd56f1?w=800',
-    relatedBuilds: ['seating-pallet-bench', 'seating-tire-coach']
-  },
-  {
-    id: 'seating-pallet-bench',
-    title: 'Pallet Bench',
-    category: 'Outdoor Seating',
-    difficulty: 'easy',
-    timeEstimate: '2-3 hours',
-    ageRange: '3-12',
-    cost: '$10-20',
-    description: 'A sturdy bench built from reclaimed pallets. Perfect for the edge of a garden or as extra seating anywhere.',
-    tools: ['Hammer', 'Drill', 'Screwdriver', 'Saw', 'Pry bar', 'Sandpaper'],
-    materials: [
-      { name: 'Wooden pallets', quantity: '3', link: 'https://www.facebook.com/marketplace' },
-      { name: 'Exterior screws', quantity: '1 box', link: 'https://www.homedepot.com' },
-      { name: '2x4 lumber', quantity: '4 pieces', link: 'https://www.homedepot.com' },
-      { name: 'Outdoor stain', quantity: '1 can', link: 'https://www.homedepot.com' },
-      { name: 'Corner brackets', quantity: '8', link: 'https://www.homedepot.com' }
-    ],
-    steps: [
-      { title: 'Inspect pallets', description: 'Check for safe pallets - HT stamp only (heat treated). Remove any loose nails.' },
-      { title: 'Disassemble and prep', description: 'Carefully pry apart some pallets to get clean boards for the seat slats.' },
-      { title: 'Build the frame', description: 'Use 2x4s to create two A-frame leg assemblies.' },
-      { title: 'Attach the seat', description: 'Screw pallet boards across the top of the frame, leaving small gaps for drainage.' },
-      { title: 'Reinforce with brackets', description: 'Attach corner brackets at all joints for extra stability.' },
-      { title: 'Sand and stain', description: 'Sand all surfaces, especially edges. Apply outdoor stain in a natural color.' }
-    ],
-    tips: [
-      'Always use heat-treated (HT) pallets only',
-      'Look for pallet ratings of 2500+ lbs',
-      'Stain both sides to prevent warping',
-      'Great project to do with kids'
-    ],
-    imageUrl: 'https://images.unsplash.com/photo-1527515637462-cff94edd56f1?w=800',
-    relatedBuilds: ['seating-log-stumps', 'seating-tire-coach']
-  },
-  {
-    id: 'seating-tire-coach',
-    title: 'Tire Ottoman',
-    category: 'Outdoor Seating',
-    difficulty: 'easy',
-    timeEstimate: '1-2 hours',
-    ageRange: '2-8',
-    cost: '$5-10',
-    description: 'A clever ottoman made from an old tire - stackable, durable, and surprisingly stylish with a little rope and paint.',
-    tools: ['Drill', 'Scissors', 'Paintbrush', 'Hot glue gun'],
-    materials: [
-      { name: 'Clean tires', quantity: '1-2', link: 'https://www.tirerack.com' },
-      { name: 'Natural rope', quantity: '20-30 ft', link: 'https://www.homedepot.com' },
-      { name: 'Outdoor acrylic paint', quantity: '1 can', link: 'https://www.michaels.com' },
-      { name: 'E6000 glue', quantity: '1 tube', link: 'https://www.amazon.com' },
-      { name: 'Foam padding', quantity: '1 piece', link: 'https://www.ikea.com' }
-    ],
-    steps: [
-      { title: 'Clean the tire', description: 'Scrub the tire thoroughly with soap and water. Let dry completely.' },
-      { title: 'Paint the tire', description: 'Apply outdoor acrylic paint to the outer surface. Let dry between coats.' },
-      { title: 'Wrap with rope', description: 'Starting from the bottom, glue rope in a spiral pattern around the tire. Work your way up.' },
-      { title: 'Add foam top', description: 'Cut foam to fit inside the tire opening. Cover with fabric or rope.' },
-      { title: 'Secure the foam', description: 'Use E6000 glue to secure the foam padding. Cover with outdoor fabric.' },
-      { title: 'Add a cushion', description: 'Top with a weather-resistant cushion tied to the tire.' }
-    ],
-    tips: [
-      'Use natural rope for outdoor durability',
-      'Paint designs or stripes for kids',
-      'Stack two tires for a taller seat',
-      'Perfect for reading corners'
-    ],
-    imageUrl: 'https://images.unsplash.com/photo-1527515637462-cff94edd56f1?w=800',
-    relatedBuilds: ['seating-log-stumps', 'seating-pallet-bench']
+    relatedBuilds: ['tire-climb', 'fort-sticks']
   },
 
   // WATER PLAY
   {
-    id: 'water-table-simple',
-    title: 'Simple Water Table',
+    id: 'bottle-bowl',
+    title: 'Plastic Bottle Water Wall',
     category: 'Water Play',
     difficulty: 'easy',
     timeEstimate: '1 hour',
-    ageRange: '2-6',
-    cost: '$10-20',
-    description: 'A simple but engaging water play station using a basic table and bin. Endless summer fun for little ones.',
-    tools: ['Drill', 'Saw'],
+    ageRange: '2-8',
+    cost: '$5',
+    description: 'Empty bottles mounted on a board at different angles. Water poured at the top flows down through channels and spouts — endlessly fascinating.',
+    tools: ['Drill', 'Scissors', 'Nail (for punching)', 'String'],
     materials: [
-      { name: 'Plastic storage bin', quantity: '1', link: 'https://www.target.com' },
-      { name: 'PVC pipe pieces', quantity: '4-6', link: 'https://www.homedepot.com' },
-      { name: 'Plastic tubing', quantity: '3 ft', link: 'https://www.homedepot.com' },
-      { name: 'Suction cups', quantity: '4-6', link: 'https://www.amazon.com' },
-      { name: 'Water toys', quantity: 'various', link: 'https://www.dollarstore.com' }
+      { name: 'Large plastic bottles', quantity: '6-8', link: 'https://www.dollarstore.com' },
+      { name: 'Wooden board or fence section', quantity: '1', link: 'https://www.homedepot.com' },
+      { name: 'Cable ties', quantity: '1 bag', link: 'https://www.amazon.com' },
+      { name: 'Garden hose adapter', quantity: '1', link: 'https://www.homedepot.com' },
+      { name: 'Funnel', quantity: '1', link: 'https://www.dollarstore.com' }
     ],
     steps: [
-      { title: 'Choose your table', description: 'Use a basic plastic or wooden table at kid height. A folding table works great.' },
-      { title: 'Prepare the bin', description: 'Select a bin that fits on the table with room for spilling. Drill drainage holes in one corner.' },
-      { title: 'Create funnels', description: 'Cut PVC pipes at angles and mount to the table edges using suction cups.' },
-      { title: 'Add tubes', description: 'Attach plastic tubes at various angles for water to flow through.' },
-      { title: 'Set up the play', description: 'Fill the bin with water and add cups, funnels, and toys for splashing.' }
+      { title: 'Prep the bottles', description: 'Cut bottles in half. Remove tops and save the necked section for spouts.' },
+      { title: 'Mount the board', description: 'Attach the board to a fence or wall at a slight lean. Or prop it up with posts.' },
+      { title: 'Arrange the bottles', description: 'Play with placement — some upside down, some sideways, some with spouts facing different directions.' },
+      { title: 'Attach with ties', description: 'Use cable ties through holes in the board to secure bottles. Leave space between them.' },
+      { title: 'Add water', description: 'Hook up a garden hose with a slow flow to the top. Or use a watering can.' }
     ],
     tips: [
-      'Add food coloring for rainbow play',
-      'Include measuring cups and spoons',
-      'Add ice for hot summer days',
-      'Perfect for learning volume and flow'
+      'Different angles create different splash patterns',
+      'Add food coloring to trace the water path',
+      'Kids love adding soap — outside only!',
+      'Drainage at the bottom catches water for relaunch'
     ],
     imageUrl: 'https://images.unsplash.com/photo-1476673160081-cf065607f449?w=800',
-    relatedBuilds: ['water-table-rain-tower', 'water-sprinkler DIY']
+    relatedBuilds: ['sprinkler-wiggle', 'gutter-stream']
   },
   {
-    id: 'water-table-rain-tower',
-    title: 'Rain Tower',
-    category: 'Water Play',
-    difficulty: 'medium',
-    timeEstimate: '3-4 hours',
-    ageRange: '2-10',
-    cost: '$40-60',
-    description: 'A tall, multi-level water play structure with cascading channels. Mesmerizing to watch and play with for hours.',
-    tools: ['Drill', 'Saw', 'Screwdriver', 'Level', 'Measuring tape'],
-    materials: [
-      { name: 'Pressure-treated lumber', quantity: '6 pieces', link: 'https://www.homedepot.com' },
-      { name: 'Plastic rain gutters', quantity: '4', link: 'https://www.homedepot.com' },
-      { name: 'Large plastic bin', quantity: '1', link: 'https://www.target.com' },
-      { name: 'PVC elbows and pipe', quantity: 'various', link: 'https://www.homedepot.com' },
-      { name: 'Waterproof sealant', quantity: '1 tube', link: 'https://www.homedepot.com' }
-    ],
-    steps: [
-      { title: 'Build the frame', description: 'Create a tall A-frame structure about 5 feet high using 2x4s.' },
-      { title: 'Install levels', description: 'Attach horizontal support beams at 3-4 different heights.' },
-      { title: 'Mount the gutters', description: 'Cut gutters to fit between posts and mount at slight angles to create cascades.' },
-      { title: 'Add overflows', description: 'Position PVC elbows to direct water from one level to the next.' },
-      { title: 'Create the base', description: 'Place the large bin at the bottom to catch water. Add a small pump for recirculation.' },
-      { title: 'Seal and test', description: 'Apply waterproof sealant to all joints. Test the flow and adjust angles.' }
-    ],
-    tips: [
-      'Add a small pump for continuous flow',
-      'Perfect with food coloring experiments',
-      'Kids can help paint and decorate',
-      'Winterize by draining and covering'
-    ],
-    imageUrl: 'https://images.unsplash.com/photo-1476673160081-cf065607f449?w=800',
-    relatedBuilds: ['water-table-simple', 'water-sprinkler DIY']
-  },
-  {
-    id: 'water-sprinkler DIY',
-    title: 'DIY Sprinkler System',
+    id: 'sprinkler-wiggle',
+    title: 'The Wiggle Sprinkler',
     category: 'Water Play',
     difficulty: 'easy',
-    timeEstimate: '30 min - 1 hour',
+    timeEstimate: '30 minutes',
     ageRange: '2-12',
-    cost: '$5-15',
-    description: 'A simple sprinkler made from PVC pipes that kids can run through on hot days. Easy to store and use anywhere.',
-    tools: ['Drill', 'PVC cutter or saw', 'Tape measure'],
+    cost: '$3',
+    description: 'A garden hose, a few zip ties, and suddenly you have a sprinkler that wiggles and dances. Kids run through the chaos of water.',
+    tools: ['Drill', 'Scissors'],
     materials: [
-      { name: 'PVC pipe (1/2 inch)', quantity: '10 ft', link: 'https://www.homedepot.com' },
-      { name: 'PVC elbows', quantity: '4', link: 'https://www.homedepot.com' },
-      { name: 'Garden hose adapter', quantity: '1', link: 'https://www.homedepot.com' },
-      { name: 'Drill bits (1/16-1/8 inch)', quantity: '1 set', link: 'https://www.homedepot.com' },
-      { name: 'PVC cement (optional)', quantity: '1 small can', link: 'https://www.homedepot.com' }
+      { name: 'Garden hose', quantity: '1', link: 'https://www.homedepot.com' },
+      { name: 'PVC elbow (1/2 inch)', quantity: '2', link: 'https://www.homedepot.com' },
+      { name: 'Zip ties', quantity: '6', link: 'https://www.amazon.com' },
+      { name: 'Rubber mallet or stake', quantity: '1', link: 'https://www.homedepot.com' }
     ],
     steps: [
-      { title: 'Cut the pipe', description: 'Cut PVC into: two 3-foot sections and two 2-foot sections.' },
-      { title: 'Assemble the frame', description: 'Connect the pieces with elbows to form a rectangle or H-shape.' },
-      { title: 'Add the hose connection', description: 'Attach the hose adapter to one end of the frame.' },
-      { title: 'Drill the holes', description: 'Drill small holes all over the top and sides of the frame. Vary the sizes.' },
-      { title: 'Connect and test', description: 'Attach to a garden hose and turn on. Adjust water pressure for best spray.' }
+      { title: 'Create the base', description: 'Cut a 2-foot piece of hose. Attach elbows to both ends at 45-degree angles pointing opposite ways.' },
+      { title: 'Add the main line', description: 'Attach the base to your regular garden hose. It should look like a T with bent arms.' },
+      { title: 'Stab into ground', description: 'Push the assembly into the ground so only the elbows poke out.' },
+      { title: 'Turn on the water', description: 'Water pressure will make the elbows wiggle and spray in spinning patterns.' }
     ],
     tips: [
-      'More holes = finer spray',
-      'Larger holes at the top for rain effect',
+      'More water pressure = more wiggle',
+      'Lay on the ground for a different spray pattern',
       'Hang it from a tree for an arch',
-      'Make two and connect them!'
+      'Add a timer — they\'ll play for hours'
     ],
     imageUrl: 'https://images.unsplash.com/photo-1476673160081-cf065607f449?w=800',
-    relatedBuilds: ['water-table-simple', 'water-table-rain-tower']
+    relatedBuilds: ['bottle-bowl', 'gutter-stream']
+  },
+  {
+    id: 'gutter-stream',
+    title: 'Gutter Water Run',
+    category: 'Water Play',
+    difficulty: 'easy',
+    timeEstimate: '2 hours',
+    ageRange: '3-10',
+    cost: '$15-20',
+    description: 'Old rain gutters become a water racing system. Kids pour water at the top and watch it flow — learning physics without realizing it.',
+    tools: ['Drill', 'Saw', 'Level'],
+    materials: [
+      { name: 'Rain gutters (10 ft)', quantity: '2', link: 'https://www.homedepot.com' },
+      { name: 'Gutter end caps', quantity: '4', link: 'https://www.homedepot.com' },
+      { name: 'PVC pipe (2 inch)', quantity: '4 pieces', link: 'https://www.homedepot.com' },
+      { name: 'L-brackets', quantity: '6', link: 'https://www.homedepot.com' },
+      { name: 'Wooden posts', quantity: '2', link: 'https://www.homedepot.com' }
+    ],
+    steps: [
+      { title: 'Cut gutters to length', description: 'Cut each gutter into two 5-foot sections. Add end caps to all four open ends.' },
+      { title: 'Set up posts', description: 'Dig two holes 5 feet apart. Set posts at different heights — one 4 feet, one 2 feet.' },
+      { title: 'Mount gutters', description: 'Attach gutters to posts using L-brackets. Angle them so water flows from high to low.' },
+      { title: 'Add PVC spillways', description: 'Cut PVC pipes and mount under each gutter end so water spills into the next gutter.' },
+      { title: 'Test and adjust', description: 'Run water through the system. Adjust angles until the flow goes where you want.' }
+    ],
+    tips: [
+      'Add boats or leaves to race',
+      'Measure the flow — who gets there fastest?',
+      'Disconnect gutters in winter',
+      'Kids can redesign the layout anytime'
+    ],
+    imageUrl: 'https://images.unsplash.com/photo-1476673160081-cf065607f449?w=800',
+    relatedBuilds: ['bottle-bowl', 'sprinkler-wiggle']
+  },
+
+  // COZY HIDEOUTS
+  {
+    id: 'fort-sticks',
+    title: 'Stick Fort',
+    category: 'Cozy Hideouts',
+    difficulty: 'easy',
+    timeEstimate: '1 hour',
+    ageRange: '3-12',
+    cost: '$0',
+    description: 'A lean-to of branches and sticks that takes 20 minutes to build and provides endless hideaway magic. The best forts are mostly built by kids.',
+    tools: ['Pruning shears', 'Gloves'],
+    materials: [
+      { name: 'Strong branches (6-8 ft)', quantity: '6-8', link: 'Your backyard' },
+      { name: 'Smaller sticks', quantity: 'Many', link: 'Your backyard' },
+      { name: 'Twine or rope', quantity: '1 spool', link: 'https://www.homedepot.com' },
+      { name: 'Old sheet or tarp', quantity: '1', link: 'https://www.dollarstore.com' },
+      { name: 'Pine straw or leaves', quantity: 'Many bags', link: 'Your backyard' }
+    ],
+    steps: [
+      { title: 'Find two fork branches', description: 'Look for Y-shaped branches about arm-thickness. These are your main supports.' },
+      { title: 'Set the ridgepole', description: 'Set forked branches in the ground about 5 feet apart. Rest a long pole across the forks.' },
+      { title: 'Add ribs', description: 'Lean smaller branches against the ridgepole at angles, like ribs of an umbrella.' },
+      { title: 'Weave in walls', description: 'Fill gaps with smaller sticks woven horizontally. Denser at the bottom.' },
+      { title: 'Add the roof', description: 'Drape old sheets or tarps over the top. Weigh down with rocks.' },
+      { title: 'Line the floor', description: 'Pile pine straw, leaves, or blankets inside for a cozy floor.' }
+    ],
+    tips: [
+      'Build in late summer when sticks are dry and flexible',
+      'Kids should do most of the building — resist helping',
+      'This fort lasts one season — that\'s the magic',
+      'Add a flag so they can find their fort'
+    ],
+    imageUrl: 'https://images.unsplash.com/photo-1518882605630-8eb700e01287?w=800',
+    relatedBuilds: ['sheet-tunnel', 'cardboard-castle']
+  },
+  {
+    id: 'sheet-tunnel',
+    title: 'Sheet Tunnel',
+    category: 'Cozy Hideouts',
+    difficulty: 'easy',
+    timeEstimate: '15 minutes',
+    ageRange: '2-8',
+    cost: '$0',
+    description: 'Two chairs, a sheet, and imagination. A tunnel connects two worlds — and you can walk through it 100 times without getting bored.',
+    tools: ['None'],
+    materials: [
+      { name: 'Two chairs or stools', quantity: '2', link: 'Use what you have' },
+      { name: 'Large sheet or blanket', quantity: '1', link: 'Use what you have' },
+      { name: 'Books or rocks', quantity: '4', link: 'Use what you have' },
+      { name: 'String lights (optional)', quantity: '1 strand', link: 'https://www.amazon.com' }
+    ],
+    steps: [
+      { title: 'Set up chairs', description: 'Place two chairs facing away from each other, about 3 feet apart.' },
+      { title: 'Drape the sheet', description: 'Throw a large sheet over the chairs so it droops in the middle, forming a tunnel.' },
+      { title: 'Weigh it down', description: 'Put books or rocks on the chair seats to keep the sheet from flying away.' },
+      { title: 'Add magic', description: 'Hang string lights inside. Put on nature sounds. The tunnel is now a portal.' },
+      { title: 'Play', description: 'Crawl through 50 times. Hide toys inside. Have snacks in the tunnel.' }
+    ],
+    tips: [
+      'A lightweight sheet works better than heavy blankets',
+      'Try different sheet positions — roof only, enclosed, one side open',
+      'Add pillows at both ends for comfortable entries',
+      'Works inside too on a rainy day'
+    ],
+    imageUrl: 'https://images.unsplash.com/photo-1476673160081-cf065607f449?w=800',
+    relatedBuilds: ['fort-sticks', 'cardboard-castle']
+  },
+  {
+    id: 'cardboard-castle',
+    title: 'Cardboard Playhouse',
+    category: 'Cozy Hideouts',
+    difficulty: 'easy',
+    timeEstimate: '2 hours',
+    ageRange: '3-10',
+    cost: '$0-5',
+    description: 'A refrigerator box becomes a castle, a spaceship, or a taco stand — depending on the day. This playhouse transforms with imagination.',
+    tools: ['Box cutter', 'Scissors', 'Tape', 'Markers'],
+    materials: [
+      { name: 'Large cardboard box', quantity: '1', link: 'https://www.facebook.com/marketplace' },
+      { name: 'Packing tape', quantity: '2 rolls', link: 'https://www.amazon.com' },
+      { name: 'Acrylic paints', quantity: '1 set', link: 'https://www.michaels.com' },
+      { name: 'Paper towel tubes', quantity: '4', link: 'Use what you have' },
+      { name: 'Old fabric scraps', quantity: 'Various', link: 'Use what you have' }
+    ],
+    steps: [
+      { title: 'Cut the doorway', description: 'Cut a doorway large enough for kids to crawl through. Leave the flaps for a door.' },
+      { title: 'Cut windows', description: 'Cut out window shapes. Fold the cardboard back to create sills.' },
+      { title: 'Add a second room', description: 'Tape cardboard walls inside to create separate rooms or a hallway.' },
+      { title: 'Paint the outside', description: 'Let kids paint the outside. No rules — castles, dragons, and tacos all welcome.' },
+      { title: 'Add details', description: 'Tape paper towel tubes as turrets. Tape fabric as flags. This is their masterpiece.' }
+    ],
+    tips: [
+      'Fridge boxes are perfect — ask at appliance stores',
+      'Paint outside to avoid mess',
+      'The playhouse lasts longer with a coat of clear spray sealer',
+      'When done, recycle it properly'
+    ],
+    imageUrl: 'https://images.unsplash.com/photo-1518882605630-8eb700e01287?w=800',
+    relatedBuilds: ['fort-sticks', 'sheet-tunnel']
   }
 ]
 

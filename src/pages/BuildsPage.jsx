@@ -15,10 +15,10 @@ export default function BuildsPage() {
     switch (category) {
       case 'Mud Kitchens': return 'bg-[#8C4A14]'
       case 'Garden Beds': return 'bg-[#5A6428]'
-      case 'Nature Tables': return 'bg-[#96963C]'
-      case 'Bird Houses': return 'bg-[#464F5F]'
-      case 'Outdoor Seating': return 'bg-[#B43C1E]'
+      case 'Nature Play': return 'bg-[#96963C]'
+      case 'Climbing Structures': return 'bg-[#464F5F]'
       case 'Water Play': return 'bg-[#5A3C00]'
+      case 'Cozy Hideouts': return 'bg-[#B43C1E]'
       default: return 'bg-ember'
     }
   }
