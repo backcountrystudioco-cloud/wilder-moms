@@ -481,10 +481,10 @@ export default function HabitatPage() {
                     <h3 className="font-serif text-xl text-ink mb-3">Not feeling the outdoors today?</h3>
                     <p className="font-sans text-inkl mb-4">Base Camp has activities perfect for indoor adventures:</p>
                     <div className="flex flex-wrap gap-3">
-                      <a href="/builds" className="px-4 py-2 bg-ember text-white rounded-full font-sans text-sm hover:bg-terra transition-colors">
+                      <a href="/basecamp" className="px-4 py-2 bg-ember text-white rounded-full font-sans text-sm hover:bg-terra transition-colors">
                         🏕️ Indoor Builds
                       </a>
-                      <a href="/activities" className="px-4 py-2 bg-ember text-white rounded-full font-sans text-sm hover:bg-terra transition-colors">
+                      <a href="/basecamp/activities" className="px-4 py-2 bg-ember text-white rounded-full font-sans text-sm hover:bg-terra transition-colors">
                         🎨 Nature Crafts
                       </a>
                       <a href="/blueprint" className="px-4 py-2 bg-ember text-white rounded-full font-sans text-sm hover:bg-terra transition-colors">
@@ -507,7 +507,7 @@ export default function HabitatPage() {
                    weatherAssessment?.level === 'rain' ? "The weather isn't cooperating for outdoor trails." :
                    "We couldn't find trails matching your criteria. Try adjusting your filters."}
                 </p>
-                <a href="/builds" className="inline-flex items-center gap-2 px-6 py-3 bg-ember text-white rounded-full font-sans font-medium hover:bg-terra transition-colors">
+                <a href="/basecamp" className="inline-flex items-center gap-2 px-6 py-3 bg-ember text-white rounded-full font-sans font-medium hover:bg-terra transition-colors">
                   Explore Base Camp instead
                   <span>→</span>
                 </a>
