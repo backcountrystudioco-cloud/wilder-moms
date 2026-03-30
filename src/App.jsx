@@ -7,6 +7,7 @@ import BuildsPage from './pages/BuildsPage'
 import BuildDetailPage from './pages/BuildDetailPage'
 import ActivitiesPage from './pages/ActivitiesPage'
 import ProfilePage from './pages/ProfilePage'
+import BlueprintPage from './pages/BlueprintPage'
 import LaunchPopup from './components/LaunchPopup'
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
         <Route path="/builds/:buildId" element={<BuildDetailPage />} />
         <Route path="/activities" element={<ActivitiesPage />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/blueprint" element={<BlueprintPage />} />
       </Route>
       </Routes>
     </UserProvider>

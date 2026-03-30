@@ -129,32 +129,36 @@ export default function Nav() {
                     className="absolute top-full left-0 mt-2 w-56 bg-cream shadow-lg rounded-lg border border-inkll/10 py-2 z-50"
                     onMouseLeave={() => setBlueprintDropdownOpen(false)}
                   >
-                    <p className="px-4 py-1 text-xs text-inkl uppercase tracking-wide">Pack Lists by Age</p>
                     <Link
-                      to="/profile"
+                      to="/blueprint"
                       className="block px-4 py-2 font-sans text-sm text-ink hover:bg-blush/50 hover:text-ember"
                     >
-                      Hiking Lists (Toddlers → Teens)
+                      📋 Pack Lists
                     </Link>
                     <Link
                       to="/profile"
                       className="block px-4 py-2 font-sans text-sm text-ink hover:bg-blush/50 hover:text-ember"
                     >
-                      Camping Lists (Toddlers → Teens)
+                      🥾 Hiking Lists
+                    </Link>
+                    <Link
+                      to="/profile"
+                      className="block px-4 py-2 font-sans text-sm text-ink hover:bg-blush/50 hover:text-ember"
+                    >
+                      ⛺ Camping Lists
                     </Link>
                     <div className="border-t border-inkll/10 my-1" />
-                    <p className="px-4 py-1 text-xs text-inkl uppercase tracking-wide">Safety</p>
                     <Link
                       to="/profile"
                       className="block px-4 py-2 font-sans text-sm text-ink hover:bg-blush/50 hover:text-ember"
                     >
-                      Day Hike Essentials
+                      🏔️ Day Hike Essentials
                     </Link>
                     <Link
                       to="/profile"
                       className="block px-4 py-2 font-sans text-sm text-ink hover:bg-blush/50 hover:text-ember"
                     >
-                      Weather & Alerts
+                      🌤️ Weather & Alerts
                     </Link>
                   </motion.div>
                 )}
@@ -221,7 +225,7 @@ export default function Nav() {
             <span>Village</span>
           </Link>
           <Link
-            to="/profile"
+            to="/blueprint"
             className="flex flex-col items-center gap-1 font-sans font-medium text-sm text-ink hover:text-ember transition-colors"
           >
             <span>📋</span>
