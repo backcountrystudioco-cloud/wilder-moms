@@ -50,7 +50,7 @@ export default function BuildCard({ build, index = 0 }) {
       whileHover={{ y: -4 }}
       transition={{ duration: 0.3 }}
     >
-      <Link to={`/builds/${build.id}`} className="block">
+      <Link to={`/basecamp/${build.id}`} className="block">
         <div className="bg-white rounded-2xl overflow-hidden shadow-lg shadow-ink/5 flex flex-col h-full">
           {/* Icon Header */}
           <div className={`relative h-32 bg-gradient-to-br ${colorClass} flex items-center justify-center`}>

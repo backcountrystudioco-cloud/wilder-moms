@@ -136,26 +136,26 @@ export default function Nav() {
                       Pack Lists
                     </Link>
                     <Link
-                      to="/village"
+                      to="/blueprint"
                       className="block px-4 py-2 font-sans text-sm text-ink hover:bg-blush/50 hover:text-ember"
                     >
                       Hiking Lists
                     </Link>
                     <Link
-                      to="/village"
+                      to="/blueprint"
                       className="block px-4 py-2 font-sans text-sm text-ink hover:bg-blush/50 hover:text-ember"
                     >
                       Camping Lists
                     </Link>
                     <div className="border-t border-inkll/10 my-1" />
                     <Link
-                      to="/village"
+                      to="/blueprint"
                       className="block px-4 py-2 font-sans text-sm text-ink hover:bg-blush/50 hover:text-ember"
                     >
                       Day Hike Essentials
                     </Link>
                     <Link
-                      to="/village"
+                      to="/blueprint"
                       className="block px-4 py-2 font-sans text-sm text-ink hover:bg-blush/50 hover:text-ember"
                     >
                       Weather & Alerts

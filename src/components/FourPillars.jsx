@@ -10,7 +10,7 @@ const pillars = [
     title: "You shouldn't have to do this alone. And with us, you won't.",
     description:
       "Somewhere between the school run and the witching hour, modern motherhood got very lonely. The neighbor who used to knock on the door stopped knocking. The village that was supposed to show up never quite did. Wilder Moms is where it shows up. Real moms, nearby, who want to get outside just as badly as you do. Who will meet you at the trailhead, hold the baby, and not judge the snack situation. You bring yourself. We'll bring the rest.",
-    cta: { label: 'Join the Village', to: '/profile', icon: null }
+    cta: { label: 'Join the Village', to: '/village', icon: null }
   },
   {
     accent: 'bg-olive',
@@ -19,7 +19,7 @@ const pillars = [
     title: "Finding the right trail shouldn't take longer than the hike.",
     description:
       "You don't need another generic list of 'family-friendly trails.' You need the right trail for your specific kids, today, with a double stroller and a four-year-old who loses it after 45 minutes. We know your family. We know the nap window, the meltdown threshold, the need for a bathroom within the first mile. Every suggestion is built around your real life — not a stock photo version of it.",
-    cta: { label: 'Explore Trails', to: '/explore', icon: null }
+    cta: { label: 'Explore Trails', to: '/habitat', icon: null }
   },
   {
     accent: 'bg-gold',
@@ -28,7 +28,7 @@ const pillars = [
     title: "Staying home doesn't mean giving up on nature.",
     description:
       "Some days the adventure is making it to the kitchen table. And that's okay. The Base Camp is for those days. Pressing the flowers you found last Sunday. Building a nature table with pinecones from your coat pocket. Letting your kid paint rocks while you drink your coffee warm for once. Nature isn't just out there — it's something you can bring inside, keep alive, and make part of every single day.",
-    cta: { label: 'See Builds & Activities', to: '/builds', icon: null }
+    cta: { label: 'See Builds & Activities', to: '/basecamp', icon: null }
   },
   {
     accent: 'bg-slate',
