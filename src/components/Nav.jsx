@@ -57,25 +57,8 @@ export default function Nav() {
             <img
               src="/wilder_moms_logo.jpeg"
               alt="Wilder Moms"
-              className="w-[42px] h-[42px] rounded-full object-cover"
-              onError={(e) => {
-                e.target.style.display = 'none'
-                e.target.nextSibling.style.display = 'flex'
-              }}
+              className="h-12 md:h-14 w-auto object-contain"
             />
-            <span
-              className="hidden"
-              style={{
-                width: 42,
-                height: 42,
-                borderRadius: '50%',
-                backgroundColor: '#8C1E00'
-              }}
-            />
-            <span className="font-serif text-xl md:text-2xl">
-              <span className="text-ink">Wilder</span>
-              <span className="text-ember italic"> Moms</span>
-            </span>
           </Link>
 
           {/* Desktop Nav Links */}
