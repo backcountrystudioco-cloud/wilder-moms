@@ -355,8 +355,11 @@ export default function ProfilePage() {
   const tabs = [
     { id: 'hikes', label: 'Hikes', count: savedHikes.length, icon: null },
     { id: 'crafts', label: 'Crafts', count: savedCrafts.length, icon: null },
-    { id: 'builds', label: 'Builds', count: savedBuilds.length, icon: null }
+    { id: 'builds', label: 'Builds', count: savedBuilds.length, icon: null },
+    { id: 'survey', label: 'Survey', count: null, icon: null }
   ]
+
+  const surveyUrl = 'https://us3.list-manage.com/survey?u=9ea84c4182a6c4ac21ecf2caa&id=58dad03290&attribution=false'
 
   return (
     <div className="min-h-screen bg-cream pt-24 pb-12 px-4">
@@ -656,6 +659,54 @@ export default function ProfilePage() {
               ) : (
                 <EmptyState type="builds" />
               )
+            )}
+
+            {activeTab === 'survey' && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="space-y-6"
+              >
+                <div className="bg-white rounded-xl p-8 shadow-sm border border-inkll/10 text-center">
+                  <span className="text-5xl mb-4 block">📋</span>
+                  <h3 className="font-serif text-2xl text-ink mb-2">Share Your Feedback</h3>
+                  <p className="font-sans text-inkl mb-6 max-w-md mx-auto">
+                    Help us improve Wilder Moms! Your feedback shapes what we build next.
+                  </p>
+                  <a
+                    href={surveyUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-8 py-4 bg-ember text-white rounded-full font-sans font-medium text-lg hover:bg-terra transition-colors shadow-lg shadow-ember/20"
+                  >
+                    Take the Survey
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </a>
+                </div>
+
+                <div className="bg-blush/30 rounded-xl p-6 border border-inkll/10">
+                  <h4 className="font-serif text-lg text-ink mb-3">Quick Feedback</h4>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                    {[
+                      { emoji: '🌲', label: 'More trails' },
+                      { emoji: '🎨', label: 'Better crafts' },
+                      { emoji: '👶', label: 'Baby-friendly' },
+                      { emoji: '🐕', label: 'Dog trails' },
+                    ].map(option => (
+                      <button
+                        key={option.label}
+                        onClick={() => window.open(surveyUrl, '_blank')}
+                        className="flex flex-col items-center gap-2 p-4 bg-white rounded-xl hover:bg-cream transition-colors shadow-sm"
+                      >
+                        <span className="text-2xl">{option.emoji}</span>
+                        <span className="font-sans text-xs text-ink text-center">{option.label}</span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
             )}
           </motion.div>
         </section>
