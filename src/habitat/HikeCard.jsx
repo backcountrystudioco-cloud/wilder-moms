@@ -23,13 +23,20 @@ const stateColors = {
   'Texas': 'bg-red-100 text-red-800',
 }
 
-export default function HikeCard({ hike, index = 0 }) {
+export default function HikeCard({ hike, index = 0, showScore = false }) {
   const { savedHikes, toggleSavedHike } = useUser()
   const isSaved = savedHikes.includes(hike.id)
   const [isExpanded, setIsExpanded] = useState(false)
   
   const getDirectionsUrl = () => {
     return `https://www.google.com/maps/dir/?api=1&destination=${hike.lat},${hike.lon}`
+  }
+
+  const getScoreColor = (score) => {
+    if (score >= 80) return 'bg-olive text-white'
+    if (score >= 60) return 'bg-gold text-white'
+    if (score >= 40) return 'bg-amber-500 text-white'
+    return 'bg-inkll/40 text-white'
   }
 
   return (
@@ -73,6 +80,12 @@ export default function HikeCard({ hike, index = 0 }) {
             </svg>
           </button>
         </div>
+        {/* Match Score Badge */}
+        {showScore && hike.score > 0 && (
+          <div className={`absolute -top-2 -right-2 px-2 py-1 rounded-full text-xs font-sans font-bold ${getScoreColor(hike.score)}`}>
+            {hike.score}% match
+          </div>
+        )}
       </div>
 
       {/* Content */}
