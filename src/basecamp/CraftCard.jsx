@@ -3,10 +3,29 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { fadeUpVariants } from '../hooks/useScrollReveal'
 import { useUser } from '../context/UserContext'
 
+const categoryGradients = {
+  'Painting': 'from-pink-400 to-rose-500',
+  'Nature': 'from-green-500 to-emerald-600',
+  'Building': 'from-amber-500 to-orange-600',
+  'Science': 'from-blue-500 to-indigo-600',
+  'Music': 'from-purple-500 to-violet-600',
+}
+
+const categoryIcons = {
+  'Painting': '🎨',
+  'Nature': '🍃',
+  'Building': '🔨',
+  'Science': '🔬',
+  'Music': '🎵',
+}
+
 export default function CraftCard({ craft, index = 0 }) {
   const { savedCrafts, toggleSavedCraft } = useUser()
   const isSaved = savedCrafts.includes(craft.id)
   const [isExpanded, setIsExpanded] = useState(false)
+  
+  const gradientClass = categoryGradients[craft.category] || 'from-peach to-amber-500'
+  const icon = categoryIcons[craft.category] || '🖐️'
 
   return (
     <motion.article
@@ -17,19 +36,12 @@ export default function CraftCard({ craft, index = 0 }) {
       custom={index}
       className="bg-cream rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-inkll/10"
     >
-      {/* Image */}
-      <div className="relative h-44 overflow-hidden">
-        <img
-          src={craft.imageUrl}
-          alt={craft.title}
-          className="w-full h-full object-cover"
-          onError={(e) => {
-            e.target.src = 'https://images.unsplash.com/photo-1518882605630-8eb700e01287?w=800'
-          }}
-        />
+      {/* Icon Header */}
+      <div className={`relative h-32 bg-gradient-to-br ${gradientClass} flex items-center justify-center`}>
+        <span className="text-5xl opacity-50">{icon}</span>
         {/* Indoor/Outdoor Badge */}
         <span className={`absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-sans font-medium ${
-          craft.indoor ? 'bg-blush text-inkl' : 'bg-parchment text-forest'
+          craft.indoor ? 'bg-white/90 text-inkl' : 'bg-parchment/90 text-forest'
         }`}>
           {craft.indoor ? 'Indoor' : 'Outdoor'}
         </span>
@@ -72,8 +84,8 @@ export default function CraftCard({ craft, index = 0 }) {
         <div className="mb-4">
           <p className="text-inkl font-sans text-sm mb-2">
             <span className="font-medium text-ink">Materials:</span>{' '}
-            {craft.materials.slice(0, 3).join(', ')}
-            {craft.materials.length > 3 && (
+            {craft.materials?.slice(0, 3).join(', ')}
+            {craft.materials?.length > 3 && (
               <span className="text-inkll"> +{craft.materials.length - 3} more</span>
             )}
           </p>

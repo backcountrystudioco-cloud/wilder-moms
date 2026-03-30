@@ -16,6 +16,17 @@ const difficultyLabels = {
   hard: 'Hard'
 }
 
+const categoryIcons = {
+  'Shelter': '🏕️',
+  'Fire': '🔥',
+  'Water': '💧',
+  'Food': '🍳',
+  'Tools': '🔧',
+  'Comfort': '🛋️',
+  'Safety': '🩹',
+  'Fun': '🎉',
+}
+
 function AccordionStep({ step, index, isOpen, onToggle }) {
   return (
     <div className="border-b border-inkll/20 last:border-b-0">
@@ -109,17 +120,11 @@ export default function BuildDetailPage() {
 
   return (
     <div className="min-h-screen bg-cream pb-20">
-      {/* Hero Image */}
-      <div className="relative h-72 md:h-80 overflow-hidden">
-        <img
-          src={build.imageUrl}
-          alt={build.title}
-          className="w-full h-full object-cover"
-          onError={(e) => {
-            e.target.src = 'https://images.unsplash.com/photo-1476673160081-cf065607f449?w=800'
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-ink/60 to-transparent" />
+      {/* Hero Header */}
+      <div className="relative h-72 md:h-80 bg-gradient-to-br from-ember to-terra flex items-center justify-center">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIj48Y2lyY2xlIGN4PSIyMCIgY3k9IjIwIiByPSIyIi8+PC9nPjwvZz48L3N2Zz4=')] opacity-20" />
+        <span className="text-8xl opacity-30">{categoryIcons[build.category] || '🏕️'}</span>
+        <div className="absolute inset-0 bg-gradient-to-t from-ink/40 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
           <Link
             to="/builds"

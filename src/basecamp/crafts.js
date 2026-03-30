@@ -6,7 +6,6 @@ export const crafts = [
     duration: '20 min',
     ageRange: '3-8',
     indoor: false,
-    imageUrl: 'https://images.unsplash.com/photo-1490745825946-4b93a9d7f2e6?w=800',
     instructions:
       'Braid three long stems together to form a base, then weave dandelion heads and small flowers through the braid. Add grass blades for leaves. Tuck stems underneath to secure.',
   },
@@ -17,7 +16,6 @@ export const crafts = [
     duration: '10 min',
     ageRange: '5-12',
     indoor: false,
-    imageUrl: 'https://images.unsplash.com/photo-1518882605630-8eb700e01287?w=800',
     instructions:
       'Fold a fresh green leaf accordion-style, place to lips, blow hard. The crack of the leaf makes a satisfying whistle. Works best with thin, flexible leaves.',
   },
@@ -28,7 +26,6 @@ export const crafts = [
     duration: '5 min',
     ageRange: '6-12',
     indoor: false,
-    imageUrl: 'https://images.unsplash.com/photo-1518882605630-8eb700e01287?w=800',
     instructions:
       'Hold a wide grass blade between thumbs, blow across the gap between thumbs. Adjust tension and gap size to change pitch. Makes a reedy, honking sound.',
   },
@@ -39,7 +36,6 @@ export const crafts = [
     duration: '30 min',
     ageRange: '5-10',
     indoor: false,
-    imageUrl: 'https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800',
     instructions:
       'Pierce flower stems with needle (or use thin grass stems as thread), string flowers one by one into a loop. Wear immediately or press to preserve.',
   },
@@ -50,7 +46,6 @@ export const crafts = [
     duration: '30 min',
     ageRange: '2-8',
     indoor: false,
-    imageUrl: 'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=800',
     instructions:
       'Mix dirt with water until you get different consistencies - thin for washes, thick for bold strokes. Paint on large leaves or smooth rocks. Watch how the earth makes beautiful browns and grays.',
   },
@@ -61,7 +56,6 @@ export const crafts = [
     duration: '25 min',
     ageRange: '6-12',
     indoor: true,
-    imageUrl: 'https://images.unsplash.com/photo-1518882605630-8eb700e01287?w=800',
     instructions:
       'Poke a small hole through each acorn cap. Thread twine through, adding beads as you go. Knot at ends to secure. The caps make satisfying rattling sounds.',
   },
@@ -72,7 +66,6 @@ export const crafts = [
     duration: '20 min',
     ageRange: '4-10',
     indoor: false,
-    imageUrl: 'https://images.unsplash.com/photo-1513519245088-0e12902e35a6?w=800',
     instructions:
       'Gather sticks in a bundle, tie tightly with twine in the middle. Fan out the tops slightly. Add dried flowers or wrap ribbon around the tie for a decorative display piece.',
   },
@@ -83,7 +76,6 @@ export const crafts = [
     duration: '45 min',
     ageRange: '4-10',
     indoor: true,
-    imageUrl: 'https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800',
     instructions:
       'Sort petals by color, arrange on cardboard in patterns or pictures. Glue each petal down carefully. Creates beautiful abstract art when petals press flat as they dry.',
   },
@@ -94,7 +86,6 @@ export const crafts = [
     duration: '30 min',
     ageRange: '3-12',
     indoor: false,
-    imageUrl: 'https://images.unsplash.com/photo-1518882605630-8eb700e01287?w=800',
     instructions:
       'Find flat-bottomed rocks of varying sizes. Stack them one on top of another, searching for the balance point of each. Go as high as you dare. Takes focus and steady hands.',
   },
@@ -105,7 +96,6 @@ export const crafts = [
     duration: '30 min',
     ageRange: '4-10',
     indoor: false,
-    imageUrl: 'https://images.unsplash.com/photo-1518882605630-8eb700e01287?w=800',
     instructions:
       'Place paper against tree bark, rub crayon sideways across the surface. The texture of each tree - smooth birch, rough oak - reveals itself in lines and patterns.',
   },
@@ -116,7 +106,6 @@ export const crafts = [
     duration: '40 min',
     ageRange: '5-10',
     indoor: true,
-    imageUrl: 'https://images.unsplash.com/photo-1518882605630-8eb700e01287?w=800',
     instructions:
       'Shape cottonwood pods into bodies, stick twigs into sides for wings. Glue on googly eyes. Each seed pod becomes a unique little bird with personality.',
   },
@@ -127,7 +116,6 @@ export const crafts = [
     duration: '15 min',
     ageRange: '4-10',
     indoor: false,
-    imageUrl: 'https://images.unsplash.com/photo-1518882605630-8eb700e01287?w=800',
     instructions:
       'Fold a large maple leaf in half lengthwise, wrap a small twig or stem around the crease, pull tight. The leaf puckers into a tiny bow shape perfect for decorating or gifting.',
   },
@@ -138,7 +126,6 @@ export const crafts = [
     duration: '1 hour',
     ageRange: '5-10',
     indoor: false,
-    imageUrl: 'https://images.unsplash.com/photo-1518495973542-4542c06a5843?w=800',
     instructions:
       'Stack flat stones to form walls of a tiny house. Use moss as roofing. Decorate with acorn cap doorways, shell windows, stick chimneys. Place in a garden corner.',
   },
@@ -149,7 +136,6 @@ export const crafts = [
     duration: '30 min',
     ageRange: '3-8',
     indoor: true,
-    imageUrl: 'https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800',
     instructions:
       'Arrange petals, seeds, and leaves on paper to create faces - petal hair, seed eyes, leaf mouth. Make happy, silly, or grumpy nature faces.',
   },
@@ -160,7 +146,6 @@ export const crafts = [
     duration: '45 min',
     ageRange: '5-12',
     indoor: false,
-    imageUrl: 'https://images.unsplash.com/photo-1518495973542-4542c06a5843?w=800',
     instructions:
       'Coil twigs into a small bowl shape, tucking ends in as you go. Weave grass and moss through the twigs. Add feathers inside for lining. Makes a sweet spring decoration.',
   },
@@ -171,7 +156,6 @@ export const crafts = [
     duration: '20 min',
     ageRange: '6-12',
     indoor: false,
-    imageUrl: 'https://images.unsplash.com/photo-1518882605630-8eb700e01287?w=800',
     instructions:
       'Collect charred sticks from a fire (safe, cooled). Break open to reveal soft charcoal inside. Draw on paper for beautiful grayscale art. Blend with fingers or brush for shading.',
   },
@@ -182,7 +166,6 @@ export const crafts = [
     duration: '1 hour',
     ageRange: '6-12',
     indoor: true,
-    imageUrl: 'https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800',
     instructions:
       'Arrange dried flowers on background paper in a design. Glue carefully. Place in frame. The colors of summer preserved to enjoy all year long.',
   },
@@ -193,7 +176,6 @@ export const crafts = [
     duration: '45 min',
     ageRange: '5-10',
     indoor: false,
-    imageUrl: 'https://images.unsplash.com/photo-1513519245088-0e12902e35a6?w=800',
     instructions:
       'Form letters (first initial works great) by arranging sticks. Glue ends together, wrap twine around joints for extra hold. Makes a charming natural room decoration.',
   }

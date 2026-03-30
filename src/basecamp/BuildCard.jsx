@@ -14,7 +14,32 @@ const difficultyLabels = {
   hard: 'Hard'
 }
 
+const categoryIcons = {
+  'Shelter': '🏕️',
+  'Fire': '🔥',
+  'Water': '💧',
+  'Food': '🍳',
+  'Tools': '🔧',
+  'Comfort': '🛋️',
+  'Safety': '🩹',
+  'Fun': '🎉',
+}
+
+const categoryColors = {
+  'Shelter': 'from-amber-600 to-amber-800',
+  'Fire': 'from-orange-600 to-red-700',
+  'Water': 'from-blue-500 to-blue-700',
+  'Food': 'from-green-600 to-green-800',
+  'Tools': 'from-gray-600 to-gray-800',
+  'Comfort': 'from-purple-600 to-purple-800',
+  'Safety': 'from-red-600 to-red-800',
+  'Fun': 'from-pink-500 to-pink-700',
+}
+
 export default function BuildCard({ build, index = 0 }) {
+  const icon = categoryIcons[build.category] || '🏕️'
+  const colorClass = categoryColors[build.category] || 'from-ember to-terra'
+  
   return (
     <motion.article
       variants={fadeUpVariants}
@@ -27,18 +52,11 @@ export default function BuildCard({ build, index = 0 }) {
     >
       <Link to={`/builds/${build.id}`} className="block">
         <div className="bg-white rounded-2xl overflow-hidden shadow-lg shadow-ink/5 flex flex-col h-full">
-          {/* Image */}
-          <div className="relative h-48 overflow-hidden">
-            <img
-              src={build.imageUrl}
-              alt={build.title}
-              className="w-full h-full object-cover"
-              onError={(e) => {
-                e.target.src = 'https://images.unsplash.com/photo-1476673160081-cf065607f449?w=800'
-              }}
-            />
+          {/* Icon Header */}
+          <div className={`relative h-32 bg-gradient-to-br ${colorClass} flex items-center justify-center`}>
+            <span className="text-6xl opacity-50">{icon}</span>
             {/* Category Tag */}
-            <span className="absolute top-3 left-3 px-3 py-1 rounded-full bg-peach/90 text-ink text-xs font-medium">
+            <span className="absolute top-3 left-3 px-3 py-1 rounded-full bg-white/90 text-ink text-xs font-medium">
               {build.category}
             </span>
           </div>

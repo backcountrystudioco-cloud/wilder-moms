@@ -8,7 +8,6 @@ export const activities = [
     materials: ['Dirt', 'Water', 'Containers', 'Sticks', 'Leaves'],
     indoor: false,
     weatherSensitive: 'Any',
-    imageUrl: 'https://images.unsplash.com/photo-1476673160081-cf065607f449?w=800',
     instructions: 'Find a muddy spot outdoors, add water to dirt and mix with sticks until you have the perfect mud consistency. Use containers to shape your mud pies. Decorate with leaves, pebbles, and flowers. Let imagination guide the creation of a complete mud café!'
   },
   {
@@ -20,7 +19,6 @@ export const activities = [
     materials: ['Blanket', 'Pillows'],
     indoor: false,
     weatherSensitive: 'Good',
-    imageUrl: 'https://images.unsplash.com/photo-1509214702879-4801d4b6e92c?w=800',
     instructions: 'Lay out a soft blanket in an open outdoor space. Lie on your backs together and point out shapes you see in the clouds. Talk about the colors of the sky. For older toddlers, ask "What does that cloud look like to you?"'
   },
   {
@@ -32,7 +30,6 @@ export const activities = [
     materials: ['Smooth stones', 'Acrylic paints', 'Paintbrushes', 'Sealer'],
     indoor: true,
     weatherSensitive: 'Bad',
-    imageUrl: 'https://images.unsplash.com/photo-1491770715962-4e12e5f42d6e?w=800',
     instructions: 'Collect smooth, flat stones from a nature walk. Clean and dry them thoroughly. Paint designs, animals, or encouraging messages on each stone. Allow to dry completely, then apply a clear sealer. Hide them around your neighborhood for others to find!'
   },
   {
@@ -44,7 +41,6 @@ export const activities = [
     materials: ['Tent', 'Sleeping bags', 'Flashlights', 'Snacks'],
     indoor: false,
     weatherSensitive: 'Good',
-    imageUrl: 'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=800',
     instructions: 'Set up a tent in your backyard before sunset. Pack sleeping bags, pillows, and snacks into the tent. Tell stories, listen to nature sounds, and watch the stars emerge. Even a few hours of backyard camping creates wonderful memories.'
   },
   {
@@ -56,7 +52,6 @@ export const activities = [
     materials: ['Paper bag', 'Checklist (optional)'],
     indoor: false,
     weatherSensitive: 'Any',
-    imageUrl: 'https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?w=800',
     instructions: 'Create a list or simply call out colors for your child to find in nature: a red leaf, orange flower, yellow dandelion, green grass, blue sky, purple berry, and so on. Every item goes into the paper bag. Celebrate when you find a rainbow!'
   },
   {
@@ -68,7 +63,6 @@ export const activities = [
     materials: ['Paper', 'Crayons or colored pencils'],
     indoor: false,
     weatherSensitive: 'Good',
-    imageUrl: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800',
     instructions: 'Sit quietly in one spot outdoors. Close your eyes and listen carefully. Draw a circle in the center of your paper—this is where you are. As you hear sounds, draw them in the direction they come from, closer or farther. Label sounds like "bird," "wind," "car."'
   },
   {
@@ -80,7 +74,6 @@ export const activities = [
     materials: ['Carrier or stroller', 'Soft textures for baby to touch'],
     indoor: false,
     weatherSensitive: 'Good',
-    imageUrl: 'https://images.unsplash.com/photo-1476703993599-0035a21b17a9?w=800',
     instructions: 'Take your baby outside in a carrier or stroller. Walk slowly, pausing often to let baby feel different textures—soft leaves, rough bark, cool grass. Point out colors, shapes, and gentle sounds. Narrate your walk in a soothing voice.'
   },
   {
@@ -92,7 +85,6 @@ export const activities = [
     materials: ['Pine cone', 'Peanut butter', 'Birdseed', 'String', 'Knife'],
     indoor: true,
     weatherSensitive: 'Bad',
-    imageUrl: 'https://images.unsplash.com/photo-1552728089-57bdde30beb3?w=800',
     instructions: 'Tie string around a large pine cone. Spread peanut butter all over the cone using a plastic knife. Roll the pine cone in birdseed, pressing gently to make it stick. Hang from a tree branch and watch birds visit over the following days.'
   },
   {
@@ -104,7 +96,6 @@ export const activities = [
     materials: ['Hula hoops', 'Cones', 'Rope', ' Balls', 'Timer'],
     indoor: true,
     weatherSensitive: 'Bad',
-    imageUrl: 'https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?w=800',
     instructions: 'Set up an obstacle course using household items: crawl through chairs, jump over pillows, balance on a rope on the floor, throw balls into buckets. Time each run and try to beat your best time. Add new challenges each round. Compete as a family!'
   },
   {
@@ -116,7 +107,6 @@ export const activities = [
     materials: ['Fall leaves', 'Wax paper', 'Iron', 'Towels', 'Paper'],
     indoor: true,
     weatherSensitive: 'Bad',
-    imageUrl: 'https://images.unsplash.com/photo-1508322844761-14f8abb375a6?w=800',
     instructions: 'Collect interesting leaves of various shapes and colors. Place leaves between two sheets of wax paper with a towel on top. Iron on medium heat for 10-15 seconds (adults handle the iron). Let cool, then frame the wax-pressed leaves as art, or use them for collages.'
   },
   {
@@ -128,7 +118,6 @@ export const activities = [
     materials: ['Seeds or seedlings', 'Pot or garden spot', 'Soil', 'Trowel', 'Watering can'],
     indoor: false,
     weatherSensitive: 'Good',
-    imageUrl: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800',
     instructions: 'Choose easy-to-grow seeds like sunflowers, beans, or cherry tomatoes. Fill your pot or garden spot with soil, leaving an inch at the top. Plant seeds according to package depth, water gently, and place in a sunny spot. Keep a plant journal to track growth!'
   },
   {
@@ -140,7 +129,6 @@ export const activities = [
     materials: ['Blanket', 'Star chart or app', 'Flashlight with red filter'],
     indoor: false,
     weatherSensitive: 'Good',
-    imageUrl: 'https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=800',
     instructions: 'Find a dark spot away from lights. Lay out a blanket and bring a star chart. Identify major constellations like Orion, Big Dipper, and Cassiopeia. Try to spot satellites and shooting stars. Learn the cardinal directions using stars.'
   },
   {
@@ -152,7 +140,6 @@ export const activities = [
     materials: ['Bubble solution', 'Wands', 'Bowls'],
     indoor: true,
     weatherSensitive: 'Bad',
-    imageUrl: 'https://images.unsplash.com/photo-1496065187959-7f07b8353c55?w=800',
     instructions: 'Set up a bubble station with bowls of bubble solution and various wands. Show baby how to blow bubbles and watch them reach for them. Practice big bubbles, small bubbles. Use different shaped wands to see different bubble shapes.'
   },
   {
@@ -164,7 +151,6 @@ export const activities = [
     materials: ['Clear packing tape', 'Nature finds'],
     indoor: false,
     weatherSensitive: 'Any',
-    imageUrl: 'https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?w=800',
     instructions: 'Wrap clear packing tape around your wrist (sticky side out) to create a nature bracelet. Take a walk and collect small nature items—tiny leaves, petals, pebbles, feathers—and stick them onto the tape. Compare bracelets when you get home!'
   },
   {
@@ -176,7 +162,6 @@ export const activities = [
     materials: ['Rocks of various sizes'],
     indoor: false,
     weatherSensitive: 'Any',
-    imageUrl: 'https://images.unsplash.com/photo-1509030969355-6dd0c96d4f91?w=800',
     instructions: 'Find a flat surface and collect rocks of various sizes. Practice balancing rocks on top of each other, finding the center of gravity for each. Start with a large base rock and stack smaller ones. See how high you can build! Focus and patience are key.'
   },
   {
@@ -188,7 +173,6 @@ export const activities = [
     materials: ['Small treasures or toys', 'Paper hints'],
     indoor: true,
     weatherSensitive: 'Bad',
-    imageUrl: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800',
     instructions: 'Hide several small treasures around the house. Create simple picture clues or rhyming hints to lead your child from one spot to the next. Each clue leads to the next treasure. Make the final clue lead to a special prize like a sweet treat or extra storytime.'
   },
   {
@@ -200,7 +184,6 @@ export const activities = [
     materials: ['Clear container', 'Magnifying glass', 'Bug field guide'],
     indoor: false,
     weatherSensitive: 'Good',
-    imageUrl: 'https://images.unsplash.com/photo-1516627145497-ae6968895b74?w=800',
     instructions: 'Head to a garden, under a log, or by a pond with a clear container and magnifying glass. Gently catch insects to observe—ants, beetles, caterpillars, tadpoles. Use the field guide to identify species. Observe for a few minutes, then release bugs back where you found them.'
   }
 ]

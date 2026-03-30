@@ -9,6 +9,13 @@ const categoryColors = {
   'Educational': 'bg-slate'
 }
 
+const categoryGradients = {
+  'Nature': 'from-green-600 to-green-800',
+  'Arts': 'from-peach to-amber-600',
+  'Physical': 'from-gold to-amber-700',
+  'Educational': 'from-slate/70 to-slate'
+}
+
 function ActivityCard({ activity, index = 0 }) {
   const [isExpanded, setIsExpanded] = useState(false)
   const [isFavorite, setIsFavorite] = useState(false)
@@ -18,6 +25,11 @@ function ActivityCard({ activity, index = 0 }) {
     if (activity.indoor === false) return 'Outdoor'
     return 'Both'
   }
+  
+  // Get gradient based on first category
+  const gradientClass = activity.categories?.[0] 
+    ? categoryGradients[activity.categories[0]] || 'from-ember to-terra'
+    : 'from-ember to-terra'
 
   return (
     <motion.article
@@ -27,13 +39,12 @@ function ActivityCard({ activity, index = 0 }) {
       variants={fadeUpVariants}
       custom={index}
     >
-      {/* Image with favorite button */}
-      <div className="relative">
-        <img
-          src={activity.imageUrl}
-          alt={activity.title}
-          className="w-full h-48 object-cover"
-        />
+      {/* Icon Header */}
+      <div className={`relative h-32 bg-gradient-to-br ${gradientClass} flex items-center justify-center`}>
+        <span className="text-5xl opacity-40">
+          {activity.emoji || '🎨'}
+        </span>
+        {/* Favorite button */}
         <button
           onClick={() => setIsFavorite(!isFavorite)}
           className="absolute top-3 right-3 w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-md hover:scale-110 transition-transform"
@@ -67,7 +78,7 @@ function ActivityCard({ activity, index = 0 }) {
 
         {/* Category tags */}
         <div className="flex flex-wrap gap-2 mb-3">
-          {activity.categories.map(category => (
+          {activity.categories?.map(category => (
             <span
               key={category}
               className={`${categoryColors[category]} text-white text-xs font-sans px-2 py-1 rounded-full`}
@@ -101,7 +112,7 @@ function ActivityCard({ activity, index = 0 }) {
         <div className="mb-4">
           <p className="font-sans text-xs text-inkl uppercase tracking-wide mb-1">Materials</p>
           <p className="font-sans text-sm text-ink">
-            {activity.materials.join(', ')}
+            {activity.materials?.join(', ')}
           </p>
         </div>
 

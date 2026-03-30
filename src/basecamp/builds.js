@@ -40,7 +40,6 @@ export const builds = [
       'The holes in cinder blocks are perfect for sticking sticks and spoons',
       'Doubles as a lemonade stand'
     ],
-    imageUrl: 'https://images.unsplash.com/photo-1476673160081-cf065607f449?w=800',
     relatedBuilds: ['mud-kitchen-table']
   },
   {
@@ -73,7 +72,6 @@ export const builds = [
       'Store in a shed when not in use',
       'Add a tray underneath for catching spills'
     ],
-    imageUrl: 'https://images.unsplash.com/photo-1518882605630-8eb700e01287?w=800',
     relatedBuilds: ['mud-kitchen-one-board']
   },
 
@@ -108,7 +106,6 @@ export const builds = [
       'Pinch off runners to get more fruit',
       'Replace plants every 2-3 years'
     ],
-    imageUrl: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800',
     relatedBuilds: ['tower-garden', 'window-box']
   },
   {
@@ -141,7 +138,6 @@ export const builds = [
       'Cherry tomatoes are easiest for kids to grow',
       'Bring inside before first frost'
     ],
-    imageUrl: 'https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?w=800',
     relatedBuilds: ['pocket-garden', 'pea-pod']
   },
   {
@@ -173,7 +169,6 @@ export const builds = [
       'Kids love hiding inside while it grows',
       'Harvest often to get more peas'
     ],
-    imageUrl: 'https://images.unsplash.com/photo-1592419044706-39796d40f98c?w=800',
     relatedBuilds: ['tower-garden', 'window-box']
   },
   {
@@ -206,7 +201,6 @@ export const builds = [
       'Pinch flowers off to keep leaves growing',
       'Water when the soil feels dry'
     ],
-    imageUrl: 'https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?w=800',
     relatedBuilds: ['pocket-garden', 'tower-garden']
   },
 
@@ -241,7 +235,6 @@ export const builds = [
       'Don\'t drill all the way through the log',
       'Clean holes every fall with a pipe cleaner'
     ],
-    imageUrl: 'https://images.unsplash.com/photo-1552728089-57bdde30beb3?w=800',
     relatedBuilds: ['rock-cairn', 'stick-sculpture']
   },
   {
@@ -271,7 +264,6 @@ export const builds = [
       'Sea glass and shells work too',
       'Display finished towers in the garden'
     ],
-    imageUrl: 'https://images.unsplash.com/photo-1527515637462-cff94edd56f1?w=800',
     relatedBuilds: ['stick-sculpture', 'fort-sticks']
   },
   {
@@ -303,7 +295,6 @@ export const builds = [
       'Add strings for beans to climb',
       'Perfect for hiding behind'
     ],
-    imageUrl: 'https://images.unsplash.com/photo-1518882605630-8eb700e01287?w=800',
     relatedBuilds: ['bug-hotel', 'fort-sticks']
   },
 
@@ -337,7 +328,6 @@ export const builds = [
       'Fill center with sand to prevent water pooling',
       'Paint bright colors with outdoor paint'
     ],
-    imageUrl: 'https://images.unsplash.com/photo-1527515637462-cff94edd56f1?w=800',
     relatedBuilds: ['balance-beam', 'rope-swing']
   },
   {
@@ -370,7 +360,6 @@ export const builds = [
       'Add two beams side-by-side for relay races',
       'Perfect for imaginary tightrope acts'
     ],
-    imageUrl: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800',
     relatedBuilds: ['tire-climb', 'stump-steps']
   },
   {
@@ -402,7 +391,6 @@ export const builds = [
       'Space closer together for toddlers, farther apart for older kids',
       'Add a "finish line" stump'
     ],
-    imageUrl: 'https://images.unsplash.com/photo-1527515637462-cff94edd56f1?w=800',
     relatedBuilds: ['balance-beam', 'tire-climb']
   },
   {
@@ -435,7 +423,6 @@ export const builds = [
       'Seat should be 2-3 feet off the ground for kids',
       'Tire swings need more clearance'
     ],
-    imageUrl: 'https://images.unsplash.com/photo-1476673160081-cf065607f449?w=800',
     relatedBuilds: ['tire-climb', 'fort-sticks']
   },
 
@@ -470,7 +457,6 @@ export const builds = [
       'Kids love adding soap — outside only!',
       'Drainage at the bottom catches water for relaunch'
     ],
-    imageUrl: 'https://images.unsplash.com/photo-1476673160081-cf065607f449?w=800',
     relatedBuilds: ['sprinkler-wiggle', 'gutter-stream']
   },
   {
@@ -501,7 +487,6 @@ export const builds = [
       'Hang it from a tree for an arch',
       'Add a timer — they\'ll play for hours'
     ],
-    imageUrl: 'https://images.unsplash.com/photo-1476673160081-cf065607f449?w=800',
     relatedBuilds: ['bottle-bowl', 'gutter-stream']
   },
   {
@@ -534,7 +519,6 @@ export const builds = [
       'Disconnect gutters in winter',
       'Kids can redesign the layout anytime'
     ],
-    imageUrl: 'https://images.unsplash.com/photo-1476673160081-cf065607f449?w=800',
     relatedBuilds: ['bottle-bowl', 'sprinkler-wiggle']
   },
 
@@ -570,7 +554,6 @@ export const builds = [
       'This fort lasts one season — that\'s the magic',
       'Add a flag so they can find their fort'
     ],
-    imageUrl: 'https://images.unsplash.com/photo-1518882605630-8eb700e01287?w=800',
     relatedBuilds: ['sheet-tunnel', 'cardboard-castle']
   },
   {
@@ -602,7 +585,6 @@ export const builds = [
       'Add pillows at both ends for comfortable entries',
       'Works inside too on a rainy day'
     ],
-    imageUrl: 'https://images.unsplash.com/photo-1476673160081-cf065607f449?w=800',
     relatedBuilds: ['fort-sticks', 'cardboard-castle']
   },
   {
@@ -635,7 +617,6 @@ export const builds = [
       'The playhouse lasts longer with a coat of clear spray sealer',
       'When done, recycle it properly'
     ],
-    imageUrl: 'https://images.unsplash.com/photo-1518882605630-8eb700e01287?w=800',
     relatedBuilds: ['fort-sticks', 'sheet-tunnel']
   },
 
@@ -674,7 +655,6 @@ export const builds = [
       'Build during dry weather',
       'Add a pulley system for raising snacks without climbing'
     ],
-    imageUrl: 'https://images.unsplash.com/photo-1518012312832-96aea3c91144?w=800',
     relatedBuilds: ['ninja-course-platform', 'tire-swing-frame', 'reading-hut']
   },
   {
@@ -712,7 +692,6 @@ export const builds = [
       'Add a wooden handrail for beginners',
       'Keep landing zones clear and add rubber mulch'
     ],
-    imageUrl: 'https://images.unsplash.com/photo-1565992441121-4361c5c43c1a?w=800',
     relatedBuilds: ['climbing-boulder-wall', 'tire-swing-frame', 'fairy-door-treehouse']
   },
   {
@@ -750,7 +729,6 @@ export const builds = [
       'Add buried plastic dinosaurs for discovery during play',
       'Consider adding wheels to the bench legs'
     ],
-    imageUrl: 'https://images.unsplash.com/photo-1591191433863-7c0d6103f7a9?w=800',
     relatedBuilds: ['mud-kitchen-deluxe', 'fairy-door-treehouse', 'reading-hut']
   },
   {
@@ -788,7 +766,6 @@ export const builds = [
       'Teach kids to brake BEFORE grabbing seat handles',
       'Apply lubricant to bearings every few months'
     ],
-    imageUrl: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800',
     relatedBuilds: ['tire-swing-frame', 'ninja-course-platform', 'climbing-boulder-wall']
   },
   {
@@ -826,7 +803,6 @@ export const builds = [
       'Rotate holds every few weeks',
       'Add a slackline next to wall for warm-up'
     ],
-    imageUrl: 'https://images.unsplash.com/photo-1565992441121-4361c5c43c1a?w=800',
     relatedBuilds: ['ninja-course-platform', 'fairy-door-treehouse', 'zip-line-station']
   },
   {
@@ -864,7 +840,6 @@ export const builds = [
       'Add a small speaker for story time ambiance',
       'Consider a step stool for younger children'
     ],
-    imageUrl: 'https://images.unsplash.com/photo-1518012312832-96aea3c91144?w=800',
     relatedBuilds: ['fairy-door-treehouse', 'sandbox-with-cover', 'sunset-pergola']
   },
   {
@@ -902,7 +877,6 @@ export const builds = [
       'Add food coloring to water for visible splash marks',
       'Keep spare pumps on hand'
     ],
-    imageUrl: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800',
     relatedBuilds: ['mud-kitchen-deluxe', 'tire-swing-frame', 'sunset-pergola']
   },
   {
@@ -940,7 +914,6 @@ export const builds = [
       'The tractor tire should be hollow-side up to prevent water',
       'Consider adding a disc bottom tire swing for toddlers'
     ],
-    imageUrl: 'https://images.unsplash.com/photo-1571923485220-363f5bf0db24?w=800',
     relatedBuilds: ['ninja-course-platform', 'zip-line-station', 'fairy-door-treehouse']
   },
   {
@@ -978,7 +951,6 @@ export const builds = [
       'Add a drain underneath the basin using landscape fabric and gravel',
       'Include magnifying glasses for nature exploration'
     ],
-    imageUrl: 'https://images.unsplash.com/photo-1476673160081-cf065607f449?w=800',
     relatedBuilds: ['sandbox-with-cover', 'water-ball-launch-station', 'reading-hut']
   },
   {
@@ -1016,7 +988,6 @@ export const builds = [
       'Add a removable bug screen panel for summer evenings',
       'Train rose canes horizontally along beams for maximum bloom'
     ],
-    imageUrl: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?w=800',
     relatedBuilds: ['reading-hut', 'tire-swing-frame', 'fairy-door-treehouse']
   }
 ]
