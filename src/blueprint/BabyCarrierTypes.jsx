@@ -6,7 +6,7 @@ const carrierTypes = [
     id: 'soft-structured',
     name: 'Soft-Structured Carrier (SSC)',
     image: '/images/carriers/SSC.png',
-    examples: ['Osprey Poco', 'Deuter Kid Comfort', 'Chimparoo', 'Tula', 'LennyLamb'],
+    examples: ['Osprey Poco Soft Child Carrier', 'Chimparoo', 'Tula', 'LennyLamb'],
     bestFor: ['Hiking with toddlers', 'Long day hikes', 'Newborns through 4 years'],
     pros: [
       'Padded hip belt transfers weight to hips',
