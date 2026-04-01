@@ -92,12 +92,12 @@ export default function SeasonalWeather({ onAddItems }) {
       <p className="text-sm text-inkl mb-6">Filter recommendations by current conditions</p>
 
       {/* Season Tabs */}
-      <div className="flex gap-2 mb-6 flex-wrap">
+      <div className="flex gap-2 mb-6 flex-wrap overflow-x-auto pb-2 -mx-1 px-1">
         {seasons.map((season) => (
           <button
             key={season.id}
             onClick={() => setActiveSeason(activeSeason === season.id ? null : season.id)}
-            className={`px-4 py-2 rounded-full font-sans text-sm font-medium transition-all ${
+            className={`px-3 py-2 rounded-full font-sans text-sm font-medium transition-all whitespace-nowrap flex-shrink-0 ${
               activeSeason === season.id
                 ? `${season.color} border`
                 : 'bg-parchment text-inkl hover:bg-blush'
@@ -132,14 +132,14 @@ export default function SeasonalWeather({ onAddItems }) {
 
             <div className="space-y-2">
               {currentSeason.items.map((item, i) => (
-                <div key={i} className="flex items-center justify-between p-2 bg-white/50 rounded-lg">
-                  <div className="flex items-center gap-3">
+                <div key={i} className="flex items-start justify-between p-2 bg-white/50 rounded-lg gap-2">
+                  <div className="flex items-center gap-2 flex-wrap">
                     <span className={`px-2 py-0.5 rounded text-xs font-sans ${priorityColors[item.priority]}`}>
                       {item.priority}
                     </span>
                     <span className="text-sm text-ink">{item.name}</span>
                   </div>
-                  <span className="text-xs text-inkl">{item.note}</span>
+                  <span className="text-xs text-inkl flex-shrink-0 hidden sm:inline">{item.note}</span>
                 </div>
               ))}
             </div>

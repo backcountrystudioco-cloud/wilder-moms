@@ -51,12 +51,12 @@ export default function TripDifficultySlider({ onDifficultyChange }) {
       <p className="text-sm text-inkl mb-6">How remote is your adventure?</p>
 
       {/* Difficulty Selector */}
-      <div className="flex gap-2 mb-6">
+      <div className="flex gap-2 mb-6 overflow-x-auto pb-1 -mx-1 px-1">
         {difficultyLevels.map((level) => (
           <button
             key={level.id}
             onClick={() => handleSelect(level.id)}
-            className={`flex-1 px-3 py-2 rounded-lg font-sans text-xs font-medium transition-all ${
+            className={`px-3 py-2 rounded-lg font-sans text-xs font-medium transition-all whitespace-nowrap flex-shrink-0 ${
               selected === level.id
                 ? level.id === 'easy' ? 'bg-olive text-white' :
                   level.id === 'moderate' ? 'bg-gold text-white' :

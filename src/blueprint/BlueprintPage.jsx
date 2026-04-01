@@ -56,12 +56,12 @@ export default function BlueprintPage() {
   return (
     <div className="min-h-screen bg-cream pt-24 pb-24 md:pb-12 px-4">
       <div className="max-w-4xl mx-auto">
-        {/* Header */}
+        {/* Header - matches HabitatPage style */}
         <header className="mb-6">
-          <h1 className="font-serif text-3xl md:text-5xl text-ink mb-3">
+          <h1 className="font-serif text-4xl md:text-5xl text-ink mb-4">
             The Blueprint
           </h1>
-          <p className="font-sans text-inkl text-base md:text-lg">
+          <p className="font-sans text-inkl text-lg max-w-2xl">
             Pack lists tailored to your family — organized by age group so everyone has what they need.
           </p>
         </header>

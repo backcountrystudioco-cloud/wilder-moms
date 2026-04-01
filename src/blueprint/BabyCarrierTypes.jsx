@@ -236,13 +236,13 @@ export default function BabyCarrierTypes() {
           </AnimatePresence>
         </>
       ) : (
-        <div className="overflow-x-auto">
-          <table className="w-full">
+        <div className="overflow-x-auto -mx-4 px-4 md:mx-0 md:px-0">
+          <table className="w-full min-w-[500px]">
             <thead>
               <tr>
-                <th className="text-left font-sans text-xs text-inkl p-2">Carrier Type</th>
+                <th className="text-left font-sans text-xs text-inkl p-2">Carrier</th>
                 {comparisonFeatures.map((f) => (
-                  <th key={f.key} className="text-center font-sans text-xs text-inkl p-2 min-w-[80px]">{f.name}</th>
+                  <th key={f.key} className="text-center font-sans text-xs text-inkl p-2">{f.name}</th>
                 ))}
               </tr>
             </thead>
@@ -250,7 +250,7 @@ export default function BabyCarrierTypes() {
               {carrierTypes.map((carrier) => (
                 <tr key={carrier.id} className="border-t border-inkll/10">
                   <td className="p-2">
-                    <p className="font-sans text-xs font-medium text-ink">{carrier.icon} {carrier.name.split(' ')[0]}</p>
+                    <p className="font-sans text-xs font-medium text-ink whitespace-nowrap">{carrier.icon} {carrier.name.split(' ')[0]}</p>
                   </td>
                   {comparisonFeatures.map((f) => (
                     <td key={f.key} className="text-center p-2">
