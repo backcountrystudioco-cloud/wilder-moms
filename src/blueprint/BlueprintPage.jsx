@@ -54,7 +54,7 @@ export default function BlueprintPage() {
   const computedMyList = [...myList, ...difficultyAdditions.filter(a => !myList.some(m => m.toLowerCase().includes(a.toLowerCase())))]
 
   return (
-    <div className="min-h-screen bg-cream pt-24 pb-24 md:pb-12 px-4">
+    <div className="min-h-screen bg-cream pt-28 md:pt-24 pb-24 md:pb-12 px-4">
       <div className="max-w-4xl mx-auto">
         {/* Header - matches HabitatPage style */}
         <header className="mb-6">

@@ -195,34 +195,28 @@ export default function Nav() {
 
       {/* Mobile Nav Links - Always Visible */}
       <div className="md:hidden border-t border-inkll/20 mt-2">
-        <div className="flex items-center justify-around gap-4 px-4 py-3">
+        <div className="flex items-center justify-around gap-2 px-2 py-2 overflow-x-auto">
           <Link
             to="/habitat"
-            className="flex flex-col items-center gap-1 font-sans font-medium text-sm text-ink hover:text-ember transition-colors"
+            className="flex flex-col items-center gap-0.5 font-sans font-medium text-xs text-ink hover:text-ember transition-colors whitespace-nowrap px-2 py-1"
           >
-            <span>Explore</span>
+            <span>Habitat</span>
           </Link>
           <Link
             to="/basecamp"
-            className="flex flex-col items-center gap-1 font-sans font-medium text-sm text-ink hover:text-ember transition-colors"
+            className="flex flex-col items-center gap-0.5 font-sans font-medium text-xs text-ink hover:text-ember transition-colors whitespace-nowrap px-2 py-1"
           >
-            <span>Builds</span>
-          </Link>
-          <Link
-            to="/basecamp/activities"
-            className="flex flex-col items-center gap-1 font-sans font-medium text-sm text-ink hover:text-ember transition-colors"
-          >
-            <span>Activities</span>
+            <span>Base Camp</span>
           </Link>
           <Link
             to="/village"
-            className="flex flex-col items-center gap-1 font-sans font-medium text-sm text-ink hover:text-ember transition-colors"
+            className="flex flex-col items-center gap-0.5 font-sans font-medium text-xs text-ink hover:text-ember transition-colors whitespace-nowrap px-2 py-1"
           >
             <span>Village</span>
           </Link>
           <Link
             to="/blueprint"
-            className="flex flex-col items-center gap-1 font-sans font-medium text-sm text-ink hover:text-ember transition-colors"
+            className="flex flex-col items-center gap-0.5 font-sans font-medium text-xs text-ink hover:text-ember transition-colors whitespace-nowrap px-2 py-1"
           >
             <span>Blueprint</span>
           </Link>
