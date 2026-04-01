@@ -60,7 +60,7 @@ export const builds = [
       { name: 'Command hooks', quantity: '6', link: 'https://www.amazon.com' }
     ],
     steps: [
-      { title: 'Prep the bin', description: 'Drill排水孔 in the bottom of the bin. Cut a v-shape notch in one rim for pouring.' },
+      { title: 'Prep the bin', description: 'Drill drainage holes in the bottom of the bin. Cut a v-shape notch in one rim for pouring.' },
       { title: 'Create the pipe utensil holder', description: 'Cut PVC pipe into 6-inch sections. Mount horizontally under the table edge.' },
       { title: 'Attach the bin', description: 'Use bungee cords to secure the bin to the table. It should be stable but removable for cleaning.' },
       { title: 'Add hooks', description: 'Screw command hooks along the table edge for hanging spoons, ladles, and funnels.' },
