@@ -7,7 +7,7 @@ const carrierTypes = [
     name: 'Soft-Structured Carrier (SSC)',
     image: '/images/carriers/SSC.png',
     examples: ['Osprey Poco', 'Deuter Kid Comfort', 'Chimparoo', 'Tula', 'LennyLamb'],
-    bestFor: ['Hiking with toddlers', 'Long day hikes', 'Children 6 months - 4 years'],
+    bestFor: ['Hiking with toddlers', 'Long day hikes', 'Newborns through 4 years'],
     pros: [
       'Padded hip belt transfers weight to hips',
       'Adjustable for different sized kids',
@@ -20,7 +20,7 @@ const carrierTypes = [
       'Heavier than wraps',
       'Bulkier to pack',
     ],
-    ageRange: '6 months - 4 years (up to 45 lbs)',
+    ageRange: 'Birth - 4 years (up to 45 lbs)',
     weight: '2-5 lbs',
   },
   {
