@@ -35,8 +35,8 @@ export default function HikeCard({ hike, index = 0, showScore = false }) {
   const getScoreColor = (score) => {
     if (score >= 80) return 'bg-olive text-white'
     if (score >= 60) return 'bg-gold text-white'
-    if (score >= 40) return 'bg-amber-500 text-white'
-    return 'bg-inkll/40 text-white'
+    if (score >= 40) return 'bg-terra text-white'
+    return 'bg-ember text-white'
   }
 
   return (
