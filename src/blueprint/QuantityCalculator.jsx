@@ -19,25 +19,19 @@ export default function QuantityCalculator({ adults, kids, onChange, onAddItems 
   const totalPeople = adults + kids
   const water = kids * 8 + adults * 16 // oz per hour
   const snacks = (adults + kids) * 3 // items
-  const sunscreen = Math.ceil(totalPeople / 4) // bottles
   const firstAidKits = 1 // per trip
-  const wipes = Math.ceil(kids / 2) // packs
 
   const quantities = [
     { label: 'Water', value: `${water} oz`, note: 'per hour' },
     { label: 'Snacks', value: snacks, note: 'items' },
-    { label: 'Sunscreen', value: sunscreen, note: sunscreen === 1 ? 'bottle' : 'bottles' },
     { label: 'First Aid Kits', value: firstAidKits, note: 'per trip' },
-    { label: 'Wipes', value: wipes, note: wipes === 1 ? 'pack' : 'packs' },
   ]
 
   // Items to add to list
   const itemsToAdd = [
     `${water} oz water per person`,
     `${snacks} trail snacks`,
-    `${sunscreen} sunscreen bottle${sunscreen > 1 ? 's' : ''}`,
     'First aid kit',
-    `${wipes} wipe pack${wipes > 1 ? 's' : ''}`,
   ]
 
   const handleAddToList = () => {
