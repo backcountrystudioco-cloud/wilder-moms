@@ -54,23 +54,23 @@ export default function BlueprintPage() {
   const computedMyList = [...myList, ...difficultyAdditions.filter(a => !myList.some(m => m.toLowerCase().includes(a.toLowerCase())))]
 
   return (
-    <div className="min-h-screen bg-cream pt-24 pb-12 px-4">
+    <div className="min-h-screen bg-cream pt-24 pb-24 md:pb-12 px-4">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
-        <header className="mb-8">
-          <h1 className="font-serif text-4xl md:text-5xl text-ink mb-4">
+        <header className="mb-6">
+          <h1 className="font-serif text-3xl md:text-5xl text-ink mb-3">
             The Blueprint
           </h1>
-          <p className="font-sans text-inkl text-lg">
+          <p className="font-sans text-inkl text-base md:text-lg">
             Pack lists tailored to your family — organized by age group so everyone has what they need.
           </p>
         </header>
 
-        {/* Main Tabs */}
-        <div className="flex gap-2 mb-6 flex-wrap">
+        {/* Main Tabs - horizontal scroll on mobile */}
+        <div className="flex gap-2 mb-6 overflow-x-auto pb-2 -mx-4 px-4 md:overflow-visible md:flex-wrap md:gap-2 md:-mx-0 md:px-0">
           <button
             onClick={() => setActiveTab('smart')}
-            className={`px-5 py-2.5 rounded-full font-sans text-sm font-medium transition-all ${
+            className={`px-4 py-2.5 rounded-full font-sans text-sm font-medium transition-all whitespace-nowrap flex-shrink-0 ${
               activeTab === 'smart'
                 ? 'bg-ember text-white'
                 : 'bg-blush/50 text-inkl hover:bg-blush'
@@ -80,37 +80,37 @@ export default function BlueprintPage() {
           </button>
           <button
             onClick={() => setActiveTab('mylist')}
-            className={`px-5 py-2.5 rounded-full font-sans text-sm font-medium transition-all ${
+            className={`px-4 py-2.5 rounded-full font-sans text-sm font-medium transition-all whitespace-nowrap flex-shrink-0 ${
               activeTab === 'mylist'
                 ? 'bg-ember text-white'
                 : 'bg-blush/50 text-inkl hover:bg-blush'
             }`}
           >
-            My Pack List {myList.length > 0 && `(${myList.length})`}
+            My List {myList.length > 0 && `(${myList.length})`}
           </button>
           <button
             onClick={() => setActiveTab('hiking')}
-            className={`px-5 py-2.5 rounded-full font-sans text-sm font-medium transition-all ${
+            className={`px-4 py-2.5 rounded-full font-sans text-sm font-medium transition-all whitespace-nowrap flex-shrink-0 ${
               activeTab === 'hiking'
                 ? 'bg-ember text-white'
                 : 'bg-blush/50 text-inkl hover:bg-blush'
             }`}
           >
-            Hiking Lists
+            Hiking
           </button>
           <button
             onClick={() => setActiveTab('camping')}
-            className={`px-5 py-2.5 rounded-full font-sans text-sm font-medium transition-all ${
+            className={`px-4 py-2.5 rounded-full font-sans text-sm font-medium transition-all whitespace-nowrap flex-shrink-0 ${
               activeTab === 'camping'
                 ? 'bg-ember text-white'
                 : 'bg-blush/50 text-inkl hover:bg-blush'
             }`}
           >
-            Camping Lists
+            Camping
           </button>
           <button
             onClick={() => setActiveTab('essentials')}
-            className={`px-5 py-2.5 rounded-full font-sans text-sm font-medium transition-all ${
+            className={`px-4 py-2.5 rounded-full font-sans text-sm font-medium transition-all whitespace-nowrap flex-shrink-0 ${
               activeTab === 'essentials'
                 ? 'bg-ember text-white'
                 : 'bg-blush/50 text-inkl hover:bg-blush'
@@ -120,13 +120,13 @@ export default function BlueprintPage() {
           </button>
           <button
             onClick={() => setActiveTab('carriers')}
-            className={`px-5 py-2.5 rounded-full font-sans text-sm font-medium transition-all ${
+            className={`px-4 py-2.5 rounded-full font-sans text-sm font-medium transition-all whitespace-nowrap flex-shrink-0 ${
               activeTab === 'carriers'
                 ? 'bg-ember text-white'
                 : 'bg-blush/50 text-inkl hover:bg-blush'
             }`}
           >
-            Baby Carriers
+            Carriers
           </button>
         </div>
 
