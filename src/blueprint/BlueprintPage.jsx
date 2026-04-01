@@ -141,8 +141,6 @@ export default function BlueprintPage() {
           >
             <AdventureProfileBuilder onGenerate={handleGenerateFromProfile} />
 
-            <ItemPicker onAddItems={handleAddItems} />
-
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <SeasonalWeather onAddItems={handleAddItems} />
               <GearYouMightBorrow />
@@ -175,6 +173,8 @@ export default function BlueprintPage() {
               currentList={computedMyList}
               onLoadTrip={handleLoadTrip}
             />
+
+            <ItemPicker onAddItems={handleAddItems} />
 
             <PackLightChallenge
               totalItems={computedMyList.length}
