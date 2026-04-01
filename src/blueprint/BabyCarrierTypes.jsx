@@ -22,6 +22,18 @@ const carrierTypes = [
     ],
     ageRange: 'Birth - 4 years (up to 45 lbs)',
     weight: '2-5 lbs',
+    tickTips: [
+      'Treat carrier straps with permethrin before hikes',
+      'Check waist belt and shoulder straps after hiking',
+      'Light-colored fabrics make ticks easier to spot',
+      'Keep baby\'s legs covered to minimize exposed skin near carrier',
+    ],
+    babywearingTips: [
+      'Ensure baby\'s hips are in M-position (knees above bottom)',
+      'Tighten waist belt first, then shoulder straps',
+      'Add rolled blanket behind baby in first 3 months',
+      'Never cook or drink hot liquids while wearing',
+    ],
   },
   {
     id: 'frame-pack',
@@ -66,6 +78,18 @@ const carrierTypes = [
     ],
     ageRange: 'Birth to 3-4 years',
     weight: '0.5-2 lbs',
+    tickTips: [
+      'Ticks can hide in fabric folds - inspect all wrapping sections carefully',
+      'Wash wraps on hot cycle after each hike',
+      'Avoid dragging wrap ends on ground when tying',
+      'Light-colored wraps make tick detection easier',
+    ],
+    babywearingTips: [
+      'Practice tying at home before your first hike',
+      'Keep wrap tension even on both shoulders',
+      'Carry a carrier knot cheat sheet until memorized',
+      'Double-wrap for more support on longer hikes',
+    ],
   },
 ]
 
@@ -211,6 +235,34 @@ export default function BabyCarrierTypes() {
                     </ul>
                   </div>
                 </div>
+
+                {current.tickTips && (
+                  <div className="mt-4 pt-4 border-t border-inkll/20">
+                    <p className="text-xs font-medium text-ink mb-2">Tick Prevention Tips</p>
+                    <ul className="space-y-1">
+                      {current.tickTips.map((tip, i) => (
+                        <li key={i} className="flex items-start gap-2 text-xs text-inkl">
+                          <span className="text-olive flex-shrink-0">🕷️</span>
+                          {tip}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {current.babywearingTips && (
+                  <div className="mt-4 pt-4 border-t border-inkll/20">
+                    <p className="text-xs font-medium text-ink mb-2">Babywearing Best Practices</p>
+                    <ul className="space-y-1">
+                      {current.babywearingTips.map((tip, i) => (
+                        <li key={i} className="flex items-start gap-2 text-xs text-inkl">
+                          <span className="text-ember flex-shrink-0">👶</span>
+                          {tip}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </motion.div>
             )}
           </AnimatePresence>
