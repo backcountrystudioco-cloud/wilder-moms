@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from 'framer-motion'
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false)
   const [baseCampDropdownOpen, setBaseCampDropdownOpen] = useState(false)
-  const [blueprintDropdownOpen, setBlueprintDropdownOpen] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -109,61 +108,13 @@ export default function Nav() {
               The Village
             </Link>
 
-            {/* The Blueprint - Pack Lists Dropdown */}
-            <div className="relative">
-              <button
-                className="font-sans font-medium text-sm uppercase tracking-[0.08em] text-ink hover:text-ember transition-colors inline-flex items-center gap-1"
-                onMouseEnter={() => setBlueprintDropdownOpen(true)}
-              >
-                The Blueprint
-                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
-              <AnimatePresence>
-                {blueprintDropdownOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 10 }}
-                    className="absolute top-full left-0 mt-2 w-56 bg-cream shadow-lg rounded-lg border border-inkll/10 py-2 z-50"
-                    onMouseLeave={() => setBlueprintDropdownOpen(false)}
-                  >
-                    <Link
-                      to="/blueprint"
-                      className="block px-4 py-2 font-sans text-sm text-ink hover:bg-blush/50 hover:text-ember"
-                    >
-                      Pack Lists
-                    </Link>
-                    <Link
-                      to="/blueprint"
-                      className="block px-4 py-2 font-sans text-sm text-ink hover:bg-blush/50 hover:text-ember"
-                    >
-                      Hiking Lists
-                    </Link>
-                    <Link
-                      to="/blueprint"
-                      className="block px-4 py-2 font-sans text-sm text-ink hover:bg-blush/50 hover:text-ember"
-                    >
-                      Camping Lists
-                    </Link>
-                    <div className="border-t border-inkll/10 my-1" />
-                    <Link
-                      to="/blueprint"
-                      className="block px-4 py-2 font-sans text-sm text-ink hover:bg-blush/50 hover:text-ember"
-                    >
-                      Day Hike Essentials
-                    </Link>
-                    <Link
-                      to="/blueprint"
-                      className="block px-4 py-2 font-sans text-sm text-ink hover:bg-blush/50 hover:text-ember"
-                    >
-                      Weather & Alerts
-                    </Link>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
+            {/* The Blueprint - just links to blueprint since it's a tabbed page */}
+            <Link
+              to="/blueprint"
+              className="font-sans font-medium text-sm uppercase tracking-[0.08em] text-ink hover:text-ember transition-colors"
+            >
+              The Blueprint
+            </Link>
 
             {/* Landing Page Links */}
             <a

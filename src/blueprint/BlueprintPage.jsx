@@ -13,6 +13,7 @@ import SeasonalWeather from './SeasonalWeather'
 import GearYouMightBorrow from './GearYouMightBorrow'
 import SaveCloneTrips from './SaveCloneTrips'
 import BabyCarrierTypes from './BabyCarrierTypes'
+import ItemPicker from './ItemPicker'
 
 export default function BlueprintPage() {
   const [activeTab, setActiveTab] = useState('smart')
@@ -21,6 +22,7 @@ export default function BlueprintPage() {
   const [checkedItems, setCheckedItems] = useState([])
   const [tripType, setTripType] = useState('day')
   const [difficultyAdditions, setDifficultyAdditions] = useState([])
+  const [quantitySettings, setQuantitySettings] = useState({ adults: 2, kids: 1 })
 
   const toggleAge = (index) => {
     setExpandedAge(expandedAge === index ? null : index)
@@ -54,7 +56,7 @@ export default function BlueprintPage() {
   const computedMyList = [...myList, ...difficultyAdditions.filter(a => !myList.some(m => m.toLowerCase().includes(a.toLowerCase())))]
 
   return (
-    <div className="min-h-screen bg-cream pt-28 md:pt-24 pb-24 md:pb-12 px-4">
+    <div className="min-h-screen bg-cream pt-32 pb-24 md:pt-24 md:pb-12 px-4">
       <div className="max-w-4xl mx-auto">
         {/* Header - matches HabitatPage style */}
         <header className="mb-6">
@@ -139,6 +141,8 @@ export default function BlueprintPage() {
           >
             <AdventureProfileBuilder onGenerate={handleGenerateFromProfile} />
 
+            <ItemPicker onAddItems={handleAddItems} />
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <SeasonalWeather onAddItems={handleAddItems} />
               <GearYouMightBorrow />
@@ -146,7 +150,12 @@ export default function BlueprintPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <TripDifficultySlider onDifficultyChange={handleDifficultyChange} />
-              <QuantityCalculator adults={2} kids={1} onChange={() => {}} />
+              <QuantityCalculator 
+                adults={quantitySettings.adults} 
+                kids={quantitySettings.kids} 
+                onChange={setQuantitySettings}
+                onAddItems={handleAddItems}
+              />
             </div>
 
             <QuickTemplates onAddItems={handleAddItems} availableItems={myList} />

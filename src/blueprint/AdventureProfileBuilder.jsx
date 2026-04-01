@@ -28,12 +28,17 @@ const questions = [
   {
     id: 'howLong',
     question: 'How long will you be out?',
-    options: [
+    dayOptions: [
       { label: '1-2 hours', value: 'short', icon: '⏱️' },
       { label: 'Half day (3-5 hours)', value: 'half', icon: '🌤️' },
       { label: 'Full day (6-8 hours)', value: 'full', icon: '☀️' },
-      { label: 'Overnight', value: 'overnight', icon: '🌙' },
-      { label: 'Multiple days', value: 'multi', icon: '📅' },
+      { label: 'Extended day (8+ hours)', value: 'extended', icon: '🌅' },
+    ],
+    overnightOptions: [
+      { label: '1 night', value: '1night', icon: '🌙' },
+      { label: '2 nights', value: '2nights', icon: '🌙🌙' },
+      { label: '3 nights', value: '3nights', icon: '🌙🌙🌙' },
+      { label: '4+ nights (extended)', value: 'extended', icon: '📅' },
     ],
   },
   {
@@ -64,8 +69,17 @@ export default function AdventureProfileBuilder({ onGenerate }) {
   const [showResults, setShowResults] = useState(false)
   const [generatedList, setGeneratedList] = useState([])
 
+  const isOvernightTrip = answers.what === 'overnight' || answers.what === 'backpacking'
+
   const handleSelect = (questionId, value) => {
-    setAnswers((prev) => ({ ...prev, [questionId]: value }))
+    setAnswers((prev) => {
+      const newAnswers = { ...prev, [questionId]: value }
+      // Reset duration if trip type changes
+      if (questionId === 'what' && prev.howLong) {
+        newAnswers.howLong = undefined
+      }
+      return newAnswers
+    })
     if (currentStep < questions.length - 1) {
       setTimeout(() => setCurrentStep(currentStep + 1), 300)
     }
@@ -92,12 +106,20 @@ export default function AdventureProfileBuilder({ onGenerate }) {
       list.push(...itemRecommendations[conditions])
     }
 
-    // Duration additions
-    if (howLong === 'full' || howLong === 'overnight') {
+    // Duration additions for day hikes
+    if ((howLong === 'full' || howLong === 'extended') && (what === 'day' || !what)) {
       list.push('Extra snacks', 'Backup water', 'Headlamp')
     }
-    if (howLong === 'multi') {
-      list.push('Water filter', 'Multiple fuel canisters', 'Repair kit')
+
+    // Duration additions for overnight trips (number of nights)
+    if (what === 'overnight' || what === 'backpacking') {
+      if (howLong === '1night') {
+        list.push('Sleeping bag', 'Sleeping pad', 'Tent', 'Pillow', 'Change of clothes for night')
+      } else if (howLong === '2nights') {
+        list.push('Sleeping bag', 'Sleeping pad', 'Tent', 'Pillow', 'Change of clothes for night', 'Extra food', 'Water filter', 'Headlamp')
+      } else if (howLong === '3nights' || howLong === 'extended') {
+        list.push('Sleeping bag', 'Sleeping pad', 'Tent', 'Pillow', 'Change of clothes for night', 'Extra food', 'Water filter', 'Water purification', 'Multiple fuel canisters', 'Repair kit', 'Camp chair', 'Camp stove')
+      }
     }
 
     // Remove duplicates
@@ -128,10 +150,16 @@ export default function AdventureProfileBuilder({ onGenerate }) {
         <div className="flex flex-wrap gap-2 mb-6">
           {Object.entries(answers).map(([key, value]) => {
             const q = questions.find((q) => q.id === key)
-            const opt = q?.options.find((o) => o.value === value)
+            let optLabel = value
+            if (q && q.dayOptions) {
+              const allOpts = [...(q.dayOptions || []), ...(q.overnightOptions || [])]
+              optLabel = allOpts.find((o) => o.value === value)?.label || value
+            } else if (q?.options) {
+              optLabel = q.options.find((o) => o.value === value)?.label || value
+            }
             return (
               <span key={key} className="px-3 py-1 bg-blush/50 rounded-full text-xs text-inkl font-sans">
-                {opt?.label}
+                {optLabel}
               </span>
             )
           })}
@@ -196,7 +224,45 @@ export default function AdventureProfileBuilder({ onGenerate }) {
           <p className="text-lg text-ink mb-6 font-sans">{currentQuestion.question}</p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {currentQuestion.options.map((option) => {
+            {currentQuestion.options && currentQuestion.options.map((option) => {
+              const isSelected = answers[currentQuestion.id] === option.value
+              return (
+                <button
+                  key={option.value}
+                  onClick={() => handleSelect(currentQuestion.id, option.value)}
+                  className={`p-4 rounded-xl border-2 text-left transition-all ${
+                    isSelected
+                      ? 'border-olive bg-olive/5'
+                      : 'border-inkll/20 hover:border-olive/50'
+                  }`}
+                >
+                  <span className="text-2xl mb-2 block">{option.icon}</span>
+                  <span className={`font-sans text-sm font-medium ${isSelected ? 'text-olive' : 'text-ink'}`}>
+                    {option.label}
+                  </span>
+                </button>
+              )
+            })}
+            {currentQuestion.dayOptions && !isOvernightTrip && currentQuestion.dayOptions.map((option) => {
+              const isSelected = answers[currentQuestion.id] === option.value
+              return (
+                <button
+                  key={option.value}
+                  onClick={() => handleSelect(currentQuestion.id, option.value)}
+                  className={`p-4 rounded-xl border-2 text-left transition-all ${
+                    isSelected
+                      ? 'border-olive bg-olive/5'
+                      : 'border-inkll/20 hover:border-olive/50'
+                  }`}
+                >
+                  <span className="text-2xl mb-2 block">{option.icon}</span>
+                  <span className={`font-sans text-sm font-medium ${isSelected ? 'text-olive' : 'text-ink'}`}>
+                    {option.label}
+                  </span>
+                </button>
+              )
+            })}
+            {currentQuestion.overnightOptions && isOvernightTrip && currentQuestion.overnightOptions.map((option) => {
               const isSelected = answers[currentQuestion.id] === option.value
               return (
                 <button

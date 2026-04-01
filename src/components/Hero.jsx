@@ -37,7 +37,7 @@ export default function Hero() {
   }
 
   return (
-    <section className="min-h-screen bg-cream pt-20 md:pt-0">
+    <section className="min-h-screen bg-cream pt-24 md:pt-0">
       <div className="grid md:grid-cols-2 min-h-screen">
         {/* Left Column - Content */}
         <div className="flex flex-col justify-center px-6 md:px-12 lg:px-16 py-12 md:py-0">

@@ -1,21 +1,27 @@
-export default function QuantityCalculator({ adults, kids, onChange }) {
+import { useState } from 'react'
+
+export default function QuantityCalculator({ adults, kids, onChange, onAddItems }) {
+  const [addedToList, setAddedToList] = useState(false)
+
   const handleAdultsChange = (delta) => {
-    const newValue = Math.max(0, adults + delta);
-    onChange({ adults: newValue, kids });
-  };
+    const newValue = Math.max(0, adults + delta)
+    onChange({ adults: newValue, kids })
+    setAddedToList(false)
+  }
 
   const handleKidsChange = (delta) => {
-    const newValue = Math.max(0, kids + delta);
-    onChange({ adults, kids: newValue });
-  };
+    const newValue = Math.max(0, kids + delta)
+    onChange({ adults, kids: newValue })
+    setAddedToList(false)
+  }
 
   // Calculate quantities
-  const totalPeople = adults + kids;
-  const water = kids * 8 + adults * 16; // oz per hour
-  const snacks = (adults + kids) * 2; // items
-  const sunscreen = Math.ceil(totalPeople / 4); // bottles
-  const firstAidKits = 1; // per trip
-  const wipes = Math.ceil(kids / 2); // packs
+  const totalPeople = adults + kids
+  const water = kids * 8 + adults * 16 // oz per hour
+  const snacks = (adults + kids) * 3 // items
+  const sunscreen = Math.ceil(totalPeople / 4) // bottles
+  const firstAidKits = 1 // per trip
+  const wipes = Math.ceil(kids / 2) // packs
 
   const quantities = [
     { label: 'Water', value: `${water} oz`, note: 'per hour' },
@@ -23,7 +29,24 @@ export default function QuantityCalculator({ adults, kids, onChange }) {
     { label: 'Sunscreen', value: sunscreen, note: sunscreen === 1 ? 'bottle' : 'bottles' },
     { label: 'First Aid Kits', value: firstAidKits, note: 'per trip' },
     { label: 'Wipes', value: wipes, note: wipes === 1 ? 'pack' : 'packs' },
-  ];
+  ]
+
+  // Items to add to list
+  const itemsToAdd = [
+    `${water} oz water per person`,
+    `${snacks} trail snacks`,
+    `${sunscreen} sunscreen bottle${sunscreen > 1 ? 's' : ''}`,
+    'First aid kit',
+    `${wipes} wipe pack${wipes > 1 ? 's' : ''}`,
+  ]
+
+  const handleAddToList = () => {
+    if (onAddItems) {
+      onAddItems(itemsToAdd)
+    }
+    setAddedToList(true)
+    setTimeout(() => setAddedToList(false), 2000)
+  }
 
   return (
     <div className="bg-white rounded-2xl p-6 shadow-sm border border-inkll/10">
@@ -73,7 +96,7 @@ export default function QuantityCalculator({ adults, kids, onChange }) {
       </div>
 
       {/* Calculated Quantities Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-4">
         {quantities.map((item) => (
           <div
             key={item.label}
@@ -85,6 +108,18 @@ export default function QuantityCalculator({ adults, kids, onChange }) {
           </div>
         ))}
       </div>
+
+      {/* Add Button */}
+      <button
+        onClick={handleAddToList}
+        className={`w-full py-3 rounded-xl font-sans font-medium transition-colors ${
+          addedToList
+            ? 'bg-olive text-white'
+            : 'bg-olive/10 text-olive hover:bg-olive/20'
+        }`}
+      >
+        {addedToList ? '✓ Added to My List' : '+ Add Quantities to My List'}
+      </button>
     </div>
-  );
+  )
 }

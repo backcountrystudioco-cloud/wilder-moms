@@ -6,7 +6,7 @@ const carrierTypes = [
     id: 'soft-structured',
     name: 'Soft-Structured Carrier (SSC)',
     icon: '🎒',
-    examples: ['Osprey Poco', 'Deuter Kid Comfort', 'Chimparoo', 'Tula'],
+    examples: ['Osprey Poco', 'Deuter Kid Comfort', 'Chimparoo', 'Tula', 'ErgoCarrier', 'LennyLamb'],
     bestFor: ['Hiking with toddlers', 'Long day hikes', 'Children 1-4 years'],
     pros: [
       'Padded hip belt transfers weight to hips',
@@ -14,14 +14,14 @@ const carrierTypes = [
       'Multiple pockets for gear',
       'Sun shade canopy often included',
       'Durable, trail-worthy construction',
+      'Can nurse baby on-trail with some adjustment',
     ],
     cons: [
       'Heavier than wraps or slings',
-      'Child cannot nurse easily',
       'Bulkier to pack',
     ],
     ageRange: '6 months - 4 years (or until 40+ lbs)',
-    weight: '4-7 lbs carrier only',
+    weight: '4-8+ lbs carrier only',
   },
   {
     id: 'frame-pack',
@@ -87,26 +87,6 @@ const carrierTypes = [
     ageRange: '2-5 years',
     weight: '1-3 lbs',
   },
-  {
-    id: 'hammock',
-    name: 'Pop Top Hammock Carrier',
-    icon: ' hammock',
-    examples: ['Popzem Pop Top', 'Bumkins Aerie'],
-    bestFor: ['Scenic viewpoints', 'Beach walks', 'Flat, wide trails', 'Kids who love hammocks'],
-    pros: [
-      'Unique and fun for kids',
-      'Lightweight',
-      'Can be used as regular hammock',
-    ],
-    cons: [
-      'Limited trail capability',
-      'Requires trees or posts',
-      'Not for serious hiking',
-      'Hard to find durable options',
-    ],
-    ageRange: '1-4 years',
-    weight: '1-2 lbs',
-  },
 ]
 
 const comparisonFeatures = [
@@ -119,11 +99,10 @@ const comparisonFeatures = [
 ]
 
 const featureRatings = {
-  'soft-structured': { infant: true, toddler: true, longHikes: true, lightweight: false, affordable: false, nursing: false },
+  'soft-structured': { infant: true, toddler: true, longHikes: true, lightweight: false, affordable: false, nursing: true },
   'frame-pack': { infant: true, toddler: true, longHikes: true, lightweight: false, affordable: false, nursing: false },
   'wrap': { infant: true, toddler: true, longHikes: false, lightweight: true, affordable: true, nursing: true },
   'harness-integrated': { infant: false, toddler: true, longHikes: false, lightweight: true, affordable: true, nursing: false },
-  'hammock': { infant: false, toddler: true, longHikes: false, lightweight: true, affordable: true, nursing: false },
 }
 
 export default function BabyCarrierTypes() {
