@@ -146,28 +146,28 @@ export default function Nav() {
 
       {/* Mobile Nav Links - Always Visible */}
       <div className="md:hidden border-t border-inkll/20 mt-1">
-        <div className="flex items-center justify-between px-1 py-1.5">
+        <div className="flex items-center justify-between px-3 py-1.5">
           <Link
             to="/habitat"
-            className="flex flex-col items-center gap-0 font-sans font-medium text-xs text-ink hover:text-ember transition-colors px-1"
+            className="flex flex-col items-center gap-0 font-sans font-medium text-xs text-ink hover:text-ember transition-colors"
           >
             Habitat
           </Link>
           <Link
             to="/basecamp"
-            className="flex flex-col items-center gap-0 font-sans font-medium text-xs text-ink hover:text-ember transition-colors px-1"
+            className="flex flex-col items-center gap-0 font-sans font-medium text-xs text-ink hover:text-ember transition-colors"
           >
             Base
           </Link>
           <Link
             to="/village"
-            className="flex flex-col items-center gap-0 font-sans font-medium text-xs text-ink hover:text-ember transition-colors px-1"
+            className="flex flex-col items-center gap-0 font-sans font-medium text-xs text-ink hover:text-ember transition-colors"
           >
             Village
           </Link>
           <Link
             to="/blueprint"
-            className="flex flex-col items-center gap-0 font-sans font-medium text-xs text-ink hover:text-ember transition-colors px-1"
+            className="flex flex-col items-center gap-0 font-sans font-medium text-xs text-ink hover:text-ember transition-colors"
           >
             Blueprint
           </Link>
