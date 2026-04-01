@@ -29,10 +29,11 @@ const carrierTypes = [
       'Keep baby\'s legs covered to minimize exposed skin near carrier',
     ],
     babywearingTips: [
+      'You should always be able to kiss baby\'s head (T.I.C.K.S. rule)',
+      'Tight - snug fit | In view - face visible | Close - kissable | Keep chin off chest | Supported back',
       'Ensure baby\'s hips are in M-position (knees above bottom)',
       'Tighten waist belt first, then shoulder straps',
       'Add rolled blanket behind baby in first 3 months',
-      'Never cook or drink hot liquids while wearing',
     ],
   },
   {
@@ -85,9 +86,10 @@ const carrierTypes = [
       'Light-colored wraps make tick detection easier',
     ],
     babywearingTips: [
+      'You should always be able to kiss baby\'s head (T.I.C.K.S. rule)',
+      'Tight - snug fit | In view - face visible | Close - kissable | Keep chin off chest | Supported back',
       'Practice tying at home before your first hike',
       'Keep wrap tension even on both shoulders',
-      'Carry a carrier knot cheat sheet until memorized',
       'Double-wrap for more support on longer hikes',
     ],
   },
