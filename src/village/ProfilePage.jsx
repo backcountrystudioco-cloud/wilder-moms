@@ -360,7 +360,7 @@ export default function ProfilePage() {
   const surveyUrl = 'https://us3.list-manage.com/survey?u=9ea84c4182a6c4ac21ecf2caa&id=58dad03290&attribution=false'
 
   return (
-    <div className="min-h-screen bg-cream pt-24 pb-12 px-4">
+    <div className="min-h-screen bg-cream pt-32 pb-24 px-4">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <header className="mb-8">
