@@ -7,10 +7,13 @@ const questions = [
     id: 'who',
     question: "Who's coming on the adventure?",
     options: [
+      { label: 'Just me (solo adventure)', value: { adults: 1, kids: 0 }, icon: '🚶‍♀️' },
+      { label: 'Me + baby carrier', value: { adults: 1, kids: 1, baby: true }, icon: '👶' },
+      { label: 'Me + walking kid(s)', value: { adults: 1, kids: 1, walking: true }, icon: '👧' },
+      { label: 'Couple + baby', value: { adults: 2, kids: 1, baby: true }, icon: '👨‍👩‍👧' },
+      { label: 'Couple + walking kid(s)', value: { adults: 2, kids: 2, mixed: true }, icon: '👨‍👩‍👧‍👦' },
+      { label: 'Full family (mixed ages)', value: { adults: 2, kids: 3, mixed: true }, icon: '👨‍👩‍👧‍👦' },
       { label: 'Adults only', value: { adults: 2, kids: 0 }, icon: '👫' },
-      { label: 'Me + toddler(s)', value: { adults: 1, kids: 1, toddler: true }, icon: '👶' },
-      { label: 'Me + partner + baby', value: { adults: 2, kids: 1, baby: true }, icon: '👨‍👩‍👧' },
-      { label: 'Family with kids (mixed ages)', value: { adults: 2, kids: 3, mixed: true }, icon: '👨‍👩‍👧‍👦' },
     ],
   },
   {
