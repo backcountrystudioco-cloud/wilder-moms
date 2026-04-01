@@ -145,31 +145,31 @@ export default function Nav() {
       </div>
 
       {/* Mobile Nav Links - Always Visible */}
-      <div className="md:hidden border-t border-inkll/20 mt-2">
-        <div className="flex items-center justify-between gap-1 px-2 py-2">
+      <div className="md:hidden border-t border-inkll/20 mt-1">
+        <div className="flex items-center justify-between px-1 py-1.5">
           <Link
             to="/habitat"
-            className="flex flex-col items-center gap-0.5 font-sans font-medium text-xs text-ink hover:text-ember transition-colors px-2 py-1"
+            className="flex flex-col items-center gap-0 font-sans font-medium text-xs text-ink hover:text-ember transition-colors px-1"
           >
-            <span>Habitat</span>
+            Habitat
           </Link>
           <Link
             to="/basecamp"
-            className="flex flex-col items-center gap-0.5 font-sans font-medium text-xs text-ink hover:text-ember transition-colors px-2 py-1"
+            className="flex flex-col items-center gap-0 font-sans font-medium text-xs text-ink hover:text-ember transition-colors px-1"
           >
-            <span>Base</span>
+            Base
           </Link>
           <Link
             to="/village"
-            className="flex flex-col items-center gap-0.5 font-sans font-medium text-xs text-ink hover:text-ember transition-colors px-2 py-1"
+            className="flex flex-col items-center gap-0 font-sans font-medium text-xs text-ink hover:text-ember transition-colors px-1"
           >
-            <span>Village</span>
+            Village
           </Link>
           <Link
             to="/blueprint"
-            className="flex flex-col items-center gap-0.5 font-sans font-medium text-xs text-ink hover:text-ember transition-colors px-2 py-1"
+            className="flex flex-col items-center gap-0 font-sans font-medium text-xs text-ink hover:text-ember transition-colors px-1"
           >
-            <span>Blueprint</span>
+            Blueprint
           </Link>
         </div>
       </div>
