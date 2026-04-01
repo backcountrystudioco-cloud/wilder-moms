@@ -5,9 +5,9 @@ const carrierTypes = [
   {
     id: 'soft-structured',
     name: 'Soft-Structured Carrier (SSC)',
-    icon: '🎒',
-    examples: ['Osprey Poco', 'Deuter Kid Comfort', 'Chimparoo', 'Tula', 'ErgoCarrier', 'LennyLamb'],
-    bestFor: ['Hiking with toddlers', 'Long day hikes', 'Children 1-4 years'],
+    image: '/images/carriers/SSC.png',
+    examples: ['Osprey Poco', 'Deuter Kid Comfort', 'Chimparoo', 'Tula', 'LennyLamb'],
+    bestFor: ['Hiking with toddlers', 'Long day hikes', 'Children 6 months - 4 years'],
     pros: [
       'Padded hip belt transfers weight to hips',
       'Adjustable for different sized kids',
@@ -17,16 +17,16 @@ const carrierTypes = [
       'Can nurse baby on-trail with some adjustment',
     ],
     cons: [
-      'Heavier than wraps or slings',
+      'Heavier than wraps',
       'Bulkier to pack',
     ],
-    ageRange: '6 months - 4 years (or until 40+ lbs)',
-    weight: '4-8+ lbs carrier only',
+    ageRange: '6 months - 4 years (up to 45 lbs)',
+    weight: '2-5 lbs',
   },
   {
     id: 'frame-pack',
     name: 'Frame Hiking Pack',
-    icon: '🎒',
+    image: '/images/carriers/frame carrier.png',
     examples: ['Osprey Pixel', 'Deuter Kid Comfort Pro', 'Kelty PerfectFit', 'Gregory Marquette'],
     bestFor: ['Serious hikers', 'Long distances', 'Backpacking with baby', 'Babies 6+ months who sit well'],
     pros: [
@@ -34,7 +34,7 @@ const carrierTypes = [
       'Can carry 40-50+ lbs total',
       'Built-in kickstand for easy loading',
       'Very comfortable for long periods',
-      ' Often includes weather protection',
+      'Often includes weather protection',
     ],
     cons: [
       'Heaviest option (5-10 lbs)',
@@ -43,12 +43,12 @@ const carrierTypes = [
       'Cumbersome in tight spaces',
     ],
     ageRange: '6 months - 5 years',
-    weight: '5-10 lbs carrier only',
+    weight: '5-10 lbs',
   },
   {
     id: 'wrap',
     name: 'Wrap / Mei Tai',
-    icon: '🧣',
+    image: '/images/carriers/wrap.png',
     examples: ['LennyLamb', 'Artipoppe', 'Chimparoo Mei Tai', 'Didymos'],
     bestFor: ['Newborns & infants', 'Short walks', 'Narrow trails', 'Early hiking before baby sits'],
     pros: [
@@ -67,26 +67,6 @@ const carrierTypes = [
     ageRange: 'Birth to 3-4 years',
     weight: '0.5-2 lbs',
   },
-  {
-    id: 'harness-integrated',
-    name: 'Harness-Style Carrier',
-    icon: '🪢',
-    examples: ['Osprey Eninja', 'Mountain Smith Quarter dome', 'Moby Wrap'],
-    bestFor: ['Toddlers who want independence', 'Shorter, easier trails', 'Kids 2+ who walk most'],
-    pros: [
-      'Child can climb in/out independently',
-      'Lightweight and simple',
-      'Good backup when toddler gets tired',
-      'Affordable',
-    ],
-    cons: [
-      'No hip belt = all weight on shoulders',
-      'Child limited to riding position only',
-      'Not suitable for infants',
-    ],
-    ageRange: '2-5 years',
-    weight: '1-3 lbs',
-  },
 ]
 
 const comparisonFeatures = [
@@ -102,12 +82,11 @@ const featureRatings = {
   'soft-structured': { infant: true, toddler: true, longHikes: true, lightweight: false, affordable: false, nursing: true },
   'frame-pack': { infant: true, toddler: true, longHikes: true, lightweight: false, affordable: false, nursing: false },
   'wrap': { infant: true, toddler: true, longHikes: false, lightweight: true, affordable: true, nursing: true },
-  'harness-integrated': { infant: false, toddler: true, longHikes: false, lightweight: true, affordable: true, nursing: false },
 }
 
 export default function BabyCarrierTypes() {
   const [selectedCarrier, setSelectedCarrier] = useState(null)
-  const [viewMode, setViewMode] = useState('cards') // 'cards' or 'comparison'
+  const [viewMode, setViewMode] = useState('cards')
 
   const current = carrierTypes.find((c) => c.id === selectedCarrier)
 
@@ -136,20 +115,33 @@ export default function BabyCarrierTypes() {
 
       {viewMode === 'cards' ? (
         <>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mb-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-6">
             {carrierTypes.map((carrier) => (
               <button
                 key={carrier.id}
                 onClick={() => setSelectedCarrier(selectedCarrier === carrier.id ? null : carrier.id)}
-                className={`p-4 rounded-xl border-2 text-left transition-all ${
+                className={`rounded-xl border-2 text-left transition-all overflow-hidden ${
                   selectedCarrier === carrier.id
                     ? 'border-olive bg-olive/5'
                     : 'border-inkll/20 hover:border-olive/50'
                 }`}
               >
-                <span className="text-2xl mb-2 block">{carrier.icon}</span>
-                <p className="font-sans text-sm font-medium text-ink">{carrier.name}</p>
-                <p className="text-xs text-inkl mt-1">{carrier.ageRange}</p>
+                <div className="aspect-[4/3] bg-cream relative">
+                  <img 
+                    src={carrier.image} 
+                    alt={carrier.name}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      e.target.style.display = 'none'
+                      e.target.parentNode.classList.add('flex', 'items-center', 'justify-center')
+                      e.target.parentNode.innerHTML = `<span class="text-4xl">🎒</span>`
+                    }}
+                  />
+                </div>
+                <div className="p-3">
+                  <p className="font-sans text-sm font-medium text-ink">{carrier.name}</p>
+                  <p className="text-xs text-inkl mt-1">{carrier.ageRange}</p>
+                </div>
               </button>
             ))}
           </div>
@@ -164,7 +156,16 @@ export default function BabyCarrierTypes() {
                 className="bg-cream rounded-xl p-5"
               >
                 <div className="flex items-start gap-3 mb-4">
-                  <span className="text-3xl">{current.icon}</span>
+                  <div className="w-16 h-16 rounded-lg overflow-hidden bg-white flex-shrink-0">
+                    <img 
+                      src={current.image} 
+                      alt={current.name}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        e.target.style.display = 'none'
+                      }}
+                    />
+                  </div>
                   <div>
                     <h4 className="font-serif text-lg text-ink">{current.name}</h4>
                     <p className="text-sm text-inkl">Weight: {current.weight}</p>
@@ -194,7 +195,7 @@ export default function BabyCarrierTypes() {
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <p className="text-xs font-medium text-olive mb-2">✓ Pros</p>
+                    <p className="text-xs font-medium text-olive mb-2">Pros</p>
                     <ul className="space-y-1">
                       {current.pros.slice(0, 3).map((p, i) => (
                         <li key={i} className="text-xs text-inkl">{p}</li>
@@ -202,7 +203,7 @@ export default function BabyCarrierTypes() {
                     </ul>
                   </div>
                   <div>
-                    <p className="text-xs font-medium text-ember mb-2">✗ Cons</p>
+                    <p className="text-xs font-medium text-ember mb-2">Cons</p>
                     <ul className="space-y-1">
                       {current.cons.slice(0, 2).map((c, i) => (
                         <li key={i} className="text-xs text-inkl">{c}</li>
@@ -229,7 +230,7 @@ export default function BabyCarrierTypes() {
               {carrierTypes.map((carrier) => (
                 <tr key={carrier.id} className="border-t border-inkll/10">
                   <td className="p-2">
-                    <p className="font-sans text-xs font-medium text-ink whitespace-nowrap">{carrier.icon} {carrier.name.split(' ')[0]}</p>
+                    <p className="font-sans text-xs font-medium text-ink whitespace-nowrap">{carrier.name.split(' ')[0]}</p>
                   </td>
                   {comparisonFeatures.map((f) => (
                     <td key={f.key} className="text-center p-2">
