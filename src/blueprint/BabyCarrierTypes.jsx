@@ -27,7 +27,6 @@ const carrierTypes = [
       'Tight - snug fit | In view - face visible | Close - kissable | Keep chin off chest | Supported back',
       'Ensure baby\'s hips are in M-position (knees above bottom)',
       'Tighten waist belt first, then shoulder straps',
-      'Add rolled blanket behind baby in first 3 months',
     ],
   },
   {
