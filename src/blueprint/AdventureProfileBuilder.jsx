@@ -11,7 +11,6 @@ const questions = [
       { label: 'Me + toddler(s)', value: { adults: 1, kids: 1, toddler: true }, icon: '👶' },
       { label: 'Me + partner + baby', value: { adults: 2, kids: 1, baby: true }, icon: '👨‍👩‍👧' },
       { label: 'Family with kids (mixed ages)', value: { adults: 2, kids: 3, mixed: true }, icon: '👨‍👩‍👧‍👦' },
-      { label: 'Just me and the little ones', value: { adults: 1, kids: 2, solo: true }, icon: '🦸‍♀️' },
     ],
   },
   {
