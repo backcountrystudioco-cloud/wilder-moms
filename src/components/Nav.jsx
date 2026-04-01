@@ -146,28 +146,28 @@ export default function Nav() {
 
       {/* Mobile Nav Links - Always Visible */}
       <div className="md:hidden border-t border-inkll/20 mt-2">
-        <div className="flex items-center justify-between gap-1 px-1 py-2">
+        <div className="flex items-center justify-between gap-1 px-2 py-2">
           <Link
             to="/habitat"
-            className="flex flex-col items-center gap-0.5 font-sans font-medium text-[10px] text-ink hover:text-ember transition-colors px-1 py-1"
+            className="flex flex-col items-center gap-0.5 font-sans font-medium text-xs text-ink hover:text-ember transition-colors px-2 py-1"
           >
             <span>Habitat</span>
           </Link>
           <Link
             to="/basecamp"
-            className="flex flex-col items-center gap-0.5 font-sans font-medium text-[10px] text-ink hover:text-ember transition-colors px-1 py-1"
+            className="flex flex-col items-center gap-0.5 font-sans font-medium text-xs text-ink hover:text-ember transition-colors px-2 py-1"
           >
             <span>Base</span>
           </Link>
           <Link
             to="/village"
-            className="flex flex-col items-center gap-0.5 font-sans font-medium text-[10px] text-ink hover:text-ember transition-colors px-1 py-1"
+            className="flex flex-col items-center gap-0.5 font-sans font-medium text-xs text-ink hover:text-ember transition-colors px-2 py-1"
           >
             <span>Village</span>
           </Link>
           <Link
             to="/blueprint"
-            className="flex flex-col items-center gap-0.5 font-sans font-medium text-[10px] text-ink hover:text-ember transition-colors px-1 py-1"
+            className="flex flex-col items-center gap-0.5 font-sans font-medium text-xs text-ink hover:text-ember transition-colors px-2 py-1"
           >
             <span>Blueprint</span>
           </Link>
