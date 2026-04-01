@@ -82,7 +82,7 @@ export default function HikeCard({ hike, index = 0, showScore = false }) {
         </div>
         {/* Match Score Badge */}
         {showScore && hike.score > 0 && (
-          <div className={`absolute -top-2 -right-2 px-2 py-1 rounded-full text-xs font-sans font-bold ${getScoreColor(hike.score)}`}>
+          <div className={`mt-2 mr-2 inline-block px-2 py-1 rounded-full text-xs font-sans font-bold ${getScoreColor(hike.score)}`}>
             {hike.score}% match
           </div>
         )}
