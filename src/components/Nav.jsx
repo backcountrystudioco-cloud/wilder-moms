@@ -117,13 +117,12 @@ export default function Nav() {
             </Link>
 
             {/* Landing Page Links */}
-            <a
-              href="#pillars"
-              onClick={(e) => handleNavClick(e, 'pillars')}
+            <Link
+              to="/mission"
               className="font-sans font-medium text-sm uppercase tracking-[0.08em] text-ink hover:text-ember transition-colors"
             >
               Our Mission
-            </a>
+            </Link>
             <a
               href="#waitlist"
               onClick={(e) => handleNavClick(e, 'waitlist')}
