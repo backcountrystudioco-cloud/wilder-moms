@@ -65,8 +65,8 @@ export default function MissionPage() {
         {/* Background Image */}
         <div className="absolute inset-0">
           <img
-            src="/images/mom-hiking.jpg"
-            alt="Mother hiking with baby"
+            src="/images/Mission.png"
+            alt="Wilder Moms"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-ink/60 via-ink/40 to-cream" />
@@ -130,8 +130,8 @@ export default function MissionPage() {
         >
           <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-ember/20">
             <img
-              src="/images/mom-hiking.jpg"
-              alt="Mother and baby in nature"
+              src="/images/Mission.png"
+              alt="Wilder Moms"
               className="w-full h-[400px] md:h-[500px] object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent" />
