@@ -79,7 +79,7 @@ export default function SmartOmissions({ checkedItems, allItems }) {
       >
         <div className={`bg-peach/20 border border-peach/40 rounded-xl p-4 ${showPulse ? 'animate-pulse' : ''}`}>
           <div className="flex items-start gap-3">
-            <span className="text-xl">💡</span>
+            <span className="text-lg font-bold text-peach">Tip</span>
             <div>
               <p className="font-sans text-sm font-medium text-ink mb-2">Smart Suggestion</p>
               <ul className="space-y-1.5">

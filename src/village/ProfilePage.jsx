@@ -14,17 +14,16 @@ const numericAgeGroups = {
 }
 const interestOptions = ['Hiking', 'Crafts', 'Building', 'Nature', 'Animals', 'Water', 'Art', 'Music']
 
-function PreferenceToggle({ enabled, onToggle, trueLabel, falseLabel, icon }) {
+function PreferenceToggle({ enabled, onToggle, trueLabel, falseLabel }) {
   return (
     <button
       onClick={onToggle}
-      className={`px-4 py-2 rounded-full font-sans text-sm font-medium transition-all flex items-center gap-2 ${
+      className={`px-4 py-2 rounded-full font-sans text-sm font-medium transition-all ${
         enabled
           ? 'bg-ember text-white'
           : 'bg-blush/50 text-inkl hover:bg-blush'
       }`}
     >
-      {icon && <span>{icon}</span>}
       {enabled ? trueLabel : falseLabel}
     </button>
   )
@@ -56,11 +55,11 @@ function FamilyProfileCard({ familyName, onFamilyNameChange }) {
 
 function PreferencesCard({ preferences, onTogglePreference }) {
   const preferenceItems = [
-    { key: 'hasStroller', icon: '🚼', trueLabel: 'Stroller needed', falseLabel: 'No stroller' },
-    { key: 'wantsWater', icon: '💧', trueLabel: 'Water features', falseLabel: 'No water needed' },
-    { key: 'wantsViews', icon: '🏔️', trueLabel: 'Scenic views', falseLabel: 'Any trail' },
-    { key: 'wantsDogs', icon: '🐕', trueLabel: 'Dogs welcome', falseLabel: 'No dogs' },
-    { key: 'prefersFreeParking', icon: '🅿️', trueLabel: 'Free parking', falseLabel: 'Paid OK' },
+    { key: 'hasStroller', trueLabel: 'Stroller needed', falseLabel: 'No stroller' },
+    { key: 'wantsWater', trueLabel: 'Water features', falseLabel: 'No water needed' },
+    { key: 'wantsViews', trueLabel: 'Scenic views', falseLabel: 'Any trail' },
+    { key: 'wantsDogs', trueLabel: 'Dogs welcome', falseLabel: 'No dogs' },
+    { key: 'prefersFreeParking', trueLabel: 'Free parking', falseLabel: 'Paid OK' },
   ]
 
   return (
@@ -81,7 +80,6 @@ function PreferencesCard({ preferences, onTogglePreference }) {
             onToggle={() => onTogglePreference(item.key)}
             trueLabel={item.trueLabel}
             falseLabel={item.falseLabel}
-            icon={item.icon}
           />
         ))}
       </div>
@@ -593,7 +591,6 @@ export default function ProfilePage() {
                 className="space-y-6"
               >
                 <div className="bg-white rounded-xl p-8 shadow-sm border border-inkll/10 text-center">
-                  <span className="text-5xl mb-4 block">📋</span>
                   <h3 className="font-serif text-2xl text-ink mb-2">Share Your Feedback</h3>
                   <p className="font-sans text-inkl mb-6 max-w-md mx-auto">
                     Help us improve Wilder Moms! Your feedback shapes what we build next.
@@ -615,18 +612,17 @@ export default function ProfilePage() {
                   <h4 className="font-serif text-lg text-ink mb-3">Quick Feedback</h4>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                     {[
-                      { emoji: '🌲', label: 'More trails' },
-                      { emoji: '🎨', label: 'Better crafts' },
-                      { emoji: '👶', label: 'Baby-friendly' },
-                      { emoji: '🐕', label: 'Dog trails' },
+                      { label: 'More trails' },
+                      { label: 'Better crafts' },
+                      { label: 'Baby-friendly' },
+                      { label: 'Dog trails' },
                     ].map(option => (
                       <button
                         key={option.label}
                         onClick={() => window.open(surveyUrl, '_blank')}
                         className="flex flex-col items-center gap-2 p-4 bg-white rounded-xl hover:bg-cream transition-colors shadow-sm"
                       >
-                        <span className="text-2xl">{option.emoji}</span>
-                        <span className="font-sans text-xs text-ink text-center">{option.label}</span>
+                        <span className="font-sans text-sm text-ink text-center font-medium">{option.label}</span>
                       </button>
                     ))}
                   </div>

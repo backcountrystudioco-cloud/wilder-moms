@@ -147,7 +147,7 @@ export default function BabyCarrierTypes() {
                     onError={(e) => {
                       e.target.style.display = 'none'
                       e.target.parentNode.classList.add('flex', 'items-center', 'justify-center')
-                      e.target.parentNode.innerHTML = `<span class="text-4xl">🎒</span>`
+                      e.target.parentNode.innerHTML = `<span class="text-2xl font-sans text-inkll">Pack</span>`
                     }}
                   />
                 </div>
@@ -231,7 +231,7 @@ export default function BabyCarrierTypes() {
                     <ul className="space-y-1">
                       {current.babywearingTips.map((tip, i) => (
                         <li key={i} className="flex items-start gap-2 text-xs text-inkl">
-                          <span className="text-ember flex-shrink-0">👶</span>
+                          <span className="text-ember flex-shrink-0">*</span>
                           {tip}
                         </li>
                       ))}

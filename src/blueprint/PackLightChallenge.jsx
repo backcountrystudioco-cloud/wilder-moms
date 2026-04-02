@@ -101,7 +101,7 @@ export default function PackLightChallenge({ totalItems, tripType = 'day', onOpt
       >
         <div className="bg-olive/10 border border-olive/30 rounded-xl p-4">
           <div className="text-center mb-4">
-            <span className="text-3xl mb-2 block">🎒</span>
+            <span className="text-2xl mb-2 block font-sans text-olive">Pack</span>
             <p className="font-serif text-lg text-ink">Pack Light Challenge!</p>
             <p className="text-sm text-inkl">
               You're {overBy} item{overBy > 1 ? 's' : ''} over ({totalItems}/{limit}). Can you optimize?

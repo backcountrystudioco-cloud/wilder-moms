@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font-sans, sans-serif); color: var(--color-text-primary); background: transparent; padding-bottom: 40px; }
+
+  .top-nav { display: flex; gap: 8px; padding: 20px 0 0; flex-wrap: wrap; }
+  .build-pill { padding: 8px 18px; border-radius: 24px; font-size: 13px; font-weight: 500; cursor: pointer; border: 1.5px solid var(--color-border-secondary); background: none; color: var(--color-text-secondary); transition: all .18s; font-family: var(--font-sans, sans-serif); }
+  .build-pill.active { color: var(--color-background-primary); border-color: transparent; }
+  .build-pill-1.active { background: #D85A30; }
+  .build-pill-2.active { background: #854F0B; }
+  .build-pill-3.active { background: #1D9E75; }
+  .build-pill-4.active { background: #185FA5; }
+
+  .build-page { display: none; }
+  .build-page.active { display: block; }
+
+  .hero { padding: 24px 0 8px; display: flex; gap: 24px; align-items: flex-start; flex-wrap: wrap; }
+  .hero-text h1 { font-size: 22px; font-weight: 500; margin-bottom: 6px; }
+  .hero-text p { font-size: 14px; color: var(--color-text-secondary); line-height: 1.6; max-width: 420px; }
+  .tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+  .tag { font-size: 12px; padding: 3px 10px; border-radius: 20px; font-weight: 500; }
+  .tag-green { background: #EAF3DE; color: #3B6D11; }
+  .tag-amber { background: #FAEEDA; color: #854F0B; }
+  .tag-teal  { background: #E1F5EE; color: #0F6E56; }
+  .tag-coral { background: #FAECE7; color: #993C1D; }
+  .tag-blue  { background: #E6F1FB; color: #185FA5; }
+  @media (prefers-color-scheme: dark) {
+    .tag-green { background: #27500A; color: #C0DD97; }
+    .tag-amber { background: #633806; color: #FAC775; }
+    .tag-teal  { background: #04342C; color: #9FE1CB; }
+    .tag-coral { background: #4A1B0C; color: #F0997B; }
+    .tag-blue  { background: #042C53; color: #85B7EB; }
+  }
+
+  .tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--color-border-tertiary); margin: 20px 0 0; flex-wrap: wrap; }
+  .tab { padding: 8px 14px; font-size: 13px; cursor: pointer; border-radius: 6px 6px 0 0; color: var(--color-text-secondary); transition: all .15s; border: none; background: none; font-family: var(--font-sans, sans-serif); }
+  .tab.active { color: var(--color-text-primary); background: var(--color-background-secondary); font-weight: 500; }
+
+  .panel { display: none; padding: 20px 0; }
+  .panel.active { display: block; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+  @media (max-width: 500px) { .two-col { grid-template-columns: 1fr; } }
+  .info-card { background: var(--color-background-secondary); border: 1px solid var(--color-border-tertiary); border-radius: 12px; padding: 16px; }
+  .info-card h3 { font-size: 13px; font-weight: 500; margin-bottom: 10px; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: .04em; }
+  .info-card ul { list-style: none; }
+  .info-card li { font-size: 13px; line-height: 1.7; color: var(--color-text-secondary); display: flex; gap: 8px; }
+  .info-card li::before { content: "·"; color: var(--color-text-tertiary); flex-shrink: 0; }
+
+  .eco-banner { border-radius: 12px; padding: 14px 16px; margin-bottom: 20px; font-size: 13px; line-height: 1.6; }
+  .eco-banner strong { font-weight: 500; }
+  .eco-green { background: #EAF3DE; border: 1px solid #C0DD97; color: #3B6D11; }
+  .eco-coral { background: #FAECE7; border: 1px solid #F5C4B3; color: #993C1D; }
+  .eco-blue  { background: #E6F1FB; border: 1px solid #B5D4F4; color: #185FA5; }
+  .eco-amber { background: #FAEEDA; border: 1px solid #FAC775; color: #854F0B; }
+  @media (prefers-color-scheme: dark) {
+    .eco-green { background: #173404; border-color: #3B6D11; color: #C0DD97; }
+    .eco-coral { background: #4A1B0C; border-color: #993C1D; color: #F0997B; }
+    .eco-blue  { background: #042C53; border-color: #185FA5; color: #85B7EB; }
+    .eco-amber { background: #412402; border-color: #854F0B; color: #FAC775; }
+  }
+
+  .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+  @media (max-width: 480px) { .compare-grid { grid-template-columns: 1fr; } }
+  .compare-card { border-radius: 12px; padding: 16px; border: 1px solid var(--color-border-tertiary); background: var(--color-background-secondary); }
+  .compare-card.upgrade { background: #E1F5EE; border-color: #9FE1CB; }
+  @media (prefers-color-scheme: dark) { .compare-card.upgrade { background: #04342C; border-color: #0F6E56; } }
+  .compare-card .clabel { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 10px; display: block; color: var(--color-text-tertiary); }
+  .compare-card.upgrade .clabel { color: #0F6E56; }
+  @media (prefers-color-scheme: dark) { .compare-card.upgrade .clabel { color: #9FE1CB; } }
+  .compare-card h3 { font-size: 13px; font-weight: 500; margin-bottom: 8px; }
+  .compare-card ul { list-style: none; }
+  .compare-card li { font-size: 13px; line-height: 1.7; color: var(--color-text-secondary); display: flex; gap: 8px; }
+  .compare-card li::before { content: "·"; color: var(--color-text-tertiary); flex-shrink: 0; }
+
+  .method-toggle { display: flex; gap: 0; background: var(--color-background-secondary); border: 1px solid var(--color-border-tertiary); border-radius: 10px; padding: 4px; margin-bottom: 16px; width: fit-content; }
+  .method-btn { padding: 7px 16px; font-size: 13px; border: none; background: none; cursor: pointer; border-radius: 7px; color: var(--color-text-secondary); transition: all .15s; font-family: var(--font-sans, sans-serif); }
+  .method-btn.active { background: var(--color-background-primary); color: var(--color-text-primary); font-weight: 500; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+  .method-panel { display: none; }
+  .method-panel.active { display: block; }
+
+  .floor-toggle { display: flex; gap: 0; background: var(--color-background-secondary); border: 1px solid var(--color-border-tertiary); border-radius: 10px; padding: 4px; margin-bottom: 12px; flex-wrap: wrap; width: fit-content; }
+  .floor-btn { padding: 6px 12px; font-size: 12px; border: none; background: none; cursor: pointer; border-radius: 7px; color: var(--color-text-secondary); transition: all .15s; font-family: var(--font-sans, sans-serif); }
+  .floor-btn.active { background: var(--color-background-primary); color: var(--color-text-primary); font-weight: 500; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+  .floor-panel { display: none; }
+  .floor-panel.active { display: block; }
+  .floor-card { border-radius: 10px; padding: 14px 16px; border: 1px solid var(--color-border-tertiary); background: var(--color-background-secondary); margin-bottom: 4px; }
+  .floor-card.eco { background: #EAF3DE; border-color: #C0DD97; }
+  @media (prefers-color-scheme: dark) { .floor-card.eco { background: #173404; border-color: #3B6D11; } }
+  .floor-card .fc-label { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 6px; display: block; color: var(--color-text-tertiary); }
+  .floor-card.eco .fc-label { color: #3B6D11; }
+  @media (prefers-color-scheme: dark) { .floor-card.eco .fc-label { color: #9FE1CB; } }
+  .floor-card h4 { font-size: 14px; font-weight: 500; margin-bottom: 6px; }
+  .floor-card p { font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; }
+
+  .steps-list { display: flex; flex-direction: column; }
+  .step { display: flex; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--color-border-tertiary); }
+  .step:last-child { border-bottom: none; }
+  .step-num { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 500; flex-shrink: 0; margin-top: 2px; }
+  .s-adult { background: #E6F1FB; color: #185FA5; }
+  .s-kid   { background: #EAF3DE; color: #3B6D11; }
+  .s-both  { background: #FAEEDA; color: #854F0B; }
+  @media (prefers-color-scheme: dark) {
+    .s-adult { background: #0C447C; color: #B5D4F4; }
+    .s-kid   { background: #27500A; color: #C0DD97; }
+    .s-both  { background: #633806; color: #FAC775; }
+  }
+  .step-body h4 { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
+  .step-body p { font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; }
+  .kid-badge { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 10px; margin-top: 6px; font-weight: 500; }
+  .kb-green { background: #EAF3DE; color: #3B6D11; }
+  .kb-amber { background: #FAEEDA; color: #854F0B; }
+  @media (prefers-color-scheme: dark) {
+    .kb-green { background: #27500A; color: #C0DD97; }
+    .kb-amber { background: #412402; color: #FAC775; }
+  }
+  .upgrade-note { background: #E1F5EE; border-left: 3px solid #1D9E75; border-radius: 0 10px 10px 0; padding: 10px 14px; margin-top: 8px; font-size: 12px; color: #0F6E56; line-height: 1.5; }
+  @media (prefers-color-scheme: dark) { .upgrade-note { background: #04342C; color: #9FE1CB; } }
+  .upgrade-note strong { font-weight: 500; }
+  .day-label { font-size: 11px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: var(--color-text-tertiary); padding: 20px 0 4px; }
+  .day-label:first-child { padding-top: 4px; }
+
+  .legend { display: flex; gap: 16px; flex-wrap: wrap; margin: 4px 0 20px; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--color-text-secondary); }
+  .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .dot-blue { background: #378ADD; } .dot-green { background: #639922; } .dot-amber { background: #BA7517; }
+
+  .mat-section { margin-bottom: 20px; }
+  .mat-section h3 { font-size: 13px; font-weight: 500; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: .04em; margin-bottom: 10px; }
+  .mat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(185px, 1fr)); gap: 8px; }
+  .mat-item { background: var(--color-background-secondary); border: 1px solid var(--color-border-tertiary); border-radius: 10px; padding: 10px 12px; }
+  .mat-item strong { display: block; font-weight: 500; font-size: 13px; margin-bottom: 2px; }
+  .mat-item span { color: var(--color-text-secondary); font-size: 12px; display: block; }
+  .mat-item .eco { font-size: 11px; color: #3B6D11; font-weight: 500; margin-top: 4px; display: block; }
+  .mat-item.upgrade-item { background: #E1F5EE; border-color: #9FE1CB; }
+  @media (prefers-color-scheme: dark) {
+    .mat-item .eco { color: #C0DD97; }
+    .mat-item.upgrade-item { background: #04342C; border-color: #0F6E56; }
+  }
+  .mat-upgrade-label { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: .05em; color: #0F6E56; margin: 20px 0 8px; }
+  @media (prefers-color-scheme: dark) { .mat-upgrade-label { color: #9FE1CB; } }
+
+  .tip { background: var(--color-background-secondary); border-left: 3px solid #1D9E75; border-radius: 0 10px 10px 0; padding: 12px 16px; margin-bottom: 12px; }
+  .tip strong { font-size: 13px; font-weight: 500; display: block; margin-bottom: 4px; }
+  .tip p { font-size: 13px; color: var(--color-text-secondary); line-height: 1.5; }
+  .end-of-life { background: var(--color-background-secondary); border: 1px solid var(--color-border-tertiary); border-radius: 12px; padding: 16px; margin-top: 8px; }
+  .end-of-life h3 { font-size: 14px; font-weight: 500; margin-bottom: 10px; }
+  .end-of-life p { font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; }
+  .section-note { font-size: 13px; color: var(--color-text-secondary); margin-bottom: 12px; }
+</style>
+</head>
+<body>
+
+<div class="top-nav">
+  <button class="build-pill build-pill-1 active" onclick="switchBuild('shroom',this)">🍄 Mushroom house</button>
+  <button class="build-pill build-pill-2" onclick="switchBuild('arch',this)">🌈 Rainbow arch</button>
+  <button class="build-pill build-pill-3" onclick="switchBuild('nest',this)">🪺 Giant nest</button>
+  <button class="build-pill build-pill-4" onclick="switchBuild('tunnel',this)">🌿 Living tunnel</button>
+</div>
+
+<!-- ===================== BUILD 1: ECO MUSHROOM PLAYHOUSE ===================== -->
+<div class="build-page active" id="page-shroom">
+  <div class="hero">
+    <div>
+      <svg width="110" height="130" viewBox="0 0 110 130" xmlns="http://www.w3.org/2000/svg">
+        <rect x="36" y="72" width="38" height="52" rx="8" fill="#D4B896" stroke="#A07850" stroke-width="1.2"/>
+        <line x1="37" y1="82" x2="73" y2="82" stroke="#A07850" stroke-width="1" opacity="0.5"/>
+        <line x1="37" y1="90" x2="73" y2="90" stroke="#A07850" stroke-width="1" opacity="0.5"/>
+        <line x1="37" y1="98" x2="73" y2="98" stroke="#A07850" stroke-width="1" opacity="0.5"/>
+        <line x1="37" y1="106" x2="73" y2="106" stroke="#A07850" stroke-width="1" opacity="0.5"/>
+        <line x1="37" y1="114" x2="73" y2="114" stroke="#A07850" stroke-width="1" opacity="0.5"/>
+        <rect x="46" y="95" width="18" height="29" rx="5" fill="#C9A87A" stroke="#A07850" stroke-width="1"/>
+        <ellipse cx="55" cy="76" rx="48" ry="10" fill="#C04828" opacity="0.18"/>
+        <path d="M7,72 Q7,20 55,15 Q103,20 103,72 Z" fill="#D85A30"/>
+        <path d="M7,72 Q7,20 55,15 Q103,20 103,72 Z" fill="none" stroke="#A83818" stroke-width="1"/>
+        <ellipse cx="55" cy="72" rx="48" ry="10" fill="#EFCFB8"/>
+        <ellipse cx="55" cy="72" rx="48" ry="10" fill="none" stroke="#C9A87A" stroke-width="1"/>
+        <ellipse cx="55" cy="38" rx="9" ry="8" fill="white" opacity="0.9"/>
+        <ellipse cx="30" cy="56" rx="7" ry="6" fill="white" opacity="0.85"/>
+        <ellipse cx="80" cy="52" rx="7" ry="6" fill="white" opacity="0.85"/>
+        <ellipse cx="42" cy="34" rx="5" ry="4.5" fill="white" opacity="0.7"/>
+        <ellipse cx="72" cy="36" rx="5" ry="4.5" fill="white" opacity="0.7"/>
+        <rect x="46" y="78" width="18" height="14" rx="4" fill="#A5CBEA" stroke="#7AAAC9" stroke-width="0.8"/>
+        <line x1="55" y1="78" x2="55" y2="92" stroke="#7AAAC9" stroke-width="0.8"/>
+        <line x1="46" y1="85" x2="64" y2="85" stroke="#7AAAC9" stroke-width="0.8"/>
+      </svg>
+    </div>
+    <div class="hero-text">
+      <h1>Eco mushroom playhouse</h1>
+      <p>Fully compostable at end of life. Every component has options — choose what you can get hold of most easily. Floor, cap skin, and hoop frame all have alternatives listed. Big enough for two kids, simple enough for one weekend.</p>
+      <div class="tags">
+        <span class="tag tag-green">Fully compostable</span>
+        <span class="tag tag-amber">~$50–70</span>
+        <span class="tag tag-teal">One weekend</span>
+        <span class="tag tag-blue">Ages 3+</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" onclick="showPanel('shroom','overview',this)">Overview</button>
+    <button class="tab" onclick="showPanel('shroom','steps',this)">Build steps</button>
+    <button class="tab" onclick="showPanel('shroom','materials',this)">Materials</button>
+    <button class="tab" onclick="showPanel('shroom','tips',this)">Tips & tricks</button>
+  </div>
+
+  <div id="shroom-overview" class="panel active">
+    <div class="eco-banner eco-amber">
+      <strong>Every single component composts.</strong> When the playhouse has had its day, pull it apart — stakes, rope, hessian, paper, canvas, and wood all break down naturally. The only things to keep and reuse are the strap hinges on the door.
+    </div>
+    <div class="two-col">
+      <div class="info-card">
+        <h3>Dimensions</h3>
+        <ul>
+          <li>Cap diameter: ~5 ft</li>
+          <li>Stem height: ~3½ ft</li>
+          <li>Door opening: 2 ft wide × 2½ ft tall</li>
+          <li>Floor: ~4 ft across</li>
+          <li>Interior: 2 kids comfortable</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h3>Weekend schedule</h3>
+        <ul>
+          <li>Saturday AM — floor + stake frame</li>
+          <li>Saturday PM — rope stem + cap frame</li>
+          <li>Saturday eve — cap skin layer 1</li>
+          <li>Sunday AM — layer 2 + spots + paint</li>
+          <li>Sunday PM — linseed oil seal + decorate</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h3>Key choices to make</h3>
+        <ul>
+          <li>Floor: pallets, cedar decking, plywood, or OSB</li>
+          <li>Cap hoops: screen moulding, garden edging, or bamboo stakes</li>
+          <li>Cap skin: papier-mâché (standard) or canvas (weatherproof)</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h3>Kid jobs</h3>
+        <ul>
+          <li>Wind jute rope around the stem</li>
+          <li>Cook and mix the flour paste</li>
+          <li>Tear paper and slap on layers</li>
+          <li>Paint the cap red with chalk paint</li>
+          <li>Place and arrange the spots</li>
+          <li>Decorate the door their way</li>
+        </ul>
+      </div>
+    </div>
+    <p class="section-note">Cap skin options — both natural and compostable:</p>
+    <div class="compare-grid">
+      <div class="compare-card">
+        <span class="clabel">Standard</span>
+        <h3>Flour-paste papier-mâché</h3>
+        <ul>
+          <li>Brown paper + flour paste + linseed oil seal</li>
+          <li>3–4 summers in mild climates</li>
+          <li>1–2 summers in very wet climates</li>
+          <li>Kids do almost all of it themselves</li>
+          <li>Needs annual linseed oil top-up</li>
+        </ul>
+      </div>
+      <div class="compare-card upgrade">
+        <span class="clabel">Weatherproof upgrade</span>
+        <h3>Canvas + linseed oil</h3>
+        <ul>
+          <li>Canvas stretched over frame, soaked in linseed oil</li>
+          <li>5–7 summers in most climates</li>
+          <li>Handles heavy rain well</li>
+          <li>More adult work to stretch and staple</li>
+          <li>Needs recoating every 2–3 years</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div id="shroom-steps" class="panel">
+    <div class="legend">
+      <div class="legend-item"><div class="dot dot-blue"></div> Adult step</div>
+      <div class="legend-item"><div class="dot dot-green"></div> Kid step</div>
+      <div class="legend-item"><div class="dot dot-amber"></div> Do together</div>
+    </div>
+    <div class="steps-list">
+      <div class="day-label">Saturday morning — floor and frame</div>
+
+      <div class="step">
+        <div class="step-num s-adult">1</div>
+        <div class="step-body">
+          <h4>Build the floor</h4>
+          <p style="margin-bottom:10px">Choose the option that works best for you, then raise the finished floor 2–3 in off the ground on four flat stones — this is the single most important thing you can do for longevity.</p>
+          <div class="floor-toggle">
+            <button class="floor-btn active" onclick="switchFloor('shroom','pallets',this)">Pallets</button>
+            <button class="floor-btn" onclick="switchFloor('shroom','cedar',this)">Cedar decking</button>
+            <button class="floor-btn" onclick="switchFloor('shroom','plywood',this)">Plywood</button>
+            <button class="floor-btn" onclick="switchFloor('shroom','osb',this)">OSB</button>
+          </div>
+          <div id="shroom-floor-pallets" class="floor-panel active">
+            <div class="floor-card eco"><span class="fc-label">Most eco — free if you can find them</span><h4>Reclaimed wooden pallets</h4><p>Break down 2–3 pallets and lay boards side by side to form a ~4 ft circle. Screw cross-battens underneath. Check Facebook Marketplace, Craigslist, local garden centres, nurseries, or liquor stores — most give them away free.</p></div>
+          </div>
+          <div id="shroom-floor-cedar" class="floor-panel">
+            <div class="floor-card eco"><span class="fc-label">Best bought option — naturally rot-resistant</span><h4>Cedar decking boards</h4><p>Buy cedar decking boards by the linear foot from Home Depot. Lay side by side to form a ~4 ft circle and screw cross-battens underneath. Naturally rot-resistant and fully compostable. Costs around $20–25.</p></div>
+          </div>
+          <div id="shroom-floor-plywood" class="floor-panel">
+            <div class="floor-card"><span class="fc-label">Simplest single-piece option</span><h4>Plywood sheet</h4><p>Buy one sheet of ¾ in plywood (4×8 ft) and ask Home Depot to cut it into a rough circle in store. Costs around $30–40.</p></div>
+          </div>
+          <div id="shroom-floor-osb" class="floor-panel">
+            <div class="floor-card"><span class="fc-label">Cheapest option</span><h4>OSB (oriented strand board)</h4><p>One sheet of ¾ in OSB cut to a circle works perfectly. About half the price of plywood at around $15–20. Seal the top surface with linseed oil to slow moisture absorption.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num s-adult">2</div>
+        <div class="step-body">
+          <h4>Plant the upright stakes</h4>
+          <p>Buy 8–10 thick wooden garden stakes (6 ft tall, 1½ in thick) from any hardware or garden shop. Or cut straight branches from a hazel or elder hedge. Drill holes around the floor perimeter and push stakes in about 8 in, screwing through a batten underneath to anchor them. Leave a 2 ft gap on one side for the door.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num s-adult">3</div>
+        <div class="step-body">
+          <h4>Lash a top ring to the stakes</h4>
+          <p>Bend a long thin branch or soaked screen moulding strip into a circle at the top of the stakes, about 3½ ft from the ground. Lash it to each stake with jute twine — this ties all the uprights together and defines the stem shape.</p>
+        </div>
+      </div>
+
+      <div class="day-label">Saturday afternoon — stem walls and cap frame</div>
+
+      <div class="step">
+        <div class="step-num s-both">4</div>
+        <div class="step-body">
+          <h4>Coil jute rope around the stem</h4>
+          <p>Starting at the base, wrap thick jute rope tightly around all the stakes going round and round upward like a coil pot. Dab wood glue or thick flour paste between each coil to bond them. Leave the 2 ft door gap open as you go.</p>
+          <span class="kid-badge kb-green">Kids wind the rope round and round</span>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num s-adult">5</div>
+        <div class="step-body">
+          <h4>Make and hang the door</h4>
+          <p>Cut a door panel from reclaimed pallet boards or offcuts — a simple arched shape, slightly smaller than the 2 ft wide × 2½ ft tall gap. Screw a wooden batten vertically to one edge of the gap as the door post. Fix the door with two strap hinges. Add a jute rope loop through a drilled hole as the handle. The door swings outward.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num s-adult">6</div>
+        <div class="step-body">
+          <h4>Build the cap hoop frame</h4>
+          <p>Soak 4 screen moulding strips (or thin bamboo garden stakes, or wood garden edging strips) in warm water for 20–30 minutes. Bend two into hoops ~3–3½ ft diameter and lash ends with jute twine. Stand these upright at 90° to each other, cross at the top, lash firmly. Push the bottoms out to ~5 ft and lash to the stem's top ring. Add a third hoop horizontally around the middle. Push the top point as high as possible — aim for at least 2 ft above the brim for good rain runoff.</p>
+        </div>
+      </div>
+
+      <div class="day-label">Saturday afternoon — cap skin (choose your method)</div>
+
+      <div class="method-toggle">
+        <button class="method-btn active" onclick="switchMethod('shroom','standard',this)">Standard</button>
+        <button class="method-btn" onclick="switchMethod('shroom','upgraded',this)">Weatherproof upgrade</button>
+      </div>
+
+      <div id="shroom-method-standard" class="method-panel active">
+        <div class="step">
+          <div class="step-num s-both">7a</div>
+          <div class="step-body">
+            <h4>Drape hessian over the cap frame</h4>
+            <p>Drape hessian sacking over the dome, cutting darts so it lies smooth. Tie to the top ring with jute twine. Kids can hold the fabric in place while you tie it off.</p>
+            <span class="kid-badge kb-amber">Kids hold and smooth the hessian</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num s-kid">8a</div>
+          <div class="step-body">
+            <h4>Cook the flour paste</h4>
+            <p>Mix 1 cup plain flour into 3 cups cold water until smooth, then heat gently stirring constantly until it thickens. Add a pinch of salt to deter mould. Leave to cool.</p>
+            <span class="kid-badge kb-green">Kids stir the paste on the hob with supervision</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num s-kid">9a</div>
+          <div class="step-body">
+            <h4>Papier-mâché layers 1 and 2</h4>
+            <p>Tear brown paper bags, egg cartons, or cardboard packaging into palm-sized pieces. Dip in flour paste, squeeze off excess, and lay overlapping all over the hessian cap. Do two full layers, leaving overnight between them if possible.</p>
+            <span class="kid-badge kb-green">Total kid takeover — messy and wonderful</span>
+          </div>
+        </div>
+      </div>
+
+      <div id="shroom-method-upgraded" class="method-panel">
+        <div class="step">
+          <div class="step-num s-adult">7b</div>
+          <div class="step-body">
+            <h4>Stretch canvas over the cap frame</h4>
+            <p>Cut heavy canvas or drop cloth to cover the 5 ft dome — allow an extra 6 in all around. Drape over the frame, pull taut, cut darts so it lies smooth. Staple or lash edges to the stem's top ring with jute twine. Should be drum-taut.</p>
+            <div class="upgrade-note"><strong>Why this works better:</strong> Canvas soaked in linseed oil forms a near-solid skin — the same material as traditional oilcloth. Rain beads and runs off immediately rather than soaking in.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num s-both">8b</div>
+          <div class="step-body">
+            <h4>Soak canvas in raw linseed oil</h4>
+            <p>Brush raw linseed oil over the entire canvas until saturated and dark. Leave 4–6 hours in sun. Apply a second coat once touch-dry. Canvas stiffens as it cures.</p>
+            <span class="kid-badge kb-amber">Kids brush on the oil with wide brushes</span>
+            <div class="upgrade-note"><strong>Safety:</strong> Lay linseed-soaked rags flat outdoors to dry — never pile them. They can self-combust.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num s-both">9b</div>
+          <div class="step-body">
+            <h4>Wrap the stem in linseed-soaked burlap</h4>
+            <p>Cut hessian into 3–4 in wide strips. Dip each in raw linseed oil and wrap tightly around the rope coil stem, overlapping each layer. Gives the stem a hard water-resistant shell. Leave to cure overnight.</p>
+            <span class="kid-badge kb-amber">Kids dip and hand strips up to wrap</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="day-label">Sunday morning — spots and paint</div>
+
+      <div class="step">
+        <div class="step-num s-both">10</div>
+        <div class="step-body">
+          <h4>Make the white spots</h4>
+          <p>Scrunch brown paper into tight balls ranging from golf-ball size to about 4 in across. Cover each in 2–3 layers of flour-paste papier-mâché and leave to dry hard and rigid. Glue onto the cap with thick flour paste or wood glue. Kids choose where every spot goes.</p>
+          <span class="kid-badge kb-amber">Kids choose all the spot positions</span>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num s-kid">11</div>
+        <div class="step-body">
+          <h4>Paint with natural chalk or clay paint</h4>
+          <p>Mix red ochre pigment powder into chalk paint for the cap. Use white chalk paint for the stem and spots. Two coats each. Once dry, brush a final coat of linseed oil over everything to lock the colour in and boost water resistance.</p>
+          <span class="kid-badge kb-green">Big brushes, big paint, big fun</span>
+        </div>
+      </div>
+
+      <div class="day-label">Sunday afternoon — finishing</div>
+
+      <div class="step">
+        <div class="step-num s-kid">12</div>
+        <div class="step-body">
+          <h4>Decorate and move in</h4>
+          <p>Paint the door, press dried flowers into the last paste layer, add a hand-painted name sign, hang a wind chime from the cap rim. Add a rug from an old blanket and string up battery fairy lights. It's theirs now.</p>
+          <span class="kid-badge kb-green">Completely their creative call</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="shroom-materials" class="panel">
+    <div class="mat-section">
+      <h3>Structure</h3>
+      <div class="mat-grid">
+        <div class="mat-item"><strong>Floor (choose one)</strong><span>Reclaimed pallets (free) · Cedar decking (~$20) · ¾ in plywood (~$35) · ¾ in OSB (~$18)</span><span class="eco">Cedar and pallets most eco</span></div>
+        <div class="mat-item"><strong>8–10 wooden garden stakes</strong><span>6 ft tall, 1½ in thick</span><span class="eco">Natural + compostable</span></div>
+        <div class="mat-item"><strong>Cap hoops (choose one)</strong><span>Screen moulding strips · Wood garden edging · Thin bamboo stakes — all from Home Depot</span><span class="eco">All compostable</span></div>
+        <div class="mat-item"><strong>1 large reel jute rope</strong><span>Thick natural jute for stem coiling</span><span class="eco">Fully compostable</span></div>
+        <div class="mat-item"><strong>Jute twine</strong><span>Lashing stakes, hoops, tying fabric</span><span class="eco">Fully compostable</span></div>
+        <div class="mat-item"><strong>2× strap hinges</strong><span>For the door — keep and reuse at end of life</span></div>
+      </div>
+    </div>
+    <div class="mat-section">
+      <h3>Standard cap skin</h3>
+      <div class="mat-grid">
+        <div class="mat-item"><strong>Hessian sacking (2–3 pieces)</strong><span>Cap dome underlay</span><span class="eco">Natural + compostable</span></div>
+        <div class="mat-item"><strong>Brown paper bags + cardboard</strong><span>Packaging, egg cartons, cereal boxes</span><span class="eco">Recycled waste</span></div>
+        <div class="mat-item"><strong>Plain flour (4–5 cups)</strong><span>For the paste</span><span class="eco">Fully compostable</span></div>
+        <div class="mat-item"><strong>Salt</strong><span>Pinch in paste to prevent mould</span></div>
+      </div>
+    </div>
+    <p class="mat-upgrade-label">Weatherproof upgrade — replaces standard cap skin above</p>
+    <div class="mat-section">
+      <div class="mat-grid">
+        <div class="mat-item upgrade-item"><strong>Heavy canvas or drop cloth</strong><span>At least 6 ft × 6 ft — hardware shops</span><span class="eco">Natural + compostable</span></div>
+        <div class="mat-item upgrade-item"><strong>Hessian or burlap strips</strong><span>3–4 in wide strips for stem wrap</span><span class="eco">Natural + compostable</span></div>
+        <div class="mat-item upgrade-item"><strong>Extra raw linseed oil (32 oz)</strong><span>Need more to fully saturate canvas</span><span class="eco">Fully natural</span></div>
+      </div>
+    </div>
+    <div class="mat-section">
+      <h3>Paint and waterproofing (both methods)</h3>
+      <div class="mat-grid">
+        <div class="mat-item"><strong>Raw linseed oil (16 oz min)</strong><span>Main waterproofing sealant</span><span class="eco">Fully natural</span></div>
+        <div class="mat-item"><strong>Red ochre pigment powder</strong><span>Cap colour — art or hardware shops</span><span class="eco">Natural mineral pigment</span></div>
+        <div class="mat-item"><strong>White chalk paint (1 quart)</strong><span>Stem and spots</span></div>
+        <div class="mat-item"><strong>Beeswax (optional)</strong><span>Mixed with linseed for harder cap finish</span><span class="eco">Fully natural</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="shroom-tips" class="panel">
+    <div class="tip"><strong>Steep dome = dry interior</strong><p>Make the cap as tall and pointy as possible. Aim for at least 2 ft of height above the brim ring. A steep dome sheds rain in seconds — a shallow one pools water regardless of which skin method you use.</p></div>
+    <div class="tip"><strong>Raise the floor off the ground</strong><p>Even just 2–3 in on flat stones keeps the base dry and can add years to the structure's life. This matters most for OSB and plywood — cedar and pallets are more forgiving but still benefit.</p></div>
+    <div class="tip"><strong>Linseed-oil-soaked rags can self-combust</strong><p>Never bunch up linseed-soaked rags — lay them flat outdoors to dry completely before disposing. Keep children away. This is a genuine fire risk worth taking seriously.</p></div>
+    <div class="tip"><strong>Flour paste keeps 3 days in the fridge</strong><p>Make a big batch Saturday morning and keep it covered. Still good Sunday for the second layer and the spots.</p></div>
+    <div class="tip"><strong>One linseed oil coat each spring</strong><p>Takes 20 minutes and keeps the structure going indefinitely. Kids can brush it on themselves. In winter, throw an old canvas tarpaulin loosely over the top.</p></div>
+    <div class="end-of-life">
+      <h3>End of life — what to do with it</h3>
+      <p>Remove and keep the strap hinges for reuse. Stakes, rope, hessian, and jute twine all go on the compost. Flour-paste papier-mâché dissolves in rain or breaks down in weeks. Canvas soaked in linseed oil biodegrades naturally. Cedar boards and pallet wood can be burned or composted. Plywood and OSB are best repurposed — donate or reuse as shelving or garden bed sides rather than composting due to their adhesive binders.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== BUILD 2: RAINBOW ARCH ===================== -->
+<div class="build-page" id="page-arch">
+  <div class="hero">
+    <div>
+      <svg width="100" height="120" viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8,100 Q8,20 50,15 Q92,20 92,100" fill="none" stroke="#E24B4A" stroke-width="7" stroke-linecap="round"/>
+        <path d="M16,100 Q16,28 50,22 Q84,28 84,100" fill="none" stroke="#EF9F27" stroke-width="7" stroke-linecap="round"/>
+        <path d="M24,100 Q24,36 50,30 Q76,36 76,100" fill="none" stroke="#97C459" stroke-width="7" stroke-linecap="round"/>
+        <path d="M32,100 Q32,44 50,38 Q68,44 68,100" fill="none" stroke="#378ADD" stroke-width="7" stroke-linecap="round"/>
+        <path d="M40,100 Q40,52 50,46 Q60,52 60,100" fill="none" stroke="#7F77DD" stroke-width="7" stroke-linecap="round"/>
+        <ellipse cx="20" cy="100" rx="6" ry="8" fill="#3B6D11" opacity="0.5"/>
+        <ellipse cx="80" cy="100" rx="6" ry="8" fill="#3B6D11" opacity="0.5"/>
+        <circle cx="28" cy="108" r="3" fill="#E24B4A" opacity="0.6"/>
+        <circle cx="50" cy="112" r="3" fill="#EF9F27" opacity="0.6"/>
+        <circle cx="72" cy="108" r="3" fill="#97C459" opacity="0.6"/>
+      </svg>
+    </div>
+    <div class="hero-text">
+      <h1>Giant rainbow arch</h1>
+      <p>Six giant arches planted in a curve, each painted a different rainbow colour. Kids run through them, wildflowers bloom at the base all summer, and at night fairy lights make the whole yard glow in six colours. Visible from the end of the street.</p>
+      <div class="tags">
+        <span class="tag tag-coral">~8 ft tall</span>
+        <span class="tag tag-green">Fully compostable</span>
+        <span class="tag tag-amber">~$40–55</span>
+        <span class="tag tag-teal">4–5 hours total</span>
+        <span class="tag tag-blue">Ages 2+</span>
+      </div>
+    </div>
+  </div>
+  <div class="tabs">
+    <button class="tab active" onclick="showPanel('arch','overview',this)">Overview</button>
+    <button class="tab" onclick="showPanel('arch','steps',this)">Build steps</button>
+    <button class="tab" onclick="showPanel('arch','materials',this)">Materials</button>
+    <button class="tab" onclick="showPanel('arch','tips',this)">Tips & tricks</button>
+  </div>
+  <div id="arch-overview" class="panel active">
+    <div class="eco-banner eco-coral"><strong>Why the whole street will stop and stare.</strong> A real rainbow landing in your yard. Each arch is just one long flexible stake bent into a U with both ends hammered in — that is the entire structural technique. Kids paint, plant, and string lights. Done in an afternoon.</div>
+    <div class="two-col">
+      <div class="info-card"><h3>Dimensions</h3><ul><li>Each arch: ~8 ft tall, ~5 ft wide</li><li>6 arches in a gentle curve</li><li>Total span: ~15 ft across the yard</li><li>Stakes pushed 12 in into ground</li><li>Wildflower border: 18 in wide at base</li></ul></div>
+      <div class="info-card"><h3>Weekend schedule</h3><ul><li>Saturday AM — mark curve and plant arches (1 hr)</li><li>Saturday PM — kids paint each arch (2 hrs)</li><li>Saturday eve — string fairy lights (30 min)</li><li>Sunday AM — scatter wildflower seeds (30 min)</li><li>Sunday PM — done, stand back and admire</li></ul></div>
+      <div class="info-card"><h3>Kid jobs</h3><ul><li>Each kid claims and paints their own arch</li><li>Wrap fairy lights around each arch</li><li>Scatter wildflower seeds at the base</li><li>Water the seeds in</li><li>Decorate the ground between arches</li></ul></div>
+      <div class="info-card"><h3>The seasonal magic</h3><ul><li>Build weekend: rainbow arch complete</li><li>Week 2–3: first wildflower shoots appear</li><li>Week 6–8: wildflowers in full bloom at base</li><li>All summer: glows with fairy lights at night</li><li>Annual refresh: one linseed oil coat each spring</li></ul></div>
+    </div>
+  </div>
+  <div id="arch-steps" class="panel">
+    <div class="legend"><div class="legend-item"><div class="dot dot-blue"></div> Adult step</div><div class="legend-item"><div class="dot dot-green"></div> Kid step</div><div class="legend-item"><div class="dot dot-amber"></div> Do together</div></div>
+    <div class="steps-list">
+      <div class="day-label">Saturday morning — planting the arches</div>
+      <div class="step"><div class="step-num s-adult">1</div><div class="step-body"><h4>Mark the rainbow curve</h4><p>Lay a garden hose or string across your yard in a gentle curve. Space 6 marks along it roughly 2½ ft apart — each is the centre point between the two feet of one arch. A slight curve looks more natural and dramatic than a straight row.</p></div></div>
+      <div class="step"><div class="step-num s-adult">2</div><div class="step-body"><h4>Prepare your arch material</h4><p>You need 6 pieces of flexible material, each at least 10–12 ft long. Screen moulding strips (¼ in × ¾ in pine, 8 ft lengths from Home Depot lumber aisle, ~$2 each — buy two and overlap for a 14 ft length) work best. Soak in warm water for 20–30 minutes before bending.</p><div class="upgrade-note"><strong>Double-up for strength:</strong> Use two strips side by side lashed with jute twine per arch leg. Lasts two to three seasons rather than one.</div></div></div>
+      <div class="step"><div class="step-num s-adult">3</div><div class="step-body"><h4>Plant all six arches</h4><p>For each arch: push one end 12 in into the ground at your marked spot. Walk the strip over in a curve and push the other end 12 in into the ground about 5 ft away. It bends naturally into a perfect arch. If loose, push a second stake alongside the first leg. Repeat for all six.</p></div></div>
+      <div class="day-label">Saturday afternoon — painting</div>
+      <div class="step"><div class="step-num s-kid">4</div><div class="step-body"><h4>Each kid paints their own arch</h4><p>Assign one arch per child: red, orange, yellow, green, blue, violet. Mix red ochre pigment into chalk paint for warm colours. Two coats each from the ground up. The messier the brush strokes the better — it's a handmade rainbow.</p><span class="kid-badge kb-green">Each kid fully owns their arch — no adult intervention needed</span></div></div>
+      <div class="step"><div class="step-num s-both">5</div><div class="step-body"><h4>Seal with linseed oil</h4><p>Once paint is dry, brush raw linseed oil over each arch. This locks the colour in and waterproofs the wood — chalk paint alone washes off in the first rain. Kids brush the lower sections while you do the tops.</p><span class="kid-badge kb-amber">Kids brush the lower halves</span><div class="upgrade-note"><strong>Safety:</strong> Lay linseed-soaked rags flat to dry outdoors — never bundle them.</div></div></div>
+      <div class="day-label">Saturday evening — fairy lights</div>
+      <div class="step"><div class="step-num s-both">6</div><div class="step-body"><h4>String the fairy lights</h4><p>Wrap battery fairy lights around each arch — start at one foot, spiral up to the apex, back down to the other foot. Tuck the battery pack into the ground beside the stake foot. Switch all six on together at dusk for the first time as a family. This moment will be remembered.</p><span class="kid-badge kb-amber">Kids wrap the lights — they are brilliant at this</span></div></div>
+      <div class="day-label">Sunday — seeds and finishing</div>
+      <div class="step"><div class="step-num s-kid">7</div><div class="step-body"><h4>Scatter wildflower seeds at the base</h4><p>Scratch the soil lightly along the base of all arches with a trowel. Kids scatter a wildflower seed mix generously — poppies, cornflowers, oxeye daisies, and marigolds. Water in well. By week six the arches will be rising out of a carpet of colour.</p><span class="kid-badge kb-green">Kids scatter and water all the seeds</span></div></div>
+      <div class="step"><div class="step-num s-kid">8</div><div class="step-body"><h4>Decorate the spaces between arches</h4><p>Place flat stepping stones between each arch pair to make a path through the rainbow. Kids can paint stones in matching colours. Add wind chimes, hessian bunting, or small painted signs. Make it a whole world.</p><span class="kid-badge kb-green">Complete kid creative control</span></div></div>
+    </div>
+  </div>
+  <div id="arch-materials" class="panel">
+    <div class="mat-section"><h3>Structure</h3><div class="mat-grid"><div class="mat-item"><strong>Screen moulding strips (×12)</strong><span>¼ in × ¾ in × 8 ft pine — Home Depot lumber, ~$2 each. Use 2 per arch overlapped.</span><span class="eco">Natural wood — compostable</span></div><div class="mat-item"><strong>Or: wood garden edging strips (×6)</strong><span>Flexible hardboard from garden section, ~$6–8 a pack. One per arch.</span><span class="eco">Natural — compostable</span></div><div class="mat-item"><strong>Jute twine</strong><span>Lashing double-strip arch legs together</span><span class="eco">Fully compostable</span></div></div></div>
+    <div class="mat-section"><h3>Paint and finish</h3><div class="mat-grid"><div class="mat-item"><strong>Chalk paint — 6 colours</strong><span>Small sample pots (2–4 oz) work perfectly. Red, orange, yellow, green, blue, violet.</span></div><div class="mat-item"><strong>Red ochre + yellow ochre pigment</strong><span>Mix into chalk paint to deepen warm colours.</span><span class="eco">Natural mineral pigment</span></div><div class="mat-item"><strong>Raw linseed oil (16 oz)</strong><span>Sealant coat over all painted arches.</span><span class="eco">Fully natural</span></div></div></div>
+    <div class="mat-section"><h3>Planting and decoration</h3><div class="mat-grid"><div class="mat-item"><strong>Wildflower seed mix</strong><span>Scatter at the base. Poppies, cornflowers, marigolds, oxeye daisies.</span><span class="eco">Fully natural</span></div><div class="mat-item"><strong>6 sets battery fairy lights</strong><span>One per arch — coloured for drama, warm white for elegance.</span></div><div class="mat-item"><strong>Flat stones (optional)</strong><span>Path between arches — forage free or cheap from hardware store.</span><span class="eco">Natural</span></div></div></div>
+  </div>
+  <div id="arch-tips" class="panel">
+    <div class="tip"><strong>Double up the arch strips for longevity</strong><p>A single screen moulding strip lasts one summer. Two strips lashed side by side lasts two to three seasons and feels much more solid in wind. The extra $2 per arch is absolutely worth it.</p></div>
+    <div class="tip"><strong>Push the feet in deep — 12 in minimum</strong><p>The most common failure point is arches pulling out of the ground in wind. If soil is soft, push two stakes side by side for each foot, or tie a short cross-stake horizontally just below ground level to anchor it like a tent peg.</p></div>
+    <div class="tip"><strong>Wildflower seeds need scratched soil to germinate</strong><p>Don't scatter on top of existing grass or hard ground — scratch the surface first with a fork to expose bare soil. This one step triples germination success. Water every day for the first two weeks.</p></div>
+    <div class="tip"><strong>Solar fairy lights mean zero effort all summer</strong><p>Replace battery lights with solar-powered ones on a stake at the base of each arch. They charge during the day and switch on automatically at dusk — no effort all summer long.</p></div>
+    <div class="tip"><strong>One linseed oil coat each spring takes 10 minutes</strong><p>The chalk paint fades gracefully over winter which looks beautiful — chalky and weathered. A fresh linseed coat revives the colours and adds another full season of life.</p></div>
+    <div class="end-of-life"><h3>End of life — what to do with it</h3><p>Pull the arch stakes and chop into short sections for the compost heap or bonfire. Jute twine composts completely. Wildflowers will self-seed for next year — let them. Remove battery packs and lights, store for the next project. The whole structure comes down in under 20 minutes and leaves nothing behind but a patch of self-seeding wildflowers.</p></div>
+  </div>
+</div>
+
+<!-- ===================== BUILD 3: GIANT NEST ===================== -->
+<div class="build-page" id="page-nest">
+  <div class="hero">
+    <div>
+      <svg width="100" height="110" viewBox="0 0 100 110" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="50" cy="80" rx="44" ry="22" fill="#C9A87A" opacity="0.3"/>
+        <path d="M10,80 Q10,45 50,42 Q90,45 90,80 Q90,100 50,102 Q10,100 10,80Z" fill="none" stroke="#A07850" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M15,72 Q25,55 40,58 Q55,50 70,56 Q82,52 88,65" fill="none" stroke="#C9A87A" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M12,82 Q22,70 35,72 Q48,65 62,70 Q75,64 90,74" fill="none" stroke="#A07850" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/>
+        <ellipse cx="50" cy="70" rx="16" ry="10" fill="white" opacity="0.9" stroke="#D3D1C7" stroke-width="1"/>
+        <ellipse cx="44" cy="68" rx="5" ry="4" fill="white" opacity="0.8" stroke="#D3D1C7" stroke-width="0.8"/>
+        <ellipse cx="56" cy="67" rx="4" ry="3.5" fill="white" opacity="0.8" stroke="#D3D1C7" stroke-width="0.8"/>
+      </svg>
+    </div>
+    <div class="hero-text">
+      <h1>Giant nest</h1>
+      <p>A 6 ft wide woven bird's nest built from foraged branches and rope — big enough for three kids to sit inside. Line it with hessian and cushions, add a giant papier-mâché egg, and it becomes the most photographed thing in the neighbourhood. No tools required at all.</p>
+      <div class="tags">
+        <span class="tag tag-teal">6 ft across</span>
+        <span class="tag tag-green">Fully compostable</span>
+        <span class="tag tag-amber">~$25–40</span>
+        <span class="tag tag-teal">One afternoon</span>
+        <span class="tag tag-blue">Ages 2+</span>
+      </div>
+    </div>
+  </div>
+  <div class="tabs">
+    <button class="tab active" onclick="showPanel('nest','overview',this)">Overview</button>
+    <button class="tab" onclick="showPanel('nest','steps',this)">Build steps</button>
+    <button class="tab" onclick="showPanel('nest','materials',this)">Materials</button>
+    <button class="tab" onclick="showPanel('nest','tips',this)">Tips & tricks</button>
+  </div>
+  <div id="nest-overview" class="panel active">
+    <div class="eco-banner eco-green"><strong>The most compostable build on this list.</strong> A giant woven bowl built from sticks, rope, and branches — most gathered for free. No cuts, no drills, no measurements. Zero tools required. Kids do 90% of this entirely by themselves.</div>
+    <div class="two-col">
+      <div class="info-card"><h3>Dimensions</h3><ul><li>Outer diameter: ~6 ft across</li><li>Walls: ~18–20 in high</li><li>Interior: comfortably fits 3 kids sitting</li><li>Frame: 8 wooden stakes in a circle</li><li>Giant egg (optional): ~20 in long</li></ul></div>
+      <div class="info-card"><h3>Weekend schedule</h3><ul><li>Saturday AM — gather branches (1 hr walk)</li><li>Saturday AM — plant frame stakes (20 min)</li><li>Saturday PM — weave branches and rope (2–3 hrs)</li><li>Saturday PM — pack twigs and line inside (1 hr)</li><li>Sunday AM — papier-mâché the giant egg</li><li>Sunday PM — paint egg, add lights, move in</li></ul></div>
+      <div class="info-card"><h3>Kid jobs</h3><ul><li>Lead the stick-gathering walk</li><li>Weave every single branch into the nest</li><li>Pack all the twigs and leaves into gaps</li><li>Papier-mâché and paint the giant egg</li><li>Arrange the inside — cushions, lights, blankets</li></ul></div>
+      <div class="info-card"><h3>The giant egg (optional)</h3><ul><li>Blow a large balloon to ~20 in long</li><li>Cover in 3 layers of flour-paste papier-mâché</li><li>Leave overnight to dry fully rigid</li><li>Pop the balloon inside once dry</li><li>Paint white with pale brown speckles</li><li>Place in the nest for maximum impact</li></ul></div>
+    </div>
+  </div>
+  <div id="nest-steps" class="panel">
+    <div class="legend"><div class="legend-item"><div class="dot dot-blue"></div> Adult step</div><div class="legend-item"><div class="dot dot-green"></div> Kid step</div><div class="legend-item"><div class="dot dot-amber"></div> Do together</div></div>
+    <div class="steps-list">
+      <div class="day-label">Before you start — the gathering walk</div>
+      <div class="step"><div class="step-num s-both">1</div><div class="step-body"><h4>Go on a family stick-gathering walk</h4><p>Head to a park, woodland edge, or around your yard. You want thick branches (thumb-width, 4–6 ft long) for the main weave, and thinner flexible twigs for filling. Collect at least twice as much as you think you need. Let the kids lead — they will not stop.</p><span class="kid-badge kb-green">Kids lead the gathering — expect to come back with far more than planned</span></div></div>
+      <div class="day-label">Saturday morning — the frame</div>
+      <div class="step"><div class="step-num s-adult">2</div><div class="step-body"><h4>Mark the circle and plant frame stakes</h4><p>Tie a 3 ft string to a centre stake. Walk the string taut in a circle and mark the perimeter — this is your 6 ft diameter circle. Hammer 8 thick garden stakes evenly around the circle, at least 12 in deep each, at a very slight outward angle to give the nest its bowl shape.</p></div></div>
+      <div class="step"><div class="step-num s-both">3</div><div class="step-body"><h4>Weave the base layer</h4><p>Take your longest flexible branches and weave them in and out between the upright stakes going around the full circle — in front of one stake, behind the next, exactly like basket weaving. Add rounds of thick jute rope between branch rows. Kids can do this entire stage after one demonstration.</p><span class="kid-badge kb-amber">Kids weave every branch — show the over-under pattern once and step back</span></div></div>
+      <div class="day-label">Saturday afternoon — walls and filling</div>
+      <div class="step"><div class="step-num s-kid">4</div><div class="step-body"><h4>Build the walls to 18–20 in</h4><p>Keep weaving until the walls reach 18–20 in — enough to feel enclosed while sitting inside but easy to climb in and out. The top doesn't need to be level or neat. A real nest is never neat.</p><span class="kid-badge kb-green">Kids build the entire wall height</span></div></div>
+      <div class="step"><div class="step-num s-kid">5</div><div class="step-body"><h4>Pack in twigs, leaves, and small sticks</h4><p>Give kids the entire pile of thin twigs, dried grass, and small sticks and let them tuck them into every gap in the weave — exactly as a real bird would. This fills holes, adds rigidity, and looks phenomenal. Do not interrupt them.</p><span class="kid-badge kb-green">Pure kid job — give them the pile and step back completely</span></div></div>
+      <div class="step"><div class="step-num s-both">6</div><div class="step-body"><h4>Line the inside and add lights</h4><p>Lay hessian sacking across the inside floor. Add old cushions or a folded blanket. String battery fairy lights around the inside rim — tuck into the top layer of weaving so they glow through the sticks at night. Kids arrange the inside exactly as they want it.</p><span class="kid-badge kb-amber">Kids arrange the inside entirely their way</span></div></div>
+      <div class="day-label">Sunday — the giant egg (optional but unmissable)</div>
+      <div class="step"><div class="step-num s-kid">7</div><div class="step-body"><h4>Make the giant papier-mâché egg</h4><p>Blow up a large oval balloon to about 20 in long. Cook flour paste (1 cup flour to 3 cups water, heat until thick, pinch of salt). Tear brown paper bags into palm-sized pieces. Kids dip each, squeeze off excess, layer over the balloon overlapping completely. Do 3 full layers. Leave to dry fully overnight.</p><span class="kid-badge kb-green">Kids do all three papier-mâché layers</span></div></div>
+      <div class="step"><div class="step-num s-kid">8</div><div class="step-body"><h4>Pop, paint, and place the egg</h4><p>Once fully dry and rigid, pop the balloon by squeezing. Paint the egg white with chalk paint. Once dry, kids flick small brown speckles on with a toothbrush dipped in brown paint for a realistic speckled effect. Place in the nest.</p><span class="kid-badge kb-green">Kids paint and speckle — the toothbrush flick is extremely satisfying</span></div></div>
+    </div>
+  </div>
+  <div id="nest-materials" class="panel">
+    <div class="mat-section"><h3>Structure</h3><div class="mat-grid"><div class="mat-item"><strong>8 thick wooden garden stakes</strong><span>6 ft tall, 1½ in thick — the frame uprights</span><span class="eco">Natural + compostable</span></div><div class="mat-item"><strong>Branches and sticks (big pile)</strong><span>Gather free from yard, park, or woodland. Mix thick (thumb-width) and thin (pencil-width).</span><span class="eco">100% natural and free</span></div><div class="mat-item"><strong>1 large reel thick jute rope</strong><span>Woven between branch rows for strength</span><span class="eco">Fully compostable</span></div><div class="mat-item"><strong>Dried grass, leaves, small twigs</strong><span>Stuffed into gaps — gathered on the same walk</span><span class="eco">100% natural and free</span></div></div></div>
+    <div class="mat-section"><h3>Lining and comfort</h3><div class="mat-grid"><div class="mat-item"><strong>Hessian sacking (1–2 pieces)</strong><span>Inside floor and lower wall lining</span><span class="eco">Natural + compostable</span></div><div class="mat-item"><strong>Old cushions or folded blanket</strong><span>Soft floor inside the nest — use what you have</span></div><div class="mat-item"><strong>Battery fairy lights</strong><span>Around the inside rim — glow through sticks at night</span></div></div></div>
+    <p class="mat-upgrade-label">Giant egg — optional but unmissable</p>
+    <div class="mat-section"><div class="mat-grid"><div class="mat-item"><strong>1 large oval balloon</strong><span>Blown to ~20 in long — the egg mould</span></div><div class="mat-item"><strong>Plain flour (2 cups)</strong><span>For the papier-mâché paste</span><span class="eco">Fully compostable</span></div><div class="mat-item"><strong>Brown paper bags</strong><span>Torn into palm-sized pieces</span><span class="eco">Recycled</span></div><div class="mat-item"><strong>White + brown chalk paint</strong><span>Base coat and speckle flicking</span></div></div></div>
+  </div>
+  <div id="nest-tips" class="panel">
+    <div class="tip"><strong>Gather far more sticks than you think you need</strong><p>The nest eats material. A pile that looks enormous will fill about two-thirds of the wall. Go back for more rather than running short mid-build — it kills momentum. Aim for a pile about 4 ft high before you start.</p></div>
+    <div class="tip"><strong>The messier it looks the better</strong><p>Resist any urge to tidy or straighten the weave. Real nests are wild, chaotic, and uneven — that's exactly what makes them look authentic. If it looks too neat, pull a few sticks out at odd angles and push them back in randomly.</p></div>
+    <div class="tip"><strong>Plant the frame stakes at a slight outward angle</strong><p>If you push all stakes perfectly vertical the nest will be a straight-sided cylinder. Angling each stake about 10° outward gives the nest a natural bowl curvature — wider at the top, narrower at the base.</p></div>
+    <div class="tip"><strong>Leave the egg to dry fully before popping the balloon</strong><p>If you pop before fully dry the shell will flex and crack. Give it a full overnight dry minimum. Tap it — it should sound hollow and feel hard like a drum before you pop.</p></div>
+    <div class="tip"><strong>Leave it as a wildlife habitat at end of season</strong><p>Before composting, leave the nest standing through autumn. Hedgehogs, beetles, and insects will move into the stick walls for winter. In late winter, pull it apart for the compost heap.</p></div>
+    <div class="end-of-life"><h3>End of life — what to do with it</h3><p>Leave standing through autumn as a wildlife habitat first. In late winter, pull the stakes and compost or bonfire. Every branch, twig, leaf, jute rope, and hessian piece composts completely. The papier-mâché egg dissolves in rain or breaks apart for the compost. Save the fairy lights for the next project. Zero waste — entirely back to the earth.</p></div>
+  </div>
+</div>
+
+<!-- ===================== BUILD 4: LIVING TUNNEL ===================== -->
+<div class="build-page" id="page-tunnel">
+  <div class="hero">
+    <div>
+      <svg width="100" height="110" viewBox="0 0 100 110" xmlns="http://www.w3.org/2000/svg">
+        <path d="M15,95 Q15,50 30,40 Q45,30 50,28 Q55,30 70,40 Q85,50 85,95" fill="none" stroke="#639922" stroke-width="2" stroke-linecap="round"/>
+        <path d="M25,95 Q25,55 38,46 Q50,38 50,36 Q50,38 62,46 Q75,55 75,95" fill="none" stroke="#97C459" stroke-width="1.5" stroke-linecap="round" opacity="0.8"/>
+        <line x1="15" y1="72" x2="85" y2="72" stroke="#A07850" stroke-width="1" stroke-dasharray="3 3" opacity="0.5"/>
+        <line x1="15" y1="82" x2="85" y2="82" stroke="#A07850" stroke-width="1" stroke-dasharray="3 3" opacity="0.5"/>
+        <line x1="16" y1="62" x2="84" y2="62" stroke="#A07850" stroke-width="1" stroke-dasharray="3 3" opacity="0.4"/>
+        <ellipse cx="28" cy="58" rx="6" ry="8" fill="#E24B4A" opacity="0.7"/>
+        <ellipse cx="72" cy="55" rx="5" ry="7" fill="#D4537E" opacity="0.7"/>
+        <ellipse cx="42" cy="48" rx="5" ry="6" fill="#EF9F27" opacity="0.7"/>
+        <ellipse cx="60" cy="50" rx="4" ry="5" fill="#97C459" opacity="0.7"/>
+        <ellipse cx="50" cy="38" rx="4" ry="5" fill="#378ADD" opacity="0.7"/>
+      </svg>
+    </div>
+    <div class="hero-text">
+      <h1>The living tunnel</h1>
+      <p>Two rows of arched stakes lashed together at the top, seeded with climbing plants. Takes 2–3 hours to build. By midsummer it becomes a fully enclosed living green tunnel bursting with flowers — kids run through it, hide in it, and eat runner beans from it every night. Gets more beautiful every single week.</p>
+      <div class="tags">
+        <span class="tag tag-blue">Grows all summer</span>
+        <span class="tag tag-green">Fully living + compostable</span>
+        <span class="tag tag-amber">~$25–35</span>
+        <span class="tag tag-teal">2–3 hours to build</span>
+        <span class="tag tag-blue">Ages 3+</span>
+      </div>
+    </div>
+  </div>
+  <div class="tabs">
+    <button class="tab active" onclick="showPanel('tunnel','overview',this)">Overview</button>
+    <button class="tab" onclick="showPanel('tunnel','steps',this)">Build steps</button>
+    <button class="tab" onclick="showPanel('tunnel','materials',this)">Materials</button>
+    <button class="tab" onclick="showPanel('tunnel','tips',this)">Tips & tricks</button>
+  </div>
+  <div id="tunnel-overview" class="panel active">
+    <div class="eco-banner eco-blue"><strong>The only build that feeds your family.</strong> Hammer stakes in two rows, bend and lash them together, tie string lines, push seeds in the ground. The plants do everything else. By August kids are picking runner beans for dinner every night. True cradle to cradle — the whole structure composts into next year's garden soil.</div>
+    <div class="two-col">
+      <div class="info-card"><h3>Dimensions</h3><ul><li>Length: ~15 ft</li><li>Width inside: ~3 ft</li><li>Height at apex: ~5–6 ft</li><li>Stakes: 8 per side, every 2 ft</li><li>Entrance arch: 2 taller stakes at 7–8 ft</li></ul></div>
+      <div class="info-card"><h3>Weekend schedule</h3><ul><li>Saturday AM — mark rows, hammer stakes (1 hr)</li><li>Saturday AM — bend and lash arches (1 hr)</li><li>Saturday PM — tie all horizontal string lines (1 hr)</li><li>Saturday PM — lay the floor path (30 min)</li><li>Sunday AM — plant all seeds (1 hr)</li><li>Sunday PM — make the growth chart, water in</li></ul></div>
+      <div class="info-card"><h3>Kid jobs</h3><ul><li>Tie the lower string lines between stakes</li><li>Plant every single seed</li><li>Design and lay the floor path inside</li><li>Make and run the weekly growth chart</li><li>Water the plants every day</li><li>Pick and eat the runner beans all summer</li></ul></div>
+      <div class="info-card"><h3>The seasonal timeline</h3><ul><li>Build weekend: tunnel frame complete</li><li>Week 1–2: first shoots emerge</li><li>Week 3–4: plants reach first string line</li><li>Week 6: tunnel sides filling with green</li><li>Week 8: roof closing over, first flowers</li><li>July: runner beans ready to eat nightly</li><li>August: fully enclosed, bursting with colour</li></ul></div>
+    </div>
+    <p class="section-note">Choose your climbing plant combination — runner beans are non-negotiable for the food side:</p>
+    <div class="compare-grid">
+      <div class="compare-card"><span class="clabel">Side one — food</span><h3>Runner beans</h3><ul><li>Fast-growing — reaches the top in 6–8 weeks</li><li>Red or white flowers throughout summer</li><li>Harvest beans nightly from July to October</li><li>Kids can pick entirely by themselves</li><li>Seeds very large — even toddlers can plant them</li></ul></div>
+      <div class="compare-card upgrade"><span class="clabel">Side two — beauty and scent</span><h3>Sweet peas + morning glories + nasturtiums</h3><ul><li>Sweet peas: extraordinary scent, cut-flower quality blooms</li><li>Morning glories: open at dawn, close at dusk</li><li>Nasturtiums: edible flowers, colour everywhere</li><li>All three together create a multi-layered living wall</li><li>Self-seed — collect for free plants next year</li></ul></div>
+    </div>
+  </div>
+  <div id="tunnel-steps" class="panel">
+    <div class="legend"><div class="legend-item"><div class="dot dot-blue"></div> Adult step</div><div class="legend-item"><div class="dot dot-green"></div> Kid step</div><div class="legend-item"><div class="dot dot-amber"></div> Do together</div></div>
+    <div class="steps-list">
+      <div class="day-label">Saturday morning — the frame</div>
+      <div class="step"><div class="step-num s-adult">1</div><div class="step-body"><h4>Mark the two rows</h4><p>Stretch two lengths of string parallel to each other, 3 ft apart and 15 ft long. Mark a stake position every 2 ft along each row — 8 positions per side, 16 total. Check the rows are parallel by measuring the gap at several points — 3 ft all the way along.</p></div></div>
+      <div class="step"><div class="step-num s-adult">2</div><div class="step-body"><h4>Hammer all the stakes</h4><p>Hammer a 6 ft wooden garden stake at every marked position, pushing each in at least 12 in deep. Use the two tallest stakes (7–8 ft) for the entrance — the first pair at one end. Every stake should feel completely solid with no wobble. Pre-make a hole with a metal bar if the ground is hard.</p></div></div>
+      <div class="step"><div class="step-num s-adult">3</div><div class="step-body"><h4>Bend and lash the arches</h4><p>Working pair by pair, gently push the top of the left stake toward the right stake until the tips meet at the centre, about 5–6 ft above the ground. Lash the two tips together firmly with jute twine — wrap at least 6 times and tie off tightly. Repeat for all 8 pairs. Then run a single jute rope along the full top ridge tying to each arch apex — this locks the whole tunnel into one rigid structure.</p></div></div>
+      <div class="day-label">Saturday afternoon — string lines and floor</div>
+      <div class="step"><div class="step-num s-both">4</div><div class="step-body"><h4>Tie all the horizontal string lines</h4><p>Run lines of jute twine horizontally along both sides of the tunnel at roughly 8 in intervals from ground all the way up to the arch. Tie to each stake as you pass. Kids tie the lower lines (up to about 3 ft) while you do the higher ones.</p><span class="kid-badge kb-amber">Kids tie all lines from ground up to 3 ft</span></div></div>
+      <div class="step"><div class="step-num s-adult">5</div><div class="step-body"><h4>Frame the entrance arch</h4><p>The first arch pair uses the two tallest stakes (7–8 ft) to create a more dramatic entrance. Lash a horizontal bar across the top between them — an old broomstick, thick branch, or offcut stake. Hang a papier-mâché sign, wind chime, or dried flower wreath from the bar.</p></div></div>
+      <div class="step"><div class="step-num s-kid">6</div><div class="step-body"><h4>Lay the floor path inside the tunnel</h4><p>Kids lay a path along the inside floor between the two rows of stakes. Wood chip, gravel, flat stones, or large fallen leaves pressed flat all work beautifully. Let kids choose the material and design the layout entirely themselves.</p><span class="kid-badge kb-green">Kids design and lay the entire floor path</span></div></div>
+      <div class="day-label">Sunday — planting</div>
+      <div class="step"><div class="step-num s-both">7</div><div class="step-body"><h4>Prepare the soil along both sides</h4><p>Dig a shallow trench about 4 in deep and 6 in wide along the outside base of both rows. Fork the soil over and break up any clumps. Mix in a little compost if you have it. Water the trench before planting — moist soil helps seeds germinate faster.</p><span class="kid-badge kb-amber">Kids dig and fork their trench sections</span></div></div>
+      <div class="step"><div class="step-num s-kid">8</div><div class="step-body"><h4>Plant every seed</h4><p>Runner beans go on one full side at 6 in intervals — push each seed about 2 in deep. Sweet peas, morning glories, and nasturtiums go on the other side in a natural mix. Cover with soil, firm down gently, and water generously. Runner bean and nasturtium seeds are large enough for even very small kids to handle confidently.</p><span class="kid-badge kb-green">Kids plant every single seed — one of those moments they remember forever</span></div></div>
+      <div class="step"><div class="step-num s-kid">9</div><div class="step-body"><h4>Make the weekly growth chart</h4><p>On a large piece of card, kids draw the tunnel outline and mark each planting spot with the seed type and their name. Each week they measure the tallest shoot and mark it with a different colour line. By week 8 the chart will be remarkable. Keep it going all summer. Frame it at the end of the season.</p><span class="kid-badge kb-green">Kids design, run, and own the chart all summer</span></div></div>
+    </div>
+  </div>
+  <div id="tunnel-materials" class="panel">
+    <div class="mat-section"><h3>Structure</h3><div class="mat-grid"><div class="mat-item"><strong>16 wooden garden stakes</strong><span>6 ft tall — 8 per side. Buy 2 at 7–8 ft for the entrance arch pair.</span><span class="eco">Natural + compostable</span></div><div class="mat-item"><strong>1 reel thick jute rope</strong><span>Ridge line along the full top, lashing each arch apex</span><span class="eco">Fully compostable</span></div><div class="mat-item"><strong>2 large balls jute twine</strong><span>Lashing arch tips + all horizontal climbing lines both sides</span><span class="eco">Fully compostable</span></div><div class="mat-item"><strong>1 horizontal bar for entrance</strong><span>Old broomstick, thick branch, or offcut stake</span><span class="eco">Natural</span></div></div></div>
+    <div class="mat-section"><h3>Floor path (choose what you have)</h3><div class="mat-grid"><div class="mat-item"><strong>Wood chip</strong><span>Cheap from hardware stores, or free from a tree surgeon</span><span class="eco">Compostable</span></div><div class="mat-item"><strong>Flat stones or gravel</strong><span>Forage from garden or cheap bag from hardware store</span><span class="eco">Natural</span></div><div class="mat-item"><strong>Fallen leaves pressed flat</strong><span>Free, seasonal, and beautiful — replace each autumn</span><span class="eco">100% natural</span></div></div></div>
+    <div class="mat-section"><h3>Plants — side one (food)</h3><div class="mat-grid"><div class="mat-item"><strong>Runner bean seeds</strong><span>One full side — plant every 6 in. Harvest July to October. Large seeds, very easy to plant.</span><span class="eco">Natural — feeds the family</span></div></div></div>
+    <div class="mat-section"><h3>Plants — side two (beauty)</h3><div class="mat-grid"><div class="mat-item"><strong>Sweet pea seeds</strong><span>Extraordinary scent and cut-flower quality blooms all summer</span><span class="eco">Natural</span></div><div class="mat-item"><strong>Morning glory seeds</strong><span>Open at dawn, close at dusk — magical for kids to observe daily</span><span class="eco">Natural</span></div><div class="mat-item"><strong>Nasturtium seeds</strong><span>Edible flowers, fills every gap with colour — very easy to grow</span><span class="eco">Natural</span></div></div></div>
+  </div>
+  <div id="tunnel-tips" class="panel">
+    <div class="tip"><strong>Hammer every stake in at least 12 in — non-negotiable</strong><p>Shallow stakes pull out in wind and the whole tunnel collapses. Check every one for wobble after hammering. If the ground is very hard, pre-make a pilot hole with a metal spike. Five extra minutes per stake saves rebuilding after the first storm.</p></div>
+    <div class="tip"><strong>Water every day for the first three weeks</strong><p>Seeds need consistent moisture to germinate. One missed day in hot weather can delay germination by a week. Set up a daily watering routine with the kids — it becomes a lovely ritual and they love watching for the first shoots.</p></div>
+    <div class="tip"><strong>Start runner beans inside two weeks early for a head start</strong><p>Push runner bean seeds into small pots of compost indoors two weeks before the tunnel build. By planting weekend they'll already be 3–4 in tall seedlings. This gets the tunnel closing over about two weeks faster.</p></div>
+    <div class="tip"><strong>The tunnel needs to face the sun</strong><p>All these climbing plants need full sun to thrive. Orient the tunnel so neither side is in full shade — ideally running roughly east to west so both sides get sun at different times of day.</p></div>
+    <div class="tip"><strong>Collect seeds at end of summer — year two costs nothing</strong><p>Leave a few runner bean pods to dry fully on the plant. Shell and store in a paper envelope over winter. Let sweet pea and nasturtium seed heads dry on the plant, then collect. Next spring's entire tunnel costs zero in seeds. True cradle to cradle.</p></div>
+    <div class="end-of-life"><h3>End of life — what to do with it</h3><p>At the end of summer, pull all the stakes — compost or bonfire. Cut all plant material into short sections and pile onto the compost heap — it breaks down over winter into rich compost ready for next spring. Jute rope and twine compost completely. Collected seeds get planted again next year at zero cost. The whole structure feeds next year's garden. The most truly circular build on this entire list.</p></div>
+  </div>
+</div>
+
+<script>
+function switchBuild(id, btn) {
+  document.querySelectorAll('.build-page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.build-pill').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+function showPanel(build, panel, btn) {
+  const prefix = build + '-';
+  document.getElementById('page-' + build).querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + build).querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(prefix + panel).classList.add('active');
+  btn.classList.add('active');
+}
+function switchMethod(build, method, btn) {
+  document.getElementById('page-' + build).querySelectorAll('.method-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + build).querySelectorAll('.method-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(build + '-method-' + method).classList.add('active');
+  btn.classList.add('active');
+}
+function switchFloor(build, type, btn) {
+  document.getElementById('page-' + build).querySelectorAll('.floor-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + build).querySelectorAll('.floor-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(build + '-floor-' + type).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>

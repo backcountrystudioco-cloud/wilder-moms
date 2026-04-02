@@ -12,11 +12,11 @@ const categoryGradients = {
 }
 
 const categoryIcons = {
-  'Painting': '🎨',
-  'Nature': '🍃',
-  'Building': '🔨',
-  'Science': '🔬',
-  'Music': '🎵',
+  'Painting': 'Painting',
+  'Nature': 'Nature',
+  'Building': 'Building',
+  'Science': 'Science',
+  'Music': 'Music',
 }
 
 export default function CraftCard({ craft, index = 0 }) {
@@ -25,7 +25,7 @@ export default function CraftCard({ craft, index = 0 }) {
   const [isExpanded, setIsExpanded] = useState(false)
   
   const gradientClass = categoryGradients[craft.category] || 'from-peach to-amber-500'
-  const icon = categoryIcons[craft.category] || '🖐️'
+  const icon = categoryIcons[craft.category] || 'craft'
 
   return (
     <motion.article
@@ -38,7 +38,7 @@ export default function CraftCard({ craft, index = 0 }) {
     >
       {/* Icon Header */}
       <div className={`relative h-32 bg-gradient-to-br ${gradientClass} flex items-center justify-center`}>
-        <span className="text-5xl opacity-50">{icon}</span>
+        <span className="text-2xl font-bold text-white opacity-40 uppercase tracking-wider">{icon}</span>
         {/* Indoor/Outdoor Badge */}
         <span className={`absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-sans font-medium ${
           craft.indoor ? 'bg-white/90 text-inkl' : 'bg-parchment/90 text-forest'

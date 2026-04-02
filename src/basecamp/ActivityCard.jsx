@@ -42,7 +42,7 @@ function ActivityCard({ activity, index = 0 }) {
       {/* Icon Header */}
       <div className={`relative h-32 bg-gradient-to-br ${gradientClass} flex items-center justify-center`}>
         <span className="text-5xl opacity-40">
-          {activity.emoji || '🎨'}
+          {activity.emoji || 'craft'}
         </span>
         {/* Favorite button */}
         <button

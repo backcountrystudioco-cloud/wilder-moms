@@ -61,38 +61,38 @@ function getTimeMessage(timeContext, weatherLevel) {
 
 // Get best hike window based on weather
 function getBestWindow(weather, timeContext) {
-  if (weather.level === 'storm') return { label: 'Stay indoors', icon: '🏠', message: "Safety first today." };
-  if (weather.level === 'rain') return { label: 'Indoor day', icon: '🎨', message: "Try a Base Camp activity instead." };
-  if (weather.level === 'snow') return { label: 'Snow play', icon: '❄️', message: "Perfect for snow adventures!" };
+  if (weather.level === 'storm') return { label: 'Stay indoors', message: "Safety first today." };
+  if (weather.level === 'rain') return { label: 'Indoor day', message: "Try a Base Camp activity instead." };
+  if (weather.level === 'snow') return { label: 'Snow play', message: "Perfect for snow adventures!" };
   
   if (weather.level === 'hot') {
-    if (timeContext === 'early') return { label: 'NOW', icon: '🌅', message: "Cool morning - best time to start!" };
-    return { label: 'Early AM', icon: '⏰', message: "Before 10am for cooler temps" };
+    if (timeContext === 'early') return { label: 'NOW', message: "Cool morning - best time to start!" };
+    return { label: 'Early AM', message: "Before 10am for cooler temps" };
   }
   
   if (weather.level === 'perfect' || weather.level === 'cloudy') {
-    return { label: 'All day', icon: '☀️', message: "Go whenever works for you!" };
+    return { label: 'All day', message: "Go whenever works for you!" };
   }
   
   if (weather.level === 'drizzle') {
-    return { label: 'Now is OK', icon: '🌦️', message: "Light rain - bring layers" };
+    return { label: 'Now is OK', message: "Light rain - bring layers" };
   }
   
   if (weather.level === 'drizzle-cold') {
-    return { label: 'Wait for sun', icon: '⏳', message: "Warmer temps expected later" };
+    return { label: 'Wait for sun', message: "Warmer temps expected later" };
   }
   
-  return { label: 'This afternoon', icon: '🕐', message: "Best conditions expected" };
+  return { label: 'This afternoon', message: "Best conditions expected" };
 }
 
 // Elevation appropriateness
 function getElevationAdvice(tempF, elevation) {
   if (tempF > 85) {
-    if (elevation > 500) return { text: "High elevation + heat = tough", icon: '😅', avoid: true };
-    if (elevation > 200) return { text: "Moderate elevation - stay hydrated", icon: '💧', avoid: false };
+    if (elevation > 500) return { text: "High elevation + heat = tough", avoid: true };
+    if (elevation > 200) return { text: "Moderate elevation - stay hydrated", avoid: false };
   }
   if (tempF < 45) {
-    if (elevation > 500) return { text: "High elevation = cold + wind", icon: '🥶', avoid: true };
+    if (elevation > 500) return { text: "High elevation = cold + wind", avoid: true };
   }
   return null;
 }
@@ -224,7 +224,6 @@ export default function HabitatPage() {
                 {/* Best window */}
                 {bestWindow && (
                   <div className="flex items-center gap-3 bg-white/60 rounded-xl px-4 py-3">
-                    <span className="text-2xl">{bestWindow.icon}</span>
                     <div>
                       <p className="font-sans text-xs text-inkl uppercase">Best time</p>
                       <p className="font-sans font-medium text-ink">{bestWindow.label}</p>
@@ -237,9 +236,8 @@ export default function HabitatPage() {
                 {weather.temp !== null && (
                   <div className="flex items-center gap-4">
                     <div className="text-center">
-                      <span className="text-3xl">{weatherAssessment?.icon || '🌤️'}</span>
                       <p className="font-sans text-2xl font-medium text-ink">{weather.temp}°F</p>
-                      <p className="font-sans text-xs text-inkl">Current temp</p>
+                      <p className="font-sans text-sm text-inkl">{weather.description}</p>
                     </div>
                   </div>
                 )}
@@ -264,7 +262,10 @@ export default function HabitatPage() {
           <div className="flex items-center justify-between flex-wrap gap-4">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-ember/10 flex items-center justify-center">
-                <span className="text-lg">📍</span>
+                <svg className="w-5 h-5 text-ember" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
               </div>
               <div>
                 <p className="font-sans text-sm text-inkl">Your Location</p>
@@ -320,7 +321,7 @@ export default function HabitatPage() {
                         !manualLocation && location.lat ? 'bg-ember text-white border-ember' : 'bg-white border-inkll/20 text-ink hover:border-ember'
                       }`}
                     >
-                      📍 Auto-detect
+                      Auto-detect
                     </button>
                     {locationPresets.map((preset) => (
                       <button
@@ -368,11 +369,11 @@ export default function HabitatPage() {
 
                     {/* Toggle buttons */}
                     {[
-                      { key: 'hasStroller', trueLabel: '🚼 Stroller', falseLabel: '🚶 No stroller', label: 'Gear' },
-                      { key: 'wantsWater', trueLabel: '💧 Water', falseLabel: 'No water', label: 'Water' },
-                      { key: 'wantsViews', trueLabel: '🏔️ Views', falseLabel: 'Any trail', label: 'Views' },
-                      { key: 'wantsDogs', trueLabel: '🐕 Dogs', falseLabel: 'No dogs', label: 'Dogs' },
-                      { key: 'prefersFreeParking', trueLabel: '🅿️ Free', falseLabel: 'Any', label: 'Parking' },
+                      { key: 'hasStroller', trueLabel: 'Stroller', falseLabel: 'No stroller', label: 'Gear' },
+                      { key: 'wantsWater', trueLabel: 'Water', falseLabel: 'No water', label: 'Water' },
+                      { key: 'wantsViews', trueLabel: 'Views', falseLabel: 'Any trail', label: 'Views' },
+                      { key: 'wantsDogs', trueLabel: 'Dogs', falseLabel: 'No dogs', label: 'Dogs' },
+                      { key: 'prefersFreeParking', trueLabel: 'Free', falseLabel: 'Any', label: 'Parking' },
                     ].map(({ key, trueLabel, falseLabel, label }) => (
                       <div key={key}>
                         <label className="block font-sans text-xs text-inkl mb-2">{label}</label>
@@ -400,7 +401,6 @@ export default function HabitatPage() {
             animate={{ opacity: 1 }}
             className="bg-blush/50 rounded-2xl p-12 text-center"
           >
-            <span className="text-5xl mb-4 block">🗺️</span>
             <h3 className="font-serif text-2xl text-ink mb-2">Select Your Location</h3>
             <p className="font-sans text-inkl">Enable location access or pick an area above to see personalized recommendations.</p>
           </motion.div>
@@ -418,7 +418,6 @@ export default function HabitatPage() {
                 }`}
               >
                 <div className="flex items-center gap-3">
-                  <span className="text-2xl">{weatherAssessment.icon}</span>
                   <p className="font-sans text-sm text-ink">
                     {weatherAssessment.level === 'hot' && "Today's heat affects trail selection. We prioritized shaded routes."}
                     {weatherAssessment.level === 'cold' && "Cold weather factored in. Sunny trails prioritized for warmth."}
@@ -462,7 +461,7 @@ export default function HabitatPage() {
                         </div>
                         {hike.distance && (
                           <p className="font-sans text-xs text-inkl mt-2">
-                            📍 {hike.distance} mi from {manualLocation?.name || location.city}
+                            {hike.distance} mi from {manualLocation?.name || location.city}
                           </p>
                         )}
                       </div>
@@ -482,13 +481,13 @@ export default function HabitatPage() {
                     <p className="font-sans text-inkl mb-4">Base Camp has activities perfect for indoor adventures:</p>
                     <div className="flex flex-wrap gap-3">
                       <a href="/basecamp" className="px-4 py-2 bg-ember text-white rounded-full font-sans text-sm hover:bg-terra transition-colors">
-                        🏕️ Indoor Builds
+                        Indoor Builds
                       </a>
                       <a href="/basecamp/activities" className="px-4 py-2 bg-ember text-white rounded-full font-sans text-sm hover:bg-terra transition-colors">
-                        🎨 Nature Crafts
+                        Nature Crafts
                       </a>
                       <a href="/blueprint" className="px-4 py-2 bg-ember text-white rounded-full font-sans text-sm hover:bg-terra transition-colors">
-                        🎒 Plan for Tomorrow
+                        Plan for Tomorrow
                       </a>
                     </div>
                   </motion.div>
@@ -500,7 +499,6 @@ export default function HabitatPage() {
                 animate={{ opacity: 1 }}
                 className="bg-blush/50 rounded-2xl p-12 text-center"
               >
-                <span className="text-5xl mb-4 block">🌧️</span>
                 <h3 className="font-serif text-2xl text-ink mb-2">Not the best day for hiking</h3>
                 <p className="font-sans text-inkl mb-6">
                   {weatherAssessment?.level === 'storm' ? "Storms aren't safe for outdoor adventures." :
@@ -527,7 +525,6 @@ export default function HabitatPage() {
             animate={{ opacity: 1 }}
             className="bg-blush/50 rounded-2xl p-12 text-center"
           >
-            <span className="text-5xl mb-4 block">🗺️</span>
             <h3 className="font-serif text-2xl text-ink mb-2">Select Your Location</h3>
             <p className="font-sans text-inkl">Pick an area above to see personalized recommendations.</p>
           </motion.div>
@@ -543,13 +540,12 @@ export default function HabitatPage() {
           <h3 className="font-serif text-xl text-ink mb-6 text-center">How We Find Your Perfect Trail</h3>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             {[
-              { icon: '📍', title: 'Location', desc: 'We find trails near you, not just anywhere.' },
-              { icon: '🌤️', title: 'Weather', desc: 'Heat? Shade. Cold? Sun. Rain? Covered.' },
-              { icon: '👨‍👩‍👧‍👦', title: 'Your Crew', desc: 'Ages, strollers, dogs, energy levels.' },
-              { icon: '⏰', title: 'Time', desc: 'Duration fits your actual schedule today.' },
+              { title: 'Location', desc: 'We find trails near you, not just anywhere.' },
+              { title: 'Weather', desc: 'Heat? Shade. Cold? Sun. Rain? Covered.' },
+              { title: 'Your Crew', desc: 'Ages, strollers, dogs, energy levels.' },
+              { title: 'Time', desc: 'Duration fits your actual schedule today.' },
             ].map((item, i) => (
               <div key={i} className="bg-white/50 rounded-xl p-4 text-center">
-                <span className="text-2xl mb-2 block">{item.icon}</span>
                 <h4 className="font-serif text-ink mb-1">{item.title}</h4>
                 <p className="font-sans text-xs text-inkl">{item.desc}</p>
               </div>

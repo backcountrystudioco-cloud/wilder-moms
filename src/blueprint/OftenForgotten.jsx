@@ -46,7 +46,7 @@ export default function OftenForgotten({ checkedItems = [], allItems = [] }) {
       >
         <div className="bg-gold/10 border border-gold/30 rounded-xl p-4">
           <div className="flex items-start gap-3">
-            <span className="text-2xl">🧠</span>
+            <span className="text-lg font-bold text-gold">!</span>
             <div className="flex-1">
               <p className="font-sans text-sm font-medium text-ink mb-1">Often Forgotten Items</p>
               <p className="text-xs text-inkl mb-3">Based on what other Wilder Moms usually leave behind:</p>

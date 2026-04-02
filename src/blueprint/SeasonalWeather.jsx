@@ -5,7 +5,7 @@ const seasons = [
   {
     id: 'hot',
     label: 'Hot Weather',
-    icon: '☀️',
+    icon: 'sun',
     color: 'bg-terra/10 border-terra/30',
     items: [
       { name: 'Extra water', note: '2x normal amount', priority: 'critical' },
@@ -21,7 +21,7 @@ const seasons = [
   {
     id: 'cold',
     label: 'Cold / Winter',
-    icon: '❄️',
+    icon: 'snow',
     color: 'bg-slate/10 border-slate/30',
     items: [
       { name: 'Insulation layers', note: '3-layer system', priority: 'critical' },
@@ -37,7 +37,7 @@ const seasons = [
   {
     id: 'wet',
     label: 'Rainy / Wet',
-    icon: '🌧️',
+    icon: 'rain',
     color: 'bg-slate/20 border-slate/40',
     items: [
       { name: 'Pack cover', note: 'waterproof rain fly', priority: 'critical' },
@@ -53,7 +53,7 @@ const seasons = [
   {
     id: 'bugs',
     label: 'Bug Season',
-    icon: '🦟',
+    icon: 'bugs',
     color: 'bg-olive/10 border-olive/30',
     items: [
       { name: 'DEET spray', note: '30%+ for ticks', priority: 'critical' },
@@ -149,7 +149,7 @@ export default function SeasonalWeather({ onAddItems }) {
 
       {!activeSeason && (
         <div className="text-center py-8 text-inkl">
-          <span className="text-3xl mb-2 block">🌿</span>
+          <span className="text-2xl mb-2 block">Nature</span>
           <p className="text-sm">Select a season above to see tailored recommendations</p>
         </div>
       )}

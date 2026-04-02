@@ -7,52 +7,52 @@ const questions = [
     id: 'who',
     question: "Who's coming on the adventure?",
     options: [
-      { label: 'Just me (solo adventure)', value: { adults: 1, kids: 0 }, icon: '🚶‍♀️' },
-      { label: 'Me + baby carrier', value: { adults: 1, kids: 1, baby: true }, icon: '👶' },
-      { label: 'Me + walking kid(s)', value: { adults: 1, kids: 1, walking: true }, icon: '👧' },
-      { label: 'Couple + baby', value: { adults: 2, kids: 1, baby: true }, icon: '👨‍👩‍👧' },
-      { label: 'Couple + walking kid(s)', value: { adults: 2, kids: 2, mixed: true }, icon: '👨‍👩‍👧‍👦' },
-      { label: 'Full family (mixed ages)', value: { adults: 2, kids: 3, mixed: true }, icon: '👨‍👩‍👧‍👦' },
-      { label: 'Adults only', value: { adults: 2, kids: 0 }, icon: '👫' },
+      { label: 'Just me (solo adventure)', value: { adults: 1, kids: 0 }, icon: 'solo' },
+      { label: 'Me + baby carrier', value: { adults: 1, kids: 1, baby: true }, icon: 'baby' },
+      { label: 'Me + walking kid(s)', value: { adults: 1, kids: 1, walking: true }, icon: 'child' },
+      { label: 'Couple + baby', value: { adults: 2, kids: 1, baby: true }, icon: 'couple+baby' },
+      { label: 'Couple + walking kid(s)', value: { adults: 2, kids: 2, mixed: true }, icon: 'couple+kids' },
+      { label: 'Full family (mixed ages)', value: { adults: 2, kids: 3, mixed: true }, icon: 'family' },
+      { label: 'Adults only', value: { adults: 2, kids: 0 }, icon: 'adults' },
     ],
   },
   {
     id: 'what',
     question: 'What type of adventure?',
     options: [
-      { label: 'Day hike', value: 'day', icon: '🥾' },
-      { label: 'Overnight camping', value: 'overnight', icon: '⛺' },
-      { label: 'Backpacking (multi-day)', value: 'backpacking', icon: '🎒' },
-      { label: 'Beach day', value: 'beach', icon: '🏖️' },
-      { label: 'Trail run / fast & light', value: 'fast', icon: '🏃' },
+      { label: 'Day hike', value: 'day', icon: 'hike' },
+      { label: 'Overnight camping', value: 'overnight', icon: 'camp' },
+      { label: 'Backpacking (multi-day)', value: 'backpacking', icon: 'pack' },
+      { label: 'Beach day', value: 'beach', icon: 'beach' },
+      { label: 'Trail run / fast & light', value: 'fast', icon: 'run' },
     ],
   },
   {
     id: 'howLong',
     question: 'How long will you be out?',
     dayOptions: [
-      { label: '1-2 hours', value: 'short', icon: '⏱️' },
-      { label: 'Half day (3-5 hours)', value: 'half', icon: '🌤️' },
-      { label: 'Full day (6-8 hours)', value: 'full', icon: '☀️' },
-      { label: 'Extended day (8+ hours)', value: 'extended', icon: '🌅' },
+      { label: '1-2 hours', value: 'short', icon: '1-2hr' },
+      { label: 'Half day (3-5 hours)', value: 'half', icon: '3-5hr' },
+      { label: 'Full day (6-8 hours)', value: 'full', icon: '6-8hr' },
+      { label: 'Extended day (8+ hours)', value: 'extended', icon: '8+hr' },
     ],
     overnightOptions: [
-      { label: '1 night', value: '1night', icon: '🌙' },
-      { label: '2 nights', value: '2nights', icon: '🌙🌙' },
-      { label: '3 nights', value: '3nights', icon: '🌙🌙🌙' },
-      { label: '4+ nights (extended)', value: 'extended', icon: '📅' },
+      { label: '1 night', value: '1night', icon: '1' },
+      { label: '2 nights', value: '2nights', icon: '2' },
+      { label: '3 nights', value: '3nights', icon: '3' },
+      { label: '4+ nights (extended)', value: 'extended', icon: '4+' },
     ],
   },
   {
     id: 'conditions',
     question: 'Any special conditions?',
     options: [
-      { label: 'Hot weather (90°F+)', value: 'hot', icon: '🔥' },
-      { label: 'Cold / Winter', value: 'cold', icon: '❄️' },
-      { label: 'Rainy / Wet', value: 'wet', icon: '🌧️' },
-      { label: 'High altitude', value: 'altitude', icon: '🏔️' },
-      { label: 'Buggy / Mosquitoes', value: 'bugs', icon: '🦟' },
-      { label: 'No special conditions', value: 'normal', icon: '✨' },
+      { label: 'Hot weather (90°F+)', value: 'hot', icon: 'hot' },
+      { label: 'Cold / Winter', value: 'cold', icon: 'cold' },
+      { label: 'Rainy / Wet', value: 'wet', icon: 'wet' },
+      { label: 'High altitude', value: 'altitude', icon: 'altitude' },
+      { label: 'Buggy / Mosquitoes', value: 'bugs', icon: 'bugs' },
+      { label: 'No special conditions', value: 'normal', icon: 'normal' },
     ],
   },
 ]
@@ -144,7 +144,7 @@ export default function AdventureProfileBuilder({ onGenerate }) {
         className="bg-white rounded-2xl p-6 shadow-sm border border-inkll/10"
       >
         <div className="text-center mb-6">
-          <span className="text-4xl mb-3 block">🎒</span>
+          <span className="text-2xl mb-3 block font-sans text-olive">Pack</span>
           <h3 className="font-serif text-2xl text-ink mb-2">Your Adventure Pack List</h3>
           <p className="text-inkl text-sm">{generatedList.length} items recommended</p>
         </div>
@@ -238,7 +238,7 @@ export default function AdventureProfileBuilder({ onGenerate }) {
                       : 'border-inkll/20 hover:border-olive/50'
                   }`}
                 >
-                  <span className="text-2xl mb-2 block">{option.icon}</span>
+                  <span className="text-xs font-bold mb-2 block text-inkll">{option.icon}</span>
                   <span className={`font-sans text-sm font-medium ${isSelected ? 'text-olive' : 'text-ink'}`}>
                     {option.label}
                   </span>
@@ -257,7 +257,7 @@ export default function AdventureProfileBuilder({ onGenerate }) {
                       : 'border-inkll/20 hover:border-olive/50'
                   }`}
                 >
-                  <span className="text-2xl mb-2 block">{option.icon}</span>
+                  <span className="text-xs font-bold mb-2 block text-inkll">{option.icon}</span>
                   <span className={`font-sans text-sm font-medium ${isSelected ? 'text-olive' : 'text-ink'}`}>
                     {option.label}
                   </span>
@@ -276,7 +276,7 @@ export default function AdventureProfileBuilder({ onGenerate }) {
                       : 'border-inkll/20 hover:border-olive/50'
                   }`}
                 >
-                  <span className="text-2xl mb-2 block">{option.icon}</span>
+                  <span className="text-xs font-bold mb-2 block text-inkll">{option.icon}</span>
                   <span className={`font-sans text-sm font-medium ${isSelected ? 'text-olive' : 'text-ink'}`}>
                     {option.label}
                   </span>

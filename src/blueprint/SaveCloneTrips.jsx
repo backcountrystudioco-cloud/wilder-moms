@@ -69,7 +69,7 @@ export default function SaveCloneTrips({ currentList = [], tripName = '', onLoad
               : 'bg-olive text-white hover:bg-forest'
           }`}
         >
-          💾 Save This List
+          Save This List
         </button>
         <button
           onClick={() => setShowLoadModal(true)}
@@ -80,7 +80,7 @@ export default function SaveCloneTrips({ currentList = [], tripName = '', onLoad
               : 'bg-blush/50 text-inkl hover:bg-blush'
           }`}
         >
-          📂 Load Saved ({savedTrips.length})
+          Load Saved ({savedTrips.length})
         </button>
       </div>
 

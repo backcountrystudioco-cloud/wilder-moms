@@ -114,7 +114,7 @@ export default function TripDifficultySlider({ onDifficultyChange }) {
           className="mt-4 p-3 bg-ember/10 border border-ember/30 rounded-lg"
         >
           <p className="text-xs text-ember font-medium">
-            ⚠️ Always file a detailed trip plan with someone you trust before heading out.
+            Warning: Always file a detailed trip plan with someone you trust before heading out.
           </p>
         </motion.div>
       )}

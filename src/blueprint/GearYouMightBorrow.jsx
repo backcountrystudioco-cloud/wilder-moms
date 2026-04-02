@@ -7,7 +7,7 @@ const borrowableGear = [
     name: 'Tent', 
     note: 'Family tents available',
     villageLink: true,
-    icon: '⛺',
+    icon: 'tent',
     priceRange: '$100-400',
   },
   { 
@@ -15,7 +15,7 @@ const borrowableGear = [
     name: 'Sleeping Bags', 
     note: 'Kids & adult sizes',
     villageLink: true,
-    icon: '🛌',
+    icon: 'sleep',
     priceRange: '$50-200',
   },
   { 
@@ -23,7 +23,7 @@ const borrowableGear = [
     name: 'Sleeping Pads', 
     note: 'Insulated pads essential',
     villageLink: true,
-    icon: '🛏️',
+    icon: 'pad',
     priceRange: '$30-150',
   },
   { 
@@ -31,7 +31,7 @@ const borrowableGear = [
     name: 'Hiking Carrier', 
     note: 'Osprey, Deuter, Ergo',
     villageLink: true,
-    icon: '🎒',
+    icon: 'pack',
     priceRange: '$80-280',
   },
   { 
@@ -39,7 +39,7 @@ const borrowableGear = [
     name: 'Trekking Poles', 
     note: 'Great for knees',
     villageLink: true,
-    icon: '🦯',
+    icon: 'poles',
     priceRange: '$30-120',
   },
   { 
@@ -47,7 +47,7 @@ const borrowableGear = [
     name: 'Headlamps', 
     note: 'USB rechargeable',
     villageLink: true,
-    icon: '🔦',
+    icon: 'light',
     priceRange: '$15-50',
   },
   { 
@@ -55,7 +55,7 @@ const borrowableGear = [
     name: 'Water Filter', 
     note: 'For backcountry',
     villageLink: true,
-    icon: '💧',
+    icon: 'water',
     priceRange: '$25-80',
   },
   { 
@@ -63,7 +63,7 @@ const borrowableGear = [
     name: 'Camp Chairs', 
     note: 'Kids sizes too',
     villageLink: true,
-    icon: '🪑',
+    icon: 'chair',
     priceRange: '$20-100',
   },
 ]
@@ -90,7 +90,7 @@ export default function GearYouMightBorrow({ onVillageClick }) {
             onClick={() => onVillageClick && onVillageClick(gear)}
           >
             <div className="flex items-start gap-3">
-              <span className="text-2xl">{gear.icon}</span>
+              <span className="text-xs font-bold text-inkll uppercase">{gear.icon}</span>
               <div className="flex-1">
                 <p className="font-sans text-sm font-medium text-ink">{gear.name}</p>
                 <p className="text-xs text-inkl">{gear.note}</p>
@@ -114,7 +114,7 @@ export default function GearYouMightBorrow({ onVillageClick }) {
 
       <div className="mt-4 p-3 bg-blush/20 rounded-lg">
         <p className="text-xs text-inkl text-center">
-          💚 The Village is our gear-sharing community. <span className="text-ember font-medium cursor-pointer">Find gear near you →</span>
+          The Village is our gear-sharing community. <span className="text-ember font-medium cursor-pointer">Find gear near you →</span>
         </p>
       </div>
     </div>

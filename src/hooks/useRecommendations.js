@@ -40,66 +40,66 @@ function assessWeather(weatherCode, tempF, humidity = 50) {
 
   // Storm - immediate no-go
   if (stormCodes.includes(weatherCode)) {
-    return { level: 'storm', label: 'Storm Warning', icon: '⛈️', score: 0, advice: 'Stay safe indoors - storms in the area.' };
+    return { level: 'storm', label: 'Storm Warning', icon: 'Storm', score: 0, advice: 'Stay safe indoors - storms in the area.' };
   }
   
   // Snow - limited options
   if (snowyCodes.includes(weatherCode)) {
     if (tempF > 35) {
-      return { level: 'snow', label: 'Snowy', icon: '❄️', score: 25, advice: 'Snow trails available! Dress warm and check trail conditions.' };
+      return { level: 'snow', label: 'Snowy', icon: 'Snow', score: 25, advice: 'Snow trails available! Dress warm and check trail conditions.' };
     }
-    return { level: 'snow-cold', label: 'Icy Conditions', icon: '🥶', score: 15, advice: 'Trails may be icy. Consider indoor activities.' };
+    return { level: 'snow-cold', label: 'Icy Conditions', icon: 'Cold', score: 15, advice: 'Trails may be icy. Consider indoor activities.' };
   }
   
   // Heavy rain
   if (rainyCodes.includes(weatherCode)) {
-    return { level: 'rain', label: 'Rainy', icon: '🌧️', score: 30, advice: 'Wet trails can be slippery. Look for covered or sheltered options.' };
+    return { level: 'rain', label: 'Rainy', icon: 'Rain', score: 30, advice: 'Wet trails can be slippery. Look for covered or sheltered options.' };
   }
   
   // Drizzle
   if (drizzlyCodes.includes(weatherCode)) {
     if (tempF < 48) {
-      return { level: 'drizzle-cold', label: 'Drizzle & Cold', icon: '🌧️', score: 45, advice: 'Light rain + cold = consider indoor alternatives or bundle up.' };
+      return { level: 'drizzle-cold', label: 'Drizzle & Cold', icon: 'Rain', score: 45, advice: 'Light rain + cold = consider indoor alternatives or bundle up.' };
     }
     if (tempF > 85) {
-      return { level: 'drizzle-cool', label: 'Light Rain', icon: '🌦️', score: 65, advice: 'Rain keeps things cool! Great for activity, just bring layers.' };
+      return { level: 'drizzle-cool', label: 'Light Rain', icon: 'Light rain', score: 65, advice: 'Rain keeps things cool! Great for activity, just bring layers.' };
     }
-    return { level: 'drizzle', label: 'Light Drizzle', icon: '🌦️', score: 70, advice: 'Light rain won\'t stop real adventurers. Waterproof layers recommended.' };
+    return { level: 'drizzle', label: 'Light Drizzle', icon: 'Light rain', score: 70, advice: 'Light rain won\'t stop real adventurers. Waterproof layers recommended.' };
   }
   
   // Cloudy - great for hiking
   if (cloudyCodes.includes(weatherCode)) {
     if (tempF < 40) {
-      return { level: 'cloudy-cold', label: 'Overcast & Cold', icon: '☁️', score: 65, advice: 'Cloudy but cold - layers needed, seek sunny exposed trails.' };
+      return { level: 'cloudy-cold', label: 'Overcast & Cold', icon: 'Cloudy', score: 65, advice: 'Cloudy but cold - layers needed, seek sunny exposed trails.' };
     }
     if (tempF > 85) {
-      return { level: 'cloudy-cool', label: 'Overcast & Comfortable', icon: '☁️', score: 95, advice: 'Perfect hiking weather - no sun stress, comfortable temps!' };
+      return { level: 'cloudy-cool', label: 'Overcast & Comfortable', icon: 'Cloudy', score: 95, advice: 'Perfect hiking weather - no sun stress, comfortable temps!' };
     }
-    return { level: 'cloudy', label: 'Overcast', icon: '☁️', score: 90, advice: 'Great conditions - clouds keep temps ideal.' };
+    return { level: 'cloudy', label: 'Overcast', icon: 'Cloudy', score: 90, advice: 'Great conditions - clouds keep temps ideal.' };
   }
   
   // Clear sky
   if (clearCodes.includes(weatherCode)) {
     if (tempF < 35) {
-      return { level: 'cold', label: 'Freezing', icon: '🥶', score: 40, advice: 'Very cold - limited trail options, stay bundled.' };
+      return { level: 'cold', label: 'Freezing', icon: 'Cold', score: 40, advice: 'Very cold - limited trail options, stay bundled.' };
     }
     if (tempF < 50) {
-      return { level: 'chilly', label: 'Chilly', icon: '🌤️', score: 70, advice: 'Cold morning - sunny trails will warm up nicely.' };
+      return { level: 'chilly', label: 'Chilly', icon: 'Mostly sunny', score: 70, advice: 'Cold morning - sunny trails will warm up nicely.' };
     }
     if (tempF > 95) {
-      return { level: 'extreme-heat', label: 'Extreme Heat', icon: '🔥', score: 25, advice: 'Very hot - prioritize shaded trails, go early or evening, drink lots of water.' };
+      return { level: 'extreme-heat', label: 'Extreme Heat', icon: 'Hot', score: 25, advice: 'Very hot - prioritize shaded trails, go early or evening, drink lots of water.' };
     }
     if (tempF > 85) {
-      return { level: 'hot', label: 'Hot Sun', icon: '☀️', score: 55, advice: 'Sun is strong - seek shade, bring extra water, take breaks.' };
+      return { level: 'hot', label: 'Hot Sun', icon: 'Sunny', score: 55, advice: 'Sun is strong - seek shade, bring extra water, take breaks.' };
     }
     if (tempF > 75) {
-      return { level: 'warm', label: 'Warm & Sunny', icon: '🌤️', score: 80, advice: 'Warm but nice - great day for outdoor activity!' };
+      return { level: 'warm', label: 'Warm & Sunny', icon: 'Mostly sunny', score: 80, advice: 'Warm but nice - great day for outdoor activity!' };
     }
-    return { level: 'perfect', label: 'Perfect', icon: '✨', score: 100, advice: 'Ideal conditions for adventure!' };
+    return { level: 'perfect', label: 'Perfect', icon: 'Perfect', score: 100, advice: 'Ideal conditions for adventure!' };
   }
   
   // Default unknown
-  return { level: 'unknown', label: 'Check Conditions', icon: '❓', score: 50, advice: 'Check trail conditions before heading out.' };
+  return { level: 'unknown', label: 'Check Conditions', icon: 'Unknown', score: 50, advice: 'Check trail conditions before heading out.' };
 }
 
 /**

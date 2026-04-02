@@ -15,14 +15,14 @@ const difficultyLabels = {
 }
 
 const categoryIcons = {
-  'Shelter': '🏕️',
-  'Fire': '🔥',
-  'Water': '💧',
-  'Food': '🍳',
-  'Tools': '🔧',
-  'Comfort': '🛋️',
-  'Safety': '🩹',
-  'Fun': '🎉',
+  'Shelter': 'Shelter',
+  'Fire': 'Fire',
+  'Water': 'Water',
+  'Food': 'Food',
+  'Tools': 'Tools',
+  'Comfort': 'Comfort',
+  'Safety': 'Safety',
+  'Fun': 'Fun',
 }
 
 const categoryColors = {
@@ -37,7 +37,7 @@ const categoryColors = {
 }
 
 export default function BuildCard({ build, index = 0 }) {
-  const icon = categoryIcons[build.category] || '🏕️'
+  const icon = categoryIcons[build.category] || 'Shelter'
   const colorClass = categoryColors[build.category] || 'from-ember to-terra'
   
   return (
@@ -54,7 +54,7 @@ export default function BuildCard({ build, index = 0 }) {
         <div className="bg-white rounded-2xl overflow-hidden shadow-lg shadow-ink/5 flex flex-col h-full">
           {/* Icon Header */}
           <div className={`relative h-32 bg-gradient-to-br ${colorClass} flex items-center justify-center`}>
-            <span className="text-6xl opacity-50">{icon}</span>
+            <span className="text-2xl font-bold text-white opacity-40 uppercase tracking-wider">{icon}</span>
             {/* Category Tag */}
             <span className="absolute top-3 left-3 px-3 py-1 rounded-full bg-white/90 text-ink text-xs font-medium">
               {build.category}

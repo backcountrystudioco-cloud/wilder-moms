@@ -61,35 +61,35 @@ export function isGoodWeatherForHiking(code, tempF) {
  */
 export function getWeatherEmoji(code) {
   const emojis = {
-    0: '☀️',  // Clear
-    1: '🌤️', // Mainly Clear
-    2: '⛅',  // Partly Cloudy
-    3: '☁️',  // Overcast
-    45: '🌫️', // Foggy
-    48: '🌫️', // Rime Fog
-    51: '🌧️', // Light Drizzle
-    53: '🌧️', // Moderate Drizzle
-    55: '🌧️', // Dense Drizzle
-    56: '🌧️', // Freezing Drizzle
-    57: '🌧️', // Dense Freezing Drizzle
-    61: '🌧️', // Slight Rain
-    63: '🌧️', // Moderate Rain
-    65: '🌧️', // Heavy Rain
-    66: '🌧️', // Freezing Rain
-    67: '🌧️', // Heavy Freezing Rain
-    71: '🌨️', // Slight Snowfall
-    73: '🌨️', // Moderate Snowfall
-    75: '❄️',  // Heavy Snowfall
-    77: '🌨️', // Snow Grains
-    80: '🌦️', // Slight Rain Showers
-    81: '🌦️', // Moderate Rain Showers
-    82: '⛈️',  // Violent Rain Showers
-    85: '🌨️', // Slight Snow Showers
-    86: '❄️',  // Heavy Snow Showers
-    95: '⛈️',  // Thunderstorm
-    96: '⛈️',  // Thunderstorm with Slight Hail
-    99: '⛈️',  // Thunderstorm with Heavy Hail
+    0: 'sunny',  // Clear
+    1: 'mostly_sunny', // Mainly Clear
+    2: 'partly_cloudy',  // Partly Cloudy
+    3: 'cloudy',  // Overcast
+    45: 'foggy', // Foggy
+    48: 'foggy', // Rime Fog
+    51: 'rain', // Light Drizzle
+    53: 'rain', // Moderate Drizzle
+    55: 'rain', // Dense Drizzle
+    56: 'rain', // Freezing Drizzle
+    57: 'rain', // Dense Freezing Drizzle
+    61: 'rain', // Slight Rain
+    63: 'rain', // Moderate Rain
+    65: 'rain', // Heavy Rain
+    66: 'rain', // Freezing Rain
+    67: 'rain', // Heavy Freezing Rain
+    71: 'snow', // Slight Snowfall
+    73: 'snow', // Moderate Snowfall
+    75: 'snow',  // Heavy Snowfall
+    77: 'snow', // Snow Grains
+    80: 'light_rain', // Slight Rain Showers
+    81: 'light_rain', // Moderate Rain Showers
+    82: 'storm',  // Violent Rain Showers
+    85: 'snow', // Slight Snow Showers
+    86: 'snow',  // Heavy Snow Showers
+    95: 'storm',  // Thunderstorm
+    96: 'storm',  // Thunderstorm with Slight Hail
+    99: 'storm',  // Thunderstorm with Heavy Hail
   };
 
-  return emojis[code] || '❓';
+  return emojis[code] || 'unknown';
 }
