@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom'
 import { UserProvider } from './context/UserContext'
 import AppLayout from './components/AppLayout'
 import HomePage from './pages/HomePage'
+import MissionPage from './pages/MissionPage'
 import HabitatPage from './habitat/HabitatPage'
 import BuildsPage from './basecamp/BuildsPage'
 import BuildDetailPage from './basecamp/BuildDetailPage'
@@ -16,6 +17,7 @@ function App() {
       <LaunchPopup />
       <Routes>
       <Route path="/" element={<HomePage />} />
+        <Route path="/mission" element={<MissionPage />} />
       <Route element={<AppLayout />}>
         <Route path="/habitat" element={<HabitatPage />} />
         <Route path="/basecamp" element={<BuildsPage />} />
