@@ -44,6 +44,7 @@ function BuildCard({ build, index }) {
   const [ref, isVisible] = useScrollReveal()
   const icon = categoryIcons[build.category] || 'Shelter'
   const colorClass = categoryColors[build.category] || 'from-ember to-terra'
+  const buildImage = `/images/builds/${build.id}.jpg`
 
   return (
     <motion.article
@@ -57,9 +58,17 @@ function BuildCard({ build, index }) {
     >
       <Link to={`/basecamp/${build.id}`} className="block">
         <div className="bg-white rounded-2xl overflow-hidden shadow-lg shadow-ink/5 flex flex-col h-full">
-          {/* Icon Header */}
-          <div className={`relative h-32 bg-gradient-to-br ${colorClass} flex items-center justify-center`}>
-            <span className="text-2xl font-bold text-white opacity-40 uppercase tracking-wider">{icon}</span>
+          {/* Image Header */}
+          <div className="relative h-40 overflow-hidden">
+            <img
+              src={buildImage}
+              alt={build.title}
+              className="w-full h-full object-cover"
+              onError={(e) => {
+                e.target.style.display = 'none'
+                e.target.parentElement.classList.add(`bg-gradient-to-br`, ...colorClass.split(' '), 'flex', 'items-center', 'justify-center')
+              }}
+            />
             <span className="absolute top-3 left-3 px-3 py-1 rounded-full bg-white/90 text-ink text-xs font-medium">
               {build.category}
             </span>
