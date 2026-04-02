@@ -17,8 +17,8 @@ function App() {
       <LaunchPopup />
       <Routes>
       <Route path="/" element={<HomePage />} />
-        <Route path="/mission" element={<MissionPage />} />
       <Route element={<AppLayout />}>
+        <Route path="/mission" element={<MissionPage />} />
         <Route path="/habitat" element={<HabitatPage />} />
         <Route path="/basecamp" element={<BuildsPage />} />
         <Route path="/basecamp/:buildId" element={<BuildDetailPage />} />
