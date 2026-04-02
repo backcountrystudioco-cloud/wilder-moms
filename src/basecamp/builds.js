@@ -620,375 +620,171 @@ export const builds = [
     relatedBuilds: ['fort-sticks', 'sheet-tunnel']
   },
 
-  // WEEKEND BUILDS
   {
-    id: 'fairy-door-treehouse',
-    title: 'The Fairy Door Treehouse',
+    id: 'eco-mushroom-playhouse',
+    title: 'Eco Mushroom Playhouse',
     category: 'Weekend Builds',
-    difficulty: 'hard',
-    timeEstimate: '5-7 hours',
-    ageRange: '3-12',
-    cost: '$100-180',
-    description: 'A whimsical small treehouse with a spiral staircase, window boxes with tiny flowers, and a fairy-sized door. The magical details make every visit feel like discovering a secret world.',
-    tools: ['Circular saw', 'Drill', 'Level', 'Ladder', 'Hammer', 'Measuring tape', 'Safety goggles'],
+    difficulty: 'medium',
+    timeEstimate: '2 days',
+    ageRange: '3-8',
+    cost: '$50-70',
+    badge: 'Eco Build',
+    description: 'A fully compostable playhouse with a flour-paste papier-mache cap. Every component breaks down naturally at end of life. Big enough for two kids, simple enough for one weekend.',
+    tools: ['Drill', 'Saw', 'Scissors', 'Paint brushes', 'Large pot (for paste)'],
     materials: [
-      { name: 'Cedar planks (1x6)', quantity: '12 boards', link: 'https://www.homedepot.com' },
-      { name: 'Plywood sheets (1/2 inch)', quantity: '2 sheets', link: 'https://www.homedepot.com' },
-      { name: 'Wooden dowels (1 inch)', quantity: '8 feet', link: 'https://www.homedepot.com' },
-      { name: 'Hinges (small, brass)', quantity: '2 pairs', link: 'https://www.homedepot.com' },
-      { name: 'Exterior wood screws', quantity: '1 box', link: 'https://www.homedepot.com' },
-      { name: 'Waterproof wood glue', quantity: '1 bottle', link: 'https://www.homedepot.com' },
-      { name: 'Child-safe wood stain', quantity: '1 quart', link: 'https://www.homedepot.com' }
+      { name: 'Wooden garden stakes (6ft)', quantity: '8-10 stakes', link: 'https://www.homedepot.com' },
+      { name: 'Reclaimed pallets or cedar decking', quantity: '2-3', link: 'https://www.facebook.com/marketplace' },
+      { name: 'Screen moulding strips or bamboo stakes', quantity: '4 strips', link: 'https://www.homedepot.com' },
+      { name: 'Thick jute rope', quantity: '1 large reel', link: 'https://www.homedepot.com' },
+      { name: 'Hessian sacking', quantity: '2-3 pieces', link: 'https://www.homedepot.com' },
+      { name: 'Brown paper bags', quantity: 'Several bags', link: 'https://localstores' },
+      { name: 'Plain flour', quantity: '4-5 cups', link: 'https://localgrocery' },
+      { name: 'Raw linseed oil (16oz)', quantity: '1-2 bottles', link: 'https://www.homedepot.com' },
+      { name: 'Red ochre pigment + white chalk paint', quantity: '1 quart each', link: 'https://www.homedepot.com' },
+      { name: 'Strap hinges', quantity: '2 pairs', link: 'https://www.homedepot.com' }
     ],
     steps: [
-      { title: 'Choose the Perfect Tree', description: 'Select a healthy tree with a sturdy trunk at least 8 inches in diameter. Mark two strong horizontal branches for platform support, ideally 5-7 feet off the ground.' },
-      { title: 'Build the Platform Frame', description: 'Cut four cedar planks to create a 4x4 foot square frame. Use metal brackets at each corner. Attach horizontal support beams to tree trunk using heavy-duty bolts.' },
-      { title: 'Install the Floor', description: 'Cut plywood to fit snugly inside the frame. Leave a 2-inch gap around the tree trunk for growth. Secure with screws every 8 inches.' },
-      { title: 'Create the Spiral Staircase', description: 'Cut triangular step pieces from cedar, spacing them 8 inches apart vertically. Attach each step to a central wooden dowel, alternating sides.' },
-      { title: 'Build the Walls and Roof', description: 'Construct three walls using cedar planks with gaps for ventilation. Create a peaked roof using plywood covered with shingles.' },
-      { title: 'Install the Fairy Door', description: 'Cut a 12x20 inch arched door opening. Hang a miniature wooden door on brass hinges. Add two windows with shutters.' },
-      { title: 'Add Magical Details', description: 'Apply wood stain in warm honey tones. Install tiny lanterns with battery-operated candles. Add a sign at the entrance.' }
+      { title: 'Build the Floor', description: 'Break down pallets and lay boards side by side to form a ~4ft circle. Screw cross-battens underneath. Raise 2-3 inches off ground on flat stones for longevity.' },
+      { title: 'Plant the Upright Stakes', description: 'Drill holes around floor perimeter and push 8-10 stakes (6ft tall) 8 inches in. Leave a 2ft gap on one side for the door. Screw through battens to anchor.' },
+      { title: 'Lash the Top Ring', description: 'Bend a long thin branch or screen moulding into a circle at the top of stakes (~3.5ft from ground). Lash to each stake with jute twine.' },
+      { title: 'Coil Jute Rope Around Stem', description: 'Starting at the base, wrap thick jute rope around all stakes like a coil pot. Dab wood glue between each coil. Leave door gap open as you go.' },
+      { title: 'Make and Hang the Door', description: 'Cut door from reclaimed pallet boards in an arched shape. Screw a batten as door post and hang with two strap hinges. Add a jute rope loop as handle.' },
+      { title: 'Build the Cap Hoop Frame', description: 'Soak screen moulding strips in warm water 20-30 min. Bend into two hoops ~3-3.5ft diameter. Cross at top, lash firmly. Push bottoms to ~5ft and lash to stem top ring.' },
+      { title: 'Drape Hessian and Apply Papier-Mache', description: 'Drape hessian over dome, tie with jute. Kids dip brown paper in flour paste and layer all over cap - 2 full layers. Leave overnight between layers.' },
+      { title: 'Make and Apply Spots', description: 'Scrunch brown paper into balls (golf ball to 4in). Cover in 2-3 layers flour-paste papier-mache. Glue spots onto cap with thick paste. Kids choose every spot position.' },
+      { title: 'Paint and Seal', description: 'Mix red ochre into chalk paint for the cap. Paint cap and stem white. Once dry, brush linseed oil over everything to lock color and add water resistance.' },
+      { title: 'Decorate', description: 'Paint the door, press dried flowers into last paste layer, add a name sign. Add a rug from old blanket and battery fairy lights. It is theirs now.' }
     ],
     tips: [
-      'Always use pressure-treated wood for any contact with tree sap',
-      'Sand all edges thoroughly - little hands touch everything',
-      'Build during dry weather',
-      'Add a pulley system for raising snacks without climbing'
+      'Make the cap as tall and steep as possible - at least 2ft above brim. Steep dome sheds rain instantly.',
+      'Raise floor 2-3 inches on flat stones - this adds years to the structure.',
+      'Lay linseed-soaked rags flat outdoors to dry - never pile them (fire risk).',
+      'One linseed oil coat each spring keeps it going indefinitely.'
     ],
-    relatedBuilds: ['ninja-course-platform', 'tire-swing-frame', 'reading-hut']
+    ecoNote: 'Fully compostable at end of life - stakes, rope, hessian, paper, canvas, and wood all break down naturally. Keep and reuse only the strap hinges.',
+    relatedBuilds: ['giant-nest', 'living-tunnel', 'giant-rainbow-arch']
   },
   {
-    id: 'ninja-course-platform',
-    title: 'Ninja Course Platform',
+    id: 'giant-rainbow-arch',
+    title: 'Giant Rainbow Arch',
     category: 'Weekend Builds',
-    difficulty: 'hard',
-    timeEstimate: '6-8 hours',
-    ageRange: '5-12',
-    cost: '$150-250',
-    description: 'An action-packed A-frame with slackline, climbing rope, cargo net, and rings. Kids burn energy mastering each obstacle while building real strength and coordination.',
-    tools: ['Power drill', 'Socket wrench set', 'Level', 'Shovel', 'Post hole digger', 'Measuring tape'],
-    materials: [
-      { name: 'Pressure-treated 4x4 posts', quantity: '6 posts (10ft)', link: 'https://www.homedepot.com' },
-      { name: 'Pressure-treated 2x6 planks', quantity: '4 planks (12ft)', link: 'https://www.homedepot.com' },
-      { name: 'Heavy-duty eye bolts', quantity: '8', link: 'https://www.homedepot.com' },
-      { name: 'Dacron slackline (50ft)', quantity: '1', link: 'https://www.rei.com' },
-      { name: 'Climbing rope (100ft)', quantity: '1', link: 'https://www.rei.com' },
-      { name: 'Cargo net (6x8ft)', quantity: '1', link: 'https://www.amazon.com' },
-      { name: 'Olympic rings set', quantity: '1 pair', link: 'https://www.amazon.com' },
-      { name: 'Concrete mix', quantity: '4 bags', link: 'https://www.homedepot.com' }
-    ],
-    steps: [
-      { title: 'Dig Support Holes', description: 'Mark six hole locations in an A-frame pattern, spaced 8 feet apart at the base. Dig holes 2 feet deep.' },
-      { title: 'Set the Main Frame', description: 'Stand two 4x4 posts vertically in holes, creating two A-frames. Cross-pairs at 6 feet height using 2x6 beams. Fill holes with concrete and allow 48 hours to cure.' },
-      { title: 'Add Cross-Beams', description: 'Connect the two A-frames with horizontal 2x6 beams at multiple heights (3ft, 5ft, 7ft).' },
-      { title: 'Install the Slackline', description: 'Attach ratchet straps to trees or posts at 3 feet height. Thread the slackline through and tension until there is 1-2 inches of sag.' },
-      { title: 'Hang the Climbing Rope', description: 'Thread rope through an eye bolt at 8 feet height. Tie knots 12 inches apart starting from the bottom.' },
-      { title: 'Mount the Cargo Net', description: 'Attach cargo net to the upper portion of one A-frame using heavy zip ties. Angle it at 75 degrees.' },
-      { title: 'Install the Rings', description: 'Hang Olympic rings from a crossbeam at 6 feet height using chains. Position them 18 inches apart.' }
-    ],
-    tips: [
-      'Install foam padding on all sharp corners',
-      'Check slackline tension weekly',
-      'Add a wooden handrail for beginners',
-      'Keep landing zones clear and add rubber mulch'
-    ],
-    relatedBuilds: ['climbing-boulder-wall', 'tire-swing-frame', 'fairy-door-treehouse']
-  },
-  {
-    id: 'sandbox-with-cover',
-    title: 'Sandbox With Cover',
-    category: 'Weekend Builds',
-    difficulty: 'hard',
-    timeEstimate: '5-7 hours',
-    ageRange: '3-10',
-    cost: '$120-200',
-    description: 'A large sandbox with built-in bench seating that transforms into a performance stage. The folding wooden cover raises on gas struts to reveal sand or create a stage.',
-    tools: ['Circular saw', 'Drill', 'Level', 'Clamps', 'Corner braces', 'Wood screws', 'Sandpaper'],
-    materials: [
-      { name: 'Cedar 2x12 boards', quantity: '8 boards (8ft)', link: 'https://www.homedepot.com' },
-      { name: 'Cedar 2x6 boards', quantity: '6 boards (8ft)', link: 'https://www.homedepot.com' },
-      { name: '2x4 pressure-treated framing', quantity: '10 boards', link: 'https://www.homedepot.com' },
-      { name: 'Landscape fabric', quantity: '10x10 feet', link: 'https://www.homedepot.com' },
-      { name: 'Play sand', quantity: '500 lbs', link: 'https://www.localnursery.com' },
-      { name: 'Gas struts (20 inch)', quantity: '4', link: 'https://www.amazon.com' },
-      { name: 'Hinges (heavy duty)', quantity: '4 pairs', link: 'https://www.homedepot.com' },
-      { name: 'Exterior wood stain', quantity: '1 gallon', link: 'https://www.homedepot.com' }
-    ],
-    steps: [
-      { title: 'Build the Base Frame', description: 'Cut 2x4 pressure-treated lumber to create a 6x8 foot rectangular frame. Install corner braces at each joint.' },
-      { title: 'Line the Interior', description: 'Cut landscape fabric to cover the interior bottom and sides up to 4 inches high.' },
-      { title: 'Create Bench Seating', description: 'Build bench frames using 2x12 cedar attached to the inside of the base frame. Make them 12 inches wide and 10 inches high.' },
-      { title: 'Add the Sandbox Floor', description: 'Cut pressure-treated plywood to cover the bottom. Drill drainage holes across the surface.' },
-      { title: 'Build the Folding Cover', description: 'Create two hinged sections using 2x6 cedar planks. Each section should be 4 feet wide. Add piano hinges along the center seam.' },
-      { title: 'Install Gas Struts', description: 'Attach gas struts between the bench frame and cover underside. When fully open at 90 degrees, the cover should stay open.' },
-      { title: 'Fill and Finish', description: 'Fill with 500 pounds of play sand. Stain all exposed cedar.' }
-    ],
-    tips: [
-      'Place sandbox in partial shade - full sun makes sand too hot',
-      'Include a cover with screen mesh to keep cats out',
-      'Add buried plastic dinosaurs for discovery during play',
-      'Consider adding wheels to the bench legs'
-    ],
-    relatedBuilds: ['mud-kitchen-deluxe', 'fairy-door-treehouse', 'reading-hut']
-  },
-  {
-    id: 'zip-line-station',
-    title: 'Zip Line Station',
-    category: 'Weekend Builds',
-    difficulty: 'hard',
-    timeEstimate: '5-6 hours',
-    ageRange: '5-12',
-    cost: '$80-150',
-    description: 'An exhilarating zipline between two trees with a hand-grip handle and brake system that kids can control. Delivers that amazing flying sensation safely.',
-    tools: ['Drill', 'Socket wrench', 'Pulleys', 'Cable tensioner', 'Measuring tape', 'Ladder', 'Cable cutters'],
-    materials: [
-      { name: 'Galvanized steel cable (100ft)', quantity: '1 roll', link: 'https://www.homedepot.com' },
-      { name: 'Zipline trolley with bearings', quantity: '1', link: 'https://www.amazon.com' },
-      { name: 'Tree-safe cable straps', quantity: '8', link: 'https://www.amazon.com' },
-      { name: 'Cable turnbuckle tensioner', quantity: '2', link: 'https://www.homedepot.com' },
-      { name: 'Tree protection pads', quantity: '4', link: 'https://www.amazon.com' },
-      { name: 'Tarp swing seat with harness', quantity: '1', link: 'https://www.amazon.com' },
-      { name: 'Wooden handle grips', quantity: '2 pairs', link: 'https://www.amazon.com' },
-      { name: 'Rubber brake pads', quantity: '2', link: 'https://www.homedepot.com' }
-    ],
-    steps: [
-      { title: 'Assess Tree and Route', description: 'Identify two trees at least 40 feet apart with trunks minimum 12 inches diameter. The starting tree should be 3-5 feet higher.' },
-      { title: 'Install Tree Protection', description: 'Wrap tree pads around both anchor points where cable will touch bark.' },
-      { title: 'Run the Cable', description: 'Feed cable through tree-safe straps at both anchor points. Pull taut and secure with cable clamps. Cable should be minimum 7 feet high.' },
-      { title: 'Calculate Proper Sag', description: 'The cable should have a 6-8% sag in the middle. Too tight strains trees, too loose and rider drags.' },
-      { title: 'Install the Trolley', description: 'Thread cable through the trolleys bearing mechanism. Test that it rolls freely along the entire length.' },
-      { title: 'Attach the Seat', description: 'Connect harness seat to trolley. Leave 18-24 inches of slack so seat can be pulled upright for riding.' },
-      { title: 'Install Brake Zone', description: 'Mount rubber brake pads at the end where rider naturally slows. Position so rider grabs them to slow before reaching anchor.' }
-    ],
-    tips: [
-      'Never install near power lines - maintain 30 feet minimum clearance',
-      'Add a landing platform at the end for safe dismount',
-      'Teach kids to brake BEFORE grabbing seat handles',
-      'Apply lubricant to bearings every few months'
-    ],
-    relatedBuilds: ['tire-swing-frame', 'ninja-course-platform', 'climbing-boulder-wall']
-  },
-  {
-    id: 'climbing-boulder-wall',
-    title: 'Climbing Boulder Wall',
-    category: 'Weekend Builds',
-    difficulty: 'hard',
-    timeEstimate: '6-8 hours',
-    ageRange: '4-12',
-    cost: '$100-180',
-    description: 'A free-standing climbing wall with slab sections for beginners, steep face for intermediates, and a crack for advanced climbers. All holds can be repositioned.',
-    tools: ['Drill', 'Level', 'Measuring tape', 'Wood screws', 'Carriage bolts', 'Socket set', 'Safety glasses'],
-    materials: [
-      { name: 'Pressure-treated 4x4 posts', quantity: '4 posts (8ft)', link: 'https://www.homedepot.com' },
-      { name: 'Plywood sheets (3/4 inch)', quantity: '3 sheets (4x8)', link: 'https://www.homedepot.com' },
-      { name: 'Climbing holds (mixed pack)', quantity: '50 holds', link: 'https://www.amazon.com' },
-      { name: 'T-nuts', quantity: '50', link: 'https://www.amazon.com' },
-      { name: '2x6 horizontal beams', quantity: '6 boards', link: 'https://www.homedepot.com' },
-      { name: 'Foam padding tiles', quantity: '24 tiles', link: 'https://www.amazon.com' },
-      { name: 'Rubber mulch', quantity: '6 bags', link: 'https://www.homedepot.com' },
-      { name: 'Wood stain', quantity: '1 gallon', link: 'https://www.homedepot.com' }
-    ],
-    steps: [
-      { title: 'Build the Frame Structure', description: 'Create an A-frame using 4x4 posts. The front face should angle back slightly at the top (5 degrees) for slab climbing.' },
-      { title: 'Sheathe the Climbing Face', description: 'Cut and attach 3/4 inch plywood sheets to the frame. The face should be 8 feet wide and 6 feet tall.' },
-      { title: 'Install T-Nuts', description: 'Drill holes every 6-8 inches across the face in a grid. Drill 3/8 inch holes and tap in T-nuts from the back.' },
-      { title: 'Plan the Route', description: 'Sketch three routes: easy slab with large holds, intermediate vertical, advanced overhang.' },
-      { title: 'Mount the Holds', description: 'Thread 3/8 inch bolt through hold, then through T-nut, and secure with washer and nut from back.' },
-      { title: 'Create the Crack Section', description: 'Position two parallel 2x4 boards at a slight angle to create a crack. Add smaller holds on one side.' },
-      { title: 'Build Landing Zone', description: 'Cover ground with foam padding tiles and surround with rubber mulch. Extend 3 feet beyond wall base.' }
-    ],
-    tips: [
-      'Start holds low and close together, move higher as kids grow',
-      'Angle some holds outward at 15-30 degrees for realistic climbing',
-      'Rotate holds every few weeks',
-      'Add a slackline next to wall for warm-up'
-    ],
-    relatedBuilds: ['ninja-course-platform', 'fairy-door-treehouse', 'zip-line-station']
-  },
-  {
-    id: 'reading-hut',
-    title: 'The Reading Hut',
-    category: 'Weekend Builds',
-    difficulty: 'hard',
-    timeEstimate: '5-6 hours',
-    ageRange: '3-10',
-    cost: '$80-150',
-    description: 'An octagonal sanctuary crafted from bamboo poles with soft cushions for story time. Peek-through windows let light in while maintaining enclosure. A hanging lantern casts warm light for evening reading.',
-    tools: ['Pruning shears', 'Drill', 'Rope (natural hemp)', 'Ground stakes', 'Level', 'Measuring tape', 'Safety gloves'],
-    materials: [
-      { name: 'Bamboo poles (8ft, 1 inch)', quantity: '24 poles', link: 'https://www.amazon.com' },
-      { name: 'Bamboo poles (6ft, 1/2 inch)', quantity: '16 poles', link: 'https://www.amazon.com' },
-      { name: 'Hemp rope', quantity: '100 feet', link: 'https://www.homedepot.com' },
-      { name: 'Canvas drop cloth', quantity: '2 large', link: 'https://www.amazon.com' },
-      { name: 'Floor cushions (set of 6)', quantity: '1 set', link: 'https://www.amazon.com' },
-      { name: 'Paper lantern (large)', quantity: '1', link: 'https://www.amazon.com' },
-      { name: 'LED candle (set)', quantity: '1 set', link: 'https://www.amazon.com' },
-      { name: 'Ground anchor stakes', quantity: '12', link: 'https://www.homedepot.com' }
-    ],
-    steps: [
-      { title: 'Mark the Octagon Foundation', description: 'Use string and stakes to mark an octagon 8 feet across. Mark each of the 8 corner points.' },
-      { title: 'Plant the Vertical Poles', description: 'Dig holes 6 inches deep at each corner. Place 8-foot bamboo poles and fill with soil, tamping firmly.' },
-      { title: 'Weave the Lower Wall', description: 'Take 6-foot horizontal poles and lash to verticals at 6 inches and 3 feet using hemp rope. Weave thin bamboo between them.' },
-      { title: 'Create Peek-Through Windows', description: 'Cut irregular window shapes at varying heights using pruning shears. Add small shutters hinged at top.' },
-      { title: 'Build the Cone Roof', description: 'Bring all 8 vertical poles together at the top and bind tightly with rope. Weave thin bamboo across for thatched appearance.' },
-      { title: 'Line the Floor', description: 'Cover ground with landscape fabric then foam padding. Arrange floor cushions in the center.' },
-      { title: 'Hang the Lantern', description: 'Create a pulley system using hemp rope through roof peak. Hang paper lantern from pulley.' }
-    ],
-    tips: [
-      'Treat bamboo ends with linseed oil to prevent cracking',
-      'The structure is flexible - do not overtighten lashings',
-      'Add a small speaker for story time ambiance',
-      'Consider a step stool for younger children'
-    ],
-    relatedBuilds: ['fairy-door-treehouse', 'sandbox-with-cover', 'sunset-pergola']
-  },
-  {
-    id: 'water-ball-launch-station',
-    title: 'Water Ball Launch Station',
-    category: 'Weekend Builds',
-    difficulty: 'hard',
+    difficulty: 'easy',
     timeEstimate: '4-5 hours',
-    ageRange: '4-12',
-    cost: '$60-100',
-    description: 'A backyard water battle headquarters with a pump-powered balloon launcher that sends water balloons soaring up to 50 feet. Includes a target board with splash zones.',
-    tools: ['PVC pipe cutter', 'Drill', 'Saw', 'Wrench set', 'Measuring tape', 'Safety goggles'],
+    ageRange: '2-12',
+    cost: '$40-55',
+    badge: 'Eco Build',
+    description: 'Six giant arches planted in a curve, each painted a different rainbow color. Kids run through them, wildflowers bloom at the base, and fairy lights make the whole yard glow. Visible from the end of the street.',
+    tools: ['Rubber mallet', 'Paint brushes', 'Garden trowel'],
     materials: [
-      { name: 'PVC pipe (2 inch, Schedule 40)', quantity: '30 feet', link: 'https://www.homedepot.com' },
-      { name: 'PVC elbows and T-joints', quantity: '12 assorted', link: 'https://www.homedepot.com' },
-      { name: 'Water balloon pump (large)', quantity: '1', link: 'https://www.amazon.com' },
-      { name: 'Water balloons (500 count)', quantity: '2 bags', link: 'https://www.amazon.com' },
-      { name: 'PVC cement and primer', quantity: '1 kit', link: 'https://www.homedepot.com' },
-      { name: 'Stakes and bungee cords', quantity: '1 set', link: 'https://www.amazon.com' },
-      { name: 'Rubberized tarp (splash zone)', quantity: '1 (10x10)', link: 'https://www.amazon.com' },
-      { name: 'Plywood for target stand', quantity: '1 sheet', link: 'https://www.homedepot.com' }
+      { name: 'Screen moulding strips (1/4 x 3/4 x 8ft)', quantity: '12 strips (2 per arch)', link: 'https://www.homedepot.com' },
+      { name: 'Jute twine', quantity: '1 large ball', link: 'https://www.homedepot.com' },
+      { name: 'Chalk paint - 6 colors', quantity: 'Small sample pots', link: 'https://www.homedepot.com' },
+      { name: 'Red ochre pigment', quantity: '1 small jar', link: 'https://www.homedepot.com' },
+      { name: 'Raw linseed oil (16oz)', quantity: '1 bottle', link: 'https://www.homedepot.com' },
+      { name: 'Wildflower seed mix', quantity: '1 packet', link: 'https://www.localnursery.com' },
+      { name: 'Battery fairy lights', quantity: '6 sets', link: 'https://www.amazon.com' }
     ],
     steps: [
-      { title: 'Design the Launcher Frame', description: 'Cut PVC to create an A-frame base 3 feet wide and 4 feet tall. Add a horizontal arm at the top that pivots.' },
-      { title: 'Build the Pumping Chamber', description: 'Create a T-junction near the base of the arm with a chamber. Install a hand pump to this chamber.' },
-      { title: 'Create the Launch Cup', description: 'Cut the end of the launch arm into a cup shape using flexible 2-inch PVC bent into a U.' },
-      { title: 'Install the Firing Mechanism', description: 'Add a sprinkler valve handle to the pumping chamber for easy on/off control.' },
-      { title: 'Build the Target Board', description: 'Construct a 4x6 foot target using plywood. Cut 3 concentric circles for scoring zones.' },
-      { title: 'Prepare the Splash Zone', description: 'Lay rubberized tarp beneath and around target. Create raised edges to contain splash.' },
-      { title: 'Safety Setup', description: 'Install ground stakes with rope around launch zone to keep runners clear during firing.' }
+      { title: 'Mark the Rainbow Curve', description: 'Lay a garden hose in a gentle curve across the yard. Space 6 marks along it roughly 2.5ft apart - each is the center point between two arch feet.' },
+      { title: 'Prepare Arch Material', description: 'Soak screen moulding strips in warm water 20-30 minutes before bending. Use two strips lashed side by side per arch leg for 2-3 season durability.' },
+      { title: 'Plant All Six Arches', description: 'Push one end 12 inches into ground at marked spot. Walk strip over in curve and push other end 12 inches in about 5 feet away. Push a second stake alongside each leg for extra stability.' },
+      { title: 'Kids Paint Each Arch', description: 'Assign one arch per child: red, orange, yellow, green, blue, violet. Mix red ochre into chalk paint for warm colors. Two coats each from ground up.' },
+      { title: 'Seal with Linseed Oil', description: 'Once paint is dry, brush raw linseed oil over each arch. Locks color and waterproofs. Lay linseed-soaked rags flat to dry outdoors.' },
+      { title: 'String Fairy Lights', description: 'Wrap battery fairy lights around each arch - spiral up to apex, back down. Tuck battery pack beside stake foot. Switch all six on at dusk for the magic moment.' },
+      { title: 'Scatter Wildflower Seeds', description: 'Scratch soil lightly along base of all arches with trowel. Kids scatter wildflower mix generously - poppies, cornflowers, marigolds. Water well.' },
+      { title: 'Decorate Between Arches', description: 'Place flat stepping stones between each arch pair for a path through the rainbow. Kids paint stones in matching colors. Add wind chimes or hessian bunting.' }
     ],
     tips: [
-      'Practice with empty balloons first to find the perfect launch angle',
-      'Store balloons in a bucket of water to keep them pre-filled',
-      'Add food coloring to water for visible splash marks',
-      'Keep spare pumps on hand'
+      'Double up arch strips for longevity - single lasts one summer, double lasts 2-3 seasons.',
+      'Push feet in 12 inches minimum - shallow stakes pull out in wind.',
+      'Wildflower seeds need scratched soil to germinate - scratch first, then scatter.',
+      'Solar fairy lights mean zero effort all summer - charge by day, switch on at dusk.'
     ],
-    relatedBuilds: ['mud-kitchen-deluxe', 'tire-swing-frame', 'sunset-pergola']
+    ecoNote: 'Pull stakes at end of season, chop for compost. Jute twine composts completely. Wildflowers self-seed. Remove battery packs and reuse lights. Whole structure comes down in under 20 minutes.',
+    relatedBuilds: ['eco-mushroom-playhouse', 'living-tunnel', 'giant-nest']
   },
   {
-    id: 'tire-swing-frame',
-    title: 'Tire Swing Frame',
+    id: 'giant-nest',
+    title: 'Giant Nest',
     category: 'Weekend Builds',
-    difficulty: 'hard',
-    timeEstimate: '6-8 hours',
-    ageRange: '3-12',
-    cost: '$100-180',
-    description: 'A custom A-frame with three swinging options: a classic tire swing, a wriggling snake swing, and a trapeze bar. The heavy-duty frame handles multiple swinging styles simultaneously.',
-    tools: ['Post hole digger', 'Drill', 'Socket wrench', 'Level', 'Measuring tape', 'Shovel', 'Concrete mix'],
+    difficulty: 'easy',
+    timeEstimate: '3-4 hours',
+    ageRange: '2-12',
+    cost: '$25-40',
+    badge: 'Eco Build',
+    description: 'A 6ft wide woven birds nest built from foraged branches and rope - big enough for three kids to sit inside. Line with hessian and cushions, add a giant papier-mache egg. Most compostable build on the list.',
+    tools: ['Rubber mallet', 'Scissors', 'Paint brushes', 'Large pot (for paste)'],
     materials: [
-      { name: 'Pressure-treated 6x6 posts', quantity: '4 posts (12ft)', link: 'https://www.homedepot.com' },
-      { name: 'Heavy-duty swing hangers', quantity: '6', link: 'https://www.homedepot.com' },
-      { name: 'Tire swing chain (48 inch)', quantity: '1 set', link: 'https://www.amazon.com' },
-      { name: 'Rubber tractor tire', quantity: '1', link: 'https://www.localtiredealer.com' },
-      { name: 'Snake swing (rubber coated)', quantity: '1', link: 'https://www.amazon.com' },
-      { name: 'Trapeze bar (14 inch)', quantity: '1', link: 'https://www.amazon.com' },
-      { name: 'Swing seats (belt style)', quantity: '2', link: 'https://www.amazon.com' },
-      { name: 'Concrete mix', quantity: '8 bags', link: 'https://www.homedepot.com' }
+      { name: 'Wooden garden stakes (6ft)', quantity: '8 stakes', link: 'https://www.homedepot.com' },
+      { name: 'Thick branches and sticks', quantity: 'Big pile - gathered free', link: 'https://localpark' },
+      { name: 'Thick jute rope', quantity: '1 large reel', link: 'https://www.homedepot.com' },
+      { name: 'Dried grass and small twigs', quantity: 'Gathered on walk', link: 'https://localarea' },
+      { name: 'Hessian sacking', quantity: '1-2 pieces', link: 'https://www.homedepot.com' },
+      { name: 'Old cushions or blanket', quantity: 'From home', link: 'https://reuse' },
+      { name: 'Battery fairy lights', quantity: '1-2 sets', link: 'https://www.amazon.com' },
+      { name: 'Large oval balloon', quantity: '1', link: 'https://localstore' },
+      { name: 'Plain flour', quantity: '2 cups', link: 'https://localgrocery' },
+      { name: 'White + brown chalk paint', quantity: 'Small pots', link: 'https://www.homedepot.com' }
     ],
     steps: [
-      { title: 'Dig the Post Holes', description: 'Mark four holes in a rectangle 10 feet long and 4 feet wide at the base. Each hole should be 3 feet deep.' },
-      { title: 'Set the Main Frame', description: 'Stand two pairs of 6x6 posts in their holes, angled outward to form an A-frame. Cross-connect each pair at 7 feet height with a horizontal beam.' },
-      { title: 'Install the Top Beam', description: 'Connect the two A-frames at the top with a horizontal 6x6 beam, 10 feet long. Secure with four 1/2 inch bolts through each joint.' },
-      { title: 'Pour the Concrete', description: 'Mix and pour concrete into all four holes. Allow 72 hours minimum before any swinging.' },
-      { title: 'Mount the Tire Swing', description: 'Hang the tire from a single point using a 48-inch chain connected to a swivel hanger. Mount at the center of the top beam.' },
-      { title: 'Install Snake Swing and Trapeze', description: 'Hang snake swing and trapeze bar 24 inches apart on either side of the tire swing.' },
-      { title: 'Safety Check and Ground Prep', description: 'Ensure all hardware is torqued properly. Add rubber mulch beneath swing zone to a depth of 12 inches.' }
+      { title: 'Go on a Family Stick-Gathering Walk', description: 'Head to a park or woodland. Collect thick branches (thumb-width, 4-6ft) for main weave and thin flexible twigs for filling. Collect at least twice as much as you think needed.' },
+      { title: 'Mark Circle and Plant Frame Stakes', description: 'Tie 3ft string to center stake, walk taut circle to mark 6ft diameter. Hammer 8 stakes evenly around circle at least 12in deep, slight outward angle for bowl shape.' },
+      { title: 'Weave Base Layer', description: 'Weave longest flexible branches in and out between upright stakes around full circle - over one, behind next. Add rounds of thick jute rope between branch rows. Kids can do this after one demo.' },
+      { title: 'Build Walls to 18-20 inches', description: 'Keep weaving until walls reach 18-20 inches - enough to feel enclosed while sitting but easy to climb. Top does not need to be level - real nests are never neat.' },
+      { title: 'Pack in Twigs, Leaves, Small Sticks', description: 'Give kids entire pile of thin twigs and let them tuck into every gap - exactly as a real bird would. Fills holes, adds rigidity, looks phenomenal.' },
+      { title: 'Line Inside and Add Lights', description: 'Lay hessian across inside floor. Add old cushions or folded blanket. String fairy lights around inside rim, tucked into top weave so they glow through sticks at night.' },
+      { title: 'Make Giant Papier-Mache Egg', description: 'Blow up large oval balloon to ~20in long. Cook flour paste (1 cup flour to 3 cups water). Kids layer brown paper dipped in paste - 3 full layers. Leave overnight to dry fully.' },
+      { title: 'Pop, Paint, and Place the Egg', description: 'Once fully dry, pop balloon. Paint white with chalk paint. Once dry, flick small brown speckles with toothbrush dipped in brown paint. Place in nest.' }
     ],
     tips: [
-      'Use chains instead of ropes for tire swings - ropes twist and wear out',
-      'Paint the frame with child-safe wood stain',
-      'The tractor tire should be hollow-side up to prevent water',
-      'Consider adding a disc bottom tire swing for toddlers'
+      'Gather far more sticks than seems needed - nest eats material. Go back for more rather than running short.',
+      'Resist urge to tidy weave - messier looks more authentic. Pull a few sticks at odd angles if too neat.',
+      'Angle frame stakes 10 degrees outward for natural bowl curvature - wider at top, narrower at base.',
+      'Leave egg to dry fully before popping balloon - should sound hollow before popping.'
     ],
-    relatedBuilds: ['ninja-course-platform', 'zip-line-station', 'fairy-door-treehouse']
+    ecoNote: 'Leave standing through autumn as wildlife habitat first. In late winter, pull stakes and compost. Every branch, twig, leaf, rope, and hessian piece composts completely. Papier-mache egg dissolves in rain.',
+    relatedBuilds: ['eco-mushroom-playhouse', 'living-tunnel', 'giant-rainbow-arch']
   },
   {
-    id: 'mud-kitchen-deluxe',
-    title: 'Mud Kitchen Deluxe',
+    id: 'living-tunnel',
+    title: 'Living Tunnel',
     category: 'Weekend Builds',
-    difficulty: 'hard',
-    timeEstimate: '5-7 hours',
+    difficulty: 'easy',
+    timeEstimate: '2-3 hours to build',
     ageRange: '3-12',
-    cost: '$100-180',
-    description: 'A multi-station outdoor cooking laboratory with running water via hand pump, chalkboard for menu planning, pegboard for utensil storage, and multiple mixing stations at different heights.',
-    tools: ['Drill', 'Saw', 'Level', 'Measuring tape', 'Wrench set', 'Sandpaper', 'Staple gun'],
+    cost: '$25-35',
+    badge: 'Eco Build',
+    description: 'Two rows of arched stakes lashed together, seeded with climbing plants. Takes 2-3 hours to build. By midsummer it becomes a fully enclosed living green tunnel bursting with flowers - and runner beans to eat.',
+    tools: ['Rubber mallet', 'Garden fork', 'Trowel'],
     materials: [
-      { name: 'Cedar 2x6 boards', quantity: '12 boards (8ft)', link: 'https://www.homedepot.com' },
-      { name: 'Cedar 4x4 posts', quantity: '4 posts (4ft)', link: 'https://www.homedepot.com' },
-      { name: 'Exterior plywood (3/4 inch)', quantity: '2 sheets', link: 'https://www.homedepot.com' },
-      { name: 'Hand water pump', quantity: '1', link: 'https://www.amazon.com' },
-      { name: 'Copper pipe and fittings', quantity: '10 feet', link: 'https://www.homedepot.com' },
-      { name: 'Chalkboard sheets', quantity: '2', link: 'https://www.amazon.com' },
-      { name: 'Pegboard sheets', quantity: '2', link: 'https://www.homedepot.com' },
-      { name: 'Stainless steel bowls', quantity: '6', link: 'https://www.amazon.com' }
+      { name: 'Wooden garden stakes (6ft)', quantity: '16 stakes (8 per side)', link: 'https://www.homedepot.com' },
+      { name: 'Extra tall stakes (7-8ft)', quantity: '2 stakes', link: 'https://www.homedepot.com' },
+      { name: 'Thick jute rope', quantity: '1 reel', link: 'https://www.homedepot.com' },
+      { name: 'Jute twine', quantity: '2 large balls', link: 'https://www.homedepot.com' },
+      { name: 'Wood chips, gravel, or flat stones', quantity: 'For floor path', link: 'https://www.localnursery.com' },
+      { name: 'Runner bean seeds', quantity: '1 packet - one full side', link: 'https://www.localnursery.com' },
+      { name: 'Sweet pea seeds', quantity: '1 packet', link: 'https://www.localnursery.com' },
+      { name: 'Morning glory seeds', quantity: '1 packet', link: 'https://www.localnursery.com' },
+      { name: 'Nasturtium seeds', quantity: '1 packet', link: 'https://www.localnursery.com' }
     ],
     steps: [
-      { title: 'Build the Base Frame', description: 'Create an L-shaped frame using 4x4 cedar posts and 2x6 horizontal supports. Main counter at 3 feet high, lower 24-inch station for toddlers.' },
-      { title: 'Install Countertops', description: 'Cut exterior plywood for main counters. Center station gets stainless steel basin. Other stations have solid plywood.' },
-      { title: 'Mount the Water System', description: 'Install hand pump drawing from a 5-gallon water jug stored below. Connect copper pipe to spray nozzle.' },
-      { title: 'Add the Chalkboard', description: 'Frame chalkboard plywood and mount on side at child height. Add shelf below for chalk storage.' },
-      { title: 'Install the Pegboard', description: 'Mount pegboard on back wall above main counter. Add hooks for utensils.' },
-      { title: 'Create Storage Solutions', description: 'Build open shelves below each station using cedar planks. Store buckets for mud ingredients: dirt, sand, water, leaves.' },
-      { title: 'Seal and Weatherproof', description: 'Apply multiple coats of child-safe waterproof sealant to all surfaces.' }
+      { title: 'Mark the Two Rows', description: 'Stretch two lengths of string parallel, 3ft apart and 15ft long. Mark a stake position every 2ft along each row - 8 positions per side, 16 total.' },
+      { title: 'Hammer All the Stakes', description: 'Hammer 6ft stake at every marked position, pushing each in at least 12in deep. Use two 7-8ft stakes for the entrance arch at one end.' },
+      { title: 'Bend and Lash the Arches', description: 'Push top of left stake toward right stake until tips meet at center. Lash firmly with jute twine - at least 6 wraps. Repeat for all 8 pairs. Run rope along full top ridge tying each apex.' },
+      { title: 'Tie Horizontal String Lines', description: 'Run lines of jute twine horizontally along both sides at 8in intervals from ground to arch. Kids tie lower lines (up to 3ft), adults do higher ones.' },
+      { title: 'Frame the Entrance Arch', description: 'The entrance arch uses 7-8ft stakes for drama. Lash horizontal bar across top - old broomstick or thick branch. Hang a sign or wind chime.' },
+      { title: 'Lay the Floor Path', description: 'Kids lay path along inside floor between stakes - wood chips, gravel, flat stones, or pressed fallen leaves. Kids choose material and design layout.' },
+      { title: 'Prepare Soil and Plant Seeds', description: 'Dig shallow trench 4in deep along outside base of both rows. Mix in compost. Water trench before planting. Runner beans on one side, sweet peas/morning glories/nasturtiums on other.' },
+      { title: 'Make the Weekly Growth Chart', description: 'Kids draw tunnel outline on large card, mark each planting spot with seed type and name. Each week measure tallest shoot. By week 8 the chart is remarkable.' }
     ],
     tips: [
-      'Place near a garden area where mud overflow creates no problems',
-      'Collect ingredients in labeled buckets for independent play',
-      'Add a drain underneath the basin using landscape fabric and gravel',
-      'Include magnifying glasses for nature exploration'
+      'Hammer every stake in at least 12 inches - shallow stakes pull out in wind.',
+      'Water every day for first three weeks - seeds need consistent moisture to germinate.',
+      'Start runner beans indoors 2 weeks early for head start - 3-4in seedlings plant out faster.',
+      'Orient tunnel east-west so both sides get sun at different times of day.'
     ],
-    relatedBuilds: ['sandbox-with-cover', 'water-ball-launch-station', 'reading-hut']
-  },
-  {
-    id: 'sunset-pergola',
-    title: 'Sunset Pergola',
-    category: 'Weekend Builds',
-    difficulty: 'hard',
-    timeEstimate: '6-8 hours',
-    ageRange: '3-12',
-    cost: '$150-250',
-    description: 'An open-sided shade structure with a swing bench, climbing roses that will cover the lattice, and a climbing rope. Golden hour light through the vines creates pure magic.',
-    tools: ['Post hole digger', 'Drill', 'Level', 'Wrench set', 'Measuring tape', 'Saw', 'Concrete mix'],
-    materials: [
-      { name: 'Pressure-treated 6x6 posts', quantity: '6 posts (10ft)', link: 'https://www.homedepot.com' },
-      { name: '2x8 cedar rafters', quantity: '8 boards (10ft)', link: 'https://www.homedepot.com' },
-      { name: 'Lattice panels (cedar)', quantity: '4 panels', link: 'https://www.homedepot.com' },
-      { name: 'Corrugated roof panels', quantity: '4 sheets', link: 'https://www.homedepot.com' },
-      { name: 'Swing hangers and chains', quantity: '2 sets', link: 'https://www.amazon.com' },
-      { name: 'Porch swing (6ft)', quantity: '1', link: 'https://www.amazon.com' },
-      { name: 'Climbing rose bushes', quantity: '4', link: 'https://www.localnursery.com' },
-      { name: 'Concrete mix', quantity: '10 bags', link: 'https://www.homedepot.com' }
-    ],
-    steps: [
-      { title: 'Mark the Layout', description: 'Create a 12x10 foot rectangular structure. Mark six post locations - one at each corner and two in the middle.' },
-      { title: 'Dig and Set Posts', description: 'Dig holes 3 feet deep. Set 6x6 posts ensuring they are perfectly vertical. Posts should extend 7 feet above ground.' },
-      { title: 'Pour Concrete Footings', description: 'Mix and pour concrete into all six holes. Allow 72 hours to cure before building the roof.' },
-      { title: 'Install the Beams', description: 'Attach two 2x8 beams across the top of posts at 7 feet height, running the 12-foot length.' },
-      { title: 'Add Rafters and Lattice', description: 'Place eight 2x8 rafters perpendicular to beams, spaced 18 inches apart. Between rafters, install cedar lattice panels.' },
-      { title: 'Build the Swing Bench', description: 'Install two heavy-duty swing hangers on interior beams, 4 feet apart. Hang 6-foot porch swing with 36-inch chains.' },
-      { title: 'Add Climbing Rose Supports', description: 'Attach lattice or wire guides along posts and beams. Plant climbing roses at each post base.' }
-    ],
-    tips: [
-      'Choose thornless climbing roses: "Blaze" or "Lady in Red" varieties',
-      'Corrugated roof panels filter sunlight while blocking rain',
-      'Add a removable bug screen panel for summer evenings',
-      'Train rose canes horizontally along beams for maximum bloom'
-    ],
-    relatedBuilds: ['reading-hut', 'tire-swing-frame', 'fairy-door-treehouse']
+    ecoNote: 'Pull stakes at end of season, chop for compost. All plant material breaks down into rich compost over winter. Jute rope and twine compost completely. Collect seeds at end of summer - year two costs nothing.',
+    relatedBuilds: ['giant-nest', 'giant-rainbow-arch', 'eco-mushroom-playhouse']
   }
 ]
 
