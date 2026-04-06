@@ -4,7 +4,6 @@ import { useLocation } from '../hooks/useLocation'
 import { useWeather } from '../hooks/useWeather'
 import { useRecommendations } from '../hooks/useRecommendations'
 import HikeCard from './HikeCard'
-import WeatherWidget from './WeatherWidget'
 
 // Time context helper
 function getTimeContext() {
@@ -15,42 +14,42 @@ function getTimeContext() {
   return 'evening';
 }
 
-// Get time-based recommendation message
+// Get time-based recommendation message - warmer mom voice
 function getTimeMessage(timeContext, weatherLevel) {
   const messages = {
     early: {
-      perfect: "Early start = best conditions! Trails are cool and quiet.",
-      cloudy: "Morning hiking is ideal - trails will be peaceful.",
-      hot: "Start early to beat the heat. Shade trails recommended.",
-      cold: "Bundle up! Morning sun will warm you up as you hike.",
-      drizzle: "Early drizzle expected - might clear by midday.",
-      default: "Great time to start your adventure!"
+      perfect: "Early bird gets the trail — and the best conditions!",
+      cloudy: "Morning adventures await. The trails are peaceful now.",
+      hot: "Start now if you can. The shade trails are calling.",
+      cold: "Layers on, coffee in hand — let's beat that morning chill.",
+      drizzle: "Light rain expected. Pack those waterproof layers!",
+      default: "What a perfect morning for your family to explore!"
     },
     midday: {
-      perfect: "Perfect timing for a midday adventure!",
-      cloudy: "Great conditions for a full day outside.",
-      hot: "It's hot - prioritize shaded trails and water breaks.",
-      cold: "Bundle up! Layers needed for comfortable hiking.",
-      drizzle: "Light rain possible - waterproof layers recommended.",
-      rain: "Rain expected - consider indoor alternatives.",
-      default: "Good time for outdoor exploration."
+      perfect: "It's go time. The weather is literally made for hiking.",
+      cloudy: "Overcast and beautiful — my favorite hiking weather honestly.",
+      hot: "Keep it cool out there. Water breaks every 10 minutes, okay?",
+      cold: "Brrr. Sunny trails will warm you up as you walk.",
+      drizzle: "Drizzle won't stop us, but waterproof layers are must-haves.",
+      rain: "Rain day vibes — maybe save the big hike for tomorrow?",
+      default: "Good window for a family adventure right now."
     },
     late: {
-      perfect: "Perfect afternoon for a family hike!",
-      cloudy: "Overcast skies mean comfortable hiking conditions.",
-      hot: "Cooling down - still a great time for a shorter trail.",
-      cold: "Temps dropping - shorter trails recommended for afternoon.",
-      drizzle: "Rain likely later - get out now before it starts.",
-      rain: "Rain expected - maybe a Base Camp afternoon?",
-      default: "Nice time for an outdoor adventure!"
+      perfect: "Perfect afternoon for a little adventure with your people.",
+      cloudy: "Overcast skies = comfortable hiking. No complaints here.",
+      hot: "Cooling down nicely. Still time for a shorter trail.",
+      cold: "Temps dropping. Short and sweet trails today, please.",
+      drizzle: "Rain likely later — get out there now before it starts.",
+      rain: "Not ideal conditions. How about a cozy Base Camp afternoon?",
+      default: "Nice time to get outside with the family!"
     },
     evening: {
-      perfect: "Quick evening hike before dinner?",
-      cloudy: "Still time for a short evening stroll.",
-      hot: "Perfect cooling off weather for evening walk.",
-      cold: "Getting chilly - keep it short and warm.",
-      drizzle: "Skip the evening hike, try tomorrow.",
-      rain: "Not ideal evening conditions - maybe craft night?",
+      perfect: "Quick sunset adventure? The light is gorgeous right now.",
+      cloudy: "Still time for a short evening stroll before dinner.",
+      hot: "Perfect cooling-off weather for a walk around the block.",
+      cold: "Getting chilly fast. Keep it short and warm.",
+      drizzle: "Skip the evening hike, try tomorrow morning instead.",
+      rain: "Not tonight — but tomorrow's looking better!",
       default: "Good time for a short family walk."
     }
   };
@@ -59,14 +58,14 @@ function getTimeMessage(timeContext, weatherLevel) {
   return weatherMessages[weatherLevel] || weatherMessages.default;
 }
 
-// Get best hike window based on weather
+// Get best hike window based on weather - warmer messaging
 function getBestWindow(weather, timeContext) {
-  if (weather.level === 'storm') return { label: 'Stay indoors', message: "Safety first today." };
+  if (weather.level === 'storm') return { label: 'Stay indoors', message: "Safety first today, mama." };
   if (weather.level === 'rain') return { label: 'Indoor day', message: "Try a Base Camp activity instead." };
-  if (weather.level === 'snow') return { label: 'Snow play', message: "Perfect for snow adventures!" };
+  if (weather.level === 'snow') return { label: 'Snow play!', message: "Bundle up and make memories." };
   
   if (weather.level === 'hot') {
-    if (timeContext === 'early') return { label: 'NOW', message: "Cool morning - best time to start!" };
+    if (timeContext === 'early') return { label: 'NOW', message: "Cool morning — best time to start!" };
     return { label: 'Early AM', message: "Before 10am for cooler temps" };
   }
   
@@ -75,7 +74,7 @@ function getBestWindow(weather, timeContext) {
   }
   
   if (weather.level === 'drizzle') {
-    return { label: 'Now is OK', message: "Light rain - bring layers" };
+    return { label: 'Totally fine', message: "Light rain — just bring layers" };
   }
   
   if (weather.level === 'drizzle-cold') {
@@ -85,17 +84,82 @@ function getBestWindow(weather, timeContext) {
   return { label: 'This afternoon', message: "Best conditions expected" };
 }
 
-// Elevation appropriateness
+// Weather assessment - warmer, friendlier labels
+function getWeatherVibe(weather, timeContext) {
+  if (weather.level === 'perfect' || weather.level === 'cloudy' || weather.level === 'cloudy-cool') {
+    return { vibe: "Perfect day to be outside", icon: "☀️", color: "bg-olive" };
+  }
+  if (weather.level === 'warm') {
+    return { vibe: "Beautiful weather for adventure", icon: "🌤️", color: "bg-olive" };
+  }
+  if (weather.level === 'hot' || weather.level === 'extreme-heat') {
+    return { vibe: "Hot one today — seek shade", icon: "🌡️", color: "bg-terra" };
+  }
+  if (weather.level === 'chilly' || weather.level === 'cold' || weather.level === 'cloudy-cold') {
+    return { vibe: "Chilly but totally doable", icon: "🧥", color: "bg-gold" };
+  }
+  if (weather.level === 'drizzle' || weather.level === 'drizzle-cool') {
+    return { vibe: "Drizzle won't stop the fun", icon: "🌧️", color: "bg-gold" };
+  }
+  if (weather.level === 'drizzle-cold') {
+    return { vibe: "Cold + damp = stay warm", icon: "❄️", color: "bg-terra" };
+  }
+  if (weather.level === 'rain') {
+    return { vibe: "Rainy day ahead", icon: "🌧️", color: "bg-terra" };
+  }
+  if (weather.level === 'snow') {
+    return { vibe: "Snow day adventures!", icon: "❄️", color: "bg-slate" };
+  }
+  return { vibe: "Check conditions before heading out", icon: "🌤️", color: "bg-gold" };
+}
+
+// Elevation appropriateness - warmer delivery
 function getElevationAdvice(tempF, elevation) {
   if (tempF > 85) {
-    if (elevation > 500) return { text: "High elevation + heat = tough", avoid: true };
-    if (elevation > 200) return { text: "Moderate elevation - stay hydrated", avoid: false };
+    if (elevation > 500) return { text: "High elevation + heat = tough combo today", avoid: true };
+    if (elevation > 200) return { text: "Moderate elevation — stay extra hydrated", avoid: false };
   }
   if (tempF < 45) {
-    if (elevation > 500) return { text: "High elevation = cold + wind", avoid: true };
+    if (elevation > 500) return { text: "High elevation will feel extra cold — bundle up!", avoid: true };
   }
   return null;
 }
+
+// Age range labels - conversational
+const ageLabels = [
+  { value: 0, label: "Still in the stroller phase" },
+  { value: 2, label: "Toddler on the move" },
+  { value: 4, label: "Preschooler explorer" },
+  { value: 7, label: "Elementary adventurer" },
+  { value: 10, label: "Pre-teen trailblazer" },
+];
+
+// Time window labels - conversational
+const timeLabels = [
+  { value: 30, label: "Quick outing (30 min)" },
+  { value: 60, label: "Standard adventure (1 hour)" },
+  { value: 90, label: "Longer trek (1.5 hours)" },
+  { value: 120, label: "Full expedition (2+ hours)" },
+];
+
+// Vibe labels - how are you feeling today
+const vibeLabels = [
+  { value: "adventurous", label: "💪 Feeling adventurous" },
+  { value: "chill", label: "😌 Take it easy today" },
+  { value: "justneedout", label: "🚪 Just need to get outside" },
+  { value: "exploring", label: "🔍 Let's explore something new" },
+];
+
+// Must-have options - friendly labels
+const mustHaveOptions = [
+  { key: 'wantsWater', label: "💦 Water to splash in", emoji: "splash" },
+  { key: 'wantsRestrooms', label: "🚽 Bathroom nearby", emoji: "potty" },
+  { key: 'needsShade', label: "🌳 Shade for hot days", emoji: "shade" },
+  { key: 'flatStroller', label: "🍼 Flat enough for stroller", emoji: "stroller" },
+  { key: 'wantsDogs', label: "🐕 Dog-friendly", emoji: "dog" },
+  { key: 'freeParking', label: "🅿️ Free parking", emoji: "parking" },
+  { key: 'hasViews', label: "🏔️ Scenic viewpoints", emoji: "views" },
+];
 
 export default function HabitatPage() {
   const location = useLocation()
@@ -106,14 +170,18 @@ export default function HabitatPage() {
   const [showLocationPicker, setShowLocationPicker] = useState(false)
   const [showProfile, setShowProfile] = useState(false)
   
-  // Family preferences
+  // Family preferences - conversational defaults
   const [preferences, setPreferences] = useState({
-    youngestAge: 5,
-    hasStroller: false,
+    youngestAge: 4,
+    timeWindow: 60,
+    vibe: 'justneedout',
     wantsWater: true,
-    wantsViews: true,
+    wantsRestrooms: true,
+    needsShade: false,
+    flatStroller: false,
     wantsDogs: false,
-    prefersFreeParking: true,
+    freeParking: false,
+    hasViews: false,
   })
 
   // Derived values
@@ -148,138 +216,124 @@ export default function HabitatPage() {
 
   // Time-based message
   const timeMessage = useMemo(() => {
-    if (!weatherAssessment) return "Pick a location to get started!";
+    if (!weatherAssessment) return "Pick a spot on the map and we'll find something perfect for your family.";
     return getTimeMessage(timeContext, weatherAssessment.level);
+  }, [weatherAssessment, timeContext]);
+
+  // Weather vibe
+  const weatherVibe = useMemo(() => {
+    if (!weatherAssessment) return null;
+    return getWeatherVibe(weatherAssessment, timeContext);
   }, [weatherAssessment, timeContext]);
 
   // Elevation advice
   const elevationAdvice = useMemo(() => {
     if (!weather.temp) return null;
-    return getElevationAdvice(weather.temp, 300); // Using average elevation
+    return getElevationAdvice(weather.temp, 300);
   }, [weather.temp]);
 
-  // Score color
-  const getScoreColor = (score) => {
-    if (score >= 80) return 'bg-olive';
-    if (score >= 50) return 'bg-gold';
-    return 'bg-terra';
-  };
+  // Get label helpers
+  const getAgeLabel = (value) => ageLabels.find(a => a.value === value)?.label || "Preschooler explorer";
+  const getVibeLabel = (value) => vibeLabels.find(v => v.value === value)?.label || "Just need to get outside";
 
   return (
-    <div className="min-h-screen bg-cream pt-32 pb-12 px-4">
+    <div className="min-h-screen bg-cream pt-28 pb-12 px-4">
       <div className="max-w-6xl mx-auto">
-        {/* Header */}
+        {/* Header - warmer intro */}
         <motion.header 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="mb-8"
         >
-          <h1 className="font-serif text-4xl md:text-5xl text-ink mb-4">
-            Your Habitat
+          <h1 className="font-serif text-4xl md:text-5xl text-ink mb-3">
+            Your Perfect Afternoon
           </h1>
-          <p className="font-sans text-inkl text-lg max-w-2xl">
-            Trails found just for you, based on where you are, how long you have, and what your family needs.
+          <p className="font-sans text-inkl text-lg max-w-2xl leading-relaxed">
+            Most trail guides were written for someone else's family. 
+            Ours was written for yours — strollers, snack breaks, nap windows, and all.
           </p>
         </motion.header>
 
-        {/* Adventure Readiness Score */}
+        {/* Weather Vibe Check - softer presentation */}
         {isReady && weatherAssessment && (
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             className="mb-8"
           >
-            <div className={`rounded-2xl p-6 ${weatherAssessment.score >= 80 ? 'bg-olive/10 border border-olive/20' : weatherAssessment.score >= 50 ? 'bg-gold/10 border border-gold/20' : 'bg-terra/10 border border-terra/20'}`}>
-              <div className="flex items-center justify-between flex-wrap gap-6">
-                {/* Score gauge */}
+            <div className={`rounded-3xl p-6 md:p-8 ${weatherVibe?.color || 'bg-blush'}/10 border border-${weatherVibe?.color || 'blush'}/20`}>
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                {/* Vibe message */}
                 <div className="flex items-center gap-4">
-                  <div className="relative w-20 h-20">
-                    <svg className="w-20 h-20 transform -rotate-90" viewBox="0 0 36 36">
-                      <path
-                        className="stroke-inkll/20"
-                        strokeWidth="3"
-                        fill="none"
-                        d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                      />
-                      <path
-                        className={`stroke-ember ${getScoreColor(weatherAssessment.score)}`}
-                        strokeWidth="3"
-                        strokeLinecap="round"
-                        fill="none"
-                        strokeDasharray={`${weatherAssessment.score}, 100`}
-                        d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                      />
-                    </svg>
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <span className="font-serif text-2xl text-ink">{weatherAssessment.score}</span>
-                    </div>
-                  </div>
+                  <div className="text-4xl">{weatherVibe?.icon || '🌤️'}</div>
                   <div>
-                    <p className="font-sans text-sm text-inkl uppercase tracking-wide">Adventure Score</p>
-                    <p className="font-serif text-xl text-ink">{weatherAssessment.label}</p>
-                    <p className="font-sans text-sm text-inkl">{timeMessage}</p>
+                    <p className="font-serif text-2xl md:text-3xl text-ink">{weatherVibe?.vibe || "Let's check the weather"}</p>
+                    <p className="font-sans text-inkl mt-1">{timeMessage}</p>
                   </div>
                 </div>
 
-                {/* Best window */}
-                {bestWindow && (
-                  <div className="flex items-center gap-3 bg-white/60 rounded-xl px-4 py-3">
-                    <div>
-                      <p className="font-sans text-xs text-inkl uppercase">Best time</p>
-                      <p className="font-sans font-medium text-ink">{bestWindow.label}</p>
-                      <p className="font-sans text-xs text-inkl">{bestWindow.message}</p>
+                {/* Best window & conditions */}
+                <div className="flex flex-wrap items-center gap-6">
+                  {bestWindow && (
+                    <div className="bg-white/70 rounded-2xl px-5 py-4 text-center">
+                      <p className="font-sans text-xs text-inkl uppercase tracking-wide mb-1">Best time to go</p>
+                      <p className="font-serif text-xl text-ink">{bestWindow.label}</p>
+                      <p className="font-sans text-sm text-inkl mt-0.5">{bestWindow.message}</p>
                     </div>
-                  </div>
-                )}
+                  )}
 
-                {/* Current conditions */}
-                {weather.temp !== null && (
-                  <div className="flex items-center gap-4">
+                  {weather.temp !== null && (
                     <div className="text-center">
-                      <p className="font-sans text-2xl font-medium text-ink">{weather.temp}°F</p>
-                      <p className="font-sans text-sm text-inkl">{weather.description}</p>
+                      <p className="font-sans text-3xl font-medium text-ink">{weather.temp}°F</p>
+                      <p className="font-sans text-sm text-inkl capitalize">{weather.description || 'Current conditions'}</p>
                     </div>
-                  </div>
-                )}
+                  )}
+                </div>
               </div>
 
-              {/* Weather advice */}
-              <div className="mt-4 pt-4 border-t border-inkll/20">
-                <p className="font-sans text-inkl">{weatherAssessment.advice}</p>
-                {message && <p className="font-sans text-ink mt-1 font-medium">{message}</p>}
-              </div>
+              {/* Additional weather advice */}
+              {(weatherAssessment.level === 'hot' || weatherAssessment.level === 'cold' || weatherAssessment.level === 'rain') && (
+                <div className="mt-5 pt-5 border-t border-inkll/20">
+                  <p className="font-sans text-inkl">
+                    {weatherAssessment.level === 'hot' && "We've prioritized shaded trails to keep everyone comfortable."}
+                    {weatherAssessment.level === 'cold' && "Sunny trails are bumped up in the results to help you warm up."}
+                    {weatherAssessment.level === 'rain' && "We've factored in trail conditions — some may be muddy but still doable."}
+                  </p>
+                </div>
+              )}
             </div>
           </motion.div>
         )}
 
-        {/* Location Status */}
+        {/* Location & Family Profile Card */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.1 }}
-          className="bg-blush/50 rounded-2xl p-4 mb-6"
+          className="bg-blush/60 rounded-3xl p-5 md:p-6 mb-6"
         >
-          <div className="flex items-center justify-between flex-wrap gap-4">
+          <div className="flex items-center justify-between flex-wrap gap-4 mb-4">
+            {/* Location indicator */}
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-ember/10 flex items-center justify-center">
+              <div className="w-11 h-11 rounded-full bg-ember/15 flex items-center justify-center">
                 <svg className="w-5 h-5 text-ember" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
               </div>
               <div>
-                <p className="font-sans text-sm text-inkl">Your Location</p>
-                <p className="font-sans font-medium text-ink">
+                <p className="font-sans text-xs text-inkl uppercase tracking-wide">Exploring</p>
+                <p className="font-sans font-medium text-ink text-lg">
                   {location.loading ? (
                     <span className="text-inkl italic">Finding you...</span>
                   ) : location.city && !manualLocation ? (
                     location.city
                   ) : manualLocation ? (
-                    <span className="text-olive">{manualLocation.name}</span>
+                    <span className="text-ember">{manualLocation.name}</span>
                   ) : location.error ? (
                     <span className="text-terra">{location.error}</span>
                   ) : (
-                    <span className="text-inkl italic">Select location below</span>
+                    <span className="text-inkl italic">Select your area below</span>
                   )}
                 </p>
               </div>
@@ -288,17 +342,17 @@ export default function HabitatPage() {
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setShowLocationPicker(!showLocationPicker)}
-                className="px-4 py-2 bg-ember text-white rounded-full font-sans text-sm hover:bg-terra transition-colors"
+                className="px-4 py-2 bg-ember text-white rounded-full font-sans text-sm hover:bg-terra transition-colors shadow-sm"
               >
-                {showLocationPicker ? 'Done' : 'Change'}
+                {showLocationPicker ? 'Done' : 'Change Area'}
               </button>
               <button
                 onClick={() => setShowProfile(!showProfile)}
-                className={`px-4 py-2 rounded-full font-sans text-sm border transition-colors ${
-                  showProfile ? 'bg-ember text-white border-ember' : 'border-inkll/20 text-ink hover:border-ember'
+                className={`px-4 py-2 rounded-full font-sans text-sm border transition-all duration-200 ${
+                  showProfile ? 'bg-ember text-white border-ember shadow-sm' : 'border-inkll/30 text-ink hover:border-ember bg-white/50'
                 }`}
               >
-                {showProfile ? 'Hide Filters' : 'Family Profile'}
+                {showProfile ? 'Hide Details' : "Who's Coming?"}
               </button>
             </div>
           </div>
@@ -312,13 +366,13 @@ export default function HabitatPage() {
                 exit={{ height: 0, opacity: 0 }}
                 className="overflow-hidden"
               >
-                <div className="mt-4 pt-4 border-t border-inkll/20">
+                <div className="mt-5 pt-5 border-t border-inkll/20">
                   <p className="font-sans text-sm text-inkl mb-3">Choose an area:</p>
                   <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2">
                     <button
                       onClick={() => { setManualLocation(null); setShowLocationPicker(false); }}
-                      className={`px-3 py-2 rounded-lg border font-sans text-sm transition-all ${
-                        !manualLocation && location.lat ? 'bg-ember text-white border-ember' : 'bg-white border-inkll/20 text-ink hover:border-ember'
+                      className={`px-3 py-2.5 rounded-xl border font-sans text-sm transition-all ${
+                        !manualLocation && location.lat ? 'bg-ember text-white border-ember' : 'bg-white border-inkll/20 text-ink hover:border-ember hover:bg-ember/5'
                       }`}
                     >
                       Auto-detect
@@ -327,8 +381,8 @@ export default function HabitatPage() {
                       <button
                         key={preset.name}
                         onClick={() => { setManualLocation({ ...preset, city: preset.name }); setShowLocationPicker(false); }}
-                        className={`px-3 py-2 rounded-lg border font-sans text-sm transition-all ${
-                          manualLocation?.name === preset.name ? 'bg-ember text-white border-ember' : 'bg-white border-inkll/20 text-ink hover:border-ember'
+                        className={`px-3 py-2.5 rounded-xl border font-sans text-sm transition-all ${
+                          manualLocation?.name === preset.name ? 'bg-ember text-white border-ember' : 'bg-white border-inkll/20 text-ink hover:border-ember hover:bg-ember/5'
                         }`}
                       >
                         {preset.name}
@@ -340,7 +394,7 @@ export default function HabitatPage() {
             )}
           </AnimatePresence>
 
-          {/* Family Profile */}
+          {/* Family Profile - conversational */}
           <AnimatePresence>
             {showProfile && (
               <motion.div
@@ -349,43 +403,83 @@ export default function HabitatPage() {
                 exit={{ height: 0, opacity: 0 }}
                 className="overflow-hidden"
               >
-                <div className="mt-4 pt-4 border-t border-inkll/20">
-                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-                    {/* Youngest Age */}
+                <div className="mt-5 pt-5 border-t border-inkll/20">
+                  <p className="font-serif text-lg text-ink mb-4">Tell us about your crew</p>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+                    {/* Youngest hiker */}
                     <div>
-                      <label className="block font-sans text-xs text-inkl mb-2">Youngest hiker</label>
+                      <label className="block font-sans text-sm text-ink mb-2">How old are your littles?</label>
                       <select
                         value={preferences.youngestAge}
                         onChange={(e) => setPreferences(prev => ({ ...prev, youngestAge: Number(e.target.value) }))}
-                        className="w-full px-3 py-2 rounded-lg bg-white border border-inkll/20 font-sans text-sm text-ink focus:outline-none focus:ring-2 focus:ring-ember"
+                        className="w-full px-4 py-3 rounded-xl bg-white border border-inkll/20 font-sans text-sm text-ink focus:outline-none focus:ring-2 focus:ring-ember/40 focus:border-ember transition-all"
                       >
-                        <option value={1}>Baby (0-1)</option>
-                        <option value={2}>Toddler (2-3)</option>
-                        <option value={4}>Preschool (4-5)</option>
-                        <option value={6}>Early Elem (6-7)</option>
-                        <option value={8}>Elem +</option>
+                        {ageLabels.map(age => (
+                          <option key={age.value} value={age.value}>{age.label}</option>
+                        ))}
                       </select>
                     </div>
 
-                    {/* Toggle buttons */}
-                    {[
-                      { key: 'hasStroller', trueLabel: 'Stroller', falseLabel: 'No stroller', label: 'Gear' },
-                      { key: 'wantsWater', trueLabel: 'Water', falseLabel: 'No water', label: 'Water' },
-                      { key: 'wantsViews', trueLabel: 'Views', falseLabel: 'Any trail', label: 'Views' },
-                      { key: 'wantsDogs', trueLabel: 'Dogs', falseLabel: 'No dogs', label: 'Dogs' },
-                      { key: 'prefersFreeParking', trueLabel: 'Free', falseLabel: 'Any', label: 'Parking' },
-                    ].map(({ key, trueLabel, falseLabel, label }) => (
-                      <div key={key}>
-                        <label className="block font-sans text-xs text-inkl mb-2">{label}</label>
-                        <button
-                          onClick={() => togglePreference(key)}
-                          className={`w-full px-3 py-2 rounded-lg border font-sans text-sm transition-all ${
-                            preferences[key] ? 'bg-ember text-white border-ember' : 'bg-white border-inkll/20 text-ink hover:border-ember'
-                          }`}
-                        >
-                          {preferences[key] ? trueLabel : falseLabel}
-                        </button>
+                    {/* Time window */}
+                    <div>
+                      <label className="block font-sans text-sm text-ink mb-2">What's your time window?</label>
+                      <select
+                        value={preferences.timeWindow}
+                        onChange={(e) => setPreferences(prev => ({ ...prev, timeWindow: Number(e.target.value) }))}
+                        className="w-full px-4 py-3 rounded-xl bg-white border border-inkll/20 font-sans text-sm text-ink focus:outline-none focus:ring-2 focus:ring-ember/40 focus:border-ember transition-all"
+                      >
+                        {timeLabels.map(time => (
+                          <option key={time.value} value={time.value}>{time.label}</option>
+                        ))}
+                      </select>
+                    </div>
+
+                    {/* Today's vibe */}
+                    <div>
+                      <label className="block font-sans text-sm text-ink mb-2">What's today's vibe?</label>
+                      <select
+                        value={preferences.vibe}
+                        onChange={(e) => setPreferences(prev => ({ ...prev, vibe: e.target.value }))}
+                        className="w-full px-4 py-3 rounded-xl bg-white border border-inkll/20 font-sans text-sm text-ink focus:outline-none focus:ring-2 focus:ring-ember/40 focus:border-ember transition-all"
+                      >
+                        {vibeLabels.map(vibe => (
+                          <option key={vibe.value} value={vibe.value}>{vibe.label}</option>
+                        ))}
+                      </select>
+                    </div>
+
+                    {/* Must-haves */}
+                    <div>
+                      <label className="block font-sans text-sm text-ink mb-2">Any must-haves?</label>
+                      <div className="flex flex-wrap gap-2">
+                        {mustHaveOptions.slice(0, 4).map(opt => (
+                          <button
+                            key={opt.key}
+                            onClick={() => togglePreference(opt.key)}
+                            className={`px-3 py-2 rounded-lg border font-sans text-xs transition-all ${
+                              preferences[opt.key] ? 'bg-ember text-white border-ember' : 'bg-white border-inkll/20 text-ink hover:border-ember'
+                            }`}
+                          >
+                            {opt.label}
+                          </button>
+                        ))}
                       </div>
+                    </div>
+                  </div>
+
+                  {/* Additional must-haves row */}
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {mustHaveOptions.slice(4).map(opt => (
+                      <button
+                        key={opt.key}
+                        onClick={() => togglePreference(opt.key)}
+                        className={`px-3 py-2 rounded-lg border font-sans text-xs transition-all ${
+                          preferences[opt.key] ? 'bg-ember text-white border-ember' : 'bg-white border-inkll/20 text-ink hover:border-ember'
+                        }`}
+                      >
+                        {opt.label}
+                      </button>
                     ))}
                   </div>
                 </div>
@@ -399,44 +493,26 @@ export default function HabitatPage() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="bg-blush/50 rounded-2xl p-12 text-center"
+            className="bg-blush/40 rounded-3xl p-10 md:p-14 text-center"
           >
-            <h3 className="font-serif text-2xl text-ink mb-2">Select Your Location</h3>
-            <p className="font-sans text-inkl">Enable location access or pick an area above to see personalized recommendations.</p>
+            <div className="text-5xl mb-4">🗺️</div>
+            <h3 className="font-serif text-2xl md:text-3xl text-ink mb-3">Let's find your trail</h3>
+            <p className="font-sans text-inkl max-w-md mx-auto">
+              Select your area above and we'll show you trails that actually work for your family's reality.
+            </p>
           </motion.div>
         ) : isReady ? (
           <>
-            {/* Weather Alert if relevant */}
-            {weatherAssessment && (weatherAssessment.level === 'hot' || weatherAssessment.level === 'cold' || weatherAssessment.level === 'rain') && (
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className={`mb-6 p-4 rounded-xl border ${
-                  weatherAssessment.level === 'hot' ? 'bg-orange-50 border-orange-200' :
-                  weatherAssessment.level === 'cold' ? 'bg-blue-50 border-blue-200' :
-                  'bg-blue-50 border-blue-200'
-                }`}
-              >
-                <div className="flex items-center gap-3">
-                  <p className="font-sans text-sm text-ink">
-                    {weatherAssessment.level === 'hot' && "Today's heat affects trail selection. We prioritized shaded routes."}
-                    {weatherAssessment.level === 'cold' && "Cold weather factored in. Sunny trails prioritized for warmth."}
-                    {weatherAssessment.level === 'rain' && "Wet conditions affect trail safety. Check descriptions for covered options."}
-                  </p>
-                </div>
-              </motion.div>
-            )}
-
-            {/* Recommended Trails */}
+            {/* Trail Results */}
             {recommendedHikes.length > 0 ? (
               <section>
-                <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center justify-between mb-6">
                   <div>
-                    <h2 className="font-serif text-2xl text-ink">Tailored For Today</h2>
-                    <p className="font-sans text-sm text-inkl">Sorted by how well each matches your situation</p>
+                    <h2 className="font-serif text-2xl md:text-3xl text-ink">Trails for Right Now</h2>
+                    <p className="font-sans text-inkl mt-1">Sorted by how well each matches your crew today</p>
                   </div>
-                  <span className="font-sans text-sm text-ember bg-ember/10 px-3 py-1 rounded-full">
-                    {recommendedHikes.length} trails
+                  <span className="font-sans text-sm text-ember bg-ember/10 px-4 py-2 rounded-full">
+                    {recommendedHikes.length} found
                   </span>
                 </div>
 
@@ -446,22 +522,23 @@ export default function HabitatPage() {
                       key={hike.id}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.2 + index * 0.1 }}
+                      transition={{ delay: 0.1 + index * 0.08 }}
                     >
                       <HikeCard hike={hike} index={index} showScore={true} />
                       
-                      {/* Match reasons */}
-                      <div className="mt-2 px-4 py-3 bg-cream rounded-b-xl border border-t-0 border-inkll/10">
+                      {/* Why this trail works - mom-friendly */}
+                      <div className="mt-2 px-5 py-4 bg-cream rounded-b-2xl border border-t-0 border-inkll/10">
+                        <p className="font-sans text-xs text-inkl mb-2">Why this one works:</p>
                         <div className="flex flex-wrap gap-2">
-                          {hike.reasons?.map((reason, i) => (
-                            <span key={i} className="font-sans text-xs text-ember bg-ember/10 px-2 py-1 rounded-full">
+                          {hike.reasons?.slice(0, 3).map((reason, i) => (
+                            <span key={i} className="font-sans text-xs text-terra bg-terra/10 px-3 py-1 rounded-full">
                               ✓ {reason}
                             </span>
                           ))}
                         </div>
                         {hike.distance && (
-                          <p className="font-sans text-xs text-inkl mt-2">
-                            {hike.distance} mi from {manualLocation?.name || location.city}
+                          <p className="font-sans text-xs text-inkl mt-3">
+                            About {hike.distance} miles from {manualLocation?.name || location.city}
                           </p>
                         )}
                       </div>
@@ -469,26 +546,31 @@ export default function HabitatPage() {
                   ))}
                 </div>
 
-                {/* Alternative activities if weather is bad */}
+                {/* Alternative activities */}
                 {weatherAssessment && weatherAssessment.score < 60 && (
                   <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.6 }}
-                    className="mt-8 bg-blush/50 rounded-2xl p-6"
+                    className="mt-10 bg-blush/50 rounded-3xl p-6 md:p-8"
                   >
-                    <h3 className="font-serif text-xl text-ink mb-3">Not feeling the outdoors today?</h3>
-                    <p className="font-sans text-inkl mb-4">Base Camp has activities perfect for indoor adventures:</p>
-                    <div className="flex flex-wrap gap-3">
-                      <a href="/basecamp" className="px-4 py-2 bg-ember text-white rounded-full font-sans text-sm hover:bg-terra transition-colors">
-                        Indoor Builds
-                      </a>
-                      <a href="/basecamp/activities" className="px-4 py-2 bg-ember text-white rounded-full font-sans text-sm hover:bg-terra transition-colors">
-                        Nature Crafts
-                      </a>
-                      <a href="/blueprint" className="px-4 py-2 bg-ember text-white rounded-full font-sans text-sm hover:bg-terra transition-colors">
-                        Plan for Tomorrow
-                      </a>
+                    <div className="flex items-start gap-4">
+                      <div className="text-3xl">🏠</div>
+                      <div>
+                        <h3 className="font-serif text-xl text-ink mb-2">Not feeling the outdoors today?</h3>
+                        <p className="font-sans text-inkl mb-4">Base Camp has everything you need for a perfect indoor day:</p>
+                        <div className="flex flex-wrap gap-3">
+                          <a href="/basecamp" className="px-5 py-2.5 bg-ember text-white rounded-full font-sans text-sm hover:bg-terra transition-colors">
+                            Indoor Builds
+                          </a>
+                          <a href="/basecamp/activities" className="px-5 py-2.5 bg-white border border-inkll/20 text-ink rounded-full font-sans text-sm hover:border-ember transition-colors">
+                            Nature Crafts
+                          </a>
+                          <a href="/blueprint" className="px-5 py-2.5 bg-white border border-inkll/20 text-ink rounded-full font-sans text-sm hover:border-ember transition-colors">
+                            Plan for Tomorrow
+                          </a>
+                        </div>
+                      </div>
                     </div>
                   </motion.div>
                 )}
@@ -497,16 +579,17 @@ export default function HabitatPage() {
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="bg-blush/50 rounded-2xl p-12 text-center"
+                className="bg-blush/40 rounded-3xl p-10 md:p-14 text-center"
               >
-                <h3 className="font-serif text-2xl text-ink mb-2">Not the best day for hiking</h3>
-                <p className="font-sans text-inkl mb-6">
-                  {weatherAssessment?.level === 'storm' ? "Storms aren't safe for outdoor adventures." :
-                   weatherAssessment?.level === 'rain' ? "The weather isn't cooperating for outdoor trails." :
+                <div className="text-5xl mb-4">🤔</div>
+                <h3 className="font-serif text-2xl md:text-3xl text-ink mb-3">Tough day for trails</h3>
+                <p className="font-sans text-inkl mb-6 max-w-md mx-auto">
+                  {weatherAssessment?.level === 'storm' ? "Storms aren't safe for outdoor adventures today." :
+                   weatherAssessment?.level === 'rain' ? "The weather isn't cooperating, mama." :
                    "We couldn't find trails matching your criteria. Try adjusting your filters."}
                 </p>
                 <a href="/basecamp" className="inline-flex items-center gap-2 px-6 py-3 bg-ember text-white rounded-full font-sans font-medium hover:bg-terra transition-colors">
-                  Explore Base Camp instead
+                  Check out Base Camp instead
                   <span>→</span>
                 </a>
               </motion.div>
@@ -515,37 +598,39 @@ export default function HabitatPage() {
         ) : location.loading ? (
           <div className="flex items-center justify-center py-20">
             <div className="text-center">
-              <div className="w-12 h-12 border-4 border-ember/30 border-t-ember rounded-full animate-spin mx-auto mb-4"></div>
-              <p className="font-sans text-inkl">Finding your perfect trails...</p>
+              <div className="w-14 h-14 border-4 border-ember/30 border-t-ember rounded-full animate-spin mx-auto mb-5"></div>
+              <p className="font-sans text-inkl text-lg">Finding trails for your family...</p>
             </div>
           </div>
         ) : (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="bg-blush/50 rounded-2xl p-12 text-center"
+            className="bg-blush/40 rounded-3xl p-10 md:p-14 text-center"
           >
-            <h3 className="font-serif text-2xl text-ink mb-2">Select Your Location</h3>
-            <p className="font-sans text-inkl">Pick an area above to see personalized recommendations.</p>
+            <div className="text-5xl mb-4">👣</div>
+            <h3 className="font-serif text-2xl md:text-3xl text-ink mb-3">Ready when you are</h3>
+            <p className="font-sans text-inkl">Pick an area above and we'll find something perfect for your crew.</p>
           </motion.div>
         )}
 
-        {/* How It Works */}
+        {/* How It Works - simpler, warmer */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7 }}
           className="mt-16"
         >
-          <h3 className="font-serif text-xl text-ink mb-6 text-center">How We Find Your Perfect Trail</h3>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <h3 className="font-serif text-xl md:text-2xl text-ink mb-6 text-center">How We Find Your Trail</h3>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
-              { title: 'Location', desc: 'We find trails near you, not just anywhere.' },
-              { title: 'Weather', desc: 'Heat? Shade. Cold? Sun. Rain? Covered.' },
-              { title: 'Your Crew', desc: 'Ages, strollers, dogs, energy levels.' },
-              { title: 'Time', desc: 'Duration fits your actual schedule today.' },
+              { emoji: '📍', title: 'Your Location', desc: 'Near you, not just anywhere generic' },
+              { emoji: '🌤️', title: 'Real Weather', desc: 'Heat? Shade. Rain? Covered options.' },
+              { emoji: '👨‍👩‍👧‍👦', title: 'Your Crew', desc: 'Ages, energy, strollers, dogs — all of it' },
+              { emoji: '⏱️', title: 'Your Time', desc: 'Fits your actual schedule today' },
             ].map((item, i) => (
-              <div key={i} className="bg-white/50 rounded-xl p-4 text-center">
+              <div key={i} className="bg-white/60 rounded-2xl p-5 text-center">
+                <div className="text-3xl mb-2">{item.emoji}</div>
                 <h4 className="font-serif text-ink mb-1">{item.title}</h4>
                 <p className="font-sans text-xs text-inkl">{item.desc}</p>
               </div>
