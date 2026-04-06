@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import EmailCapture from '../components/EmailCapture'
 
 // ============ SAMPLE DATA ============
 
@@ -474,6 +475,11 @@ export default function VillagePage() {
             </motion.div>
           )}
         </AnimatePresence>
+
+        {/* Email Capture */}
+        <div className="mt-8">
+          <EmailCapture criteria="Village page signup" />
+        </div>
       </div>
     </div>
   )
