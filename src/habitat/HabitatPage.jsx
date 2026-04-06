@@ -4,6 +4,7 @@ import { useLocation } from '../hooks/useLocation'
 import { useWeather } from '../hooks/useWeather'
 import { useRecommendations } from '../hooks/useRecommendations'
 import HikeCard from './HikeCard'
+import EmailCapture from '../components/EmailCapture'
 
 // Time context helper
 function getTimeContext() {
@@ -597,6 +598,9 @@ export default function HabitatPage() {
                       </motion.div>
                     )}
                   </div>
+
+                  {/* Email Capture */}
+                  <EmailCapture criteria={getSmartSummary()} />
                 </div>
               </motion.div>
             )}
