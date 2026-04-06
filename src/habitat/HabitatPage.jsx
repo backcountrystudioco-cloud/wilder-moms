@@ -348,6 +348,7 @@ export default function HabitatPage() {
 
         {/* Location & Family Profile Card */}
         <motion.div
+          id="profile-section"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.1 }}
@@ -382,13 +383,37 @@ export default function HabitatPage() {
 
             <div className="flex items-center gap-2">
               <button
-                onClick={() => setShowLocationPicker(!showLocationPicker)}
+                onClick={() => {
+                  setShowLocationPicker(!showLocationPicker)
+                  if (!showLocationPicker) {
+                    setTimeout(() => {
+                      const section = document.getElementById('profile-section')
+                      if (section) {
+                        const navOffset = 100
+                        const top = section.getBoundingClientRect().top + window.pageYOffset - navOffset
+                        window.scrollTo({ top, behavior: 'smooth' })
+                      }
+                    }, 50)
+                  }
+                }}
                 className="px-4 py-2 bg-ember text-white rounded-full font-sans text-sm hover:bg-terra transition-colors shadow-sm"
               >
                 {showLocationPicker ? 'Done' : 'Change Area'}
               </button>
               <button
-                onClick={() => setShowProfile(!showProfile)}
+                onClick={() => {
+                  setShowProfile(!showProfile)
+                  if (!showProfile) {
+                    setTimeout(() => {
+                      const section = document.getElementById('profile-section')
+                      if (section) {
+                        const navOffset = 100
+                        const top = section.getBoundingClientRect().top + window.pageYOffset - navOffset
+                        window.scrollTo({ top, behavior: 'smooth' })
+                      }
+                    }, 50)
+                  }
+                }}
                 className={`px-4 py-2 rounded-full font-sans text-sm border transition-all duration-200 ${
                   showProfile ? 'bg-ember text-white border-ember shadow-sm' : 'border-inkll/30 text-ink hover:border-ember bg-white/50'
                 }`}
