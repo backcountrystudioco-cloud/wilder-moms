@@ -127,6 +127,7 @@ function getElevationAdvice(tempF, elevation) {
 
 // Age range labels - conversational
 const ageLabels = [
+  { value: -1, label: "Baby in carrier (we can go longer, but diaper stops matter)" },
   { value: 0, label: "Still in the stroller phase" },
   { value: 2, label: "Toddler on the move" },
   { value: 4, label: "Preschooler explorer" },
@@ -173,6 +174,7 @@ export default function HabitatPage() {
   // Family preferences - conversational defaults
   const [preferences, setPreferences] = useState({
     youngestAge: 4,
+    hasBabyInCarrier: false,
     timeWindow: 60,
     vibe: 'justneedout',
     wantsWater: true,
@@ -183,6 +185,9 @@ export default function HabitatPage() {
     freeParking: false,
     hasViews: false,
   })
+  
+  // Search trigger for Let's Go button
+  const [searchTriggered, setSearchTriggered] = useState(false)
 
   // Derived values
   const activeLocation = manualLocation || (location.lat ? location : null)
@@ -233,8 +238,45 @@ export default function HabitatPage() {
   }, [weather.temp]);
 
   // Get label helpers
-  const getAgeLabel = (value) => ageLabels.find(a => a.value === value)?.label || "Preschooler explorer";
+  const getAgeLabel = (value) => {
+    if (value === -1) return "Baby in carrier";
+    return ageLabels.find(a => a.value === value)?.label || "Preschooler explorer";
+  };
   const getVibeLabel = (value) => vibeLabels.find(v => v.value === value)?.label || "Just need to get outside";
+  
+  // Smart summary generator
+  const getSmartSummary = () => {
+    const ageDesc = preferences.youngestAge === -1 
+      ? "baby in carrier" 
+      : getAgeLabel(preferences.youngestAge).toLowerCase();
+    const timeDesc = timeLabels.find(t => t.value === preferences.timeWindow)?.label || "standard adventure";
+    const mustHaves = Object.entries({
+      wantsWater: 'water to splash in',
+      wantsRestrooms: 'bathrooms nearby',
+      needsShade: 'shade',
+      flatStroller: 'stroller-friendly',
+      wantsDogs: 'dog-friendly',
+      freeParking: 'free parking',
+      hasViews: 'scenic views'
+    }).filter(([key]) => preferences[key]).map(([, label]) => label);
+    
+    return { ageDesc, timeDesc, mustHaves };
+  };
+  
+  // Handle Let's Go button
+  const handleLetsGo = () => {
+    setSearchTriggered(true);
+    // Scroll to results section
+    setTimeout(() => {
+      const resultsSection = document.getElementById('trail-results');
+      if (resultsSection) {
+        const navOffset = 100;
+        const elementPosition = resultsSection.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - navOffset;
+        window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+      }
+    }, 100);
+  };
 
   return (
     <div className="min-h-screen bg-cream pt-28 pb-12 px-4">
@@ -411,7 +453,14 @@ export default function HabitatPage() {
                       <label className="block font-sans text-sm text-ink mb-2">How old are your littles?</label>
                       <select
                         value={preferences.youngestAge}
-                        onChange={(e) => setPreferences(prev => ({ ...prev, youngestAge: Number(e.target.value) }))}
+                        onChange={(e) => {
+                          const val = Number(e.target.value);
+                          setPreferences(prev => ({ 
+                            ...prev, 
+                            youngestAge: val,
+                            hasBabyInCarrier: val === -1
+                          }))
+                        }}
                         className="w-full px-4 py-3 rounded-xl bg-white border border-inkll/20 font-sans text-sm text-ink focus:outline-none focus:ring-2 focus:ring-ember/40 focus:border-ember transition-all"
                       >
                         {ageLabels.map(age => (
@@ -481,6 +530,48 @@ export default function HabitatPage() {
                       </button>
                     ))}
                   </div>
+                  
+                  {/* Let's Go Button */}
+                  <div className="mt-6 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                    <button
+                      onClick={handleLetsGo}
+                      className="px-8 py-3.5 bg-ember text-white rounded-full font-sans font-medium text-base hover:bg-terra transition-all shadow-lg shadow-ember/20 flex items-center gap-2"
+                    >
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                      </svg>
+                      Let's Go
+                    </button>
+                    
+                    {/* Smart Summary */}
+                    {searchTriggered && (
+                      <motion.div
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        className="bg-cream/80 rounded-xl px-4 py-3 border border-inkll/20"
+                      >
+                        <p className="font-sans text-sm text-ink">
+                          Finding trails for a family with{' '}
+                          <span className="font-medium text-ember">
+                            {getSmartSummary().ageDesc}
+                          </span>
+                          ,{' '}
+                          <span className="font-medium text-ember">
+                            {getSmartSummary().timeDesc.toLowerCase()}
+                          </span>
+                          {getSmartSummary().mustHaves.length > 0 && (
+                            <>
+                              , wanting{' '}
+                              <span className="font-medium text-ember">
+                                {getSmartSummary().mustHaves.slice(0, 2).join(', ')}
+                                {getSmartSummary().mustHaves.length > 2 && ` +${getSmartSummary().mustHaves.length - 2} more`}
+                              </span>
+                            </>
+                          )}
+                        </p>
+                      </motion.div>
+                    )}
+                  </div>
                 </div>
               </motion.div>
             )}
@@ -508,7 +599,7 @@ export default function HabitatPage() {
           <>
             {/* Trail Results */}
             {recommendedHikes.length > 0 ? (
-              <section>
+              <section id="trail-results">
                 <div className="flex items-center justify-between mb-6">
                   <div>
                     <h2 className="font-serif text-2xl md:text-3xl text-ink">Trails for Right Now</h2>
