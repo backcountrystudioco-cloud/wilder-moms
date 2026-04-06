@@ -87,30 +87,30 @@ function getBestWindow(weather, timeContext) {
 // Weather assessment - warmer, friendlier labels
 function getWeatherVibe(weather, timeContext) {
   if (weather.level === 'perfect' || weather.level === 'cloudy' || weather.level === 'cloudy-cool') {
-    return { vibe: "Perfect day to be outside", icon: "☀️", color: "bg-olive" };
+    return { vibe: "Perfect day to be outside", color: "bg-olive" };
   }
   if (weather.level === 'warm') {
-    return { vibe: "Beautiful weather for adventure", icon: "🌤️", color: "bg-olive" };
+    return { vibe: "Beautiful weather for adventure", color: "bg-olive" };
   }
   if (weather.level === 'hot' || weather.level === 'extreme-heat') {
-    return { vibe: "Hot one today — seek shade", icon: "🌡️", color: "bg-terra" };
+    return { vibe: "Hot one today — seek shade", color: "bg-terra" };
   }
   if (weather.level === 'chilly' || weather.level === 'cold' || weather.level === 'cloudy-cold') {
-    return { vibe: "Chilly but totally doable", icon: "🧥", color: "bg-gold" };
+    return { vibe: "Chilly but totally doable", color: "bg-gold" };
   }
   if (weather.level === 'drizzle' || weather.level === 'drizzle-cool') {
-    return { vibe: "Drizzle won't stop the fun", icon: "🌧️", color: "bg-gold" };
+    return { vibe: "Drizzle won't stop the fun", color: "bg-gold" };
   }
   if (weather.level === 'drizzle-cold') {
-    return { vibe: "Cold + damp = stay warm", icon: "❄️", color: "bg-terra" };
+    return { vibe: "Cold + damp = stay warm", color: "bg-terra" };
   }
   if (weather.level === 'rain') {
-    return { vibe: "Rainy day ahead", icon: "🌧️", color: "bg-terra" };
+    return { vibe: "Rainy day ahead", color: "bg-terra" };
   }
   if (weather.level === 'snow') {
-    return { vibe: "Snow day adventures!", icon: "❄️", color: "bg-slate" };
+    return { vibe: "Snow day adventures!", color: "bg-slate" };
   }
-  return { vibe: "Check conditions before heading out", icon: "🌤️", color: "bg-gold" };
+  return { vibe: "Check conditions before heading out", color: "bg-gold" };
 }
 
 // Elevation appropriateness - warmer delivery
@@ -144,21 +144,21 @@ const timeLabels = [
 
 // Vibe labels - how are you feeling today
 const vibeLabels = [
-  { value: "adventurous", label: "💪 Feeling adventurous" },
-  { value: "chill", label: "😌 Take it easy today" },
-  { value: "justneedout", label: "🚪 Just need to get outside" },
-  { value: "exploring", label: "🔍 Let's explore something new" },
+  { value: "adventurous", label: "Feeling adventurous" },
+  { value: "chill", label: "Take it easy today" },
+  { value: "justneedout", label: "Just need to get outside" },
+  { value: "exploring", label: "Let's explore something new" },
 ];
 
 // Must-have options - friendly labels
 const mustHaveOptions = [
-  { key: 'wantsWater', label: "💦 Water to splash in", emoji: "splash" },
-  { key: 'wantsRestrooms', label: "🚽 Bathroom nearby", emoji: "potty" },
-  { key: 'needsShade', label: "🌳 Shade for hot days", emoji: "shade" },
-  { key: 'flatStroller', label: "🍼 Flat enough for stroller", emoji: "stroller" },
-  { key: 'wantsDogs', label: "🐕 Dog-friendly", emoji: "dog" },
-  { key: 'freeParking', label: "🅿️ Free parking", emoji: "parking" },
-  { key: 'hasViews', label: "🏔️ Scenic viewpoints", emoji: "views" },
+  { key: 'wantsWater', label: "Water to splash in" },
+  { key: 'wantsRestrooms', label: "Bathroom nearby" },
+  { key: 'needsShade', label: "Shade for hot days" },
+  { key: 'flatStroller', label: "Flat enough for stroller" },
+  { key: 'wantsDogs', label: "Dog-friendly" },
+  { key: 'freeParking', label: "Free parking" },
+  { key: 'hasViews', label: "Scenic viewpoints" },
 ];
 
 export default function HabitatPage() {
@@ -265,7 +265,6 @@ export default function HabitatPage() {
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                 {/* Vibe message */}
                 <div className="flex items-center gap-4">
-                  <div className="text-4xl">{weatherVibe?.icon || '🌤️'}</div>
                   <div>
                     <p className="font-serif text-2xl md:text-3xl text-ink">{weatherVibe?.vibe || "Let's check the weather"}</p>
                     <p className="font-sans text-inkl mt-1">{timeMessage}</p>
@@ -495,7 +494,11 @@ export default function HabitatPage() {
             animate={{ opacity: 1 }}
             className="bg-blush/40 rounded-3xl p-10 md:p-14 text-center"
           >
-            <div className="text-5xl mb-4">🗺️</div>
+            <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-ember/10 flex items-center justify-center">
+              <svg className="w-8 h-8 text-ember" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+              </svg>
+            </div>
             <h3 className="font-serif text-2xl md:text-3xl text-ink mb-3">Let's find your trail</h3>
             <p className="font-sans text-inkl max-w-md mx-auto">
               Select your area above and we'll show you trails that actually work for your family's reality.
@@ -555,7 +558,11 @@ export default function HabitatPage() {
                     className="mt-10 bg-blush/50 rounded-3xl p-6 md:p-8"
                   >
                     <div className="flex items-start gap-4">
-                      <div className="text-3xl">🏠</div>
+                      <div className="w-12 h-12 rounded-full bg-ember/10 flex items-center justify-center flex-shrink-0">
+                        <svg className="w-6 h-6 text-ember" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                        </svg>
+                      </div>
                       <div>
                         <h3 className="font-serif text-xl text-ink mb-2">Not feeling the outdoors today?</h3>
                         <p className="font-sans text-inkl mb-4">Base Camp has everything you need for a perfect indoor day:</p>
@@ -581,7 +588,11 @@ export default function HabitatPage() {
                 animate={{ opacity: 1 }}
                 className="bg-blush/40 rounded-3xl p-10 md:p-14 text-center"
               >
-                <div className="text-5xl mb-4">🤔</div>
+                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-terra/10 flex items-center justify-center">
+                  <svg className="w-8 h-8 text-terra" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
                 <h3 className="font-serif text-2xl md:text-3xl text-ink mb-3">Tough day for trails</h3>
                 <p className="font-sans text-inkl mb-6 max-w-md mx-auto">
                   {weatherAssessment?.level === 'storm' ? "Storms aren't safe for outdoor adventures today." :
@@ -608,7 +619,11 @@ export default function HabitatPage() {
             animate={{ opacity: 1 }}
             className="bg-blush/40 rounded-3xl p-10 md:p-14 text-center"
           >
-            <div className="text-5xl mb-4">👣</div>
+            <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-olive/10 flex items-center justify-center">
+              <svg className="w-8 h-8 text-olive" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+              </svg>
+            </div>
             <h3 className="font-serif text-2xl md:text-3xl text-ink mb-3">Ready when you are</h3>
             <p className="font-sans text-inkl">Pick an area above and we'll find something perfect for your crew.</p>
           </motion.div>
@@ -624,13 +639,17 @@ export default function HabitatPage() {
           <h3 className="font-serif text-xl md:text-2xl text-ink mb-6 text-center">How We Find Your Trail</h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
-              { emoji: '📍', title: 'Your Location', desc: 'Near you, not just anywhere generic' },
-              { emoji: '🌤️', title: 'Real Weather', desc: 'Heat? Shade. Rain? Covered options.' },
-              { emoji: '👨‍👩‍👧‍👦', title: 'Your Crew', desc: 'Ages, energy, strollers, dogs — all of it' },
-              { emoji: '⏱️', title: 'Your Time', desc: 'Fits your actual schedule today' },
+              { title: 'Your Location', desc: 'Near you, not just anywhere generic', icon: 'M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z' },
+              { title: 'Real Weather', desc: 'Heat? Shade. Rain? Covered options.', icon: 'M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z' },
+              { title: 'Your Crew', desc: 'Ages, energy, strollers, dogs — all of it', icon: 'M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z' },
+              { title: 'Your Time', desc: 'Fits your actual schedule today', icon: 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z' },
             ].map((item, i) => (
               <div key={i} className="bg-white/60 rounded-2xl p-5 text-center">
-                <div className="text-3xl mb-2">{item.emoji}</div>
+                <div className="w-10 h-10 mx-auto mb-2 rounded-full bg-ember/10 flex items-center justify-center">
+                  <svg className="w-5 h-5 text-ember" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={item.icon} />
+                  </svg>
+                </div>
                 <h4 className="font-serif text-ink mb-1">{item.title}</h4>
                 <p className="font-sans text-xs text-inkl">{item.desc}</p>
               </div>
