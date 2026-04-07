@@ -14,7 +14,17 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Send to your email
+    // Add to Resend audience
+    if (process.env.RESEND_AUDIENCE_ID) {
+      await resend.contacts.create({
+        audienceId: process.env.RESEND_AUDIENCE_ID,
+        email: email,
+        firstName: name,
+        unsubscribed: false,
+      });
+    }
+
+    // Send notification email
     await resend.emails.send({
       from: 'Wilder Moms <onboarding@resend.dev>',
       to: process.env.RECIPIENT_EMAIL || 'your@email.com',
@@ -23,18 +33,9 @@ export default async function handler(req, res) {
         <h2>New Signup</h2>
         <p><strong>Name:</strong> ${name}</p>
         <p><strong>Email:</strong> ${email}</p>
-        ${criteria ? `<p><strong>Looking for:</strong> ${criteria}</p>` : ''}
+        ${criteria ? `<p><strong>Looking for:</strong> ${JSON.stringify(criteria)}</p>` : ''}
       `,
     });
-
-    // Add to audience if RESEND_AUDIENCE_ID is set
-    if (process.env.RESEND_AUDIENCE_ID) {
-      await resend.contacts.create({
-        audienceId: process.env.RESEND_AUDIENCE_ID,
-        email,
-        firstName: name,
-      });
-    }
 
     return res.status(200).json({ success: true });
   } catch (error) {
