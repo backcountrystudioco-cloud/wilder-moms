@@ -14,12 +14,24 @@ export default async function handler(req, res) {
   }
 
   try {
+    // Format criteria for display
+    let criteriaText = 'General signup';
+    if (criteria && typeof criteria === 'object') {
+      const parts = [];
+      if (criteria.ageDesc) parts.push(criteria.ageDesc);
+      if (criteria.timeDesc) parts.push(criteria.timeDesc);
+      if (criteria.mustHaves?.length) parts.push(`wants: ${criteria.mustHaves.slice(0, 3).join(', ')}`);
+      criteriaText = parts.join(' | ') || criteriaText;
+    } else if (criteria) {
+      criteriaText = String(criteria);
+    }
+
     // Add to Resend audience
     if (process.env.RESEND_AUDIENCE_ID) {
       await resend.contacts.create({
         audienceId: process.env.RESEND_AUDIENCE_ID,
-        email: email,
-        firstName: name,
+        email: String(email),
+        firstName: String(name),
         unsubscribed: false,
       });
     }
@@ -33,7 +45,7 @@ export default async function handler(req, res) {
         <h2>New Signup</h2>
         <p><strong>Name:</strong> ${name}</p>
         <p><strong>Email:</strong> ${email}</p>
-        ${criteria ? `<p><strong>Looking for:</strong> ${JSON.stringify(criteria)}</p>` : ''}
+        <p><strong>Looking for:</strong> ${criteriaText}</p>
       `,
     });
 
