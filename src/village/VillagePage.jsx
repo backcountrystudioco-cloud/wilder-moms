@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import EmailCapture from '../components/EmailCapture'
+import { Link } from 'react-router-dom'
 
 // ============ SAMPLE DATA ============
 
@@ -476,9 +476,20 @@ export default function VillagePage() {
           )}
         </AnimatePresence>
 
-        {/* Email Capture */}
-        <div className="mt-8">
-          <EmailCapture criteria="Village page signup" />
+        {/* Join CTA */}
+        <div className="mt-8 bg-parchment rounded-2xl p-6 text-center">
+          <p className="font-sans text-forest mb-4">
+            Ready to join the Village?
+          </p>
+          <Link
+            to="/join"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-ember text-white rounded-full font-sans font-medium hover:bg-terra transition-colors"
+          >
+            Sign Up
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </Link>
         </div>
       </div>
     </div>

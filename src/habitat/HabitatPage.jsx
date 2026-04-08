@@ -3,8 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useLocation } from '../hooks/useLocation'
 import { useWeather } from '../hooks/useWeather'
 import { useRecommendations } from '../hooks/useRecommendations'
+import { Link } from 'react-router-dom'
 import HikeCard from './HikeCard'
-import EmailCapture from '../components/EmailCapture'
 
 // Time context helper
 function getTimeContext() {
@@ -599,8 +599,21 @@ export default function HabitatPage() {
                     )}
                   </div>
 
-                  {/* Email Capture */}
-                  <EmailCapture criteria={getSmartSummary()} />
+                  {/* Join CTA */}
+                  <div className="mt-4 bg-parchment rounded-2xl p-4 text-center">
+                    <p className="font-sans text-forest text-sm mb-3">
+                      Ready for personalized trail recs?
+                    </p>
+                    <Link
+                      to="/join"
+                      className="inline-flex items-center gap-2 px-6 py-3 bg-ember text-white rounded-full font-sans font-medium hover:bg-terra transition-colors"
+                    >
+                      Join the Village
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                      </svg>
+                    </Link>
+                  </div>
                 </div>
               </motion.div>
             )}
