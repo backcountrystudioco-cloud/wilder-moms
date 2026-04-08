@@ -1,7 +1,35 @@
+import { useState } from 'react'
 import { motion } from 'framer-motion'
-import EmailCapture from '../components/EmailCapture'
 
 export default function JoinPage() {
+  const [formData, setFormData] = useState({ name: '', email: '' })
+  const [status, setStatus] = useState('idle')
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setStatus('loading')
+    
+    try {
+      const response = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: formData.email,
+          name: formData.name,
+          criteria: 'Join page signup'
+        }),
+      })
+      
+      if (response.ok) {
+        setStatus('success')
+      } else {
+        setStatus('error')
+      }
+    } catch (err) {
+      setStatus('error')
+    }
+  }
+
   return (
     <div className="min-h-screen bg-cream pt-32 pb-20 px-4">
       <div className="max-w-xl mx-auto">
@@ -24,10 +52,42 @@ export default function JoinPage() {
           transition={{ delay: 0.1 }}
           className="bg-white rounded-3xl p-8 shadow-lg"
         >
-          <EmailCapture 
-            criteria="Join page signup" 
-            inline={true}
-          />
+          {status === 'success' ? (
+            <div className="text-center py-8">
+              <h2 className="font-serif text-2xl text-ink mb-2">You're in!</h2>
+              <p className="font-sans text-inkl">Check your inbox for next steps.</p>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div>
+                <label className="block font-sans text-sm text-ink mb-1">Your name</label>
+                <input
+                  type="text"
+                  required
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  className="w-full px-4 py-3 rounded-xl border border-inkll/20 bg-cream font-sans text-ink focus:outline-none focus:ring-2 focus:ring-ember/40"
+                />
+              </div>
+              <div>
+                <label className="block font-sans text-sm text-ink mb-1">Email</label>
+                <input
+                  type="email"
+                  required
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  className="w-full px-4 py-3 rounded-xl border border-inkll/20 bg-cream font-sans text-ink focus:outline-none focus:ring-2 focus:ring-ember/40"
+                />
+              </div>
+              <button
+                type="submit"
+                disabled={status === 'loading'}
+                className="w-full px-6 py-3 bg-ember text-white rounded-xl font-sans font-medium hover:bg-terra transition-colors disabled:opacity-50"
+              >
+                {status === 'loading' ? 'Joining...' : 'Join the Village'}
+              </button>
+            </form>
+          )}
         </motion.div>
 
         <motion.div
