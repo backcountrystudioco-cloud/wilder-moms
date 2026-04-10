@@ -123,13 +123,6 @@ export default function Nav() {
             >
               Our Mission
             </Link>
-            <a
-              href="#waitlist"
-              onClick={(e) => handleNavClick(e, 'waitlist')}
-              className="font-sans font-medium text-sm uppercase tracking-[0.08em] text-ink hover:text-ember transition-colors"
-            >
-              Join
-            </a>
           </div>
 
           {/* CTA Button */}
