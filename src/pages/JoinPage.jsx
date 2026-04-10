@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import { supabase } from '../utils/supabase'
 
 export default function JoinPage() {
   const [formData, setFormData] = useState({ name: '', email: '' })
@@ -10,20 +11,21 @@ export default function JoinPage() {
     setStatus('loading')
     
     try {
-      const response = await fetch('/api/subscribe', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
+      const { error } = await supabase
+        .from('Waitlist')
+        .insert({
           email: formData.email,
           name: formData.name,
-          criteria: 'Join page signup'
-        }),
-      })
+        })
       
-      if (response.ok) {
-        setStatus('success')
+      if (error) {
+        if (error.code === '23505') {
+          setStatus('duplicate')
+        } else {
+          setStatus('error')
+        }
       } else {
-        setStatus('error')
+        setStatus('success')
       }
     } catch (err) {
       setStatus('error')
@@ -57,8 +59,16 @@ export default function JoinPage() {
               <h2 className="font-serif text-2xl text-ink mb-2">You're in!</h2>
               <p className="font-sans text-inkl">Check your inbox for next steps.</p>
             </div>
+          ) : status === 'duplicate' ? (
+            <div className="text-center py-8">
+              <h2 className="font-serif text-2xl text-ink mb-2">Already on the list!</h2>
+              <p className="font-sans text-inkl">You're signed up. We'll be in touch soon.</p>
+            </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
+              {status === 'error' && (
+                <p className="text-red-600 text-sm font-sans">Something went wrong. Please try again.</p>
+              )}
               <div>
                 <label className="block font-sans text-sm text-ink mb-1">Your name</label>
                 <input
