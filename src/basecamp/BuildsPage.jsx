@@ -2,10 +2,12 @@ import { useState, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import { builds, buildCategories, getBuildsByCategory } from './builds'
 import BuildCard from './BuildCard'
+import WilderCampArchitect from './WilderCampArchitect'
 import { fadeUpVariants } from '../hooks/useScrollReveal'
 
 export default function BuildsPage() {
   const [selectedCategory, setSelectedCategory] = useState('All')
+  const [viewMode, setViewMode] = useState('free') // 'free' or 'premium'
 
   const filteredBuilds = useMemo(() => {
     return getBuildsByCategory(selectedCategory)
@@ -75,79 +77,116 @@ export default function BuildsPage() {
           </div>
         </motion.div>
 
-        {/* Results Count */}
-        <motion.p
-          initial="hidden"
-          animate="visible"
-          variants={fadeUpVariants}
-          custom={2}
-          className="text-inkll text-sm mb-6"
-        >
-          Showing {filteredBuilds.length} {filteredBuilds.length === 1 ? 'build' : 'builds'}
-          {selectedCategory !== 'All' && ` in ${selectedCategory}`}
-        </motion.p>
-
-        {/* Builds Grid */}
-        {filteredBuilds.length > 0 ? (
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={fadeUpVariants}
-            custom={3}
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
-          >
-            {filteredBuilds.map((build, index) => (
-              <BuildCard key={build.id} build={build} index={index} />
-            ))}
-          </motion.div>
-        ) : (
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={fadeUpVariants}
-            custom={3}
-            className="bg-blush rounded-2xl p-12 text-center"
-          >
-            <p className="font-serif text-2xl text-ink italic">
-              No builds found in this category yet.
-            </p>
-            <p className="text-inkl mt-2">
-              Check back soon or explore other categories.
-            </p>
-          </motion.div>
-        )}
-
-        {/* Bottom CTA */}
+        {/* View Mode Toggle */}
         <motion.div
           initial="hidden"
           animate="visible"
           variants={fadeUpVariants}
-          custom={4}
-          className="mt-16 text-center bg-parchment rounded-2xl p-8 md:p-12"
+          custom={2}
+          className="mb-6 flex items-center justify-between"
         >
-          <h2 className="font-serif text-2xl md:text-3xl text-ink italic mb-4">
-            Want more build guides?
-          </h2>
-          <p className="text-inkl max-w-xl mx-auto mb-6">
-            We're constantly adding new projects. Join the waitlist to be the first to know when new builds are released.
+          <p className="text-inkll text-sm">
+            {viewMode === 'free' && (
+              <>Showing {filteredBuilds.length} free {filteredBuilds.length === 1 ? 'build' : 'builds'}{selectedCategory !== 'All' && ` in ${selectedCategory}`}</>
+            )}
+            {viewMode === 'premium' && (
+              <>Premium architectural blueprints</>
+            )}
           </p>
-          <a
-            href="#waitlist"
-            onClick={(e) => {
-              e.preventDefault()
-              window.scrollTo({ top: 0, behavior: 'smooth' })
-              const waitlist = document.getElementById('waitlist')
-              if (waitlist) {
-                setTimeout(() => {
-                  waitlist.scrollIntoView({ behavior: 'smooth' })
-                }, 100)
-              }
-            }}
-            className="inline-flex items-center gap-2 bg-ember text-white px-8 py-3 rounded-full font-medium text-lg hover:bg-terra transition-colors"
-          >
-            Join the Waitlist
-          </a>
+          <div className="flex gap-2 bg-parchment p-1 rounded-full">
+            <button
+              onClick={() => setViewMode('free')}
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                viewMode === 'free'
+                  ? 'bg-ember text-white'
+                  : 'text-ink hover:text-ember'
+              }`}
+            >
+              Free Builds
+            </button>
+            <button
+              onClick={() => setViewMode('premium')}
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-all flex items-center gap-2 ${
+                viewMode === 'premium'
+                  ? 'bg-ember text-white'
+                  : 'text-ink hover:text-ember'
+              }`}
+            >
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+              </svg>
+              Wilder Camp Architect
+            </button>
+          </div>
         </motion.div>
+
+        {/* Builds Grid or Wilder Camp Architect */}
+        {viewMode === 'free' ? (
+          filteredBuilds.length > 0 ? (
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={fadeUpVariants}
+              custom={3}
+              className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
+            >
+              {filteredBuilds.map((build, index) => (
+                <BuildCard key={build.id} build={build} index={index} />
+              ))}
+            </motion.div>
+          ) : (
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={fadeUpVariants}
+              custom={3}
+              className="bg-blush rounded-2xl p-12 text-center"
+            >
+              <p className="font-serif text-2xl text-ink italic">
+                No builds found in this category yet.
+              </p>
+              <p className="text-inkl mt-2">
+                Check back soon or explore other categories.
+              </p>
+            </motion.div>
+          )
+        ) : (
+          <WilderCampArchitect />
+        )}
+
+        {/* Bottom CTA - only show in free mode */}
+        {viewMode === 'free' && (
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={fadeUpVariants}
+            custom={4}
+            className="mt-16 text-center bg-parchment rounded-2xl p-8 md:p-12"
+          >
+            <h2 className="font-serif text-2xl md:text-3xl text-ink italic mb-4">
+              Want more build guides?
+            </h2>
+            <p className="text-inkl max-w-xl mx-auto mb-6">
+              We're constantly adding new projects. Join the waitlist to be the first to know when new builds are released.
+            </p>
+            <a
+              href="#waitlist"
+              onClick={(e) => {
+                e.preventDefault()
+                window.scrollTo({ top: 0, behavior: 'smooth' })
+                const waitlist = document.getElementById('waitlist')
+                if (waitlist) {
+                  setTimeout(() => {
+                    waitlist.scrollIntoView({ behavior: 'smooth' })
+                  }, 100)
+                }
+              }}
+              className="inline-flex items-center gap-2 bg-ember text-white px-8 py-3 rounded-full font-medium text-lg hover:bg-terra transition-colors"
+            >
+              Join the Waitlist
+            </a>
+          </motion.div>
+        )}
       </div>
     </div>
   )
