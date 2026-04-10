@@ -76,10 +76,9 @@ export default function Hero() {
             initial="hidden"
             animate="visible"
             custom={2}
-            className="font-serif font-light text-5xl md:text-6xl lg:text-7xl text-ink leading-tight mb-6"
+            className="font-serif font-light text-4xl md:text-5xl lg:text-6xl text-ink leading-tight mb-6"
           >
-            Design a life<br />
-            <span className="italic text-ember">without walls.</span>
+            When nature lives in your home, you stop having to find it.
           </motion.h1>
 
           {/* Subtext */}
@@ -90,9 +89,7 @@ export default function Hero() {
             custom={3}
             className="text-inkl font-sans text-base md:text-lg leading-relaxed mb-8 max-w-md"
           >
-            Wilder Moms is a new kind of community — part dispatch board, part build guide, 
-            part village. We help mothers find their people, plan their adventures, and 
-            design their lives around what actually matters.
+            Wilder Moms is for the mother who wants a different kind of everyday — one that starts on the windowsill, grows into the backyard, and finds its way to the trailhead when you're ready.
           </motion.p>
 
           {/* Email Form */}
