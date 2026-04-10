@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { fadeUpVariants, slideInRightVariants } from '../hooks/useScrollReveal'
+import { supabase } from '../utils/supabase'
 
 const dispatchCards = [
   {
@@ -26,13 +27,32 @@ const dispatchCards = [
 const avatarInitials = ['MH', 'JL', 'SR', 'KC']
 
 export default function Hero() {
-  const [email, setEmail] = useState('')
-  const [submitted, setSubmitted] = useState(false)
+  const [formData, setFormData] = useState({ name: '', email: '' })
+  const [status, setStatus] = useState('idle')
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    if (email && !submitted) {
-      setSubmitted(true)
+    setStatus('loading')
+    
+    try {
+      const { error } = await supabase
+        .from('Waitlist')
+        .insert({
+          email: formData.email,
+          name: formData.name,
+        })
+      
+      if (error) {
+        if (error.code === '23505') {
+          setStatus('duplicate')
+        } else {
+          setStatus('error')
+        }
+      } else {
+        setStatus('success')
+      }
+    } catch (err) {
+      setStatus('error')
     }
   }
 
@@ -92,39 +112,55 @@ export default function Hero() {
             Wilder Moms is for the mother who wants a different kind of everyday — one that starts on the windowsill, grows into the backyard, and finds its way to the trailhead when you're ready.
           </motion.p>
 
-          {/* Email Form */}
-          <motion.form
-            variants={fadeUpVariants}
-            initial="hidden"
-            animate="visible"
-            custom={4}
-            onSubmit={handleSubmit}
-            className="flex flex-col sm:flex-row gap-3 mb-3"
-          >
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="your@email.com"
-              disabled={submitted}
-              className="flex-1 px-4 py-3 rounded-full border border-inkll/30 bg-cream font-sans text-ink placeholder:text-inkll/60 focus:outline-none focus:border-ember transition-colors disabled:opacity-60"
-              required
-            />
-            <button
-              type="submit"
-              disabled={submitted}
-              className={`
-                px-6 py-3 rounded-full font-sans font-medium text-white
-                transition-all duration-300 whitespace-nowrap
-                ${submitted 
-                  ? 'bg-forest cursor-default' 
-                  : 'bg-ember hover:bg-forest'
-                }
-              `}
+          {/* Form */}
+          {status === 'success' ? (
+            <motion.div variants={fadeUpVariants} initial="hidden" animate="visible" custom={4}>
+              <p className="text-forest font-serif text-2xl italic">You're in the pack!</p>
+              <p className="text-inkl font-sans text-sm mt-2">Check your inbox for next steps.</p>
+            </motion.div>
+          ) : status === 'duplicate' ? (
+            <motion.div variants={fadeUpVariants} initial="hidden" animate="visible" custom={4}>
+              <p className="text-forest font-serif text-2xl italic">Already on the list!</p>
+              <p className="text-inkl font-sans text-sm mt-2">We'll be in touch soon.</p>
+            </motion.div>
+          ) : (
+            <motion.form
+              variants={fadeUpVariants}
+              initial="hidden"
+              animate="visible"
+              custom={4}
+              onSubmit={handleSubmit}
+              className="flex flex-col sm:flex-row gap-3 mb-3"
             >
-              {submitted ? "You're in! ✓" : "Claim your spot →"}
-            </button>
-          </motion.form>
+              <input
+                type="text"
+                required
+                placeholder="Your name"
+                value={formData.name}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                className="flex-1 px-4 py-3 rounded-full border border-inkll/30 bg-cream font-sans text-ink placeholder:text-inkll/60 focus:outline-none focus:border-ember transition-colors"
+              />
+              <input
+                type="email"
+                required
+                placeholder="your@email.com"
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                className="flex-1 px-4 py-3 rounded-full border border-inkll/30 bg-cream font-sans text-ink placeholder:text-inkll/60 focus:outline-none focus:border-ember transition-colors"
+              />
+              <button
+                type="submit"
+                disabled={status === 'loading'}
+                className="px-6 py-3 rounded-full bg-ember text-white font-sans font-medium hover:bg-forest transition-colors disabled:opacity-50 whitespace-nowrap"
+              >
+                {status === 'loading' ? 'Joining...' : 'Claim your spot →'}
+              </button>
+            </motion.form>
+          )}
+
+          {status === 'error' && (
+            <p className="text-red-600 text-sm font-sans">Something went wrong. Try again.</p>
+          )}
 
           {/* Note */}
           <motion.p
