@@ -133,13 +133,12 @@ export default function Nav() {
           </div>
 
           {/* CTA Button */}
-          <a
-            href="#waitlist"
-            onClick={(e) => handleNavClick(e, 'waitlist')}
+          <Link
+            to="/join"
             className="bg-ember text-white font-sans font-medium text-sm px-5 py-2.5 rounded-full hover:bg-forest transition-colors duration-300"
           >
             Join the Waitlist
-          </a>
+          </Link>
         </div>
       </div>
 
