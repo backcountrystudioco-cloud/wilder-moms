@@ -3,11 +3,12 @@ import { motion } from 'framer-motion'
 import { builds, buildCategories, getBuildsByCategory } from './builds'
 import BuildCard from './BuildCard'
 import WilderCampArchitect from './WilderCampArchitect'
+import WildRoom from './WildRoom'
 import { fadeUpVariants } from '../hooks/useScrollReveal'
 
 export default function BuildsPage() {
   const [selectedCategory, setSelectedCategory] = useState('All')
-  const [viewMode, setViewMode] = useState('free') // 'free' or 'premium'
+  const [viewMode, setViewMode] = useState('free') // 'free', 'wildroom', or 'premium'
 
   const filteredBuilds = useMemo(() => {
     return getBuildsByCategory(selectedCategory)
@@ -83,17 +84,20 @@ export default function BuildsPage() {
           animate="visible"
           variants={fadeUpVariants}
           custom={2}
-          className="mb-6 flex items-center justify-between"
+          className="mb-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4"
         >
           <p className="text-inkll text-sm">
             {viewMode === 'free' && (
               <>Showing {filteredBuilds.length} free {filteredBuilds.length === 1 ? 'build' : 'builds'}{selectedCategory !== 'All' && ` in ${selectedCategory}`}</>
             )}
+            {viewMode === 'wildroom' && (
+              <>The Wild Room — design your outdoor space by room type</>
+            )}
             {viewMode === 'premium' && (
               <>Premium architectural blueprints</>
             )}
           </p>
-          <div className="flex gap-2 bg-parchment p-1 rounded-full">
+          <div className="flex gap-2 bg-parchment p-1 rounded-full flex-wrap">
             <button
               onClick={() => setViewMode('free')}
               className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
@@ -103,6 +107,16 @@ export default function BuildsPage() {
               }`}
             >
               Free Builds
+            </button>
+            <button
+              onClick={() => setViewMode('wildroom')}
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                viewMode === 'wildroom'
+                  ? 'bg-ember text-white'
+                  : 'text-ink hover:text-ember'
+              }`}
+            >
+              The Wild Room
             </button>
             <button
               onClick={() => setViewMode('premium')}
@@ -115,12 +129,12 @@ export default function BuildsPage() {
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
               </svg>
-              Wilder Camp Architect
+              Architect
             </button>
           </div>
         </motion.div>
 
-        {/* Builds Grid or Wilder Camp Architect */}
+        {/* Builds Grid or Wilder Camp Architect or Wild Room */}
         {viewMode === 'free' ? (
           filteredBuilds.length > 0 ? (
             <motion.div
@@ -150,6 +164,8 @@ export default function BuildsPage() {
               </p>
             </motion.div>
           )
+        ) : viewMode === 'wildroom' ? (
+          <WildRoom />
         ) : (
           <WilderCampArchitect />
         )}
