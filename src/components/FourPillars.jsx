@@ -7,10 +7,10 @@ const pillars = [
     accent: 'bg-ember',
     numeral: 'I',
     label: 'THE VILLAGE',
-    title: "You shouldn't have to do this alone. And with us, you won't.",
+    title: "Pull up a chair. The fire is always here.",
     description:
-      "Somewhere between the school run and the witching hour, modern motherhood got very lonely. The neighbor who used to knock on the door stopped knocking. The village that was supposed to show up never quite did. Wilder Moms is where it shows up. Real moms, nearby, who want to get outside just as badly as you do. Who will meet you at the trailhead, hold the baby, and not judge the snack situation. You bring yourself. We'll bring the rest.",
-    cta: { label: 'Join the Village', to: '/village', icon: null }
+      "The Village isn't another social network. It's a campfire circle — an oral tradition where mothers share stories that get witnessed, not liked. The hard weeks. The trail tales. The quiet wisdom that comes from years of showing up. No metrics. No algorithms. Just stories gathered around the fire.",
+    cta: { label: 'Hear the Stories', to: '/village', icon: null }
   },
   {
     accent: 'bg-olive',

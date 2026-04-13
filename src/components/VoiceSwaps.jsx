@@ -19,8 +19,8 @@ const voiceCards = [
   },
   {
     dontSay: 'connect with community',
-    weSay: 'find your pack',
-    note: 'We turn strangers in a park into a coordinated tribe.',
+    weSay: 'gather around the fire',
+    note: 'Stories witnessed, not liked. Wisdom shared, not broadcast. The Village is an oral tradition.',
   },
   {
     dontSay: 'explore nature activities',
