@@ -5,22 +5,22 @@ import { supabase } from '../utils/supabase'
 
 const dispatchCards = [
   {
-    tag: 'AI dispatch · Sunday 9:41am',
-    title: 'A 2-hour window opens at 10am.',
-    desc: 'Perfect conditions for a solo morning roam through the preserve.',
-    pill: 'Roam with the pack →'
+    tag: 'Trail Tales · This Week',
+    title: 'The Hike We Almost Quit (Three Times)',
+    desc: 'At the turnaround, my daughter picked up a pinecone and called it her trophy. She showed it to every single person we passed.',
+    pill: 'Read the story →'
   },
   {
-    tag: 'Rainy Tuesday · Stay & Create',
-    title: 'Pressed flower nature table',
-    desc: 'Transform your window sills into living art installations.',
-    pill: 'Start the craft →'
+    tag: 'The Hard Seasons · Sunday',
+    title: 'The week I stopped pretending',
+    desc: 'I posted in our Village: "Hey, I haven\'t taken my kids on a real hike in three weeks." Seventeen mothers wrote back. Not advice. Just: Same.',
+    pill: 'Hear the stories →'
   },
   {
-    tag: '3 moms nearby · This weekend',
-    title: 'Jamie is heading to Bear Creek',
-    desc: 'She is leaving at 7am Saturday. Room for two more.',
-    pill: 'Join the roam →'
+    tag: 'Quiet Wisdom · This Month',
+    title: 'What I know now that I wish I knew then',
+    desc: 'After seven years of hiking with kids: the hikes where everything went wrong are the ones they\'ll remember. Show up. The rest takes care of itself.',
+    pill: 'Read the wisdom →'
   }
 ]
 
