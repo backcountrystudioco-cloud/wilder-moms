@@ -193,28 +193,25 @@ export default function WildRoom() {
         >
           {/* Room Hero */}
           <div
-            className="px-4 py-8 mt-6"
-            style={{ backgroundColor: currentRoom.color }}
+            className="px-4 py-8 mt-6 border-b border-inkll/20"
           >
             <div className="max-w-4xl mx-auto">
               <p
-                className="text-xs font-medium uppercase tracking-widest mb-3"
-                style={{ color: currentRoom.textColor }}
+                className="text-xs font-medium uppercase tracking-widest text-ember mb-3"
               >
                 Room {roomIndex + 1} of 5 · {currentRoom.category}
               </p>
               <h3
-                className="font-serif text-3xl md:text-4xl text-white mb-3 italic"
+                className="font-serif text-3xl md:text-4xl text-ink mb-3 italic"
               >
                 {currentRoom.name}<br />
-                <span className="opacity-80">where {currentRoom.tagline}</span>
+                <span className="text-inkl">where {currentRoom.tagline}</span>
               </h3>
               <div
-                className="mt-6 p-4 rounded-lg border-l-4 max-w-lg"
-                style={{ backgroundColor: 'rgba(0,0,0,0.2)', borderColor: 'rgba(255,255,255,0.4)' }}
+                className="mt-6 p-4 rounded-lg border-l-4 border-ember bg-parchment max-w-lg"
               >
-                <p className="text-xs uppercase tracking-wider text-white/50 mb-2">Architect's principle</p>
-                <p className="font-serif text-white/90 text-sm italic leading-relaxed">
+                <p className="text-xs uppercase tracking-wider text-inkl mb-2">Architect's principle</p>
+                <p className="font-serif text-ink text-sm italic leading-relaxed">
                   {currentRoom.principle}
                 </p>
               </div>

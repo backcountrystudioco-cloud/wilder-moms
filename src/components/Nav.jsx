@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useAuth, SignInButton, SignUpButton, UserButton } from '@clerk/react'
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false)
   const [baseCampDropdownOpen, setBaseCampDropdownOpen] = useState(false)
+  const { isSignedIn, user } = useAuth()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -125,13 +127,23 @@ export default function Nav() {
             </Link>
           </div>
 
-          {/* CTA Button */}
-          <Link
-            to="/join"
-            className="bg-ember text-white font-sans font-medium text-sm px-5 py-2.5 rounded-full hover:bg-forest transition-colors duration-300"
-          >
-            Join the Waitlist
-          </Link>
+          {/* Auth Buttons */}
+          {isSignedIn ? (
+            <UserButton />
+          ) : (
+            <div className="flex items-center gap-2">
+              <SignInButton>
+                <button className="font-sans font-medium text-sm px-4 py-2 text-ink hover:text-ember transition-colors">
+                  Sign In
+                </button>
+              </SignInButton>
+              <SignUpButton>
+                <button className="bg-ember text-white font-sans font-medium text-sm px-5 py-2.5 rounded-full hover:bg-forest transition-colors duration-300">
+                  Join the Waitlist
+                </button>
+              </SignUpButton>
+            </div>
+          )}
         </div>
       </div>
 
