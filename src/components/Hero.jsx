@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import { fadeUpVariants, slideInRightVariants } from '../hooks/useScrollReveal'
-import { SignIn } from '@clerk/react'
 
 const dispatchCards = [
   {
@@ -82,7 +82,7 @@ export default function Hero() {
             Wilder Moms is for the mother who wants a different kind of everyday — one that starts on the windowsill, grows into the backyard, and finds its way to the trailhead when you're ready.
           </motion.p>
 
-          {/* Clerk Sign In - Clean */}
+          {/* CTA Button */}
           <motion.div
             variants={fadeUpVariants}
             initial="hidden"
@@ -90,7 +90,15 @@ export default function Hero() {
             custom={4}
             className="mb-8"
           >
-            <SignIn />
+            <Link
+              to="/join"
+              className="inline-flex items-center gap-2 bg-ember text-white px-8 py-3 rounded-full font-medium text-lg hover:bg-terra transition-colors"
+            >
+              Join the Village
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </Link>
           </motion.div>
 
           {/* Social Proof */}
