@@ -128,22 +128,39 @@ export default function Nav() {
           </div>
 
           {/* Auth Buttons */}
-          {isSignedIn ? (
-            <UserButton />
-          ) : (
-            <div className="flex items-center gap-2">
-              <SignInButton>
-                <button className="font-sans font-medium text-sm px-4 py-2 text-ink hover:text-ember transition-colors">
-                  Sign In
-                </button>
-              </SignInButton>
-              <SignUpButton>
-                <button className="bg-ember text-white font-sans font-medium text-sm px-5 py-2.5 rounded-full hover:bg-forest transition-colors duration-300">
-                  Join the Waitlist
-                </button>
-              </SignUpButton>
-            </div>
-          )}
+          <AnimatePresence mode="wait">
+            {isSignedIn ? (
+              <motion.div
+                key="user-button"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.2 }}
+              >
+                <UserButton />
+              </motion.div>
+            ) : (
+              <motion.div
+                key="auth-buttons"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.2 }}
+                className="flex items-center gap-2"
+              >
+                <SignInButton>
+                  <button className="font-sans font-medium text-sm px-4 py-2 text-ink hover:text-ember transition-colors">
+                    Sign In
+                  </button>
+                </SignInButton>
+                <SignUpButton>
+                  <button className="bg-ember text-white font-sans font-medium text-sm px-5 py-2.5 rounded-full hover:bg-forest transition-colors duration-300">
+                    Join the Waitlist
+                  </button>
+                </SignUpButton>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </div>
 
