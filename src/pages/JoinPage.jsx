@@ -1,11 +1,20 @@
 import { SignIn, useAuth } from '@clerk/react'
 import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { supabase } from '../utils/supabase'
 
 export default function JoinPage() {
   const { userId, isSignedIn } = useAuth()
+  const navigate = useNavigate()
 
-  // After sign-in, save user to Supabase
+  // If already signed in, redirect to habitat immediately
+  useEffect(() => {
+    if (isSignedIn && userId) {
+      navigate('/habitat')
+    }
+  }, [isSignedIn, userId, navigate])
+
+  // After sign-in completes, save user and redirect
   useEffect(() => {
     if (isSignedIn && userId) {
       saveUserToSupabase(userId)
