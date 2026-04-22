@@ -49,7 +49,9 @@ export default function JoinPage() {
         </div>
 
         <div className="bg-white rounded-3xl p-8 shadow-lg">
-          <SignIn />
+          <div className="flex justify-center">
+              <SignIn />
+          </div>
         </div>
       </div>
     </div>

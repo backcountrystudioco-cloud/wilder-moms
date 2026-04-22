@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 
 // ============ SAMPLE STORY DATA ============
@@ -250,9 +251,9 @@ const WeeklyPrompt = ({ prompt }) => {
       <p className="text-sm text-inkl mb-4">
         {prompt.description}
       </p>
-      <button className="text-sm font-medium px-4 py-2 rounded-full bg-white hover:bg-cream transition-colors" style={{ color: data.color }}>
+      <Link to="/join" className="text-sm font-medium px-4 py-2 rounded-full bg-white hover:bg-cream transition-colors inline-block" style={{ color: data.color }}>
         Share Your Story ({prompt.contributed} so far)
-      </button>
+      </Link>
     </div>
   )
 }
@@ -462,9 +463,12 @@ export default function VillagePage() {
 
               {/* Add Your Story CTA */}
               <div className="mt-8 text-center">
-                <button className="px-8 py-4 rounded-full border-2 border-ember text-ember font-medium hover:bg-ember hover:text-white transition-colors">
-                  Share Your Story
-                </button>
+                <Link 
+                  to="/join"
+                  className="px-8 py-4 rounded-full border-2 border-ember text-ember font-medium hover:bg-ember hover:text-white transition-colors inline-block"
+                >
+                  Join the Village to Share Your Story
+                </Link>
                 <p className="text-xs text-inkl mt-3">
                   Your story lives here, witnessed by mothers who understand.
                 </p>
