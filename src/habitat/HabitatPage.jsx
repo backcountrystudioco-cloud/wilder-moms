@@ -299,8 +299,7 @@ export default function HabitatPage() {
             Your Perfect Afternoon
           </h1>
           <p className="font-sans text-inkl text-lg max-w-2xl leading-relaxed">
-            Most trail guides were written for someone else's family. 
-            Ours was written for yours — strollers, snack breaks, nap windows, and all.
+            Most trail guides were written for someone else's family. Ours was built for yours — your kids' ages, your time window, your vibe, your must-haves.
           </p>
         </motion.header>
 
