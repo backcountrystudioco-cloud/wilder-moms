@@ -116,6 +116,22 @@ export default function Nav() {
               The Village
             </Link>
 
+            {/* Journal */}
+            <Link
+              to="/journal"
+              className="font-sans font-medium text-sm uppercase tracking-[0.08em] text-ink hover:text-ember transition-colors"
+            >
+              Journal
+            </Link>
+
+            {/* Skills Passport */}
+            <Link
+              to="/skills"
+              className="font-sans font-medium text-sm uppercase tracking-[0.08em] text-ink hover:text-ember transition-colors"
+            >
+              Skills
+            </Link>
+
             {/* The Blueprint - just links to blueprint since it's a tabbed page */}
             <Link
               to="/blueprint"
@@ -192,10 +208,16 @@ export default function Nav() {
             Village
           </Link>
           <Link
-            to="/blueprint"
+            to="/journal"
             className="flex flex-col items-center gap-0 font-sans font-medium text-xs text-ink hover:text-ember transition-colors"
           >
-            Blueprint
+            Journal
+          </Link>
+          <Link
+            to="/skills"
+            className="flex flex-col items-center gap-0 font-sans font-medium text-xs text-ink hover:text-ember transition-colors"
+          >
+            Skills
           </Link>
         </div>
       </div>

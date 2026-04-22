@@ -1,6 +1,8 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { fadeUpVariants } from '../hooks/useScrollReveal'
+import { ecoProducts } from './ecoProducts'
 
 const rooms = [
   {
@@ -79,6 +81,14 @@ const rooms = [
     ]
   }
 ]
+
+const roomEcoMapping = {
+  'mud': { useCases: ['mudroom', 'playroom'], label: 'Mud Room Materials' },
+  'grow': { useCases: ['garden', 'outdoor', 'nursery'], label: 'Grow Room Supplies' },
+  'build': { useCases: ['playroom', 'outdoor', 'child-bedroom'], label: 'Build Room Materials' },
+  'still': { useCases: ['nursery', 'playroom', 'child-bedroom'], label: 'Still Room Finishes' },
+  'wonder': { useCases: ['outdoor', 'playroom', 'nursery'], label: 'Wonder Room Elements' }
+}
 
 const buildDetails = {
   'mud-patch': {
@@ -368,6 +378,79 @@ export default function WildRoom() {
           </div>
         </motion.div>
       </AnimatePresence>
+
+      {/* Eco Products Section */}
+      {(() => {
+        const mapping = roomEcoMapping[activeRoom]
+        const relevantProducts = ecoProducts.filter(p => 
+          mapping.useCases.some(uc => p.useCases.includes(uc)) || 
+          p.useCases.includes('nursery') || 
+          p.useCases.includes('playroom')
+        ).slice(0, 4)
+        
+        return (
+          <div className="bg-parchment py-12 px-4">
+            <div className="max-w-4xl mx-auto">
+              <div className="text-center mb-8">
+                <p className="text-ember text-xs font-medium uppercase tracking-widest mb-3">
+                  Eco-Friendly Materials
+                </p>
+                <h3 className="font-serif text-2xl md:text-3xl text-ink italic mb-3">
+                  Safe finishes for your {currentRoom.name}
+                </h3>
+                <p className="text-inkl text-sm max-w-lg mx-auto">
+                  Every material in your Wild Room should be as thoughtful as the design. 
+                  These certified low-VOC, non-toxic products keep the space safe for little hands and lungs.
+                </p>
+              </div>
+              
+              <div className="grid md:grid-cols-2 gap-4 mb-6">
+                {relevantProducts.map(product => (
+                  <div
+                    key={product.id}
+                    className="bg-white rounded-xl p-4 border border-inkll/20 hover:border-ember transition-colors"
+                  >
+                    <div className="flex justify-between items-start mb-2">
+                      <div>
+                        <p className="text-xs text-ember font-medium uppercase tracking-wider">{product.brand}</p>
+                        <h4 className="font-serif text-lg text-ink">{product.name}</h4>
+                      </div>
+                      <span className="px-2 py-1 bg-blush text-ember text-xs rounded-full">{product.priceRange}</span>
+                    </div>
+                    <p className="text-inkl text-xs mb-3 line-clamp-2">{product.description}</p>
+                    <div className="flex flex-wrap gap-1 mb-3">
+                      {product.certifications.slice(0, 2).map(cert => (
+                        <span key={cert} className="px-2 py-0.5 bg-olive/10 text-olive text-xs rounded">
+                          {cert}
+                        </span>
+                      ))}
+                    </div>
+                    <div className="flex gap-2">
+                      {product.healthFlags.slice(0, 2).map(flag => (
+                        <span key={flag} className="text-xs text-inkl">
+                          • {flag.replace(/-/g, ' ')}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+              
+              <div className="text-center">
+                <Link
+                  to="/basecamp/eco-products"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-ember text-white text-sm font-medium rounded-full hover:bg-terra transition-colors"
+                >
+                  Browse all eco products
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </Link>
+              </div>
+            </div>
+          </div>
+        )
+      })()}
 
       {/* Final CTA */}
       <div className="bg-ink py-12 px-4 text-center">
