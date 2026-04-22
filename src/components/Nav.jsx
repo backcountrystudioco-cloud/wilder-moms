@@ -7,6 +7,7 @@ export default function Nav() {
   const [scrolled, setScrolled] = useState(false)
   const [baseCampDropdownOpen, setBaseCampDropdownOpen] = useState(false)
   const [villageDropdownOpen, setVillageDropdownOpen] = useState(false)
+  const [mobileVillageOpen, setMobileVillageOpen] = useState(false)
   const { isSignedIn, user } = useAuth()
 
   useEffect(() => {
@@ -215,24 +216,34 @@ export default function Nav() {
           >
             Base
           </Link>
-          <Link
-            to="/village"
+          <button
+            onClick={() => setMobileVillageOpen(!mobileVillageOpen)}
             className="flex flex-col items-center gap-0 font-sans font-medium text-xs text-ink hover:text-ember transition-colors"
           >
             Village
-          </Link>
-          <Link
-            to="/journal"
-            className="flex flex-col items-center gap-0 font-sans font-medium text-xs text-ink hover:text-ember transition-colors"
-          >
-            Journal
-          </Link>
-          <Link
-            to="/skills"
-            className="flex flex-col items-center gap-0 font-sans font-medium text-xs text-ink hover:text-ember transition-colors"
-          >
-            Skills
-          </Link>
+          </button>
+          {mobileVillageOpen && (
+            <div className="absolute top-full left-0 w-full bg-cream border-t border-inkll/20 py-2 px-4">
+              <Link
+                to="/village"
+                className="block py-2 font-sans text-sm text-ink hover:text-ember"
+              >
+                Village
+              </Link>
+              <Link
+                to="/journal"
+                className="block py-2 font-sans text-sm text-ink hover:text-ember"
+              >
+                Journal
+              </Link>
+              <Link
+                to="/skills"
+                className="block py-2 font-sans text-sm text-ink hover:text-ember"
+              >
+                Skills
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </motion.nav>

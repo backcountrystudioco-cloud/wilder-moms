@@ -627,7 +627,7 @@ export const ecoProducts = [
     id: 'green-toys-building-set',
     name: 'Make Believe Magic Sky Castle',
     brand: 'Green Toys',
-    category: 'kids',
+    category: 'interiors',
     description: 'Made from 100% post-consumer recycled plastic (milk jugs). BPA-free, phthalate-free. Made in USA.',
     ecoFeatures: [
       '100% recycled plastic (milk jugs)',
@@ -654,7 +654,7 @@ export const ecoProducts = [
     id: 'nature-kids-co-kit',
     name: 'Nature Explorer Kit Bundle',
     brand: 'Nature Kids Co.',
-    category: 'kids',
+    category: 'interiors',
     description: 'Curated non-toxic kids products by parent founders. Organic and natural materials. Rigorous safety vetting.',
     ecoFeatures: [
       'Parent-founded company',
@@ -1010,7 +1010,7 @@ export const ecoProducts = [
     id: 'green-toys-bath-set',
     name: 'Bath Time Fun Set',
     brand: 'Green Toys',
-    category: 'kids',
+    category: 'interiors',
     description: '100% recycled plastic bath toys. Mold and mildew resistant. No batteries, no plastic film packaging.',
     ecoFeatures: [
       '100% recycled plastic (milk jugs)',
@@ -1066,7 +1066,7 @@ export const ecoProducts = [
 // HELPER FUNCTIONS
 // ============================================
 
-export const categories = ['All', 'Paints & Finishes', 'Building Materials', 'Interiors', 'Furniture'];
+export const categories = ['All', 'Paints & Finishes', 'Building Materials', 'Interiors', 'Kids & Baby', 'Furniture'];
 
 export const healthFilters = [
   { id: 'asthma-safe', label: 'Asthma Safe', color: 'blue' },
