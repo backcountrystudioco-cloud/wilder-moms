@@ -7,10 +7,10 @@ export default function JoinPage() {
   const { userId, isSignedIn } = useAuth()
   const navigate = useNavigate()
 
-  // If already signed in, redirect to habitat immediately
+  // If already signed in, redirect to profile immediately
   useEffect(() => {
     if (isSignedIn && userId) {
-      navigate('/habitat')
+      navigate('/profile')
     }
   }, [isSignedIn, userId, navigate])
 
