@@ -93,3 +93,33 @@ export function getWeatherEmoji(code) {
 
   return emojis[code] || 'unknown';
 }
+
+/**
+ * Get weather level for recommendations (used in HabitatPage)
+ * @param {number} tempF - Temperature in Fahrenheit
+ * @param {number} code - WMO weather code
+ * @returns {string} Weather level
+ */
+export function getWeatherLevel(tempF, code) {
+  // Storm conditions
+  if ([95, 96, 99].includes(code)) return 'storm';
+  if ([65, 67, 82].includes(code)) return 'rain';
+  if ([71, 73, 75, 77, 85, 86].includes(code)) return 'snow';
+  
+  // Precipitation
+  if ([51, 53, 55, 56, 57, 61, 66, 80, 81].includes(code)) {
+    if (tempF < 50) return 'drizzle-cold';
+    if (tempF < 65) return 'drizzle-cool';
+    return 'drizzle';
+  }
+  
+  // Temperature-based levels
+  if (tempF >= 95) return 'extreme-heat';
+  if (tempF >= 85) return 'hot';
+  if (tempF >= 65) return 'perfect';
+  if (tempF >= 55) return 'warm';
+  if (tempF >= 45) return 'chilly';
+  if (tempF >= 35) return 'cold';
+  
+  return 'cold';
+}
