@@ -8,6 +8,7 @@ import BuildsPage from './basecamp/BuildsPage'
 import BuildDetailPage from './basecamp/BuildDetailPage'
 import ActivitiesPage from './basecamp/ActivitiesPage'
 import VillagePage from './village/VillagePage'
+import ProfilePage from './village/ProfilePage'
 import BlueprintPage from './blueprint/BlueprintPage'
 import JoinPage from './pages/JoinPage'
 import LaunchPopup from './components/LaunchPopup'
@@ -27,6 +28,7 @@ function App() {
         <Route path="/basecamp/:buildId" element={<BuildDetailPage />} />
         <Route path="/basecamp/activities" element={<ActivitiesPage />} />
         <Route path="/village" element={<VillagePage />} />
+        <Route path="/profile" element={<ProfilePage />} />
         <Route path="/blueprint" element={<BlueprintPage />} />
         <Route path="/basecamp/eco-products" element={<EcoProductsPage />} />
       </Route>

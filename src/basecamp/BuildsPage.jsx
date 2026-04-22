@@ -4,6 +4,7 @@ import { builds, buildCategories, getBuildsByCategory } from './builds'
 import BuildCard from './BuildCard'
 import WilderCampArchitect from './WilderCampArchitect'
 import WildRoom from './WildRoom'
+import EcoProductsPage from './EcoProductsPage'
 import { fadeUpVariants } from '../hooks/useScrollReveal'
 
 export default function BuildsPage() {
@@ -139,6 +140,34 @@ export default function BuildsPage() {
               Architectural blueprints for cradle-to-grave builds. Ancient techniques, modern simplicity. Premium plans from $35.
             </p>
             {expandedSection === 'architect' && (
+              <div className="mt-4 text-xs text-ember font-medium">↓ Viewing now</div>
+            )}
+          </button>
+
+          {/* Eco Products Card */}
+          <button
+            onClick={() => setExpandedSection('ecoproducts')}
+            className={`text-left p-6 rounded-2xl border-2 transition-all ${
+              expandedSection === 'ecoproducts'
+                ? 'border-ember bg-white shadow-lg'
+                : 'border-inkll/20 bg-white/50 hover:border-ember/50'
+            }`}
+          >
+            <div className="flex items-center gap-3 mb-3">
+              <div className="w-10 h-10 rounded-full bg-[#2D5A3D]/10 flex items-center justify-center">
+                <svg className="w-5 h-5 text-[#2D5A3D]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+              </div>
+              <div>
+                <h3 className="font-serif text-xl text-ink">Eco Products</h3>
+                <p className="text-inkl text-sm">Verified green building</p>
+              </div>
+            </div>
+            <p className="text-inkl text-sm">
+              Verified eco-friendly paints, materials, and furnishings. No greenwashing — just third-party certified products.
+            </p>
+            {expandedSection === 'ecoproducts' && (
               <div className="mt-4 text-xs text-ember font-medium">↓ Viewing now</div>
             )}
           </button>
@@ -327,6 +356,47 @@ export default function BuildsPage() {
                     <span className="font-medium text-ink">Explore The Wild Room</span>
                   </div>
                   <p className="text-inkl text-xs pl-7">Interactive design tool</p>
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        )}
+
+        {/* Eco Products Section */}
+        {expandedSection === 'ecoproducts' && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+          >
+            <EcoProductsPage />
+            
+            {/* Other Sections Links */}
+            <div className="mt-8 p-6 bg-white rounded-xl border border-inkll/20">
+              <div className="grid md:grid-cols-2 gap-4">
+                <button
+                  onClick={() => setExpandedSection('free')}
+                  className="p-4 bg-cream rounded-lg hover:bg-parchment transition-all text-left"
+                >
+                  <div className="flex items-center gap-3 mb-1">
+                    <svg className="w-4 h-4 text-ember" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                    <span className="font-medium text-ink">Back to Free Builds</span>
+                  </div>
+                  <p className="text-inkl text-xs pl-7">{builds.length} step-by-step guides</p>
+                </button>
+                <button
+                  onClick={() => setExpandedSection('architect')}
+                  className="p-4 bg-cream rounded-lg hover:bg-parchment transition-all text-left"
+                >
+                  <div className="flex items-center gap-3 mb-1">
+                    <svg className="w-4 h-4 text-[#D2961E]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                    <span className="font-medium text-ink">View Premium Blueprints</span>
+                  </div>
+                  <p className="text-inkl text-xs pl-7">Architectural plans from $35</p>
                 </button>
               </div>
             </div>
