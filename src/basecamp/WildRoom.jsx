@@ -381,12 +381,7 @@ export default function WildRoom() {
 
       {/* Eco Products Section */}
       {(() => {
-        const mapping = roomEcoMapping[activeRoom]
-        const relevantProducts = ecoProducts.filter(p => 
-          mapping.useCases.some(uc => p.useCases.includes(uc)) || 
-          p.useCases.includes('nursery') || 
-          p.useCases.includes('playroom')
-        ).slice(0, 4)
+        const relevantProducts = ecoProducts.slice(0, 4)
         
         return (
           <div className="bg-parchment py-12 px-4">
