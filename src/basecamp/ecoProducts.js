@@ -1066,7 +1066,7 @@ export const ecoProducts = [
 // HELPER FUNCTIONS
 // ============================================
 
-export const categories = ['All', 'Paints & Finishes', 'Building Materials', 'Interiors', 'Kids & Baby', 'Furniture'];
+export const categories = ['All', 'Paints & Finishes', 'Building Materials', 'Interiors', 'Furniture'];
 
 export const healthFilters = [
   { id: 'asthma-safe', label: 'Asthma Safe', color: 'blue' },
