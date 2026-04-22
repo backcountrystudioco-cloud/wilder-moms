@@ -6,14 +6,44 @@ import WilderCampArchitect from './WilderCampArchitect'
 import WildRoom from './WildRoom'
 import EcoProductsPage from './EcoProductsPage'
 import { fadeUpVariants } from '../hooks/useScrollReveal'
+import MaterialPicker, { getMatchedItems } from './MaterialPicker'
+import { activities } from './activities'
 
 export default function BuildsPage() {
   const [selectedCategory, setSelectedCategory] = useState('All')
   const [expandedSection, setExpandedSection] = useState('free')
+  const [selectedMaterials, setSelectedMaterials] = useState([])
+  const [showMaterialPicker, setShowMaterialPicker] = useState(false)
 
   const filteredBuilds = useMemo(() => {
-    return getBuildsByCategory(selectedCategory)
-  }, [selectedCategory])
+    let result = getBuildsByCategory(selectedCategory)
+    
+    // Filter by selected materials if any
+    if (selectedMaterials.length > 0) {
+      const matched = getMatchedItems(result, selectedMaterials)
+      result = matched
+    }
+    
+    return result
+  }, [selectedCategory, selectedMaterials])
+
+  const matchedActivities = useMemo(() => {
+    if (selectedMaterials.length === 0) return []
+    return getMatchedItems(activities, selectedMaterials).slice(0, 4)
+  }, [selectedMaterials])
+
+  const toggleMaterial = (materialId) => {
+    setSelectedMaterials(prev => {
+      if (prev.includes(materialId)) {
+        return prev.filter(id => id !== materialId)
+      }
+      return [...prev, materialId]
+    })
+  }
+
+  const clearMaterials = () => {
+    setSelectedMaterials([])
+  }
 
   const getCategoryColor = (category) => {
     switch (category) {
@@ -180,6 +210,88 @@ export default function BuildsPage() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
           >
+            {/* Material Picker Toggle */}
+            <button
+              onClick={() => setShowMaterialPicker(!showMaterialPicker)}
+              className={`w-full p-4 rounded-xl border-2 mb-6 flex items-center justify-between transition-all ${
+                showMaterialPicker
+                  ? 'border-ember bg-white shadow-md'
+                  : selectedMaterials.length > 0
+                  ? 'border-olive bg-olive/5'
+                  : 'border-inkll/20 bg-white hover:border-ember/50'
+              }`}
+            >
+              <div className="flex items-center gap-3">
+                <span className="text-2xl">🔍</span>
+                <div className="text-left">
+                  <p className="font-sans font-medium text-ink">
+                    {selectedMaterials.length > 0 
+                      ? `${selectedMaterials.length} material${selectedMaterials.length > 1 ? 's' : ''} selected`
+                      : 'What do you have?'}
+                  </p>
+                  <p className="text-sm text-inkl">
+                    {selectedMaterials.length > 0 
+                      ? 'Showing builds you can make with what you have'
+                      : 'Filter builds by materials you already own'}
+                  </p>
+                </div>
+              </div>
+              <svg 
+                className={`w-5 h-5 text-inkll transition-transform ${showMaterialPicker ? 'rotate-180' : ''}`} 
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+
+            {/* Material Picker Panel */}
+            {showMaterialPicker && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                className="mb-6"
+              >
+                <MaterialPicker 
+                  selectedMaterials={selectedMaterials}
+                  onToggleMaterial={toggleMaterial}
+                  onClearAll={clearMaterials}
+                />
+              </motion.div>
+            )}
+
+            {/* Matched Activities Preview */}
+            {selectedMaterials.length > 0 && matchedActivities.length > 0 && (
+              <div className="mb-6 p-4 bg-olive/5 border border-olive/20 rounded-xl">
+                <p className="font-sans text-sm font-medium text-olive mb-3">
+                  ✨ Activities you can make right now:
+                </p>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                  {matchedActivities.map(activity => (
+                    <div 
+                      key={activity.id}
+                      className={`p-3 rounded-lg ${
+                        activity.hasAllMaterials 
+                          ? 'bg-olive/20 border border-olive/30' 
+                          : 'bg-white border border-inkll/10'
+                      }`}
+                    >
+                      <p className="font-sans text-sm text-ink font-medium truncate">
+                        {activity.title}
+                      </p>
+                      {activity.hasAllMaterials ? (
+                        <p className="text-xs text-olive mt-1">✓ Ready!</p>
+                      ) : (
+                        <p className="text-xs text-inkl mt-1">Missing {activity.missingMaterials.length}</p>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {/* Category Filter Tabs */}
             <div className="mb-8 overflow-x-auto">
               <div className="flex gap-2 pb-2 min-w-max">

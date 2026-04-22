@@ -14,6 +14,8 @@ import GearYouMightBorrow from './GearYouMightBorrow'
 import SaveCloneTrips from './SaveCloneTrips'
 import BabyCarrierTypes from './BabyCarrierTypes'
 import ItemPicker from './ItemPicker'
+import TrailSafetyCheck from './TrailSafetyCheck'
+import SunriseSunset from './SunriseSunset'
 
 export default function BlueprintPage() {
   const [activeTab, setActiveTab] = useState('smart')
@@ -64,7 +66,7 @@ export default function BlueprintPage() {
             The Blueprint
           </h1>
           <p className="font-sans text-inkl text-lg max-w-2xl">
-            Pack lists tailored to your family — organized by age group so everyone has what they need.
+            Pack lists tailored to your family — with weather-smart safety checks and sunrise timing.
           </p>
         </header>
 
@@ -140,6 +142,11 @@ export default function BlueprintPage() {
             className="space-y-6"
           >
             <AdventureProfileBuilder onGenerate={handleGenerateFromProfile} />
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <TrailSafetyCheck onAddItems={handleAddItems} />
+              <SunriseSunset onAddItems={handleAddItems} />
+            </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <SeasonalWeather onAddItems={handleAddItems} />

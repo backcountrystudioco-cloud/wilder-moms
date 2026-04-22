@@ -97,6 +97,12 @@ export default function Nav() {
                     >
                       Activities
                     </Link>
+                    <Link
+                      to="/basecamp/eco-products"
+                      className="block px-4 py-2 font-sans text-sm text-ink hover:bg-blush/50 hover:text-ember"
+                    >
+                      Eco
+                    </Link>
                   </motion.div>
                 )}
               </AnimatePresence>

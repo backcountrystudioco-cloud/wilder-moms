@@ -10,6 +10,16 @@ export const crafts = [
       'Braid three long stems together to form a base, then weave dandelion heads and small flowers through the braid. Add grass blades for leaves. Tuck stems underneath to secure.',
   },
   {
+    id: 'sunPrintTurmeric',
+    title: 'Sun Print with Turmeric',
+    materials: ['White cotton fabric or paper', 'Turmeric powder', 'Baking soda', 'Leaves, flowers, or objects with interesting shapes', 'Plastic bin or tray', 'Rubber gloves', 'Sunny day'],
+    duration: '2 hours',
+    ageRange: '4-12',
+    indoor: false,
+    instructions:
+      'Mix 1/4 cup turmeric, 2 tbsp baking soda in warm water until dissolved. Soak fabric in solution for 10 minutes. Lay wet fabric flat in sun. Arrange leaves and objects on top. Let sun fade the fabric around objects for 1-2 hours. Remove objects to reveal print. Rinse in water to set (baking soda sets the yellow). The result: ghostly white impressions of nature on golden fabric.',
+  },
+  {
     id: 'leaf Whistle',
     title: 'Leaf Whistle',
     materials: ['Fresh green leaf (elm, maple, or aspen)', 'Two hands'],
@@ -178,5 +188,125 @@ export const crafts = [
     indoor: false,
     instructions:
       'Form letters (first initial works great) by arranging sticks. Glue ends together, wrap twine around joints for extra hold. Makes a charming natural room decoration.',
+  },
+  {
+    id: 'pine-cone-owl',
+    title: 'Pine Cone Owl',
+    materials: ['Pine cones (open)', 'Leaves (large)', 'Googly eyes', 'Glue', 'Cardboard'],
+    duration: '40 min',
+    ageRange: '4-10',
+    indoor: true,
+    instructions:
+      'Flatten a pine cone slightly. Glue two large leaf halves as wing flaps on sides. Stick on googly eyes on top. Use a small triangle of bark or leaf for the beak. The owl perches on branches or shelves.',
+  },
+  {
+    id: 'leaf-print-bookmarks',
+    title: 'Leaf Print Bookmarks',
+    materials: ['Leaves (interesting veins)', 'Cardstock', 'Watercolors or markers', 'Laminator or clear contact paper'],
+    duration: '45 min',
+    ageRange: '5-10',
+    indoor: true,
+    instructions:
+      'Paint one side of a leaf with watercolor. Press painted-side down onto cardstock. Peel leaf up to reveal vein prints. Repeat in patterns. Laminate when dry for lasting bookmarks.',
+  },
+  {
+    id: 'mud-faces',
+    title: 'Mud Face Sculptures',
+    materials: ['Mud', 'Sticks', 'Small stones', 'Grass', 'Leaves', 'Smooth area to sculpt in'],
+    duration: '30 min',
+    ageRange: '3-8',
+    indoor: false,
+    instructions:
+      'Scoop mud into a ball or pat into a flat shape. Press sticks for hair, stones for eyes, small grass blades for mouths or eyebrows. Let sun harden your creations.',
+  },
+  {
+    id: 'stick-insect',
+    title: 'Stick Bug Creatures',
+    materials: ['Thin sticks (varied lengths)', 'Twine', 'Leaves for wings', 'Googly eyes', 'Hot glue gun'],
+    duration: '35 min',
+    ageRange: '5-12',
+    indoor: false,
+    instructions:
+      'Form body from one medium stick. Cross two shorter sticks for legs, two for antennae. Wrap twine at joints. Glue leaves as wings. Stick googly eyes on head.',
+  },
+  {
+    id: 'pressed-flower-bookmarks',
+    title: 'Pressed Flower Bookmarks',
+    materials: ['Fresh flat flowers (violets, clover, small wildflowers)', 'Wax paper', 'Iron', 'Cardstock strips', 'Hole punch', 'Ribbon'],
+    duration: '1 hour',
+    ageRange: '6-12',
+    indoor: true,
+    instructions:
+      'Sandwich flowers between two sheets of wax paper. Iron on low heat until wax melts slightly. Trim close around petals. Glue to cardstock, punch hole, add ribbon.',
+  },
+  {
+    id: 'sand-art-canvas',
+    title: 'Sand Art Canvas',
+    materials: ['Colored sand (from beach or sandbox)', 'White glue', 'Cardboard or canvas', 'Sifted dirt (optional)'],
+    duration: '40 min',
+    ageRange: '4-10',
+    indoor: true,
+    instructions:
+      'Draw a design in glue on cardboard. Sprinkle colored sand over glue (catch extra to reuse). Shake off excess. For multiple colors, let each layer dry first. Makes textured nature art.',
+  },
+  {
+    id: 'twig-frame',
+    title: 'Twig Photo Frame',
+    materials: ['Various sized twigs', 'Cardboard cutout', 'Hot glue gun', 'Twine', 'Hanging ribbon'],
+    duration: '45 min',
+    ageRange: '6-12',
+    indoor: true,
+    instructions:
+      'Cut cardboard into desired frame shape. Lay twigs around edge, trimming to fit. Glue each twig down with hot glue. Wrap twine at corners for rustic detail. Attach ribbon for hanging.',
+  },
+  {
+    id: 'moss-terrarium',
+    title: 'Moss Terrarium',
+    materials: ['Moss patches', 'Small jar or container', 'Small rocks', 'Charcoal bits', 'Spoon', 'Optional: tiny figurines'],
+    duration: '30 min',
+    ageRange: '5-12',
+    indoor: true,
+    instructions:
+      'Add small rocks to bottom for drainage. Sprinkle charcoal. Add a thin layer of soil. Press moss patches on top, gently mist with water. Add tiny figurines for a fairy garden.',
+  },
+  {
+    id: 'seed-mosaic',
+    title: 'Seed Mosaic',
+    materials: ['Seeds (sunflower, pumpkin, sesame)', 'Cardboard', 'White glue', 'Paints or markers'],
+    duration: '50 min',
+    ageRange: '5-10',
+    indoor: true,
+    instructions:
+      'Paint background in solid color, let dry. Outline a simple shape like a sun or animal. Fill areas with glue, press seeds in patterns. Alternate seed types and colors for effect.',
+  },
+  {
+    id: 'feather-mobile',
+    title: 'Feather Wind Catcher',
+    materials: ['Feathers (varied colors and sizes)', 'Twine', 'Stick or branch', 'Small bead', 'Outdoor hook or branch to hang on'],
+    duration: '30 min',
+    ageRange: '5-10',
+    indoor: false,
+    instructions:
+      'Tie twine to a sturdy stick. Attach feathers at various lengths down the twine with a bead knot above each feather to hold it in place. Hang from a tree branch and watch it spin.',
+  },
+  {
+    id: 'nature-bracelet',
+    title: 'Nature Bracelet',
+    materials: ['Masking tape (2 inches wide)', 'Sticks, leaves, petals, small stones, grass'],
+    duration: '15 min',
+    ageRange: '3-8',
+    indoor: false,
+    instructions:
+      'Wrap masking tape sticky-side-out around wrist (child\'s arm). Go on a walk collecting small nature items. Stick finds onto the tape to create a living bracelet to wear home.',
+  },
+  {
+    id: 'grass-weaving',
+    title: 'Grass Blade Mats',
+    materials: ['Long grass blades', 'Flat rock or cardboard', 'Optional: flower stems for color'],
+    duration: '25 min',
+    ageRange: '5-12',
+    indoor: false,
+    instructions:
+      'Lay several blades across base. Weave more blades over-under through the base blades, adding rows to make a small square mat. Tuck ends under. Makes cute little coasters or doll blankets.',
   }
 ];
