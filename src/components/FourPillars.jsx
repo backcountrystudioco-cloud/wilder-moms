@@ -7,18 +7,18 @@ const pillars = [
     accent: 'bg-ember',
     numeral: 'I',
     label: 'THE VILLAGE',
-    title: "Pull up a chair. The fire is always here.",
+    title: "Stories from the trail, told around the fire.",
     description:
-      "The Village isn't another social network. It's a campfire circle — an oral tradition where mothers share stories that get witnessed, not liked. The hard weeks. The trail tales. The quiet wisdom that comes from years of showing up. No metrics. No algorithms. Just stories gathered around the fire.",
+      "The Village is where mothers share what they've learned — the hard weeks, the trail tales, the quiet wisdom that comes from years of showing up. Not another social network. Just stories gathered around the fire, witnessed by people who get it.",
     cta: { label: 'Hear the Stories', to: '/village', icon: null }
   },
   {
     accent: 'bg-olive',
     numeral: 'II',
     label: 'THE HABITAT',
-    title: "Finding the right trail shouldn't take longer than the hike.",
+    title: "The right trail for your family, today.",
     description:
-      "You don't need another generic list of 'family-friendly trails.' You need the right trail for your specific kids, today, with a double stroller and a four-year-old who loses it after 45 minutes. We know your family. We know the nap window, the meltdown threshold, the need for a bathroom within the first mile. Every suggestion is built around your real life — not a stock photo version of it.",
+      "You don't need another generic list of 'family-friendly trails.' You need the right trail for your specific kids, today, with a double stroller and a four-year-old who loses it after 45 minutes. Every suggestion is built around your real life — not a stock photo version of it.",
     cta: { label: 'Explore Trails', to: '/habitat', icon: null }
   },
   {
@@ -27,7 +27,7 @@ const pillars = [
     label: 'THE BASE CAMP',
     title: "Staying home doesn't mean giving up on nature.",
     description:
-      "Some days the adventure is making it to the kitchen table. And that's okay. The Base Camp is for those days. Pressing the flowers you found last Sunday. Building a nature table with pinecones from your coat pocket. Letting your kid paint rocks while you drink your coffee warm for once. Nature isn't just out there — it's something you can bring inside, keep alive, and make part of every single day.",
+      "Some days the adventure is making it to the kitchen table. The Base Camp is for those days. Pressing the flowers you found last Sunday. Building a nature table with pinecones from your coat pocket. Nature isn't just out there — it's something you can bring inside.",
     cta: { label: 'See Builds & Activities', to: '/basecamp', icon: null }
   },
   {
@@ -36,7 +36,7 @@ const pillars = [
     label: 'THE BLUEPRINT',
     title: 'Leave the house ready. Come home safe.',
     description:
-      "The thing stopping most moms from getting outside isn't wanting to — it's the mental load of preparing for it. What do I pack? Is this trail safe to do alone? What if something goes wrong? We answer all of it before you even put on your boots. Smart pack lists for your exact trip. Offline maps so you never lose signal and your nerve. Live location with the people who love you. We handle the logistics so you can just go.",
+      "The thing stopping most moms from getting outside isn't wanting to — it's the mental load of preparing for it. What do I pack? Is this trail safe to do alone? We answer all of it before you even put on your boots. Smart pack lists. Offline maps. Live location with the people who love you.",
     cta: { label: 'See Pack Lists', to: '/blueprint', icon: null }
   }
 ]

@@ -34,15 +34,15 @@ const ArcSection = () => {
               WHEN YOU CAN GO
             </p>
             <h3 className="font-serif text-white text-2xl md:text-3xl mb-6">
-              The Habitat + The Village + The Blueprint
+              Get outside — we've got you covered
             </h3>
             <ul className="space-y-3">
               {[
-                'AI trail matching',
-                'Pack finder',
-                'AI pack lists',
-                'Live location sharing',
-                'Weather windows'
+                'Trail recommendations for your family',
+                'Smart pack lists for your exact hike',
+                'Weather windows that actually fit your schedule',
+                'Offline maps so you never lose signal',
+                'Live location sharing with your pack'
               ].map((item, i) => (
                 <li key={i} className="flex items-start gap-3 text-white/90">
                   <span className="text-olive mt-1">→</span>
@@ -58,14 +58,14 @@ const ArcSection = () => {
               WHEN YOU CAN'T GO
             </p>
             <h3 className="font-serif text-white text-2xl md:text-3xl mb-6">
-              The Base Camp — bring nature home
+              Pull up a chair — the Village is here
             </h3>
             <ul className="space-y-3">
               {[
-                'Seasonal crafts & displays',
-                'Pressing flowers from your last trail',
-                'Sensory play with natural materials',
-                'Activity kits delivered to your door'
+                'Stories from the trail',
+                'Crafts you can make with what you have',
+                'Weekly dispatches from other moms',
+                'Nature tables and windowsill wonders'
               ].map((item, i) => (
                 <li key={i} className="flex items-start gap-3 text-white/90">
                   <span className="text-gold mt-1">→</span>
