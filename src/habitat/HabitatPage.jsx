@@ -5,6 +5,8 @@ import { useWeather } from '../hooks/useWeather'
 import { useRecommendations } from '../hooks/useRecommendations'
 import { Link } from 'react-router-dom'
 import HikeCard from './HikeCard'
+import HourlyWeather from './HourlyWeather'
+import WhatsGrowing from './WhatsGrowing'
 
 // Time context helper
 function getTimeContext() {
@@ -345,6 +347,20 @@ export default function HabitatPage() {
               )}
             </div>
           </motion.div>
+        )}
+
+        {/* Hourly Weather & What's Growing - new features */}
+        {isReady && location.lat && (
+          <div className="grid md:grid-cols-2 gap-6 mb-8">
+            <HourlyWeather 
+              hourly={weather.hourly || []} 
+              currentHour={new Date().getHours()}
+            />
+            <WhatsGrowing 
+              lat={location.lat} 
+              lon={location.lon}
+            />
+          </div>
         )}
 
         {/* Location & Family Profile Card */}
