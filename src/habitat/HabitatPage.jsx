@@ -7,6 +7,8 @@ import { Link } from 'react-router-dom'
 import HikeCard from './HikeCard'
 import HourlyWeather from './HourlyWeather'
 import WhatsGrowing from './WhatsGrowing'
+import TrailCraftMoments from './TrailCraftMoments'
+import WhatICollected from './WhatICollected'
 
 // Time context helper
 function getTimeContext() {
@@ -191,6 +193,9 @@ export default function HabitatPage() {
   
   // Search trigger for Let's Go button
   const [searchTriggered, setSearchTriggered] = useState(false)
+  
+  // Foraged items collection for trail crafts
+  const [forageCollection, setForageCollection] = useState([])
 
   // Derived values
   const activeLocation = manualLocation || (location.lat ? location : null)
@@ -362,6 +367,23 @@ export default function HabitatPage() {
             />
           </div>
         )}
+
+        {/* Trail Craft Moments */}
+        {isReady && weatherAssessment && (
+          <div className="mb-8">
+            <TrailCraftMoments 
+              weatherAssessment={weatherAssessment}
+              timeWindow={preferences.timeWindow}
+              forage={forageCollection.map(c => c.id)}
+            />
+          </div>
+        )}
+
+        {/* What I Collected - floating tracker */}
+        <WhatICollected 
+          collection={forageCollection}
+          onCollectionChange={setForageCollection}
+        />
 
         {/* Location & Family Profile Card */}
         <motion.div
