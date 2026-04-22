@@ -11,6 +11,7 @@ import VillagePage from './village/VillagePage'
 import BlueprintPage from './blueprint/BlueprintPage'
 import JoinPage from './pages/JoinPage'
 import LaunchPopup from './components/LaunchPopup'
+import EcoProductsPage from './basecamp/EcoProductsPage'
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="/basecamp/activities" element={<ActivitiesPage />} />
         <Route path="/village" element={<VillagePage />} />
         <Route path="/blueprint" element={<BlueprintPage />} />
+        <Route path="/basecamp/eco-products" element={<EcoProductsPage />} />
       </Route>
       </Routes>
     </UserProvider>
