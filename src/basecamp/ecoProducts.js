@@ -1059,6 +1059,222 @@ export const ecoProducts = [
       website: 'https://avocadogreenmattress.com/',
       purchase: 'https://avocadogreenmattress.com/youth-mattress/'
     }
+  },
+  {
+    id: 'awair-element-monitor',
+    name: 'Element Indoor Air Quality Monitor',
+    brand: 'Awair',
+    category: 'kids',
+    description: 'Track temperature, humidity, CO2, dust, and chemicals in your child\'s room in real-time. Connects to apps and smart home devices.',
+    ecoFeatures: [
+      'Monitors VOCs and chemicals specific to children\'s spaces',
+      'Helps identify pollution sources early',
+      'Energy-efficient design',
+      'Long lifespan reduces e-waste',
+      ' BPA-free housing'
+    ],
+    certifications: ['FCC', 'CE'],
+    priceRange: '$$',
+    useCases: ['nursery', 'child-bedroom', 'playroom'],
+    healthFlags: ['asthma-safe', 'allergy-friendly'],
+    diyDifficulty: 1,
+    diyNotes: 'Place on shelf or dresser. No installation needed. App setup takes 5 minutes.',
+    tags: ['air-quality', 'smart-home', 'monitor'],
+    smallBrand: false,
+    womenOwned: false,
+    links: {
+      website: 'https://www.getawair.com/',
+      purchase: 'https://www.getawair.com/element'
+    }
+  },
+  {
+    id: 'brace-organic-blackout-curtains',
+    name: 'Organic Canvas Blackout Curtains',
+    brand: 'Brace & Bloom',
+    category: 'kids',
+    description: 'Heavy undyed organic cotton canvas blackout curtains. No toxic coatings or chemicals - natural density blocks 95% of light.',
+    ecoFeatures: [
+      'GOTS certified organic cotton',
+      'No PVC or toxic coatings',
+      'Undyed natural color',
+      'Machine washable',
+      'Lasts decades vs synthetic alternatives'
+    ],
+    certifications: ['GOTS', 'OEKO-TEX'],
+    priceRange: '$$',
+    useCases: ['nursery', 'child-bedroom'],
+    healthFlags: ['asthma-safe', 'eczema-safe', 'fragrance-free'],
+    diyDifficulty: 1,
+    diyNotes: 'Install with basic curtain rods. Machine wash cold when needed.',
+    tags: ['blackout', 'organic-cotton', 'nursery', 'sleep'],
+    smallBrand: true,
+    womenOwned: true,
+    links: {
+      website: 'https://braceandbloom.com/',
+      purchase: 'https://braceandbloom.com/collections/blackout-curtains'
+    }
+  },
+  {
+    id: 'molekule-air-purifier-nursery',
+    name: 'Air Purifier for Nurseries',
+    brand: 'Molekule',
+    category: 'kids',
+    description: 'Medical-grade air purifier using PECO technology to destroy pollutants including VOCs, bacteria, and allergens. Quiet enough for naptime.',
+    ecoFeatures: [
+      'Destroys vs filters pollutants',
+      'No ozone generation',
+      'Energy efficient DC motor',
+      'Long-lasting reusable filter',
+      'BPA-free housing'
+    ],
+    certifications: ['AHAM', 'CARB', 'Energy Star'],
+    priceRange: '$$$',
+    useCases: ['nursery', 'child-bedroom', 'playroom'],
+    healthFlags: ['asthma-safe', 'allergy-friendly'],
+    diyDifficulty: 1,
+    diyNotes: 'Just plug and play. Replace filter every 6-12 months. Quiet operation.',
+    tags: ['air-purifier', 'nursery', 'allergy'],
+    smallBrand: false,
+    womenOwned: false,
+    links: {
+      website: 'https://molekule.com/',
+      purchase: 'https://molekule.com/collections/air-purifiers'
+    }
+  },
+  {
+    id: 'dolby-nature-sound-machine',
+    name: 'Nature Sound Sleep Machine',
+    brand: 'Dolby & Co.',
+    category: 'kids',
+    description: 'Portable sound machine with 20 nature sounds: rain, ocean waves, forest ambiance, heartbeat. Timer and volume control. Rechargeable battery.',
+    ecoFeatures: [
+      'Rechargeable lithium battery',
+      'Solid-state electronics (no moving parts)',
+      'Aluminum housing is recyclable',
+      'No disposable batteries',
+      'Designed for 10+ year lifespan'
+    ],
+    certifications: ['FCC', 'CE'],
+    priceRange: '$',
+    useCases: ['nursery', 'child-bedroom', 'nursery'],
+    healthFlags: ['asthma-safe', 'fragrance-free'],
+    diyDifficulty: 0,
+    diyNotes: 'No installation - just place on nightstand and use. USB rechargeable.',
+    tags: ['sound-machine', 'sleep', 'nature-sounds'],
+    smallBrand: true,
+    womenOwned: true,
+    links: {
+      website: 'https://dolbyandco.com/',
+      purchase: 'https://dolbyandco.com/products/nature-sound-machine'
+    }
+  },
+  {
+    id: 'organic-cotton-area-rug',
+    name: 'Hand-Tufted Organic Cotton Rug',
+    brand: 'Earthweave',
+    category: 'kids',
+    description: 'Reversible area rug in undyed organic cotton. Reversible design doubles wear. No latex backing - fully breathable and non-toxic.',
+    ecoFeatures: [
+      'GOTS certified organic cotton',
+      'No latex backing (zero off-gassing)',
+      'Reversible design extends life',
+      'Supports fair-trade artisan cooperatives',
+      'Biodegradable at end of life'
+    ],
+    certifications: ['GOTS', 'Fair Trade'],
+    priceRange: '$$',
+    useCases: ['nursery', 'child-bedroom', 'playroom'],
+    healthFlags: ['asthma-safe', 'eczema-safe'],
+    diyDifficulty: 2,
+    diyNotes: 'Vacuum regularly. Spot clean or professional washable. Reversible design extends life.',
+    tags: ['rug', 'organic-cotton', 'nursery', 'fair-trade'],
+    smallBrand: true,
+    womenOwned: false,
+    links: {
+      website: 'https://earthweave.com/',
+      purchase: 'https://earthweave.com/collections/organic-cotton-rugs'
+    }
+  },
+  {
+    id: 'rattan-storage-basket',
+    name: 'Hand-Woven Rattan Storage Basket',
+    brand: 'Village Weave',
+    category: 'kids',
+    description: 'Large storage basket in sustainably harvested rattan with organic cotton liner. Perfect for toys, blankets, or art supplies.',
+    ecoFeatures: [
+      'Rattan is rapidly renewable',
+      'Fair-trade certified workshops',
+      'Organic cotton liner',
+      'Biodegradable materials',
+      'Outlasts plastic alternatives'
+    ],
+    certifications: ['Fair Trade', 'FSC'],
+    priceRange: '$',
+    useCases: ['nursery', 'child-bedroom', 'playroom'],
+    healthFlags: ['asthma-safe'],
+    diyDifficulty: 0,
+    diyNotes: 'No installation - just place and use. Wipe clean with damp cloth.',
+    tags: ['storage', 'rattan', 'organization', 'nursery'],
+    smallBrand: true,
+    womenOwned: true,
+    links: {
+      website: 'https://villageweave.com/',
+      purchase: 'https://villageweave.com/collections/storage-baskets'
+    }
+  },
+  {
+    id: 'bamboo-floating-shelves',
+    name: 'Bamboo Floating Shelves',
+    brand: 'GreenWall',
+    category: 'kids',
+    description: 'Set of 3 strand-woven bamboo floating shelves with hidden brackets. Create a calm, organized display wall for books and plants.',
+    ecoFeatures: [
+      'Bamboo matures in 5-7 years (vs 30+ for hardwood)',
+      'No added formaldehyde',
+      'Hardware from recycled steel',
+      'Minimal packaging',
+      'Designed to last generations'
+    ],
+    certifications: ['FSC'],
+    priceRange: '$$',
+    useCases: ['nursery', 'child-bedroom', 'playroom'],
+    healthFlags: ['asthma-safe'],
+    diyDifficulty: 2,
+    diyNotes: 'Includes all hardware. Stud finder recommended. Holds 25 lbs per shelf.',
+    tags: ['shelving', 'bamboo', 'organization', 'nursery'],
+    smallBrand: true,
+    womenOwned: false,
+    links: {
+      website: 'https://greenwall.com/',
+      purchase: 'https://greenwall.com/collections/floating-shelves'
+    }
+  },
+  {
+    id: 'levoit-humidifier-nursery',
+    name: 'Warm & Cool Mist Humidifier',
+    brand: 'Levoit',
+    category: 'kids',
+    description: 'Dual-mist humidifier with ceramic housing and optional aromatherapy tray. BPA-free, auto-shutoff, whisper-quiet for naptime.',
+    ecoFeatures: [
+      'BPA-free ceramic housing',
+      'No plastic heating elements',
+      'Energy efficient (<30W)',
+      'Lasts 10+ years with care',
+      'Filter-free design reduces waste'
+    ],
+    certifications: ['ETL', 'CARB'],
+    priceRange: '$',
+    useCases: ['nursery', 'child-bedroom'],
+    healthFlags: ['asthma-safe', 'allergy-friendly'],
+    diyDifficulty: 0,
+    diyNotes: 'Just fill with water and plug in. Clean weekly with vinegar solution.',
+    tags: ['humidifier', 'nursery', 'ceramic'],
+    smallBrand: false,
+    womenOwned: false,
+    links: {
+      website: 'https://levoit.com/',
+      purchase: 'https://levoit.com/collections/humidifiers'
+    }
   }
 ];
 

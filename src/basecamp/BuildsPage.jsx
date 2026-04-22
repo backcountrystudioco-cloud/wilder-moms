@@ -550,55 +550,119 @@ export default function BuildsPage() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
           >
-            {/* Archive Header */}
-            <div className="mb-12 p-8 bg-gradient-to-b from-parchment to-cream rounded-2xl">
-              <div className="text-center mb-8">
-                <p className="text-xs font-medium uppercase tracking-widest text-ember mb-3">
-                  The Wilder Archive · Premium Guides
+            {/* Hero Banner */}
+            <div className="mb-12 p-8 md:p-12 bg-gradient-to-br from-[#5A3C00] via-[#8C4A14] to-[#D2961E] rounded-3xl text-center relative overflow-hidden">
+              {/* Decorative elements */}
+              <div className="absolute inset-0 opacity-10">
+                <div className="absolute top-4 left-4 text-8xl">🏺</div>
+                <div className="absolute bottom-4 right-4 text-8xl">🪵</div>
+                <div className="absolute top-1/2 left-1/4 text-6xl opacity-50">⭕</div>
+              </div>
+              
+              <div className="relative z-10">
+                <p className="text-white/80 text-xs font-medium uppercase tracking-widest mb-3">
+                  The Wilder Archive · Premium Downloads
                 </p>
-                <h2 className="font-serif text-3xl md:text-4xl text-ink italic mb-4">
-                  Building wisdom from another era.
+                <h2 className="font-serif text-3xl md:text-5xl text-white italic mb-4 leading-tight">
+                  The outdoor skills your<br />grandparents knew by heart.
                 </h2>
-                <p className="text-inkl max-w-xl mx-auto text-sm leading-relaxed mb-6">
-                  The techniques our ancestors used to build for children — cob, timber framing, stone stacking.
-                  These guides resurrect that wisdom, adapted for the modern family garden.
+                <p className="text-white/70 max-w-xl mx-auto text-sm md:text-base leading-relaxed mb-8">
+                  Cob, timber framing, stone stacking — techniques passed down through generations, 
+                  now adapted for modern family gardens. These aren't just builds. They're heirlooms.
                 </p>
+                
+                {/* Social proof badges */}
+                <div className="flex flex-wrap items-center justify-center gap-6 text-white/80 text-xs">
+                  <div className="flex items-center gap-1">
+                    <span className="text-ember">★</span>
+                    <span>4.9 rating from 200+ families</span>
+                  </div>
+                  <div className="w-px h-4 bg-white/30" />
+                  <div>Instant PDF download</div>
+                  <div className="w-px h-4 bg-white/30" />
+                  <div>Lifetime access</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Why Ancient Techniques Matter */}
+            <div className="mb-12 grid md:grid-cols-3 gap-6">
+              <div className="bg-white rounded-2xl p-6 border border-inkll/10 text-center">
+                <div className="text-4xl mb-3">🌍</div>
+                <h4 className="font-serif text-lg text-ink mb-2">Zero Waste</h4>
+                <p className="text-inkl text-sm">Built with materials from your own yard. No carbon footprint, no hardware store run.</p>
+              </div>
+              <div className="bg-white rounded-2xl p-6 border border-inkll/10 text-center">
+                <div className="text-4xl mb-3">👶</div>
+                <h4 className="font-serif text-lg text-ink mb-2">Kid-Safe</h4>
+                <p className="text-inkl text-sm">Every technique adapted for little hands. Sensory-rich, developmentally appropriate.</p>
+              </div>
+              <div className="bg-white rounded-2xl p-6 border border-inkll/10 text-center">
+                <div className="text-4xl mb-3">🏔️</div>
+                <h4 className="font-serif text-lg text-ink mb-2">Lasts Generations</h4>
+                <p className="text-inkl text-sm">Stone and earth don't rot. These are the builds your grandchildren will play on.</p>
+              </div>
+            </div>
+
+            {/* Archive Cards */}
+            <div className="mb-12">
+              <div className="flex items-end justify-between mb-6">
+                <div>
+                  <p className="text-xs font-medium uppercase tracking-widest text-ember mb-1">Ancient Technique Guides</p>
+                  <h3 className="font-serif text-2xl text-ink italic">Build something that lasts.</h3>
+                </div>
+                <p className="text-inkl text-sm hidden md:block">Each includes printable blueprints, material lists & step-by-step video</p>
               </div>
 
-              {/* Archive Cards */}
-              <div className="grid md:grid-cols-3 gap-6 mb-10">
+              <div className="grid md:grid-cols-3 gap-6 mb-8">
                 {/* Cob for Kids */}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.1 }}
-                  className="bg-white rounded-2xl overflow-hidden shadow-sm border border-inkll/10 group"
+                  className="bg-white rounded-2xl overflow-hidden shadow-lg border border-inkll/10 group"
                 >
-                  <div className="aspect-[4/3] bg-gradient-to-br from-[#8C4A14]/20 to-[#D2961E]/10 flex items-center justify-center relative overflow-hidden">
-                    <div className="text-6xl">🏺</div>
-                    <div className="absolute inset-0 bg-gradient-to-t from-white/80 to-transparent" />
+                  <div className="aspect-[4/3] bg-gradient-to-br from-[#8C4A14] to-[#D2961E] flex items-center justify-center relative overflow-hidden">
+                    <div className="text-7xl">🏺</div>
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
+                      <span className="text-white text-xs font-medium uppercase tracking-wider">Most Popular</span>
+                    </div>
                   </div>
-                  <div className="p-5">
-                    <p className="text-xs font-medium uppercase tracking-wider text-ember mb-2">Ancient Technique</p>
+                  <div className="p-6">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="px-2 py-0.5 bg-ember/10 text-ember text-xs font-medium rounded-full">Bestseller</span>
+                      <span className="text-inkll text-xs">45 pages · 3 hrs</span>
+                    </div>
                     <h3 className="font-serif text-xl text-ink mb-2">Cob for Kids</h3>
                     <p className="text-inkl text-sm leading-relaxed mb-4">
-                      Earth building made accessible. Learn to shape cob benches, mushroom seats, and sculptural forms
+                      Earth building made accessible. Shape cob benches, mushroom seats, sculptural forms 
                       that children can climb on — using clay, sand, and straw from your own yard.
                     </p>
+                    
+                    {/* What's included */}
+                    <div className="bg-cream/50 rounded-lg p-3 mb-4">
+                      <p className="text-xs font-medium text-ink mb-2">What's inside:</p>
+                      <ul className="text-xs text-inkl space-y-1">
+                        <li className="flex items-start gap-2"><span className="text-olive">✓</span> 45-page illustrated guide</li>
+                        <li className="flex items-start gap-2"><span className="text-olive">✓</span> Printable material checklist</li>
+                        <li className="flex items-start gap-2"><span className="text-olive">✓</span> Step-by-step video tutorial</li>
+                        <li className="flex items-start gap-2"><span className="text-olive">✓</span> Safety guide for kids</li>
+                      </ul>
+                    </div>
+                    
                     <div className="flex items-center justify-between mb-4">
                       <div>
-                        <span className="text-2xl font-serif text-ink">$35</span>
-                        <span className="text-inkl text-xs ml-1">digital guide</span>
+                        <span className="text-3xl font-serif text-ink">$35</span>
+                        <span className="text-inkl text-xs block">One-time purchase, lifetime access</span>
                       </div>
-                      <div className="text-xs text-inkl">45 pages · 3 hours</div>
                     </div>
                     <a
                       href="https://gumroad.com"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="block w-full py-3 text-center bg-ink text-white font-sans font-medium rounded-full hover:bg-ember transition-colors"
+                      className="block w-full py-3 text-center bg-ember text-white font-sans font-medium rounded-full hover:bg-terra transition-colors shadow-lg shadow-ember/20"
                     >
-                      Download Guide
+                      Get the Guide →
                     </a>
                   </div>
                 </motion.div>
@@ -608,25 +672,38 @@ export default function BuildsPage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 }}
-                  className="bg-white rounded-2xl overflow-hidden shadow-sm border border-inkll/10 group"
+                  className="bg-white rounded-2xl overflow-hidden shadow-lg border border-inkll/10 group"
                 >
-                  <div className="aspect-[4/3] bg-gradient-to-br from-[#5A6428]/20 to-[#96963C]/10 flex items-center justify-center relative overflow-hidden">
-                    <div className="text-6xl">🪵</div>
-                    <div className="absolute inset-0 bg-gradient-to-t from-white/80 to-transparent" />
+                  <div className="aspect-[4/3] bg-gradient-to-br from-[#5A6428] to-[#96963C] flex items-center justify-center relative overflow-hidden">
+                    <div className="text-7xl">🪵</div>
                   </div>
-                  <div className="p-5">
-                    <p className="text-xs font-medium uppercase tracking-wider text-[#5A6428] mb-2">Ancient Technique</p>
+                  <div className="p-6">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="px-2 py-0.5 bg-[#5A6428]/10 text-[#5A6428] text-xs font-medium rounded-full">Editor’s Pick</span>
+                      <span className="text-inkll text-xs">38 pages · 4 hrs</span>
+                    </div>
                     <h3 className="font-serif text-xl text-ink mb-2">Timber & Twine</h3>
                     <p className="text-inkl text-sm leading-relaxed mb-4">
-                      Joinery without nails. Japanese-inspired connections, rope-lashed joints, and the beauty
-                      of a frame that holds together through geometry alone.
+                      Joinery without nails. Japanese-inspired connections, rope-lashed joints, 
+                      and the beauty of a frame that holds together through geometry alone.
                     </p>
+                    
+                    {/* What's included */}
+                    <div className="bg-cream/50 rounded-lg p-3 mb-4">
+                      <p className="text-xs font-medium text-ink mb-2">What's inside:</p>
+                      <ul className="text-xs text-inkl space-y-1">
+                        <li className="flex items-start gap-2"><span className="text-olive">✓</span> 38-page illustrated guide</li>
+                        <li className="flex items-start gap-2"><span className="text-olive">✓</span> Knot-tying reference chart</li>
+                        <li className="flex items-start gap-2"><span className="text-olive">✓</span> 3 project blueprints</li>
+                        <li className="flex items-start gap-2"><span className="text-olive">✓</span> Tool recommendations</li>
+                      </ul>
+                    </div>
+                    
                     <div className="flex items-center justify-between mb-4">
                       <div>
-                        <span className="text-2xl font-serif text-ink">$35</span>
-                        <span className="text-inkl text-xs ml-1">digital guide</span>
+                        <span className="text-3xl font-serif text-ink">$35</span>
+                        <span className="text-inkl text-xs block">One-time purchase, lifetime access</span>
                       </div>
-                      <div className="text-xs text-inkl">38 pages · 4 hours</div>
                     </div>
                     <a
                       href="https://gumroad.com"
@@ -634,7 +711,7 @@ export default function BuildsPage() {
                       rel="noopener noreferrer"
                       className="block w-full py-3 text-center bg-ink text-white font-sans font-medium rounded-full hover:bg-ember transition-colors"
                     >
-                      Download Guide
+                      Get the Guide →
                     </a>
                   </div>
                 </motion.div>
@@ -644,25 +721,38 @@ export default function BuildsPage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 }}
-                  className="bg-white rounded-2xl overflow-hidden shadow-sm border border-inkll/10 group"
+                  className="bg-white rounded-2xl overflow-hidden shadow-lg border border-inkll/10 group"
                 >
-                  <div className="aspect-[4/3] bg-gradient-to-br from-[#464F5F]/20 to-[#5A6428]/10 flex items-center justify-center relative overflow-hidden">
-                    <div className="text-6xl">⭕</div>
-                    <div className="absolute inset-0 bg-gradient-to-t from-white/80 to-transparent" />
+                  <div className="aspect-[4/3] bg-gradient-to-br from-[#464F5F] to-[#5A6428] flex items-center justify-center relative overflow-hidden">
+                    <div className="text-7xl">⭕</div>
                   </div>
-                  <div className="p-5">
-                    <p className="text-xs font-medium uppercase tracking-wider text-[#464F5F] mb-2">Ancient Technique</p>
+                  <div className="p-6">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="px-2 py-0.5 bg-[#464F5F]/10 text-[#464F5F] text-xs font-medium rounded-full">New</span>
+                      <span className="text-inkll text-xs">52 pages · 5 hrs</span>
+                    </div>
                     <h3 className="font-serif text-xl text-ink mb-2">The Stone Circle</h3>
                     <p className="text-inkl text-sm leading-relaxed mb-4">
-                      Dry stacking without mortar. The ancient art of balance — stones that hold each other up
+                      Dry stacking without mortar. The ancient art of balance — stones that hold each other up 
                       through geometry alone. Create gathering spaces, spirals, and towers.
                     </p>
+                    
+                    {/* What's included */}
+                    <div className="bg-cream/50 rounded-lg p-3 mb-4">
+                      <p className="text-xs font-medium text-ink mb-2">What's inside:</p>
+                      <ul className="text-xs text-inkl space-y-1">
+                        <li className="flex items-start gap-2"><span className="text-olive">✓</span> 52-page illustrated guide</li>
+                        <li className="flex items-start gap-2"><span className="text-olive">✓</span> Design templates (5 patterns)</li>
+                        <li className="flex items-start gap-2"><span className="text-olive">✓</span> Stone sourcing guide</li>
+                        <li className="flex items-start gap-2"><span className="text-olive">✓</span> Weatherproofing tips</li>
+                      </ul>
+                    </div>
+                    
                     <div className="flex items-center justify-between mb-4">
                       <div>
-                        <span className="text-2xl font-serif text-ink">$45</span>
-                        <span className="text-inkl text-xs ml-1">digital guide</span>
+                        <span className="text-3xl font-serif text-ink">$45</span>
+                        <span className="text-inkl text-xs block">One-time purchase, lifetime access</span>
                       </div>
-                      <div className="text-xs text-inkl">52 pages · 5 hours</div>
                     </div>
                     <a
                       href="https://gumroad.com"
@@ -670,114 +760,174 @@ export default function BuildsPage() {
                       rel="noopener noreferrer"
                       className="block w-full py-3 text-center bg-ink text-white font-sans font-medium rounded-full hover:bg-ember transition-colors"
                     >
-                      Download Guide
+                      Get the Guide →
                     </a>
                   </div>
                 </motion.div>
               </div>
+            </div>
 
-              {/* Wilder Library Philosophy Collection */}
-              <div className="mb-10">
-                <div className="flex items-center justify-between mb-6">
-                  <div>
-                    <p className="text-xs font-medium uppercase tracking-widest text-olive mb-1">The Wilder Library</p>
-                    <h3 className="font-serif text-xl text-ink italic">Philosophy meets practice.</h3>
-                  </div>
-                </div>
+            {/* Full Library Bundle CTA */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+              className="mb-12 bg-gradient-to-r from-ink via-[#2D5A3D] to-[#5A6428] rounded-3xl p-8 md:p-12 text-center"
+            >
+              <span className="inline-block px-4 py-1 bg-ember text-white text-xs font-medium rounded-full mb-4">
+                Save $65 with the Complete Bundle
+              </span>
+              <h3 className="font-serif text-2xl md:text-4xl text-white italic mb-3">
+                The Full Wilder Archive
+              </h3>
+              <p className="text-white/60 text-sm max-w-lg mx-auto mb-6">
+                All 5 ancient technique guides + all 3 Wilder Library philosophy books. 
+                Everything you need to transform your backyard into a generations-long adventure.
+              </p>
+              
+              {/* What's included quick view */}
+              <div className="flex flex-wrap justify-center gap-3 mb-8">
+                {['Cob for Kids', 'Timber & Twine', 'Stone Circle', 'Wattle & Daub', 'Cordwood Craft', 'Mud Kitchen Handbook', 'Art of Doing Nothing', '12 Seasonal Builds'].map(item => (
+                  <span key={item} className="px-3 py-1 bg-white/10 text-white/80 text-xs rounded-full">{item}</span>
+                ))}
+              </div>
+              
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a
+                  href="https://gumroad.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-10 py-4 bg-white text-ink font-sans font-bold rounded-full hover:bg-cream transition-colors shadow-xl text-lg"
+                >
+                  Get the Full Archive — $199
+                </a>
+                <p className="text-white/40 text-sm">Reg. $264 separately</p>
+              </div>
+            </motion.div>
 
-                <div className="grid md:grid-cols-2 gap-6">
-                  {/* The Mud Kitchen Handbook */}
-                  <motion.div
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.2 }}
-                    className="bg-white rounded-xl p-5 border border-inkll/10 flex gap-4"
-                  >
-                    <div className="w-16 h-20 bg-gradient-to-br from-blush/30 to-parchment rounded-lg flex items-center justify-center flex-shrink-0">
-                      <span className="text-2xl">🍲</span>
-                    </div>
-                    <div className="flex-1">
-                      <p className="text-xs text-ember font-medium mb-1">40-page guide</p>
-                      <h4 className="font-serif text-base text-ink mb-1">The Mud Kitchen Handbook</h4>
-                      <p className="text-inkl text-xs leading-relaxed mb-3">
-                        Why mess is necessary for childhood development. Build philosophy + 5 recipes.
-                      </p>
-                      <div className="flex items-center justify-between">
-                        <span className="font-serif text-lg text-ink">$18</span>
-                        <a
-                          href="https://gumroad.com"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="px-4 py-2 bg-ember text-white text-xs font-medium rounded-full hover:bg-terra transition-colors"
-                        >
-                          Download
-                        </a>
-                      </div>
-                    </div>
-                  </motion.div>
-
-                  {/* The Art of Doing Nothing */}
-                  <motion.div
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.3 }}
-                    className="bg-white rounded-xl p-5 border border-inkll/10 flex gap-4"
-                  >
-                    <div className="w-16 h-20 bg-gradient-to-br from-olive/20 to-cream rounded-lg flex items-center justify-center flex-shrink-0">
-                      <span className="text-2xl">🌿</span>
-                    </div>
-                    <div className="flex-1">
-                      <p className="text-xs text-olive font-medium mb-1">55-page guide</p>
-                      <h4 className="font-serif text-base text-ink mb-1">The Art of Doing Nothing</h4>
-                      <p className="text-inkl text-xs leading-relaxed mb-3">
-                        On letting children be bored and unsupervised outdoors. Why our ancestors understood this.
-                      </p>
-                      <div className="flex items-center justify-between">
-                        <span className="font-serif text-lg text-ink">$22</span>
-                        <a
-                          href="https://gumroad.com"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="px-4 py-2 bg-ember text-white text-xs font-medium rounded-full hover:bg-terra transition-colors"
-                        >
-                          Download
-                        </a>
-                      </div>
-                    </div>
-                  </motion.div>
+            {/* Wilder Library Philosophy Collection */}
+            <div className="mb-12">
+              <div className="flex items-end justify-between mb-6">
+                <div>
+                  <p className="text-xs font-medium uppercase tracking-widest text-olive mb-1">The Wilder Library</p>
+                  <h3 className="font-serif text-2xl text-ink italic">The philosophy behind the builds.</h3>
                 </div>
               </div>
 
-              {/* Master Builder Course CTA */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
-                className="bg-gradient-to-r from-ink via-ink to-[#5A6428] rounded-2xl p-8 text-center"
-              >
-                <p className="text-xs font-medium uppercase tracking-widest text-ember mb-3">
-                  The Master Builder Course
-                </p>
-                <h3 className="font-serif text-2xl md:text-3xl text-white italic mb-3">
-                  6 weeks. 5 ancient techniques. One backyard.
-                </h3>
-                <p className="text-white/60 text-sm max-w-lg mx-auto mb-6">
-                  A video + printable course on earth building, timber joinery, stone stacking,
-                  and designing your wild room. For families ready to go deep.
-                </p>
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                  <a
-                    href="https://gumroad.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-8 py-4 bg-ember text-white font-sans font-medium rounded-full hover:bg-terra transition-colors shadow-lg shadow-ember/30 text-lg"
-                  >
-                    Join the Course — $120
-                  </a>
-                  <p className="text-white/40 text-xs">or bundle with all guides for $199</p>
-                </div>
-              </motion.div>
+              <div className="grid md:grid-cols-2 gap-6">
+                {/* The Mud Kitchen Handbook */}
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.2 }}
+                  className="bg-white rounded-2xl p-6 border border-inkll/10 flex gap-5"
+                >
+                  <div className="w-24 h-28 bg-gradient-to-br from-blush/30 to-parchment rounded-xl flex items-center justify-center flex-shrink-0">
+                    <span className="text-4xl">🍲</span>
+                  </div>
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="px-2 py-0.5 bg-blush/50 text-ember text-xs font-medium rounded-full">40-page guide</span>
+                      <span className="text-inkll text-xs">Instant PDF</span>
+                    </div>
+                    <h4 className="font-serif text-xl text-ink mb-2">The Mud Kitchen Handbook</h4>
+                    <p className="text-inkl text-sm leading-relaxed mb-4">
+                      A meditation on why mess is necessary for childhood development. 
+                      Build philosophy + 5 recipes for the ultimate mud kitchen.
+                    </p>
+                    <div className="flex items-center justify-between">
+                      <span className="text-2xl font-serif text-ink">$18</span>
+                      <a
+                        href="https://gumroad.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-5 py-2 bg-ember text-white text-sm font-medium rounded-full hover:bg-terra transition-colors"
+                      >
+                        Download
+                      </a>
+                    </div>
+                  </div>
+                </motion.div>
+
+                {/* The Art of Doing Nothing */}
+                <motion.div
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.3 }}
+                  className="bg-white rounded-2xl p-6 border border-inkll/10 flex gap-5"
+                >
+                  <div className="w-24 h-28 bg-gradient-to-br from-olive/20 to-cream rounded-xl flex items-center justify-center flex-shrink-0">
+                    <span className="text-4xl">🌿</span>
+                  </div>
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="px-2 py-0.5 bg-olive/20 text-olive text-xs font-medium rounded-full">55-page guide</span>
+                      <span className="text-inkll text-xs">Instant PDF</span>
+                    </div>
+                    <h4 className="font-serif text-xl text-ink mb-2">The Art of Doing Nothing</h4>
+                    <p className="text-inkl text-sm leading-relaxed mb-4">
+                      On letting children be bored and unsupervised outdoors. 
+                      Why our ancestors understood this — and why we've forgotten.
+                    </p>
+                    <div className="flex items-center justify-between">
+                      <span className="text-2xl font-serif text-ink">$22</span>
+                      <a
+                        href="https://gumroad.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-5 py-2 bg-olive text-white text-sm font-medium rounded-full hover:bg-forest transition-colors"
+                      >
+                        Download
+                      </a>
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
             </div>
+
+            {/* Testimonial */}
+            <div className="mb-12 p-8 bg-parchment rounded-2xl text-center">
+              <div className="flex justify-center mb-4">
+                {[1,2,3,4,5].map(i => (
+                  <span key={i} className="text-2xl text-ember">★</span>
+                ))}
+              </div>
+              <p className="font-serif text-xl text-ink italic mb-4 max-w-2xl mx-auto">
+                "We built the cob bench last spring and my kids still use it every single day. 
+                It's become the heart of our backyard. Worth every penny."
+              </p>
+              <p className="text-inkl text-sm">— Sarah, mother of 3, Portland OR</p>
+            </div>
+
+            {/* Master Builder Course CTA */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+              className="bg-cream rounded-3xl p-8 md:p-12 text-center border border-inkll/10"
+            >
+              <p className="text-xs font-medium uppercase tracking-widest text-ember mb-3">
+                For Families Ready to Go Deep
+              </p>
+              <h3 className="font-serif text-2xl md:text-3xl text-ink italic mb-3">
+                The Master Builder Course
+              </h3>
+              <p className="text-inkl max-w-lg mx-auto mb-6">
+                6 weeks. 5 ancient techniques. One backyard. Video lessons, printable blueprints, 
+                and a community of families building together.
+              </p>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a
+                  href="https://gumroad.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-8 py-4 bg-ember text-white font-sans font-bold rounded-full hover:bg-terra transition-colors shadow-lg shadow-ember/20 text-lg"
+                >
+                  Join the Course — $120
+                </a>
+                <p className="text-inkl text-sm">or $199 with all guides included</p>
+              </div>
+            </motion.div>
 
             {/* Other Sections Links */}
             <div className="mt-8 p-6 bg-white rounded-xl border border-inkll/20">
