@@ -708,7 +708,7 @@ export const ecoProducts = [
     id: 'columbia-jacket-kids',
     name: 'Min丫头 Midweight Jacket',
     brand: 'Columbia',
-    category: 'kids',
+    category: 'interiors',
     description: 'Kids outdoor jacket with warm synthetic insulation. Good for active outdoor play in changing weather.',
     ecoFeatures: [
       'Recycled insulation (our in-house standard)',
