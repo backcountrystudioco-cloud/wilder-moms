@@ -138,12 +138,6 @@ export default function Nav() {
                     >
                       Village
                     </Link>
-                    <Link
-                      to="/journal"
-                      className="block px-4 py-2 font-sans text-sm text-ink hover:bg-blush/50 hover:text-ember"
-                    >
-                      Journal
-                    </Link>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -254,12 +248,6 @@ export default function Nav() {
                 className="block py-2 font-sans text-sm text-ink hover:text-ember"
               >
                 Village
-              </Link>
-              <Link
-                to="/journal"
-                className="block py-2 font-sans text-sm text-ink hover:text-ember"
-              >
-                Journal
               </Link>
             </div>
           )}
