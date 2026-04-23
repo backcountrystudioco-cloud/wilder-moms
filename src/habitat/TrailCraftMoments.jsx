@@ -12,17 +12,17 @@ const effortColors = {
 };
 
 const weatherEmojis = {
-  hot: '🔥',
-  extreme_heat: '🥵',
-  drizzle: '🌦️',
-  'drizzle-cool': '🌧️',
-  rain: '🌧️',
-  cold: '🥶',
-  snow: '❄️',
-  perfect: '✨',
-  cloudy: '⛅',
-  warm: '🌤️',
-  default: '🌿',
+  hot: 'Hot',
+  extreme_heat: 'Heat',
+  drizzle: 'Drizzle',
+  'drizzle-cool': 'Rain',
+  rain: 'Rain',
+  cold: 'Cold',
+  snow: 'Snow',
+  perfect: 'Great',
+  cloudy: 'Cloudy',
+  warm: 'Warm',
+  default: 'Nature',
 };
 
 export default function TrailCraftMoments({ 
@@ -33,7 +33,7 @@ export default function TrailCraftMoments({
   compact = false 
 }) {
   const season = getCurrentSeason();
-  const seasonEmoji = { spring: '🌱', summer: '☀️', fall: '🍂', winter: '❄️' }[season];
+  const seasonEmoji = { spring: 'Spring', summer: 'Summer', fall: 'Fall', winter: 'Winter' }[season];
   
   const craftSuggestions = useMemo(() => {
     const suggestions = getCraftSuggestions({
@@ -61,7 +61,7 @@ export default function TrailCraftMoments({
             to={`/basecamp/activities`}
             className="flex items-center gap-3 p-3 bg-cream/60 rounded-xl hover:bg-cream transition-colors"
           >
-            <span className="text-lg">🎨</span>
+            <span className="text-lg">C</span>
             <div className="flex-1 min-w-0">
               <p className="font-sans text-sm text-ink font-medium truncate">
                 {suggestion.craft.title}
@@ -86,7 +86,7 @@ export default function TrailCraftMoments({
       <div className="flex items-center justify-between mb-6">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <span className="text-2xl">🎨</span>
+            <span className="text-2xl">Craft</span>
             <p className="text-xs font-medium text-ember uppercase tracking-widest">
               Trail Craft Moments
             </p>
@@ -191,11 +191,11 @@ export default function TrailCraftMoments({
       {weatherAssessment && (
         <div className="mt-4 pt-4 border-t border-inkll/20">
           <p className="font-sans text-xs text-inkl italic">
-            {weatherAssessment.level === 'hot' && "💡 Collect items early, craft in shade during peak heat"}
-            {weatherAssessment.level === 'perfect' && "💡 No excuses — this is prime craft time!"}
-            {weatherAssessment.level === 'drizzle' && "💡 Find a covered spot for bark rubbings or journaling"}
-            {weatherAssessment.level === 'cloudy' && "💡 No sunburn risk — perfect for detailed craft work"}
-            {weatherAssessment.level === 'cold' && "💡 Keep hands warm! Craft during rest stops, keep moving between"}
+            {weatherAssessment.level === 'hot' && "Collect items early, craft in shade during peak heat"}
+            {weatherAssessment.level === 'perfect' && "No excuses — this is prime craft time!"}
+            {weatherAssessment.level === 'drizzle' && "Find a covered spot for bark rubbings or journaling"}
+            {weatherAssessment.level === 'cloudy' && "No sunburn risk — perfect for detailed craft work"}
+            {weatherAssessment.level === 'cold' && "Keep hands warm! Craft during rest stops, keep moving between"}
           </p>
         </div>
       )}

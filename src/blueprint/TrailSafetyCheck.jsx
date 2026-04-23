@@ -131,7 +131,7 @@ export default function TrailSafetyCheck({ onAddItems }) {
           className="p-4 rounded-xl mb-6 bg-ember border border-ember/30"
         >
           <div className="flex items-center gap-2 mb-2">
-            <span className="text-xl">⚡</span>
+            <span className="text-xl">Lightning</span>
             <p className="text-sm text-ember font-medium">{lightning.message}</p>
           </div>
           <p className="text-xs text-ember/80">Lightning can strike from clear sky — white clouds building = incoming weather</p>

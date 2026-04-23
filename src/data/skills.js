@@ -9,7 +9,7 @@ export const pillars = {
   roam: {
     id: 'roam',
     name: 'Roam',
-    icon: '🥾',
+    icon: 'R',
     color: '#5A6428',
     description: 'Trail & Nature Skills',
     skills: [
@@ -19,7 +19,7 @@ export const pillars = {
         level: 1,
         description: 'First walk outside',
         requirements: ['Take your first outdoor nature walk'],
-        badge: '🌱'
+        badge: 'I'
       },
       {
         id: 'roam_sprout',
@@ -27,7 +27,7 @@ export const pillars = {
         level: 2,
         description: '1-mile hike completed',
         requirements: ['Complete a 1-mile hike with the family'],
-        badge: '🌿'
+        badge: 'II'
       },
       {
         id: 'roam_leaf',
@@ -35,7 +35,7 @@ export const pillars = {
         level: 3,
         description: '3-mile trail master',
         requirements: ['Complete a 3-mile trail hike'],
-        badge: '🍃'
+        badge: 'III'
       },
       {
         id: 'roam_branch',
@@ -43,7 +43,7 @@ export const pillars = {
         level: 4,
         description: 'Dawn adventurer',
         requirements: ['Start a hike at sunrise or before 7am'],
-        badge: '🌅'
+        badge: 'IV'
       },
       {
         id: 'roam_root',
@@ -51,14 +51,14 @@ export const pillars = {
         level: 5,
         description: 'Trail navigator',
         requirements: ['Lead the way on a trail using map or compass'],
-        badge: '🧭'
+        badge: 'V'
       }
     ]
   },
   create: {
     id: 'create',
     name: 'Create',
-    icon: '🎨',
+    icon: 'C',
     color: '#8C4A14',
     description: 'Nature Arts & Discovery',
     skills: [
@@ -68,7 +68,7 @@ export const pillars = {
         level: 1,
         description: 'Collector of treasures',
         requirements: ['Collect natural items (leaves, rocks, feathers)'],
-        badge: '🌿'
+        badge: 'I'
       },
       {
         id: 'create_sprout',
@@ -76,7 +76,7 @@ export const pillars = {
         level: 2,
         description: 'Nature art maker',
         requirements: ['Create art using only natural materials'],
-        badge: '🎨'
+        badge: 'II'
       },
       {
         id: 'create_leaf',
@@ -84,7 +84,7 @@ export const pillars = {
         level: 3,
         description: 'Photo journal keeper',
         requirements: ['Document 5 outdoor adventures with photos'],
-        badge: '📷'
+        badge: 'III'
       },
       {
         id: 'create_branch',
@@ -92,7 +92,7 @@ export const pillars = {
         level: 4,
         description: 'Scavenger hunt champion',
         requirements: ['Complete a nature scavenger hunt'],
-        badge: '🔍'
+        badge: 'IV'
       },
       {
         id: 'create_root',
@@ -100,14 +100,14 @@ export const pillars = {
         level: 5,
         description: 'Nature journal keeper',
         requirements: ['Keep a written nature journal for 4+ weeks'],
-        badge: '📓'
+        badge: 'V'
       }
     ]
   },
   build: {
     id: 'build',
     name: 'Build',
-    icon: '🔨',
+    icon: 'B',
     color: '#D2961E',
     description: 'Campcraft & Making',
     skills: [
@@ -117,7 +117,7 @@ export const pillars = {
         level: 1,
         description: 'Gathering helper',
         requirements: ['Help gather kindling for a fire or stove'],
-        badge: '🔥'
+        badge: 'I'
       },
       {
         id: 'build_sprout',
@@ -125,7 +125,7 @@ export const pillars = {
         level: 2,
         description: 'Fire safety star',
         requirements: ['Learn fire safety and help start a safe outdoor fire'],
-        badge: '🔥'
+        badge: 'II'
       },
       {
         id: 'build_leaf',
@@ -133,7 +133,7 @@ export const pillars = {
         level: 3,
         description: 'Shelter maker',
         requirements: ['Help set up a tent or outdoor shelter'],
-        badge: '⛺'
+        badge: 'III'
       },
       {
         id: 'build_branch',
@@ -141,7 +141,7 @@ export const pillars = {
         level: 4,
         description: 'Outdoor cooking assistant',
         requirements: ['Help prepare a meal outdoors over fire or stove'],
-        badge: '🍳'
+        badge: 'IV'
       },
       {
         id: 'build_root',
@@ -149,14 +149,14 @@ export const pillars = {
         level: 5,
         description: 'Build lead',
         requirements: ['Lead a family outdoor building project from plan to finish'],
-        badge: '🔨'
+        badge: 'V'
       }
     ]
   },
   connect: {
     id: 'connect',
     name: 'Connect',
-    icon: '🤝',
+    icon: 'Co',
     color: '#7B3E88',
     description: 'Community & Sharing',
     skills: [
@@ -166,7 +166,7 @@ export const pillars = {
         level: 1,
         description: 'Story sharer',
         requirements: ['Share a story about an outdoor adventure'],
-        badge: '📖'
+        badge: 'I'
       },
       {
         id: 'connect_sprout',
@@ -174,7 +174,7 @@ export const pillars = {
         level: 2,
         description: 'Hike buddy finder',
         requirements: ['Hike with another family or friend'],
-        badge: '🤝'
+        badge: 'II'
       },
       {
         id: 'connect_leaf',
@@ -182,7 +182,7 @@ export const pillars = {
         level: 3,
         description: 'Group guide',
         requirements: ['Lead a group hike or outdoor activity'],
-        badge: '👑'
+        badge: 'III'
       },
       {
         id: 'connect_branch',
@@ -190,7 +190,7 @@ export const pillars = {
         level: 4,
         description: 'Mentor spirit',
         requirements: ['Help a new family discover outdoor adventures'],
-        badge: '🌟'
+        badge: 'IV'
       },
       {
         id: 'connect_root',
@@ -198,7 +198,7 @@ export const pillars = {
         level: 5,
         description: 'Village connector',
         requirements: ['Organize a community outdoor event'],
-        badge: '🏕️'
+        badge: 'V'
       }
     ]
   }

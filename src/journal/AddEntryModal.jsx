@@ -4,9 +4,9 @@ import { useJournal } from '../context/JournalContext'
 import { pillars } from '../data/skills'
 
 const moods = [
-  { value: 'great', label: 'Great', emoji: '😊' },
-  { value: 'good', label: 'Good', emoji: '🙂' },
-  { value: 'meh', label: 'Meh', emoji: '😐' }
+  { value: 'great', label: 'Great', emoji: 'G' },
+  { value: 'good', label: 'Good', emoji: 'OK' },
+  { value: 'meh', label: 'Meh', emoji: '-' }
 ]
 
 export default function AddEntryModal({ onClose }) {

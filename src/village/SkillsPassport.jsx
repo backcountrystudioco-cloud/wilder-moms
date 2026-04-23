@@ -5,58 +5,58 @@ import { motion, AnimatePresence } from 'framer-motion'
 const BADGE_CATEGORIES = {
   trailBlazer: {
     title: 'Trail Blazer',
-    icon: '🥾',
+    icon: '',
     description: 'Complete hikes of increasing difficulty',
     color: 'bg-ember',
     badges: [
-      { id: 'first_hike', name: 'First Steps', description: 'Complete your first hike', icon: '🥾', criteria: { type: 'hike', count: 1 } },
-      { id: 'three_hikes', name: 'Trail Starter', description: 'Complete 3 hikes', icon: '🥾', criteria: { type: 'hike', count: 3 } },
-      { id: 'five_hikes', name: 'Path Finder', description: 'Complete 5 hikes', icon: '🥾', criteria: { type: 'hike', count: 5 } },
-      { id: 'ten_hikes', name: 'Trail Master', description: 'Complete 10 hikes', icon: '🏔️', criteria: { type: 'hike', count: 10 } },
+      { id: 'first_hike', name: 'First Steps', description: 'Complete your first hike', icon: '', criteria: { type: 'hike', count: 1 } },
+      { id: 'three_hikes', name: 'Trail Starter', description: 'Complete 3 hikes', icon: '', criteria: { type: 'hike', count: 3 } },
+      { id: 'five_hikes', name: 'Path Finder', description: 'Complete 5 hikes', icon: '', criteria: { type: 'hike', count: 5 } },
+      { id: 'ten_hikes', name: 'Trail Master', description: 'Complete 10 hikes', icon: '', criteria: { type: 'hike', count: 10 } },
     ]
   },
   craftyHands: {
     title: 'Crafty Hands',
-    icon: '🎨',
+    icon: '',
     description: 'Try crafts from different categories',
     color: 'bg-peach',
     badges: [
-      { id: 'first_craft', name: 'First Creation', description: 'Complete your first craft', icon: '🌿', criteria: { type: 'craft', count: 1 } },
-      { id: 'nature_craft', name: 'Nature Artist', description: 'Try a nature craft', icon: '🍃', criteria: { type: 'craft', category: 'nature' } },
-      { id: 'outdoor_craft', name: 'Outdoor Maker', description: 'Try an outdoor craft', icon: '🏕️', criteria: { type: 'craft', category: 'outdoor' } },
-      { id: 'three_crafts', name: 'Craft Enthusiast', description: 'Complete 3 crafts', icon: '🎨', criteria: { type: 'craft', count: 3 } },
-      { id: 'five_crafts', name: 'Master Crafter', description: 'Complete 5 crafts', icon: '✨', criteria: { type: 'craft', count: 5 } },
+      { id: 'first_craft', name: 'First Creation', description: 'Complete your first craft', icon: '', criteria: { type: 'craft', count: 1 } },
+      { id: 'nature_craft', name: 'Nature Artist', description: 'Try a nature craft', icon: '', criteria: { type: 'craft', category: 'nature' } },
+      { id: 'outdoor_craft', name: 'Outdoor Maker', description: 'Try an outdoor craft', icon: '', criteria: { type: 'craft', category: 'outdoor' } },
+      { id: 'three_crafts', name: 'Craft Enthusiast', description: 'Complete 3 crafts', icon: '', criteria: { type: 'craft', count: 3 } },
+      { id: 'five_crafts', name: 'Master Crafter', description: 'Complete 5 crafts', icon: '', criteria: { type: 'craft', count: 5 } },
     ]
   },
   builder: {
     title: 'Builder',
-    icon: '🔨',
+    icon: '',
     description: 'Complete builds from different categories',
     color: 'bg-gold',
     badges: [
-      { id: 'first_build', name: 'First Build', description: 'Complete your first build', icon: '🔨', criteria: { type: 'build', count: 1 } },
-      { id: 'shelter_build', name: 'Shelter Builder', description: 'Build a shelter', icon: '⛺', criteria: { type: 'build', category: 'shelter' } },
-      { id: 'tool_build', name: 'Tool Maker', description: 'Build a tool', icon: '🪓', criteria: { type: 'build', category: 'tool' } },
-      { id: 'three_builds', name: 'Builder Basics', description: 'Complete 3 builds', icon: '🏗️', criteria: { type: 'build', count: 3 } },
-      { id: 'five_builds', name: 'Master Builder', description: 'Complete 5 builds', icon: '🏆', criteria: { type: 'build', count: 5 } },
+      { id: 'first_build', name: 'First Build', description: 'Complete your first build', icon: '', criteria: { type: 'build', count: 1 } },
+      { id: 'shelter_build', name: 'Shelter Builder', description: 'Build a shelter', icon: '', criteria: { type: 'build', category: 'shelter' } },
+      { id: 'tool_build', name: 'Tool Maker', description: 'Build a tool', icon: '', criteria: { type: 'build', category: 'tool' } },
+      { id: 'three_builds', name: 'Builder Basics', description: 'Complete 3 builds', icon: '', criteria: { type: 'build', count: 3 } },
+      { id: 'five_builds', name: 'Master Builder', description: 'Complete 5 builds', icon: '', criteria: { type: 'build', count: 5 } },
     ]
   },
   natureSpotter: {
     title: 'Nature Spotter',
-    icon: '🔍',
+    icon: '',
     description: 'Discover different species and nature items',
     color: 'bg-olive',
     badges: [
-      { id: 'first_spot', name: 'First Discovery', description: 'Spot your first nature item', icon: '🦋', criteria: { type: 'nature_spot', count: 1 } },
-      { id: 'bird_spotter', name: 'Bird Watcher', description: 'Spot 3 birds', icon: '🐦', criteria: { type: 'nature_spot', category: 'bird', count: 3 } },
-      { id: 'bug_spotter', name: 'Bug Scout', description: 'Find 3 bugs', icon: '🐛', criteria: { type: 'nature_spot', category: 'bug', count: 3 } },
-      { id: 'five_spots', name: 'Nature Eyes', description: 'Make 5 nature discoveries', icon: '👀', criteria: { type: 'nature_spot', count: 5 } },
-      { id: 'ten_spots', name: 'Nature Expert', description: 'Make 10 nature discoveries', icon: '🌟', criteria: { type: 'nature_spot', count: 10 } },
+      { id: 'first_spot', name: 'First Discovery', description: 'Spot your first nature item', icon: '', criteria: { type: 'nature_spot', count: 1 } },
+      { id: 'bird_spotter', name: 'Bird Watcher', description: 'Spot 3 birds', icon: '', criteria: { type: 'nature_spot', category: 'bird', count: 3 } },
+      { id: 'bug_spotter', name: 'Bug Scout', description: 'Find 3 bugs', icon: '', criteria: { type: 'nature_spot', category: 'bug', count: 3 } },
+      { id: 'five_spots', name: 'Nature Eyes', description: 'Make 5 nature discoveries', icon: '', criteria: { type: 'nature_spot', count: 5 } },
+      { id: 'ten_spots', name: 'Nature Expert', description: 'Make 10 nature discoveries', icon: '', criteria: { type: 'nature_spot', count: 10 } },
     ]
   },
   adventureFirsts: {
     title: 'Adventure Firsts',
-    icon: '⭐',
+    icon: '',
     description: 'Reach exciting milestones',
     color: 'bg-terra',
     badges: [
@@ -301,7 +301,7 @@ function CheckInModal({ isOpen, onClose, onCheckIn }) {
             onClick={e => e.stopPropagation()}
             className="bg-cream rounded-t-2xl sm:rounded-2xl w-full max-w-md p-6 max-h-[80vh] overflow-y-auto"
           >
-            <h3 className="font-serif text-2xl text-ink mb-6 text-center">Log Your Adventure! 🌿</h3>
+            <h3 className="font-serif text-2xl text-ink mb-6 text-center">Log Your Adventure!</h3>
             
             {/* Type selection */}
             <div className="mb-6">
@@ -320,11 +320,11 @@ function CheckInModal({ isOpen, onClose, onCheckIn }) {
                     `}
                   >
                     <span className="block text-lg mb-1">
-                      {type === 'hike' && '🥾'}
-                      {type === 'craft' && '🎨'}
-                      {type === 'build' && '🔨'}
-                      {type === 'nature_spot' && '🔍'}
-                      {type === 'milestone' && '⭐'}
+                      {type === 'hike' && 'H'}
+                      {type === 'craft' && 'C'}
+                      {type === 'build' && 'B'}
+                      {type === 'nature_spot' && 'N'}
+                      {type === 'milestone' && 'M'}
                     </span>
                     <span className="text-ink capitalize">{type.replace('_', ' ')}</span>
                   </button>
@@ -536,9 +536,9 @@ export default function SkillsPassport() {
           onClick={() => setIsModalOpen(true)}
           className="w-full py-4 bg-ember text-white font-sans font-medium rounded-xl hover:bg-terra transition-colors shadow-lg shadow-ember/20 flex items-center justify-center gap-2"
         >
-          <span className="text-xl">✨</span>
+          <span className="text-xl">+</span>
           Add Check-in
-          <span className="text-xl">✨</span>
+          <span className="text-xl">+</span>
         </button>
       </motion.div>
       
@@ -575,11 +575,11 @@ export default function SkillsPassport() {
                 className="flex items-center gap-3 p-3 bg-white rounded-xl border border-inkll/20"
               >
                 <div className="w-10 h-10 bg-blush rounded-full flex items-center justify-center">
-                  {checkin.type === 'hike' && '🥾'}
-                  {checkin.type === 'craft' && '🎨'}
-                  {checkin.type === 'build' && '🔨'}
-                  {checkin.type === 'nature_spot' && '🔍'}
-                  {checkin.type === 'milestone' && '⭐'}
+                  {checkin.type === 'hike' && 'H'}
+                  {checkin.type === 'craft' && 'C'}
+                  {checkin.type === 'build' && 'B'}
+                  {checkin.type === 'nature_spot' && 'N'}
+                  {checkin.type === 'milestone' && 'M'}
                 </div>
                 <div className="flex-1">
                   <p className="font-sans text-sm text-ink">{checkin.name}</p>

@@ -11,7 +11,7 @@ const storyCircles = {
     description: 'The hard stuff. The exhausting weeks. The moments you weren\'t sure you\'d make it through. We hold those stories here, with witness.',
     color: '#8C1E00',
     bgColor: '#FFF3EC',
-    icon: '🔥'
+    icon: ''
   },
   'trail-tales': {
     name: 'Trail Tales',
@@ -19,7 +19,7 @@ const storyCircles = {
     description: 'The hike where everything went wrong and somehow became the best day. The discovery on a Tuesday afternoon. The trail magic you didn\'t expect.',
     color: '#5A6428',
     bgColor: '#F2F5E8',
-    icon: '🥾'
+    icon: ''
   },
   'quiet-wisdom': {
     name: 'The Quiet Wisdom',
@@ -27,7 +27,7 @@ const storyCircles = {
     description: 'The lessons that took years to learn. The things you know now that you wished you\'d known then. The wisdom you\'re still forming.',
     color: '#464F5F',
     bgColor: '#F0F2F5',
-    icon: '✨'
+    icon: ''
   }
 }
 

@@ -51,21 +51,21 @@ export default function JournalPage() {
         >
           {/* Streak */}
           <div className="bg-white rounded-2xl p-4 text-center border border-inkll/10">
-            <div className="text-3xl mb-1">🔥</div>
+            <div className="text-3xl mb-1">Fire</div>
             <p className="font-serif text-2xl text-ink">{streak}</p>
             <p className="font-sans text-xs text-inkl">day streak</p>
           </div>
 
           {/* Total Entries */}
           <div className="bg-white rounded-2xl p-4 text-center border border-inkll/10">
-            <div className="text-3xl mb-1">📝</div>
+            <div className="text-3xl mb-1">Notes</div>
             <p className="font-serif text-2xl text-ink">{entries.length}</p>
             <p className="font-sans text-xs text-inkl">entries</p>
           </div>
 
           {/* Skills */}
           <div className="bg-white rounded-2xl p-4 text-center border border-inkll/10">
-            <div className="text-3xl mb-1">⭐</div>
+            <div className="text-3xl mb-1">Star</div>
             <p className="font-serif text-2xl text-ink">
               {Object.values(pillarProgress).reduce((acc, p) => acc + p.earned, 0)}
             </p>
@@ -74,7 +74,7 @@ export default function JournalPage() {
 
           {/* Days Active */}
           <div className="bg-white rounded-2xl p-4 text-center border border-inkll/10">
-            <div className="text-3xl mb-1">🌿</div>
+            <div className="text-3xl mb-1">Leaf</div>
             <p className="font-serif text-2xl text-ink">
               {entries.length > 0 
                 ? Math.max(...entries.map(e => {
@@ -162,7 +162,7 @@ export default function JournalPage() {
             </div>
           ) : (
             <div className="bg-blush/40 rounded-2xl p-8 text-center">
-              <div className="text-4xl mb-3">🌱</div>
+              <div className="text-4xl mb-3">Seed</div>
               <h3 className="font-serif text-xl text-ink mb-2">Start your journey</h3>
               <p className="font-sans text-inkl mb-4">
                 Your first journal entry is waiting. What did you notice today?

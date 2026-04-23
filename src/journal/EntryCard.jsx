@@ -2,9 +2,9 @@ import { motion } from 'framer-motion'
 import { pillars } from '../data/skills'
 
 const moodEmojis = {
-  great: '😊',
-  good: '🙂',
-  meh: '😐'
+  great: 'Great',
+  good: 'Good',
+  meh: 'Meh'
 }
 
 const moodColors = {

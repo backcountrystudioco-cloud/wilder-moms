@@ -241,7 +241,7 @@ export default function EcoProductsPage() {
                 }
               `}
             >
-              {showDIYOnly && '✓'} 🔧 DIY Friendly
+              {showDIYOnly && '✓'} DIY Friendly
             </button>
           </div>
         </motion.div>

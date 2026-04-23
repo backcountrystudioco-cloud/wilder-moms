@@ -3,10 +3,10 @@ import { motion } from 'framer-motion';
 import { getCurrentSeason, getSeasonalPlants, estimateZone } from '../data/seasonalPlants';
 
 const seasonEmojis = {
-  spring: '🌱',
-  summer: '☀️',
-  fall: '🍂',
-  winter: '❄️',
+  spring: 'Spring',
+  summer: 'Summer',
+  fall: 'Fall',
+  winter: 'Winter',
 };
 
 const seasonLabels = {

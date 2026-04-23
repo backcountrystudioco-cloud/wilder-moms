@@ -250,7 +250,7 @@ export default function BuildsPage() {
               }`}
             >
               <div className="flex items-center gap-3">
-                <span className="text-2xl">🔍</span>
+                <span className="text-2xl">Search</span>
                 <div className="text-left">
                   <p className="font-sans font-medium text-ink">
                     {selectedMaterials.length > 0 
@@ -294,7 +294,7 @@ export default function BuildsPage() {
             {selectedMaterials.length > 0 && matchedActivities.length > 0 && (
               <div className="mb-6 p-4 bg-olive/5 border border-olive/20 rounded-xl">
                 <p className="font-sans text-sm font-medium text-olive mb-3">
-                  ✨ Activities you can make right now:
+                  Activities you can make right now:
                 </p>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                   {matchedActivities.map(activity => (
@@ -554,9 +554,9 @@ export default function BuildsPage() {
             <div className="mb-12 p-8 md:p-12 bg-gradient-to-br from-[#5A3C00] via-[#8C4A14] to-[#D2961E] rounded-3xl text-center relative overflow-hidden">
               {/* Decorative elements */}
               <div className="absolute inset-0 opacity-10">
-                <div className="absolute top-4 left-4 text-8xl">🏺</div>
-                <div className="absolute bottom-4 right-4 text-8xl">🪵</div>
-                <div className="absolute top-1/2 left-1/4 text-6xl opacity-50">⭕</div>
+                <div className="absolute top-4 left-4 text-8xl">*</div>
+                <div className="absolute bottom-4 right-4 text-8xl">*</div>
+                <div className="absolute top-1/2 left-1/4 text-6xl opacity-50">*</div>
               </div>
               
               <div className="relative z-10">
@@ -574,7 +574,7 @@ export default function BuildsPage() {
                 {/* Social proof badges */}
                 <div className="flex flex-wrap items-center justify-center gap-6 text-white/80 text-xs">
                   <div className="flex items-center gap-1">
-                    <span className="text-ember">★</span>
+                    <span className="text-ember">Star</span>
                     <span>4.9 rating from 200+ families</span>
                   </div>
                   <div className="w-px h-4 bg-white/30" />
@@ -588,17 +588,17 @@ export default function BuildsPage() {
             {/* Why Ancient Techniques Matter */}
             <div className="mb-12 grid md:grid-cols-3 gap-6">
               <div className="bg-white rounded-2xl p-6 border border-inkll/10 text-center">
-                <div className="text-4xl mb-3">🌍</div>
+                <div className="text-4xl mb-3">Globe</div>
                 <h4 className="font-serif text-lg text-ink mb-2">Zero Waste</h4>
                 <p className="text-inkl text-sm">Built with materials from your own yard. No carbon footprint, no hardware store run.</p>
               </div>
               <div className="bg-white rounded-2xl p-6 border border-inkll/10 text-center">
-                <div className="text-4xl mb-3">👶</div>
+                <div className="text-4xl mb-3">Child</div>
                 <h4 className="font-serif text-lg text-ink mb-2">Kid-Safe</h4>
                 <p className="text-inkl text-sm">Every technique adapted for little hands. Sensory-rich, developmentally appropriate.</p>
               </div>
               <div className="bg-white rounded-2xl p-6 border border-inkll/10 text-center">
-                <div className="text-4xl mb-3">🏔️</div>
+                <div className="text-4xl mb-3">Mountain</div>
                 <h4 className="font-serif text-lg text-ink mb-2">Lasts Generations</h4>
                 <p className="text-inkl text-sm">Stone and earth don't rot. These are the builds your grandchildren will play on.</p>
               </div>
@@ -675,7 +675,7 @@ export default function BuildsPage() {
                   className="bg-white rounded-2xl overflow-hidden shadow-lg border border-inkll/10 group"
                 >
                   <div className="aspect-[4/3] bg-gradient-to-br from-[#5A6428] to-[#96963C] flex items-center justify-center relative overflow-hidden">
-                    <div className="text-7xl">🪵</div>
+                    <div className="text-7xl">Wood</div>
                   </div>
                   <div className="p-6">
                     <div className="flex items-center gap-2 mb-2">
@@ -857,7 +857,7 @@ export default function BuildsPage() {
                   className="bg-white rounded-2xl p-6 border border-inkll/10 flex gap-5"
                 >
                   <div className="w-24 h-28 bg-gradient-to-br from-olive/20 to-cream rounded-xl flex items-center justify-center flex-shrink-0">
-                    <span className="text-4xl">🌿</span>
+                    <span className="text-4xl">Nature</span>
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-2">
@@ -889,7 +889,7 @@ export default function BuildsPage() {
             <div className="mb-12 p-8 bg-parchment rounded-2xl text-center">
               <div className="flex justify-center mb-4">
                 {[1,2,3,4,5].map(i => (
-                  <span key={i} className="text-2xl text-ember">★</span>
+                  <span key={i} className="text-2xl text-ember">Star</span>
                 ))}
               </div>
               <p className="font-serif text-xl text-ink italic mb-4 max-w-2xl mx-auto">

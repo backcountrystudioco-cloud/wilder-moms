@@ -54,17 +54,17 @@ const RADIUS_OPTIONS = [
 
 // Time availability options
 const TIME_OPTIONS = [
-  { value: 60, label: 'Quick outing', sublabel: '~1 hour', icon: '⚡' },
-  { value: 180, label: 'Half day', sublabel: '2-3 hours', icon: '🌤️' },
-  { value: 360, label: 'Full adventure', sublabel: '4-6 hours', icon: '🏔️' }
+  { value: 60, label: 'Quick outing', sublabel: '~1 hour', icon: '' },
+  { value: 180, label: 'Half day', sublabel: '2-3 hours', icon: '' },
+  { value: 360, label: 'Full adventure', sublabel: '4-6 hours', icon: '' }
 ]
 
 // Age range options
 const AGE_OPTIONS = [
-  { value: '2-4', label: 'Toddlers', icon: '👶' },
-  { value: '4-7', label: 'Little kids', icon: '🧒' },
-  { value: '7-10', label: 'Big kids', icon: '🧒' },
-  { value: '10+', label: 'Pre-teens', icon: '👧' }
+  { value: '2-4', label: 'Toddlers', icon: '' },
+  { value: '4-7', label: 'Little kids', icon: '' },
+  { value: '7-10', label: 'Big kids', icon: '' },
+  { value: '10+', label: 'Pre-teens', icon: '' }
 ]
 
 // Get seasonal title based on month
@@ -850,7 +850,7 @@ const NaturePlanner = () => {
 
               <div className="text-center mb-6">
                 <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-ember/10 flex items-center justify-center">
-                  <span className="text-3xl">⏱️</span>
+                  <span className="text-3xl">Clock</span>
                 </div>
                 <h2 className="font-serif text-xl text-ember mb-2">How much time?</h2>
                 <p className="font-sans text-sm text-inkl">
@@ -932,7 +932,7 @@ const NaturePlanner = () => {
 
               <div className="text-center mb-6">
                 <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-ember/10 flex items-center justify-center">
-                  <span className="text-3xl">👨‍👩‍👧‍👦</span>
+                  <span className="text-3xl">Family</span>
                 </div>
                 <h2 className="font-serif text-xl text-ember mb-2">Who are you bringing?</h2>
                 <p className="font-sans text-sm text-inkl">
@@ -1033,7 +1033,7 @@ const NaturePlanner = () => {
               {(!weekendPlan.saturday.hike && !weekendPlan.sunday.hike) && (
                 <div className="text-center py-12 bg-white rounded-2xl shadow-md">
                   <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-blush flex items-center justify-center">
-                    <span className="text-3xl">🔍</span>
+                    <span className="text-3xl">Search</span>
                   </div>
                   <h3 className="font-serif text-xl text-ember mb-2">No hikes found</h3>
                   <p className="font-sans text-inkl mb-4">
@@ -1085,7 +1085,7 @@ const DayCard = ({ day, hike, addon, drivingRadius }) => {
       <div className="p-5">
         <div className="flex gap-4">
           <div className="w-14 h-14 rounded-xl bg-olive/20 flex items-center justify-center flex-shrink-0">
-            <span className="text-2xl">🥾</span>
+            <span className="text-2xl">Boot</span>
           </div>
           <div className="flex-1">
             <h5 className="font-serif text-lg text-ink leading-tight mb-1">
@@ -1103,13 +1103,13 @@ const DayCard = ({ day, hike, addon, drivingRadius }) => {
         {/* Hike Details */}
         <div className="mt-4 flex flex-wrap gap-2">
           <span className="text-xs font-sans px-3 py-1.5 rounded-full bg-blush text-ink">
-            📏 {hike.distanceLabel}
+            Distance: {hike.distanceLabel}
           </span>
           <span className="text-xs font-sans px-3 py-1.5 rounded-full bg-blush text-ink">
-            ⏱️ {hike.durationLabel}
+            Time: {hike.durationLabel}
           </span>
           <span className="text-xs font-sans px-3 py-1.5 rounded-full bg-blush text-ink">
-            🚗 ~{hike.drivingTime} min drive
+            ~{hike.drivingTime} min drive
           </span>
           <span className={`text-xs font-sans px-3 py-1.5 rounded-full ${
             hike.difficulty === 'easy' ? 'bg-green-100 text-green-800' :
@@ -1124,22 +1124,22 @@ const DayCard = ({ day, hike, addon, drivingRadius }) => {
         <div className="mt-3 flex flex-wrap gap-2">
           {hike.hasWater && (
             <span className="text-xs font-sans px-2 py-1 rounded-full bg-blue-50 text-blue-700">
-              💧 Water feature
+              Water feature
             </span>
           )}
           {hike.hasViews && (
             <span className="text-xs font-sans px-2 py-1 rounded-full bg-purple-50 text-purple-700">
-              👁️ Great views
+              Views
             </span>
           )}
           {hike.dogsAllowed && (
             <span className="text-xs font-sans px-2 py-1 rounded-full bg-amber-50 text-amber-700">
-              🐕 Dogs OK
+              Dogs OK
             </span>
           )}
           {hike.strollerFriendly && (
             <span className="text-xs font-sans px-2 py-1 rounded-full bg-pink-50 text-pink-700">
-              🚼 Stroller friendly
+              Stroller friendly
             </span>
           )}
         </div>
@@ -1152,7 +1152,7 @@ const DayCard = ({ day, hike, addon, drivingRadius }) => {
             <div className={`w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 ${
               addon.type === 'craft' ? 'bg-peach/30' : 'bg-gold/20'
             }`}>
-              <span className="text-lg">{addon.type === 'craft' ? '🎨' : '🔨'}</span>
+              <span className="text-lg">{addon.type === 'craft' ? 'Craft' : 'Hammer'}</span>
             </div>
             <div className="flex-1">
               <div className="flex items-center gap-2 mb-1">

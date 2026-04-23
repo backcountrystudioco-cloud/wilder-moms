@@ -2,16 +2,16 @@ import { useMemo } from 'react';
 import { motion } from 'framer-motion';
 
 const weatherIcons = {
-  'sunny': '☀️',
-  'mostly_sunny': '🌤️',
-  'partly_cloudy': '⛅',
-  'cloudy': '☁️',
-  'foggy': '🌫️',
-  'rain': '🌧️',
-  'light_rain': '🌦️',
-  'snow': '🌨️',
-  'storm': '⛈️',
-  'unknown': '❓',
+  'sunny': 'Sun',
+  'mostly_sunny': 'Sun',
+  'partly_cloudy': 'Cloud',
+  'cloudy': 'Overcast',
+  'foggy': 'Fog',
+  'rain': 'Rain',
+  'light_rain': 'Rain',
+  'snow': 'Snow',
+  'storm': 'Storm',
+  'unknown': '?',
 };
 
 function getOutdoorRating(hourData, currentHour) {
@@ -120,7 +120,7 @@ export default function HourlyWeather({ hourly, currentHour }) {
       return {
         type: 'hour',
         message: `Next good time: ${nextGood.hourLabel} (${nextGood.temp}°F, ${nextGood.rating.label})`,
-        icon: '🌤️',
+        icon: 'Sun',
       };
     }
     
@@ -133,7 +133,7 @@ export default function HourlyWeather({ hourly, currentHour }) {
       return {
         type: 'wait',
         message: `Weather changes around ${nextRain.hourLabel} - go before then`,
-        icon: '⏱️',
+        icon: 'Clock',
       };
     }
     
@@ -193,7 +193,7 @@ export default function HourlyWeather({ hourly, currentHour }) {
                 {hour.temp}°F
               </p>
               <p className="font-sans text-xs text-inkl mt-1">
-                {hour.precipChance}% 💧
+                {hour.precipChance}%
               </p>
               {hour.rating && (
                 <p className={`font-sans text-xs font-medium mt-2 ${hour.rating.textColor}`}>
@@ -230,7 +230,7 @@ export default function HourlyWeather({ hourly, currentHour }) {
             {hourlyWithRatings[0].level === 'hot' && "💡 Pro tip: Early morning is coolest - pack extra water!"}
             {hourlyWithRatings[0].level === 'drizzle' && "💡 Light rain won't stop the fun - waterproof layers work!"}
             {hourlyWithRatings[0].level === 'perfect' && "💡 Perfect conditions - get out there and enjoy!"}
-            {hourlyWithRatings[0].level === 'cloudy' && "☁️ Overcast = no sunburn risk and comfortable temps"}
+            {hourlyWithRatings[0].level === 'cloudy' && "Overcast = no sunburn risk and comfortable temps"}
             {hourlyWithRatings[0].precipChance > 50 && hourlyWithRatings[0].level !== 'rain' && "💡 Rain possible later - timing matters today"}
           </p>
         </div>
