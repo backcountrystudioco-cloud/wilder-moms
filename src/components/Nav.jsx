@@ -6,10 +6,6 @@ import { useAuth, SignInButton, SignUpButton, UserButton } from '@clerk/react'
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false)
   const [baseCampDropdownOpen, setBaseCampDropdownOpen] = useState(false)
-  const [villageDropdownOpen, setVillageDropdownOpen] = useState(false)
-  const [blueprintDropdownOpen, setBlueprintDropdownOpen] = useState(false)
-  const [mobileVillageOpen, setMobileVillageOpen] = useState(false)
-  const [mobileBlueprintOpen, setMobileBlueprintOpen] = useState(false)
   const { isSignedIn, user } = useAuth()
 
   useEffect(() => {
@@ -112,67 +108,21 @@ export default function Nav() {
               </AnimatePresence>
             </div>
 
-            {/* The Village - Profile/Community Dropdown */}
-            <div className="relative">
-              <button
-                className="font-sans font-medium text-sm uppercase tracking-[0.08em] text-ink hover:text-ember transition-colors inline-flex items-center gap-1"
-                onMouseEnter={() => setVillageDropdownOpen(true)}
-              >
-                The Village
-                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
-              <AnimatePresence>
-                {villageDropdownOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 10 }}
-                    className="absolute top-full left-0 mt-2 w-48 bg-cream shadow-lg rounded-lg border border-inkll/10 py-2 z-50"
-                    onMouseLeave={() => setVillageDropdownOpen(false)}
-                  >
-                    <Link
-                      to="/village"
-                      className="block px-4 py-2 font-sans text-sm text-ink hover:bg-blush/50 hover:text-ember"
-                    >
-                      Village
-                    </Link>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
+            {/* The Village */}
+            <Link
+              to="/village"
+              className="font-sans font-medium text-sm uppercase tracking-[0.08em] text-ink hover:text-ember transition-colors"
+            >
+              The Village
+            </Link>
 
             {/* The Blueprint */}
-            <div className="relative">
-              <button
-                className="font-sans font-medium text-sm uppercase tracking-[0.08em] text-ink hover:text-ember transition-colors inline-flex items-center gap-1"
-                onMouseEnter={() => setBlueprintDropdownOpen(true)}
-              >
-                The Blueprint
-                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
-              <AnimatePresence>
-                {blueprintDropdownOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 10 }}
-                    className="absolute top-full left-0 mt-2 w-48 bg-cream shadow-lg rounded-lg border border-inkll/10 py-2 z-50"
-                    onMouseLeave={() => setBlueprintDropdownOpen(false)}
-                  >
-                    <Link
-                      to="/blueprint"
-                      className="block px-4 py-2 font-sans text-sm text-ink hover:bg-blush/50 hover:text-ember"
-                    >
-                      Blueprint
-                    </Link>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
+            <Link
+              to="/blueprint"
+              className="font-sans font-medium text-sm uppercase tracking-[0.08em] text-ink hover:text-ember transition-colors"
+            >
+              The Blueprint
+            </Link>
 
             {/* Landing Page Links */}
             <Link
@@ -235,22 +185,12 @@ export default function Nav() {
           >
             Base
           </Link>
-          <button
-            onClick={() => setMobileVillageOpen(!mobileVillageOpen)}
+          <Link
+            to="/village"
             className="flex flex-col items-center gap-0 font-sans font-medium text-xs text-ink hover:text-ember transition-colors"
           >
             Village
-          </button>
-          {mobileVillageOpen && (
-            <div className="absolute top-full left-0 w-full bg-cream border-t border-inkll/20 py-2 px-4">
-              <Link
-                to="/village"
-                className="block py-2 font-sans text-sm text-ink hover:text-ember"
-              >
-                Village
-              </Link>
-            </div>
-          )}
+          </Link>
           <Link
             to="/blueprint"
             className="flex flex-col items-center gap-0 font-sans font-medium text-xs text-ink hover:text-ember transition-colors"
