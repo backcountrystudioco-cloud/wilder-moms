@@ -143,10 +143,10 @@ export default function TrailSafetyCheck({ onAddItems }) {
         <label className="block font-sans text-sm text-ink mb-2">Weather Conditions</label>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
           {[
-            { id: 'clear', label: '☀️ Clear', color: 'bg-forest/10 border-forest/30' },
-            { id: 'rain', label: '🌧️ Rain', color: 'bg-slate/20 border-slate/40' },
-            { id: 'thunderstorm', label: '⛈️ Storm', color: 'bg-ember/10 border-ember/30' },
-            { id: 'wind', label: '💨 Wind', color: 'bg-olive/10 border-olive/30' },
+            { id: 'clear', label: 'Clear', color: 'bg-forest/10 border-forest/30' },
+            { id: 'rain', label: 'Rain', color: 'bg-slate/20 border-slate/40' },
+            { id: 'thunderstorm', label: 'Storm', color: 'bg-ember/10 border-ember/30' },
+            { id: 'wind', label: 'Wind', color: 'bg-olive/10 border-olive/30' },
           ].map((w) => (
             <button
               key={w.id}
@@ -168,7 +168,7 @@ export default function TrailSafetyCheck({ onAddItems }) {
         <div className="mb-6 space-y-2">
           {filteredWeatherAlerts.map((alert, i) => (
             <div key={i} className="p-3 rounded-lg bg-gold/10 border border-gold/30">
-              <p className="text-sm text-ink">⚠️ {alert.alert}</p>
+              <p className="text-sm text-ink">Warning: {alert.alert}</p>
             </div>
           ))}
         </div>

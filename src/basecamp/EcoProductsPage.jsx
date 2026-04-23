@@ -39,12 +39,12 @@ const difficultyColors = {
 }
 
 const projectPathways = [
-  { id: 'nursery', label: "I'm painting a nursery", icon: '🍼', color: 'bg-[#FFE4E1]' },
-  { id: 'playset', label: "I'm building outdoor structures", icon: '🏗️', color: 'bg-[#E8F5E9]' },
-  { id: 'playroom', label: "I'm furnishing a playroom", icon: '🎨', color: 'bg-[#E3F2FD]' },
-  { id: 'child-bedroom', label: "I'm setting up a child's bedroom", icon: '🛏️', color: 'bg-[#FFF3E0]' },
-  { id: 'mudroom', label: "I'm building a mudroom", icon: '🥾', color: 'bg-[#F1F8E9]' },
-  { id: 'all', label: "I'm browsing everything", icon: '🔍', color: 'bg-cream' }
+  { id: 'nursery', label: "I'm painting a nursery", icon: '', color: 'bg-[#FFE4E1]' },
+  { id: 'playset', label: "I'm building outdoor structures", icon: '', color: 'bg-[#E8F5E9]' },
+  { id: 'playroom', label: "I'm furnishing a playroom", icon: '', color: 'bg-[#E3F2FD]' },
+  { id: 'child-bedroom', label: "I'm setting up a child's bedroom", icon: '', color: 'bg-[#FFF3E0]' },
+  { id: 'mudroom', label: "I'm building a mudroom", icon: '', color: 'bg-[#F1F8E9]' },
+  { id: 'all', label: "I'm browsing everything", icon: '', color: 'bg-cream' }
 ]
 
 const bundles = {
@@ -300,16 +300,16 @@ export default function EcoProductsPage() {
                   product && (
                     <div key={key} className="flex items-center gap-3 p-3 bg-cream rounded-xl">
                       <div className="w-12 h-12 bg-ember/10 rounded-full flex items-center justify-center text-ember text-xl">
-                        {key === 'paint' && '🎨'}
-                        {key === 'floor' && '🏗️'}
-                        {key === 'mattress' && '🛏️'}
-                        {key === 'purifier' && '💨'}
-                        {key === 'lighting' && '💡'}
-                        {key === 'toys' && '🧸'}
-                        {key === 'lumber' && '🪵'}
-                        {key === 'finish' && '✨'}
-                        {key === 'flooring' && '🪵'}
-                        {key === 'furniture' && '🪑'}
+                        {key === 'paint' && 'Paint'}
+                        {key === 'floor' && 'Build'}
+                        {key === 'mattress' && 'Bed'}
+                        {key === 'purifier' && 'Air'}
+                        {key === 'lighting' && 'Light'}
+                        {key === 'toys' && 'Toys'}
+                        {key === 'lumber' && 'Wood'}
+                        {key === 'finish' && 'Finish'}
+                        {key === 'flooring' && 'Floor'}
+                        {key === 'furniture' && 'Chair'}
                       </div>
                       <div>
                         <p className="text-xs text-inkll uppercase">{key}</p>
@@ -374,7 +374,7 @@ export default function EcoProductsPage() {
                   <span className="text-xs bg-[#5A6428]/10 text-[#5A6428] px-2 py-0.5 rounded-full">🏪 Small Brand</span>
                 )}
                 {product.womenOwned && (
-                  <span className="text-xs bg-purple-100 text-purple-700 px-2 py-0.5 rounded-full">👩 Owned</span>
+                  <span className="text-xs bg-purple-100 text-purple-700 px-2 py-0.5 rounded-full">Owned</span>
                 )}
               </div>
 
@@ -397,7 +397,7 @@ export default function EcoProductsPage() {
               {/* DIY Difficulty */}
               {product.diyDifficulty !== undefined && (
                 <div className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium mb-3 ${difficultyColors[product.diyDifficulty]}`}>
-                  <span>{product.diyDifficulty <= 2 ? '🔧' : '⚙️'}</span>
+                  <span>{product.diyDifficulty <= 2 ? 'DIY' : 'Expert'}</span>
                   {difficultyLabels[product.diyDifficulty]}
                 </div>
               )}

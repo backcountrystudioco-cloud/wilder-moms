@@ -9,6 +9,7 @@ export default function Nav() {
   const [villageDropdownOpen, setVillageDropdownOpen] = useState(false)
   const [blueprintDropdownOpen, setBlueprintDropdownOpen] = useState(false)
   const [mobileVillageOpen, setMobileVillageOpen] = useState(false)
+  const [mobileBlueprintOpen, setMobileBlueprintOpen] = useState(false)
   const { isSignedIn, user } = useAuth()
 
   useEffect(() => {
@@ -274,12 +275,28 @@ export default function Nav() {
           >
             Blueprint
           </Link>
-          <Link
-            to="/skills"
+          <button
+            onClick={() => setMobileBlueprintOpen(!mobileBlueprintOpen)}
             className="flex flex-col items-center gap-0 font-sans font-medium text-xs text-ink hover:text-ember transition-colors"
           >
             Skills
-          </Link>
+          </button>
+          {mobileBlueprintOpen && (
+            <div className="absolute top-full right-0 w-40 bg-cream border-t border-inkll/20 py-2 px-4">
+              <Link
+                to="/blueprint"
+                className="block py-2 font-sans text-sm text-ink hover:text-ember"
+              >
+                Blueprint
+              </Link>
+              <Link
+                to="/skills"
+                className="block py-2 font-sans text-sm text-ink hover:text-ember"
+              >
+                Skills Passport
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </motion.nav>
