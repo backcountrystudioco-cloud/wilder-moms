@@ -65,7 +65,7 @@ export default function WhatICollected({ collection = [], onCollectionChange }) 
         onClick={() => setIsExpanded(true)}
         className="fixed bottom-6 right-6 z-40 bg-ember text-white rounded-full px-5 py-3 shadow-lg hover:bg-terra transition-colors flex items-center gap-2"
       >
-        <span className="text-xl">🎒</span>
+        <span className="text-lg">Pack</span>
         <span className="font-sans text-sm font-medium">What I Found</span>
       </motion.button>
     );
@@ -84,7 +84,7 @@ export default function WhatICollected({ collection = [], onCollectionChange }) 
       >
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <span className="text-xl">🎒</span>
+            <span className="text-lg">Pack</span>
             <div>
               <p className="font-sans text-white font-medium">What I Found</p>
               <p className="font-sans text-white/70 text-xs">
@@ -141,7 +141,7 @@ export default function WhatICollected({ collection = [], onCollectionChange }) 
                       onClick={() => setShowSuggestions(!showSuggestions)}
                       className="flex items-center gap-2 mb-2"
                     >
-                      <span className="text-lg">💡</span>
+                      <span className="text-lg">Idea</span>
                       <p className="font-sans text-sm text-ember font-medium">
                         Make something!
                       </p>

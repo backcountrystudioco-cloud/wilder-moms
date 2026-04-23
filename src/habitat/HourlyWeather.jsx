@@ -112,7 +112,7 @@ export default function HourlyWeather({ hourly, currentHour }) {
         message: nextBest.startLabel === nextBest.endLabel 
           ? `Go at ${nextBest.startLabel}`
           : `Best window: ${nextBest.startLabel} – ${nextBest.endLabel}`,
-        icon: '⏰',
+        icon: 'Clock',
       };
     }
     
@@ -187,7 +187,7 @@ export default function HourlyWeather({ hourly, currentHour }) {
                 {hour.hourLabel}
               </p>
               <p className="text-2xl my-1">
-                {weatherIcons[hour.emoji] || '❓'}
+                {weatherIcons[hour.emoji] || '?'}
               </p>
               <p className="font-sans text-sm font-medium text-ink">
                 {hour.temp}°F
@@ -227,11 +227,11 @@ export default function HourlyWeather({ hourly, currentHour }) {
       {hourlyWithRatings[0] && (
         <div className="mt-4 pt-4 border-t border-inkll/20">
           <p className="font-sans text-xs text-inkl">
-            {hourlyWithRatings[0].level === 'hot' && "💡 Pro tip: Early morning is coolest - pack extra water!"}
-            {hourlyWithRatings[0].level === 'drizzle' && "💡 Light rain won't stop the fun - waterproof layers work!"}
-            {hourlyWithRatings[0].level === 'perfect' && "💡 Perfect conditions - get out there and enjoy!"}
+            {hourlyWithRatings[0].level === 'hot' && "Tip: Early morning is coolest - pack extra water!"}
+            {hourlyWithRatings[0].level === 'drizzle' && "Tip: Light rain won't stop the fun - waterproof layers work!"}
+            {hourlyWithRatings[0].level === 'perfect' && "Tip: Perfect conditions - get out there and enjoy!"}
             {hourlyWithRatings[0].level === 'cloudy' && "Overcast = no sunburn risk and comfortable temps"}
-            {hourlyWithRatings[0].precipChance > 50 && hourlyWithRatings[0].level !== 'rain' && "💡 Rain possible later - timing matters today"}
+            {hourlyWithRatings[0].precipChance > 50 && hourlyWithRatings[0].level !== 'rain' && "Tip: Rain possible later - timing matters today"}
           </p>
         </div>
       )}

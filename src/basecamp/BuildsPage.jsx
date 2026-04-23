@@ -623,7 +623,7 @@ export default function BuildsPage() {
                   className="bg-white rounded-2xl overflow-hidden shadow-lg border border-inkll/10 group"
                 >
                   <div className="aspect-[4/3] bg-gradient-to-br from-[#8C4A14] to-[#D2961E] flex items-center justify-center relative overflow-hidden">
-                    <div className="text-7xl">🏺</div>
+                    <div className="text-4xl text-white/30">Craft</div>
                     <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
                       <span className="text-white text-xs font-medium uppercase tracking-wider">Most Popular</span>
                     </div>
@@ -724,7 +724,7 @@ export default function BuildsPage() {
                   className="bg-white rounded-2xl overflow-hidden shadow-lg border border-inkll/10 group"
                 >
                   <div className="aspect-[4/3] bg-gradient-to-br from-[#464F5F] to-[#5A6428] flex items-center justify-center relative overflow-hidden">
-                    <div className="text-7xl">⭕</div>
+                    <div className="text-4xl text-white/30">Guide</div>
                   </div>
                   <div className="p-6">
                     <div className="flex items-center gap-2 mb-2">
