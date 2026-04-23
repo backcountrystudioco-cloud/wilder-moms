@@ -175,12 +175,6 @@ export default function Nav() {
                     >
                       Blueprint
                     </Link>
-                    <Link
-                      to="/skills"
-                      className="block px-4 py-2 font-sans text-sm text-ink hover:bg-blush/50 hover:text-ember"
-                    >
-                      Skills
-                    </Link>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -275,28 +269,6 @@ export default function Nav() {
           >
             Blueprint
           </Link>
-          <button
-            onClick={() => setMobileBlueprintOpen(!mobileBlueprintOpen)}
-            className="flex flex-col items-center gap-0 font-sans font-medium text-xs text-ink hover:text-ember transition-colors"
-          >
-            Skills
-          </button>
-          {mobileBlueprintOpen && (
-            <div className="absolute top-full right-0 w-40 bg-cream border-t border-inkll/20 py-2 px-4">
-              <Link
-                to="/blueprint"
-                className="block py-2 font-sans text-sm text-ink hover:text-ember"
-              >
-                Blueprint
-              </Link>
-              <Link
-                to="/skills"
-                className="block py-2 font-sans text-sm text-ink hover:text-ember"
-              >
-                Skills Passport
-              </Link>
-            </div>
-          )}
         </div>
       </div>
     </motion.nav>
