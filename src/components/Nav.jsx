@@ -123,10 +123,22 @@ export default function Nav() {
       <div className="md:hidden border-t border-inkll/20 mt-1">
         <div className="flex items-center justify-around px-4 py-1.5">
           <Link
+            to="/wilder-trails/location"
+            className="flex flex-col items-center gap-0 font-sans font-medium text-xs text-ink hover:text-ember transition-colors"
+          >
+            Trails
+          </Link>
+          <Link
             to="/wilder-homes"
             className="flex flex-col items-center gap-0 font-sans font-medium text-xs text-ink hover:text-ember transition-colors"
           >
-            Homes
+            Wilder Homes
+          </Link>
+          <Link
+            to="/wilder-philosophy"
+            className="flex flex-col items-center gap-0 font-sans font-medium text-xs text-ink hover:text-ember transition-colors"
+          >
+            Philosophy
           </Link>
         </div>
       </div>
