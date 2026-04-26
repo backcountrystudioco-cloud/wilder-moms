@@ -2,11 +2,8 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import Hero from '../components/Hero'
-import ArcSection from '../components/ArcSection'
-import FourPillars from '../components/FourPillars'
-import BaseCampBuilds from '../basecamp/BaseCampBuilds'
+import ChooseYourPath from '../components/ChooseYourPath'
 import MissionSection from '../components/MissionSection'
-import VoiceSwaps from '../components/VoiceSwaps'
 import WaitlistCTA from '../components/WaitlistCTA'
 
 export default function HomePage() {
@@ -45,11 +42,8 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <ArcSection />
-      <FourPillars />
-      <BaseCampBuilds />
+      <ChooseYourPath />
       <MissionSection />
-      <VoiceSwaps />
       <WaitlistCTA />
 
       {/* Floating CTA - appears after scrolling */}
