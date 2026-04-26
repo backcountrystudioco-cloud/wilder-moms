@@ -25,7 +25,7 @@ const environmentSections = [
       </svg>
     ),
     color: 'olive',
-    to: '/eco-products',
+    to: '/wilder-homes/eco-products',
     badge: 'Shop'
   },
   {

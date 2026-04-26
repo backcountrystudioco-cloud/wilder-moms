@@ -15,13 +15,13 @@ import ActivitiesPage from './basecamp/ActivitiesPage'
 import BlueprintPage from './blueprint/BlueprintPage'
 import JoinPage from './pages/JoinPage'
 import LaunchPopup from './components/LaunchPopup'
-import EcoProductsPage from './basecamp/EcoProductsPage'
 import JournalPage from './journal/JournalPage'
 import SkillsPassport from './skills/SkillsPassport'
 import WilderHomesPage from './wilderhomes/WilderHomesPage'
 import WilderActivitiesPage from './wilderhomes/ActivitiesPage'
 import WilderEnvironmentPage from './wilderhomes/EnvironmentPage'
 import WilderBuildDetailPage from './wilderhomes/BuildDetailPage'
+import EcoProductsInterestPage from './wilderhomes/EcoProductsInterestPage'
 
 function App() {
   return (
@@ -49,7 +49,7 @@ function App() {
               <Route path="/basecamp/:buildId" element={<BuildDetailPage />} />
               <Route path="/basecamp/activities" element={<ActivitiesPage />} />
               <Route path="/blueprint" element={<BlueprintPage />} />
-              <Route path="/basecamp/eco-products" element={<EcoProductsPage />} />
+              <Route path="/wilder-homes/eco-products" element={<EcoProductsInterestPage />} />
             </Route>
           </Routes>
         </WilderTrailsProvider>

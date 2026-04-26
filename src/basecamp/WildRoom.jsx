@@ -433,7 +433,7 @@ export default function WildRoom() {
               
               <div className="text-center">
                 <Link
-                  to="/basecamp/eco-products"
+                  to="/wilder-homes/eco-products"
                   className="inline-flex items-center gap-2 px-6 py-3 bg-ember text-white text-sm font-medium rounded-full hover:bg-terra transition-colors"
                 >
                   Browse all eco products
