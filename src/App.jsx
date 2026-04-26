@@ -1,11 +1,10 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import { UserProvider } from './context/UserContext'
 import { JournalProvider } from './context/JournalContext'
 import { WilderTrailsProvider } from './wilder-trails/WilderTrailsContext'
 import AppLayout from './components/AppLayout'
 import HomePage from './pages/HomePage'
 import MissionPage from './pages/MissionPage'
-import WilderTrailsPage from './wilder-trails/WilderTrailsPage'
 import LocationPage from './wilder-trails/LocationPage'
 import WhosComingPage from './wilder-trails/WhosComingPage'
 import TrailsPage from './wilder-trails/TrailsPage'
@@ -33,7 +32,7 @@ function App() {
             <Route path="/join" element={<JoinPage />} />
             <Route element={<AppLayout />}>
               <Route path="/mission" element={<MissionPage />} />
-              <Route path="/wilder-trails" element={<WilderTrailsPage />} />
+              <Route path="/wilder-trails" element={<Navigate to="/wilder-trails/location" replace />} />
               <Route path="/wilder-trails/location" element={<LocationPage />} />
               <Route path="/wilder-trails/whos-coming" element={<WhosComingPage />} />
               <Route path="/wilder-trails/trails" element={<TrailsPage />} />
