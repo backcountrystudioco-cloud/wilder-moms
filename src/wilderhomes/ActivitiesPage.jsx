@@ -26,7 +26,7 @@ export default function ActivitiesPage() {
             ← Back to Wilder Homes
           </Link>
           <h1 className="font-serif text-4xl md:text-5xl text-ink mb-3">Activities</h1>
-          <p className="text-inkl text-lg">Free builds and crafts for your family.</p>
+          <p className="text-inkl text-lg">Builds and crafts to make this weekend. Designed for the kind of fun that gets you dirty.</p>
         </motion.header>
 
         {/* Tab Switcher */}

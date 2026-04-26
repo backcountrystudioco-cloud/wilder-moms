@@ -78,7 +78,7 @@ export default function EnvironmentPage() {
           </Link>
           <h1 className="font-serif text-4xl md:text-5xl text-ink mb-3">Environment</h1>
           <p className="text-inkl text-lg max-w-2xl">
-            Tools, products, and knowledge for creating the perfect outdoor space.
+            Design tools and guides for creating natural spaces with intention. Clean materials, time-tested techniques, and builds that bring the outdoors in.
           </p>
         </motion.header>
 
