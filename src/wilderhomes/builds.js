@@ -19,6 +19,8 @@ export const builds = [
     timeEstimate: '30 minutes',
     ageRange: '2-6',
     cost: '$5-10',
+    imageUrl: '/builds/mud kitchen.png',
+    imageUrl: '/builds/mud kitchen.png',
     description: 'One board, two cinder blocks, and imagination. This is the mud kitchen stripped to its essence — and it works beautifully.',
     tools: ['Drill', 'Sandpaper'],
     materials: [
@@ -50,6 +52,8 @@ export const builds = [
     timeEstimate: '1 hour',
     ageRange: '2-8',
     cost: '$15-25',
+    imageUrl: '/builds/table kitchen.png',
+    imageUrl: '/builds/table kitchen.png',
     description: 'Turn any outdoor table into a mud kitchen with this simple add-on. Features a basin, utensil holder, and mixing station.',
     tools: ['Drill', 'Jigsaw', 'Sandpaper'],
     materials: [
@@ -84,6 +88,7 @@ export const builds = [
     timeEstimate: '45 minutes',
     ageRange: '3-10',
     cost: '$20-30',
+    imageUrl: '/builds/strawberries.png',
     description: 'A vertical pallet garden that grows 15+ strawberry plants in the space of one square foot. Perfect for small yards and apartment balconies.',
     tools: ['Drill', 'Hammer', 'Staple gun', 'Sandpaper'],
     materials: [
@@ -116,6 +121,7 @@ export const builds = [
     timeEstimate: '30 minutes',
     ageRange: '3-12',
     cost: '$10-15',
+    imageUrl: '/builds/tomato.png',
     description: 'A five-gallon bucket, some twine, and a sunny spot. This tower makes growing tomatoes easy enough for a four-year-old to manage alone.',
     tools: ['Drill', 'Scissors'],
     materials: [
@@ -148,6 +154,7 @@ export const builds = [
     timeEstimate: '1 hour',
     ageRange: '3-10',
     cost: '$5-10',
+    imageUrl: '/builds/pea.png',
     description: 'A simple bamboo frame in the shape of a pea pod. Kids love crawling inside, and the peas grow up and over for easy picking.',
     tools: ['Scissors', 'Garden twine'],
     materials: [
@@ -179,6 +186,7 @@ export const builds = [
     timeEstimate: '45 minutes',
     ageRange: '2-12',
     cost: '$15-25',
+    imageUrl: '/builds/herb.png',
     description: 'A window box herb garden that turns cooking into an adventure. Kids pick the basil, mint, and chives while you make dinner.',
     tools: ['Drill', 'Screwdriver'],
     materials: [
@@ -213,6 +221,7 @@ export const builds = [
     timeEstimate: '30 minutes',
     ageRange: '3-10',
     cost: '$5-10',
+    imageUrl: '/builds/bee.png',
     description: 'Mason bees are gentle, amazing pollinators — and they\'ll move into this simple hotel you can build from a log and some bamboo. No tools required.',
     tools: ['Drill', 'Saw'],
     materials: [
@@ -245,6 +254,7 @@ export const builds = [
     timeEstimate: '30 minutes',
     ageRange: '2-12',
     cost: '$0',
+    imageUrl: '/builds/stones.png',
     description: 'River rocks stacked into meditative towers. There\'s something deeply calming about finding the exact balance point — for kids and adults alike.',
     tools: ['None'],
     materials: [
@@ -274,6 +284,7 @@ export const builds = [
     timeEstimate: '1 hour',
     ageRange: '4-12',
     cost: '$0',
+    imageUrl: '/builds/logs.png',
     description: 'A living art frame where kids weave sticks, vines, and branches into living sculptures. As things grow, the art changes with the seasons.',
     tools: ['Pruning shears', 'Gloves'],
     materials: [
@@ -307,6 +318,7 @@ export const builds = [
     timeEstimate: '2 hours',
     ageRange: '3-10',
     cost: '$0-10',
+    imageUrl: '/builds/tires.png',
     description: 'Old tires stacked and bolted together. Free, endlessly fun, and great for burning energy. This is the jungle gym you can build in an afternoon.',
     tools: ['Drill', 'Wrench', 'Socket set'],
     materials: [
@@ -338,6 +350,7 @@ export const builds = [
     timeEstimate: '1 hour',
     ageRange: '3-12',
     cost: '$10-15',
+    imageUrl: '/builds/balance-beam.png',
     description: 'Three posts, one beam, infinite walks. This balance beam builds core strength and confidence — and it\'s adjustable as kids grow.',
     tools: ['Drill', 'Level', 'Shovel'],
     materials: [
@@ -370,6 +383,7 @@ export const builds = [
     timeEstimate: '2 hours',
     ageRange: '2-8',
     cost: '$0-10',
+    imageUrl: '/builds/logs.png',
     description: 'Tree rounds at different heights create a balance course. Kids hop from stump to stump — building balance, coordination, and confidence.',
     tools: ['Saw', 'Chainsaw', 'Sandpaper', 'Drill'],
     materials: [
@@ -401,6 +415,7 @@ export const builds = [
     timeEstimate: '2 hours',
     ageRange: '2-12',
     cost: '$15-25',
+    imageUrl: '/builds/tree swing.png',
     description: 'A proper tree swing with a wooden seat that will last for years. The kind of swing you remember from childhood.',
     tools: ['Drill', 'Saw', 'Wrench', 'Ladder'],
     materials: [
@@ -435,6 +450,7 @@ export const builds = [
     timeEstimate: '1 hour',
     ageRange: '2-8',
     cost: '$5',
+    imageUrl: '/builds/bottle-bowl.png',
     description: 'Empty bottles mounted on a board at different angles. Water poured at the top flows down through channels and spouts — endlessly fascinating.',
     tools: ['Drill', 'Scissors', 'Nail (for punching)', 'String'],
     materials: [
@@ -467,6 +483,7 @@ export const builds = [
     timeEstimate: '30 minutes',
     ageRange: '2-12',
     cost: '$3',
+    imageUrl: '/builds/wiggle.png',
     description: 'A garden hose, a few zip ties, and suddenly you have a sprinkler that wiggles and dances. Kids run through the chaos of water.',
     tools: ['Drill', 'Scissors'],
     materials: [
@@ -497,6 +514,7 @@ export const builds = [
     timeEstimate: '2 hours',
     ageRange: '3-10',
     cost: '$15-20',
+    imageUrl: '/builds/gutter-stream.png',
     description: 'Old rain gutters become a water racing system. Kids pour water at the top and watch it flow — learning physics without realizing it.',
     tools: ['Drill', 'Saw', 'Level'],
     materials: [
@@ -531,6 +549,7 @@ export const builds = [
     timeEstimate: '1 hour',
     ageRange: '3-12',
     cost: '$0',
+    imageUrl: '/builds/fort-sticks.png',
     description: 'A lean-to of branches and sticks that takes 20 minutes to build and provides endless hideaway magic. The best forts are mostly built by kids.',
     tools: ['Pruning shears', 'Gloves'],
     materials: [
@@ -564,6 +583,7 @@ export const builds = [
     timeEstimate: '15 minutes',
     ageRange: '2-8',
     cost: '$0',
+    imageUrl: '/builds/sheet-tunnel.png',
     description: 'Two chairs, a sheet, and imagination. A tunnel connects two worlds — and you can walk through it 100 times without getting bored.',
     tools: ['None'],
     materials: [
@@ -595,6 +615,7 @@ export const builds = [
     timeEstimate: '2 hours',
     ageRange: '3-10',
     cost: '$0-5',
+    imageUrl: '/builds/cardboard-castle.png',
     description: 'A refrigerator box becomes a castle, a spaceship, or a taco stand — depending on the day. This playhouse transforms with imagination.',
     tools: ['Box cutter', 'Scissors', 'Tape', 'Markers'],
     materials: [
@@ -628,6 +649,7 @@ export const builds = [
     timeEstimate: '2 days',
     ageRange: '3-8',
     cost: '$50-70',
+    imageUrl: '/builds/mushroom.png',
     badge: 'Eco Build',
     description: 'A fully compostable playhouse with a flour-paste papier-mache cap. Every component breaks down naturally at end of life. Big enough for two kids, simple enough for one weekend.',
     tools: ['Drill', 'Saw', 'Scissors', 'Paint brushes', 'Large pot (for paste)'],
@@ -672,6 +694,7 @@ export const builds = [
     timeEstimate: '4-5 hours',
     ageRange: '2-12',
     cost: '$40-55',
+    imageUrl: '/builds/giant-rainbow-arch.png',
     badge: 'Eco Build',
     description: 'Six giant arches planted in a curve, each painted a different rainbow color. Kids run through them, wildflowers bloom at the base, and fairy lights make the whole yard glow. Visible from the end of the street.',
     tools: ['Rubber mallet', 'Paint brushes', 'Garden trowel'],
@@ -711,6 +734,7 @@ export const builds = [
     timeEstimate: '3-4 hours',
     ageRange: '2-12',
     cost: '$25-40',
+    imageUrl: '/builds/new nest.png',
     badge: 'Eco Build',
     description: 'A 6ft wide woven birds nest built from foraged branches and rope - big enough for three kids to sit inside. Line with hessian and cushions, add a giant papier-mache egg. Most compostable build on the list.',
     tools: ['Rubber mallet', 'Scissors', 'Paint brushes', 'Large pot (for paste)'],
@@ -753,6 +777,7 @@ export const builds = [
     timeEstimate: '2-3 hours to build',
     ageRange: '3-12',
     cost: '$25-35',
+    imageUrl: '/builds/wiggle.png',
     badge: 'Eco Build',
     description: 'Two rows of arched stakes lashed together, seeded with climbing plants. Takes 2-3 hours to build. By midsummer it becomes a fully enclosed living green tunnel bursting with flowers - and runner beans to eat.',
     tools: ['Rubber mallet', 'Garden fork', 'Trowel'],
