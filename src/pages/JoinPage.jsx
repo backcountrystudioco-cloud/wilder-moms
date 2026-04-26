@@ -43,12 +43,13 @@ export default function JoinPage() {
           <h1 className="font-serif text-4xl md:text-5xl text-ink mb-4">
             Join the Wilder Moms Village
           </h1>
-          <p className="font-sans text-inkl text-lg">
-            Get personalized trail recommendations, connect with local moms, and discover outdoor adventures that actually work for your family.
+          <p className="font-sans text-inkl text-lg leading-relaxed">
+            Find your perfect trail, build your wilder home, and connect with moms who get it. This is motherhood with more dirt, more nature, and a lot less figuring-it-out-alone.
           </p>
         </div>
 
         <div className="bg-white rounded-3xl p-8 shadow-lg">
+          <p className="text-center text-inkl mb-6 font-sans">Sign in or create your free account</p>
           <div className="flex justify-center">
               <SignIn />
           </div>
