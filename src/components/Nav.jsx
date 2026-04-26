@@ -108,12 +108,12 @@ export default function Nav() {
               </AnimatePresence>
             </div>
 
-            {/* The Village */}
+            {/* Wilder Philosophy */}
             <Link
-              to="/village"
+              to="/wilder-philosophy"
               className="font-sans font-medium text-sm uppercase tracking-[0.08em] text-ink hover:text-ember transition-colors"
             >
-              The Village
+              Wilder Philosophy
             </Link>
 
             {/* Landing Page Links */}

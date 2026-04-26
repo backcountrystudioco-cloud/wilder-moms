@@ -6,11 +6,11 @@ const pillars = [
   {
     accent: 'bg-ember',
     numeral: 'I',
-    label: 'THE VILLAGE',
-    title: "Stories from the trail, told around the fire.",
+    label: 'WILDER PHILOSOPHY',
+    title: "Getting outside isn't optional. It's how we survive.",
     description:
-      "The Village is where mothers share what they've learned — the hard weeks, the trail tales, the quiet wisdom that comes from years of showing up. Not another social network. Just stories gathered around the fire, witnessed by people who get it.",
-    cta: { label: 'Hear the Stories', to: '/village', icon: null }
+      "Nature isn't a reward for good parenting. It's a requirement. We believe in muddy boots, cold hands, and the kind of tired that comes from actually living. This is our philosophy — messy, honest, and unapologetically outdoorsy.",
+    cta: { label: 'Read Our Philosophy', to: '/wilder-philosophy', icon: null }
   },
   {
     accent: 'bg-olive',
@@ -56,13 +56,13 @@ const FourPillars = () => {
           custom={0}
         >
           <p className="text-inkll font-sans text-sm tracking-widest uppercase mb-4">
-            WHAT WE BELIEVE
+            WHAT WE'RE ABOUT
           </p>
           <h2 className="font-serif italic text-4xl md:text-5xl text-ember mb-6">
-            Four pillars. One community.
+            Four ways to get outside.
           </h2>
           <p className="font-sans text-inkl text-lg max-w-2xl mx-auto">
-            Trails, community, nature crafts, and safety — all in one place, for every kind of day.
+            Trails, philosophy, nature crafts, and safety — all in one place, for every kind of day.
           </p>
         </motion.div>
 
