@@ -4,7 +4,8 @@ import { JournalProvider } from './context/JournalContext'
 import AppLayout from './components/AppLayout'
 import HomePage from './pages/HomePage'
 import MissionPage from './pages/MissionPage'
-import HabitatPage from './habitat/HabitatPage'
+import WilderTrailsPage from './wilder-trails/WilderTrailsPage'
+import TrailDetailPage from './wilder-trails/TrailDetailPage'
 import BuildsPage from './basecamp/BuildsPage'
 import BuildDetailPage from './basecamp/BuildDetailPage'
 import ActivitiesPage from './basecamp/ActivitiesPage'
@@ -27,7 +28,8 @@ function App() {
           <Route path="/join" element={<JoinPage />} />
           <Route element={<AppLayout />}>
             <Route path="/mission" element={<MissionPage />} />
-            <Route path="/habitat" element={<HabitatPage />} />
+            <Route path="/wilder-trails" element={<WilderTrailsPage />} />
+            <Route path="/wilder-trails/:trailId" element={<TrailDetailPage />} />
             <Route path="/journal" element={<JournalPage />} />
             <Route path="/skills" element={<SkillsPassport />} />
             <Route path="/basecamp" element={<BuildsPage />} />

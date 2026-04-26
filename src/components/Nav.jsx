@@ -57,12 +57,12 @@ export default function Nav() {
 
           {/* Desktop Nav Links */}
           <div className="hidden md:flex items-center gap-8">
-            {/* The Habitat - Explore */}
+            {/* Wilder Trails - Explore */}
             <Link
-              to="/habitat"
+              to="/wilder-trails"
               className="font-sans font-medium text-sm uppercase tracking-[0.08em] text-ink hover:text-ember transition-colors"
             >
-              The Habitat
+              Wilder Trails
             </Link>
 
             {/* The Base Camp - Builds & Activities Dropdown */}
@@ -116,14 +116,6 @@ export default function Nav() {
               The Village
             </Link>
 
-            {/* The Blueprint */}
-            <Link
-              to="/blueprint"
-              className="font-sans font-medium text-sm uppercase tracking-[0.08em] text-ink hover:text-ember transition-colors"
-            >
-              The Blueprint
-            </Link>
-
             {/* Landing Page Links */}
             <Link
               to="/mission"
@@ -174,10 +166,10 @@ export default function Nav() {
       <div className="md:hidden border-t border-inkll/20 mt-1">
         <div className="flex items-center justify-around px-4 py-1.5">
           <Link
-            to="/habitat"
+            to="/wilder-trails"
             className="flex flex-col items-center gap-0 font-sans font-medium text-xs text-ink hover:text-ember transition-colors"
           >
-            Habitat
+            Trails
           </Link>
           <Link
             to="/basecamp"
@@ -190,12 +182,6 @@ export default function Nav() {
             className="flex flex-col items-center gap-0 font-sans font-medium text-xs text-ink hover:text-ember transition-colors"
           >
             Village
-          </Link>
-          <Link
-            to="/blueprint"
-            className="flex flex-col items-center gap-0 font-sans font-medium text-xs text-ink hover:text-ember transition-colors"
-          >
-            Blueprint
           </Link>
         </div>
       </div>

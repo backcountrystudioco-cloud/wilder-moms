@@ -15,11 +15,11 @@ const pillars = [
   {
     accent: 'bg-olive',
     numeral: 'II',
-    label: 'THE HABITAT',
+    label: 'WILDER TRAILS',
     title: "The right trail for your family, today.",
     description:
       "You don't need another generic list of 'family-friendly trails.' You need the right trail for your specific kids, today, with a double stroller and a four-year-old who loses it after 45 minutes. Every suggestion is built around your real life — not a stock photo version of it.",
-    cta: { label: 'Explore Trails', to: '/habitat', icon: null }
+    cta: { label: 'Explore Trails', to: '/wilder-trails', icon: null }
   },
   {
     accent: 'bg-gold',

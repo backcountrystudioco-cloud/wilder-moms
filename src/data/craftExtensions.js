@@ -4,7 +4,7 @@
  */
 
 import { crafts } from '../basecamp/crafts';
-import { trailMoments, effortLevels } from '../habitat/craftTrails';
+import { trailMoments, effortLevels } from '../wilder-trails/craftTrails';
 
 // Extend each craft with trail-specific data
 export const trailCrafts = crafts.map(craft => {

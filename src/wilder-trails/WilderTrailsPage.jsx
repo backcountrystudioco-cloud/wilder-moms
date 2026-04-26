@@ -167,7 +167,7 @@ const mustHaveOptions = [
   { key: 'hasViews', label: "Scenic viewpoints" },
 ];
 
-export default function HabitatPage() {
+export default function WilderTrailsPage() {
   const location = useLocation()
   const weather = useWeather(location.lat, location.lon)
   

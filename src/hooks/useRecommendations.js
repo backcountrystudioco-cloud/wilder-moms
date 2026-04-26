@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { hikes } from '../habitat/hikes';
+import { hikes } from '../wilder-trails/hikes';
 
 /**
  * Calculate distance between two coordinates using Haversine formula

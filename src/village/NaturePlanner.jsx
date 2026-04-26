@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { hikes } from '../habitat/hikes'
+import { hikes } from '../wilder-trails/hikes'
 import { crafts } from '../basecamp/crafts'
 import { builds } from '../basecamp/builds'
 

@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import { useUser } from '../context/UserContext'
-import { hikes } from '../habitat/hikes'
+import { hikes } from '../wilder-trails/hikes'
 import { crafts } from '../basecamp/crafts'
 import { builds } from '../basecamp/builds'
 

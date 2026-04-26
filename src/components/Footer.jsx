@@ -15,22 +15,16 @@ export default function Footer() {
           {/* Center: Links */}
           <nav className="flex items-center gap-8">
             <Link 
-              to="/habitat"
+              to="/wilder-trails"
               className="text-white/30 hover:text-gold transition-colors font-sans text-sm"
             >
-              Habitat
+              Wilder Trails
             </Link>
             <Link 
               to="/basecamp"
               className="text-white/30 hover:text-gold transition-colors font-sans text-sm"
             >
               Base Camp
-            </Link>
-            <Link 
-              to="/blueprint"
-              className="text-white/30 hover:text-gold transition-colors font-sans text-sm"
-            >
-              Blueprint
             </Link>
             <a 
               href="https://instagram.com" 
