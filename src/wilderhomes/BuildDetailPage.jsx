@@ -5,7 +5,9 @@ import BuildCard from './BuildCard'
 
 export default function BuildDetailPage() {
   const { buildId } = useParams()
+  console.log('BuildDetailPage loaded, buildId:', buildId)
   const build = getBuildById(buildId)
+  console.log('Found build:', build?.title)
   const relatedBuilds = getRelatedBuilds(buildId)
 
   if (!build) {
