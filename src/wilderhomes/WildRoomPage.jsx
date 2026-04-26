@@ -329,12 +329,6 @@ const rooms = [
   },
 ]
 
-const spaceTypes = [
-  { id: 'all', label: 'All Spaces' },
-  { id: 'indoor', label: 'Indoors' },
-  { id: 'outdoor', label: 'Outdoors' },
-]
-
 const iconSvgs = {
   pour: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />,
   touch: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 11.5V14m0-2.5v-6a1.5 1.5 0 113 0m-3 6a1.5 1.5 0 00-3 0v2a7.5 7.5 0 0015 0v-5a1.5 1.5 0 00-3 0m-6-3V11m0-5.5v-1a1.5 1.5 0 013 0v1m0 0V11m0-5.5a1.5 1.5 0 013 0v3m0 0V11" />,
@@ -379,7 +373,6 @@ const iconSvgs = {
 }
 
 export default function WildRoomPage() {
-  const [activeSpace, setActiveSpace] = useState('all')
   const [savedRooms, setSavedRooms] = useState([])
   const [expandedRoom, setExpandedRoom] = useState(null)
   const [showPlanner, setShowPlanner] = useState(false)
@@ -411,10 +404,6 @@ export default function WildRoomPage() {
     e.stopPropagation()
     setExpandedRoom(expandedRoom === roomId ? null : roomId)
   }
-
-  const filteredRooms = activeSpace === 'all' 
-    ? rooms 
-    : rooms.filter(r => r.spaces?.includes(activeSpace))
 
   const getSpaceLabel = (room) => {
     if (!room.spaces || room.spaces.length === 2) return 'Indoor and Outdoor'
@@ -524,27 +513,11 @@ export default function WildRoomPage() {
           </motion.div>
         )}
 
-        {/* Space Filter */}
-        <div className="flex gap-2 mb-8">
-          {spaceTypes.map(space => (
-            <button
-              key={space.id}
-              onClick={() => setActiveSpace(space.id)}
-              className="flex-1 px-4 py-3 rounded-xl border-2 transition-all"
-              style={{
-                borderColor: activeSpace === space.id ? '#8C1E00' : '#D2B496',
-                backgroundColor: activeSpace === space.id ? '#8C1E00' : 'white',
-                color: activeSpace === space.id ? 'white' : '#783C1E',
-              }}
-            >
-              <span className="text-sm font-medium">{space.label}</span>
-            </button>
-          ))}
-        </div>
+
 
         {/* Room Cards */}
         <div className="space-y-4">
-          {filteredRooms.map(room => {
+          {rooms.map(room => {
             const isSaved = savedRooms.includes(room.id)
             const isExpanded = expandedRoom === room.id
             
@@ -716,12 +689,6 @@ export default function WildRoomPage() {
             )
           })}
         </div>
-
-        {filteredRooms.length === 0 && (
-          <div className="text-center py-12">
-            <p className="text-inkl">No rooms match this filter. Try "All Spaces".</p>
-          </div>
-        )}
       </div>
     </div>
   )
