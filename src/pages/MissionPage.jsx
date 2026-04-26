@@ -89,46 +89,7 @@ export default function MissionPage() {
         </div>
       </section>
 
-      {/* Three Pillars */}
-      <section className="py-16 px-6 bg-white">
-        <div className="max-w-4xl mx-auto">
-          <motion.div
-            ref={pillarsRef}
-            variants={fadeUpVariants}
-            initial="hidden"
-            animate={pillarsVisible ? 'visible' : 'hidden'}
-            className="grid md:grid-cols-3 gap-6"
-          >
-            {pillars.map((pillar, index) => (
-              <motion.div
-                key={pillar.name}
-                variants={fadeUpVariants}
-                custom={index}
-              >
-                <Link
-                  to={pillar.path}
-                  className="block bg-cream rounded-2xl p-6 border border-inkll/10 hover:border-ember hover:shadow-lg transition-all group"
-                >
-                  <h3 className="font-serif text-xl text-ink mb-2 group-hover:text-ember transition-colors">
-                    {pillar.name}
-                  </h3>
-                  <p className="text-inkl text-sm leading-relaxed">
-                    {pillar.description}
-                  </p>
-                  <span className="inline-flex items-center gap-1 mt-4 text-ember text-sm font-medium">
-                    Explore
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </span>
-                </Link>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Opening Paragraphs */}
+      {/* Call to Action */}
       <section className="py-20 px-6 bg-cream">
         <div className="max-w-3xl mx-auto">
           <motion.div
@@ -184,27 +145,45 @@ export default function MissionPage() {
         </div>
       </section>
 
-      {/* Call to Action */}
-      <section className="py-24 px-6 bg-ink text-white">
-        <div className="max-w-3xl mx-auto text-center">
-          <p className="font-serif text-3xl md:text-4xl text-white italic mb-6">
-            Build the wild life — at home, and beyond it.
+      {/* Three Pillars */}
+      <section className="py-16 px-6 bg-white">
+        <div className="max-w-4xl mx-auto">
+          <p className="text-center text-sm font-medium uppercase tracking-widest text-inkl mb-8">
+            Explore Wilder Moms
           </p>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              to="/wilder-trails/location"
-              className="px-8 py-4 bg-ember text-white font-sans font-medium rounded-full hover:bg-terra transition-colors"
-            >
-              Find Your Trail
-            </Link>
-            <Link
-              to="/wilder-homes"
-              className="px-8 py-4 bg-white/10 text-white font-sans font-medium rounded-full hover:bg-white/20 transition-colors"
-            >
-              Explore Wilder Homes
-            </Link>
-          </div>
+          <motion.div
+            ref={pillarsRef}
+            variants={fadeUpVariants}
+            initial="hidden"
+            animate={pillarsVisible ? 'visible' : 'hidden'}
+            className="grid md:grid-cols-3 gap-6"
+          >
+            {pillars.map((pillar, index) => (
+              <motion.div
+                key={pillar.name}
+                variants={fadeUpVariants}
+                custom={index}
+              >
+                <Link
+                  to={pillar.path}
+                  className="block bg-cream rounded-2xl p-6 border border-inkll/10 hover:border-ember hover:shadow-lg transition-all group"
+                >
+                  <h3 className="font-serif text-xl text-ink mb-2 group-hover:text-ember transition-colors">
+                    {pillar.name}
+                  </h3>
+                  <p className="text-inkl text-sm leading-relaxed">
+                    {pillar.description}
+                  </p>
+                  <span className="inline-flex items-center gap-1 mt-4 text-ember text-sm font-medium">
+                    Explore
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </span>
+                </Link>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
       </section>
     </div>
