@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useState, useEffect } from 'react'
 
 const rooms = [
@@ -15,48 +15,16 @@ const rooms = [
     accentColor: '#F0D2B4',
     implementations: {
       indoor: [
-        {
-          name: 'Sensory Station',
-          description: 'Low bins with sand, dried beans, rice, kinetic sand. Tools nearby: ladles, funnels, molds.',
-          icon: 'pour'
-        },
-        {
-          name: 'Textured Wall',
-          description: 'Bark panels, smooth river stones, woven hessian, cork squares at varying heights for finger exploration.',
-          icon: 'touch'
-        },
-        {
-          name: 'Water Wall',
-          description: 'Vertical gutters and pipes with funnels. Pour, splash, watch flow.',
-          icon: 'water'
-        },
-        {
-          name: 'Barefoot Path',
-          description: 'Alternating textures: smooth stones, artificial turf, bubble wrap. Remove shoes, explore.',
-          icon: 'walk'
-        },
+        { id: 'sensory-station', name: 'Sensory Station', description: 'Low bins with sand, dried beans, rice, kinetic sand. Tools nearby: ladles, funnels, molds.' },
+        { id: 'textured-wall', name: 'Textured Wall', description: 'Bark panels, smooth river stones, woven hessian, cork squares at varying heights for finger exploration.' },
+        { id: 'water-wall', name: 'Water Wall', description: 'Vertical gutters and pipes with funnels. Pour, splash, watch flow.' },
+        { id: 'barefoot-path', name: 'Barefoot Path', description: 'Alternating textures: smooth stones, artificial turf, bubble wrap. Remove shoes, explore.' },
       ],
       outdoor: [
-        {
-          name: 'Mud Kitchen',
-          description: 'Low counters, real bowls, wooden spoons. Mix dirt, water, leaves. The classic outdoor lab.',
-          icon: 'kitchen'
-        },
-        {
-          name: 'Texture Trail',
-          description: 'Bark chips, pea gravel, smooth stones, grass. Walk barefoot and discover.',
-          icon: 'trail'
-        },
-        {
-          name: 'Tactile Garden Bed',
-          description: 'Lamb\'s ear, moss, sage, ornamental grasses. Raised beds where everything is meant to touch.',
-          icon: 'garden'
-        },
-        {
-          name: 'Rain Station',
-          description: 'Collecting rain, pouring, mixing. Waders optional, curiosity required.',
-          icon: 'rain'
-        },
+        { id: 'mud-kitchen', name: 'Mud Kitchen', description: 'Low counters, real bowls, wooden spoons. Mix dirt, water, leaves. The classic outdoor lab.' },
+        { id: 'texture-trail', name: 'Texture Trail', description: 'Bark chips, pea gravel, smooth stones, grass. Walk barefoot and discover.' },
+        { id: 'tactile-garden', name: 'Tactile Garden Bed', description: 'Lamb\'s ear, moss, sage, ornamental grasses. Raised beds where everything is meant to touch.' },
+        { id: 'rain-station', name: 'Rain Station', description: 'Collecting rain, pouring, mixing. Waders optional, curiosity required.' },
       ],
       transition: 'The Threshold Zone: A sheltered spot between inside and out. Wipe stations, apron hooks, a place to get messy before entering the house.',
     },
@@ -80,48 +48,16 @@ const rooms = [
     accentColor: '#C8D890',
     implementations: {
       indoor: [
-        {
-          name: 'Windowsill Herbs',
-          description: 'Basil, mint, chives. Kitchen-accessible. Snip and taste. Watch roots grow in water glasses.',
-          icon: 'herb'
-        },
-        {
-          name: 'Terrarium',
-          description: 'Enclosed world in glass. Moss, ferns, tiny stones. Self-contained ecosystems to observe.',
-          icon: 'terrarium'
-        },
-        {
-          name: 'Sprouting Station',
-          description: 'Mung beans in jars, wheatgrass on trays. Watch transformation happen in days, not weeks.',
-          icon: 'sprout'
-        },
-        {
-          name: 'Kitchen Scrap Garden',
-          description: 'Green onions regrow in water. Carrot tops produce seeds. Potato eyes become vines.',
-          icon: 'scrap'
-        },
+        { id: 'windowsill-herbs', name: 'Windowsill Herbs', description: 'Basil, mint, chives. Kitchen-accessible. Snip and taste. Watch roots grow in water glasses.' },
+        { id: 'terrarium', name: 'Terrarium', description: 'Enclosed world in glass. Moss, ferns, tiny stones. Self-contained ecosystems to observe.' },
+        { id: 'sprouting-station', name: 'Sprouting Station', description: 'Mung beans in jars, wheatgrass on trays. Watch transformation happen in days, not weeks.' },
+        { id: 'kitchen-scrap', name: 'Kitchen Scrap Garden', description: 'Green onions regrow in water. Carrot tops produce seeds. Potato eyes become vines.' },
       ],
       outdoor: [
-        {
-          name: 'Raised Bed Plot',
-          description: 'Their own square foot. Carrots, radishes, beans. First harvests are addictive.',
-          icon: 'bed'
-        },
-        {
-          name: 'Teepee Trellis',
-          description: 'Climbing beans create a hideout. Eat while hiding. Secret garden logic.',
-          icon: 'teepee'
-        },
-        {
-          name: 'Pizza Garden',
-          description: 'Tomatoes, basil, oregano in a semicircle. Harvest and assemble.',
-          icon: 'pizza'
-        },
-        {
-          name: 'Pollinator Patch',
-          description: 'Flowers that attract butterflies and bees. Watch the ecosystem arrive.',
-          icon: 'bee'
-        },
+        { id: 'raised-bed', name: 'Raised Bed Plot', description: 'Their own square foot. Carrots, radishes, beans. First harvests are addictive.' },
+        { id: 'teepee-trellis', name: 'Teepee Trellis', description: 'Climbing beans create a hideout. Eat while hiding. Secret garden logic.' },
+        { id: 'pizza-garden', name: 'Pizza Garden', description: 'Tomatoes, basil, oregano in a semicircle. Harvest and assemble.' },
+        { id: 'pollinator-patch', name: 'Pollinator Patch', description: 'Flowers that attract butterflies and bees. Watch the ecosystem arrive.' },
       ],
       transition: 'The Waiting Window: An indoor spot with a clear sightline to the outdoor garden. Check on it daily. Notice changes. Practice patience.',
     },
@@ -145,48 +81,16 @@ const rooms = [
     accentColor: '#D4B4A4',
     implementations: {
       indoor: [
-        {
-          name: 'Loose Parts Shelf',
-          description: 'Cardboard tubes, fabric scraps, cardboard boxes, wooden blocks. Real materials, not toys.',
-          icon: 'shelf'
-        },
-        {
-          name: 'Cardboard Construction Zone',
-          description: 'Large boxes become forts, castles, cars. Tape, scissors, imagination.',
-          icon: 'cardboard'
-        },
-        {
-          name: 'Tool Corner',
-          description: 'Wooden mallets, child-safe screwdrivers, large clips. Real tools, scaled for small hands.',
-          icon: 'tools'
-        },
-        {
-          name: 'Make-Do Cart',
-          description: 'Mobile cart with weekly rotating materials. Bring the Build Room anywhere.',
-          icon: 'cart'
-        },
+        { id: 'loose-parts-shelf', name: 'Loose Parts Shelf', description: 'Cardboard tubes, fabric scraps, cardboard boxes, wooden blocks. Real materials, not toys.' },
+        { id: 'cardboard-zone', name: 'Cardboard Construction Zone', description: 'Large boxes become forts, castles, cars. Tape, scissors, imagination.' },
+        { id: 'tool-corner', name: 'Tool Corner', description: 'Wooden mallets, child-safe screwdrivers, large clips. Real tools, scaled for small hands.' },
+        { id: 'make-do-cart', name: 'Make-Do Cart', description: 'Mobile cart with weekly rotating materials. Bring the Build Room anywhere.' },
       ],
       outdoor: [
-        {
-          name: 'Log Construction Area',
-          description: 'Short log rounds, long branches, stakes. Build structures that stay.',
-          icon: 'logs'
-        },
-        {
-          name: 'Stick Fort',
-          description: 'Branch walls, fabric roofs. Changes with the seasons as sticks fall.',
-          icon: 'fort'
-        },
-        {
-          name: 'Mud Brick Station',
-          description: 'Mix dirt and water, pack into forms. Build walls, ovens, villages.',
-          icon: 'brick'
-        },
-        {
-          name: 'Salvage Pile',
-          description: 'Collected "junk": pallets, pipes, old tiles. Premium building materials. Free.',
-          icon: 'pile'
-        },
+        { id: 'log-construction', name: 'Log Construction Area', description: 'Short log rounds, long branches, stakes. Build structures that stay.' },
+        { id: 'stick-fort', name: 'Stick Fort', description: 'Branch walls, fabric roofs. Changes with the seasons as sticks fall.' },
+        { id: 'mud-brick', name: 'Mud Brick Station', description: 'Mix dirt and water, pack into forms. Build walls, ovens, villages.' },
+        { id: 'salvage-pile', name: 'Salvage Pile', description: 'Collected "junk": pallets, pipes, old tiles. Premium building materials. Free.' },
       ],
       transition: 'The Making Threshold: Materials roll between spaces on carts. Outdoor builds inform indoor projects. The distinction blurs.',
     },
@@ -210,48 +114,16 @@ const rooms = [
     accentColor: '#C8D0D8',
     implementations: {
       indoor: [
-        {
-          name: 'Cozy Nook',
-          description: 'Floor cushions, canopy, low light. A corner that invites sitting. Nothing else required.',
-          icon: 'nook'
-        },
-        {
-          name: 'Bird Window',
-          description: 'Cushioned seat at a window with a view. Binoculars nearby. Aiming to see.',
-          icon: 'bird'
-        },
-        {
-          name: 'Nature Table',
-          description: 'Low shelf with found objects. Rotate weekly. Let them arrange.',
-          icon: 'table'
-        },
-        {
-          name: 'Sound Corner',
-          description: 'Headphones, nature sounds. An island of calm in a loud house.',
-          icon: 'sound'
-        },
+        { id: 'cozy-nook', name: 'Cozy Nook', description: 'Floor cushions, canopy, low light. A corner that invites sitting. Nothing else required.' },
+        { id: 'bird-window', name: 'Bird Window', description: 'Cushioned seat at a window with a view. Binoculars nearby. Aiming to see.' },
+        { id: 'nature-table', name: 'Nature Table', description: 'Low shelf with found objects. Rotate weekly. Let them arrange.' },
+        { id: 'sound-corner', name: 'Sound Corner', description: 'Headphones, nature sounds. An island of calm in a loud house.' },
       ],
       outdoor: [
-        {
-          name: 'Observation Hut',
-          description: 'Small structure with viewing slots at child height. Hide, watch, notice.',
-          icon: 'hut'
-        },
-        {
-          name: 'Sitting Stones',
-          description: 'Arranged stones in a garden. Come, sit, look. Return weekly to notice changes.',
-          icon: 'stones'
-        },
-        {
-          name: 'Tunnel Entrance',
-          description: 'Short tunnel leading to a hidden circle. Privacy invites presence.',
-          icon: 'tunnel'
-        },
-        {
-          name: 'Seasonal Posts',
-          description: 'Marked spots with painted stones. Return each week. Track the year.',
-          icon: 'posts'
-        },
+        { id: 'observation-hut', name: 'Observation Hut', description: 'Small structure with viewing slots at child height. Hide, watch, notice.' },
+        { id: 'sitting-stones', name: 'Sitting Stones', description: 'Arranged stones in a garden. Come, sit, look. Return weekly to notice changes.' },
+        { id: 'tunnel-entrance', name: 'Tunnel Entrance', description: 'Short tunnel leading to a hidden circle. Privacy invites presence.' },
+        { id: 'seasonal-posts', name: 'Seasonal Posts', description: 'Marked spots with painted stones. Return each week. Track the year.' },
       ],
       transition: 'The Notice Wall: A shared space to record observations. Drawings, photos, notes. What did you see?',
     },
@@ -275,48 +147,16 @@ const rooms = [
     accentColor: '#F0E4A0',
     implementations: {
       indoor: [
-        {
-          name: 'Seasonal Table',
-          description: 'Low shelf with seasonal treasures. Pressed leaves, nuts, feathers, shells. Changes with the year.',
-          icon: 'seasonal'
-        },
-        {
-          name: 'Fairy Garden',
-          description: 'Miniature world in a pot. Tiny furniture, moss, beads. Inhabit the small.',
-          icon: 'fairy'
-        },
-        {
-          name: 'Discovery Basket',
-          description: 'Weekly finds: unusual seed pods, strange stones, bark with interesting patterns. Mystery in a box.',
-          icon: 'basket'
-        },
-        {
-          name: 'Story Corner',
-          description: 'Soft fabric, pillows, puppets. The space invites becoming someone else.',
-          icon: 'story'
-        },
+        { id: 'seasonal-table', name: 'Seasonal Table', description: 'Low shelf with seasonal treasures. Pressed leaves, nuts, feathers, shells. Changes with the year.' },
+        { id: 'fairy-garden', name: 'Fairy Garden', description: 'Miniature world in a pot. Tiny furniture, moss, beads. Inhabit the small.' },
+        { id: 'discovery-basket', name: 'Discovery Basket', description: 'Weekly finds: unusual seed pods, strange stones, bark with interesting patterns. Mystery in a box.' },
+        { id: 'story-corner', name: 'Story Corner', description: 'Soft fabric, pillows, puppets. The space invites becoming someone else.' },
       ],
       outdoor: [
-        {
-          name: 'Fairy Door',
-          description: 'A door in a tree. No bigger than a child\'s hand. Who lives there?',
-          icon: 'door'
-        },
-        {
-          name: 'Moon Garden',
-          description: 'White flowers that open at night. Plant it, tend it, visit it after dark.',
-          icon: 'moon'
-        },
-        {
-          name: 'Night Walk Path',
-          description: 'Lantern walk after dark. Follow the path. Discover what appears at night.',
-          icon: 'night'
-        },
-        {
-          name: 'Seasonal Altar',
-          description: 'A place for offerings: autumn leaves, spring flowers, summer stones. Rotate with rituals.',
-          icon: 'altar'
-        },
+        { id: 'fairy-door', name: 'Fairy Door', description: 'A door in a tree. No bigger than a child\'s hand. Who lives there?' },
+        { id: 'moon-garden', name: 'Moon Garden', description: 'White flowers that open at night. Plant it, tend it, visit it after dark.' },
+        { id: 'night-walk', name: 'Night Walk Path', description: 'Lantern walk after dark. Follow the path. Discover what appears at night.' },
+        { id: 'seasonal-altar', name: 'Seasonal Altar', description: 'A place for offerings: autumn leaves, spring flowers, summer stones. Rotate with rituals.' },
       ],
       transition: 'The Mystery Box: A shared container of unexplained natural objects. Questions welcome. Answers not required.',
     },
@@ -329,53 +169,14 @@ const rooms = [
   },
 ]
 
-const iconSvgs = {
-  pour: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />,
-  touch: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 11.5V14m0-2.5v-6a1.5 1.5 0 113 0m-3 6a1.5 1.5 0 00-3 0v2a7.5 7.5 0 0015 0v-5a1.5 1.5 0 00-3 0m-6-3V11m0-5.5v-1a1.5 1.5 0 013 0v1m0 0V11m0-5.5a1.5 1.5 0 013 0v3m0 0V11" />,
-  water: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 3v18m0 0a10 10 0 01-10-10 10 10 0 0110 10m0 0a10 10 0 0010 10 10 10 0 01-10 10" />,
-  walk: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />,
-  kitchen: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />,
-  trail: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />,
-  garden: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />,
-  rain: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />,
-  herb: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />,
-  terrarium: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />,
-  sprout: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />,
-  scrap: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />,
-  bed: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />,
-  teepee: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />,
-  pizza: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />,
-  bee: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />,
-  shelf: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6h16M4 10h16M4 14h16M4 18h16" />,
-  cardboard: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />,
-  tools: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />,
-  cart: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />,
-  logs: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />,
-  fort: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />,
-  brick: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6a2 2 0 012-2h12a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6z" />,
-  pile: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />,
-  nook: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />,
-  bird: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />,
-  table: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />,
-  sound: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />,
-  hut: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />,
-  stones: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4" />,
-  tunnel: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />,
-  posts: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />,
-  seasonal: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />,
-  fairy: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />,
-  basket: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />,
-  story: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />,
-  door: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />,
-  moon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />,
-  night: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />,
-  altar: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />,
-}
-
 export default function WildRoomPage() {
   const [savedRooms, setSavedRooms] = useState([])
   const [expandedRoom, setExpandedRoom] = useState(null)
   const [showPlanner, setShowPlanner] = useState(false)
+  const [showModal, setShowModal] = useState(null)
+  const [selectedImpls, setSelectedImpls] = useState([])
+  const [roomNotes, setRoomNotes] = useState('')
+  const [spaceLocation, setSpaceLocation] = useState('')
 
   useEffect(() => {
     const saved = localStorage.getItem('wilder_wild_room_plan')
@@ -393,11 +194,51 @@ export default function WildRoomPage() {
     setSavedRooms(roomsToSave)
   }
 
-  const toggleRoom = (roomId) => {
-    const newRooms = savedRooms.includes(roomId)
-      ? savedRooms.filter(id => id !== roomId)
-      : [...savedRooms, roomId]
+  const openAddModal = (room) => {
+    const existing = savedRooms.find(r => r.id === room.id)
+    setShowModal(room.id)
+    setSelectedImpls(existing?.implementations || [])
+    setRoomNotes(existing?.notes || '')
+    setSpaceLocation(existing?.location || '')
+  }
+
+  const toggleImpl = (implId) => {
+    setSelectedImpls(prev => 
+      prev.includes(implId) 
+        ? prev.filter(id => id !== implId)
+        : [...prev, implId]
+    )
+  }
+
+  const savePlan = () => {
+    if (!showModal) return
+    
+    const roomData = rooms.find(r => r.id === showModal)
+    const existingIndex = savedRooms.findIndex(r => r.id === showModal)
+    
+    const roomPlan = {
+      id: showModal,
+      label: roomData.label,
+      color: roomData.color,
+      implementations: selectedImpls,
+      notes: roomNotes,
+      location: spaceLocation,
+    }
+
+    let newRooms
+    if (existingIndex >= 0) {
+      newRooms = [...savedRooms]
+      newRooms[existingIndex] = roomPlan
+    } else {
+      newRooms = [...savedRooms, roomPlan]
+    }
+    
     saveRooms(newRooms)
+    setShowModal(null)
+  }
+
+  const removeRoom = (roomId) => {
+    saveRooms(savedRooms.filter(r => r.id !== roomId))
   }
 
   const toggleExpand = (roomId, e) => {
@@ -405,18 +246,8 @@ export default function WildRoomPage() {
     setExpandedRoom(expandedRoom === roomId ? null : roomId)
   }
 
-  const getSpaceLabel = (room) => {
-    if (!room.spaces || room.spaces.length === 2) return 'Indoor and Outdoor'
-    return room.spaces[0] === 'indoor' ? 'Indoor only' : 'Outdoor only'
-  }
-
-  const getIcon = (iconName) => {
-    return (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        {iconSvgs[iconName] || iconSvgs.nook}
-      </svg>
-    )
-  }
+  const getSavedRoom = (roomId) => savedRooms.find(r => r.id === roomId)
+  const isSaved = (roomId) => !!getSavedRoom(roomId)
 
   return (
     <div className="min-h-screen bg-cream pt-20 pb-12">
@@ -474,51 +305,78 @@ export default function WildRoomPage() {
               </span>
             </button>
 
-            {showPlanner && (
-              <div className="p-4 bg-white rounded-b-2xl border-2 border-t-0 border-ember">
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {savedRooms.map(roomId => {
-                    const room = rooms.find(r => r.id === roomId)
-                    return (
-                      <div
-                        key={roomId}
-                        className="flex items-center gap-2 px-3 py-2 rounded-full text-white text-sm"
-                        style={{ backgroundColor: room.color }}
-                      >
-                        <span className="font-serif italic">{room.label}</span>
-                        <button
-                          onClick={() => toggleRoom(roomId)}
-                          className="ml-1 opacity-70 hover:opacity-100"
-                        >
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                          </svg>
-                        </button>
-                      </div>
-                    )
-                  })}
-                </div>
-                <button
-                  onClick={() => {
-                    localStorage.removeItem('wilder_wild_room_plan')
-                    setSavedRooms([])
-                    setShowPlanner(false)
-                  }}
-                  className="px-4 py-2 text-sm text-inkl hover:text-ember"
+            <AnimatePresence>
+              {showPlanner && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                  className="overflow-hidden"
                 >
-                  Clear All
-                </button>
-              </div>
-            )}
+                  <div className="p-4 bg-white rounded-b-2xl border-2 border-t-0 border-ember">
+                    {savedRooms.map(room => (
+                      <div key={room.id} className="mb-4 last:mb-0">
+                        <div className="flex items-start justify-between mb-2">
+                          <div>
+                            <h3 className="font-serif text-lg" style={{ color: room.color }}>
+                              {room.label}
+                            </h3>
+                            {room.location && (
+                              <p className="text-xs text-inkl">{room.location}</p>
+                            )}
+                          </div>
+                          <button
+                            onClick={() => removeRoom(room.id)}
+                            className="text-inkl hover:text-ember"
+                          >
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                          </button>
+                        </div>
+                        {room.implementations?.length > 0 && (
+                          <ul className="text-sm text-inkl space-y-1 ml-4">
+                            {room.implementations.map(implId => {
+                              const roomData = rooms.find(r => r.id === room.id)
+                              const allImpls = [...(roomData?.implementations.indoor || []), ...(roomData?.implementations.outdoor || [])]
+                              const impl = allImpls.find(i => i.id === implId)
+                              return impl ? (
+                                <li key={implId} className="flex items-start gap-2">
+                                  <span style={{ color: room.color }}>-</span>
+                                  {impl.name}
+                                </li>
+                              ) : null
+                            })}
+                          </ul>
+                        )}
+                        {room.notes && (
+                          <p className="text-sm text-inkl italic mt-2 ml-4 border-l-2 pl-3" style={{ borderColor: room.accentColor }}>
+                            "{room.notes}"
+                          </p>
+                        )}
+                      </div>
+                    ))}
+                    <button
+                      onClick={() => {
+                        localStorage.removeItem('wilder_wild_room_plan')
+                        setSavedRooms([])
+                        setShowPlanner(false)
+                      }}
+                      className="px-4 py-2 text-sm text-inkl hover:text-ember mt-4"
+                    >
+                      Clear All
+                    </button>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </motion.div>
         )}
-
-
 
         {/* Room Cards */}
         <div className="space-y-4">
           {rooms.map(room => {
-            const isSaved = savedRooms.includes(room.id)
+            const saved = getSavedRoom(room.id)
             const isExpanded = expandedRoom === room.id
             
             return (
@@ -528,7 +386,7 @@ export default function WildRoomPage() {
                 animate={{ opacity: 1, y: 0 }}
                 className="rounded-2xl overflow-hidden"
                 style={{ 
-                  border: isSaved ? '3px solid ' + room.color : '2px solid #D2B496',
+                  border: saved ? '3px solid ' + room.color : '2px solid #D2B496',
                 }}
               >
                 {/* Header - Clickable */}
@@ -560,20 +418,22 @@ export default function WildRoomPage() {
                     </div>
                   </div>
                   
-                  {/* Space indicator */}
-                  <div className="mt-4 flex items-center gap-3">
-                    <span className="text-xs px-3 py-1 rounded-full bg-white/20 text-white">
-                      {getSpaceLabel(room)}
-                    </span>
-                    {isSaved && (
+                  {/* Saved indicator */}
+                  {saved && (
+                    <div className="mt-4 flex items-center gap-2">
                       <span className="text-xs px-3 py-1 rounded-full bg-white text-sm flex items-center gap-1" style={{ color: room.color }}>
                         <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
                           <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
                         </svg>
                         In your plan
                       </span>
-                    )}
-                  </div>
+                      {saved.implementations?.length > 0 && (
+                        <span className="text-xs text-white/70">
+                          {saved.implementations.length} item{saved.implementations.length !== 1 ? 's' : ''}
+                        </span>
+                      )}
+                    </div>
+                  )}
                 </button>
 
                 {/* Expanded Content */}
@@ -616,13 +476,10 @@ export default function WildRoomPage() {
                             </svg>
                             Indoors
                           </h3>
-                          <div className="grid md:grid-cols-2 gap-3">
+                          <div className="space-y-2">
                             {room.implementations.indoor.map((impl, i) => (
-                              <div key={i} className="p-4 rounded-xl" style={{ backgroundColor: '#FAF6EE' }}>
-                                <div className="flex items-center gap-2 mb-2">
-                                  <span style={{ color: room.color }}>{getIcon(impl.icon)}</span>
-                                  <h4 className="text-sm font-medium text-ink">{impl.name}</h4>
-                                </div>
+                              <div key={i} className="p-3 rounded-lg" style={{ backgroundColor: '#FAF6EE' }}>
+                                <h4 className="text-sm font-medium text-ink mb-1">{impl.name}</h4>
                                 <p className="text-xs text-inkl leading-relaxed">{impl.description}</p>
                               </div>
                             ))}
@@ -639,13 +496,10 @@ export default function WildRoomPage() {
                             </svg>
                             Outdoors
                           </h3>
-                          <div className="grid md:grid-cols-2 gap-3">
+                          <div className="space-y-2">
                             {room.implementations.outdoor.map((impl, i) => (
-                              <div key={i} className="p-4 rounded-xl" style={{ backgroundColor: '#FAF6EE' }}>
-                                <div className="flex items-center gap-2 mb-2">
-                                  <span style={{ color: room.color }}>{getIcon(impl.icon)}</span>
-                                  <h4 className="text-sm font-medium text-ink">{impl.name}</h4>
-                                </div>
+                              <div key={i} className="p-3 rounded-lg" style={{ backgroundColor: '#FAF6EE' }}>
+                                <h4 className="text-sm font-medium text-ink mb-1">{impl.name}</h4>
                                 <p className="text-xs text-inkl leading-relaxed">{impl.description}</p>
                               </div>
                             ))}
@@ -671,15 +525,15 @@ export default function WildRoomPage() {
                       {/* Action */}
                       <div className="pt-4 border-t border-inkll/10">
                         <button
-                          onClick={() => toggleRoom(room.id)}
+                          onClick={() => openAddModal(room)}
                           className="w-full py-3 px-4 rounded-full font-medium text-sm transition-all"
                           style={{
-                            backgroundColor: isSaved ? 'transparent' : room.color,
-                            color: isSaved ? room.color : 'white',
+                            backgroundColor: saved ? 'transparent' : room.color,
+                            color: saved ? room.color : 'white',
                             border: `2px solid ${room.color}`,
                           }}
                         >
-                          {isSaved ? 'Remove from Plan' : 'Add to Plan'}
+                          {saved ? 'Edit Plan' : 'Add to Plan'}
                         </button>
                       </div>
                     </div>
@@ -690,6 +544,127 @@ export default function WildRoomPage() {
           })}
         </div>
       </div>
+
+      {/* Add to Plan Modal */}
+      <AnimatePresence>
+        {showModal && (() => {
+          const room = rooms.find(r => r.id === showModal)
+          const allImpls = [...(room.implementations.indoor || []), ...(room.implementations.outdoor || [])]
+          
+          return (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-4"
+              style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}
+              onClick={() => setShowModal(null)}
+            >
+              <motion.div
+                initial={{ y: 100 }}
+                animate={{ y: 0 }}
+                exit={{ y: 100 }}
+                className="bg-white rounded-t-2xl sm:rounded-2xl w-full max-w-lg max-h-[85vh] overflow-hidden flex flex-col"
+                onClick={e => e.stopPropagation()}
+              >
+                {/* Header */}
+                <div className="p-6 border-b border-inkll/10" style={{ backgroundColor: room.color }}>
+                  <div className="flex items-center justify-between">
+                    <h2 className="font-serif text-2xl text-white">{room.title}</h2>
+                    <button
+                      onClick={() => setShowModal(null)}
+                      className="text-white/70 hover:text-white"
+                    >
+                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </button>
+                  </div>
+                  <p className="text-white/80 mt-1">Customize your {room.label.toLowerCase()}</p>
+                </div>
+
+                {/* Content */}
+                <div className="flex-1 overflow-y-auto p-6">
+                  {/* Location Input */}
+                  <div className="mb-6">
+                    <label className="block text-sm font-medium text-ink mb-2">
+                      Where will this go?
+                    </label>
+                    <input
+                      type="text"
+                      value={spaceLocation}
+                      onChange={e => setSpaceLocation(e.target.value)}
+                      placeholder="e.g., Kitchen corner, Back porch, Whole basement"
+                      className="w-full px-4 py-3 rounded-xl border-2 border-inkll/20 focus:border-ember focus:outline-none text-ink"
+                    />
+                  </div>
+
+                  {/* Implementation Picker */}
+                  <div className="mb-6">
+                    <label className="block text-sm font-medium text-ink mb-3">
+                      What do you want to include?
+                    </label>
+                    <div className="space-y-2">
+                      {allImpls.map(impl => (
+                        <label
+                          key={impl.id}
+                          className="flex items-start gap-3 p-3 rounded-lg cursor-pointer transition-colors"
+                          style={{ 
+                            backgroundColor: selectedImpls.includes(impl.id) ? room.accentColor + '40' : '#FAF6EE'
+                          }}
+                        >
+                          <input
+                            type="checkbox"
+                            checked={selectedImpls.includes(impl.id)}
+                            onChange={() => toggleImpl(impl.id)}
+                            className="mt-1 w-4 h-4 rounded"
+                            style={{ accentColor: room.color }}
+                          />
+                          <div>
+                            <span className="text-sm font-medium text-ink">{impl.name}</span>
+                            <p className="text-xs text-inkl mt-0.5">{impl.description}</p>
+                          </div>
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Notes */}
+                  <div>
+                    <label className="block text-sm font-medium text-ink mb-2">
+                      Your notes
+                    </label>
+                    <textarea
+                      value={roomNotes}
+                      onChange={e => setRoomNotes(e.target.value)}
+                      placeholder="Ideas, materials to gather, reminders..."
+                      rows={3}
+                      className="w-full px-4 py-3 rounded-xl border-2 border-inkll/20 focus:border-ember focus:outline-none text-ink resize-none"
+                    />
+                  </div>
+                </div>
+
+                {/* Footer */}
+                <div className="p-6 border-t border-inkll/10 flex gap-3">
+                  <button
+                    onClick={() => setShowModal(null)}
+                    className="flex-1 py-3 px-4 rounded-full font-medium text-sm bg-cream text-ink hover:bg-blush/50 transition-colors"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={savePlan}
+                    className="flex-1 py-3 px-4 rounded-full font-medium text-sm text-white transition-all"
+                    style={{ backgroundColor: room.color }}
+                  >
+                    {selectedImpls.length > 0 || roomNotes || spaceLocation ? 'Save Plan' : 'Skip'}
+                  </button>
+                </div>
+              </motion.div>
+            </motion.div>
+          )
+        })()}
+      </AnimatePresence>
     </div>
   )
 }
