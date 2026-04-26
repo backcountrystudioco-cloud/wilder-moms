@@ -2,318 +2,221 @@ import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 
-const spaceTypes = [
-  { id: 'backyard', label: 'Backyard', icon: '🏡' },
-  { id: 'porch', label: 'Porch/Patio', icon: '🪑' },
-  { id: 'balcony', label: 'Balcony', icon: '🌿' },
-  { id: 'indoor', label: 'Indoor Room', icon: '🏠' },
-  { id: 'garden', label: 'Garden', icon: '🌻' },
+const rooms = [
+  {
+    id: 'mud',
+    label: 'The Mud Room',
+    tagline: 'Tactile - Loud - Messy',
+    title: 'The Mud Room',
+    subtitle: 'where hands learn to think',
+    description: 'A dedicated space for mess, mixing, pouring, and sensory immersion. The noisiest room. The most important one.',
+    principle: 'Mess needs a container. Not to limit it - to liberate it.',
+    color: '#8C4A14',
+    accentColor: '#F0D2B4',
+  },
+  {
+    id: 'grow',
+    label: 'The Grow Room',
+    tagline: 'Patient - Living - Seasonal',
+    title: 'The Grow Room',
+    subtitle: 'where children learn to wait',
+    description: 'A space dedicated to growing things. Where the timeline is set by nature, not by a child.',
+    principle: 'The timeline belongs to the plant, not the child.',
+    color: '#5A6428',
+    accentColor: '#C8D890',
+  },
+  {
+    id: 'build',
+    label: 'The Build Room',
+    tagline: 'Structured - Purposeful - Physical',
+    title: 'The Build Room',
+    subtitle: 'where agency is born',
+    description: 'A space with materials, tools, and a problem to solve. No instruction manual.',
+    principle: 'Agency is not taught. It is built.',
+    color: '#6B3A2A',
+    accentColor: '#D4B4A4',
+  },
+  {
+    id: 'still',
+    label: 'The Still Room',
+    tagline: 'Quiet - Observational - Slow',
+    title: 'The Still Room',
+    subtitle: 'where children learn to see',
+    description: 'A quiet corner for watching, noticing, drawing, pressing.',
+    principle: 'Stillness is a skill. Design for it.',
+    color: '#464F5F',
+    accentColor: '#C8D0D8',
+  },
+  {
+    id: 'wonder',
+    label: 'The Wonder Room',
+    tagline: 'Magical - Seasonal - Storytelling',
+    title: 'The Wonder Room',
+    subtitle: 'where imagination takes root',
+    description: 'The room that changes with the seasons. Where small magic lives.',
+    principle: 'Wonder is a design choice. Make it on purpose.',
+    color: '#7A5C14',
+    accentColor: '#F0E4A0',
+  },
 ]
 
-const goals = [
-  { id: 'play', label: 'Kids play area', icon: '🎮' },
-  { id: 'garden', label: 'Growing things', icon: '🌱' },
-  { id: 'sensory', label: 'Sensory play', icon: '👐' },
-  { id: 'cozy', label: 'Cozy hideaway', icon: '🏕️' },
-  { id: 'science', label: 'Nature exploration', icon: '🔬' },
-]
-
-const recommendations = {
-  backyard: {
-    play: ['Mud Kitchen Station', 'Balance Beam', 'Tire Climber', 'Water Play Station'],
-    garden: ['Strawberry Pocket Garden', 'Pea Pod Frame', 'Tomato Tower', 'Bug Hotel'],
-    sensory: ['Sand Table', 'Textured Path', 'Wind Chimes', 'Sensory Beds'],
-    cozy: ['Fort Building Corner', 'Sheet Tunnel', 'Cozy Reading Nook', 'Hammock Space'],
-    science: ['Rock Collection Display', 'Bird Watching Station', 'Weather Station', 'Pond Area'],
-  },
-  porch: {
-    play: ['Mini Mud Kitchen', 'Water Wall', 'Activity Table', 'Chalk Board'],
-    garden: ['Herb Window Box', 'Potted Gardens', 'Vertical Planter', 'Hanging Plants'],
-    sensory: ['Wind Chimes', 'Texture Boards', 'Sound Garden', 'Scent Pots'],
-    cozy: ['Cozy Corner Setup', 'Blanket Fort Space', 'Reading Nook', 'Bean Bag Zone'],
-    science: ['Seed Starting Station', 'Bug Observation', 'Sun Dial', 'Rain Gauge'],
-  },
-  balcony: {
-    play: ['Mini Activity Table', 'Finger Painting Station', 'Small Sand Box', 'Play Kitchen'],
-    garden: ['Vertical Garden', 'Herb Pots', 'Hanging Baskets', 'Window Box'],
-    sensory: ['Wind Mobiles', 'Texture Pots', 'Scent Garden', 'Sound Tubes'],
-    cozy: ['Cushion Corner', 'Canopy Fort', 'Story Corner', 'Teepee'],
-    science: ['Seed Growing', 'Plant Observation', 'Weather Watch', 'Bug Hotel Mini'],
-  },
-  indoor: {
-    play: ['Sensory Table', 'Activity Wall', 'Construction Corner', 'Art Station'],
-    garden: ['Windowsill Garden', 'Terrarium', 'Hydroponics', 'Sprouting Station'],
-    sensory: ['Sensory Bins', 'Texture Wall', 'Calming Corner', 'Fidget Tools'],
-    cozy: ['Fort Kit', 'Reading Nook', 'Canopy Tent', 'Cozy Cushions'],
-    science: ['Nature Collections', 'Magnifying Station', 'Observation Journal', 'Craft Projects'],
-  },
-  garden: {
-    play: ['Natural Play Structures', 'Log Climbers', 'Tire Stacks', 'Balance Rocks'],
-    garden: ['Vegetable Beds', 'Butterfly Garden', 'Herb Spiral', 'Berry Patch'],
-    sensory: ['Sensory Path', 'Textured Plants', 'Wind Chimes', 'Scent Garden'],
-    cozy: ['Seating Area', 'Shade Structure', 'Fire Pit Circle', 'Hammock'],
-    science: ['Pollinator Garden', 'Native Plants', 'Soil Testing', 'Wildlife Habitat'],
-  },
+const builds = {
+  mud: [
+    { tag: 'Ages 0-2', title: 'The mud patch', desc: 'A designated square of bare earth. Watered daily.', cost: 'Free', time: '30 min' },
+    { tag: 'Ages 2-7', title: 'Mud kitchen', desc: 'Pallet frame and a world of imaginary cooking.', cost: '$20-40', time: 'Weekend' },
+  ],
+  grow: [
+    { tag: 'Ages 0-3', title: 'Sensory herb garden', desc: 'Mint, lavender, rosemary - gardening as sensory experience.', cost: '$10-20', time: '1 hour' },
+    { tag: 'Ages 3-7', title: 'First raised bed', desc: 'Cherry tomatoes and snap peas. A bed fully theirs.', cost: '$15-35', time: 'Afternoon' },
+  ],
+  build: [
+    { tag: 'Ages 2-5', title: 'Loose parts yard', desc: 'Logs, planks, bricks. No instructions.', cost: 'Free-$20', time: 'Ongoing' },
+    { tag: 'Ages 4-8', title: 'Wild fort', desc: 'Sticks, twine, living walls.', cost: '$0-25', time: 'Half day' },
+  ],
+  still: [
+    { tag: 'Ages 1-8', title: 'Observation nook', desc: 'A sheltered corner with a sightline to something living.', cost: '$0-15', time: '1 hour' },
+    { tag: 'Ages 3-10', title: 'Pressing station', desc: 'A flat stone, heavy books, collected specimens.', cost: 'Free', time: 'Ongoing' },
+  ],
+  wonder: [
+    { tag: 'Ages 1-6', title: 'Fairy garden', desc: 'A miniature world in a corner of the garden.', cost: '$5-20', time: 'Afternoon' },
+    { tag: 'Ages 4-12', title: 'Moon garden', desc: 'White flowers, silver leaves - for dusk and moonlight.', cost: '$10-25', time: 'Weekend' },
+  ],
 }
 
-const buildRecommendations = [
-  { id: 'mud-kitchen-one-board', title: 'The One-Board Mud Kitchen', image: '/builds/mud kitchen.png' },
-  { id: 'balance-beam', title: 'Balance Beam', image: '/builds/balance-beam.png' },
-  { id: 'bug-hotel', title: 'Mason Bee Hotel', image: '/builds/bee.png' },
-  { id: 'fort-sticks', title: 'Stick Fort', image: '/builds/fort-sticks.png' },
-  { id: 'pocket-garden', title: 'Strawberry Pocket Garden', image: '/builds/strawberries.png' },
-  { id: 'window-box', title: 'Herbs on the Porch', image: '/builds/herb.png' },
-  { id: 'sheet-tunnel', title: 'Sheet Tunnel', image: '/builds/sheet-tunnel.png' },
-  { id: 'bottle-bowl', title: 'Bottle Bowl', image: '/builds/bottle-bowl.png' },
-]
-
 export default function WildRoomPage() {
-  const [step, setStep] = useState(1)
-  const [selectedImage, setSelectedImage] = useState(null)
-  const [spaceType, setSpaceType] = useState(null)
-  const [selectedGoals, setSelectedGoals] = useState([])
-  const [showResults, setShowResults] = useState(false)
+  const [activeRoom, setActiveRoom] = useState('mud')
+  const [expandedBuild, setExpandedBuild] = useState(null)
 
-  const toggleGoal = (goalId) => {
-    setSelectedGoals(prev => 
-      prev.includes(goalId) 
-        ? prev.filter(g => g !== goalId)
-        : [...prev, goalId]
-    )
+  const room = rooms.find(r => r.id === activeRoom)
+  const roomIndex = rooms.findIndex(r => r.id === activeRoom)
+  const roomBuilds = builds[activeRoom] || []
+
+  const prevRoom = () => {
+    const idx = roomIndex - 1
+    setActiveRoom(idx >= 0 ? rooms[idx].id : rooms[rooms.length - 1].id)
+    setExpandedBuild(null)
   }
 
-  const handleImageUpload = (e) => {
-    const file = e.target.files[0]
-    if (file) {
-      const reader = new FileReader()
-      reader.onload = (e) => setSelectedImage(e.target.result)
-      reader.readAsDataURL(file)
-    }
-  }
-
-  const getRecommendations = () => {
-    const recs = []
-    if (spaceType && selectedGoals.length > 0) {
-      selectedGoals.forEach(goal => {
-        const spaceRecs = recommendations[spaceType]?.[goal] || []
-        spaceRecs.forEach(buildName => {
-          const build = buildRecommendations.find(b => b.title.includes(buildName.split(' ')[0]) || buildName.includes(b.title.split(' ')[0]))
-          if (build && !recs.find(r => r.id === build.id)) {
-            recs.push(build)
-          }
-        })
-      })
-    }
-    return recs.slice(0, 6)
-  }
-
-  const reset = () => {
-    setStep(1)
-    setSelectedImage(null)
-    setSpaceType(null)
-    setSelectedGoals([])
-    setShowResults(false)
+  const nextRoom = () => {
+    const idx = roomIndex + 1
+    setActiveRoom(idx < rooms.length ? rooms[idx].id : rooms[0].id)
+    setExpandedBuild(null)
   }
 
   return (
     <div className="min-h-screen bg-cream pt-20 pb-12">
-      <div className="max-w-3xl mx-auto px-4">
+      <div className="max-w-2xl mx-auto px-4">
         <motion.header
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-8"
+          className="text-center mb-8"
         >
-          <Link to="/wilder-homes/environment" className="text-ember text-sm font-medium mb-4 inline-flex items-center gap-1 hover:underline">
-            ← Back to Environment
+          <Link 
+            to="/wilder-homes/environment" 
+            className="text-ember text-sm font-medium mb-4 inline-flex items-center gap-1 hover:underline"
+          >
+            &larr; Back to Environment
           </Link>
           <h1 className="font-serif text-4xl md:text-5xl text-ink mb-3">The Wild Room</h1>
-          <p className="text-inkl text-lg">Take a photo of your space and get personalized ideas.</p>
+          <p className="text-inkl text-lg max-w-xl mx-auto">
+            Every home needs a Wild Room. Not a room - a design intention. 
+            Choose a room, pick your builds, get the blueprint.
+          </p>
         </motion.header>
 
-        {/* Progress */}
-        <div className="flex items-center gap-2 mb-8">
-          {[1, 2, 3].map((s) => (
-            <div
-              key={s}
-              className={`h-1 flex-1 rounded-full transition-colors ${
-                s <= step ? 'bg-ember' : 'bg-inkll/20'
-              }`}
-            />
+        {/* Room Tabs */}
+        <div className="flex gap-2 mb-6 overflow-x-auto pb-2">
+          {rooms.map(r => (
+            <button
+              key={r.id}
+              onClick={() => { setActiveRoom(r.id); setExpandedBuild(null); }}
+              className="flex-shrink-0 px-4 py-2 rounded-full text-xs font-medium transition-all border"
+              style={{
+                backgroundColor: activeRoom === r.id ? r.color : 'transparent',
+                color: activeRoom === r.id ? 'white' : '#783C1E',
+                borderColor: activeRoom === r.id ? r.color : '#D2B496',
+              }}
+            >
+              {r.label.replace('The ', '')}
+            </button>
           ))}
         </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="bg-white rounded-3xl p-8 border border-inkll/10"
-        >
-          {/* Step 1: Photo Upload */}
-          {step === 1 && (
-            <div className="text-center">
-              <h2 className="font-serif text-2xl text-ink mb-4">Upload a photo of your space</h2>
-              <p className="text-inkl mb-8">This helps us visualize what you're working with.</p>
-              
-              <div className="mb-8">
-                <label className="block cursor-pointer">
-                  <div className={`aspect-[4/3] rounded-2xl border-2 border-dashed ${
-                    selectedImage ? 'border-ember bg-ember/5' : 'border-inkll/30 hover:border-ember/50'
-                  } flex items-center justify-center overflow-hidden transition-colors`}>
-                    {selectedImage ? (
-                      <img src={selectedImage} alt="Your space" className="w-full h-full object-cover" />
-                    ) : (
-                      <div className="text-center p-8">
-                        <div className="w-16 h-16 bg-ember/10 rounded-full mx-auto mb-4 flex items-center justify-center">
-                          <svg className="w-8 h-8 text-ember" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                          </svg>
-                        </div>
-                        <p className="text-ink font-medium">Click to upload a photo</p>
-                        <p className="text-sm text-inkll">or drag and drop</p>
-                      </div>
-                    )}
-                  </div>
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleImageUpload}
-                    className="hidden"
-                  />
-                </label>
+        {/* Room Panel */}
+        {room && (
+          <motion.div
+            key={room.id}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+          >
+            {/* Hero */}
+            <div className="rounded-t-2xl p-6 text-white" style={{ backgroundColor: room.color }}>
+              <p className="text-xs font-medium uppercase tracking-widest mb-2 opacity-70">{room.tagline}</p>
+              <h2 className="font-serif text-2xl mb-1">
+                {room.title}<br />
+                <span className="opacity-80 italic">"{room.subtitle}"</span>
+              </h2>
+              <p className="text-sm opacity-70 mb-4">{room.description}</p>
+              <div className="p-3 rounded-lg" style={{ backgroundColor: 'rgba(0,0,0,0.2)' }}>
+                <p className="text-[10px] font-medium uppercase tracking-wider opacity-50 mb-1">Architect's principle</p>
+                <p className="font-serif text-sm italic opacity-90 leading-relaxed">"{room.principle}"</p>
               </div>
-
-              <button
-                onClick={() => setStep(2)}
-                className="px-8 py-4 bg-ember text-white font-sans font-medium rounded-full hover:bg-terra transition-colors"
-              >
-                Continue →
-              </button>
             </div>
-          )}
 
-          {/* Step 2: Space Type */}
-          {step === 2 && (
-            <div className="text-center">
-              <h2 className="font-serif text-2xl text-ink mb-4">What kind of space is this?</h2>
-              <p className="text-inkl mb-8">This helps us tailor our recommendations.</p>
-              
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
-                {spaceTypes.map((type) => (
+            {/* Body */}
+            <div className="bg-white rounded-b-2xl p-4 border border-inkll/10 border-t-0">
+              {/* Builds */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
+                {roomBuilds.map((build, idx) => (
                   <button
-                    key={type.id}
-                    onClick={() => setSpaceType(type.id)}
-                    className={`p-4 rounded-xl border-2 transition-all ${
-                      spaceType === type.id
-                        ? 'bg-ember text-white border-ember'
-                        : 'bg-cream text-ink border-inkll/20 hover:border-ember/50'
-                    }`}
+                    key={idx}
+                    onClick={() => setExpandedBuild(expandedBuild === idx ? null : idx)}
+                    className="w-full text-left p-3 rounded-lg border transition-all"
+                    style={{
+                      backgroundColor: expandedBuild === idx ? '#FAF6EE' : '#FAF6EE50',
+                      borderColor: expandedBuild === idx ? '#8C1E00' : '#D2B496',
+                    }}
                   >
-                    <span className="text-3xl mb-2 block">{type.icon}</span>
-                    <span className="font-sans font-medium">{type.label}</span>
+                    <p className="text-[10px] font-medium uppercase tracking-wider text-ember mb-1">{build.tag}</p>
+                    <h4 className="font-sans font-medium text-ink text-sm mb-1">{build.title}</h4>
+                    <p className="text-xs text-inkl leading-relaxed mb-2">{build.desc}</p>
+                    <div className="flex gap-2">
+                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-blush/50 text-ember">{build.cost}</span>
+                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-blush/50 text-ember">{build.time}</span>
+                    </div>
                   </button>
                 ))}
               </div>
 
-              <div className="flex gap-4 justify-center">
-                <button
-                  onClick={() => setStep(1)}
-                  className="px-6 py-4 bg-cream text-ink font-sans font-medium rounded-full hover:bg-blush/50 transition-colors"
-                >
-                  ← Back
-                </button>
-                <button
-                  onClick={() => setStep(3)}
-                  disabled={!spaceType}
-                  className="px-8 py-4 bg-ember text-white font-sans font-medium rounded-full hover:bg-terra transition-colors disabled:opacity-50"
-                >
-                  Continue →
-                </button>
-              </div>
-            </div>
-          )}
-
-          {/* Step 3: Goals */}
-          {step === 3 && !showResults && (
-            <div className="text-center">
-              <h2 className="font-serif text-2xl text-ink mb-4">What do you want to create?</h2>
-              <p className="text-inkl mb-8">Select all that apply. This helps us suggest the right projects.</p>
-              
-              <div className="grid grid-cols-2 gap-4 mb-8">
-                {goals.map((goal) => (
-                  <button
-                    key={goal.id}
-                    onClick={() => toggleGoal(goal.id)}
-                    className={`p-4 rounded-xl border-2 transition-all ${
-                      selectedGoals.includes(goal.id)
-                        ? 'bg-ember text-white border-ember'
-                        : 'bg-cream text-ink border-inkll/20 hover:border-ember/50'
-                    }`}
-                  >
-                    <span className="text-2xl mb-2 block">{goal.icon}</span>
-                    <span className="font-sans text-sm font-medium">{goal.label}</span>
-                  </button>
-                ))}
-              </div>
-
-              <div className="flex gap-4 justify-center">
-                <button
-                  onClick={() => setStep(2)}
-                  className="px-6 py-4 bg-cream text-ink font-sans font-medium rounded-full hover:bg-blush/50 transition-colors"
-                >
-                  ← Back
-                </button>
-                <button
-                  onClick={() => setShowResults(true)}
-                  disabled={selectedGoals.length === 0}
-                  className="px-8 py-4 bg-ember text-white font-sans font-medium rounded-full hover:bg-terra transition-colors disabled:opacity-50"
-                >
-                  Get Ideas →
-                </button>
-              </div>
-            </div>
-          )}
-
-          {/* Results */}
-          {showResults && (
-            <div>
-              <div className="text-center mb-8">
-                <h2 className="font-serif text-2xl text-ink mb-4">Your Wilder Space Ideas</h2>
-                <p className="text-inkl">
-                  Based on your {spaceTypes.find(s => s.id === spaceType)?.label.toLowerCase()} and goals, here are some ideas to get you started:
+              {/* Design Principle */}
+              <div className="p-4 border border-inkll/10 rounded-lg mb-4">
+                <p className="text-[10px] font-medium uppercase tracking-wider text-inkl mb-2">
+                  The {room.label} design principle
                 </p>
+                <h4 className="font-serif text-base text-ink mb-2 italic">"{room.principle}"</h4>
               </div>
 
-              <div className="grid md:grid-cols-2 gap-4 mb-8">
-                {getRecommendations().map((build) => (
-                  <Link
-                    key={build.id}
-                    to={`/wilder-homes/activities/${build.id}`}
-                    className="block bg-cream rounded-xl overflow-hidden border border-inkll/10 hover:shadow-md transition-shadow"
-                  >
-                    <div className="aspect-[4/3] bg-gradient-to-br from-blush/20 to-parchment relative">
-                      {build.image && (
-                        <img src={build.image} alt={build.title} className="w-full h-full object-cover" />
-                      )}
-                    </div>
-                    <div className="p-4">
-                      <h3 className="font-serif text-lg text-ink mb-1">{build.title}</h3>
-                      <p className="text-xs text-ember">View guide →</p>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-
-              <div className="text-center">
-                <p className="text-inkl mb-4">Want more ideas for your space?</p>
-                <button
-                  onClick={reset}
-                  className="px-6 py-3 bg-cream text-ink font-sans font-medium rounded-full hover:bg-blush/50 transition-colors"
-                >
-                  Start Over
-                </button>
+              {/* Navigation */}
+              <div className="flex items-center justify-between pt-4 border-t border-inkll/10">
+                <span className="text-xs text-inkl">
+                  {roomIndex > 0 && (
+                    <button onClick={prevRoom} className="text-ember font-medium ml-1">
+                      &larr; {rooms[roomIndex - 1].label.replace('The ', '')}
+                    </button>
+                  )}
+                </span>
+                <span className="text-xs text-inkl">Room {roomIndex + 1} of 5</span>
+                <span className="text-xs text-inkl">
+                  {roomIndex < rooms.length - 1 && (
+                    <button onClick={nextRoom} className="text-ember font-medium">
+                      {rooms[roomIndex + 1].label.replace('The ', '')} &rarr;
+                    </button>
+                  )}
+                </span>
               </div>
             </div>
-          )}
-        </motion.div>
+          </motion.div>
+        )}
       </div>
     </div>
   )
