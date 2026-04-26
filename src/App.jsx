@@ -47,7 +47,7 @@ function App() {
               <Route path="/wilder-homes/activities/:buildId" element={<WilderBuildDetailPage />} />
               <Route path="/wilder-homes/environment" element={<WilderEnvironmentPage />} />
               <Route path="/wilder-homes/wild-room" element={<WildRoomPage />} />
-              <Route path="/wilder-homes/archive" element={<ArchivePage />} />
+              <Route path="/wilder-homes/activities/archive" element={<ArchivePage />} />
               <Route path="/wilder-homes/architect" element={<ArchitectPage />} />
               <Route path="/journal" element={<JournalPage />} />
               <Route path="/skills" element={<SkillsPassport />} />

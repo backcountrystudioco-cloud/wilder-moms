@@ -38,7 +38,7 @@ const environmentSections = [
       </svg>
     ),
     color: 'ember',
-    to: '/wilder-homes/archive',
+    to: '/wilder-homes/activities/archive',
     badge: 'Premium Guides'
   },
   {
