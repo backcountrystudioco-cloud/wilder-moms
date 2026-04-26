@@ -26,3 +26,57 @@
     font-family: 'Cormorant Garamond', Georgia, serif;
   }
 }
+
+/* Print Styles */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+    font-size: 12pt;
+  }
+  
+  nav, footer, .no-print, button, a[onclick], .print\\:hidden {
+    display: none !important;
+  }
+  
+  .print-checklist-item {
+    border-bottom: 1px solid #ddd;
+    padding: 8px 0;
+    list-style: none;
+    page-break-inside: avoid;
+  }
+  
+  .print-checklist-item::before {
+    content: '☐';
+    display: inline-block;
+    width: 24px;
+    font-size: 16pt;
+  }
+  
+  .print-checklist-item.checked::before {
+    content: '☑';
+  }
+  
+  .print-checklist-item.checked span {
+    text-decoration: line-through;
+  }
+  
+  a {
+    text-decoration: none !important;
+    color: black !important;
+  }
+  
+  .bg-cream, .bg-white {
+    background: white !important;
+    border: 1px solid #ddd;
+  }
+  
+  .shadow-sm, .shadow-lg, .shadow-md {
+    box-shadow: none !important;
+  }
+  
+  @page {
+    margin: 0.5in;
+    size: letter;
+  }
+}

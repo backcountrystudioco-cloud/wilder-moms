@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
-export default function SmartChecklist({ items, checkedItems = [], onToggle, title, listType = 'default' }) {
+export default function SmartChecklist({ items, checkedItems = [], onToggle, title, listType = 'default', showPrint = true }) {
   const [localChecked, setLocalChecked] = useState(() => {
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem(`wilder_moms_blueprint_${listType}`)
@@ -37,13 +37,53 @@ export default function SmartChecklist({ items, checkedItems = [], onToggle, tit
     }
   }
 
+  const handlePrint = () => {
+    window.print()
+  }
+
   const progress = items.length > 0 ? (localChecked.length / items.length) * 100 : 0
 
   return (
-    <div className="bg-white rounded-2xl p-6 shadow-sm border border-inkll/10">
-      {title && (
-        <h3 className="font-serif text-xl text-ink mb-4">{title}</h3>
-      )}
+    <>
+      <style>{`
+        @media print {
+          .print-checklist-item {
+            border-bottom: 1px solid #ccc;
+            padding: 8px 0;
+            list-style: none;
+          }
+          .print-checklist-item::before {
+            content: '☐';
+            display: inline-block;
+            width: 20px;
+            font-size: 16px;
+          }
+          .print-checklist-item.checked::before {
+            content: '☑';
+          }
+          .print-checklist-item.checked span {
+            text-decoration: line-through;
+          }
+        }
+      `}</style>
+      
+      <div className="bg-white rounded-2xl p-6 shadow-sm border border-inkll/10">
+      <div className="flex items-center justify-between mb-4">
+        {title && (
+          <h3 className="font-serif text-xl text-ink">{title}</h3>
+        )}
+        {showPrint && (
+          <button
+            onClick={handlePrint}
+            className="flex items-center gap-2 px-4 py-2 bg-ink text-white rounded-full font-sans text-sm hover:bg-inkl transition-colors print:hidden"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+            </svg>
+            Print List
+          </button>
+        )}
+      </div>
       
       {/* Progress Bar */}
       <div className="mb-6">
@@ -73,7 +113,7 @@ export default function SmartChecklist({ items, checkedItems = [], onToggle, tit
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -5 }}
                 transition={{ duration: 0.2 }}
-                className="flex items-start gap-3"
+                className={`flex items-start gap-3 print-checklist-item ${isChecked ? 'checked' : ''}`}
               >
                 <button
                   onClick={() => handleToggle(index)}
@@ -113,5 +153,6 @@ export default function SmartChecklist({ items, checkedItems = [], onToggle, tit
         </AnimatePresence>
       </ul>
     </div>
+    </>
   )
 }
