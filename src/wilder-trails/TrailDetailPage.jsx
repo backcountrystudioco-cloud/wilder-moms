@@ -1,12 +1,14 @@
 import { useState, useEffect, useMemo } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { hikes } from './hikes'
 import { useLocation } from '../hooks/useLocation'
 import { useWeather } from '../hooks/useWeather'
+import { useWilderTrails } from './WilderTrailsContext'
 import HourlyWeather from './HourlyWeather'
 import SmartChecklist from '../blueprint/SmartChecklist'
 import { packLists } from '../blueprint/packLists'
+import ProgressStepper from './ProgressStepper'
 
 // Get weather-based pack recommendations
 function getWeatherPackRecommendations(weather, tempF, elevation) {
@@ -98,11 +100,17 @@ const difficultyLabels = {
 
 export default function TrailDetailPage() {
   const { trailId } = useParams()
-  const location = useLocation()
-  const weather = useWeather(location.lat, location.lon)
+  const navigate = useNavigate()
+  const autoLocation = useLocation()
+  const weather = useWeather(autoLocation.lat, autoLocation.lon)
+  const { location, familyInfo } = useWilderTrails()
   
   const [checkedItems, setCheckedItems] = useState([])
   const [showPackList, setShowPackList] = useState(false)
+  
+  // Use WilderTrails location if available, otherwise fall back to auto-detected
+  const activeLocation = location || (autoLocation.lat ? autoLocation : null)
+  const hikeWeather = useWeather(activeLocation?.lat, activeLocation?.lon)
   
   // Find the hike by ID
   const hike = useMemo(() => {
@@ -111,9 +119,10 @@ export default function TrailDetailPage() {
   
   // Get weather-based recommendations
   const weatherRecommendations = useMemo(() => {
-    if (!weather || !weather.temp) return []
-    return getWeatherPackRecommendations(weather, weather.temp, hike?.elevation || 0)
-  }, [weather, hike?.elevation])
+    const weatherSource = hikeWeather.temp !== null ? hikeWeather : weather
+    if (!weatherSource || !weatherSource.temp) return []
+    return getWeatherPackRecommendations(weatherSource, weatherSource.temp, hike?.elevation || 0)
+  }, [hikeWeather, weather, hike?.elevation])
   
   // Get difficulty-based pack list
   const basePackItems = useMemo(() => {
@@ -121,7 +130,7 @@ export default function TrailDetailPage() {
     return getDifficultyPackItems(hike.difficulty, hike.duration)
   }, [hike])
   
-  // Combined pack list
+  // Combined pack list with family considerations
   const combinedPackList = useMemo(() => {
     const combined = [...basePackItems]
     weatherRecommendations.forEach(rec => {
@@ -129,8 +138,28 @@ export default function TrailDetailPage() {
         combined.push(rec.item)
       }
     })
+    
+    // Add family-specific items based on youngest age
+    if (familyInfo) {
+      if (familyInfo.youngestAge <= 2 && !combined.some(item => item.toLowerCase().includes('snack'))) {
+        combined.push('Kid-friendly snacks')
+        combined.push('Water cup or bottle for little ones')
+      }
+      if (familyInfo.youngestAge === -1) {
+        combined.push('Baby carrier backup')
+        combined.push('Diapers and changing supplies')
+      }
+      if (familyInfo.needsStroller && !combined.some(item => item.toLowerCase().includes('stroller'))) {
+        combined.push('Compact stroller or carrier')
+      }
+      if (familyInfo.needsDog) {
+        combined.push('Dog treats and water bowl')
+        combined.push('Doggie bags')
+      }
+    }
+    
     return combined
-  }, [basePackItems, weatherRecommendations])
+  }, [basePackItems, weatherRecommendations, familyInfo])
   
   const handleToggleItem = (index) => {
     setCheckedItems(prev =>
@@ -158,16 +187,18 @@ export default function TrailDetailPage() {
   return (
     <div className="min-h-screen bg-cream pt-28 pb-12 px-4">
       <div className="max-w-4xl mx-auto">
+        <ProgressStepper currentStep={4} />
+        
         {/* Back Link */}
-        <Link
-          to="/wilder-trails"
+        <button
+          onClick={() => navigate('/wilder-trails/trails')}
           className="inline-flex items-center gap-2 text-inkl hover:text-ember transition-colors font-sans text-sm mb-6"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
           </svg>
-          Back to all trails
-        </Link>
+          Back to trails
+        </button>
         
         {/* Header */}
         <motion.header

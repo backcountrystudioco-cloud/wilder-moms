@@ -1,10 +1,14 @@
 import { Routes, Route } from 'react-router-dom'
 import { UserProvider } from './context/UserContext'
 import { JournalProvider } from './context/JournalContext'
+import { WilderTrailsProvider } from './wilder-trails/WilderTrailsContext'
 import AppLayout from './components/AppLayout'
 import HomePage from './pages/HomePage'
 import MissionPage from './pages/MissionPage'
 import WilderTrailsPage from './wilder-trails/WilderTrailsPage'
+import LocationPage from './wilder-trails/LocationPage'
+import WhosComingPage from './wilder-trails/WhosComingPage'
+import TrailsPage from './wilder-trails/TrailsPage'
 import TrailDetailPage from './wilder-trails/TrailDetailPage'
 import BuildsPage from './basecamp/BuildsPage'
 import BuildDetailPage from './basecamp/BuildDetailPage'
@@ -22,25 +26,30 @@ function App() {
   return (
     <UserProvider>
       <JournalProvider>
-        <LaunchPopup />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/join" element={<JoinPage />} />
-          <Route element={<AppLayout />}>
-            <Route path="/mission" element={<MissionPage />} />
-            <Route path="/wilder-trails" element={<WilderTrailsPage />} />
-            <Route path="/wilder-trails/:trailId" element={<TrailDetailPage />} />
-            <Route path="/journal" element={<JournalPage />} />
-            <Route path="/skills" element={<SkillsPassport />} />
-            <Route path="/basecamp" element={<BuildsPage />} />
-            <Route path="/basecamp/:buildId" element={<BuildDetailPage />} />
-            <Route path="/basecamp/activities" element={<ActivitiesPage />} />
-            <Route path="/village" element={<VillagePage />} />
-            <Route path="/profile" element={<ProfilePage />} />
-            <Route path="/blueprint" element={<BlueprintPage />} />
-            <Route path="/basecamp/eco-products" element={<EcoProductsPage />} />
-          </Route>
-        </Routes>
+        <WilderTrailsProvider>
+          <LaunchPopup />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/join" element={<JoinPage />} />
+            <Route element={<AppLayout />}>
+              <Route path="/mission" element={<MissionPage />} />
+              <Route path="/wilder-trails" element={<WilderTrailsPage />} />
+              <Route path="/wilder-trails/location" element={<LocationPage />} />
+              <Route path="/wilder-trails/whos-coming" element={<WhosComingPage />} />
+              <Route path="/wilder-trails/trails" element={<TrailsPage />} />
+              <Route path="/wilder-trails/:trailId" element={<TrailDetailPage />} />
+              <Route path="/journal" element={<JournalPage />} />
+              <Route path="/skills" element={<SkillsPassport />} />
+              <Route path="/basecamp" element={<BuildsPage />} />
+              <Route path="/basecamp/:buildId" element={<BuildDetailPage />} />
+              <Route path="/basecamp/activities" element={<ActivitiesPage />} />
+              <Route path="/village" element={<VillagePage />} />
+              <Route path="/profile" element={<ProfilePage />} />
+              <Route path="/blueprint" element={<BlueprintPage />} />
+              <Route path="/basecamp/eco-products" element={<EcoProductsPage />} />
+            </Route>
+          </Routes>
+        </WilderTrailsProvider>
       </JournalProvider>
     </UserProvider>
   )
