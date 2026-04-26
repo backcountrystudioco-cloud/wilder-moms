@@ -26,18 +26,18 @@ const timeLabels = [
 
 // Today's vibe options
 const vibeLabels = [
-  { value: 'adventurous', label: 'Feeling adventurous', icon: '🏔️' },
-  { value: 'chill', label: 'Take it easy', icon: '🌿' },
-  { value: 'justneedout', label: 'Just need to get outside', icon: '🌤️' },
-  { value: 'exploring', label: 'Explore something new', icon: '🔍' },
+  { value: 'adventurous', label: 'Feeling adventurous' },
+  { value: 'chill', label: 'Take it easy' },
+  { value: 'justneedout', label: 'Just need to get outside' },
+  { value: 'exploring', label: 'Explore something new' },
 ]
 
 // Special needs options
 const specialNeeds = [
-  { key: 'needsStroller', label: 'Stroller needed', icon: '🍼' },
-  { key: 'needsDog', label: 'Bringing our dog', icon: '🐕' },
-  { key: 'wantsWater', label: 'Want to splash in water', icon: '💦' },
-  { key: 'needsRestrooms', label: 'Need restrooms nearby', icon: '🚽' },
+  { key: 'needsStroller', label: 'Stroller needed' },
+  { key: 'needsDog', label: 'Bringing our dog' },
+  { key: 'wantsWater', label: 'Want to splash in water' },
+  { key: 'needsRestrooms', label: 'Need restrooms nearby' },
 ]
 
 export default function WhosComingPage() {
@@ -47,7 +47,7 @@ export default function WhosComingPage() {
   
   // Form state
   const [formData, setFormData] = useState({
-    youngestAge: familyInfo?.youngestAge ?? profileYoungestAge ?? 4,
+    ageGroups: familyInfo?.ageGroups ?? (profileYoungestAge !== undefined ? [profileYoungestAge] : [4]),
     numberOfKids: familyInfo?.numberOfKids ?? (children?.length || 1),
     needsStroller: familyInfo?.needsStroller ?? false,
     needsDog: familyInfo?.needsDog ?? false,
@@ -75,15 +75,25 @@ export default function WhosComingPage() {
   
   const handleNext = () => {
     updateFamilyInfo({
-      youngestAge: formData.youngestAge,
+      youngestAge: Math.min(...formData.ageGroups),
+      ageGroups: formData.ageGroups,
       numberOfKids: formData.numberOfKids,
       needsStroller: formData.needsStroller,
       needsDog: formData.needsDog,
       wantsWater: formData.wantsWater,
       needsRestrooms: formData.needsRestrooms,
-      hasBabyInCarrier: formData.youngestAge === -1,
+      hasBabyInCarrier: formData.ageGroups.includes(-1),
     })
     navigate('/wilder-trails/trails')
+  }
+  
+  const toggleAgeGroup = (ageValue) => {
+    setFormData(prev => {
+      const groups = prev.ageGroups.includes(ageValue)
+        ? prev.ageGroups.filter(a => a !== ageValue)
+        : [...prev.ageGroups, ageValue]
+      return { ...prev, ageGroups: groups }
+    })
   }
   
   const handleBack = () => {
@@ -144,31 +154,42 @@ export default function WhosComingPage() {
           </motion.div>
         )}
 
-        {/* Youngest Child Age */}
+        {/* Age Groups (multi-select) */}
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
           className="mb-8"
         >
-          <h2 className="font-serif text-xl text-ink mb-4">Age of your youngest hiker</h2>
+          <h2 className="font-serif text-xl text-ink mb-2">Who is joining you?</h2>
+          <p className="font-sans text-sm text-inkl mb-4">Select all that apply</p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            {ageLabels.map((age) => (
-              <button
-                key={age.value}
-                onClick={() => handleUpdateFamilyInfo({ youngestAge: age.value })}
-                className={`p-4 rounded-xl border-2 text-left transition-all ${
-                  formData.youngestAge === age.value
-                    ? 'bg-ember text-white border-ember'
-                    : 'bg-white border-inkll/20 text-ink hover:border-ember'
-                }`}
-              >
-                <span className="font-sans font-medium block">{age.label}</span>
-                <span className={`text-xs ${formData.youngestAge === age.value ? 'text-white/70' : 'text-inkl'}`}>
-                  {age.desc}
-                </span>
-              </button>
-            ))}
+            {ageLabels.map((age) => {
+              const isSelected = formData.ageGroups.includes(age.value)
+              return (
+                <button
+                  key={age.value}
+                  onClick={() => toggleAgeGroup(age.value)}
+                  className={`p-4 rounded-xl border-2 text-left transition-all relative ${
+                    isSelected
+                      ? 'bg-ember text-white border-ember'
+                      : 'bg-white border-inkll/20 text-ink hover:border-ember'
+                  }`}
+                >
+                  <span className="font-sans font-medium block">{age.label}</span>
+                  <span className={`text-xs ${isSelected ? 'text-white/70' : 'text-inkl'}`}>
+                    {age.desc}
+                  </span>
+                  {isSelected && (
+                    <span className="absolute top-2 right-2 w-5 h-5 bg-white rounded-full flex items-center justify-center">
+                      <svg className="w-3 h-3 text-ember" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </span>
+                  )}
+                </button>
+              )
+            })}
           </div>
         </motion.section>
 
@@ -244,8 +265,7 @@ export default function WhosComingPage() {
                     : 'bg-white border-inkll/20 text-ink hover:border-ember'
                 }`}
               >
-                <span className="text-2xl mb-1 block">{v.icon}</span>
-                <span className="font-sans font-medium">{v.label}</span>
+                <span className="font-sans font-medium block">{v.label}</span>
               </button>
             ))}
           </div>
@@ -266,12 +286,11 @@ export default function WhosComingPage() {
                 onClick={() => handleUpdateFamilyInfo({ [need.key]: !formData[need.key] })}
                 className={`p-4 rounded-xl border-2 text-left transition-all ${
                   formData[need.key]
-                    ? 'bg-ember text-white border-ember'
-                    : 'bg-white border-inkll/20 text-ink hover:border-ember'
+                    ? 'bg-olive text-white border-olive'
+                    : 'bg-white border-inkll/20 text-ink hover:border-olive'
                 }`}
               >
-                <span className="text-2xl mb-1 block">{need.icon}</span>
-                <span className="font-sans font-medium">{need.label}</span>
+                <span className="font-sans font-medium block">{need.label}</span>
               </button>
             ))}
           </div>
@@ -293,7 +312,7 @@ export default function WhosComingPage() {
           <p className="text-center mt-3 font-sans text-sm text-inkl">
             Showing trails for{' '}
             <span className="text-ember font-medium">
-              {formData.youngestAge === -1 ? 'baby in carrier' : ageLabels.find(a => a.value === formData.youngestAge)?.label}
+              {formData.ageGroups.length} {formData.ageGroups.length === 1 ? 'age group' : 'age groups'}
             </span>
             {' '}•{' '}
             <span className="text-ember font-medium">{selectedTime} min</span>
