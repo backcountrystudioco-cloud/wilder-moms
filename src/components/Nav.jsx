@@ -126,19 +126,13 @@ export default function Nav() {
             to="/wilder-trails/location"
             className="flex flex-col items-center gap-0 font-sans font-medium text-xs text-ink hover:text-ember transition-colors"
           >
-            Trails
+            Wilder Trails
           </Link>
           <Link
             to="/wilder-homes"
             className="flex flex-col items-center gap-0 font-sans font-medium text-xs text-ink hover:text-ember transition-colors"
           >
             Wilder Homes
-          </Link>
-          <Link
-            to="/wilder-philosophy"
-            className="flex flex-col items-center gap-0 font-sans font-medium text-xs text-ink hover:text-ember transition-colors"
-          >
-            Philosophy
           </Link>
         </div>
       </div>
