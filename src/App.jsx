@@ -24,6 +24,7 @@ import WilderBuildDetailPage from './wilderhomes/BuildDetailPage'
 import EcoProductsInterestPage from './wilderhomes/EcoProductsInterestPage'
 import ArchivePage from './wilderhomes/ArchivePage'
 import ArchitectPage from './wilderhomes/ArchitectPage'
+import WildRoomPage from './wilderhomes/WildRoomPage'
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
               <Route path="/wilder-homes/activities" element={<WilderActivitiesPage />} />
               <Route path="/wilder-homes/activities/:buildId" element={<WilderBuildDetailPage />} />
               <Route path="/wilder-homes/environment" element={<WilderEnvironmentPage />} />
+              <Route path="/wilder-homes/wild-room" element={<WildRoomPage />} />
               <Route path="/wilder-homes/archive" element={<ArchivePage />} />
               <Route path="/wilder-homes/architect" element={<ArchitectPage />} />
               <Route path="/journal" element={<JournalPage />} />

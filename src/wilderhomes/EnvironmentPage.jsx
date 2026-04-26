@@ -12,7 +12,7 @@ const environmentSections = [
       </svg>
     ),
     color: 'forest',
-    to: '/wild-room',
+    to: '/wilder-homes/wild-room',
     badge: 'Interactive Tool'
   },
   {
