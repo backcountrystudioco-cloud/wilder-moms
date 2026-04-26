@@ -25,6 +25,7 @@ import EcoProductsInterestPage from './wilderhomes/EcoProductsInterestPage'
 import ArchivePage from './wilderhomes/ArchivePage'
 import ArchitectPage from './wilderhomes/ArchitectPage'
 import WildRoomPage from './wilderhomes/WildRoomPage'
+import CraftDetailPage from './wilderhomes/CraftDetailPage'
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
               <Route path="/wilder-trails/:trailId" element={<TrailDetailPage />} />
               <Route path="/wilder-homes" element={<WilderHomesPage />} />
               <Route path="/wilder-homes/activities" element={<WilderActivitiesPage />} />
+              <Route path="/wilder-homes/activities/craft/:craftId" element={<CraftDetailPage />} />
               <Route path="/wilder-homes/activities/:buildId" element={<WilderBuildDetailPage />} />
               <Route path="/wilder-homes/environment" element={<WilderEnvironmentPage />} />
               <Route path="/wilder-homes/wild-room" element={<WildRoomPage />} />
