@@ -157,6 +157,35 @@ export default function ActivitiesPage() {
             )}
           </motion.div>
         )}
+
+        {/* Archive Upsell Banner */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="mt-16"
+        >
+          <Link
+            to="/wilder-homes/activities/archive"
+            className="block bg-gradient-to-r from-[#5A3C00] via-[#8C4A14] to-[#D2961E] rounded-3xl p-8 text-center hover:opacity-95 transition-opacity group"
+          >
+            <p className="text-white/60 text-xs font-medium uppercase tracking-widest mb-2">
+              Premium Downloads
+            </p>
+            <h3 className="font-serif text-2xl md:text-3xl text-white italic mb-3">
+              Want to build something that lasts?
+            </h3>
+            <p className="text-white/70 max-w-xl mx-auto mb-4">
+              The Archive has detailed guides on cob, timber framing, and stone stacking — techniques your grandparents knew by heart.
+            </p>
+            <span className="inline-flex items-center gap-2 px-6 py-3 bg-white text-[#8C4A14] font-sans font-medium rounded-full group-hover:bg-cream transition-colors">
+              Explore The Archive
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </span>
+          </Link>
+        </motion.div>
       </div>
     </div>
   )
