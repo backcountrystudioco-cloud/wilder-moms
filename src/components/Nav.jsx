@@ -66,47 +66,12 @@ export default function Nav() {
             </Link>
 
             {/* The Base Camp - Builds & Activities Dropdown */}
-            <div className="relative">
-              <button
-                className="font-sans font-medium text-sm uppercase tracking-[0.08em] text-ink hover:text-ember transition-colors inline-flex items-center gap-1"
-                onMouseEnter={() => setBaseCampDropdownOpen(true)}
-              >
-                Wilder Homes
-                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
-              <AnimatePresence>
-                {baseCampDropdownOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 10 }}
-                    className="absolute top-full left-0 mt-2 w-48 bg-cream shadow-lg rounded-lg border border-inkll/10 py-2 z-50"
-                    onMouseLeave={() => setBaseCampDropdownOpen(false)}
-                  >
-                    <Link
-                      to="/wilder-homes"
-                      className="block px-4 py-2 font-sans text-sm text-ink hover:bg-blush/50 hover:text-ember"
-                    >
-                      Wilder Homes
-                    </Link>
-                    <Link
-                      to="/wilder-homes/activities"
-                      className="block px-4 py-2 font-sans text-sm text-ink hover:bg-blush/50 hover:text-ember"
-                    >
-                      Activities
-                    </Link>
-                    <Link
-                      to="/wilder-homes/environment"
-                      className="block px-4 py-2 font-sans text-sm text-ink hover:bg-blush/50 hover:text-ember"
-                    >
-                      Environment
-                    </Link>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
+            <Link
+              to="/wilder-homes"
+              className="font-sans font-medium text-sm uppercase tracking-[0.08em] text-ink hover:text-ember transition-colors"
+            >
+              Wilder Homes
+            </Link>
 
             {/* Wilder Philosophy */}
             <Link
