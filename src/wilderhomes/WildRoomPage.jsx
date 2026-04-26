@@ -1,6 +1,6 @@
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 const rooms = [
   {
@@ -10,7 +10,9 @@ const rooms = [
     title: 'The Mud Room',
     subtitle: 'where hands learn to think',
     description: 'A dedicated space for mess, mixing, pouring, and sensory immersion. The noisiest room. The most important one.',
-    principle: 'Mess needs a container. Not to limit it - to liberate it.',
+    principle: 'Mess needs a container. Not to limit it - to liberate it. When children know exactly where mess is permitted, they go deeper into it.',
+    spaces: ['indoor', 'outdoor'],
+    icon: '🤲',
     color: '#8C4A14',
     accentColor: '#F0D2B4',
   },
@@ -20,8 +22,10 @@ const rooms = [
     tagline: 'Patient - Living - Seasonal',
     title: 'The Grow Room',
     subtitle: 'where children learn to wait',
-    description: 'A space dedicated to growing things. Where the timeline is set by nature, not by a child.',
-    principle: 'The timeline belongs to the plant, not the child.',
+    description: 'A space dedicated to growing things. Where the timeline is set by nature, not by a child. The slowest room. One of the most powerful ones.',
+    principle: 'The timeline belongs to the plant, not the child. In a world of instant feedback, a garden is radical.',
+    spaces: ['outdoor', 'indoor'],
+    icon: '🌱',
     color: '#5A6428',
     accentColor: '#C8D890',
   },
@@ -31,8 +35,10 @@ const rooms = [
     tagline: 'Structured - Purposeful - Physical',
     title: 'The Build Room',
     subtitle: 'where agency is born',
-    description: 'A space with materials, tools, and a problem to solve. No instruction manual.',
-    principle: 'Agency is not taught. It is built.',
+    description: 'A space with materials, tools, and a problem to solve. No instruction manual. The most empowering room in the house.',
+    principle: 'Agency is not taught. It is built. Children who are given materials and a problem - and then left alone to solve it - develop a relationship with their own capability.',
+    spaces: ['indoor', 'outdoor'],
+    icon: '🔨',
     color: '#6B3A2A',
     accentColor: '#D4B4A4',
   },
@@ -42,8 +48,10 @@ const rooms = [
     tagline: 'Quiet - Observational - Slow',
     title: 'The Still Room',
     subtitle: 'where children learn to see',
-    description: 'A quiet corner for watching, noticing, drawing, pressing.',
-    principle: 'Stillness is a skill. Design for it.',
+    description: 'A quiet corner for watching, noticing, drawing, pressing. The antidote to overstimulation. The rarest and most needed room.',
+    principle: 'Stillness is a skill. Design for it. We design houses full of stimulation and then wonder why children cannot be still.',
+    spaces: ['indoor', 'outdoor'],
+    icon: '🦋',
     color: '#464F5F',
     accentColor: '#C8D0D8',
   },
@@ -53,54 +61,55 @@ const rooms = [
     tagline: 'Magical - Seasonal - Storytelling',
     title: 'The Wonder Room',
     subtitle: 'where imagination takes root',
-    description: 'The room that changes with the seasons. Where small magic lives.',
-    principle: 'Wonder is a design choice. Make it on purpose.',
+    description: 'The room that changes with the seasons. Where small magic lives - fairy doors, moon gardens, night walks, seasonal altars.',
+    principle: 'Wonder is a design choice. Make it on purpose. Magic does not happen by accident - it is placed there deliberately.',
+    spaces: ['outdoor', 'indoor'],
+    icon: '✨',
     color: '#7A5C14',
     accentColor: '#F0E4A0',
   },
 ]
 
-const builds = {
-  mud: [
-    { tag: 'Ages 0-2', title: 'The mud patch', desc: 'A designated square of bare earth. Watered daily.', cost: 'Free', time: '30 min' },
-    { tag: 'Ages 2-7', title: 'Mud kitchen', desc: 'Pallet frame and a world of imaginary cooking.', cost: '$20-40', time: 'Weekend' },
-  ],
-  grow: [
-    { tag: 'Ages 0-3', title: 'Sensory herb garden', desc: 'Mint, lavender, rosemary - gardening as sensory experience.', cost: '$10-20', time: '1 hour' },
-    { tag: 'Ages 3-7', title: 'First raised bed', desc: 'Cherry tomatoes and snap peas. A bed fully theirs.', cost: '$15-35', time: 'Afternoon' },
-  ],
-  build: [
-    { tag: 'Ages 2-5', title: 'Loose parts yard', desc: 'Logs, planks, bricks. No instructions.', cost: 'Free-$20', time: 'Ongoing' },
-    { tag: 'Ages 4-8', title: 'Wild fort', desc: 'Sticks, twine, living walls.', cost: '$0-25', time: 'Half day' },
-  ],
-  still: [
-    { tag: 'Ages 1-8', title: 'Observation nook', desc: 'A sheltered corner with a sightline to something living.', cost: '$0-15', time: '1 hour' },
-    { tag: 'Ages 3-10', title: 'Pressing station', desc: 'A flat stone, heavy books, collected specimens.', cost: 'Free', time: 'Ongoing' },
-  ],
-  wonder: [
-    { tag: 'Ages 1-6', title: 'Fairy garden', desc: 'A miniature world in a corner of the garden.', cost: '$5-20', time: 'Afternoon' },
-    { tag: 'Ages 4-12', title: 'Moon garden', desc: 'White flowers, silver leaves - for dusk and moonlight.', cost: '$10-25', time: 'Weekend' },
-  ],
-}
+const spaceTypes = [
+  { id: 'all', label: 'All Spaces', icon: '🏠' },
+  { id: 'indoor', label: 'Indoors', icon: '🏠' },
+  { id: 'outdoor', label: 'Outdoors', icon: '🌳' },
+]
 
 export default function WildRoomPage() {
-  const [activeRoom, setActiveRoom] = useState('mud')
-  const [expandedBuild, setExpandedBuild] = useState(null)
+  const [activeSpace, setActiveSpace] = useState('all')
+  const [savedRooms, setSavedRooms] = useState([])
+  const [showPlanner, setShowPlanner] = useState(false)
+  const [showSuccess, setShowSuccess] = useState(false)
 
-  const room = rooms.find(r => r.id === activeRoom)
-  const roomIndex = rooms.findIndex(r => r.id === activeRoom)
-  const roomBuilds = builds[activeRoom] || []
+  // Load saved rooms from localStorage
+  useEffect(() => {
+    const saved = localStorage.getItem('wilder_wild_room_plan')
+    if (saved) {
+      setSavedRooms(JSON.parse(saved))
+    }
+  }, [])
 
-  const prevRoom = () => {
-    const idx = roomIndex - 1
-    setActiveRoom(idx >= 0 ? rooms[idx].id : rooms[rooms.length - 1].id)
-    setExpandedBuild(null)
+  // Save to localStorage
+  const saveRooms = (rooms) => {
+    localStorage.setItem('wilder_wild_room_plan', JSON.stringify(rooms))
+    setSavedRooms(rooms)
   }
 
-  const nextRoom = () => {
-    const idx = roomIndex + 1
-    setActiveRoom(idx < rooms.length ? rooms[idx].id : rooms[0].id)
-    setExpandedBuild(null)
+  const toggleRoom = (roomId) => {
+    const newRooms = savedRooms.includes(roomId)
+      ? savedRooms.filter(id => id !== roomId)
+      : [...savedRooms, roomId]
+    saveRooms(newRooms)
+  }
+
+  const filteredRooms = activeSpace === 'all' 
+    ? rooms 
+    : rooms.filter(r => r.space?.includes(activeSpace) || r.spaces?.includes(activeSpace))
+
+  const getSpaceLabel = (room) => {
+    if (!room.spaces || room.spaces.length === 2) return 'Indoor & Outdoor'
+    return room.spaces[0] === 'indoor' ? 'Indoor only' : 'Outdoor only'
   }
 
   return (
@@ -120,102 +129,183 @@ export default function WildRoomPage() {
           <h1 className="font-serif text-4xl md:text-5xl text-ink mb-3">The Wild Room</h1>
           <p className="text-inkl text-lg max-w-xl mx-auto">
             Every home needs a Wild Room. Not a room - a design intention. 
-            Choose a room, pick your builds, get the blueprint.
+            Plan your spaces and bring nature home.
           </p>
         </motion.header>
 
-        {/* Room Tabs */}
-        <div className="flex gap-2 mb-6 overflow-x-auto pb-2">
-          {rooms.map(r => (
+        {/* Saved Rooms Banner */}
+        {savedRooms.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-6"
+          >
             <button
-              key={r.id}
-              onClick={() => { setActiveRoom(r.id); setExpandedBuild(null); }}
-              className="flex-shrink-0 px-4 py-2 rounded-full text-xs font-medium transition-all border"
+              onClick={() => setShowPlanner(!showPlanner)}
+              className="w-full p-4 rounded-2xl border-2 transition-all flex items-center justify-between"
+              style={{ borderColor: '#8C1E00', backgroundColor: showPlanner ? '#8C1E00' : 'white' }}
+            >
+              <div className="flex items-center gap-3">
+                <span className="text-2xl">📋</span>
+                <div className="text-left">
+                  <p className="font-serif text-lg" style={{ color: showPlanner ? 'white' : '#3C1E00' }}>
+                    Your Wild Room Plan
+                  </p>
+                  <p className="text-sm" style={{ color: showPlanner ? 'rgba(255,255,255,0.7)' : '#783C1E' }}>
+                    {savedRooms.length} {savedRooms.length === 1 ? 'room' : 'rooms'} selected
+                  </p>
+                </div>
+              </div>
+              <span className="text-sm font-medium" style={{ color: showPlanner ? 'white' : '#8C1E00' }}>
+                {showPlanner ? 'Hide' : 'View'} Plan
+              </span>
+            </button>
+
+            <AnimatePresence>
+              {showPlanner && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                  className="overflow-hidden"
+                >
+                  <div className="p-4 bg-white rounded-b-2xl border-2 border-t-0"
+                    style={{ borderColor: '#8C1E00' }}>
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {savedRooms.map(roomId => {
+                        const room = rooms.find(r => r.id === roomId)
+                        return (
+                          <div
+                            key={roomId}
+                            className="flex items-center gap-2 px-3 py-2 rounded-full text-white text-sm"
+                            style={{ backgroundColor: room.color }}
+                          >
+                            <span>{room.icon}</span>
+                            <span>{room.label.replace('The ', '')}</span>
+                            <button
+                              onClick={() => toggleRoom(roomId)}
+                              className="ml-1 opacity-70 hover:opacity-100"
+                            >
+                              x
+                            </button>
+                          </div>
+                        )
+                      })}
+                    </div>
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => {
+                          localStorage.removeItem('wilder_wild_room_plan')
+                          setSavedRooms([])
+                          setShowPlanner(false)
+                        }}
+                        className="px-4 py-2 text-sm text-inkl hover:text-ember"
+                      >
+                        Clear All
+                      </button>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
+        )}
+
+        {/* Space Filter */}
+        <div className="flex gap-2 mb-6">
+          {spaceTypes.map(space => (
+            <button
+              key={space.id}
+              onClick={() => setActiveSpace(space.id)}
+              className="flex-1 px-4 py-3 rounded-xl border-2 transition-all flex items-center justify-center gap-2"
               style={{
-                backgroundColor: activeRoom === r.id ? r.color : 'transparent',
-                color: activeRoom === r.id ? 'white' : '#783C1E',
-                borderColor: activeRoom === r.id ? r.color : '#D2B496',
+                borderColor: activeSpace === space.id ? '#8C1E00' : '#D2B496',
+                backgroundColor: activeSpace === space.id ? '#8C1E00' : 'white',
+                color: activeSpace === space.id ? 'white' : '#783C1E',
               }}
             >
-              {r.label.replace('The ', '')}
+              <span>{space.icon}</span>
+              <span className="text-sm font-medium">{space.label}</span>
             </button>
           ))}
         </div>
 
-        {/* Room Panel */}
-        {room && (
-          <motion.div
-            key={room.id}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-          >
-            {/* Hero */}
-            <div className="rounded-t-2xl p-6 text-white" style={{ backgroundColor: room.color }}>
-              <p className="text-xs font-medium uppercase tracking-widest mb-2 opacity-70">{room.tagline}</p>
-              <h2 className="font-serif text-2xl mb-1">
-                {room.title}<br />
-                <span className="opacity-80 italic">"{room.subtitle}"</span>
-              </h2>
-              <p className="text-sm opacity-70 mb-4">{room.description}</p>
-              <div className="p-3 rounded-lg" style={{ backgroundColor: 'rgba(0,0,0,0.2)' }}>
-                <p className="text-[10px] font-medium uppercase tracking-wider opacity-50 mb-1">Architect's principle</p>
-                <p className="font-serif text-sm italic opacity-90 leading-relaxed">"{room.principle}"</p>
-              </div>
-            </div>
-
-            {/* Body */}
-            <div className="bg-white rounded-b-2xl p-4 border border-inkll/10 border-t-0">
-              {/* Builds */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
-                {roomBuilds.map((build, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => setExpandedBuild(expandedBuild === idx ? null : idx)}
-                    className="w-full text-left p-3 rounded-lg border transition-all"
-                    style={{
-                      backgroundColor: expandedBuild === idx ? '#FAF6EE' : '#FAF6EE50',
-                      borderColor: expandedBuild === idx ? '#8C1E00' : '#D2B496',
-                    }}
-                  >
-                    <p className="text-[10px] font-medium uppercase tracking-wider text-ember mb-1">{build.tag}</p>
-                    <h4 className="font-sans font-medium text-ink text-sm mb-1">{build.title}</h4>
-                    <p className="text-xs text-inkl leading-relaxed mb-2">{build.desc}</p>
-                    <div className="flex gap-2">
-                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-blush/50 text-ember">{build.cost}</span>
-                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-blush/50 text-ember">{build.time}</span>
+        {/* Room Cards */}
+        <div className="space-y-4">
+          {filteredRooms.map(room => {
+            const isSaved = savedRooms.includes(room.id)
+            return (
+              <motion.div
+                key={room.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="rounded-2xl overflow-hidden"
+                style={{ border: isSaved ? '3px solid' + room.color : '2px solid #D2B496' }}
+              >
+                <div 
+                  className="p-6 text-white relative"
+                  style={{ backgroundColor: room.color }}
+                >
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="text-2xl">{room.icon}</span>
+                        <span className="text-xs font-medium uppercase tracking-wider opacity-70">{room.tagline}</span>
+                      </div>
+                      <h2 className="font-serif text-2xl mb-1">
+                        {room.title}
+                        <br />
+                        <span className="italic opacity-80">"{room.subtitle}"</span>
+                      </h2>
+                      <p className="text-sm opacity-70 mt-2">{room.description}</p>
                     </div>
-                  </button>
-                ))}
-              </div>
-
-              {/* Design Principle */}
-              <div className="p-4 border border-inkll/10 rounded-lg mb-4">
-                <p className="text-[10px] font-medium uppercase tracking-wider text-inkl mb-2">
-                  The {room.label} design principle
-                </p>
-                <h4 className="font-serif text-base text-ink mb-2 italic">"{room.principle}"</h4>
-              </div>
-
-              {/* Navigation */}
-              <div className="flex items-center justify-between pt-4 border-t border-inkll/10">
-                <span className="text-xs text-inkl">
-                  {roomIndex > 0 && (
-                    <button onClick={prevRoom} className="text-ember font-medium ml-1">
-                      &larr; {rooms[roomIndex - 1].label.replace('The ', '')}
+                    <button
+                      onClick={() => toggleRoom(room.id)}
+                      className="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center transition-all"
+                      style={{ 
+                        backgroundColor: isSaved ? 'rgba(255,255,255,0.3)' : 'rgba(255,255,255,0.1)',
+                        border: '2px solid rgba(255,255,255,0.5)'
+                      }}
+                    >
+                      {isSaved ? (
+                        <svg className="w-6 h-6" fill="white" viewBox="0 0 24 24">
+                          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                        </svg>
+                      ) : (
+                        <svg className="w-6 h-6" fill="none" stroke="white" viewBox="0 0 24 24" strokeWidth={2}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+                        </svg>
+                      )}
                     </button>
-                  )}
-                </span>
-                <span className="text-xs text-inkl">Room {roomIndex + 1} of 5</span>
-                <span className="text-xs text-inkl">
-                  {roomIndex < rooms.length - 1 && (
-                    <button onClick={nextRoom} className="text-ember font-medium">
-                      {rooms[roomIndex + 1].label.replace('The ', '')} &rarr;
-                    </button>
-                  )}
-                </span>
-              </div>
-            </div>
-          </motion.div>
+                  </div>
+                  
+                  {/* Space indicator */}
+                  <div className="mt-4 flex items-center gap-2">
+                    <span className="text-xs px-2 py-1 rounded bg-white/20">
+                      {getSpaceLabel(room)}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="p-4 bg-white">
+                  <div className="p-3 rounded-lg" style={{ backgroundColor: '#F0F0D2' }}>
+                    <p className="text-[10px] font-medium uppercase tracking-wider mb-1" style={{ color: '#5A6428' }}>
+                      Architect's Principle
+                    </p>
+                    <p className="text-sm italic leading-relaxed" style={{ color: '#3C3800' }}>
+                      "{room.principle}"
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            )
+          })}
+        </div>
+
+        {filteredRooms.length === 0 && (
+          <div className="text-center py-12">
+            <p className="text-inkl">No rooms match this filter. Try "All Spaces".</p>
+          </div>
         )}
       </div>
     </div>
