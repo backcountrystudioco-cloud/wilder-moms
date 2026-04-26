@@ -27,10 +27,10 @@ export default function EcoProductsInterestPage() {
           {!submitted ? (
             <>
               <h1 className="font-serif text-3xl md:text-4xl text-ink mb-4">
-                Eco-Friendly Products
+                GreenHome Guide
               </h1>
               <p className="font-sans text-inkl text-lg mb-6">
-                We're building a curated guide to non-toxic, eco-friendly products for families — from nursery paints to playroom furniture.
+                We're building a curated guide to sustainable, non-toxic materials for your family projects — from outdoor builds to play spaces.
               </p>
               <p className="font-sans text-inkl mb-8">
                 Would you be interested in this feature when it's ready?

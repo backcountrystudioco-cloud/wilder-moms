@@ -69,7 +69,7 @@ export default function MissionPage() {
             alt="Wilder Moms"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-ink/60 via-ink/40 to-cream" />
+          <div className="absolute inset-0 bg-gradient-to-b from-ink/30 via-ink/20 to-cream" />
         </div>
 
         {/* Content */}
