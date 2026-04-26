@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 
@@ -125,13 +125,17 @@ export default function WildRoomPage() {
   useEffect(() => {
     const saved = localStorage.getItem('wilder_wild_room_plan')
     if (saved) {
-      setSavedRooms(JSON.parse(saved))
+      try {
+        setSavedRooms(JSON.parse(saved))
+      } catch (e) {
+        console.error('Failed to parse saved rooms')
+      }
     }
   }, [])
 
-  const saveRooms = (rooms) => {
-    localStorage.setItem('wilder_wild_room_plan', JSON.stringify(rooms))
-    setSavedRooms(rooms)
+  const saveRooms = (roomsToSave) => {
+    localStorage.setItem('wilder_wild_room_plan', JSON.stringify(roomsToSave))
+    setSavedRooms(roomsToSave)
   }
 
   const toggleRoom = (roomId) => {
@@ -141,7 +145,8 @@ export default function WildRoomPage() {
     saveRooms(newRooms)
   }
 
-  const toggleExpand = (roomId) => {
+  const toggleExpand = (roomId, e) => {
+    e.stopPropagation()
     setExpandedRoom(expandedRoom === roomId ? null : roomId)
   }
 
@@ -210,51 +215,42 @@ export default function WildRoomPage() {
               </span>
             </button>
 
-            <AnimatePresence>
-              {showPlanner && (
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: 'auto' }}
-                  exit={{ opacity: 0, height: 0 }}
-                  className="overflow-hidden"
+            {showPlanner && (
+              <div className="p-4 bg-white rounded-b-2xl border-2 border-t-0 border-ember">
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {savedRooms.map(roomId => {
+                    const room = rooms.find(r => r.id === roomId)
+                    return (
+                      <div
+                        key={roomId}
+                        className="flex items-center gap-2 px-3 py-2 rounded-full text-white text-sm"
+                        style={{ backgroundColor: room.color }}
+                      >
+                        <span className="font-serif italic">{room.label}</span>
+                        <button
+                          onClick={() => toggleRoom(roomId)}
+                          className="ml-1 opacity-70 hover:opacity-100"
+                        >
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                          </svg>
+                        </button>
+                      </div>
+                    )
+                  })}
+                </div>
+                <button
+                  onClick={() => {
+                    localStorage.removeItem('wilder_wild_room_plan')
+                    setSavedRooms([])
+                    setShowPlanner(false)
+                  }}
+                  className="px-4 py-2 text-sm text-inkl hover:text-ember"
                 >
-                  <div className="p-4 bg-white rounded-b-2xl border-2 border-t-0 border-ember">
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {savedRooms.map(roomId => {
-                        const room = rooms.find(r => r.id === roomId)
-                        return (
-                          <div
-                            key={roomId}
-                            className="flex items-center gap-2 px-3 py-2 rounded-full text-white text-sm"
-                            style={{ backgroundColor: room.color }}
-                          >
-                            <span className="font-serif italic">{room.label}</span>
-                            <button
-                              onClick={() => toggleRoom(roomId)}
-                              className="ml-1 opacity-70 hover:opacity-100"
-                            >
-                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                              </svg>
-                            </button>
-                          </div>
-                        )
-                      })}
-                    </div>
-                    <button
-                      onClick={() => {
-                        localStorage.removeItem('wilder_wild_room_plan')
-                        setSavedRooms([])
-                        setShowPlanner(false)
-                      }}
-                      className="px-4 py-2 text-sm text-inkl hover:text-ember"
-                    >
-                      Clear All
-                    </button>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+                  Clear All
+                </button>
+              </div>
+            )}
           </motion.div>
         )}
 
@@ -290,12 +286,11 @@ export default function WildRoomPage() {
                 className="rounded-2xl overflow-hidden"
                 style={{ 
                   border: isSaved ? '3px solid ' + room.color : '2px solid #D2B496',
-                  boxShadow: isExpanded ? '0 8px 30px rgba(0,0,0,0.1)' : 'none'
                 }}
               >
                 {/* Header - Clickable */}
                 <button
-                  onClick={toggleExpand}
+                  onClick={(e) => toggleExpand(room.id, e)}
                   className="w-full p-6 text-left"
                   style={{ backgroundColor: room.color }}
                 >
@@ -312,7 +307,7 @@ export default function WildRoomPage() {
                     </div>
                     <div className="flex flex-col items-end gap-3">
                       <svg 
-                        className={`w-6 h-6 text-white transition-transform ${isExpanded ? 'rotate-180' : ''}`}
+                        className={`w-6 h-6 text-white transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`}
                         fill="none" 
                         stroke="currentColor" 
                         viewBox="0 0 24 24"
@@ -339,93 +334,86 @@ export default function WildRoomPage() {
                 </button>
 
                 {/* Expanded Content */}
-                <AnimatePresence>
-                  {isExpanded && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      className="bg-white"
-                    >
-                      <div className="p-6 border-t border-inkll/10">
-                        {/* Architect's Principle */}
-                        <div className="p-4 rounded-xl mb-6" style={{ backgroundColor: '#F0F0D2' }}>
-                          <p className="text-xs font-medium uppercase tracking-wider mb-2" style={{ color: '#5A6428' }}>
-                            Architect's Principle
-                          </p>
-                          <p className="text-base italic leading-relaxed" style={{ color: '#3C3800' }}>
-                            "{room.principle}"
-                          </p>
-                        </div>
+                {isExpanded && (
+                  <div className="bg-white">
+                    <div className="p-6 border-t border-inkll/10">
+                      {/* Architect's Principle */}
+                      <div className="p-4 rounded-xl mb-6" style={{ backgroundColor: '#F0F0D2' }}>
+                        <p className="text-xs font-medium uppercase tracking-wider mb-2" style={{ color: '#5A6428' }}>
+                          Architect's Principle
+                        </p>
+                        <p className="text-base italic leading-relaxed" style={{ color: '#3C3800' }}>
+                          "{room.principle}"
+                        </p>
+                      </div>
 
-                        {/* Examples */}
-                        <div className="mb-6">
-                          <h3 className="font-serif text-lg text-ink mb-4">How it looks in your space</h3>
-                          <div className="grid md:grid-cols-2 gap-4">
-                            {room.examples.indoor && (
-                              <div className="p-4 rounded-xl" style={{ backgroundColor: '#FAF6EE' }}>
-                                <div className="flex items-center gap-2 mb-2">
-                                  <svg className="w-5 h-5 text-olive" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 001 1v4a1 1 0 001 1m-6 0h6" />
-                                  </svg>
-                                  <span className="text-sm font-medium text-ink">Indoors</span>
-                                </div>
-                                <p className="text-sm text-inkl">{room.examples.indoor}</p>
+                      {/* Examples */}
+                      <div className="mb-6">
+                        <h3 className="font-serif text-lg text-ink mb-4">How it looks in your space</h3>
+                        <div className="grid md:grid-cols-2 gap-4">
+                          {room.examples.indoor && (
+                            <div className="p-4 rounded-xl" style={{ backgroundColor: '#FAF6EE' }}>
+                              <div className="flex items-center gap-2 mb-2">
+                                <svg className="w-5 h-5 text-olive" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 001 1v4a1 1 0 001 1m-6 0h6" />
+                                </svg>
+                                <span className="text-sm font-medium text-ink">Indoors</span>
                               </div>
-                            )}
-                            {room.examples.outdoor && (
-                              <div className="p-4 rounded-xl" style={{ backgroundColor: '#FAF6EE' }}>
-                                <div className="flex items-center gap-2 mb-2">
-                                  <svg className="w-5 h-5 text-olive" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-                                  </svg>
-                                  <span className="text-sm font-medium text-ink">Outdoors</span>
-                                </div>
-                                <p className="text-sm text-inkl">{room.examples.outdoor}</p>
+                              <p className="text-sm text-inkl">{room.examples.indoor}</p>
+                            </div>
+                          )}
+                          {room.examples.outdoor && (
+                            <div className="p-4 rounded-xl" style={{ backgroundColor: '#FAF6EE' }}>
+                              <div className="flex items-center gap-2 mb-2">
+                                <svg className="w-5 h-5 text-olive" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                                </svg>
+                                <span className="text-sm font-medium text-ink">Outdoors</span>
                               </div>
-                            )}
-                          </div>
-                        </div>
-
-                        {/* Tips */}
-                        <div className="mb-6">
-                          <h3 className="font-serif text-lg text-ink mb-3">Where to start</h3>
-                          <ul className="space-y-2">
-                            {room.tips.map((tip, i) => (
-                              <li key={i} className="flex items-start gap-3 text-sm text-inkl">
-                                <span className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style={{ backgroundColor: room.accentColor }}>
-                                  <span style={{ color: room.color }}>{i + 1}</span>
-                                </span>
-                                {tip}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-
-                        {/* Actions */}
-                        <div className="flex gap-3 pt-4 border-t border-inkll/10">
-                          <button
-                            onClick={() => toggleRoom(room.id)}
-                            className="flex-1 py-3 px-4 rounded-full font-medium text-sm transition-all"
-                            style={{
-                              backgroundColor: isSaved ? 'transparent' : room.color,
-                              color: isSaved ? room.color : 'white',
-                              border: `2px solid ${room.color}`,
-                            }}
-                          >
-                            {isSaved ? 'Remove from Plan' : 'Add to Plan'}
-                          </button>
-                          <Link
-                            to="/wilder-homes/activities"
-                            className="flex-1 py-3 px-4 rounded-full font-medium text-sm text-center bg-cream text-ink hover:bg-blush/50 transition-colors"
-                          >
-                            View Build Guides
-                          </Link>
+                              <p className="text-sm text-inkl">{room.examples.outdoor}</p>
+                            </div>
+                          )}
                         </div>
                       </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+
+                      {/* Tips */}
+                      <div className="mb-6">
+                        <h3 className="font-serif text-lg text-ink mb-3">Where to start</h3>
+                        <ul className="space-y-2">
+                          {room.tips.map((tip, i) => (
+                            <li key={i} className="flex items-start gap-3 text-sm text-inkl">
+                              <span className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style={{ backgroundColor: room.accentColor }}>
+                                <span style={{ color: room.color }}>{i + 1}</span>
+                              </span>
+                              {tip}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      {/* Actions */}
+                      <div className="flex gap-3 pt-4 border-t border-inkll/10">
+                        <button
+                          onClick={() => toggleRoom(room.id)}
+                          className="flex-1 py-3 px-4 rounded-full font-medium text-sm transition-all"
+                          style={{
+                            backgroundColor: isSaved ? 'transparent' : room.color,
+                            color: isSaved ? room.color : 'white',
+                            border: `2px solid ${room.color}`,
+                          }}
+                        >
+                          {isSaved ? 'Remove from Plan' : 'Add to Plan'}
+                        </button>
+                        <Link
+                          to="/wilder-homes/activities"
+                          className="flex-1 py-3 px-4 rounded-full font-medium text-sm text-center bg-cream text-ink hover:bg-blush/50 transition-colors"
+                        >
+                          View Build Guides
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </motion.div>
             )
           })}
