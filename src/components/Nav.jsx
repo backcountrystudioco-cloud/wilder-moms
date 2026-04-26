@@ -38,7 +38,7 @@ export default function Nav() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
       className={`
-        fixed top-0 left-0 right-0 z-50
+        fixed top-0 left-0 right-0 z-[60]
         backdrop-blur-md bg-cream/88
         transition-all duration-300
         ${scrolled ? 'border-b border-inkll/30' : 'border-b border-transparent'}

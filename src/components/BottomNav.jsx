@@ -11,20 +11,11 @@ const tabs = [
     )
   },
   {
-    path: '/basecamp',
-    label: 'Base Camp',
+    path: '/wilder-homes',
+    label: 'Homes',
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M11.42 15.17 17.25 21A2.652 2.652 0 0 0 21 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 1 1-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 0 0 4.486.06l3.76-5.814-1.814-1.614M16.5 9a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
-      </svg>
-    )
-  },
-  {
-    path: '/wilder-philosophy',
-    label: 'Wilder Philosophy',
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.98 14.98 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.5-2.202m-8.25.144c.984 0 1.5.839 1.5 2.202v.192M6 18a2 2 0 100-4 2 2 0 000 4z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12l8.25-8.25L21 12M3 18h18M6.75 21h12a.75.75 0 010 1.5H5.25a.75.75 0 01-.75-.75v-4.5a.75.75 0 01.75-.75h4.5a.75.75 0 01.75.75v4.5a.75.75 0 001.5 0z" />
       </svg>
     )
   }
