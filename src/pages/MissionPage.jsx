@@ -1,86 +1,76 @@
 import { motion } from 'framer-motion'
 import { useScrollReveal, fadeUpVariants } from '../hooks/useScrollReveal'
+import { Link } from 'react-router-dom'
 
 const paragraphs = [
   {
-    text: "Somewhere along the way, motherhood got boxed in — by schedules, by screens, by the quiet weight of doing everything alone. The village disappeared. The days filled up. The wild got pushed further and further away.",
+    text: "Somewhere along the way, motherhood got boxed in — by schedules, by screens, by the quiet weight of doing everything alone. The wild got pushed further and further away.",
     highlight: false
   },
   {
-    text: "We're building it back.",
+    text: "We built Wilder Moms to get it back.",
     highlight: true
   }
 ]
 
 const sections = [
   {
-    title: "For the mother who wants more than survival mode.",
-    body: "More than another list, another app, another thing to manage. You don't need more pressure to \"get outside.\" You need a life that makes it natural.",
-    emphasis: "So we start at home."
-  },
-  {
-    title: "We build spaces where nature lives —",
-    body: "not just on weekends, but in the everyday. On the windowsill, where flowers you pressed together catch the light. In the backyard, where mud kitchens and wild forts become entire worlds. At the kitchen table, where pinecones, paint, and quiet moments turn into something that stays.",
-    emphasis: "Because when nature is part of your home, it stops being something you have to chase."
-  },
-  {
-    title: "And when you are ready to step outside —",
-    body: "you don't do it alone.",
-    emphasis: "We bring back the village."
-  },
-  {
-    title: "Real mothers, nearby.",
-    body: "The kind who will meet you at the trailhead, hold the baby, and not think twice about the mess, the snacks, or the chaos. The kind who show up.",
-    emphasis: "We make getting out simple."
+    title: "Getting outside isn't optional. It's how we survive.",
+    body: "Nature isn't a reward for good parenting. It's a requirement. We believe in muddy boots, cold hands, and the kind of tired that comes from actually living.",
+    emphasis: "So we start by making it easier."
   },
   {
     title: "The right trail, for your real life.",
-    body: "The plan already thought through. The bag already packed — at least in your head.",
-    emphasis: "So you can go."
+    body: "Not another generic list of 'family-friendly trails.' You need the right trail for your specific kids, today, with a double stroller and a four-year-old who loses it after 45 minutes. Every suggestion is built around your real life.",
+    emphasis: "Wilder Trails finds your perfect match."
   },
   {
-    title: "And when you can't —",
-    body: "you're still living it.",
-    emphasis: "This is a different kind of motherhood."
+    title: "And when you can't get outside —",
+    body: "you're still living it. At home. In your backyard, your kitchen, your living room floor. Nature isn't just out there — it's something you can bring inside.",
+    emphasis: "Wilder Homes brings nature home."
+  },
+  {
+    title: "This is Wilder Moms.",
+    body: "Trails for every kind of day. Builds for every kind of weather. A philosophy that says: the wild isn't a destination. It's a way of life.",
+    emphasis: "Welcome home."
   }
 ]
 
-const closingPoints = [
-  "One that feels less isolated.",
-  "More grounded.",
-  "A little slower.",
-  "A little wilder."
+const pillars = [
+  {
+    name: 'Wilder Trails',
+    path: '/wilder-trails/location',
+    description: 'Find the perfect trail for your family today'
+  },
+  {
+    name: 'Wilder Homes',
+    path: '/wilder-homes',
+    description: 'Bring nature home with builds and crafts'
+  },
+  {
+    name: 'Wilder Philosophy',
+    path: '/wilder-philosophy',
+    description: 'A different way of thinking about motherhood'
+  }
 ]
 
 export default function MissionPage() {
   const [introRef, introVisible] = useScrollReveal()
-  const [imageRef, imageVisible] = useScrollReveal()
+  const [pillarsRef, pillarsVisible] = useScrollReveal()
   const [sectionsRef, sectionsVisible] = useScrollReveal()
-  const [closingRef, closingVisible] = useScrollReveal()
 
   return (
     <div className="bg-cream">
-      {/* Hero Section */}
-      <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0">
-          <img
-            src="/images/Mission.png"
-            alt="Wilder Moms"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-ink/30 via-ink/20 to-cream" />
-        </div>
-
-        {/* Content */}
-        <div className="relative z-10 text-center px-6 pt-20 pb-32 max-w-4xl mx-auto">
+      {/* Hero Section - No Image */}
+      <section className="pt-28 pb-20 px-6 bg-cream">
+        <div className="max-w-4xl mx-auto text-center">
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="font-serif text-4xl md:text-5xl lg:text-6xl text-white leading-tight mb-8"
+            className="font-serif text-4xl md:text-5xl lg:text-6xl text-ink leading-tight mb-8"
           >
-            WILDER MOMS — A MOVEMENT
+            Wilder Philosophy
           </motion.h1>
           
           <motion.div
@@ -89,12 +79,51 @@ export default function MissionPage() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="space-y-4"
           >
-            <p className="font-serif text-xl md:text-2xl text-white/90 italic">
+            <p className="font-serif text-xl md:text-2xl text-inkl italic">
               This isn't about getting outside more.
             </p>
-            <p className="font-serif text-xl md:text-2xl text-white/90 italic">
+            <p className="font-serif text-xl md:text-2xl text-ember italic">
               It's about living differently.
             </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Three Pillars */}
+      <section className="py-16 px-6 bg-white">
+        <div className="max-w-4xl mx-auto">
+          <motion.div
+            ref={pillarsRef}
+            variants={fadeUpVariants}
+            initial="hidden"
+            animate={pillarsVisible ? 'visible' : 'hidden'}
+            className="grid md:grid-cols-3 gap-6"
+          >
+            {pillars.map((pillar, index) => (
+              <motion.div
+                key={pillar.name}
+                variants={fadeUpVariants}
+                custom={index}
+              >
+                <Link
+                  to={pillar.path}
+                  className="block bg-cream rounded-2xl p-6 border border-inkll/10 hover:border-ember hover:shadow-lg transition-all group"
+                >
+                  <h3 className="font-serif text-xl text-ink mb-2 group-hover:text-ember transition-colors">
+                    {pillar.name}
+                  </h3>
+                  <p className="text-inkl text-sm leading-relaxed">
+                    {pillar.description}
+                  </p>
+                  <span className="inline-flex items-center gap-1 mt-4 text-ember text-sm font-medium">
+                    Explore
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </span>
+                </Link>
+              </motion.div>
+            ))}
           </motion.div>
         </div>
       </section>
@@ -117,31 +146,6 @@ export default function MissionPage() {
             </p>
           </motion.div>
         </div>
-      </section>
-
-      {/* Image with Quote */}
-      <section className="py-16 px-6 bg-cream">
-        <motion.div
-          ref={imageRef}
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={imageVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
-          transition={{ duration: 0.8 }}
-          className="max-w-4xl mx-auto"
-        >
-          <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-ember/20">
-            <img
-              src="/images/Mission.png"
-              alt="Wilder Moms"
-              className="w-full h-[400px] md:h-[500px] object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12">
-              <p className="font-serif text-2xl md:text-3xl text-white italic leading-relaxed">
-                "When nature is part of your home, it stops being something you have to chase."
-              </p>
-            </div>
-          </div>
-        </motion.div>
       </section>
 
       {/* Content Sections */}
@@ -180,49 +184,27 @@ export default function MissionPage() {
         </div>
       </section>
 
-      {/* The Closing */}
+      {/* Call to Action */}
       <section className="py-24 px-6 bg-ink text-white">
         <div className="max-w-3xl mx-auto text-center">
-          <motion.div
-            ref={closingRef}
-            variants={fadeUpVariants}
-            initial="hidden"
-            animate={closingVisible ? 'visible' : 'hidden'}
-            className="space-y-8"
-          >
-            <p className="text-lg text-white/70 leading-relaxed">
-              Not perfect. Not curated. Not performative.
-            </p>
-            
-            <p className="text-lg text-white/70 leading-relaxed">
-              Just real life, lived closer to what matters.
-            </p>
-
-            <div className="pt-8 space-y-2">
-              <p className="font-serif text-3xl md:text-4xl text-blush italic">
-                This is Wilder Moms.
-              </p>
-              <p className="font-serif text-xl md:text-2xl text-white/80">
-                Build the wild life — at home, and beyond it.
-              </p>
-            </div>
-
-            {/* Closing Points */}
-            <div className="pt-12 grid grid-cols-2 md:grid-cols-4 gap-6">
-              {closingPoints.map((point, index) => (
-                <motion.div
-                  key={index}
-                  variants={fadeUpVariants}
-                  custom={index}
-                  className="text-center"
-                >
-                  <p className="text-lg text-white/90 font-medium">
-                    {point}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
+          <p className="font-serif text-3xl md:text-4xl text-white italic mb-6">
+            Build the wild life — at home, and beyond it.
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link
+              to="/wilder-trails/location"
+              className="px-8 py-4 bg-ember text-white font-sans font-medium rounded-full hover:bg-terra transition-colors"
+            >
+              Find Your Trail
+            </Link>
+            <Link
+              to="/wilder-homes"
+              className="px-8 py-4 bg-white/10 text-white font-sans font-medium rounded-full hover:bg-white/20 transition-colors"
+            >
+              Explore Wilder Homes
+            </Link>
+          </div>
         </div>
       </section>
     </div>
