@@ -62,7 +62,7 @@ export default function HomePage() {
             className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40"
           >
             <Link
-              to="/basecamp"
+              to="/wilder-trails/location"
               className="flex items-center gap-3 bg-ember text-white px-6 py-3 rounded-full shadow-lg shadow-ember/30 hover:bg-terra transition-colors"
             >
               <span className="font-sans font-medium">Start Exploring</span>

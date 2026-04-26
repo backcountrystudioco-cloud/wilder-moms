@@ -15,7 +15,7 @@ export default function Footer() {
           {/* Center: Links */}
           <nav className="flex items-center gap-8">
             <Link 
-              to="/wilder-trails"
+              to="/wilder-trails/location"
               className="text-white/30 hover:text-gold transition-colors font-sans text-sm"
             >
               Wilder Trails

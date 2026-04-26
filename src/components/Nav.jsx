@@ -59,7 +59,7 @@ export default function Nav() {
           <div className="hidden md:flex items-center gap-8">
             {/* Wilder Trails - Explore */}
             <Link
-              to="/wilder-trails"
+              to="/wilder-trails/location"
               className="font-sans font-medium text-sm uppercase tracking-[0.08em] text-ink hover:text-ember transition-colors"
             >
               Wilder Trails
@@ -71,7 +71,7 @@ export default function Nav() {
                 className="font-sans font-medium text-sm uppercase tracking-[0.08em] text-ink hover:text-ember transition-colors inline-flex items-center gap-1"
                 onMouseEnter={() => setBaseCampDropdownOpen(true)}
               >
-                The Base Camp
+                Wilder Homes
                 <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
@@ -82,26 +82,26 @@ export default function Nav() {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
-                    className="absolute top-full left-0 mt-2 w-48 bg-cream shadow-lg rounded-lg border border-inkll/10 py-2"
+                    className="absolute top-full left-0 mt-2 w-48 bg-cream shadow-lg rounded-lg border border-inkll/10 py-2 z-50"
                     onMouseLeave={() => setBaseCampDropdownOpen(false)}
                   >
                     <Link
-                      to="/basecamp"
+                      to="/wilder-homes"
                       className="block px-4 py-2 font-sans text-sm text-ink hover:bg-blush/50 hover:text-ember"
                     >
-                      Builds
+                      Wilder Homes
                     </Link>
                     <Link
-                      to="/basecamp/activities"
+                      to="/wilder-homes/activities"
                       className="block px-4 py-2 font-sans text-sm text-ink hover:bg-blush/50 hover:text-ember"
                     >
                       Activities
                     </Link>
                     <Link
-                      to="/basecamp/eco-products"
+                      to="/wilder-homes/environment"
                       className="block px-4 py-2 font-sans text-sm text-ink hover:bg-blush/50 hover:text-ember"
                     >
-                      Eco
+                      Environment
                     </Link>
                   </motion.div>
                 )}

@@ -2,7 +2,7 @@ import { Link, useLocation } from 'react-router-dom'
 
 const tabs = [
   {
-    path: '/wilder-trails',
+    path: '/wilder-trails/location',
     label: 'Trails',
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
