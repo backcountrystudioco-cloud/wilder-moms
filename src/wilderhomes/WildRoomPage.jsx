@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 
 const rooms = [
@@ -167,15 +166,15 @@ export default function WildRoomPage() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-8"
         >
-          <Link 
-            to="/wilder-homes/environment" 
+          <a 
+            href="/wilder-homes/environment" 
             className="text-ember text-sm font-medium mb-4 inline-flex items-center gap-1 hover:underline"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
             Back to Environment
-          </Link>
+          </a>
           <h1 className="font-serif text-4xl md:text-5xl text-ink mb-3">The Wild Room</h1>
           <p className="text-inkl text-lg max-w-xl mx-auto">
             Every home needs a Wild Room. Not a room - a design intention. 
@@ -391,11 +390,11 @@ export default function WildRoomPage() {
                         </ul>
                       </div>
 
-                      {/* Actions */}
-                      <div className="flex gap-3 pt-4 border-t border-inkll/10">
+                      {/* Action */}
+                      <div className="pt-4 border-t border-inkll/10">
                         <button
                           onClick={() => toggleRoom(room.id)}
-                          className="flex-1 py-3 px-4 rounded-full font-medium text-sm transition-all"
+                          className="w-full py-3 px-4 rounded-full font-medium text-sm transition-all"
                           style={{
                             backgroundColor: isSaved ? 'transparent' : room.color,
                             color: isSaved ? room.color : 'white',
@@ -404,12 +403,6 @@ export default function WildRoomPage() {
                         >
                           {isSaved ? 'Remove from Plan' : 'Add to Plan'}
                         </button>
-                        <Link
-                          to="/wilder-homes/activities"
-                          className="flex-1 py-3 px-4 rounded-full font-medium text-sm text-center bg-cream text-ink hover:bg-blush/50 transition-colors"
-                        >
-                          View Build Guides
-                        </Link>
                       </div>
                     </div>
                   </div>
