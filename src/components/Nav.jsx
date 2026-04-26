@@ -80,14 +80,6 @@ export default function Nav() {
             >
               Wilder Philosophy
             </Link>
-
-            {/* Landing Page Links */}
-            <Link
-              to="/mission"
-              className="font-sans font-medium text-sm uppercase tracking-[0.08em] text-ink hover:text-ember transition-colors"
-            >
-              Our Mission
-            </Link>
           </div>
 
           {/* Auth Buttons */}
@@ -131,22 +123,10 @@ export default function Nav() {
       <div className="md:hidden border-t border-inkll/20 mt-1">
         <div className="flex items-center justify-around px-4 py-1.5">
           <Link
-            to="/habitat"
-            className="flex flex-col items-center gap-0 font-sans font-medium text-xs text-ink hover:text-ember transition-colors"
-          >
-            Habitat
-          </Link>
-          <Link
             to="/wilder-homes"
             className="flex flex-col items-center gap-0 font-sans font-medium text-xs text-ink hover:text-ember transition-colors"
           >
             Homes
-          </Link>
-          <Link
-            to="/village"
-            className="flex flex-col items-center gap-0 font-sans font-medium text-xs text-ink hover:text-ember transition-colors"
-          >
-            Village
           </Link>
         </div>
       </div>
