@@ -76,21 +76,21 @@ function filterAndScoreTrails(trails, context, request = '') {
     let score = 0
     const notes = []
     
-    // CRITICAL: State/region match - heavy weighting
-    if (context.location?.state) {
-      const state = context.location.state.toUpperCase()
-      if (h.state?.toUpperCase() === state) {
-        score += 50
-        notes.push(`In ${h.state}`)
-      }
-    }
-    
-    // City/region match
+    // CRITICAL: City/region match - heaviest weighting
     if (context.location?.city) {
       const loc = context.location.city.toLowerCase()
       if (h.region?.toLowerCase().includes(loc)) {
-        score += 30
+        score += 50
         notes.push(`Near ${context.location.city}`)
+      }
+    }
+    
+    // State match
+    if (context.location?.state) {
+      const state = context.location.state.toUpperCase()
+      if (h.state?.toUpperCase() === state) {
+        score += 30
+        notes.push(`In ${h.state}`)
       }
     }
     
@@ -172,17 +172,17 @@ function filterAndScoreTrails(trails, context, request = '') {
     return { trail: h, score, notes }
   })
   
-  // Sort scored trails - state match first, then city, then by score
+  // Sort scored trails - city match first, then state, then by score
   const sortedTrails = scored.sort((a, b) => {
-    // First: state match (highest priority)
-    const aStateMatch = a.trail.state?.toUpperCase() === context.location?.state?.toUpperCase() ? 1 : 0
-    const bStateMatch = b.trail.state?.toUpperCase() === context.location?.state?.toUpperCase() ? 1 : 0
-    if (aStateMatch !== bStateMatch) return bStateMatch - aStateMatch
-    
-    // Second: city match
+    // First: city match (highest priority)
     const aCityMatch = context.location?.city && a.trail.region?.toLowerCase().includes(context.location.city.toLowerCase()) ? 1 : 0
     const bCityMatch = context.location?.city && b.trail.region?.toLowerCase().includes(context.location.city.toLowerCase()) ? 1 : 0
     if (aCityMatch !== bCityMatch) return bCityMatch - aCityMatch
+    
+    // Second: state match
+    const aStateMatch = a.trail.state?.toUpperCase() === context.location?.state?.toUpperCase() ? 1 : 0
+    const bStateMatch = b.trail.state?.toUpperCase() === context.location?.state?.toUpperCase() ? 1 : 0
+    if (aStateMatch !== bStateMatch) return bStateMatch - aStateMatch
     
     // Third: total score
     return b.score - a.score
