@@ -9,16 +9,17 @@ import ProgressStepper from './ProgressStepper'
 const locationPresets = [
   { name: 'Denver Metro', lat: 39.7392, lon: -104.9903, state: 'Colorado' },
   { name: 'Boulder', lat: 40.0150, lon: -105.2705, state: 'Colorado' },
-  { name: 'Colorado Springs', lat: 38.8339, lon: -104.8214, state: 'Colorado' },
+  { name: 'Longmont', lat: 40.1672, lon: -105.1000, state: 'Colorado' },
   { name: 'Fort Collins', lat: 40.5853, lon: -105.0844, state: 'Colorado' },
+  { name: 'Colorado Springs', lat: 38.8339, lon: -104.8214, state: 'Colorado' },
   { name: 'Estes Park (RMNP)', lat: 40.3772, lon: -105.5217, state: 'Colorado' },
   { name: 'Golden', lat: 39.7555, lon: -105.2211, state: 'Colorado' },
-  { name: 'Seattle', lat: 47.6062, lon: -122.3321 },
-  { name: 'Portland', lat: 45.5051, lon: -122.6750 },
-  { name: 'Bend', lat: 44.0582, lon: -121.3153 },
-  { name: 'Austin', lat: 30.2672, lon: -97.7431 },
-  { name: 'Salt Lake City', lat: 40.7608, lon: -111.8910 },
-  { name: 'Phoenix', lat: 33.4484, lon: -112.0740 },
+  { name: 'Seattle', lat: 47.6062, lon: -122.3321, state: 'Washington' },
+  { name: 'Portland', lat: 45.5051, lon: -122.6750, state: 'Oregon' },
+  { name: 'Bend', lat: 44.0582, lon: -121.3153, state: 'Oregon' },
+  { name: 'Austin', lat: 30.2672, lon: -97.7431, state: 'Texas' },
+  { name: 'Salt Lake City', lat: 40.7608, lon: -111.8910, state: 'Utah' },
+  { name: 'Phoenix', lat: 33.4484, lon: -112.0740, state: 'Arizona' },
 ]
 
 export default function LocationPage() {
