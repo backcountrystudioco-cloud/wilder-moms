@@ -204,11 +204,11 @@ export default function PackListGenerator({ trail, familyInfo, weather, onClose 
           className="bg-cream rounded-3xl max-w-lg w-full max-h-[85vh] overflow-hidden shadow-xl"
         >
           {/* Header */}
-          <div className="bg-forest p-5 print-header">
+          <div className="bg-ember p-5 print-header">
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="font-serif text-2xl text-white">Pack List</h2>
-                <p className="text-forestl text-sm mt-1">
+                <p className="text-whitelow opacity-90 text-sm mt-1">
                   {trail.title} • {trail.durationLabel}
                 </p>
               </div>
@@ -224,13 +224,13 @@ export default function PackListGenerator({ trail, familyInfo, weather, onClose 
             
             {/* Progress */}
             <div className="mt-4">
-              <div className="flex justify-between text-sm text-forestl mb-1">
+              <div className="flex justify-between text-sm text-whitelow opacity-90 mb-1">
                 <span>Packed</span>
                 <span>{checkedItems.length}/{packList.length}</span>
               </div>
               <div className="h-2 bg-white/20 rounded-full overflow-hidden">
                 <div 
-                  className="h-full bg-white rounded-full transition-all duration-300"
+                  className="h-full bg-olive rounded-full transition-all duration-300"
                   style={{ width: `${progress}%` }}
                 />
               </div>
@@ -261,7 +261,7 @@ export default function PackListGenerator({ trail, familyInfo, weather, onClose 
                       </svg>
                     )}
                   </span>
-                  <span className={`flex-1 font-sans ${
+                  <span className={`flex-1 font-sans text-base ${
                     checkedItems.includes(item.id) ? 'text-forest line-through' : 'text-ink'
                   }`}>
                     {item.label}
