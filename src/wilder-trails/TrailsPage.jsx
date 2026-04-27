@@ -177,16 +177,32 @@ export default function TrailsPage() {
             Based on your crew near {location?.city || 'your area'}, here are trails that actually work for your family's reality today.
           </p>
           
-          {/* AI Finder Link */}
-          <Link
-            to="/wilder-trails/ai-finder"
-            className="inline-flex items-center gap-2 px-5 py-2.5 bg-forest text-white rounded-full font-sans text-sm font-medium hover:bg-forest/90 transition-colors"
-          >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-            </svg>
-            Ask AI to find a trail
-          </Link>
+          {/* Wilder Companion Suggestion */}
+          <div className="bg-gradient-to-br from-forest/10 to-forest/5 rounded-2xl p-5 border border-forest/20 mb-6">
+            <div className="flex items-start gap-4">
+              <div className="w-10 h-10 bg-forest rounded-full flex items-center justify-center flex-shrink-0">
+                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                </svg>
+              </div>
+              <div className="flex-1">
+                <h3 className="font-serif text-base text-ink mb-1">Wilder Companion suggests:</h3>
+                <p className="text-inkl text-sm mb-3">
+                  {familyInfo?.wantsWater 
+                    ? "Based on your crew, a trail with water features might be perfect today!"
+                    : familyInfo?.youngestAge <= 3
+                      ? "For your youngest adventurer, I'd look for easy, engaging trails with lots to explore."
+                      : "Let me find something adventurous that works for everyone."}
+                </p>
+                <Link
+                  to="/wilder-trails/ai-finder"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-forest text-white rounded-full text-sm font-medium hover:bg-forest/90 transition-colors"
+                >
+                  Show me trails →
+                </Link>
+              </div>
+            </div>
+          </div>
         </motion.header>
 
         {/* Family Summary */}

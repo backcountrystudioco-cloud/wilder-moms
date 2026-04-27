@@ -8,7 +8,7 @@ import ProgressStepper from './ProgressStepper'
 // Age options for youngest child
 const ageLabels = [
   { value: -1, label: 'Baby in carrier', desc: 'watch nap windows' },
-  { value: 0, label: 'Still in stroller', desc: 'flat paths needed' },
+  { value: 0, label: 'Baby/toddler', desc: 'paths for everyone' },
   { value: 2, label: 'Toddler', desc: '2-3 years old' },
   { value: 4, label: 'Preschooler', desc: '4-5 years old' },
   { value: 7, label: 'Elementary', desc: '6-7 years old' },

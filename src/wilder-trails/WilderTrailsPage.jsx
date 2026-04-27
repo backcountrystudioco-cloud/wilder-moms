@@ -133,7 +133,7 @@ function getElevationAdvice(tempF, elevation) {
 // Age range labels - conversational
 const ageLabels = [
   { value: -1, label: "Baby in carrier (we can go longer, but diaper stops matter)" },
-  { value: 0, label: "Still in the stroller phase" },
+  { value: 0, label: "Baby/toddler" },
   { value: 2, label: "Toddler on the move" },
   { value: 4, label: "Preschooler explorer" },
   { value: 7, label: "Elementary adventurer" },
