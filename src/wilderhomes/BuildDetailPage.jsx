@@ -39,17 +39,24 @@ export default function BuildDetailPage() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="aspect-[16/9] bg-gradient-to-br from-blush/20 to-parchment rounded-3xl mb-8 flex items-center justify-center"
+          className="aspect-[16/9] bg-gradient-to-br from-blush/20 to-parchment rounded-3xl mb-8 overflow-hidden"
         >
-          <span className="text-6xl opacity-50">
-            {build.category === 'Mud Kitchens' ? '🍽️' :
-             build.category === 'Garden Beds' ? '🌱' :
-             build.category === 'Nature Play' ? '🦋' :
-             build.category === 'Climbing Structures' ? '🧗' :
-             build.category === 'Water Play' ? '💧' :
-             build.category === 'Cozy Hideouts' ? '🏕️' :
-             build.category === 'Weekend Builds' ? '🔨' : '✨'}
-          </span>
+          {build.imageUrl ? (
+            <img 
+              src={build.imageUrl} 
+              alt={build.title}
+              className="w-full h-full object-cover"
+              onError={(e) => {
+                e.target.style.display = 'none'
+                e.target.parentElement.classList.add('flex', 'items-center', 'justify-center')
+                e.target.parentElement.innerHTML = '<span class="text-6xl opacity-50">✨</span>'
+              }}
+            />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center bg-inkll/5">
+              <span className="text-inkl text-lg font-medium">{build.category}</span>
+            </div>
+          )}
         </motion.div>
 
         {/* Header */}
