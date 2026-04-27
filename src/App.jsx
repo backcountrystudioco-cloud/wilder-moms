@@ -26,6 +26,7 @@ import ArchivePage from './wilderhomes/ArchivePage'
 import ArchitectPage from './wilderhomes/ArchitectPage'
 import WildRoomPage from './wilderhomes/WildRoomPage'
 import CraftDetailPage from './wilderhomes/CraftDetailPage'
+import AITrailFinder from './wilder-trails/AITrailFinder'
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
               <Route path="/wilder-trails/location" element={<LocationPage />} />
               <Route path="/wilder-trails/whos-coming" element={<WhosComingPage />} />
               <Route path="/wilder-trails/trails" element={<TrailsPage />} />
+              <Route path="/wilder-trails/ai-finder" element={<AITrailFinder />} />
               <Route path="/wilder-trails/:trailId" element={<TrailDetailPage />} />
               <Route path="/wilder-homes" element={<WilderHomesPage />} />
               <Route path="/wilder-homes/activities" element={<WilderActivitiesPage />} />
