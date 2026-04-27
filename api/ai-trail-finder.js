@@ -18,23 +18,32 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: 'OpenAI API key not configured' })
   }
 
-  // Build prompt for OpenAI
+  // Build prompt for OpenAI with FULL trail data
   const trailList = trails.map(h => `
-TRAIL DATA:
-- Name: ${h.title}
-- City/Region: ${h.region}
-- State: ${h.state}
-- Distance: ${h.distance} miles
-- Duration: ${h.durationLabel}
-- Difficulty: ${h.difficulty}
-- Features: ${[
+Trail #${h.id}:
+Name: ${h.title}
+Full Location: ${h.region}, ${h.state}
+Distance: ${h.distance} miles (${h.distanceLabel})
+Duration: ${h.durationLabel}
+Difficulty: ${h.difficulty}
+Elevation Gain: ${h.elevationLabel}
+Kid-Friendly Age Range: ${h.ageRange || 'All ages'}
+Terrain: ${[
     h.strollerFriendly && 'Stroller-friendly',
-    h.dogsAllowed && 'Dogs allowed',
-    h.hasWater && 'Water features',
+    h.isPaved && 'Paved path',
+    h.hasWater && 'Water features nearby',
     h.hasViews && 'Scenic views',
-    h.isPaved && 'Paved',
-    h.restrooms && 'Restrooms'
-  ].filter(Boolean).join(', ') || 'None'}
+    h.shadeLevel === 'high' && 'Shaded',
+    h.shadeLevel === 'medium' && 'Partial shade'
+  ].filter(Boolean).join(', ') || 'Natural terrain'}
+Amenities: ${[
+    h.restrooms && 'Restrooms available',
+    h.dogsAllowed && 'Dogs allowed',
+    h.parking === 'free_limited' && 'Limited free parking',
+    h.parking === 'free' && 'Free parking',
+    h.parking === 'fee' && 'Paid parking'
+  ].filter(Boolean).join(', ') || 'Self-serve parking'}
+Description: ${h.description || 'A great family trail.'}
 `).join('\n---\n')
 
   // Extract location from context for the prompt
@@ -44,28 +53,34 @@ TRAIL DATA:
 
   const prompt = `You are a hiking guide for families with young children.
 
-IMPORTANT: The family is located in ${cityName || 'their area'}, ${stateName || ''}.
+CRITICAL CONTEXT:
+- Family is located in ${cityName || 'their area'}, ${stateName || ''}
+- All trails below are from ${stateName || 'their state'} ONLY
 
-STRICT RULES:
-1. ONLY recommend trails from ${stateName || 'their state'}
-2. PRIORITIZE trails in ${cityName || 'their city'} or nearby
-3. Do NOT recommend trails from other states
-4. Return exactly 3 trail recommendations
-
-FAMILY INFO:
+FAMILY'S EXACT SITUATION:
 ${context}
 
-Available trails (sorted by relevance):
+STRICT RULES - Follow these exactly:
+1. ONLY recommend from the provided trail list
+2. PRIORITIZE trails in/near ${cityName || 'their city'}
+3. Do NOT mention trails from other states in your response
+4. Return exactly 5 trail recommendations
+5. Each reason must mention specific features that match the family's needs
+
+AVAILABLE TRAILS IN ${stateName?.toUpperCase() || 'THEIR STATE'}:
 ${trailList}
 
-TASK: Recommend the TOP 3 trails closest to ${cityName || 'their location'}.
+TASK: From the list above, recommend the TOP 5 trails closest to ${cityName || 'their location'}.
 
-For each trail, explain WHY it works for this specific family situation.
+For each trail, write a reason that:
+- Mentions specific features (water, paved, shade, etc.)
+- Explains why it fits their family's situation (ages, needs, time)
+- Is 1-2 sentences, friendly tone
 
-Return as JSON:
+Return as JSON with exactly 5 trails:
 {
   "trails": [
-    { "id": "trail-id", "title": "Trail Name", "reason": "Why this trail is perfect for this family..." }
+    { "id": "exact-trail-id", "title": "Exact Trail Name", "reason": "Why this specific trail is perfect for this specific family..." }
   ]
 }`
 
