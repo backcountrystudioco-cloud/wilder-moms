@@ -14,23 +14,23 @@ const rooms = [
     accentColor: '#F0D2B4',
     implementations: {
       indoor: [
-        { id: 'sensory-nook', name: 'Sensory Alcove', description: 'A curtained corner with a low bin of rice, beans, or sand. Clip a shower curtain to ceiling hooks for instant enclosure. The compression of the entrance creates the "now I am in my world" feeling. Cleanup: contain in the bin.' },
-        { id: 'locker-village', name: 'Gear Cubby Village', description: 'Individual hooks and shelves designed as tiny dwellings - a cave, a hollow log, a small cottage. Each child has their own home within a home at their scale. Low thresholds create ownership. Add a curtain for extra hideaway.' },
-        { id: 'texture-wall', name: 'Texture Discovery Wall', description: 'A section of wall covered in different materials: bark, smooth stones, woven fabric, cork. At child eye level. Remove shoes and explore with fingertips. A sensory hallway in narrow spaces.' },
-        { id: 'water-station', name: 'Standing Water Station', description: 'A large container on a bench with cups, funnels, and tubes. Water play at standing height. Mop nearby. The station is the destination, not the mess. Works in laundry rooms, porches, garages.' },
+        { id: 'sensory-nook', name: 'Curtained Sensory Alcove', description: 'A corner with a tension rod and shower curtain. Low bin inside with rice, beans, or sand. The curtain contains the mess and creates a "cave." Children disappear inside. Cleanup takes 30 seconds.', type: 'hideaway' },
+        { id: 'table-cave', name: 'Under-the-Table Cave', description: 'A low table (or inverted storage bin) with fabric draped to the floor. Children enter from one side. Add a flashlight. The table is the ceiling; the fabric is the walls. One small opening only.', type: 'hideaway' },
+        { id: 'texture-wall', name: 'Texture Discovery Wall', description: 'A section of wall covered in natural materials: bark, smooth stones, woven fabric, cork. At child eye level. Take off shoes and explore with fingertips. A sensory hallway in narrow spaces.', type: 'eco' },
+        { id: 'water-station', name: 'Standing Water Station', description: 'A large container on a bench with cups, funnels, tubes. Water play at standing height. Mop nearby. Rain barrel collection eliminates hose dependency. The station is the destination.', type: 'eco' },
       ],
       outdoor: [
-        { id: 'mud-kitchen', name: 'Mud Kitchen Corner', description: 'A low table or repurposed dresser outdoors with bowls, spoons, and old kitchen items. Near a water source. The mess stays outside where it belongs. Start with what you have - expand from there.' },
-        { id: 'dig-zone', name: 'Digging Zone', description: 'A contained area - sandbox, old tub, or demarcated ground - for digging and mixing. Add sticks, stones, water. The boundary makes it feel intentional rather than destructive.' },
-        { id: 'texture-path', name: 'Barefoot Texture Path', description: 'Stepping stones or a designated path with different surfaces: smooth pebbles, bark mulch, grass, gravel. Take off shoes and explore. Returns to the same spot weekly to note changes in texture after weather.' },
-        { id: 'rain-play', name: 'Rain Day Station', description: 'A spot to put on rain gear and go outside when it rains. Boots, coats, umbrella. Keep them by the door. Rain becomes an event, not an inconvenience. A bucket to collect rain for later play.' },
+        { id: 'mud-kitchen', name: 'Curtained Mud Kitchen', description: 'A low table outdoors with bowls, spoons, old kitchen items. PVC pipe frame with shower curtain walls. Children disappear inside to make mud. Water from rain barrel. The kitchen is their house.', type: 'hideaway' },
+        { id: 'dig-zone', name: 'Tarp-Tented Dig Zone', description: 'A demarcated ground area with a large tarp propped on logs. Children dig under the tarp - secret, sheltered. The tarp contains the mess and provides shade. Unpeg and fold for winter.', type: 'hideaway' },
+        { id: 'ecobrick-channels', name: 'Ecobrick Sensory Channels', description: 'Children fill plastic bottles with organic waste (straw, leaves). Stacked with mud mortar into channels for water and sensory play. Each brick diverts waste from landfill. Channels reconfigure seasonally.', type: 'eco' },
+        { id: 'tire-grating', name: 'Tire-Rubber Grating Path', description: 'Discarded tires sliced into patterns over gravel drainage. Soft underfoot, instant drainage. Redirects toxic waste (each tire = 80 years to decompose). Path leads to the mess zone.', type: 'eco' },
       ],
-      transition: 'The Threshold: A compression space with low ceiling before releasing into the sensory zone. Borrowed light from adjacent rooms creates emergence-from-darkness feeling. This is where the outside world ends and the wild begins.',
+      transition: 'The Threshold: A compression entrance with low ceiling. Step through a curtain into the sensory zone. This is where the outside world ends and the wild begins. Hand-washing station powered by rainwater.',
     },
     tips: [
       'Start with one sensory element, expand slowly',
       'The messier the entrance, the cleaner the exit ritual',
-      'Low light at entry creates anticipation',
+      'Kids-only spaces with small doorways create ownership',
       'Let children establish the mess zone boundaries',
     ],
   },
@@ -46,24 +46,24 @@ const rooms = [
     accentColor: '#C8D890',
     implementations: {
       indoor: [
-        { id: 'seed-station', name: 'Seed Starting Station', description: 'A sunny window shelf with small pots, seeds, and a spray bottle. Label with photos. Watch roots develop in clear cups. The window becomes a living exhibit that changes daily.' },
-        { id: 'kitchen-herbs', name: 'Kitchen Herb Garden', description: 'Basil, mint, chives in small pots on a windowsill or shelf at child height. Snip and taste. Water with a small pitcher. The kitchen becomes the grow room.' },
-        { id: 'scrap-garden', name: 'Scrap Regeneration Garden', description: 'Green onions regrow in water glasses. Carrot tops produce seeds. Potato eyes become vines. Keep jars on a sunny shelf. Low commitment, high wonder.' },
-        { id: 'observation-shelf', name: 'Nature Observation Shelf', description: 'A dedicated low shelf holding this week\'s finds: a feather, a seed pod, a pressed flower. Rotate weekly. Let children arrange. The shelf changes with the seasons.' },
+        { id: 'seed-station', name: 'Window Seed Station', description: 'A sunny window shelf with small pots, seeds, spray bottle. Watch roots develop in clear cups. The window becomes a living exhibit. Rotate weekly. Check daily.', type: 'eco' },
+        { id: 'scrap-garden', name: 'Scrap Regeneration Garden', description: 'Green onions in water glasses. Carrot tops producing seeds. Potato eyes becoming vines. Keep jars on a sunny shelf. Free, ongoing, no soil required.', type: 'eco' },
+        { id: 'observation-shelf', name: 'Nature Observation Shelf', description: 'A dedicated low shelf holding this week\'s finds: a feather, a seed pod, a pressed flower. Rotate weekly. Let children arrange. The shelf changes with the seasons.', type: 'eco' },
+        { id: 'tiny-greenhouse', name: 'Clear-Container Greenhouse', description: 'An old aquarium or plastic bin becomes a terrarium. Moss, ferns, small plants. Closed loop ecosystem to observe. Mist once a week. Watch condensation cycle.', type: 'hideaway' },
       ],
       outdoor: [
-        { id: 'raised-bed', name: 'Raised Bed Plot', description: 'A raised bed at child height - even 6 inches helps. Their own square foot for carrots, radishes, beans. First harvests are addictive. Size makes it manageable.' },
-        { id: 'container-garden', name: 'Container Growing Corner', description: 'Pots on a patio or porch. Tomatoes in a bucket, herbs in old cans, flowers in thrifted ceramics. Containers let you move with the sun. Low investment, high yield.' },
-        { id: 'teepee-trellis', name: 'Climbing Bean Teepee', description: 'Canes or branches in a circle, tied at top. Beans climb up and create a hideout inside. Eat while hiding. The teepee is the structure, the beans are the walls.' },
-        { id: 'pollinator-zone', name: 'Pollinator Welcome Zone', description: 'A corner of flowers that attract butterflies and bees. Zinnias, sunflowers, lavender. Plant once, observe for years. Watch the ecosystem arrive.' },
+        { id: 'bean-teepee', name: 'Bean Teepee Hideout', description: 'Canes in a circle, tied at top. Beans climb up and create a hideout inside. Eat while hiding. The teepee is the structure, the beans are the walls. Small enough for kids only.', type: 'hideaway' },
+        { id: 'raised-bed', name: 'Keyhole Raised Bed', description: 'A keyhole-shaped raised bed with a compost basket in center. Worm castings feed plants. Children reach everything from the center path. Circular, efficient, kid-designed.', type: 'eco' },
+        { id: 'food-forest', name: 'Mini Food Forest Guild', description: 'A tree with companion plants underneath: nitrogen-fixers, dynamic accumulators, groundcovers. Seven layers in a small footprint. The forest teaches ecosystem thinking.', type: 'eco' },
+        { id: 'rain-garden', name: 'Bioswale Rain Garden', description: 'A sunken area with gravel, sand, soil, plants. Filters 90% of runoff before it reaches groundwater. Native plants mark water paths. The garden cleans water while children watch.', type: 'eco' },
       ],
-      transition: 'The Waiting Window: An indoor spot with clear sightline to outdoor garden. Check daily. Notice changes. Practice patience. The window frame becomes a living picture that changes with seasons.',
+      transition: 'The Waiting Window: An indoor spot with clear sightline to outdoor garden. Check daily. Notice changes. Practice patience. The window frame becomes a living picture.',
     },
     tips: [
       'Choose fast growers: radishes sprout in a week',
       'Let them water, even too much. Overwatering is learning.',
       'Harvest together and eat what you grow',
-      'Keep a growth journal with dated photos',
+      'A teepee sized for kids creates secret growing space',
     ],
   },
   {
@@ -78,24 +78,24 @@ const rooms = [
     accentColor: '#D4B4A4',
     implementations: {
       indoor: [
-        { id: 'loose-parts', name: 'Loose Parts Collection', description: 'A shelf with cardboard tubes, fabric scraps, boxes, wooden blocks. Not toys - raw materials. Rotate weekly. The shelf is the inventory. Children choose what to build.' },
-        { id: 'cardboard-station', name: 'Cardboard Construction Station', description: 'Large boxes, tape, child-safe scissors. The rule: anything made gets displayed, then recycled. New builds replace old ones. A standing supply of boxes from appliance stores.' },
-        { id: 'tool-corner', name: 'Tool Corner', description: 'A low shelf with real tools: hammer, screwdriver, pliers (child-sized). The corner is for working, not playing. Model correct use, then step back. Supervision from nearby.' },
-        { id: 'make-do-cart', name: 'Make-Do Cart', description: 'A rolling cart with this week\'s materials: egg cartons, bottle caps, toilet paper tubes. Bring the Build Room anywhere. The cart makes the space.' },
+        { id: 'loose-parts', name: 'Loose Parts Collection', description: 'A shelf with cardboard tubes, fabric scraps, boxes, wooden blocks. Not toys - raw materials. Rotate weekly. The shelf is the inventory. Children choose what to build.', type: 'eco' },
+        { id: 'cardboard-station', name: 'Cardboard Fort Corner', description: 'Large boxes, tape, child-safe scissors. The rule: anything made gets displayed, then recycled. New builds replace old ones. An appliance box becomes a castle. Sheets make it a palace.', type: 'hideaway' },
+        { id: 'tool-corner', name: 'Tool Corner', description: 'A low shelf with real tools: hammer, screwdriver, pliers (child-sized). The corner is for working, not playing. Model correct use, then step back. Supervision from nearby.', type: 'eco' },
+        { id: 'platform-nook', name: 'Platform Building Nook', description: 'A low wooden platform (12" high) with storage underneath. Children stand on top to build; hide underneath with pillows. Two levels of use. The platform is the floor; the underneath is the cave.', type: 'hideaway' },
       ],
       outdoor: [
-        { id: 'stick-pile', name: 'Stick Collection Corner', description: 'A designated pile of branches, logs, and stakes. The pile is the lumber yard. Start collecting on walks. Structures change weekly. Some last, some get rebuilt.' },
-        { id: 'mud-building', name: 'Mud Brick Building', description: 'A spot for mixing dirt and water into mud. Add leaves, sand, straw. Pack into forms or hands. The mud is the material. Sun-baked bricks last longer. The ground is the workbench.' },
-        { id: 'salvage-pile', name: 'Salvage Collection', description: 'Collected junk: pallets, pipes, tiles, old windows. Premium building materials, free. An outdoor pile makes gathering feel serious. Safety check before adding to pile.' },
-        { id: 'fort-supply', name: 'Fort-Building Supplies', description: 'A bin of sheets, rope, clothespins, and stakes. Outdoor forts happen fast with the right supplies. Keep them in a weatherproof bin. Ready when inspiration strikes.' },
+        { id: 'stick-pile', name: 'Stick Collection Corner', description: 'A designated pile of branches, logs, stakes. The pile is the lumber yard. Start collecting on walks. Structures change weekly. Some last, some get rebuilt.', type: 'eco' },
+        { id: 'pallet-platform', name: 'Pallet Platform Fort', description: 'Stacking pallets creates instant platforms and caves. Add a tarp roof, rope, fabric walls. Kids-only entry points (small). Adults supervise from outside the fort.', type: 'hideaway' },
+        { id: 'mud-building', name: 'Mud Brick Building Zone', description: 'A spot for mixing dirt and water into mud. Pack into forms or hands. Mud bricks sun-bake hard. The ground is the workbench. Structures last the season.', type: 'eco' },
+        { id: 'mushroom-logs', name: 'Mushroom Log Cultivation', description: 'Oak logs with shiitake or oyster plug spawn. Stack in shade structure. Soak weekly to induce fruiting. Children harvest mushrooms. Logs fruit for 3-5 years, then become soil.', type: 'eco' },
       ],
-      transition: 'The Making Threshold: Materials roll between spaces on carts. Outdoor builds inform indoor projects. The distinction blurs. A child carries their outdoor fort plan inside to scale it in cardboard.',
+      transition: 'The Making Threshold: Materials roll between spaces on carts. Outdoor builds inform indoor projects. A child carries their outdoor fort plan inside to scale it in cardboard.',
     },
     tips: [
       'Real tools, not toys - a small hammer and nails works best',
       'Loose parts accumulate naturally - start collecting',
       'The best builds have no right answer',
-      'Document builds with photos - they become planning tools',
+      'Pallet platforms create instant kid-only hideaways',
     ],
   },
   {
@@ -110,23 +110,23 @@ const rooms = [
     accentColor: '#C8D0D8',
     implementations: {
       indoor: [
-        { id: 'cozy-nook', name: 'Curtained Reading Nook', description: 'A corner with a chair, cushions, and a curtain on a tension rod. Creates a cave-like enclosure. A lamp inside makes it a destination. Low cost, high impact. Works in closets, corners, under stairs.' },
-        { id: 'window-seat', name: 'Bird Window Seat', description: 'A cushioned spot at a window with a view. Add a small stool for feet. Binoculars on a hook. The window becomes a TV - live, free, always changing. Position away from household traffic.' },
-        { id: 'nature-shelf', name: 'Nature Curiosity Shelf', description: 'A low shelf for collected objects: feathers, stones, seed pods, leaves. No labels, no explanations. Rotate monthly. Let children arrange and rearrange. The shelf tells the season.' },
-        { id: 'sound-corner', name: 'Quiet Sound Corner', description: 'Headphones with nature sounds (rain, ocean, birds) plus a simple coloring activity. An island of calm in a loud house. Works during noise-sensitive times: naptime, quiet hours.' },
+        { id: 'cozy-nook', name: 'Curtained Reading Nook', description: 'A corner with a chair, cushions, and a curtain on a tension rod. Creates a cave-like enclosure. A lamp inside makes it a destination. Low cost, high impact. Works in closets, corners.', type: 'hideaway' },
+        { id: 'window-seat', name: 'Bird Window Seat', description: 'A cushioned spot at a window with a view. Add a small stool for feet. Binoculars on a hook. The window becomes a TV - live, free, always changing.', type: 'eco' },
+        { id: 'nature-shelf', name: 'Nature Curiosity Shelf', description: 'A low shelf for collected objects: feathers, stones, seed pods. No labels, no explanations. Rotate monthly. Let children arrange. The shelf tells the season.', type: 'eco' },
+        { id: 'sound-corner', name: 'Quiet Sound Corner', description: 'Headphones with nature sounds (rain, ocean, birds). An island of calm in a loud house. Works during noise-sensitive times. Children control their soundscape.', type: 'eco' },
       ],
       outdoor: [
-        { id: 'sitting-stone', name: 'Designated Sitting Stone', description: 'One comfortable stone or stump in the garden. Return to the same spot weekly. Notice changes: What bloomed? What fell? What visited? The spot becomes a relationship with that place.' },
-        { id: 'shade-nook', name: 'Shade Observation Nook', description: 'A naturally shady corner with a small chair. Watch what happens in the shade: ants, shadows, cool air. The spot is chosen, not furnished. Part of the garden becomes the Still Room.' },
-        { id: 'wind-chimes', name: 'Wind Chime Collection', description: 'Hang different materials that make sound: bamboo, old silverware, glass bottles. Children sit and listen. The sounds change with wind. Adds auditory interest to any outdoor space.' },
-        { id: 'rain-watching', name: 'Rain Watching Spot', description: 'A covered spot to watch rain fall: under a porch roof, under a large tree, under an umbrella. Rain gear nearby. When it rains, this is the place to be.' },
+        { id: 'sitting-stone', name: 'Designated Sitting Stone', description: 'One comfortable stone or stump in the garden. Return to the same spot weekly. Notice changes: What bloomed? What fell? The spot becomes a relationship with that place.', type: 'eco' },
+        { id: 'tent-spot', name: 'Seasonal Tent Spot', description: 'A designated corner with stakes in ground. Add a small tent or tarp when wanted. Remove for warm months. The tent spot signals "this is the Still Room" without permanent structure.', type: 'hideaway' },
+        { id: 'wind-chimes', name: 'Wind Chime Collection', description: 'Hang different materials that make sound: bamboo, old silverware, glass bottles. Children sit and listen. The sounds change with wind. Adds auditory interest to any outdoor space.', type: 'eco' },
+        { id: 'pollinator-strip', name: 'Pollinator Observation Strip', description: 'A narrow strip of native wildflowers. Lavender, echinacea, bee balm. Sequential blooms Mar-Oct. Children sit and observe. No mow, just watch.', type: 'eco' },
       ],
       transition: 'The Notice Wall: A shared space to record observations. Drawings, photos, notes. What did you see? The wall becomes a collective journal of presence over time.',
     },
     tips: [
       'A chair and a view is enough',
       'Keep materials minimal - empty space invites presence',
-      'Return weekly to notice changes',
+      'Small tent spaces give kids ownership of stillness',
       'Model stillness yourself first',
     ],
   },
@@ -142,23 +142,23 @@ const rooms = [
     accentColor: '#F0E4A0',
     implementations: {
       indoor: [
-        { id: 'star-ceiling', name: 'Star Ceiling Corner', description: 'Glow-in-the-dark stars on a ceiling corner. A small flashlight. Lie down and look up. Takes 20 minutes to install. A $5 investment in wonder. Add new constellations over time.' },
-        { id: 'mystery-box', name: 'The Mystery Box', description: 'A closed box with a small hole to peer inside. Once a week, add something: a bone, a strange seed, a feather, a stone. Never explain. The box becomes a source of questions, not answers.' },
-        { id: 'costume-corner', name: 'Imagination Costume Corner', description: 'A basket of fabric scraps, old jewelry, hats, scarves. No costumes - just materials. A sarong becomes a cape, a scarf becomes a wizard robe. Less is more.' },
-        { id: 'discovery-basket', name: 'Weekly Discovery Basket', description: 'A basket with this week\'s seasonal treasures. Autumn leaves. Spring buds. Summer shells. Winter pine. Rotate weekly. Let children arrange. The basket holds the season.' },
+        { id: 'star-ceiling', name: 'Star Ceiling Corner', description: 'Glow-in-the-dark stars on a ceiling corner. A small flashlight. Lie down and look up. Takes 20 minutes to install. A $5 investment in wonder. Add new constellations over time.', type: 'hideaway' },
+        { id: 'mystery-box', name: 'The Mystery Box', description: 'A closed box with a small hole to peer inside. Once a week, add something: a bone, a strange seed, a feather. Never explain. The box becomes a source of questions.', type: 'eco' },
+        { id: 'costume-corner', name: 'Imagination Costume Corner', description: 'A basket of fabric scraps, old jewelry, hats, scarves. A sarong becomes a cape, a scarf becomes a wizard robe. Less is more. Materials, not costumes.', type: 'hideaway' },
+        { id: 'discovery-basket', name: 'Weekly Discovery Basket', description: 'A basket with this week\'s seasonal treasures. Autumn leaves. Spring buds. Summer shells. Rotate weekly. Let children arrange. The basket holds the season.', type: 'eco' },
       ],
       outdoor: [
-        { id: 'fairy-door', name: 'One Fairy Door', description: 'One small door in a tree or stump. Real wood, simple hinge. No bigger than a child\'s hand. Who lives there? The question is the point. Add a tiny mailbox for letters.' },
-        { id: 'moon-garden', name: 'Moon Garden', description: 'White flowers that open at night: moonflower, jasmine, white petunia. Plant in a visible spot from a window. Visit after dark. The garden is different at night.' },
-        { id: 'night-walk', name: 'Evening Lantern Walk', description: 'A flashlight walk around the yard after dark. Same route each time. Notice what appears at night: moths, frogs, stars. The ordinary becomes mysterious.' },
-        { id: 'seasonal-altar', name: 'Seasonal Nature Altar', description: 'A low stone or stump where you place weekly offerings: fallen leaves, spring flowers, summer berries. The altar changes with the year. Part altar, part nature table.' },
+        { id: 'fairy-door', name: 'One Fairy Door', description: 'One small door in a tree or stump. Real wood, simple hinge. No bigger than a child\'s hand. Who lives there? The question is the point. Add a tiny mailbox for letters.', type: 'hideaway' },
+        { id: 'moon-garden', name: 'Moon Garden', description: 'White flowers that open at night: moonflower, jasmine, white petunia. Plant in a visible spot from a window. Visit after dark. The garden is different at night.', type: 'eco' },
+        { id: 'night-walk', name: 'Evening Lantern Walk', description: 'A flashlight walk around the yard after dark. Same route each time. Notice what appears at night: moths, frogs, stars. The ordinary becomes mysterious.', type: 'eco' },
+        { id: 'willow-tunnel', name: 'Living Willow Tunnel', description: 'Plant willow cuttings in arc pattern over steel rods. Willow grows 6+ feet per year. Within 2 seasons, a living green tunnel. Kids walk through; adults duck. Magic created by growing.', type: 'hideaway' },
       ],
-      transition: 'The Mystery Box: A shared container of unexplained natural objects. Questions welcome. Answers not required. The box sits at the threshold between inside and outside, a daily invitation to wonder.',
+      transition: 'The Mystery Box: A shared container of unexplained natural objects. Questions welcome. Answers not required. The box sits at the threshold between inside and outside.',
     },
     tips: [
       'Rotate weekly with seasonal finds',
       'Let children arrange - their curation tells you what matters',
-      'Small, specific, surprising beats large and obvious',
+      'Small doors and tunnels give kids secret magic spaces',
       'Questions are more valuable than answers',
     ],
   },
@@ -462,8 +462,35 @@ export default function WildRoomPage() {
                         </div>
                       )}
 
+                      {/* Kid-Only Hideaways Section */}
+                      {(() => {
+                        const hideaways = [
+                          ...(room.implementations.indoor || []).filter(i => i.type === 'hideaway'),
+                          ...(room.implementations.outdoor || []).filter(i => i.type === 'hideaway')
+                        ]
+                        if (hideaways.length === 0) return null
+                        return (
+                          <div className="mb-6">
+                            <h3 className="font-serif text-lg text-ink mb-4 flex items-center gap-2">
+                              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                              </svg>
+                              Kid-Only Hideaways
+                            </h3>
+                            <div className="space-y-2">
+                              {hideaways.map((impl, i) => (
+                                <div key={i} className="p-4 rounded-lg" style={{ backgroundColor: room.accentColor + '30' }}>
+                                  <h4 className="text-sm font-medium text-ink mb-1">{impl.name}</h4>
+                                  <p className="text-xs text-inkl leading-relaxed">{impl.description}</p>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )
+                      })()}
+
                       {/* Indoor Implementations */}
-                      {room.implementations.indoor && (
+                      {room.implementations.indoor && room.implementations.indoor.filter(i => i.type !== 'hideaway').length > 0 && (
                         <div className="mb-6">
                           <h3 className="font-serif text-lg text-ink mb-4 flex items-center gap-2">
                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -472,7 +499,7 @@ export default function WildRoomPage() {
                             Indoors
                           </h3>
                           <div className="space-y-2">
-                            {room.implementations.indoor.map((impl, i) => (
+                            {room.implementations.indoor.filter(i => i.type !== 'hideaway').map((impl, i) => (
                               <div key={i} className="p-4 rounded-lg" style={{ backgroundColor: '#FAF6EE' }}>
                                 <h4 className="text-sm font-medium text-ink mb-1">{impl.name}</h4>
                                 <p className="text-xs text-inkl leading-relaxed">{impl.description}</p>
@@ -483,7 +510,7 @@ export default function WildRoomPage() {
                       )}
 
                       {/* Outdoor Implementations */}
-                      {room.implementations.outdoor && (
+                      {room.implementations.outdoor && room.implementations.outdoor.filter(i => i.type !== 'hideaway').length > 0 && (
                         <div className="mb-6">
                           <h3 className="font-serif text-lg text-ink mb-4 flex items-center gap-2">
                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -492,7 +519,7 @@ export default function WildRoomPage() {
                             Outdoors
                           </h3>
                           <div className="space-y-2">
-                            {room.implementations.outdoor.map((impl, i) => (
+                            {room.implementations.outdoor.filter(i => i.type !== 'hideaway').map((impl, i) => (
                               <div key={i} className="p-4 rounded-lg" style={{ backgroundColor: '#FAF6EE' }}>
                                 <h4 className="text-sm font-medium text-ink mb-1">{impl.name}</h4>
                                 <p className="text-xs text-inkl leading-relaxed">{impl.description}</p>
