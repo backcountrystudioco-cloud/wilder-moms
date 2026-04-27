@@ -2,76 +2,433 @@ import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 
-const blueprints = [
+const collections = [
   {
-    id: 'sensory-table',
-    title: 'Sensory Play Table',
-    type: 'Indoor',
-    description: 'A built-in sensory table for your living room or playroom. Sand, water, rice, or beans — the removable tray makes cleanup easy. Perfect for rainy days when the outdoors calls but won\'t answer.',
-    dimensions: '3ft x 2ft x 2ft',
-    difficulty: 'Intermediate',
-    price: '$19'
+    id: 'hideaway',
+    title: 'Kid-Only Hideaways',
+    subtitle: 'Spaces where adults need not apply',
+    icon: 'door',
+    color: '#8C4A14',
+    blueprints: [
+      {
+        id: 'hobbit-hole',
+        title: 'Hobbit Hole House',
+        description: 'An earth-sheltered play nook built into a hillside or raised bed. Grass roof, round door, just big enough for two kids. The earth insulates naturally; the moss makes it magical.',
+        difficulty: 'Advanced',
+        price: '$49',
+        time: '2-3 weekends',
+        materials: ['Rammed earth or straw bales', 'Salvaged timber framing', 'Living roof sod', 'Round door (salvaged hatch)'],
+        ecoImpact: 'Earth shelter reduces energy 80%. Living roof creates habitat.',
+        viral: 'Earth-sheltered aesthetic is Instagram gold. The "real hobbit house" angle goes viral.',
+        settings: ['House', 'Townhouse'],
+        featured: true,
+      },
+      {
+        id: 'fairy-trail',
+        title: 'Fairy Door Trail',
+        description: 'A winding path through your yard with multiple tiny carved doors in stumps, logs, and trees. Each door opens to a tiny world. Add tiny mailboxes for letters from the fairies.',
+        difficulty: 'Beginner',
+        price: '$19',
+        time: '1 afternoon',
+        materials: ['Small logs and stumps', 'Tiny hinges and latches', 'Wood glue', 'Miniature decorations'],
+        ecoImpact: 'Uses fallen wood. Encourages outdoor time and observation.',
+        viral: 'Fairy doors are a major Pinterest trend. Parents share their kids finding fairy mail.',
+        settings: ['House', 'Apartment Balcony', 'Park'],
+        featured: false,
+      },
+      {
+        id: 'tarptunnels',
+        title: 'Endless Tarp Tunnels',
+        description: 'PVC pipe arches with ripstop fabric stretched between them. Create tunnels, caves, connected rooms. Rearrange seasonally. The fabric becomes walls, roofs, forts. Renters welcome.',
+        difficulty: 'Beginner',
+        price: '$39',
+        time: '2-3 hours',
+        materials: ['PVC pipe (3/4")', 'Ripstop nylon or parachute fabric', 'Zip ties', 'Stakes'],
+        ecoImpact: 'Ripstop lasts decades. No permanent modifications. Zero waste.',
+        viral: 'Transformable spaces perform extremely well. The "building the fort" process is content gold.',
+        settings: ['House', 'Apartment Balcony', 'Renters'],
+        featured: true,
+      },
+      {
+        id: 'tipi',
+        title: 'Cedar Pole Tipi',
+        description: 'Lean 8-10 cedar poles together, lashed at top. Canvas or drop cloth cover. Just big enough for sitting, too small for adults to stand. A fire pit or chiminea inside makes it magical at night.',
+        difficulty: 'Intermediate',
+        price: '$44',
+        time: '1 day',
+        materials: ['Cedar poles (8-10 ft)', 'Natural rope', 'Canvas or heavy drop cloth', 'Stakes'],
+        ecoImpact: 'Cedar is naturally rot-resistant. No chemicals or treatment needed.',
+        viral: 'Campfire content is massively engaging. "Our backyard campout" posts go viral.',
+        settings: ['House', 'Townhouse'],
+        featured: false,
+      },
+      {
+        id: 'cardboard-village',
+        title: 'Cardboard Box Village',
+        description: 'Collect large appliance boxes. Connect them with tunnels cut between. Paint and decorate as a village. Kids help design and build. Updates seasonally. Free materials, endless possibilities.',
+        difficulty: 'Beginner',
+        price: '$9',
+        time: '1 afternoon',
+        materials: ['Large cardboard boxes (appliance stores)', 'Box cutter', 'Paint', 'Tape'],
+        ecoImpact: 'Diverts cardboard from landfill. Fully recyclable at end of life.',
+        viral: 'Box fort content is legendary on TikTok. The "we built a city" angle is shareable.',
+        settings: ['House', 'Apartment', 'Renters'],
+        featured: true,
+      },
+      {
+        id: 'nook-closet',
+        title: 'Closet Reading Cave',
+        description: 'Convert a closet or corner into a cave-like reading nook. Curtain rod with draped fabric. Cushions on floor. String lights. Small bookshelf. The smaller, the better - compression creates coziness.',
+        difficulty: 'Beginner',
+        price: '$24',
+        time: '2 hours',
+        materials: ['Tension curtain rod', 'Fabric (sari, quilt, drop cloth)', 'Floor cushions', 'String lights'],
+        ecoImpact: 'Reuses existing space. No new materials required.',
+        viral: 'Cozy corners are a major aesthetic trend. The "secret reading spot" angle resonates.',
+        settings: ['House', 'Apartment', 'Renters'],
+        featured: false,
+      },
+    ],
   },
   {
-    id: 'nook-retreat',
-    title: 'Nature Nook Retreat',
-    type: 'Indoor/Outdoor',
-    description: 'Build a cozy reading nook using reclaimed wood, soft lighting, and natural materials. A place your kids will actually want to go when the chaos gets too much. Indoor or covered porch installation.',
-    dimensions: '4ft x 4ft x 6ft',
-    difficulty: 'Advanced',
-    price: '$29'
+    id: 'eco',
+    title: 'Eco-Friendly Builds',
+    subtitle: 'Built to give back to the earth',
+    icon: 'leaf',
+    color: '#5A6428',
+    blueprints: [
+      {
+        id: 'ecobrick-beds',
+        title: 'Ecobrick Raised Beds',
+        description: 'Build garden walls from plastic bottles packed with organic waste. Kids fill bottles as part of the activity. Bottles stacked with mud mortar create insulating, level beds. Each bed diverts 200+ bottles from landfill.',
+        difficulty: 'Intermediate',
+        price: '$29',
+        time: '2 weekends',
+        materials: ['Plastic bottles (collect 100+)', 'Clay soil', 'Straw', 'Wood framing'],
+        ecoImpact: 'Diverts 200+ bottles per bed. Plastic locked away for 500 years. Teaches circular economy.',
+        viral: 'Eco-content performs extremely well. The "we built this from trash" angle is highly shareable.',
+        settings: ['House', 'Townhouse'],
+        featured: true,
+      },
+      {
+        id: 'mushroom-fort',
+        title: 'Mushroom Log Fort',
+        description: 'A fort structure where the structural posts are oak logs being colonised by shiitake or oyster mushrooms. The logs fruit seasonally. Kids harvest and eat what they built. Spent logs become garden soil.',
+        difficulty: 'Intermediate',
+        price: '$39',
+        time: '1 weekend + seasonal',
+        materials: ['Oak logs (4-6" diameter)', 'Mushroom plug spawn', 'Wax', 'Simple frame'],
+        ecoImpact: 'Mushrooms remediate wood. Logs sequester carbon. Zero-waste system.',
+        viral: 'Edible forts are unique. The "we eat our fort" content is memorable.',
+        settings: ['House'],
+        featured: true,
+      },
+      {
+        id: 'living-willow',
+        title: 'Living Willow Lodge',
+        description: 'Plant willow cuttings in an arc pattern over steel rods. Willow grows 6+ feet per year. Within 2 seasons, a living green cave. Kids watch it grow. Prunings become building materials.',
+        difficulty: 'Beginner',
+        price: '$34',
+        time: '1 afternoon + seasons',
+        materials: ['Willow cuttings (50+)', 'Steel rebar rods', 'Patience'],
+        ecoImpact: 'Willow is a hyperaccumulator (pulls toxins from soil). Creates habitat. Sequesters carbon rapidly.',
+        viral: 'Time-lapse of growth is extremely engaging. "Our living fort" is a multi-year content series.',
+        settings: ['House'],
+        featured: false,
+      },
+      {
+        id: 'rain-garden',
+        title: 'Rain Chain Rain Garden',
+        description: 'Replace downspouts with copper or bamboo rain chains. Direct overflow to a sunken garden bed with gravel, sand, and native plants. The garden filters 90% of runoff. Mosquitoes don\'t breed in gravel.',
+        difficulty: 'Intermediate',
+        price: '$44',
+        time: '1 weekend',
+        materials: ['Rain chain (copper or bamboo)', 'River stone', 'Native plants', 'Edging'],
+        ecoImpact: 'Filters 90% of stormwater runoff. Creates habitat. Recharges groundwater.',
+        viral: 'Water feature + native plants = beautiful content. The "ecosystem in our yard" angle educates and inspires.',
+        settings: ['House'],
+        featured: false,
+      },
+      {
+        id: 'pollinator-palace',
+        title: 'Pollinator Palace',
+        description: 'A multi-story insect hotel built from salvaged materials. Drill holes in logs, pack pinecones and stems into wooden frames. Native bees, predatory wasps, and beneficial insects check in. Kids observe all season.',
+        difficulty: 'Beginner',
+        price: '$19',
+        time: '3 hours',
+        materials: ['Salvaged wood', 'Drill with various bits', 'Pinecones, stems, dried leaves', 'Natural twine'],
+        ecoImpact: 'Provides habitat for native pollinators. No native bees = no food crops. Critical ecosystem support.',
+        viral: 'Pollinator content is trending. "We hosted 300 bees this summer" posts are shareable.',
+        settings: ['House', 'Apartment Balcony', 'Townhouse'],
+        featured: false,
+      },
+      {
+        id: 'bamboo-trellis',
+        title: 'Bamboo Bean Tunnel',
+        description: 'Plant bamboo poles in a U-shape. Train beans up both sides. The beans meet at the top and create a green tunnel. Kids walk through and eat while exploring. Bamboo sequesters 35% more carbon than trees.',
+        difficulty: 'Beginner',
+        price: '$24',
+        time: '2 hours + growing',
+        materials: ['Bamboo poles (8-10)', 'Bean seeds', 'Twine', 'Seeds (scarlet runner are magic)'],
+        ecoImpact: 'Bamboo sequesters carbon rapidly. Beans fix nitrogen in soil. Zero inputs after planting.',
+        viral: 'Garden tunnels are highly photogenic. "Our bean palace" is a beloved content category.',
+        settings: ['House', 'Townhouse', 'Community Garden'],
+        featured: false,
+      },
+    ],
   },
   {
-    id: 'mud-kitchen',
-    title: 'Outdoor Mud Kitchen',
-    type: 'Outdoor',
-    description: 'The ultimate outdoor cooking station for little chefs. Counter height perfect for ages 3-9, with a working basin, prep space, and storage for real cookware. Built to last through seasons of mud pies.',
-    dimensions: '4ft x 2ft x 3ft',
-    difficulty: 'Beginner',
-    price: '$24'
+    id: 'nature',
+    title: 'Nature Connection',
+    subtitle: 'Spaces designed around wonder',
+    icon: 'eye',
+    color: '#464F5F',
+    blueprints: [
+      {
+        id: 'vernal-pool',
+        title: 'Vernal Pool Observatory',
+        description: 'A clay-lined seasonal depression that fills with winter rains. By spring, it\'s alive with tadpoles. A wooden platform at child height lets kids observe without disturbing. In summer, it dries to reveal "fossils."',
+        difficulty: 'Advanced',
+        price: '$49',
+        time: '2-3 weekends',
+        materials: ['Clay soil (compact)', 'Local stone', 'Cedar posts', 'Weather-resistant wood'],
+        ecoImpact: 'Creates critical amphibian habitat. Vernal pools are endangered ecosystems.',
+        viral: 'Tadpole content is irresistible. The "we watched them grow" narrative is emotional and shareable.',
+        settings: ['House'],
+        featured: true,
+      },
+      {
+        id: 'moon-garden',
+        title: 'Moon Garden Alcove',
+        description: 'A sitting area planted with white flowers that open at night: moonflower, jasmine, evening primrose. Solar lights make it magical after dark. Kids visit every evening to see what opened.',
+        difficulty: 'Beginner',
+        price: '$29',
+        time: '1 afternoon + planting',
+        materials: ['White night-blooming plants', 'Solar garden lights', 'Mulch', 'Stone or log seating'],
+        ecoImpact: 'Night gardens support nocturnal pollinators. Moths, bats, and night creatures benefit.',
+        viral: 'Night garden content is visually stunning. "Magic hour" photography performs extremely well.',
+        settings: ['House', 'Townhouse'],
+        featured: true,
+      },
+      {
+        id: 'bird-blind',
+        title: 'Kid-Sized Bird Blind',
+        description: 'A small observation structure just big enough for 2-3 kids. Peepholes at child eye level. camouflage with fabric and branches. Binoculars on hooks. Kids wait in silence for birds to appear.',
+        difficulty: 'Intermediate',
+        price: '$34',
+        time: '1 weekend',
+        materials: ['Salvaged timber', 'Camouflage fabric', 'Drift net', 'Logs for seating'],
+        ecoImpact: 'Encourages bird observation and stewardship. No ecological footprint.',
+        viral: 'Patience content is compelling. "We spotted 15 species" posts are popular.',
+        settings: ['House'],
+        featured: false,
+      },
+      {
+        id: 'texture-trail',
+        title: 'Barefoot Texture Trail',
+        description: 'A winding path through your yard with different surfaces: smooth river stones, bark mulch, grass, gravel, sand, moss. Take off shoes. The trail changes with weather and seasons. Return weekly to notice.',
+        difficulty: 'Beginner',
+        price: '$19',
+        time: '1 day',
+        materials: ['River stones', 'Bark mulch', 'Gravel', 'Sand', 'Moss', 'Grass'],
+        ecoImpact: 'No materials needed beyond natural surfaces. Encourages barefoot time and immune support.',
+        viral: 'Sensory content is engaging. "Our barefoot trail" is a seasonal content series.',
+        settings: ['House', 'Apartment Balcony'],
+        featured: false,
+      },
+      {
+        id: 'star-platform',
+        title: 'Star Gazing Platform',
+        description: 'A small elevated deck with a skylight or open roof. A sleeping bag and pillow. A red flashlight. A star chart. The platform is just high enough to see over fences. No light pollution.',
+        difficulty: 'Intermediate',
+        price: '$39',
+        time: '1-2 weekends',
+        materials: ['Cedar decking', 'Simple framing', 'Optional: plexiglass skylight', 'Railing at safe height'],
+        ecoImpact: 'Encourages astronomy and night sky appreciation. No energy use.',
+        viral: 'Night sky photography is stunning. "We saw the Milky Way from our yard" is highly shareable.',
+        settings: ['House'],
+        featured: false,
+      },
+      {
+        id: 'sensory-bins',
+        title: 'Rolling Sensory Bin Station',
+        description: 'A tiered rolling cart with 4 rotating sensory bins: smooth stones, dried beans, sand, leaves. Bins swap seasonally. The cart rolls anywhere. Kids bring the sensory room to them.',
+        difficulty: 'Beginner',
+        price: '$29',
+        time: '2 hours',
+        materials: ['Rolling cart (IKEA troom)', '4 bins', 'Natural materials (stones, beans, sand, leaves)', 'Labels'],
+        ecoImpact: 'Natural materials, reusable bins, zero waste. Materials can be composted at end of life.',
+        viral: 'Sensory content is satisfying to watch. "Sensory bin rotation" posts are popular.',
+        settings: ['House', 'Apartment', 'Renters'],
+        featured: false,
+      },
+    ],
   },
   {
-    id: 'tree-platform',
-    title: 'Tree Platform',
-    type: 'Outdoor',
-    description: 'A safe, sturdy platform for treehouses. Includes load calculations, hardware specs, and step-by-step instructions. The design adapts to most standard trees — no engineering degree required.',
-    dimensions: '8ft x 8ft platform',
-    difficulty: 'Advanced',
-    price: '$39'
+    id: 'apartment',
+    title: 'Apartment-Friendly',
+    subtitle: 'Nature connection in small spaces',
+    icon: 'home',
+    color: '#7A5C14',
+    blueprints: [
+      {
+        id: 'window-station',
+        title: 'Window Seed Station',
+        description: 'A shallow wooden tray on your sill with seed-starting pots and a spray bottle. Watch roots develop in clear cups. Track growth in a journal. Move starts to balcony when ready.',
+        difficulty: 'Beginner',
+        price: '$14',
+        time: '1 hour',
+        materials: ['Shallow wooden tray', 'Small pots', 'Seeds', 'Clear cups (for root watching)', 'Spray bottle'],
+        ecoImpact: 'Connects kids to food systems. Zero footprint.',
+        viral: 'Growing content is satisfying. "Day 7: they sprouted!" posts get engagement.',
+        settings: ['Apartment', 'Condo', 'Renters'],
+        featured: true,
+      },
+      {
+        id: 'balcony-meadow',
+        title: 'Balcony Meadow in Pots',
+        description: 'Group 5-6 large nursery pots on your balcony. Fill with native grass plugs and wildflower seedlings. Add a mason bee house on the railing. Watch insects arrive. Bring pots inside for winter.',
+        difficulty: 'Beginner',
+        price: '$29',
+        time: '2 hours',
+        materials: ['Large nursery pots (5-6)', 'Native grass plugs', 'Wildflower seedlings', 'Mason bee house'],
+        ecoImpact: 'Creates urban habitat. Mason bees pollinate 20x more efficiently than honeybees.',
+        viral: 'Balcony content is aspirational. "Our 20 sq ft nature sanctuary" is relatable.',
+        settings: ['Apartment Balcony', 'Condo', 'Renters'],
+        featured: true,
+      },
+      {
+        id: 'living-curtain',
+        title: 'Living Plant Curtain',
+        description: 'Two tall planter boxes with caster wheels filled with ornamental grasses or ferns. Roll them to create a room divider. Plants create privacy, filter air, and add nature to the space.',
+        difficulty: 'Beginner',
+        price: '$34',
+        time: '2 hours',
+        materials: ['Two 24" planters on casters', 'Ornamental grasses or ferns', 'Potting soil', 'Liquid fertilizer'],
+        ecoImpact: 'Plants filter indoor air. Ornamental grasses support urban biodiversity.',
+        viral: 'Plant parent content is huge. "I made a room from plants" is shareable.',
+        settings: ['Apartment', 'Condo', 'Renters'],
+        featured: false,
+      },
+      {
+        id: 'terrarium-table',
+        title: 'Terrarium Side Table',
+        description: 'A 20-gallon glass aquarium or apothecary jar becomes a self-contained ecosystem. Moss, ferns, small stones. Mist twice a week. The glass lid becomes a side table for books.',
+        difficulty: 'Beginner',
+        price: '$24',
+        time: '1 hour',
+        materials: ['Glass aquarium or apothecary jar', 'Moss', 'Ferns', 'Decorative stones', 'Activated charcoal'],
+        ecoImpact: 'Self-contained ecosystem. No water waste. Closed-loop system.',
+        viral: 'Terrarium content is calming and beautiful. "Our desk ecosystem" is popular.',
+        settings: ['Apartment', 'Condo', 'Renters', 'Dorm'],
+        featured: false,
+      },
+      {
+        id: 'vine-tunnel',
+        title: 'Indoor Vine Tunnel',
+        description: 'A PVC arch in a sunny corner with morning glory or pole bean seeds planted at the base. As vines grow, they climb the frame and create a living cave. Kids walk through. Week 6 is magical.',
+        difficulty: 'Beginner',
+        price: '$19',
+        time: '1 hour + 6 weeks',
+        materials: ['PVC pipe arch', 'Morning glory or pole bean seeds', 'Small pots', 'Twist ties'],
+        ecoImpact: 'Plants grow food and beauty from nothing. No resources beyond water.',
+        viral: 'Growing content with time progression is engaging. "Week 1 vs Week 6" posts perform well.',
+        settings: ['Apartment', 'Condo', 'Renters'],
+        featured: false,
+      },
+      {
+        id: 'nest-swing',
+        title: 'Freestanding Nest Swing',
+        description: 'A rattan hanging chair on a freestanding A-frame. No ceiling mounting needed. Kids curl up with a blanket and a book. Position near the window. Nature viewing + swinging.',
+        difficulty: 'Beginner',
+        price: '$49',
+        time: '1 hour',
+        materials: ['Freestanding A-frame (IKEA or similar)', 'Rattan nest chair', 'Rope', 'Cushion', 'Throw blanket'],
+        ecoImpact: 'Natural materials (rattan is sustainable). No installation means it moves with you.',
+        viral: 'Cozy swinging content is aspirational. "The reading spot" is a beloved aesthetic.',
+        settings: ['Apartment', 'Condo', 'Renters'],
+        featured: false,
+      },
+    ],
   },
   {
-    id: 'nature-shelf',
-    title: 'Display Nature Shelf',
-    type: 'Indoor',
-    description: 'A wall-mounted display system for treasures from your adventures. Acorns, feathers, pressed flowers, rocks — rotate the collections as the seasons change. Makes nature feel like art.',
-    dimensions: '4ft wide x 3ft tall',
-    difficulty: 'Beginner',
-    price: '$14'
+    id: 'sensory',
+    title: 'Sensory Sanctuaries',
+    subtitle: 'Spaces for calm and regulation',
+    icon: 'heart',
+    color: '#6B3A2A',
+    blueprints: [
+      {
+        id: 'sound-garden',
+        title: 'Wind Chime Garden',
+        description: 'Hang different materials that make sound: bamboo, old silverware, glass bottles, metal pipe. Arrange them at child height. The sounds change with wind. Kids sit and listen.',
+        difficulty: 'Beginner',
+        price: '$14',
+        time: '2 hours',
+        materials: ['Bamboo', 'Old silverware', 'Glass bottles', 'Metal pipe', 'Natural twine'],
+        ecoImpact: 'Uses reclaimed materials. No energy required.',
+        viral: 'Satisfying sound content performs well. "Sounds like this" posts engage viewers.',
+        settings: ['House', 'Apartment Balcony', 'Townhouse'],
+        featured: false,
+      },
+      {
+        id: 'water-wall',
+        title: 'Gutter Water Wall',
+        description: 'Mount rain gutters at angles on a wall or fence. Water flows down through funnels and channels. Kids redirect the flow with cups and toys. Rain barrel below collects water.',
+        difficulty: 'Intermediate',
+        price: '$29',
+        time: '3 hours',
+        materials: ['Rain gutters (3-4)', 'Rain barrel', 'Brackets', 'Funnels', 'Cups and toys'],
+        ecoImpact: 'Collects rainwater for reuse. No water bill increase.',
+        viral: 'Water play content is satisfying. "Watch this water flow" posts get high retention.',
+        settings: ['House', 'Townhouse'],
+        featured: false,
+      },
+      {
+        id: 'dark-cave',
+        title: 'Dark Den Cave',
+        description: 'A small tent or canopy in a quiet corner with blackout curtains. A small lamp with red light (preserves night vision). Cushions. A place to be still when the world is too loud.',
+        difficulty: 'Beginner',
+        price: '$39',
+        time: '2 hours',
+        materials: ['Pop-up tent or canopy', 'Blackout curtains', 'Red fairy light', 'Cushions', 'Blanket'],
+        ecoImpact: 'Reuses existing materials. Zero waste.',
+        viral: 'Cozy/sensory content is engaging. "Where we go to calm down" normalizes self-regulation.',
+        settings: ['House', 'Apartment', 'Renters'],
+        featured: false,
+      },
+      {
+        id: 'nature-table',
+        title: 'Rotating Nature Table',
+        description: 'A low shelf or table dedicated to this week\'s nature finds. A feather, a seed pod, a strange stone. No labels. No explanations. Let children arrange. The table changes with the season.',
+        difficulty: 'Beginner',
+        price: '$9',
+        time: '30 minutes',
+        materials: ['Low shelf or table', 'Weekly nature collection', 'Optional: display dishes'],
+        ecoImpact: 'Free. Encourages outdoor time and observation.',
+        viral: 'Nature table content is aesthetic. "What we found this week" is a popular series format.',
+        settings: ['House', 'Apartment', 'Renters'],
+        featured: false,
+      },
+    ],
   },
-  {
-    id: 'climbing-wall',
-    title: 'Indoor Climbing Wall',
-    type: 'Indoor',
-    description: 'Turn a wall into a climbing challenge. Designed for small spaces — works in a bedroom corner or basement. Holds up to 100lbs, with handholds that grow with your kids\' skills.',
-    dimensions: '6ft x 8ft',
-    difficulty: 'Intermediate',
-    price: '$29'
-  }
 ]
 
 export default function ArchitectPage() {
-  const [filter, setFilter] = useState('All')
-  const [submitted, setSubmitted] = useState(false)
+  const [activeCollection, setActiveCollection] = useState('hideaway')
+  const [expandedBlueprint, setExpandedBlueprint] = useState(null)
 
-  const filteredBlueprints = filter === 'All' 
-    ? blueprints 
-    : blueprints.filter(b => b.type === filter)
+  const currentCollection = collections.find(c => c.id === activeCollection)
+  const featuredBlueprints = collections.flatMap(c => c.blueprints.filter(b => b.featured))
 
   return (
     <div className="min-h-screen bg-cream pt-20 pb-12">
-      <div className="max-w-5xl mx-auto px-4">
+      <div className="max-w-6xl mx-auto px-4">
         <Link to="/wilder-homes/environment" className="text-ember text-sm font-medium mb-4 inline-flex items-center gap-1 hover:underline">
-          ← Back to Environment
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+          Back to Environment
         </Link>
 
         {/* Hero */}
@@ -85,53 +442,106 @@ export default function ArchitectPage() {
               The Wilder Architect
             </p>
             <h1 className="font-serif text-3xl md:text-5xl text-white italic mb-4 leading-tight">
-              Come up with a plan first.
+              Build something they will remember.
             </h1>
             <p className="text-white/70 max-w-xl mx-auto text-sm md:text-base leading-relaxed">
-              Before you swing the hammer, we help you think it through. Detailed plans for indoor sensory spaces, outdoor builds, and everything in between — designed for real families with real spaces.
+              Not just a playground. Not just a playroom. Spaces so special that kids describe them to therapists decades later. 
+              Eco-friendly builds that also happen to be Instagram gold.
             </p>
           </div>
+          <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-white/5 rounded-full blur-3xl" />
         </motion.div>
 
-        {/* Filter Tabs */}
-        <div className="flex gap-2 mb-8">
-          {['All', 'Indoor', 'Outdoor'].map(type => (
+        {/* Featured Builds */}
+        <div className="mb-12">
+          <h2 className="font-serif text-2xl text-ink mb-6">Featured Builds</h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {featuredBlueprints.slice(0, 6).map(blueprint => {
+              const collection = collections.find(c => c.blueprints.some(b => b.id === blueprint.id))
+              return (
+                <motion.button
+                  key={blueprint.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  onClick={() => {
+                    setActiveCollection(collection.id)
+                    setExpandedBlueprint(blueprint.id)
+                  }}
+                  className="text-left bg-white rounded-xl p-5 border border-inkll/10 hover:shadow-lg transition-all hover:border-ember/30 group"
+                >
+                  <div className="flex items-start justify-between mb-2">
+                    <span className="text-xs font-medium px-2 py-1 rounded" style={{ backgroundColor: collection.color + '20', color: collection.color }}>
+                      {collection.title}
+                    </span>
+                    <span className="font-serif text-lg" style={{ color: collection.color }}>{blueprint.price}</span>
+                  </div>
+                  <h3 className="font-serif text-lg text-ink mb-1 group-hover:text-ember transition-colors">{blueprint.title}</h3>
+                  <p className="text-xs text-inkl line-clamp-2">{blueprint.description}</p>
+                  <div className="mt-3 flex items-center gap-2 text-xs text-inkll">
+                    <span>{blueprint.difficulty}</span>
+                    <span>-</span>
+                    <span>{blueprint.time}</span>
+                  </div>
+                </motion.button>
+              )
+            })}
+          </div>
+        </div>
+
+        {/* Collection Tabs */}
+        <div className="flex gap-2 mb-8 overflow-x-auto pb-2">
+          {collections.map(collection => (
             <button
-              key={type}
-              onClick={() => setFilter(type)}
-              className={`px-4 py-2 rounded-full font-sans text-sm font-medium transition-all ${
-                filter === type
-                  ? 'bg-ink text-white'
-                  : 'bg-white text-inkl border border-inkll/20 hover:border-ember/50'
-              }`}
+              key={collection.id}
+              onClick={() => {
+                setActiveCollection(collection.id)
+                setExpandedBlueprint(null)
+              }}
+              className="flex-shrink-0 px-4 py-2 rounded-full font-sans text-sm font-medium transition-all whitespace-nowrap"
+              style={{
+                backgroundColor: activeCollection === collection.id ? collection.color : 'white',
+                color: activeCollection === collection.id ? 'white' : '#783C1E',
+                border: `2px solid ${activeCollection === collection.id ? collection.color : '#D2B496'}`,
+              }}
             >
-              {type}
+              {collection.title}
             </button>
           ))}
         </div>
 
-        {/* Blueprints Grid */}
+        {/* Collection Header */}
+        <div className="mb-6">
+          <h2 className="font-serif text-2xl text-ink" style={{ color: currentCollection.color }}>
+            {currentCollection.title}
+          </h2>
+          <p className="text-inkl">{currentCollection.subtitle}</p>
+        </div>
+
+        {/* Blueprints */}
         <div className="grid md:grid-cols-2 gap-6 mb-12">
-          {filteredBlueprints.map((blueprint, index) => (
+          {currentCollection.blueprints.map((blueprint, index) => (
             <motion.div
               key={blueprint.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.05 * index }}
-              className="bg-white rounded-2xl overflow-hidden shadow-lg border border-inkll/10 group"
+              className="bg-white rounded-2xl overflow-hidden shadow-lg border border-inkll/10"
             >
-              <div className="p-6">
-                <div className="flex items-center justify-between mb-3">
+              <button
+                onClick={() => setExpandedBlueprint(expandedBlueprint === blueprint.id ? null : blueprint.id)}
+                className="w-full p-6 text-left"
+              >
+                <div className="flex items-start justify-between mb-3">
                   <span className={`px-2 py-1 text-xs font-medium rounded-full ${
-                    blueprint.type === 'Indoor' 
-                      ? 'bg-olive/10 text-olive' 
-                      : blueprint.type === 'Outdoor'
-                        ? 'bg-ember/10 text-ember'
-                        : 'bg-gold/10 text-gold'
+                    blueprint.settings.includes('Apartment') || blueprint.settings.includes('Renters') 
+                      ? 'bg-gold/10 text-gold' 
+                      : 'bg-olive/10 text-olive'
                   }`}>
-                    {blueprint.type}
+                    {blueprint.settings.includes('Apartment') || blueprint.settings.includes('Renters') 
+                      ? 'Apartment OK' 
+                      : 'House Only'}
                   </span>
-                  <span className="font-serif text-2xl text-ember">{blueprint.price}</span>
+                  <span className="font-serif text-2xl" style={{ color: currentCollection.color }}>{blueprint.price}</span>
                 </div>
                 
                 <h3 className="font-serif text-xl text-ink mb-2">{blueprint.title}</h3>
@@ -139,16 +549,75 @@ export default function ArchitectPage() {
                   {blueprint.description}
                 </p>
                 
-                <div className="flex items-center gap-4 text-xs text-inkll mb-4">
-                  <span>{blueprint.dimensions}</span>
-                  <span>·</span>
-                  <span>{blueprint.difficulty}</span>
+                <div className="flex items-center gap-4 text-xs text-inkll">
+                  <span className="font-medium">{blueprint.difficulty}</span>
+                  <span className="text-inkll/50">|</span>
+                  <span>{blueprint.time}</span>
                 </div>
-                
-                <button className="w-full py-3 bg-ember text-white text-sm font-medium rounded-full hover:bg-terra transition-colors">
-                  Download Blueprint
-                </button>
-              </div>
+              </button>
+
+              {/* Expanded Content */}
+              {expandedBlueprint === blueprint.id && (
+                <motion.div
+                  initial={{ height: 0 }}
+                  animate={{ height: 'auto' }}
+                  className="px-6 pb-6 border-t border-inkll/10"
+                >
+                  <div className="pt-4 space-y-4">
+                    {/* Materials */}
+                    <div>
+                      <h4 className="text-xs font-medium uppercase tracking-wider text-inkll mb-2">Materials</h4>
+                      <ul className="text-sm text-inkl space-y-1">
+                        {blueprint.materials.map((mat, i) => (
+                          <li key={i} className="flex items-start gap-2">
+                            <span style={{ color: currentCollection.color }}>-</span>
+                            {mat}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {/* Eco Impact */}
+                    <div className="p-3 rounded-lg" style={{ backgroundColor: currentCollection.color + '10' }}>
+                      <div className="flex items-start gap-2">
+                        <svg className="w-5 h-5 flex-shrink-0" style={{ color: currentCollection.color }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <div>
+                          <p className="text-xs font-medium" style={{ color: currentCollection.color }}>Eco Impact</p>
+                          <p className="text-sm text-inkl">{blueprint.ecoImpact}</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Viral Potential */}
+                    <div className="p-3 rounded-lg bg-ember/5">
+                      <div className="flex items-start gap-2">
+                        <svg className="w-5 h-5 flex-shrink-0 text-ember" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                        <div>
+                          <p className="text-xs font-medium text-ember">Viral Potential</p>
+                          <p className="text-sm text-inkl">{blueprint.viral}</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Settings */}
+                    <div>
+                      <p className="text-xs text-inkll">
+                        <span className="font-medium">Works in: </span>
+                        {blueprint.settings.join(', ')}
+                      </p>
+                    </div>
+
+                    {/* CTA */}
+                    <button className="w-full py-3 text-white text-sm font-medium rounded-full hover:opacity-90 transition-opacity" style={{ backgroundColor: currentCollection.color }}>
+                      Get the Blueprint
+                    </button>
+                  </div>
+                </motion.div>
+              )}
             </motion.div>
           ))}
         </div>
@@ -157,39 +626,18 @@ export default function ArchitectPage() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
           className="bg-white rounded-3xl p-8 border border-inkll/10 text-center"
         >
-          {!submitted ? (
-            <>
-              <h2 className="font-serif text-2xl text-ink mb-4">Need a custom plan?</h2>
-              <p className="text-inkl max-w-md mx-auto mb-6">
-                Tell us what you're building. We'll help you plan it out — dimensions that fit your space, materials that fit your budget, and steps that fit your schedule.
-              </p>
-              <button 
-                onClick={() => setSubmitted(true)}
-                className="px-6 py-3 bg-ember text-white font-sans font-medium rounded-full hover:bg-terra transition-colors"
-              >
-                Get a custom plan
-              </button>
-            </>
-          ) : (
-            <>
-              <div className="w-16 h-16 bg-olive/20 rounded-full mx-auto mb-4 flex items-center justify-center">
-                <svg className="w-8 h-8 text-olive" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-              </div>
-              <h2 className="font-serif text-2xl text-ink mb-4">We'll be in touch</h2>
-              <p className="text-inkl mb-4">Share a bit more about your project and we'll follow up with ideas.</p>
-              <Link 
-                to="/wilder-homes"
-                className="inline-flex items-center justify-center px-6 py-3 bg-olive text-white font-sans font-medium rounded-full hover:opacity-90 transition-colors"
-              >
-                Continue exploring Wilder Homes
-              </Link>
-            </>
-          )}
+          <h2 className="font-serif text-2xl text-ink mb-4">Need something specific?</h2>
+          <p className="text-inkl max-w-md mx-auto mb-6">
+            Tell us what you're dreaming of. We'll help you plan it - dimensions that fit, materials that make sense, steps that don't overwhelm.
+          </p>
+          <a 
+            href="mailto:hello@wildermoms.com?subject=Custom Build Request"
+            className="inline-flex items-center justify-center px-6 py-3 bg-ember text-white font-sans font-medium rounded-full hover:bg-terra transition-colors"
+          >
+            Request a Custom Plan
+          </a>
         </motion.div>
       </div>
     </div>
