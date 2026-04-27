@@ -1,10 +1,12 @@
 import { useState, useEffect, useMemo } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
+import { useAuth } from '@clerk/react'
 import { hikes } from './hikes'
 import { useLocation } from '../hooks/useLocation'
 import { useWeather } from '../hooks/useWeather'
 import { useWilderTrails } from './WilderTrailsContext'
+import { useSavedTrails } from '../hooks/useSavedContent'
 import HourlyWeather from './HourlyWeather'
 import SmartChecklist from '../blueprint/SmartChecklist'
 import PackListGenerator from './PackListGenerator'
@@ -118,9 +120,12 @@ export default function TrailDetailPage() {
   const autoLocation = useLocation()
   const userWeather = useWeather(autoLocation.lat, autoLocation.lon)
   const { location, familyInfo } = useWilderTrails()
+  const { userId } = useAuth()
+  const { isSaved, toggleSaved } = useSavedTrails(userId)
   
   const [checkedItems, setCheckedItems] = useState([])
   const [showPackList, setShowPackList] = useState(false)
+  const [showSavedToast, setShowSavedToast] = useState(false)
   
   // Find the hike by ID
   const hike = useMemo(() => {
@@ -218,16 +223,52 @@ export default function TrailDetailPage() {
           animate={{ opacity: 1, y: 0 }}
           className="mb-8"
         >
-          <div className={`inline-block px-3 py-1 rounded-full text-sm font-sans font-medium mb-4 ${difficultyColors[hike.difficulty]}`}>
-            {difficultyLabels[hike.difficulty]}
+          <div className="flex items-start justify-between">
+            <div className="flex-1">
+              <div className={`inline-block px-3 py-1 rounded-full text-sm font-sans font-medium mb-4 ${difficultyColors[hike.difficulty]}`}>
+                {difficultyLabels[hike.difficulty]}
+              </div>
+              <h1 className="font-serif text-4xl md:text-5xl text-ink mb-3">
+                {hike.title}
+              </h1>
+              <p className="font-sans text-inkl text-lg">
+                {hike.region}, {hike.state}
+              </p>
+            </div>
+            
+            {/* Save Button */}
+            <button
+              onClick={async () => {
+                await toggleSaved(hike.id)
+                setShowSavedToast(true)
+                setTimeout(() => setShowSavedToast(false), 2000)
+              }}
+              className={`flex-shrink-0 w-14 h-14 rounded-full flex items-center justify-center transition-all ${
+                isSaved(hike.id)
+                  ? 'bg-ember text-white'
+                  : 'bg-white text-ember border-2 border-ember hover:bg-ember/10'
+              }`}
+            >
+              <svg className="w-6 h-6" fill={isSaved(hike.id) ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+              </svg>
+            </button>
           </div>
-          <h1 className="font-serif text-4xl md:text-5xl text-ink mb-3">
-            {hike.title}
-          </h1>
-          <p className="font-sans text-inkl text-lg">
-            {hike.region}, {hike.state}
-          </p>
         </motion.header>
+        
+        {/* Saved Toast */}
+        <AnimatePresence>
+          {showSavedToast && (
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="fixed top-24 left-1/2 -translate-x-1/2 z-50 bg-forest text-white px-6 py-3 rounded-full shadow-lg"
+            >
+              {isSaved(hike.id) ? 'Saved to your profile!' : 'Removed from saved'}
+            </motion.div>
+          )}
+        </AnimatePresence>
         
         {/* Quick Stats */}
         <motion.div
