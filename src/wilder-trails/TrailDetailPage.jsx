@@ -60,21 +60,34 @@ function getWeatherPackRecommendations(weather, tempF, elevation) {
 }
 
 // Get difficulty-appropriate pack items
-function getDifficultyPackItems(difficulty, duration) {
+function getDifficultyPackItems(difficulty, duration, needsStroller = false) {
   let baseItems = []
   
   switch (difficulty) {
     case 'easy':
-      baseItems = packLists.dayHikeEssentials.slice(0, 8)
+      baseItems = packLists.dayHikeEssentials.filter(item => 
+        !item.includes('Stroller or hiking carrier') && !item.includes('stroller')
+      ).slice(0, 8)
       break
     case 'moderate':
-      baseItems = packLists.dayHikeEssentials.slice(0, 10)
+      baseItems = packLists.dayHikeEssentials.filter(item => 
+        !item.includes('Stroller or hiking carrier') && !item.includes('stroller')
+      ).slice(0, 10)
       break
     case 'challenging':
-      baseItems = packLists.dayHikeEssentials
+      baseItems = packLists.dayHikeEssentials.filter(item => 
+        !item.includes('Stroller or hiking carrier') && !item.includes('stroller')
+      )
       break
     default:
-      baseItems = packLists.dayHikeEssentials.slice(0, 8)
+      baseItems = packLists.dayHikeEssentials.filter(item => 
+        !item.includes('Stroller or hiking carrier') && !item.includes('stroller')
+      ).slice(0, 8)
+  }
+  
+  // Add stroller/carrier only if explicitly needed
+  if (needsStroller) {
+    baseItems.push('Stroller or hiking carrier (Osprey, Deuter)')
   }
   
   // Add duration-appropriate items
@@ -127,8 +140,8 @@ export default function TrailDetailPage() {
   // Get difficulty-based pack list
   const basePackItems = useMemo(() => {
     if (!hike) return []
-    return getDifficultyPackItems(hike.difficulty, hike.duration)
-  }, [hike])
+    return getDifficultyPackItems(hike.difficulty, hike.duration, familyInfo?.needsStroller || false)
+  }, [hike, familyInfo])
   
   // Combined pack list with family considerations
   const combinedPackList = useMemo(() => {
