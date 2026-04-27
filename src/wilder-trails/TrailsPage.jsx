@@ -338,8 +338,8 @@ export default function TrailsPage() {
           </div>
         )}
 
-        {/* Trail Results */}
-        {!isReady ? (
+        {/* Trail Results - Hidden when AI recommendations are showing */}
+        {!aiLoading && aiRecommendations.length > 0 ? null : !isReady ? (
           <div className="flex items-center justify-center py-20">
             <div className="text-center">
               <div className="w-14 h-14 border-4 border-ember/30 border-t-ember rounded-full animate-spin mx-auto mb-5"></div>
@@ -349,9 +349,7 @@ export default function TrailsPage() {
         ) : recommendedHikes.length > 0 ? (
           <div>
             <div className="flex items-center justify-between mb-6">
-              <h2 className="font-serif text-2xl text-ink">
-                {aiRecommendations.length > 0 ? 'More trails for you' : 'Found trails'}
-              </h2>
+              <h2 className="font-serif text-2xl text-ink">Found trails</h2>
               <span className="font-sans text-sm text-ember bg-ember/10 px-4 py-2 rounded-full">
                 Sorted by best match
               </span>
