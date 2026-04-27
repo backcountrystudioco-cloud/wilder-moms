@@ -428,41 +428,9 @@ export default function ArchitectPage() {
     timeline: ''
   })
   const [submitted, setSubmitted] = useState(false)
-  const [buildPrompt, setBuildPrompt] = useState('')
-  const [isGenerating, setIsGenerating] = useState(false)
-  const [generatedBuilds, setGeneratedBuilds] = useState([])
-  const [buildError, setBuildError] = useState('')
 
   const currentCollection = collections.find(c => c.id === activeCollection)
   const featuredBlueprints = collections.flatMap(c => c.blueprints.filter(b => b.featured))
-
-  const generateBuilds = async () => {
-    if (!buildPrompt.trim()) return
-    
-    setIsGenerating(true)
-    setBuildError('')
-    
-    try {
-      const response = await fetch('/api/ai-build-generator', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ items: buildPrompt })
-      })
-      
-      const data = await response.json()
-      
-      if (!response.ok) {
-        throw new Error(data.error || 'Failed to generate builds')
-      }
-      
-      setGeneratedBuilds(data.builds)
-    } catch (error) {
-      console.error('Build generation error:', error)
-      setBuildError(error.message || 'Failed to generate builds. Please try again.')
-    } finally {
-      setIsGenerating(false)
-    }
-  }
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -505,94 +473,6 @@ export default function ArchitectPage() {
             </button>
           </div>
           <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-white/5 rounded-full blur-3xl" />
-        </motion.div>
-
-        {/* Build Generator */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="mb-12 p-6 md:p-8 bg-white rounded-3xl border border-inkll/10"
-        >
-          <div className="text-center mb-6">
-            <h2 className="font-serif text-2xl text-ink mb-2">What can I make today?</h2>
-            <p className="text-inkl">Tell me what you have around the house. Wilder Companion will generate 3 builds you can make this afternoon.</p>
-          </div>
-          
-          <div className="flex flex-col md:flex-row gap-3 mb-4">
-            <input
-              type="text"
-              value={buildPrompt}
-              onChange={(e) => setBuildPrompt(e.target.value)}
-              placeholder="e.g., cardboard boxes, old sheets, sticks, fabric scraps..."
-              className="flex-1 px-4 py-3 rounded-xl border-2 border-inkll/20 focus:border-ember focus:outline-none text-ink"
-              onKeyDown={(e) => e.key === 'Enter' && generateBuilds()}
-            />
-            <button
-              onClick={generateBuilds}
-              disabled={isGenerating || !buildPrompt.trim()}
-              className="px-6 py-3 bg-ember text-white font-medium rounded-full hover:bg-terra transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
-            >
-              {isGenerating ? (
-                <>
-                  <svg className="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 0h12a8 8 0 010 16V0z" />
-                  </svg>
-                  Generating...
-                </>
-              ) : (
-                <>
-                  Generate Builds
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                  </svg>
-                </>
-              )}
-            </button>
-          </div>
-
-          {buildError && (
-            <p className="text-red-500 text-sm text-center">{buildError}</p>
-          )}
-
-          {generatedBuilds.length > 0 && (
-            <div className="mt-6 space-y-4">
-              {generatedBuilds.map((build, index) => (
-                <div key={index} className="p-4 bg-cream rounded-xl">
-                  <h3 className="font-serif text-lg text-ink mb-2">{build.title}</h3>
-                  <p className="text-sm text-inkl mb-3">{build.description}</p>
-                  
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div>
-                      <p className="text-xs font-medium uppercase tracking-wider text-inkll mb-2">Materials</p>
-                      <ul className="space-y-1">
-                        {build.materials.map((mat, i) => (
-                          <li key={i} className="text-sm text-inkl flex items-start gap-2">
-                            <span className="text-olive">-</span>
-                            {mat}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div>
-                      <p className="text-xs font-medium uppercase tracking-wider text-inkll mb-2">Steps</p>
-                      <ol className="space-y-1">
-                        {build.steps.map((step, i) => (
-                          <li key={i} className="text-sm text-inkl flex items-start gap-2">
-                            <span className="text-ember font-medium w-4">{i + 1}.</span>
-                            {step}
-                          </li>
-                        ))}
-                      </ol>
-                    </div>
-                  </div>
-                  
-                  <p className="mt-3 text-sm italic text-olive">{build.whyKidsLoveIt}</p>
-                </div>
-              ))}
-            </div>
-          )}
         </motion.div>
 
         {/* Featured Builds */}
