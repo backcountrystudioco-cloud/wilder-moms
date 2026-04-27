@@ -7,12 +7,12 @@ import ProgressStepper from './ProgressStepper'
 
 // Location presets
 const locationPresets = [
-  { name: 'Denver Metro', lat: 39.7392, lon: -104.9903 },
-  { name: 'Boulder', lat: 40.0150, lon: -105.2705 },
-  { name: 'Colorado Springs', lat: 38.8339, lon: -104.8214 },
-  { name: 'Fort Collins', lat: 40.5853, lon: -105.0844 },
-  { name: 'Estes Park (RMNP)', lat: 40.3772, lon: -105.5217 },
-  { name: 'Golden', lat: 39.7555, lon: -105.2211 },
+  { name: 'Denver Metro', lat: 39.7392, lon: -104.9903, state: 'Colorado' },
+  { name: 'Boulder', lat: 40.0150, lon: -105.2705, state: 'Colorado' },
+  { name: 'Colorado Springs', lat: 38.8339, lon: -104.8214, state: 'Colorado' },
+  { name: 'Fort Collins', lat: 40.5853, lon: -105.0844, state: 'Colorado' },
+  { name: 'Estes Park (RMNP)', lat: 40.3772, lon: -105.5217, state: 'Colorado' },
+  { name: 'Golden', lat: 39.7555, lon: -105.2211, state: 'Colorado' },
   { name: 'Seattle', lat: 47.6062, lon: -122.3321 },
   { name: 'Portland', lat: 45.5051, lon: -122.6750 },
   { name: 'Bend', lat: 44.0582, lon: -121.3153 },
@@ -35,6 +35,7 @@ export default function LocationPage() {
       lat: preset.lat,
       lon: preset.lon,
       city: preset.name,
+      state: preset.state || '',
       name: preset.name,
     })
   }
@@ -45,6 +46,7 @@ export default function LocationPage() {
         lat: autoLocation.lat,
         lon: autoLocation.lon,
         city: autoLocation.city || 'Your Location',
+        state: autoLocation.state || '',
         name: autoLocation.city || 'My Location',
       })
       setManualLocation(autoLocation.city || 'My Location')

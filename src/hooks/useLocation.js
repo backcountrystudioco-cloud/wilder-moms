@@ -53,11 +53,17 @@ export function useLocation() {
             data.address?.village ||
             data.address?.county ||
             'Unknown Location';
+          
+          const state =
+            data.address?.state ||
+            data.address?.region ||
+            '';
 
           setLocation({
             lat: latitude,
             lon: longitude,
             city,
+            state,
             error: null,
             loading: false,
           });
