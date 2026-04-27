@@ -116,27 +116,25 @@ export default function TrailDetailPage() {
   const { trailId } = useParams()
   const navigate = useNavigate()
   const autoLocation = useLocation()
-  const weather = useWeather(autoLocation.lat, autoLocation.lon)
+  const userWeather = useWeather(autoLocation.lat, autoLocation.lon)
   const { location, familyInfo } = useWilderTrails()
   
   const [checkedItems, setCheckedItems] = useState([])
   const [showPackList, setShowPackList] = useState(false)
-  
-  // Use WilderTrails location if available, otherwise fall back to auto-detected
-  const activeLocation = location || (autoLocation.lat ? autoLocation : null)
-  const hikeWeather = useWeather(activeLocation?.lat, activeLocation?.lon)
   
   // Find the hike by ID
   const hike = useMemo(() => {
     return hikes.find(h => h.id === trailId)
   }, [trailId])
   
-  // Get weather-based recommendations
+  // Use trail's location for weather - THIS IS THE KEY FIX
+  const trailWeather = useWeather(hike?.lat, hike?.lon)
+  
+  // Get weather-based recommendations (using trail location)
   const weatherRecommendations = useMemo(() => {
-    const weatherSource = hikeWeather.temp !== null ? hikeWeather : weather
-    if (!weatherSource || !weatherSource.temp) return []
-    return getWeatherPackRecommendations(weatherSource, weatherSource.temp, hike?.elevation || 0)
-  }, [hikeWeather, weather, hike?.elevation])
+    if (!trailWeather || !trailWeather.temp) return []
+    return getWeatherPackRecommendations(trailWeather, trailWeather.temp, hike?.elevation || 0)
+  }, [trailWeather, hike?.elevation])
   
   // Get difficulty-based pack list
   const basePackItems = useMemo(() => {
@@ -312,20 +310,21 @@ export default function TrailDetailPage() {
           </div>
         </motion.div>
         
-        {/* Weather Integration */}
-        {weather.temp !== null && (
+        {/* Weather Integration - Using trail location */}
+        {trailWeather.temp !== null && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
             className="mb-6"
           >
-            <h2 className="font-serif text-2xl text-ink mb-4">Current Conditions</h2>
+            <h2 className="font-serif text-2xl text-ink mb-4">Current Conditions at {hike.title}</h2>
             <div className="bg-blush/40 rounded-2xl p-6">
               <div className="flex items-center justify-between mb-4">
                 <div>
-                  <p className="font-serif text-4xl text-ink">{weather.temp}°F</p>
-                  <p className="text-inkl capitalize">{weather.description || 'Clear conditions'}</p>
+                  <p className="font-serif text-4xl text-ink">{trailWeather.temp}°F</p>
+                  <p className="text-inkl capitalize">{trailWeather.description || 'Clear conditions'}</p>
+                  <p className="text-sm text-inkl mt-1">{hike.region}, {hike.state}</p>
                 </div>
                 <div className="text-right">
                   <p className="text-inkl text-sm">Best time: </p>
@@ -333,8 +332,8 @@ export default function TrailDetailPage() {
                 </div>
               </div>
               
-              {weather.hourly && weather.hourly.length > 0 && (
-                <HourlyWeather hourly={weather.hourly} currentHour={new Date().getHours()} />
+              {trailWeather.hourly && trailWeather.hourly.length > 0 && (
+                <HourlyWeather hourly={trailWeather.hourly} currentHour={new Date().getHours()} />
               )}
             </div>
           </motion.div>
@@ -350,7 +349,7 @@ export default function TrailDetailPage() {
           >
             <h2 className="font-serif text-2xl text-ink mb-4">Smart Pack List for Today</h2>
             <p className="font-sans text-inkl mb-4">
-              Based on current weather ({weather?.temp}°F) and {hike.elevationLabel} elevation
+              Based on current weather ({trailWeather?.temp}°F) and {hike.elevationLabel} elevation at {hike.title}
             </p>
             
             <div className="bg-white rounded-2xl p-6 shadow-sm border border-inkll/10">
@@ -398,7 +397,7 @@ export default function TrailDetailPage() {
           <PackListGenerator 
             trail={hike} 
             familyInfo={familyInfo} 
-            weather={weather}
+            weather={trailWeather}
             onClose={() => setShowPackList(false)} 
           />
         )}
