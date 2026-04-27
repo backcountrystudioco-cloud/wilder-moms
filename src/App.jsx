@@ -7,6 +7,7 @@ import HomePage from './pages/HomePage'
 import MissionPage from './pages/MissionPage'
 import LocationPage from './wilder-trails/LocationPage'
 import WhosComingPage from './wilder-trails/WhosComingPage'
+import SetupPage from './wilder-trails/SetupPage'
 import TrailsPage from './wilder-trails/TrailsPage'
 import TrailDetailPage from './wilder-trails/TrailDetailPage'
 import BuildsPage from './basecamp/BuildsPage'
@@ -39,7 +40,8 @@ function App() {
             <Route path="/join" element={<JoinPage />} />
             <Route element={<AppLayout />}>
               <Route path="/wilder-philosophy" element={<MissionPage />} />
-              <Route path="/wilder-trails" element={<Navigate to="/wilder-trails/location" replace />} />
+              <Route path="/wilder-trails" element={<Navigate to="/wilder-trails/setup" replace />} />
+              <Route path="/wilder-trails/setup" element={<SetupPage />} />
               <Route path="/wilder-trails/location" element={<LocationPage />} />
               <Route path="/wilder-trails/whos-coming" element={<WhosComingPage />} />
               <Route path="/wilder-trails/trails" element={<TrailsPage />} />

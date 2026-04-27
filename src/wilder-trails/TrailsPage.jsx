@@ -269,6 +269,73 @@ export default function TrailsPage() {
           </motion.div>
         )}
 
+        {/* Starter Trails - Show immediately */}
+        {!aiLoading && aiRecommendations.length === 0 && !isReady && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-8"
+          >
+            <div className="flex items-center gap-3 mb-4">
+              <p className="font-sans text-inkl">Loading trails...</p>
+            </div>
+          </motion.div>
+        )}
+
+        {/* Starter Trails - Show these first while AI is thinking */}
+        {!aiLoading && aiRecommendations.length === 0 && isReady && recommendedHikes.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-8"
+          >
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 bg-ember/20 rounded-full flex items-center justify-center">
+                <svg className="w-5 h-5 text-ember" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                </svg>
+              </div>
+              <div>
+                <h2 className="font-serif text-xl text-ink">Top Picks for {location?.city}</h2>
+                <p className="font-sans text-xs text-inkl">Great trails for your crew</p>
+              </div>
+            </div>
+            
+            <div className="space-y-3">
+              {recommendedHikes.slice(0, 3).map((hike, index) => (
+                <motion.div
+                  key={hike.id}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  onClick={() => handleTrailSelect(hike.id)}
+                  className="bg-white rounded-xl p-4 border border-ember/20 hover:border-ember/40 hover:shadow-md transition-all cursor-pointer"
+                >
+                  <div className="flex items-start gap-4">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${
+                          hike.difficulty === 'easy' ? 'bg-olive/20 text-forest' :
+                          hike.difficulty === 'moderate' ? 'bg-gold/20 text-ink' :
+                          'bg-ember/20 text-ember'
+                        }`}>
+                          {hike.difficulty}
+                        </span>
+                        <span className="text-xs text-inkl">{hike.durationLabel}</span>
+                      </div>
+                      <h3 className="font-serif text-lg text-ink">{hike.title}</h3>
+                      <p className="text-sm text-inkl">{hike.region}, {hike.state}</p>
+                    </div>
+                    <svg className="w-5 h-5 text-ember flex-shrink-0 mt-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        )}
+
         {/* Wilder Companion AI Recommendations */}
         {(aiLoading || aiRecommendations.length > 0) && (
           <motion.div

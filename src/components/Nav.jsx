@@ -59,7 +59,7 @@ export default function Nav() {
           <div className="hidden md:flex items-center gap-8">
             {/* Wilder Trails - Explore */}
             <Link
-              to="/wilder-trails/location"
+              to="/wilder-trails/setup"
               className="font-sans font-medium text-sm uppercase tracking-[0.08em] text-ink hover:text-ember transition-colors"
             >
               Wilder Trails
@@ -123,7 +123,7 @@ export default function Nav() {
       <div className="md:hidden border-t border-inkll/20 mt-1">
         <div className="flex items-center justify-around px-4 py-1.5">
           <Link
-            to="/wilder-trails/location"
+            to="/wilder-trails/setup"
             className="flex flex-col items-center gap-0 font-sans font-medium text-xs text-ink hover:text-ember transition-colors"
           >
             Wilder Trails
