@@ -116,7 +116,7 @@ function filterAndScoreTrails(trails, context, request = '') {
     
     // Time constraint
     if (context.timeWindow) {
-      const duration = parseInt(h.duration?.match(/\d+/)?.[0] || '60')
+      const duration = parseInt(h.duration) || 60
       if (duration <= context.timeWindow) {
         score += 3
       }
