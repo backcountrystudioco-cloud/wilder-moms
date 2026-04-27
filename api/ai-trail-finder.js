@@ -83,7 +83,20 @@ Be warm, supportive, and specific. Parents want to know WHY this trail will work
 
     if (!response.ok) {
       const error = await response.json()
-      return res.status(500).json({ error: error.error?.message || 'OpenAI API error' })
+      const errorMessage = error.error?.message || ''
+      
+      // User-friendly error messages
+      if (errorMessage.includes('rate limit') || errorMessage.includes('Rate limit')) {
+        return res.status(500).json({ error: "We're popular today! Too many people using Wilder Companion right now. Please try again in a moment." })
+      }
+      if (errorMessage.includes('token') || errorMessage.includes('quota') || errorMessage.includes('limit')) {
+        return res.status(500).json({ error: "Wilder Companion is taking a quick break. Please try again shortly!" })
+      }
+      if (errorMessage.includes('Incorrect API key') || errorMessage.includes('Invalid API key')) {
+        return res.status(500).json({ error: "Wilder Companion needs a moment to set up. We're on it!" })
+      }
+      
+      return res.status(500).json({ error: errorMessage || "Something came up with Wilder Companion. Please try again!" })
     }
 
     const data = await response.json()
@@ -112,6 +125,6 @@ Be warm, supportive, and specific. Parents want to know WHY this trail will work
     res.status(200).json(trailsData)
   } catch (error) {
     console.error('AI Trail Finder error:', error)
-    res.status(500).json({ error: 'Failed to get recommendations' })
+    res.status(500).json({ error: "Wilder Companion is having trouble right now. Give it another try!" })
   }
 }
