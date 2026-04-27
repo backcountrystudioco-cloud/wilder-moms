@@ -39,29 +39,34 @@ Description: ${h.description}
 
   const prompt = `You are a friendly hiking expert for families with young children.
 
-${context ? `Here's what you know about this family:\n${context}\n` : ''}
+CRITICAL: You MUST use the family's specific situation (listed below) to make your recommendations.
 
-A parent is asking for trail recommendations: "${request}"
+FAMILY SITUATION:
+${context || 'No specific information provided - recommend generally kid-friendly trails'}
+
+A parent is asking: "${request || 'Find trails that work for my family'}"
 
 Here are the most relevant trails from our database:
 ${trailList}
 
-Based on the parent's request AND their family situation (from the context above), recommend the TOP 3 trails that best match their needs. 
+Based on the family's specific situation above, recommend the TOP 3 trails that best match their needs. 
 
 For each recommendation:
-1. State why this trail is perfect for their specific situation
-2. Mention specific kid-friendly details (water splashing, easy terrain, fun features, etc.)
-3. Keep it conversational and encouraging - like you're texting a friend who's a tired mom
+1. State why this trail is perfect for their family's specific situation (age of kids, time limit, any special needs like stroller, dog, water features)
+2. Mention specific kid-friendly details they asked for
+3. Keep it warm and encouraging - like texting a tired parent friend
+
+IMPORTANT: Your "reason" for each trail MUST mention something specific from their family situation.
 
 Format your response as JSON:
 {
   "trails": [
-    { "id": "trail-id", "title": "Trail Title", "reason": "Why this trail is perfect for their situation..." },
+    { "id": "trail-id", "title": "Trail Title", "reason": "Why this trail is perfect for their specific situation..." },
     ...
   ]
 }
 
-Be warm, supportive, and specific. Parents want to know WHY this trail will work for their family.`
+Be warm, supportive, and specific about what makes each trail work for THEIR family.`
 
   try {
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
