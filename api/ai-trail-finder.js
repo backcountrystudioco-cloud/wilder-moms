@@ -6,7 +6,7 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' })
   }
 
-  const { request, trails } = req.body
+  const { request, context, trails } = req.body
 
   if (!request || !trails) {
     return res.status(400).json({ error: 'Missing request or trails' })
@@ -31,27 +31,32 @@ Features: ${[
     h.dogsAllowed && 'Dogs allowed',
     h.hasWater && 'Water features',
     h.hasViews && 'Scenic views',
-    h.isPaved && 'Paved'
+    h.isPaved && 'Paved',
+    h.restrooms && 'Restrooms nearby'
   ].filter(Boolean).join(', ') || 'None listed'}
 Description: ${h.description}
 `).join('\n---\n')
 
-  const prompt = `You are a friendly hiking expert for families with young children. A parent is asking for trail recommendations.
+  const prompt = `You are a friendly hiking expert for families with young children.
 
-Their request: "${request}"
+${context ? `Here's what you know about this family:\n${context}\n` : ''}
+
+A parent is asking for trail recommendations: "${request}"
 
 Here are the most relevant trails from our database:
 ${trailList}
 
-Based on the parent's request, recommend the TOP 3 trails that best match their needs. For each recommendation:
-1. State why this trail is perfect for their situation
-2. Mention specific kid-friendly details (water splashing, interesting features, etc.)
-3. Keep it conversational and encouraging
+Based on the parent's request AND their family situation (from the context above), recommend the TOP 3 trails that best match their needs. 
+
+For each recommendation:
+1. State why this trail is perfect for their specific situation
+2. Mention specific kid-friendly details (water splashing, easy terrain, fun features, etc.)
+3. Keep it conversational and encouraging - like you're texting a friend who's a tired mom
 
 Format your response as JSON:
 {
   "trails": [
-    { "id": "trail-id", "title": "Trail Title", "reason": "Why this trail is perfect..." },
+    { "id": "trail-id", "title": "Trail Title", "reason": "Why this trail is perfect for their situation..." },
     ...
   ]
 }
@@ -71,7 +76,7 @@ Be warm, supportive, and specific. Parents want to know WHY this trail will work
           { role: 'system', content: 'You are a helpful hiking expert for families. Always respond with valid JSON.' },
           { role: 'user', content: prompt }
         ],
-        max_tokens: 800,
+        max_tokens: 1000,
         temperature: 0.7
       })
     })
@@ -87,7 +92,6 @@ Be warm, supportive, and specific. Parents want to know WHY this trail will work
     // Parse JSON from response
     let trailsData
     try {
-      // Try to extract JSON from the response
       const jsonMatch = content.match(/\{[\s\S]*\}/)
       if (jsonMatch) {
         trailsData = JSON.parse(jsonMatch[0])

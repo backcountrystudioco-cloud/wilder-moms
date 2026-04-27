@@ -4,16 +4,17 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useWilderTrails } from './WilderTrailsContext'
 import { findTrailsWithAI, getRemainingQueries, incrementQueryCount } from './aiTrailFinderUtils'
 
-// Sample prompts to help users
+// Sample prompts that work with their context
 const samplePrompts = [
-  "Shady trail near Seattle for my 4-year-old",
-  "Easy waterfall hike for toddlers",
-  "Dog-friendly trail with water access",
-  "Flat paved path for grandparents and kids"
+  "Shady trail for our family",
+  "Water features for the kids",
+  "Easy walk for everyone",
+  "Something adventurous"
 ]
 
 export default function AITrailFinder() {
   const navigate = useNavigate()
+  const { location, familyInfo, timeWindow } = useWilderTrails()
   
   const [query, setQuery] = useState('')
   const [isLoading, setIsLoading] = useState(false)
@@ -34,7 +35,11 @@ export default function AITrailFinder() {
     setResults(null)
 
     try {
-      const data = await findTrailsWithAI(searchQuery)
+      const data = await findTrailsWithAI(searchQuery, {
+        location,
+        familyInfo,
+        timeWindow
+      })
       setResults(data.recommendations)
       setRemainingQueries(data.remainingQueries)
       incrementQueryCount()
@@ -54,6 +59,24 @@ export default function AITrailFinder() {
     handleSearch(sample)
   }
 
+  // Build context summary for display
+  const getContextSummary = () => {
+    const parts = []
+    if (location?.city) parts.push(`Near ${location.city}`)
+    if (familyInfo) {
+      if (familyInfo.youngestAge === -1) parts.push('Baby in carrier')
+      else if (familyInfo.youngestAge <= 2) parts.push('Toddler')
+      else if (familyInfo.youngestAge <= 5) parts.push('Young kids')
+      else parts.push('Older kids')
+      if (familyInfo.needsStroller) parts.push('Need stroller')
+      if (familyInfo.needsDog) parts.push('Bringing dog')
+    }
+    if (timeWindow) parts.push(`Within ${timeWindow} min`)
+    return parts.length > 0 ? parts.join(' · ') : null
+  }
+
+  const contextSummary = getContextSummary()
+
   return (
     <div className="min-h-screen bg-cream pt-20 pb-12">
       <div className="max-w-3xl mx-auto px-4">
@@ -65,10 +88,21 @@ export default function AITrailFinder() {
         >
           <p className="text-ember text-xs font-medium uppercase tracking-widest mb-3">AI Trail Finder</p>
           <h1 className="font-serif text-3xl md:text-4xl text-ink mb-3">
-            Tell me what you're looking for
+            What kind of adventure are you looking for?
           </h1>
+          
+          {/* User Context */}
+          {contextSummary && (
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-olive/10 text-forest rounded-full text-sm mb-4">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              {contextSummary}
+            </div>
+          )}
+          
           <p className="text-inkl max-w-lg mx-auto">
-            Describe your perfect trail in plain English. I'll find the best match for your family.
+            Tell me what you're in the mood for. I'll find the perfect trail based on your crew and location.
           </p>
           
           {/* Query Counter */}
@@ -90,7 +124,7 @@ export default function AITrailFinder() {
             <textarea
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="e.g., Shady trail near Seattle for my 4-year-old who loves splashing in water"
+              placeholder="e.g., Something with water where the kids can splash around"
               className="w-full px-6 py-4 pr-14 rounded-2xl border-2 border-inkll/20 bg-white text-ink placeholder:text-inkl/50 focus:border-ember focus:outline-none resize-none"
               rows={3}
               onKeyDown={(e) => {
