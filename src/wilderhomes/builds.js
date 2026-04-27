@@ -52,8 +52,7 @@ export const builds = [
     timeEstimate: '1 hour',
     ageRange: '2-8',
     cost: '$15-25',
-    imageUrl: '/builds/table kitchen.png',
-    imageUrl: '/builds/table kitchen.png',
+    imageUrl: '/builds/table top.png',
     description: 'Turn any outdoor table into a mud kitchen with this simple add-on. Features a basin, utensil holder, and mixing station.',
     tools: ['Drill', 'Jigsaw', 'Sandpaper'],
     materials: [
