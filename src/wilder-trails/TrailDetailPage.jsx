@@ -7,6 +7,7 @@ import { useWeather } from '../hooks/useWeather'
 import { useWilderTrails } from './WilderTrailsContext'
 import HourlyWeather from './HourlyWeather'
 import SmartChecklist from '../blueprint/SmartChecklist'
+import PackListGenerator from './PackListGenerator'
 import { packLists } from '../blueprint/packLists'
 import ProgressStepper from './ProgressStepper'
 
@@ -375,7 +376,7 @@ export default function TrailDetailPage() {
           </motion.div>
         )}
         
-        {/* Full Pack List Toggle */}
+        {/* Generate Pack List Button */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -383,37 +384,24 @@ export default function TrailDetailPage() {
           className="mb-6"
         >
           <button
-            onClick={() => setShowPackList(!showPackList)}
-            className="w-full flex items-center justify-between px-6 py-4 bg-ember text-white rounded-xl font-sans font-medium hover:bg-terra transition-colors"
+            onClick={() => setShowPackList(true)}
+            className="w-full flex items-center justify-center gap-3 px-6 py-4 bg-forest text-white rounded-xl font-sans font-medium hover:bg-forest/90 transition-colors"
           >
-            <span>Full Pack List ({combinedPackList.length} items)</span>
-            <svg 
-              className={`w-5 h-5 transition-transform ${showPackList ? 'rotate-180' : ''}`} 
-              fill="none" 
-              stroke="currentColor" 
-              viewBox="0 0 24 24"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
             </svg>
+            Generate Pack List for {hike.title}
           </button>
-          
-          {showPackList && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              className="mt-4"
-            >
-              <SmartChecklist
-                items={combinedPackList}
-                checkedItems={checkedItems}
-                onToggle={handleToggleItem}
-                title="My Pack List"
-                listType="mylist"
-              />
-            </motion.div>
-          )}
         </motion.div>
+        
+        {showPackList && (
+          <PackListGenerator 
+            trail={hike} 
+            familyInfo={familyInfo} 
+            weather={weather}
+            onClose={() => setShowPackList(false)} 
+          />
+        )}
         
         {/* Get Directions */}
         <motion.div

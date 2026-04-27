@@ -184,6 +184,29 @@ function filterAndScoreTrails(trails, context, request = '') {
   return sortedTrails.slice(0, 15)
 }
 
+// Ensure at least one local trail (city match) is included
+function ensureLocalTrailPresence(trails, context) {
+  if (!context.location?.city || trails.length === 0) return trails
+  
+  const city = context.location.city.toLowerCase()
+  const hasLocalTrail = trails.some(t => t.region?.toLowerCase().includes(city))
+  
+  // If no local trail, inject the best local one from all hikes
+  if (!hasLocalTrail) {
+    const allLocalTrails = hikes.filter(h => {
+      if (h.state?.toUpperCase() !== context.location.state?.toUpperCase()) return false
+      return h.region?.toLowerCase().includes(city)
+    })
+    
+    if (allLocalTrails.length > 0) {
+      // Add local trail at the start, remove last one to keep count
+      return [allLocalTrails[0], ...trails.slice(0, 14)]
+    }
+  }
+  
+  return trails
+}
+
 // Generate a friendly auto-request based on context
 function generateAutoRequest(context) {
   const parts = []
@@ -202,15 +225,18 @@ function generateAutoRequest(context) {
     return `Find a ${parts.join(' with ')} trail for our family`
   }
   
-  return 'Find the best trail for our family based on our situation'
+  return 'Find the best trail for our family based on their situation'
 }
 
 // Call backend API
 export async function findTrailsWithAI(userRequest, context = {}) {
-  // Get scored/filtered trails
-  const scoredTrails = filterAndScoreTrails(hikes, context, userRequest)
+  // Get scored/filtered trails from user's state
+  let scoredTrails = filterAndScoreTrails(hikes, context, userRequest)
   
-  // If no trails in user's state, return empty (let regular recommendations handle it)
+  // GUARANTEE: At least one local trail will be included
+  scoredTrails = ensureLocalTrailPresence(scoredTrails, context)
+  
+  // If no trails in user's state, return empty
   if (scoredTrails.length === 0) {
     return {
       recommendations: [],
