@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link, useNavigate } from 'react-router-dom'
 import { useWilderTrails } from './WilderTrailsContext'
@@ -14,37 +14,18 @@ const samplePrompts = [
 
 export default function AITrailFinder() {
   const navigate = useNavigate()
-  const { updateFamilyInfo } = useWilderTrails()
   
   const [query, setQuery] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [results, setResults] = useState(null)
   const [error, setError] = useState(null)
   const [remainingQueries, setRemainingQueries] = useState(getRemainingQueries())
-  const [showApiKeyPrompt, setShowApiKeyPrompt] = useState(false)
-  const [apiKey, setApiKey] = useState('')
-  
-  // Check if API key exists
-  useEffect(() => {
-    const savedKey = localStorage.getItem('wilder_moms_openai_key')
-    if (savedKey) {
-      setApiKey(savedKey)
-      setShowApiKeyPrompt(false)
-    } else {
-      setShowApiKeyPrompt(true)
-    }
-  }, [])
 
   const handleSearch = async (searchQuery = query) => {
     if (!searchQuery.trim()) return
     
-    if (!apiKey) {
-      setShowApiKeyPrompt(true)
-      return
-    }
-
     if (remainingQueries <= 0) {
-      setError("You've used all your free searches. Sign up to continue!")
+      setError("You've used all your free searches. Check back soon!")
       return
     }
 
@@ -53,7 +34,7 @@ export default function AITrailFinder() {
     setResults(null)
 
     try {
-      const data = await findTrailsWithAI(searchQuery, apiKey)
+      const data = await findTrailsWithAI(searchQuery)
       setResults(data.recommendations)
       setRemainingQueries(data.remainingQueries)
       incrementQueryCount()
@@ -61,13 +42,6 @@ export default function AITrailFinder() {
       setError(err.message || 'Something went wrong. Please try again.')
     } finally {
       setIsLoading(false)
-    }
-  }
-
-  const handleSaveApiKey = () => {
-    if (apiKey.trim()) {
-      localStorage.setItem('wilder_moms_openai_key', apiKey.trim())
-      setShowApiKeyPrompt(false)
     }
   }
 
@@ -98,56 +72,12 @@ export default function AITrailFinder() {
           </p>
           
           {/* Query Counter */}
-          {apiKey && remainingQueries > 0 && (
+          {remainingQueries > 0 && (
             <p className="mt-4 text-sm text-inkl">
               <span className="text-ember font-medium">{remainingQueries}</span> free searches remaining
             </p>
           )}
         </motion.div>
-
-        {/* API Key Prompt */}
-        <AnimatePresence>
-          {showApiKeyPrompt && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              className="bg-white rounded-2xl p-6 mb-6 border border-inkll/10"
-            >
-              <h3 className="font-serif text-xl text-ink mb-3">Connect Your AI</h3>
-              <p className="text-inkl text-sm mb-4">
-                This feature uses OpenAI to understand your request. You get 3 free searches, then connect your own API key (about $0.01 per search).
-              </p>
-              <div className="flex gap-3">
-                <input
-                  type="password"
-                  value={apiKey}
-                  onChange={(e) => setApiKey(e.target.value)}
-                  placeholder="sk-..." 
-                  className="flex-1 px-4 py-3 rounded-xl border border-inkll/20 font-mono text-sm"
-                />
-                <button
-                  onClick={handleSaveApiKey}
-                  className="px-6 py-3 bg-ember text-white rounded-xl font-medium hover:bg-terra transition-colors"
-                >
-                  Save Key
-                </button>
-              </div>
-              <p className="text-xs text-inkl mt-3">
-                Get your API key at{' '}
-                <a 
-                  href="https://platform.openai.com/api-keys" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-ember underline"
-                >
-                  platform.openai.com
-                </a>
-                . Your key stays in your browser.
-              </p>
-            </motion.div>
-          )}
-        </AnimatePresence>
 
         {/* Search Input */}
         <motion.div
@@ -220,14 +150,6 @@ export default function AITrailFinder() {
               className="bg-red-50 border border-red-200 rounded-xl p-4 mb-6"
             >
               <p className="text-red-700 text-sm">{error}</p>
-              {!apiKey && (
-                <button
-                  onClick={() => setShowApiKeyPrompt(true)}
-                  className="mt-2 text-sm text-red-700 underline"
-                >
-                  Add API key
-                </button>
-              )}
             </motion.div>
           )}
         </AnimatePresence>

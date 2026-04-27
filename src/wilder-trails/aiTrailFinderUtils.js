@@ -2,6 +2,7 @@ import { hikes } from './hikes'
 
 const FREE_QUERY_LIMIT = 3
 const STORAGE_KEY = 'wilder_trails_ai_queries'
+const API_ENDPOINT = '/api/ai-trail-finder' // Your backend endpoint
 
 export function getRemainingQueries() {
   if (typeof window === 'undefined') return FREE_QUERY_LIMIT
@@ -20,7 +21,7 @@ export function resetQueryCount() {
   localStorage.setItem(STORAGE_KEY, '0')
 }
 
-// Filter trails by basic criteria to reduce payload
+// Filter trails by basic criteria
 function filterTrailsForAI(request) {
   let filtered = [...hikes]
   
@@ -68,127 +69,6 @@ function filterTrailsForAI(request) {
   return filtered.slice(0, 15)
 }
 
-// Build prompt for OpenAI
-function buildPrompt(userRequest, filteredTrails) {
-  const trailList = filteredTrails.map(h => `
-Trail: ${h.title}
-Location: ${h.region}, ${h.state}
-Distance: ${h.distance} miles
-Elevation: ${h.elevationLabel}
-Difficulty: ${h.difficulty}
-Duration: ${h.durationLabel}
-Features: ${[
-    h.strollerFriendly && 'Stroller-friendly',
-    h.dogsAllowed && 'Dogs allowed',
-    h.hasWater && 'Water features',
-    h.hasViews && 'Scenic views',
-    h.isPaved && 'Paved'
-  ].filter(Boolean).join(', ') || 'None listed'}
-Description: ${h.description}
-`).join('\n---\n')
-
-  return `You are a friendly hiking expert for families with young children. A parent is asking for trail recommendations.
-
-Their request: "${userRequest}"
-
-Here are the most relevant trails from our database:
-${trailList}
-
-Based on the parent's request, recommend the TOP 3 trails that best match their needs. For each recommendation:
-1. State why this trail is perfect for their situation
-2. Mention specific kid-friendly details (water splashing, interesting features, etc.)
-3. Keep it conversational and encouraging
-
-Format your response like this:
-TITLES: [list the 3 trail titles, separated by |]
-RECOMMENDATIONS: [your friendly explanation for each trail, separated by |]
-
-Be warm, supportive, and specific. Parents want to know WHY this trail will work for their family.`
-}
-
-// Call OpenAI API
-export async function findTrailsWithAI(userRequest, apiKey) {
-  if (!apiKey) {
-    throw new Error('OpenAI API key required')
-  }
-
-  // Filter trails first
-  const filteredTrails = filterTrailsForAI(parseUserRequest(userRequest))
-  
-  if (filteredTrails.length === 0) {
-    return {
-      recommendations: [],
-      message: "I couldn't find trails matching your request. Try adjusting your search or browse all trails."
-    }
-  }
-
-  const prompt = buildPrompt(userRequest, filteredTrails)
-
-  try {
-    const response = await fetch('https://api.openai.com/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${apiKey}`
-      },
-      body: JSON.stringify({
-        model: 'gpt-4o-mini',
-        messages: [
-          {
-            role: 'system',
-            content: 'You are a helpful hiking expert for families.'
-          },
-          {
-            role: 'user',
-            content: prompt
-          }
-        ],
-        max_tokens: 800,
-        temperature: 0.7
-      })
-    })
-
-    if (!response.ok) {
-      const error = await response.json()
-      throw new Error(error.error?.message || 'API request failed')
-    }
-
-    const data = await response.json()
-    const content = data.choices[0]?.message?.content || ''
-
-    // Parse the response
-    const titlesMatch = content.match(/TITLES:\s*(.+)/i)
-    const recsMatch = content.match(/RECOMMENDATIONS:\s*(.+)/i)
-
-    if (titlesMatch && recsMatch) {
-      const titles = titlesMatch[1].split('|').map(t => t.trim()).filter(Boolean)
-      const recommendations = recsMatch[1].split('|').map((r, i) => ({
-        title: titles[i] || 'Trail',
-        explanation: r.trim(),
-        trail: filteredTrails.find(t => t.title === titles[i]) || filteredTrails[i]
-      })).filter(r => r.trail)
-
-      return {
-        recommendations,
-        remainingQueries: getRemainingQueries()
-      }
-    }
-
-    // Fallback if parsing fails
-    return {
-      recommendations: filteredTrails.slice(0, 3).map((trail, i) => ({
-        title: trail.title,
-        explanation: `This ${trail.difficulty} trail in ${trail.region} is ${trail.distance} miles - perfect for your adventure!`,
-        trail
-      })),
-      remainingQueries: getRemainingQueries()
-    }
-  } catch (error) {
-    console.error('AI Trail Finder error:', error)
-    throw error
-  }
-}
-
 // Simple parser for user requests
 function parseUserRequest(request) {
   const lower = request.toLowerCase()
@@ -210,7 +90,7 @@ function parseUserRequest(request) {
   if (lower.includes('easy') || lower.includes('flat')) parsed.features.push('easy')
   
   // Extract location
-  const locations = ['seattle', 'portland', 'denver', 'bend', ' Moab', 'austin', 'houston', 'boulder', 'colorado', 'oregon', 'washington', 'texas']
+  const locations = ['seattle', 'portland', 'denver', 'bend', 'moab', 'austin', 'houston', 'boulder', 'colorado', 'oregon', 'washington', 'texas']
   for (const loc of locations) {
     if (lower.includes(loc)) {
       parsed.location = loc.charAt(0).toUpperCase() + loc.slice(1)
@@ -219,6 +99,54 @@ function parseUserRequest(request) {
   }
   
   return parsed
+}
+
+// Call backend API
+export async function findTrailsWithAI(userRequest) {
+  // Filter trails first
+  const filteredTrails = filterTrailsForAI(parseUserRequest(userRequest))
+  
+  if (filteredTrails.length === 0) {
+    return {
+      recommendations: [],
+      message: "I couldn't find trails matching your request. Try adjusting your search or browse all trails."
+    }
+  }
+
+  try {
+    const response = await fetch(API_ENDPOINT, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        request: userRequest,
+        trails: filteredTrails
+      })
+    })
+
+    if (!response.ok) {
+      const error = await response.json()
+      throw new Error(error.error || 'API request failed')
+    }
+
+    const data = await response.json()
+    
+    // Map backend response to our format
+    const recommendations = data.trails.map((trail, i) => ({
+      title: trail.title,
+      explanation: trail.reason,
+      trail: filteredTrails.find(t => t.id === trail.id) || filteredTrails[i]
+    })).filter(r => r.trail)
+
+    return {
+      recommendations,
+      remainingQueries: getRemainingQueries()
+    }
+  } catch (error) {
+    console.error('AI Trail Finder error:', error)
+    throw error
+  }
 }
 
 export { filterTrailsForAI, parseUserRequest }
