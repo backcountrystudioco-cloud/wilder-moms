@@ -28,7 +28,7 @@ function buildContextSummary(context) {
   if (context.location?.city) {
     parts.push(`Location: ${context.location.city}, ${context.location.state || ''}`)
     if (context.location.lat && context.location.lon) {
-      parts.push(`(Approximate coordinates: ${context.location.lat.toFixed(2)}, ${context.location.lon.toFixed(2)})`)
+      parts.push(`(Coordinates: ${context.location.lat.toFixed(2)}, ${context.location.lon.toFixed(2)})`)
     }
   }
   
@@ -62,9 +62,9 @@ function buildContextSummary(context) {
   }
   
   // CRITICAL: Emphasize location matching
-  if (context.location?.city) {
-    parts.push(``)
-    parts.push(`MOST IMPORTANT: Find trails near ${context.location.city}, ${context.location.state || ''}. Distance from this location should be the primary factor in recommendations.`)
+  if (context.location?.city && context.location?.state) {
+    parts.push('')
+    parts.push(`CRITICAL: Only recommend trails in ${context.location.state}. The family is located in/near ${context.location.city}, ${context.location.state}. Do NOT recommend trails from any other state.`)
   }
   
   return parts.length > 0 ? parts.join('\n') : null
@@ -72,11 +72,25 @@ function buildContextSummary(context) {
 
 // Filter and score trails by user context
 function filterAndScoreTrails(trails, context, request = '') {
-  let scored = trails.map(h => {
+  // CRITICAL: First filter to user's state ONLY
+  let filteredTrails = trails
+  
+  if (context.location?.state) {
+    const userState = context.location.state.toUpperCase()
+    filteredTrails = trails.filter(h => h.state?.toUpperCase() === userState)
+  }
+  
+  // If no trails in user's state, return empty
+  if (filteredTrails.length === 0) {
+    return []
+  }
+  
+  // Score only the filtered trails from user's state
+  let scored = filteredTrails.map(h => {
     let score = 0
     const notes = []
     
-    // CRITICAL: City/region match - heaviest weighting
+    // City/region match - highest priority
     if (context.location?.city) {
       const loc = context.location.city.toLowerCase()
       if (h.region?.toLowerCase().includes(loc)) {
@@ -85,20 +99,10 @@ function filterAndScoreTrails(trails, context, request = '') {
       }
     }
     
-    // State match
-    if (context.location?.state) {
-      const state = context.location.state.toUpperCase()
-      if (h.state?.toUpperCase() === state) {
-        score += 30
-        notes.push(`In ${h.state}`)
-      }
-    }
-    
     // Age appropriateness
     if (context.familyInfo?.youngestAge !== undefined) {
       const youngest = context.familyInfo.youngestAge
       
-      // Check difficulty matches age
       if (youngest <= 3 && h.difficulty === 'easy') {
         score += 5
         notes.push('Great for young kids')
@@ -108,25 +112,21 @@ function filterAndScoreTrails(trails, context, request = '') {
         notes.push('Good challenge for older kids')
       }
       
-      // Stroller needs
       if (context.familyInfo.needsStroller && h.strollerFriendly) {
         score += 5
         notes.push('Stroller-friendly')
       }
       
-      // Dog needs
       if (context.familyInfo.needsDog && h.dogsAllowed) {
         score += 4
         notes.push('Dogs welcome')
       }
       
-      // Water preferences
       if (context.familyInfo.wantsWater && h.hasWater) {
         score += 4
         notes.push('Has water features')
       }
       
-      // Restroom needs
       if (context.familyInfo.needsRestrooms && h.restrooms) {
         score += 3
         notes.push('Has restrooms')
@@ -172,24 +172,16 @@ function filterAndScoreTrails(trails, context, request = '') {
     return { trail: h, score, notes }
   })
   
-  // Sort scored trails - city match first, then state, then by score
+  // Sort by city match first, then score
   const sortedTrails = scored.sort((a, b) => {
-    // First: city match (highest priority)
     const aCityMatch = context.location?.city && a.trail.region?.toLowerCase().includes(context.location.city.toLowerCase()) ? 1 : 0
     const bCityMatch = context.location?.city && b.trail.region?.toLowerCase().includes(context.location.city.toLowerCase()) ? 1 : 0
     if (aCityMatch !== bCityMatch) return bCityMatch - aCityMatch
     
-    // Second: state match
-    const aStateMatch = a.trail.state?.toUpperCase() === context.location?.state?.toUpperCase() ? 1 : 0
-    const bStateMatch = b.trail.state?.toUpperCase() === context.location?.state?.toUpperCase() ? 1 : 0
-    if (aStateMatch !== bStateMatch) return bStateMatch - aStateMatch
-    
-    // Third: total score
     return b.score - a.score
   })
   
-  // Return top 20 trails, prioritizing same-state trails
-  return sortedTrails.slice(0, 20)
+  return sortedTrails.slice(0, 15)
 }
 
 // Generate a friendly auto-request based on context
@@ -218,10 +210,11 @@ export async function findTrailsWithAI(userRequest, context = {}) {
   // Get scored/filtered trails
   const scoredTrails = filterAndScoreTrails(hikes, context, userRequest)
   
+  // If no trails in user's state, return empty (let regular recommendations handle it)
   if (scoredTrails.length === 0) {
     return {
       recommendations: [],
-      message: "I couldn't find trails matching your request. Try adjusting your search or browse all trails."
+      message: "No trails found in your state yet. We're expanding our trail database!"
     }
   }
 
