@@ -20,55 +20,54 @@ export default async function handler(req, res) {
 
   // Build prompt for OpenAI
   const trailList = trails.map(h => `
-Trail: ${h.title}
-Location: ${h.region}, ${h.state}
-Distance: ${h.distance} miles
-Elevation: ${h.elevationLabel}
-Difficulty: ${h.difficulty}
-Duration: ${h.durationLabel}
-Features: ${[
+TRAIL DATA:
+- Name: ${h.title}
+- City/Region: ${h.region}
+- State: ${h.state}
+- Distance: ${h.distance} miles
+- Duration: ${h.durationLabel}
+- Difficulty: ${h.difficulty}
+- Features: ${[
     h.strollerFriendly && 'Stroller-friendly',
     h.dogsAllowed && 'Dogs allowed',
     h.hasWater && 'Water features',
     h.hasViews && 'Scenic views',
     h.isPaved && 'Paved',
-    h.restrooms && 'Restrooms nearby'
-  ].filter(Boolean).join(', ') || 'None listed'}
-Description: ${h.description}
+    h.restrooms && 'Restrooms'
+  ].filter(Boolean).join(', ') || 'None'}
 `).join('\n---\n')
 
-  const prompt = `You are a friendly hiking expert for families with young children.
+  // Extract location from context for the prompt
+  const locationMatch = context.match(/Location: ([^,]+), ([^\n]+)/)
+  const cityName = locationMatch ? locationMatch[1].trim() : ''
+  const stateName = locationMatch ? locationMatch[2].trim() : ''
 
-CRITICAL: You MUST recommend trails near the family's specific location. Distance is the #1 factor.
+  const prompt = `You are a hiking guide for families with young children.
 
-FAMILY SITUATION:
-${context || 'No specific information provided - recommend generally kid-friendly trails'}
+IMPORTANT: The family is located in ${cityName || 'their area'}, ${stateName || ''}.
 
-A parent is asking: "${request || 'Find trails that work for my family'}"
+STRICT RULES:
+1. ONLY recommend trails from ${stateName || 'their state'}
+2. PRIORITIZE trails in ${cityName || 'their city'} or nearby
+3. Do NOT recommend trails from other states
+4. Return exactly 3 trail recommendations
 
-Here are the most relevant trails from our database:
+FAMILY INFO:
+${context}
+
+Available trails (sorted by relevance):
 ${trailList}
 
-Based on the family's location and situation, recommend the TOP 3 trails that are CLOSEST to their area.
+TASK: Recommend the TOP 3 trails closest to ${cityName || 'their location'}.
 
-For each recommendation:
-1. State why this trail is close and perfect for their family's specific situation (age of kids, time limit, any special needs like stroller, dog, water features)
-2. Mention the distance from their location
-3. Keep it warm and encouraging
+For each trail, explain WHY it works for this specific family situation.
 
-IMPORTANT: 
-- Prioritize trails that are geographically closest to ${context.match(/Location: ([^,]+), ([^\n]+)/)?.[2] || 'their area'}
-- Your "reason" for each trail MUST mention the distance and why it's a good fit for their specific family
-
-Format your response as JSON:
+Return as JSON:
 {
   "trails": [
-    { "id": "trail-id", "title": "Trail Title", "reason": "Why this trail is perfect for their specific situation..." },
-    ...
+    { "id": "trail-id", "title": "Trail Name", "reason": "Why this trail is perfect for this family..." }
   ]
-}
-
-Be warm, supportive, and specific about what makes each trail work for THEIR family.`
+}`
 
   try {
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
