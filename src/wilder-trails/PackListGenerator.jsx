@@ -47,7 +47,7 @@ const AGE_ITEMS = {
     { id: 'change_mat', label: 'Change mat', icon: '🛏️' },
   ],
   toddler: [ // 1-3 years
-    { id: 'stroller', label: 'Stroller (if needed)', icon: '婴儿车' },
+    { id: 'stroller', label: 'Stroller (if needed)', icon: '🚼' },
     { id: 'comfort_item', label: 'Comfort item (blanket/toy)', icon: '🧸' },
     { id: 'activities', label: 'Snacks/comfort items', icon: '🍎' },
   ],
