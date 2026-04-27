@@ -10,29 +10,28 @@ const rooms = [
     subtitle: 'where hands learn to think',
     description: 'A dedicated space for mess, mixing, pouring, and sensory immersion. The noisiest room. The most important one.',
     principle: 'Mess needs a container. Not to limit it - to liberate it. When children know exactly where mess is permitted, they go deeper into it.',
-    spaces: ['indoor', 'outdoor'],
     color: '#8C4A14',
     accentColor: '#F0D2B4',
     implementations: {
       indoor: [
-        { id: 'sensory-station', name: 'Sensory Station', description: 'Low bins with sand, dried beans, rice, kinetic sand. Tools nearby: ladles, funnels, molds.' },
-        { id: 'textured-wall', name: 'Textured Wall', description: 'Bark panels, smooth river stones, woven hessian, cork squares at varying heights for finger exploration.' },
-        { id: 'water-wall', name: 'Water Wall', description: 'Vertical gutters and pipes with funnels. Pour, splash, watch flow.' },
-        { id: 'barefoot-path', name: 'Barefoot Path', description: 'Alternating textures: smooth stones, artificial turf, bubble wrap. Remove shoes, explore.' },
+        { id: 'root-cellar', name: 'Root Cellar Hideaway', description: 'A below-grade sensory room accessed by a small hatch. Earth walls regulate temperature. Clay and water play contained underground where mess belongs. The compression of the entrance creates the "now I am in my world" transition.' },
+        { id: 'stream-crossing', name: 'Stream Crossing Arrival', description: 'Stepping stones spanning a drainage channel create a ceremonial arrival moment. Cross the water to enter. Parents maintain sight lines while children feel the satisfaction of independent navigation.' },
+        { id: 'locker-village', name: 'Inhabitable Locker Village', description: 'Gear cubbies designed as tiny dwellings - a cave, a hollow log, a small cottage. Each child has their own home within a home at their scale. Low thresholds create ownership.' },
+        { id: 'tunnel-network', name: 'Tunnel Connection System', description: 'A network of child-scale tunnels connecting zones. Children move independently through the space. Smooth concrete with embedded mosaics. The journey IS the experience.' },
       ],
       outdoor: [
-        { id: 'mud-kitchen', name: 'Mud Kitchen', description: 'Low counters, real bowls, wooden spoons. Mix dirt, water, leaves. The classic outdoor lab.' },
-        { id: 'texture-trail', name: 'Texture Trail', description: 'Bark chips, pea gravel, smooth stones, grass. Walk barefoot and discover.' },
-        { id: 'tactile-garden', name: 'Tactile Garden Bed', description: 'Lamb\'s ear, moss, sage, ornamental grasses. Raised beds where everything is meant to touch.' },
-        { id: 'rain-station', name: 'Rain Station', description: 'Collecting rain, pouring, mixing. Waders optional, curiosity required.' },
+        { id: 'floating-island', name: 'Floating Island Pod', description: 'A raised platform with stepping stones, accessible sensory play space underneath. Deep eaves keep it outdoor-but-sheltered. The below zone is contained; the above is elevated and visible.' },
+        { id: 'mud-theater', name: 'Earth Amphitheater', description: 'Tiered earth benches around a central mud pit. Children perform, work, and observe from different heights. Natural arena logic. Adults watch from the perimeter.' },
+        { id: 'texture-maze', name: 'Texture Maze Garden', description: 'A winding path through sensory zones: gravel, bark, grass, sand, moss. The maze format makes discovery sequential. Children return weekly to note changes.' },
+        { id: 'rain-ritual', name: 'Rain Collection Ritual', description: 'A rain chain guides water to a collection basin. Children watch, collect, and redirect. The daily ritual of rain observation connects them to weather cycles.' },
       ],
-      transition: 'The Threshold Zone: A sheltered spot between inside and out. Wipe stations, apron hooks, a place to get messy before entering the house.',
+      transition: 'The Threshold: A compression space with low ceiling before releasing into the sensory zone. Borrowed light from adjacent rooms creates emergence-from-darkness feeling. This is where the outside world ends and the wild begins.',
     },
     tips: [
-      'Start with one sensory bin, expand from there',
-      'Contain the mess to feel liberating, not overwhelming',
-      'Rotate materials weekly to renew interest',
-      'Let them get completely dirty - that is the point',
+      'Start with one sensory element, expand slowly',
+      'The messier the entrance, the cleaner the exit ritual',
+      'Low light at entry creates anticipation',
+      'Let children establish the mess zone boundaries',
     ],
   },
   {
@@ -43,23 +42,22 @@ const rooms = [
     subtitle: 'where children learn to wait',
     description: 'A space dedicated to growing things. Where the timeline is set by nature, not by a child. The slowest room. One of the most powerful ones.',
     principle: 'The timeline belongs to the plant, not the child. In a world of instant feedback, a garden is radical.',
-    spaces: ['outdoor', 'indoor'],
     color: '#5A6428',
     accentColor: '#C8D890',
     implementations: {
       indoor: [
-        { id: 'windowsill-herbs', name: 'Windowsill Herbs', description: 'Basil, mint, chives. Kitchen-accessible. Snip and taste. Watch roots grow in water glasses.' },
-        { id: 'terrarium', name: 'Terrarium', description: 'Enclosed world in glass. Moss, ferns, tiny stones. Self-contained ecosystems to observe.' },
-        { id: 'sprouting-station', name: 'Sprouting Station', description: 'Mung beans in jars, wheatgrass on trays. Watch transformation happen in days, not weeks.' },
-        { id: 'kitchen-scrap', name: 'Kitchen Scrap Garden', description: 'Green onions regrow in water. Carrot tops produce seeds. Potato eyes become vines.' },
+        { id: 'seed-vault', name: 'Subterranean Seed Vault', description: 'A small below-grade room accessible by ladder where seeds are stored and starting happens. The underground space maintains consistent temperature. Low ceiling, intimate scale. Children descend into the earth to work with seeds.' },
+        { id: 'bay-greenhouse', name: 'Bay Window Greenhouse', description: 'A deep alcove becomes a micro-greenhouse with child-height observation perches. Kids monitor seed starting at eye level. The curved seat wraps around them like a protective seed furrow.' },
+        { id: 'propagation-loft', name: 'Vertical Propagation Loft', description: 'A lofted platform at child eye level for hanging planters. Above is the grow zone; underneath is the observation nook. Multiple exits maintain safety while creating vertical discovery.' },
+        { id: 'cocoon-chamber', name: 'Cocoon Propagation Chamber', description: 'A glass-walled pod kids can crawl into to feel surrounded by their plants. Capsule-inspired scale creates intimacy. Children disappear into the green.' },
       ],
       outdoor: [
-        { id: 'raised-bed', name: 'Raised Bed Plot', description: 'Their own square foot. Carrots, radishes, beans. First harvests are addictive.' },
-        { id: 'teepee-trellis', name: 'Teepee Trellis', description: 'Climbing beans create a hideout. Eat while hiding. Secret garden logic.' },
-        { id: 'pizza-garden', name: 'Pizza Garden', description: 'Tomatoes, basil, oregano in a semicircle. Harvest and assemble.' },
-        { id: 'pollinator-patch', name: 'Pollinator Patch', description: 'Flowers that attract butterflies and bees. Watch the ecosystem arrive.' },
+        { id: 'greenhouse-tunnel', name: 'Greenhouse Tunnel Portal', description: 'A transparent corridor connecting inside to outside growing spaces. Children pass through a portal between environments. The tunnel itself becomes a growing environment with climbing vines.' },
+        { id: 'canopy-lookout', name: 'Canopy Observation Loft', description: 'A raised platform where children climb up to observe the plant canopy from above. Sized for children only - adults view from below. Different relationship with plants than adults have.' },
+        { id: 'terraced-beds', name: 'Terraced Growing Amphitheater', description: 'Tiered raised beds create natural seating and different microclimates. Children work at different heights. The amphitheater format encourages communal tending.' },
+        { id: 'secret-beds', name: 'Hidden Garden Rooms', description: 'Separate enclosed growing areas connected by narrow paths. Each room has its own character and crops. The paths between create discovery and secrecy.' },
       ],
-      transition: 'The Waiting Window: An indoor spot with a clear sightline to the outdoor garden. Check on it daily. Notice changes. Practice patience.',
+      transition: 'The Waiting Window: An indoor spot with clear sightline to outdoor garden. Check daily. Notice changes. Practice patience. The window frame becomes a living picture that changes with seasons.',
     },
     tips: [
       'Choose fast growers: radishes sprout in a week',
@@ -76,23 +74,22 @@ const rooms = [
     subtitle: 'where agency is born',
     description: 'A space with materials, tools, and a problem to solve. No instruction manual. The most empowering room in the house.',
     principle: 'Agency is not taught. It is built. Children who are given materials and a problem - and then left alone to solve it - develop a relationship with their own capability.',
-    spaces: ['indoor', 'outdoor'],
     color: '#6B3A2A',
     accentColor: '#D4B4A4',
     implementations: {
       indoor: [
-        { id: 'loose-parts-shelf', name: 'Loose Parts Shelf', description: 'Cardboard tubes, fabric scraps, cardboard boxes, wooden blocks. Real materials, not toys.' },
-        { id: 'cardboard-zone', name: 'Cardboard Construction Zone', description: 'Large boxes become forts, castles, cars. Tape, scissors, imagination.' },
-        { id: 'tool-corner', name: 'Tool Corner', description: 'Wooden mallets, child-safe screwdrivers, large clips. Real tools, scaled for small hands.' },
-        { id: 'make-do-cart', name: 'Make-Do Cart', description: 'Mobile cart with weekly rotating materials. Bring the Build Room anywhere.' },
+        { id: 'loft-workshop', name: 'Inhabitable Workshop Loft', description: 'A lofted building station where kids stand inside a child-scaled workshop. Elevated with pegboard walls, small workbench, material bins at reach. The underneath becomes clay/sprawl zone. Multiple ladder access points.' },
+        { id: 'transform-floor', name: 'Transformable Floor Plane', description: 'The floor consists of flip-top surfaces: smooth for drawing, inverted to reveal texture for building. Low storage benches convert to seating or work surfaces. The room literally transforms.' },
+        { id: 'threshold-airlock', name: 'Compression Threshold Airlock', description: 'Low ceiling at entry creates psychological preparation, then releases into full-height making space. This architectural airlock helps children transition into experimental freedom.' },
+        { id: 'wall-workshop', name: 'Full-Height Pegboard Wall', description: 'An entire wall of pegboard with tools and materials at every height. Children climb a library ladder to access upper storage. The wall is the inventory, the room is the workshop.' },
       ],
       outdoor: [
-        { id: 'log-construction', name: 'Log Construction Area', description: 'Short log rounds, long branches, stakes. Build structures that stay.' },
-        { id: 'stick-fort', name: 'Stick Fort', description: 'Branch walls, fabric roofs. Changes with the seasons as sticks fall.' },
-        { id: 'mud-brick', name: 'Mud Brick Station', description: 'Mix dirt and water, pack into forms. Build walls, ovens, villages.' },
-        { id: 'salvage-pile', name: 'Salvage Pile', description: 'Collected "junk": pallets, pipes, old tiles. Premium building materials. Free.' },
+        { id: 'climbing-entry', name: 'Climbing Wall Entry Workshop', description: 'The build zone is accessed by climbing a bouldering wall. Tools are stored at elevation. The physical requirement creates focus and transition ritual. Adults enter conventionally; the child-space is defined by climbing.' },
+        { id: 'tunnel-spire', name: 'Tunnel Network Makerspace', description: 'Connected workshops arranged around a tunnel spine. Children move through tunnels to access different making zones. The tunnels create secret routes through the workshop.' },
+        { id: 'log-construction', name: 'Log Architecture Lab', description: 'Real logs, branches, stakes. Build structures that weather and change. The log pile is the lumber yard. Structures last seasons, not hours.' },
+        { id: 'salvage-warehouse', name: 'Salvage Warehouse', description: 'Collected junk: pallets, pipes, tiles, windows. Premium building materials, free. The warehouse format makes gathering feel industrial and serious.' },
       ],
-      transition: 'The Making Threshold: Materials roll between spaces on carts. Outdoor builds inform indoor projects. The distinction blurs.',
+      transition: 'The Making Threshold: Materials roll between spaces on carts. Outdoor builds inform indoor projects. The distinction blurs. A child carries their outdoor fort plan inside to scale it in cardboard.',
     },
     tips: [
       'Real tools, not toys - a small hammer and nails works best',
@@ -109,23 +106,22 @@ const rooms = [
     subtitle: 'where children learn to see',
     description: 'A quiet corner for watching, noticing, drawing, pressing. The antidote to overstimulation. The rarest and most needed room.',
     principle: 'Stillness is a skill. Design for it. We design houses full of stimulation and then wonder why children cannot be still.',
-    spaces: ['indoor', 'outdoor'],
     color: '#464F5F',
     accentColor: '#C8D0D8',
     implementations: {
       indoor: [
-        { id: 'cozy-nook', name: 'Cozy Nook', description: 'Floor cushions, canopy, low light. A corner that invites sitting. Nothing else required.' },
-        { id: 'bird-window', name: 'Bird Window', description: 'Cushioned seat at a window with a view. Binoculars nearby. Aiming to see.' },
-        { id: 'nature-table', name: 'Nature Table', description: 'Low shelf with found objects. Rotate weekly. Let them arrange.' },
-        { id: 'sound-corner', name: 'Sound Corner', description: 'Headphones, nature sounds. An island of calm in a loud house.' },
+        { id: 'listening-chamber', name: 'Listening Chamber', description: 'A small enclosed room with acoustic isolation for 1-2 children. One round window at child eye level - adults see only ceiling. No furniture except cushions. Rammed earth walls for silence. The room is for being, not doing.' },
+        { id: 'womb-alcove', name: 'Womb-Like Reading Alcove', description: 'A deeply curved, low-ceilinged niche. Sized just for one child plus a book - proportionally tiny for the feeling of being held. Warm overhead lighting. Multiple entries prevent entrapment feeling.' },
+        { id: 'hygge-platform', name: 'Scandinavian Hygge Platform', description: 'A low wooden platform in a corner creates a papoose effect through partial enclosure. Layered textiles - wool, sheepskin, linen. Children can disappear into cushions but remain supervised.' },
+        { id: 'capsule-retreat', name: 'Japanese Capsule Retreat', description: 'A small enclosed pod built into the wall with a single porthole window. Extreme coziness through compression. Children see out but feel protected within. Inspired by capsule hotels, softened for children.' },
       ],
       outdoor: [
-        { id: 'observation-hut', name: 'Observation Hut', description: 'Small structure with viewing slots at child height. Hide, watch, notice.' },
-        { id: 'sitting-stones', name: 'Sitting Stones', description: 'Arranged stones in a garden. Come, sit, look. Return weekly to notice changes.' },
-        { id: 'tunnel-entrance', name: 'Tunnel Entrance', description: 'Short tunnel leading to a hidden circle. Privacy invites presence.' },
-        { id: 'seasonal-posts', name: 'Seasonal Posts', description: 'Marked spots with painted stones. Return each week. Track the year.' },
+        { id: 'sky-observatory', name: 'Sky Observatory Loft', description: 'Accessed by ladder, this small loft is positioned under a roof window. Children climb up to lie under stars or watch rain. Intimate space with low ceiling except under window. Adults cannot stand inside.' },
+        { id: 'sitting-stones', name: 'Arranged Sitting Stones', description: 'Natural stones arranged around a focal planting create a listen spot. Return weekly to notice changes. The arrangement signals this is a place for presence.' },
+        { id: 'hiding-room', name: 'The Hiding Room', description: 'A small space (2m x 2m) with a single child-scale doorway (60cm square). Inside: a cushion, a lamp, a book. The room is barely visible from outside - a void that draws you in.' },
+        { id: 'wind-chime-zone', name: 'Wind Chime Garden', description: 'Various materials - bamboo, metal, glass - creating gentle sounds paired with swaying grasses. Children sit within the zone and listen. The sound garden has no other purpose.' },
       ],
-      transition: 'The Notice Wall: A shared space to record observations. Drawings, photos, notes. What did you see?',
+      transition: 'The Notice Wall: A shared space to record observations. Drawings, photos, notes. What did you see? The wall becomes a collective journal of presence over time.',
     },
     tips: [
       'A chair and a view is enough',
@@ -142,23 +138,22 @@ const rooms = [
     subtitle: 'where imagination takes root',
     description: 'The room that changes with the seasons. Where small magic lives - fairy doors, moon gardens, night walks, seasonal altars.',
     principle: 'Wonder is a design choice. Make it on purpose. Magic does not happen by accident - it is placed there deliberately.',
-    spaces: ['outdoor', 'indoor'],
     color: '#7A5C14',
     accentColor: '#F0E4A0',
     implementations: {
       indoor: [
-        { id: 'seasonal-table', name: 'Seasonal Table', description: 'Low shelf with seasonal treasures. Pressed leaves, nuts, feathers, shells. Changes with the year.' },
-        { id: 'fairy-garden', name: 'Fairy Garden', description: 'Miniature world in a pot. Tiny furniture, moss, beads. Inhabit the small.' },
-        { id: 'discovery-basket', name: 'Discovery Basket', description: 'Weekly finds: unusual seed pods, strange stones, bark with interesting patterns. Mystery in a box.' },
-        { id: 'story-corner', name: 'Story Corner', description: 'Soft fabric, pillows, puppets. The space invites becoming someone else.' },
+        { id: 'the-vortex', name: 'The Vortex', description: 'A circular room with curved walls and domed ceiling. Star map painted above. A single fabric curtain entry. Inside, a rotating projector casts slow-moving constellations. No corners, no right angles. The geometry itself is the magic.' },
+        { id: 'transformation-chamber', name: 'Transformation Chamber', description: 'Mirrored walls with interchangeable floor panels - wood, grass, water imagery. Children rearrange the space to create different environments. Hidden storage holds costumes and props. The room becomes whatever story requires.' },
+        { id: 'underworld-passage', name: 'The Underworld Passage', description: 'A narrow corridor (50cm wide) with sequential chambers: one dark with water sounds, one mirrored with light, one filled with soft objects. Children traverse to reach a treasure room. Adults enter each chamber separately.' },
+        { id: 'micro-dollhouse', name: 'Enterable Micro-Dollhouse', description: 'A child-scaled magical dwelling - fairy cottage, spaceship, submarine. Kids physically enter at 1:1 scale. Multiple openings create escape routes. Translucent walls provide borrowed light and mystery.' },
       ],
       outdoor: [
-        { id: 'fairy-door', name: 'Fairy Door', description: 'A door in a tree. No bigger than a child\'s hand. Who lives there?' },
-        { id: 'moon-garden', name: 'Moon Garden', description: 'White flowers that open at night. Plant it, tend it, visit it after dark.' },
-        { id: 'night-walk', name: 'Night Walk Path', description: 'Lantern walk after dark. Follow the path. Discover what appears at night.' },
-        { id: 'seasonal-altar', name: 'Seasonal Altar', description: 'A place for offerings: autumn leaves, spring flowers, summer stones. Rotate with rituals.' },
+        { id: 'fairy-door-village', name: 'Fairy Door Village', description: 'Multiple tiny doors in trees, stumps, walls. Each door is a different world - no bigger than a child\'s hand. The village logic means more discovery, more mystery, more inhabitants.' },
+        { id: 'moon-garden', name: 'Moon Garden', description: 'White flowers that open at night - moonflower, jasmine, white petunia. Plant it, tend it, visit after dark. The garden transforms when the sun goes down.' },
+        { id: 'night-walk', name: 'Lantern Walk Path', description: 'A winding path with embedded low lights. Follow the light through the garden at night. The path reveals what appears after dark - moths, owls, night-blooming flowers.' },
+        { id: 'cloud-room', name: 'Cloud Viewing Room', description: 'A small structure with large skylight and reclined seating. Lie on cushions and watch clouds. Pure observation. No other purpose. White plaster, soft fabric, nothing else.' },
       ],
-      transition: 'The Mystery Box: A shared container of unexplained natural objects. Questions welcome. Answers not required.',
+      transition: 'The Mystery Box: A shared container of unexplained natural objects. Questions welcome. Answers not required. The box sits at the threshold between inside and outside, a daily invitation to wonder.',
     },
     tips: [
       'Rotate weekly with seasonal finds',
@@ -478,7 +473,7 @@ export default function WildRoomPage() {
                           </h3>
                           <div className="space-y-2">
                             {room.implementations.indoor.map((impl, i) => (
-                              <div key={i} className="p-3 rounded-lg" style={{ backgroundColor: '#FAF6EE' }}>
+                              <div key={i} className="p-4 rounded-lg" style={{ backgroundColor: '#FAF6EE' }}>
                                 <h4 className="text-sm font-medium text-ink mb-1">{impl.name}</h4>
                                 <p className="text-xs text-inkl leading-relaxed">{impl.description}</p>
                               </div>
@@ -498,7 +493,7 @@ export default function WildRoomPage() {
                           </h3>
                           <div className="space-y-2">
                             {room.implementations.outdoor.map((impl, i) => (
-                              <div key={i} className="p-3 rounded-lg" style={{ backgroundColor: '#FAF6EE' }}>
+                              <div key={i} className="p-4 rounded-lg" style={{ backgroundColor: '#FAF6EE' }}>
                                 <h4 className="text-sm font-medium text-ink mb-1">{impl.name}</h4>
                                 <p className="text-xs text-inkl leading-relaxed">{impl.description}</p>
                               </div>
