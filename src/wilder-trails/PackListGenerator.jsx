@@ -47,9 +47,8 @@ const AGE_ITEMS = {
     { id: 'change_mat', label: 'Change mat', icon: '🛏️' },
   ],
   toddler: [ // 1-3 years
-    { id: 'stroller', label: 'Stroller (if needed)', icon: '🚼' },
     { id: 'comfort_item', label: 'Comfort item (blanket/toy)', icon: '🧸' },
-    { id: 'activities', label: 'Snacks/comfort items', icon: '🍎' },
+    { id: 'snacks_extra', label: 'Extra snacks', icon: '🍎' },
   ],
   preschool: [ // 4-5 years
     { id: 'binoculars', label: 'Kid binoculars', icon: '🔭' },
@@ -98,14 +97,16 @@ export default function PackListGenerator({ trail, familyInfo, weather, onClose 
       items.push(...DURATION_ITEMS.long)
     }
 
-    // Add feature items
+    // Add feature items (based on TRAIL features)
     if (trail?.hasWater) {
       items.push(...FEATURE_ITEMS.hasWater)
     }
     if (trail?.restrooms) {
       items.push(...FEATURE_ITEMS.restrooms)
     }
-    if (trail?.dogsAllowed) {
+    
+    // Add family-specific items (based on FAMILY needs)
+    if (familyInfo?.needsDog) {
       items.push(...FEATURE_ITEMS.dogsAllowed)
     }
 
@@ -114,12 +115,12 @@ export default function PackListGenerator({ trail, familyInfo, weather, onClose 
     if (age <= 0) {
       items.push(...AGE_ITEMS.baby)
       if (familyInfo?.needsStroller) {
-        items.push(...AGE_ITEMS.toddler.filter(i => i.id === 'stroller'))
+        items.push({ id: 'stroller', label: 'Stroller', icon: '🚼' })
       }
     } else if (age <= 3) {
-      items.push(...AGE_ITEMS.toddler)
+      items.push(...AGE_ITEMS.toddler.filter(i => i.id !== 'stroller'))
       if (familyInfo?.needsStroller) {
-        items.push(...AGE_ITEMS.toddler.filter(i => i.id === 'stroller'))
+        items.push({ id: 'stroller', label: 'Stroller', icon: '🚼' })
       }
     } else if (age <= 5) {
       items.push(...AGE_ITEMS.preschool)

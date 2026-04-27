@@ -8,6 +8,12 @@ function ActivitiesPage() {
   const [selectedAge, setSelectedAge] = useState('')
   const [selectedCategories, setSelectedCategories] = useState([])
   const [selectedLocation, setSelectedLocation] = useState('')
+  const [buildPrompt, setBuildPrompt] = useState('')
+  const [isGenerating, setIsGenerating] = useState(false)
+  const [generatedBuilds, setGeneratedBuilds] = useState([])
+  const [buildError, setBuildError] = useState('')
+  const [freeGenerations, setFreeGenerations] = useState(5)
+  const [hasSubscription, setHasSubscription] = useState(false)
 
   const filteredActivities = useMemo(() => {
     return activities.filter(activity => {
@@ -40,6 +46,38 @@ function ActivitiesPage() {
   }, [selectedAge, selectedCategories, selectedLocation])
 
   const hasActiveFilters = selectedAge || selectedCategories.length > 0 || selectedLocation
+
+  const generateBuilds = async () => {
+    if (!buildPrompt.trim()) return
+    if (!hasSubscription && freeGenerations <= 0) return
+    
+    setIsGenerating(true)
+    setBuildError('')
+    
+    try {
+      const response = await fetch('/api/ai-build-generator', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ items: buildPrompt })
+      })
+      
+      const data = await response.json()
+      
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to generate builds')
+      }
+      
+      setGeneratedBuilds(data.builds)
+      if (!hasSubscription) {
+        setFreeGenerations(prev => prev - 1)
+      }
+    } catch (error) {
+      console.error('Build generation error:', error)
+      setBuildError(error.message || 'Failed to generate builds. Please try again.')
+    } finally {
+      setIsGenerating(false)
+    }
+  }
 
   return (
     <div className="min-h-screen bg-cream pt-24 pb-12 px-4">
