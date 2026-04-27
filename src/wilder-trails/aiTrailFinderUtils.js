@@ -51,149 +51,149 @@ function buildContextSummary(context) {
     if (fi.needsStroller) parts.push('Needs stroller-friendly')
     if (fi.needsDog) parts.push('Bringing dog')
     if (fi.wantsWater) parts.push('Wants water features')
+    if (fi.needsRestrooms) parts.push('Needs restrooms nearby')
   }
   
   if (context.timeWindow) {
-    parts.push(`Time available: ${context.timeWindow} minutes`)
+    parts.push(`Time available: ${context.timeWindow} minutes max`)
   }
   
   return parts.length > 0 ? parts.join('\n') : null
 }
 
-// Filter trails by user context
-function filterTrailsByContext(trails, context) {
-  let filtered = [...trails]
-  
-  // Location filter
-  if (context.location?.city) {
-    const loc = context.location.city.toLowerCase()
-    filtered = filtered.filter(h => 
-      h.region?.toLowerCase().includes(loc) ||
-      h.state?.toLowerCase().includes(loc)
-    )
-    // If no matches, try broader search
-    if (filtered.length < 3) {
-      filtered = [...trails].filter(h => 
-        h.region?.toLowerCase().includes(loc) ||
-        h.state?.toLowerCase().includes(loc)
-      )
-    }
-  }
-  
-  // Age filter - prioritize appropriate trails
-  if (context.familyInfo?.youngestAge !== undefined) {
-    const youngestAge = context.familyInfo.youngestAge
+// Filter and score trails by user context
+function filterAndScoreTrails(trails, context, request = '') {
+  let scored = trails.map(h => {
+    let score = 0
+    const notes = []
     
-    // Reorder trails - put most appropriate ones first
-    filtered.sort((a, b) => {
-      const aAge = parseInt(a.ageRange?.match(/\d+/)?.[0] || '5')
-      const bAge = parseInt(b.ageRange?.match(/\d+/)?.[0] || '5')
-      
-      // Trails for younger kids should come first
-      if (youngestAge <= 3) {
-        return aAge - bAge
+    // Location match
+    if (context.location?.city) {
+      const loc = context.location.city.toLowerCase()
+      if (h.region?.toLowerCase().includes(loc) || h.state?.toLowerCase().includes(loc)) {
+        score += 10
       }
-      return 0
-    })
-  }
-  
-  // Feature filters
-  const features = []
-  if (context.familyInfo?.needsStroller) features.push('strollerFriendly')
-  if (context.familyInfo?.needsDog) features.push('dogsAllowed')
-  if (context.familyInfo?.wantsWater) features.push('hasWater')
-  if (context.familyInfo?.needsRestrooms) features.push('restrooms')
-  
-  if (features.length > 0) {
-    // Boost trails that match features
-    filtered = filtered.sort((a, b) => {
-      const aScore = features.filter(f => a[f]).length
-      const bScore = features.filter(f => b[f]).length
-      return bScore - aScore
-    })
-  }
-  
-  // Time filter
-  if (context.timeWindow) {
-    filtered = filtered.filter(h => {
+    }
+    
+    // Age appropriateness
+    if (context.familyInfo?.youngestAge !== undefined) {
+      const youngest = context.familyInfo.youngestAge
+      
+      // Check difficulty matches age
+      if (youngest <= 3 && h.difficulty === 'easy') {
+        score += 5
+        notes.push('Great for young kids')
+      }
+      if (youngest >= 7 && h.difficulty === 'challenging') {
+        score += 3
+        notes.push('Good challenge for older kids')
+      }
+      
+      // Stroller needs
+      if (context.familyInfo.needsStroller && h.strollerFriendly) {
+        score += 5
+        notes.push('Stroller-friendly')
+      }
+      
+      // Dog needs
+      if (context.familyInfo.needsDog && h.dogsAllowed) {
+        score += 4
+        notes.push('Dogs welcome')
+      }
+      
+      // Water preferences
+      if (context.familyInfo.wantsWater && h.hasWater) {
+        score += 4
+        notes.push('Has water features')
+      }
+      
+      // Restroom needs
+      if (context.familyInfo.needsRestrooms && h.restrooms) {
+        score += 3
+        notes.push('Has restrooms')
+      }
+    }
+    
+    // Time constraint
+    if (context.timeWindow) {
       const duration = parseInt(h.duration?.match(/\d+/)?.[0] || '60')
-      return duration <= context.timeWindow
-    })
-  }
+      if (duration <= context.timeWindow) {
+        score += 3
+      }
+    }
+    
+    // Request-based scoring
+    if (request) {
+      const lower = request.toLowerCase()
+      
+      if (lower.includes('water') && h.hasWater) {
+        score += 6
+        notes.push('Water features')
+      }
+      if ((lower.includes('shade') || lower.includes('shady')) && h.shady) {
+        score += 4
+        notes.push('Shaded trail')
+      }
+      if ((lower.includes('easy') || lower.includes('gentle')) && h.difficulty === 'easy') {
+        score += 5
+      }
+      if (lower.includes('view') && h.hasViews) {
+        score += 4
+        notes.push('Scenic views')
+      }
+      if (lower.includes('adventure') && h.difficulty !== 'easy') {
+        score += 3
+      }
+      if ((lower.includes('paved') || lower.includes('flat')) && h.isPaved) {
+        score += 5
+        notes.push('Paved path')
+      }
+    }
+    
+    return { trail: h, score, notes }
+  })
   
-  // Limit to top 15
-  return filtered.slice(0, 15)
+  // Sort by score descending
+  scored.sort((a, b) => b.score - a.score)
+  
+  return scored.slice(0, 10)
 }
 
-// Simple parser for user requests
-function parseUserRequest(request) {
-  const lower = request.toLowerCase()
-  const parsed = {
-    features: []
+// Generate a friendly auto-request based on context
+function generateAutoRequest(context) {
+  const parts = []
+  
+  if (context.familyInfo?.wantsWater) {
+    parts.push('kid-friendly waterfall or water feature')
+  }
+  if (context.familyInfo?.youngestAge <= 3) {
+    parts.push('easy trail suitable for toddlers')
+  }
+  if (context.familyInfo?.needsStroller) {
+    parts.push('stroller-friendly')
   }
   
-  // Extract features from natural language
-  if (lower.includes('water') || lower.includes('splash') || lower.includes('creek') || lower.includes('river')) {
-    parsed.features.push('hasWater')
-  }
-  if (lower.includes('dog')) parsed.features.push('dogsAllowed')
-  if (lower.includes('stroller') || lower.includes('paved') || lower.includes('flat')) parsed.features.push('strollerFriendly')
-  if (lower.includes('shade') || lower.includes('shady')) parsed.features.push('shade')
-  if (lower.includes('view') || lower.includes('scenic')) parsed.features.push('hasViews')
-  if (lower.includes('easy') || lower.includes('short')) parsed.features.push('easy')
-  if (lower.includes('waterfall')) parsed.features.push('hasWater')
-  
-  // Extract difficulty preferences
-  if (lower.includes('challenging') || lower.includes('hard') || lower.includes('adventure')) {
-    parsed.difficulty = 'challenging'
-  } else if (lower.includes('moderate')) {
-    parsed.difficulty = 'moderate'
-  } else if (lower.includes('easy') || lower.includes('gentle') || lower.includes('toddler')) {
-    parsed.difficulty = 'easy'
+  if (parts.length > 0) {
+    return `Find a ${parts.join(' with ')} trail for our family`
   }
   
-  // Extract any additional locations mentioned
-  const locations = ['seattle', 'portland', 'denver', 'bend', 'moab', 'austin', 'houston', 'boulder', 'colorado', 'oregon', 'washington', 'texas']
-  for (const loc of locations) {
-    if (lower.includes(loc) && !lower.includes(context?.location?.city?.toLowerCase())) {
-      parsed.location = loc.charAt(0).toUpperCase() + loc.slice(1)
-      break
-    }
-  }
-  
-  return parsed
+  return 'Find the best trail for our family based on our situation'
 }
 
 // Call backend API
 export async function findTrailsWithAI(userRequest, context = {}) {
-  // Filter trails by context first
-  const contextFilteredTrails = filterTrailsByContext(hikes, context)
+  // Get scored/filtered trails
+  const scoredTrails = filterAndScoreTrails(hikes, context, userRequest)
   
-  // Then apply user request filters
-  const requestFilters = parseUserRequest(userRequest)
-  let filteredTrails = contextFilteredTrails
-  
-  if (requestFilters.features.length > 0) {
-    filteredTrails = contextFilteredTrails.filter(h => {
-      return requestFilters.features.every(f => {
-        if (f === 'easy') return h.difficulty === 'easy'
-        return h[f] === true
-      })
-    })
+  if (scoredTrails.length === 0) {
+    return {
+      recommendations: [],
+      message: "I couldn't find trails matching your request. Try adjusting your search or browse all trails."
+    }
   }
-  
-  if (requestFilters.difficulty) {
-    // Prefer difficulty but don't exclude
-    filteredTrails = filteredTrails.sort((a, b) => {
-      if (a.difficulty === requestFilters.difficulty) return -1
-      if (b.difficulty === requestFilters.difficulty) return 1
-      return 0
-    })
-  }
-  
-  if (filteredTrails.length === 0) {
-    filteredTrails = contextFilteredTrails.slice(0, 5)
-  }
+
+  // If no request provided, generate one based on context
+  const request = userRequest || generateAutoRequest(context)
 
   try {
     const response = await fetch(API_ENDPOINT, {
@@ -202,9 +202,9 @@ export async function findTrailsWithAI(userRequest, context = {}) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        request: userRequest,
+        request,
         context: buildContextSummary(context),
-        trails: filteredTrails.slice(0, 10)
+        trails: scoredTrails.map(s => s.trail)
       })
     })
 
@@ -219,7 +219,7 @@ export async function findTrailsWithAI(userRequest, context = {}) {
     const recommendations = data.trails.map((trail, i) => ({
       title: trail.title,
       explanation: trail.reason,
-      trail: filteredTrails.find(t => t.id === trail.id) || filteredTrails[i]
+      trail: scoredTrails.find(s => s.trail.id === trail.id)?.trail || scoredTrails[i]?.trail
     })).filter(r => r.trail)
 
     return {
@@ -231,5 +231,3 @@ export async function findTrailsWithAI(userRequest, context = {}) {
     throw error
   }
 }
-
-

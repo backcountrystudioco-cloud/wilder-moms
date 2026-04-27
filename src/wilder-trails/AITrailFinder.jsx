@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link, useNavigate } from 'react-router-dom'
 import { useWilderTrails } from './WilderTrailsContext'
@@ -6,10 +6,10 @@ import { findTrailsWithAI, getRemainingQueries, incrementQueryCount } from './ai
 
 // Sample prompts that work with their context
 const samplePrompts = [
-  "Shady trail for our family",
   "Water features for the kids",
-  "Easy walk for everyone",
-  "Something adventurous"
+  "Shady trail for everyone",
+  "Something adventurous",
+  "Easy walk with views"
 ]
 
 export default function AITrailFinder() {
@@ -21,9 +21,18 @@ export default function AITrailFinder() {
   const [results, setResults] = useState(null)
   const [error, setError] = useState(null)
   const [remainingQueries, setRemainingQueries] = useState(getRemainingQueries())
+  const [hasAutoSearched, setHasAutoSearched] = useState(false)
 
-  const handleSearch = async (searchQuery = query) => {
-    if (!searchQuery.trim()) return
+  // Auto-search on mount if we have context
+  useEffect(() => {
+    if (!hasAutoSearched && remainingQueries > 0 && (location?.city || familyInfo)) {
+      handleSearch(true) // true = auto search
+      setHasAutoSearched(true)
+    }
+  }, [location, familyInfo])
+
+  const handleSearch = async (isAuto = false) => {
+    if (!isAuto && !query.trim()) return
     
     if (remainingQueries <= 0) {
       setError("You've used all your free searches. Check back soon!")
@@ -35,7 +44,7 @@ export default function AITrailFinder() {
     setResults(null)
 
     try {
-      const data = await findTrailsWithAI(searchQuery, {
+      const data = await findTrailsWithAI(isAuto ? '' : query, {
         location,
         familyInfo,
         timeWindow
@@ -56,7 +65,7 @@ export default function AITrailFinder() {
 
   const handleSampleClick = (sample) => {
     setQuery(sample)
-    handleSearch(sample)
+    handleSearch()
   }
 
   // Build context summary for display
@@ -71,7 +80,7 @@ export default function AITrailFinder() {
       if (familyInfo.needsStroller) parts.push('Need stroller')
       if (familyInfo.needsDog) parts.push('Bringing dog')
     }
-    if (timeWindow) parts.push(`Within ${timeWindow} min`)
+    if (timeWindow) parts.push(`${timeWindow} min max`)
     return parts.length > 0 ? parts.join(' · ') : null
   }
 
@@ -88,7 +97,7 @@ export default function AITrailFinder() {
         >
           <p className="text-ember text-xs font-medium uppercase tracking-widest mb-3">AI Trail Finder</p>
           <h1 className="font-serif text-3xl md:text-4xl text-ink mb-3">
-            What kind of adventure are you looking for?
+            {contextSummary ? 'What kind of adventure?' : 'Find your perfect trail'}
           </h1>
           
           {/* User Context */}
@@ -102,7 +111,9 @@ export default function AITrailFinder() {
           )}
           
           <p className="text-inkl max-w-lg mx-auto">
-            Tell me what you're in the mood for. I'll find the perfect trail based on your crew and location.
+            {contextSummary 
+              ? "Tell me what you're in the mood for, or let me surprise you."
+              : "Tell me what you're looking for and I'll find the perfect trail."}
           </p>
           
           {/* Query Counter */}
@@ -113,11 +124,44 @@ export default function AITrailFinder() {
           )}
         </motion.div>
 
+        {/* Quick Action - Find for me button */}
+        {contextSummary && !results && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="mb-6"
+          >
+            <button
+              onClick={() => handleSearch(true)}
+              disabled={isLoading}
+              className="w-full py-6 px-8 bg-forest text-white rounded-2xl font-sans font-medium text-lg hover:bg-forest/90 transition-colors disabled:opacity-50 flex items-center justify-center gap-3"
+            >
+              {isLoading ? (
+                <>
+                  <svg className="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                  </svg>
+                  Finding perfect trails...
+                </>
+              ) : (
+                <>
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                  Find perfect trails for us
+                </>
+              )}
+            </button>
+          </motion.div>
+        )}
+
         {/* Search Input */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
+          transition={{ delay: 0.2 }}
           className="mb-6"
         >
           <div className="relative">
@@ -126,7 +170,7 @@ export default function AITrailFinder() {
               onChange={(e) => setQuery(e.target.value)}
               placeholder="e.g., Something with water where the kids can splash around"
               className="w-full px-6 py-4 pr-14 rounded-2xl border-2 border-inkll/20 bg-white text-ink placeholder:text-inkl/50 focus:border-ember focus:outline-none resize-none"
-              rows={3}
+              rows={2}
               onKeyDown={(e) => {
                 if (e.key === 'Enter' && !e.shiftKey) {
                   e.preventDefault()
@@ -154,25 +198,27 @@ export default function AITrailFinder() {
         </motion.div>
 
         {/* Sample Prompts */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
-          className="mb-8"
-        >
-          <p className="text-xs text-inkl uppercase tracking-wider mb-3">Try these</p>
-          <div className="flex flex-wrap gap-2">
-            {samplePrompts.map((sample, i) => (
-              <button
-                key={i}
-                onClick={() => handleSampleClick(sample)}
-                className="px-4 py-2 bg-white rounded-full text-sm text-ink border border-inkll/20 hover:border-ember/50 transition-colors text-left"
-              >
-                {sample}
-              </button>
-            ))}
-          </div>
-        </motion.div>
+        {contextSummary && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3 }}
+            className="mb-8"
+          >
+            <p className="text-xs text-inkl uppercase tracking-wider mb-3">Or try these</p>
+            <div className="flex flex-wrap gap-2">
+              {samplePrompts.map((sample, i) => (
+                <button
+                  key={i}
+                  onClick={() => handleSampleClick(sample)}
+                  className="px-4 py-2 bg-white rounded-full text-sm text-ink border border-inkll/20 hover:border-ember/50 transition-colors text-left"
+                >
+                  {sample}
+                </button>
+              ))}
+            </div>
+          </motion.div>
+        )}
 
         {/* Error */}
         <AnimatePresence>
