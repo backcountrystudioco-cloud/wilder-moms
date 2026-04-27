@@ -1,10 +1,11 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useWilderTrails } from './WilderTrailsContext'
 import { useLocation } from '../hooks/useLocation'
 import { useWeather } from '../hooks/useWeather'
 import { useRecommendations } from '../hooks/useRecommendations'
+import { findTrailsWithAI, getRemainingQueries } from './aiTrailFinderUtils'
 import ProgressStepper from './ProgressStepper'
 import HikeCard from './HikeCard'
 
@@ -78,16 +79,13 @@ function getWeatherVibe(weather, timeContext) {
   if (weather.level === 'drizzle' || weather.level === 'drizzle-cool') {
     return { vibe: "Drizzle won't stop the fun", color: "bg-gold" };
   }
-  if (weather.level === 'drizzle-cold') {
-    return { vibe: "Cold + damp = stay warm", color: "bg-terra" };
+  if (weather.level === 'rain' || weather.level === 'heavy-rain') {
+    return { vibe: "Rainy day — indoor fun or wait it out", color: "bg-slate" };
   }
-  if (weather.level === 'rain') {
-    return { vibe: "Rainy day ahead", color: "bg-terra" };
+  if (weather.level === 'snow' || weather.level === 'heavy-snow') {
+    return { vibe: "Snow day! Bundle up or save for later", color: "bg-blue" };
   }
-  if (weather.level === 'snow') {
-    return { vibe: "Snow day adventures!", color: "bg-slate" };
-  }
-  return { vibe: "Check conditions before heading out", color: "bg-gold" };
+  return null;
 }
 
 // Age range labels
@@ -102,10 +100,16 @@ const ageLabels = [
 
 export default function TrailsPage() {
   const navigate = useNavigate()
-  const { location, familyInfo, timeWindow, vibe, currentStep } = useWilderTrails()
+  const { location, familyInfo, timeWindow } = useWilderTrails()
   
   // Weather hook - only if we have location
   const weather = useWeather(location?.lat, location?.lon)
+  
+  // AI recommendations state
+  const [aiRecommendations, setAiRecommendations] = useState([])
+  const [aiLoading, setAiLoading] = useState(false)
+  const [aiError, setAiError] = useState(null)
+  const [aiRemaining, setAiRemaining] = useState(getRemainingQueries())
   
   // Get recommendations based on context
   const { hikes: recommendedHikes, weatherAssessment, isReady } = useRecommendations(
@@ -134,6 +138,32 @@ export default function TrailsPage() {
     if (!weatherAssessment) return null;
     return getWeatherVibe(weatherAssessment, timeContext);
   }, [weatherAssessment, timeContext]);
+  
+  // Fetch AI recommendations on mount
+  useEffect(() => {
+    if (aiRemaining > 0 && (location?.city || familyInfo)) {
+      fetchAiRecommendations()
+    }
+  }, [])
+  
+  const fetchAiRecommendations = async () => {
+    setAiLoading(true)
+    setAiError(null)
+    
+    try {
+      const data = await findTrailsWithAI('', {
+        location,
+        familyInfo,
+        timeWindow
+      })
+      setAiRecommendations(data.recommendations || [])
+      setAiRemaining(data.remainingQueries)
+    } catch (err) {
+      setAiError(err.message)
+    } finally {
+      setAiLoading(false)
+    }
+  }
   
   const handleBack = () => {
     navigate('/wilder-trails/whos-coming')
@@ -176,33 +206,6 @@ export default function TrailsPage() {
           <p className="font-sans text-inkl text-lg max-w-2xl leading-relaxed mb-4">
             Based on your crew near {location?.city || 'your area'}, here are trails that actually work for your family's reality today.
           </p>
-          
-          {/* Wilder Companion Suggestion */}
-          <div className="bg-gradient-to-br from-forest/10 to-forest/5 rounded-2xl p-5 border border-forest/20 mb-6">
-            <div className="flex items-start gap-4">
-              <div className="w-10 h-10 bg-forest rounded-full flex items-center justify-center flex-shrink-0">
-                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                </svg>
-              </div>
-              <div className="flex-1">
-                <h3 className="font-serif text-base text-ink mb-1">Wilder Companion suggests:</h3>
-                <p className="text-inkl text-sm mb-3">
-                  {familyInfo?.wantsWater 
-                    ? "Based on your crew, a trail with water features might be perfect today!"
-                    : familyInfo?.youngestAge <= 3
-                      ? "For your youngest adventurer, I'd look for easy, engaging trails with lots to explore."
-                      : "Let me find something adventurous that works for everyone."}
-                </p>
-                <Link
-                  to="/wilder-trails/ai-finder"
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-forest text-white rounded-full text-sm font-medium hover:bg-forest/90 transition-colors"
-                >
-                  Show me trails →
-                </Link>
-              </div>
-            </div>
-          </div>
         </motion.header>
 
         {/* Family Summary */}
@@ -247,7 +250,7 @@ export default function TrailsPage() {
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className={`rounded-2xl p-6 mb-8 ${weatherVibe.color}/10 border border-${weatherVibe.color}/20`}
+            className={`rounded-2xl p-6 mb-8 ${weatherVibe.color}/10 border ${weatherVibe.color}/20`}
           >
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div>
@@ -266,6 +269,75 @@ export default function TrailsPage() {
           </motion.div>
         )}
 
+        {/* Wilder Companion AI Recommendations */}
+        {(aiLoading || aiRecommendations.length > 0) && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-8"
+          >
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 bg-forest rounded-full flex items-center justify-center">
+                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                </svg>
+              </div>
+              <div>
+                <h2 className="font-serif text-xl text-ink">Wilder Companion's Picks</h2>
+                <p className="font-sans text-xs text-inkl">Based on your family's needs</p>
+              </div>
+            </div>
+            
+            {aiLoading ? (
+              <div className="flex items-center justify-center py-8">
+                <div className="w-6 h-6 border-2 border-forest/30 border-t-forest rounded-full animate-spin mr-3"></div>
+                <p className="font-sans text-inkl">Finding perfect trails...</p>
+              </div>
+            ) : (
+              <div className="space-y-3">
+                {aiRecommendations.map((rec, index) => (
+                  <motion.div
+                    key={rec.trail.id}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    onClick={() => handleTrailSelect(rec.trail.id)}
+                    className="bg-white rounded-xl p-4 border border-forest/20 hover:border-forest/40 hover:shadow-md transition-all cursor-pointer"
+                  >
+                    <div className="flex items-start gap-4">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${
+                            rec.trail.difficulty === 'easy' ? 'bg-olive/20 text-forest' :
+                            rec.trail.difficulty === 'moderate' ? 'bg-gold/20 text-ink' :
+                            'bg-ember/20 text-ember'
+                          }`}>
+                            {rec.trail.difficulty}
+                          </span>
+                          <span className="text-xs text-inkl">{rec.trail.distance} mi</span>
+                        </div>
+                        <h3 className="font-serif text-lg text-ink mb-1">{rec.trail.title}</h3>
+                        <p className="text-sm text-inkl mb-2">{rec.trail.region}, {rec.trail.state}</p>
+                        <p className="font-sans text-sm text-inkl leading-relaxed">{rec.explanation}</p>
+                      </div>
+                      <svg className="w-5 h-5 text-forest flex-shrink-0 mt-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            )}
+          </motion.div>
+        )}
+
+        {/* AI Error or fallback */}
+        {aiError && (
+          <div className="mb-8 p-4 bg-blush/40 rounded-xl text-center">
+            <p className="text-sm text-inkl">{aiError}</p>
+          </div>
+        )}
+
         {/* Trail Results */}
         {!isReady ? (
           <div className="flex items-center justify-center py-20">
@@ -278,7 +350,7 @@ export default function TrailsPage() {
           <div>
             <div className="flex items-center justify-between mb-6">
               <h2 className="font-serif text-2xl text-ink">
-                Found {recommendedHikes.length} trails
+                {aiRecommendations.length > 0 ? 'More trails for you' : 'Found trails'}
               </h2>
               <span className="font-sans text-sm text-ember bg-ember/10 px-4 py-2 rounded-full">
                 Sorted by best match
