@@ -21,18 +21,9 @@ export default function AITrailFinder() {
   const [results, setResults] = useState(null)
   const [error, setError] = useState(null)
   const [remainingQueries, setRemainingQueries] = useState(getRemainingQueries())
-  const [hasAutoSearched, setHasAutoSearched] = useState(false)
 
-  // Auto-search on mount if we have context
-  useEffect(() => {
-    if (!hasAutoSearched && remainingQueries > 0 && (location?.city || familyInfo)) {
-      handleSearch(true) // true = auto search
-      setHasAutoSearched(true)
-    }
-  }, [location, familyInfo])
-
-  const handleSearch = async (isAuto = false) => {
-    if (!isAuto && !query.trim()) return
+  const handleSearch = async (isCompanionSuggestion = false) => {
+    if (!isCompanionSuggestion && !query.trim()) return
     
     if (remainingQueries <= 0) {
       setError("You've used all your free searches. Check back soon!")
@@ -44,7 +35,7 @@ export default function AITrailFinder() {
     setResults(null)
 
     try {
-      const data = await findTrailsWithAI(isAuto ? '' : query, {
+      const data = await findTrailsWithAI(isCompanionSuggestion ? '' : query, {
         location,
         familyInfo,
         timeWindow
@@ -97,7 +88,7 @@ export default function AITrailFinder() {
         >
           <p className="text-ember text-xs font-medium uppercase tracking-widest mb-3">AI Trail Finder</p>
           <h1 className="font-serif text-3xl md:text-4xl text-ink mb-3">
-            {contextSummary ? 'What kind of adventure?' : 'Find your perfect trail'}
+            Find your perfect trail
           </h1>
           
           {/* User Context */}
@@ -111,9 +102,7 @@ export default function AITrailFinder() {
           )}
           
           <p className="text-inkl max-w-lg mx-auto">
-            {contextSummary 
-              ? "Tell me what you're in the mood for, or let me surprise you."
-              : "Tell me what you're looking for and I'll find the perfect trail."}
+            Tell me what you're looking for. I'll find the perfect trail based on your crew and location.
           </p>
           
           {/* Query Counter */}
@@ -124,7 +113,7 @@ export default function AITrailFinder() {
           )}
         </motion.div>
 
-        {/* Quick Action - Find for me button */}
+        {/* Wilder Companion Suggestion Card */}
         {contextSummary && !results && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -132,28 +121,28 @@ export default function AITrailFinder() {
             transition={{ delay: 0.1 }}
             className="mb-6"
           >
-            <button
-              onClick={() => handleSearch(true)}
-              disabled={isLoading}
-              className="w-full py-6 px-8 bg-forest text-white rounded-2xl font-sans font-medium text-lg hover:bg-forest/90 transition-colors disabled:opacity-50 flex items-center justify-center gap-3"
-            >
-              {isLoading ? (
-                <>
-                  <svg className="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+            <div className="bg-gradient-to-br from-forest/10 to-forest/5 rounded-2xl p-6 border border-forest/20">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 bg-forest rounded-full flex items-center justify-center flex-shrink-0">
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                   </svg>
-                  Finding perfect trails...
-                </>
-              ) : (
-                <>
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
-                  Find perfect trails for us
-                </>
-              )}
-            </button>
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-serif text-lg text-ink mb-1">Wilder Companion suggests:</h3>
+                  <p className="text-inkl text-sm mb-4">
+                    Based on your crew, a trail with water features might be perfect for the kids today!
+                  </p>
+                  <button
+                    onClick={() => handleSearch(true)}
+                    disabled={isLoading || remainingQueries <= 0}
+                    className="px-5 py-2.5 bg-forest text-white rounded-full text-sm font-medium hover:bg-forest/90 transition-colors disabled:opacity-50"
+                  >
+                    Show me water trails →
+                  </button>
+                </div>
+              </div>
+            </div>
           </motion.div>
         )}
 
@@ -205,7 +194,7 @@ export default function AITrailFinder() {
             transition={{ delay: 0.3 }}
             className="mb-8"
           >
-            <p className="text-xs text-inkl uppercase tracking-wider mb-3">Or try these</p>
+            <p className="text-xs text-inkl uppercase tracking-wider mb-3">Try these</p>
             <div className="flex flex-wrap gap-2">
               {samplePrompts.map((sample, i) => (
                 <button
