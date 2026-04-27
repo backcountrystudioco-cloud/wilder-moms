@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 
@@ -213,7 +213,7 @@ const collections = [
       {
         id: 'bird-blind',
         title: 'Kid-Sized Bird Blind',
-        description: 'A small observation structure just big enough for 2-3 kids. Peepholes at child eye level. camouflage with fabric and branches. Binoculars on hooks. Kids wait in silence for birds to appear.',
+        description: 'A small observation structure just big enough for 2-3 kids. Peepholes at child eye level. Camouflage with fabric and branches. Binoculars on hooks. Kids wait in silence for birds to appear.',
         difficulty: 'Intermediate',
         price: '$34',
         time: '1 weekend',
@@ -417,9 +417,26 @@ const collections = [
 export default function ArchitectPage() {
   const [activeCollection, setActiveCollection] = useState('hideaway')
   const [expandedBlueprint, setExpandedBlueprint] = useState(null)
+  const [showConsultation, setShowConsultation] = useState(false)
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    space: '',
+    kids: '',
+    vision: '',
+    budget: '',
+    timeline: ''
+  })
+  const [submitted, setSubmitted] = useState(false)
 
   const currentCollection = collections.find(c => c.id === activeCollection)
   const featuredBlueprints = collections.flatMap(c => c.blueprints.filter(b => b.featured))
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    // In production, this would send to a backend or email service
+    setSubmitted(true)
+  }
 
   return (
     <div className="min-h-screen bg-cream pt-20 pb-12">
@@ -442,19 +459,25 @@ export default function ArchitectPage() {
               The Wilder Architect
             </p>
             <h1 className="font-serif text-3xl md:text-5xl text-white italic mb-4 leading-tight">
-              Build something they will remember.
+              Cozy. Clever. Where childhood memories live.
             </h1>
-            <p className="text-white/70 max-w-xl mx-auto text-sm md:text-base leading-relaxed">
-              Not just a playground. Not just a playroom. Spaces so special that kids describe them to therapists decades later. 
-              Eco-friendly builds that also happen to be Instagram gold.
+            <p className="text-white/70 max-w-xl mx-auto text-sm md:text-base leading-relaxed mb-6">
+              We design and build custom cozy nooks, secret hideaways, and special spaces for kids. 
+              Not a playground. Not a playroom. A space so special your kids will remember it forever.
             </p>
+            <button
+              onClick={() => setShowConsultation(true)}
+              className="px-8 py-3 bg-white text-ink font-medium rounded-full hover:bg-cream transition-colors"
+            >
+              Start Your Project
+            </button>
           </div>
           <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-white/5 rounded-full blur-3xl" />
         </motion.div>
 
         {/* Featured Builds */}
         <div className="mb-12">
-          <h2 className="font-serif text-2xl text-ink mb-6">Featured Builds</h2>
+          <h2 className="font-serif text-2xl text-ink mb-6">Our Signature Builds</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
             {featuredBlueprints.slice(0, 6).map(blueprint => {
               const collection = collections.find(c => c.blueprints.some(b => b.id === blueprint.id))
@@ -610,11 +633,6 @@ export default function ArchitectPage() {
                         {blueprint.settings.join(', ')}
                       </p>
                     </div>
-
-                    {/* CTA */}
-                    <button className="w-full py-3 text-white text-sm font-medium rounded-full hover:opacity-90 transition-opacity" style={{ backgroundColor: currentCollection.color }}>
-                      Get the Blueprint
-                    </button>
                   </div>
                 </motion.div>
               )}
@@ -628,18 +646,188 @@ export default function ArchitectPage() {
           animate={{ opacity: 1 }}
           className="bg-white rounded-3xl p-8 border border-inkll/10 text-center"
         >
-          <h2 className="font-serif text-2xl text-ink mb-4">Need something specific?</h2>
+          <h2 className="font-serif text-2xl text-ink mb-4">Want something custom?</h2>
           <p className="text-inkl max-w-md mx-auto mb-6">
-            Tell us what you're dreaming of. We'll help you plan it - dimensions that fit, materials that make sense, steps that don't overwhelm.
+            We work with families to design and build one-of-a-kind spaces. 
+            Cozy nooks. Secret hideaways. The stuff childhood memories are made of.
           </p>
-          <a 
-            href="mailto:hello@wildermoms.com?subject=Custom Build Request"
-            className="inline-flex items-center justify-center px-6 py-3 bg-ember text-white font-sans font-medium rounded-full hover:bg-terra transition-colors"
+          <button
+            onClick={() => setShowConsultation(true)}
+            className="px-8 py-3 bg-ember text-white font-medium rounded-full hover:bg-terra transition-colors"
           >
-            Request a Custom Plan
-          </a>
+            Start Your Project
+          </button>
         </motion.div>
       </div>
+
+      {/* Consultation Modal */}
+      <AnimatePresence>
+        {showConsultation && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-4"
+            style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}
+            onClick={() => setShowConsultation(false)}
+          >
+            <motion.div
+              initial={{ y: 100 }}
+              animate={{ y: 0 }}
+              exit={{ y: 100 }}
+              className="bg-white rounded-t-2xl sm:rounded-2xl w-full max-w-lg max-h-[85vh] overflow-hidden flex flex-col"
+              onClick={e => e.stopPropagation()}
+            >
+              {!submitted ? (
+                <>
+                  <div className="p-6 border-b border-inkll/10" style={{ backgroundColor: '#1A1A2E' }}>
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-white/60 text-xs font-medium uppercase tracking-wider">The Wilder Architect</p>
+                        <h2 className="font-serif text-2xl text-white italic">Cozy. Clever. Where childhood memories live.</h2>
+                      </div>
+                      <button
+                        onClick={() => setShowConsultation(false)}
+                        className="text-white/70 hover:text-white"
+                      >
+                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                      </button>
+                    </div>
+                    <p className="text-white/70 text-sm mt-2">Tell us about your dream project</p>
+                  </div>
+
+                  <form onSubmit={handleSubmit} className="flex-1 overflow-y-auto p-6 space-y-4">
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium text-ink mb-1">Your Name</label>
+                        <input
+                          type="text"
+                          required
+                          value={formData.name}
+                          onChange={e => setFormData({...formData, name: e.target.value})}
+                          className="w-full px-4 py-3 rounded-xl border-2 border-inkll/20 focus:border-ember focus:outline-none text-ink"
+                          placeholder="Sarah"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-ink mb-1">Email</label>
+                        <input
+                          type="email"
+                          required
+                          value={formData.email}
+                          onChange={e => setFormData({...formData, email: e.target.value})}
+                          className="w-full px-4 py-3 rounded-xl border-2 border-inkll/20 focus:border-ember focus:outline-none text-ink"
+                          placeholder="sarah@example.com"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-ink mb-1">Where is this space?</label>
+                      <select
+                        value={formData.space}
+                        onChange={e => setFormData({...formData, space: e.target.value})}
+                        className="w-full px-4 py-3 rounded-xl border-2 border-inkll/20 focus:border-ember focus:outline-none text-ink"
+                      >
+                        <option value="">Select space type</option>
+                        <option value="apartment">Apartment / Condo</option>
+                        <option value="house-yard">House with Yard</option>
+                        <option value="house-no-yard">House without Yard</option>
+                        <option value="townhouse">Townhouse</option>
+                        <option value="other">Other</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-ink mb-1">Tell us about your kids</label>
+                      <input
+                        type="text"
+                        value={formData.kids}
+                        onChange={e => setFormData({...formData, kids: e.target.value})}
+                        className="w-full px-4 py-3 rounded-xl border-2 border-inkll/20 focus:border-ember focus:outline-none text-ink"
+                        placeholder="Ages, interests, what they love..."
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-ink mb-1">Describe your vision</label>
+                      <textarea
+                        required
+                        rows={3}
+                        value={formData.vision}
+                        onChange={e => setFormData({...formData, vision: e.target.value})}
+                        className="w-full px-4 py-3 rounded-xl border-2 border-inkll/20 focus:border-ember focus:outline-none text-ink resize-none"
+                        placeholder="What kind of space do you dream of? A cozy reading nook? Secret hideaway? Fairy garden?"
+                      />
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium text-ink mb-1">Budget Range</label>
+                        <select
+                          value={formData.budget}
+                          onChange={e => setFormData({...formData, budget: e.target.value})}
+                          className="w-full px-4 py-3 rounded-xl border-2 border-inkll/20 focus:border-ember focus:outline-none text-ink"
+                        >
+                          <option value="">Select range</option>
+                          <option value="under-500">Under $500</option>
+                          <option value="500-1500">$500 - $1,500</option>
+                          <option value="1500-3000">$1,500 - $3,000</option>
+                          <option value="3000-5000">$3,000 - $5,000</option>
+                          <option value="5000-plus">$5,000+</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-ink mb-1">Timeline</label>
+                        <select
+                          value={formData.timeline}
+                          onChange={e => setFormData({...formData, timeline: e.target.value})}
+                          className="w-full px-4 py-3 rounded-xl border-2 border-inkll/20 focus:border-ember focus:outline-none text-ink"
+                        >
+                          <option value="">When do you want to start?</option>
+                          <option value="asap">As soon as possible</option>
+                          <option value="month">Within a month</option>
+                          <option value="few-months">In a few months</option>
+                          <option value="exploring">Just exploring</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <button
+                      type="submit"
+                      className="w-full py-4 bg-ember text-white font-medium rounded-full hover:bg-terra transition-colors"
+                    >
+                      Start Your Project
+                    </button>
+                  </form>
+                </>
+              ) : (
+                <div className="p-12 text-center">
+                  <div className="w-16 h-16 bg-olive/20 rounded-full mx-auto mb-4 flex items-center justify-center">
+                    <svg className="w-8 h-8 text-olive" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <h2 className="font-serif text-2xl text-ink mb-2">We're excited to hear from you!</h2>
+                  <p className="text-inkl mb-6">We'll review your project and be in touch within 48 hours to schedule a consultation.</p>
+                  <button
+                    onClick={() => {
+                      setShowConsultation(false)
+                      setSubmitted(false)
+                      setFormData({name: '', email: '', space: '', kids: '', vision: '', budget: '', timeline: ''})
+                    }}
+                    className="px-6 py-3 bg-cream text-ink font-medium rounded-full hover:bg-blush/50 transition-colors"
+                  >
+                    Continue Exploring
+                  </button>
+                </div>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   )
 }
