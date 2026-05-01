@@ -218,12 +218,12 @@ export default function BuildsPage() {
                 </svg>
               </div>
               <div>
-                <h3 className="font-serif text-xl text-ink">The Archive</h3>
-                <p className="text-inkl text-sm">Premium guides</p>
+                <h3 className="font-serif text-xl text-ink">The Wilder Lab</h3>
+                <p className="text-inkl text-sm">Build Guides</p>
               </div>
             </div>
             <p className="text-inkl text-sm">
-              Ancient building wisdom for modern families. Cob, timber framing, stone stacking — downloadable PDF guides.
+              Ancient building wisdom for modern families. Mycelium, hempcrete, cob, and more guides for building with the earth.
             </p>
             {expandedSection === 'archive' && (
               <div className="mt-4 text-xs text-ember font-medium">↓ Viewing now</div>

@@ -310,7 +310,7 @@ export default function ActivitiesPage() {
           </motion.div>
         )}
 
-        {/* Archive Upsell Banner */}
+        {/* Wilder Lab Upsell Banner */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -319,19 +319,22 @@ export default function ActivitiesPage() {
         >
           <Link
             to="/wilder-homes/activities/archive"
-            className="block bg-gradient-to-r from-[#5A3C00] via-[#8C4A14] to-[#D2961E] rounded-3xl p-8 text-center hover:opacity-95 transition-opacity group"
+            className="block bg-gradient-to-r from-[#1A1A2E] via-[#2D3A4A] to-[#3D5A80] rounded-3xl p-8 text-center hover:opacity-95 transition-opacity group"
           >
-            <p className="text-white/60 text-xs font-medium uppercase tracking-widest mb-2">
-              Premium Downloads
-            </p>
-            <h3 className="font-serif text-2xl md:text-3xl text-white italic mb-3">
-              Want to build something that lasts?
+            <div className="flex items-center justify-center gap-2 mb-4">
+              <svg className="w-6 h-6 text-olive" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+              </svg>
+              <span className="text-white/80 text-xs font-medium uppercase tracking-wider">The Wilder Lab</span>
+            </div>
+            <h3 className="font-serif text-2xl text-white italic mb-2">
+              Where living materials meet family builds
             </h3>
             <p className="text-white/70 max-w-xl mx-auto mb-4">
-              The Archive has detailed guides on cob, timber framing, and stone stacking — techniques your grandparents knew by heart.
+              Mycelium, hempcrete, cob, and more — guides for building with the earth, not against it.
             </p>
-            <span className="inline-flex items-center gap-2 px-6 py-3 bg-white text-[#8C4A14] font-sans font-medium rounded-full group-hover:bg-cream transition-colors">
-              Explore The Archive
+            <span className="inline-flex items-center gap-2 px-6 py-3 bg-olive text-white font-sans font-medium rounded-full group-hover:bg-white group-hover:text-ink transition-colors">
+              Explore The Wilder Lab
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>

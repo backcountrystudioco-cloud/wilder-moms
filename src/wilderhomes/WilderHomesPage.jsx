@@ -73,7 +73,7 @@ export default function WilderHomesPage() {
               </p>
               <div className="flex flex-wrap items-center gap-2 text-sm text-inkll mb-6">
                 <span className="px-2 py-1 bg-olive/10 text-olive rounded-full">GreenHome Guide</span>
-                <span className="px-2 py-1 bg-olive/10 text-olive rounded-full">The Archive</span>
+                <span className="px-2 py-1 bg-olive/10 text-olive rounded-full">The Wilder Lab</span>
                 <span className="px-2 py-1 bg-olive/10 text-olive rounded-full">The Architect</span>
               </div>
               <div className="flex items-center gap-2 text-olive font-medium">
