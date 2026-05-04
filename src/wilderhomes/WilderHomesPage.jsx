@@ -4,7 +4,6 @@ import { builds } from './builds'
 import { crafts } from './crafts'
 
 export default function WilderHomesPage() {
-  const featuredBuilds = builds.slice(0, 3)
 
   return (
     <div className="min-h-screen bg-cream pt-20 pb-12">
@@ -84,54 +83,6 @@ export default function WilderHomesPage() {
               </div>
             </div>
           </Link>
-        </motion.div>
-
-        {/* Featured Builds Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-        >
-          <div className="flex items-center justify-between mb-6">
-            <h3 className="font-serif text-xl text-ink">Popular Builds</h3>
-            <Link to="/wilder-homes/activities" className="text-ember text-sm font-medium hover:underline">
-              See all →
-            </Link>
-          </div>
-          
-          <div className="grid md:grid-cols-3 gap-4">
-            {featuredBuilds.map((build, index) => (
-              <motion.div
-                key={build.id}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 + index * 0.1 }}
-              >
-                <Link
-                  to={`/wilder-homes/activities/${build.id}`}
-                  className="block bg-white rounded-xl overflow-hidden border border-inkll/10 hover:shadow-md transition-shadow"
-                >
-                  <div className="aspect-[4/3] bg-gradient-to-br from-blush/20 to-parchment relative">
-                    {build.imageUrl ? (
-                      <img 
-                        src={build.imageUrl} 
-                        alt={build.title} 
-                        className="w-full h-full object-cover"
-                      />
-                    ) : (
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <span className="text-3xl opacity-50">🏗️</span>
-                      </div>
-                    )}
-                  </div>
-                  <div className="p-4">
-                    <h4 className="font-serif text-base text-ink mb-1">{build.title}</h4>
-                    <p className="text-xs text-inkll">{build.timeEstimate} · {build.difficulty}</p>
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
         </motion.div>
       </div>
     </div>
