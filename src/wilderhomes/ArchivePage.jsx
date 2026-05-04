@@ -73,8 +73,8 @@ export default function ArchivePage() {
   return (
     <div className="min-h-screen bg-cream pt-20 pb-12">
       <div className="max-w-5xl mx-auto px-4">
-        <Link to="/wilder-homes/activities" className="text-ember text-sm font-medium mb-4 inline-flex items-center gap-1 hover:underline">
-          ← Back to Activities
+        <Link to="/wilder-homes" className="text-ember text-sm font-medium mb-4 inline-flex items-center gap-1 hover:underline">
+          ← Back to Wilder Homes
         </Link>
 
         {/* Hero Banner */}
