@@ -4,34 +4,38 @@ import { Link } from 'react-router-dom'
 
 const paragraphs = [
   {
-    text: "Somewhere along the way, motherhood got boxed in — by schedules, by screens, by the quiet weight of doing everything alone. The wild got pushed further and further away.",
+    text: "Motherhood can feel small. Four walls. Schedules. The same rooms, the same faces, the same tired. But the wild is always there — waiting.",
     highlight: false
   },
   {
-    text: "We built Wilder Moms to get it back.",
+    text: "We're here to find it again.",
     highlight: true
   }
 ]
 
 const sections = [
   {
-    title: "Getting outside isn't optional. It's how we survive.",
-    body: "Nature isn't a reward for good parenting. It's a requirement. We believe in muddy boots, cold hands, and the kind of tired that comes from actually living.",
-    emphasis: "So we start by making it easier."
+    title: "What are we raising here?",
+    body: "Children who know they belong to something larger than themselves. Who feel the pull of open sky and understand it. Who carry the woods inside them — not as memory, but as home."
   },
   {
     title: "The right trail, for your real life.",
-    body: "Not another generic list of 'family-friendly trails.' You need the right trail for your specific kids, today, with a double stroller and a four-year-old who loses it after 45 minutes. Every suggestion is built around your real life.",
+    body: "Nature meets you where you are. So do we. Not a generic list — a real trail for your real day, your real kids, your real stroller and your real forty-five minutes before someone needs a snack and a nap.",
     emphasis: "Wilder Trails finds your perfect match."
   },
   {
-    title: "And when you can't get outside —",
-    body: "you're still living it. At home. In your backyard, your kitchen, your living room floor. Nature isn't just out there — it's something you can bring inside.",
+    title: "When you can't get outside — bring it home.",
+    body: "Nature is not only out there. It lives in the light through your kitchen window, the soil under small fingernails, the branch your child carried home and refuses to put down. The wild has a way of finding us, if we leave the door open.",
+    emphasis: "Nature isn't just out there."
+  },
+  {
+    title: "Why Wilder Homes?",
+    body: "Because children who know how to touch the earth grow into people who know how to be still. Because making something with your hands is one of the oldest conversations between a human and the natural world. Because wonder doesn't need a destination — just a little space, and someone willing to look.",
     emphasis: "Wilder Homes brings nature home."
   },
   {
     title: "This is Wilder Moms.",
-    body: "Trails for every kind of day. Builds for every kind of weather. A philosophy that says: the wild isn't a destination. It's a way of life.",
+    body: "A return to the oldest truth we know — that we are nature. Not observers of it. Not visitors to it. We are made of the same thing as the trees and the tide and the turning seasons. And when we raise our children inside that truth, something in them — and in us — comes back to life.",
     emphasis: "Welcome home."
   }
 ]
