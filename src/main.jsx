@@ -12,8 +12,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <BrowserRouter>
       <ClerkProvider 
         publishableKey={publishableKey}
-        signInFallbackRedirectUrl="/wilder-homes"
-        signUpFallbackRedirectUrl="/wilder-homes"
+        signInFallbackRedirectUrl="/explore"
+        signUpFallbackRedirectUrl="/explore"
         afterSignOutUrl="/"
       >
         <App />

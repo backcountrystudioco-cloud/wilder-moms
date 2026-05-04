@@ -5,6 +5,7 @@ import { WilderTrailsProvider } from './wilder-trails/WilderTrailsContext'
 import AppLayout from './components/AppLayout'
 import HomePage from './pages/HomePage'
 import MissionPage from './pages/MissionPage'
+import ExplorePage from './pages/ExplorePage'
 import LocationPage from './wilder-trails/LocationPage'
 import WhosComingPage from './wilder-trails/WhosComingPage'
 import SetupPage from './wilder-trails/SetupPage'
@@ -46,6 +47,7 @@ function App() {
               <Route path="/wilder-trails/trails" element={<TrailsPage />} />
               <Route path="/wilder-trails/ai-finder" element={<AITrailFinder />} />
               <Route path="/wilder-trails/:trailId" element={<TrailDetailPage />} />
+              <Route path="/explore" element={<ExplorePage />} />
               <Route path="/wilder-homes" element={<WilderHomesPage />} />
               <Route path="/wilder-homes/activities" element={<WilderActivitiesPage />} />
               <Route path="/wilder-homes/activities/craft/:craftId" element={<CraftDetailPage />} />

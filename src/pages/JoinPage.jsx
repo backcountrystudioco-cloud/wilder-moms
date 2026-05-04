@@ -10,7 +10,7 @@ export default function JoinPage() {
   // If already signed in, redirect to profile immediately
   useEffect(() => {
     if (isSignedIn && userId) {
-      navigate('/profile')
+      navigate('/explore')
     }
   }, [isSignedIn, userId, navigate])
 
