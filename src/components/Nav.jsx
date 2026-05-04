@@ -57,12 +57,12 @@ export default function Nav() {
 
           {/* Desktop Nav Links */}
           <div className="hidden md:flex items-center gap-8">
-            {/* Wilder Trails - Explore */}
+            {/* Wilder Trails */}
             <Link
               to="/wilder-trails"
               className="font-sans font-medium text-sm uppercase tracking-[0.08em] text-ink hover:text-ember transition-colors"
             >
-              Trails
+              Wilder Trails
             </Link>
 
             {/* Wilder Homes */}
@@ -70,7 +70,7 @@ export default function Nav() {
               to="/wilder-homes"
               className="font-sans font-medium text-sm uppercase tracking-[0.08em] text-ink hover:text-ember transition-colors"
             >
-              Homes
+              Wilder Homes
             </Link>
 
             {/* Wilder Philosophy */}
