@@ -3,6 +3,7 @@ import { UserProvider } from './context/UserContext'
 import { JournalProvider } from './context/JournalContext'
 import { WilderTrailsProvider } from './wilder-trails/WilderTrailsContext'
 import AppLayout from './components/AppLayout'
+import AppLayoutWithoutFooter from './components/AppLayoutWithoutFooter'
 import HomePage from './pages/HomePage'
 import MissionPage from './pages/MissionPage'
 import ExplorePage from './pages/ExplorePage'
@@ -39,14 +40,16 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/join" element={<JoinPage />} />
-            <Route element={<AppLayout />}>
-              <Route path="/wilder-philosophy" element={<MissionPage />} />
+            <Route element={<AppLayoutWithoutFooter />}>
               <Route path="/wilder-trails" element={<Navigate to="/wilder-trails/location" replace />} />
               <Route path="/wilder-trails/location" element={<LocationPage />} />
               <Route path="/wilder-trails/whos-coming" element={<WhosComingPage />} />
               <Route path="/wilder-trails/trails" element={<TrailsPage />} />
               <Route path="/wilder-trails/ai-finder" element={<AITrailFinder />} />
               <Route path="/wilder-trails/:trailId" element={<TrailDetailPage />} />
+            </Route>
+            <Route element={<AppLayout />}>
+              <Route path="/wilder-philosophy" element={<MissionPage />} />
               <Route path="/explore" element={<ExplorePage />} />
               <Route path="/wilder-homes" element={<WilderHomesPage />} />
               <Route path="/wilder-homes/activities" element={<WilderActivitiesPage />} />
