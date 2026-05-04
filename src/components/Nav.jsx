@@ -59,18 +59,18 @@ export default function Nav() {
           <div className="hidden md:flex items-center gap-8">
             {/* Wilder Trails - Explore */}
             <Link
-              to="/explore"
+              to="/wilder-trails"
               className="font-sans font-medium text-sm uppercase tracking-[0.08em] text-ink hover:text-ember transition-colors"
             >
-              Explore
+              Trails
             </Link>
 
-            {/* The Base Camp - Builds & Activities Dropdown */}
+            {/* Wilder Homes */}
             <Link
-              to="/explore"
+              to="/wilder-homes"
               className="font-sans font-medium text-sm uppercase tracking-[0.08em] text-ink hover:text-ember transition-colors"
             >
-              Explore
+              Homes
             </Link>
 
             {/* Wilder Philosophy */}
