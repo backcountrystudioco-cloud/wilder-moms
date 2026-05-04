@@ -84,7 +84,7 @@ export default function ChooseYourPath() {
 
               {/* CTA */}
               <Link
-                to="/wilder-trails/location"
+                to="/explore"
                 className="inline-flex items-center gap-2 bg-white text-forest px-6 py-3 rounded-full font-sans font-medium hover:bg-peach hover:text-forest transition-colors"
               >
                 Explore Trails
@@ -158,7 +158,7 @@ export default function ChooseYourPath() {
         {/* Mobile-only stacked buttons */}
         <div className="md:hidden mt-8 grid grid-cols-2 gap-4">
           <Link
-            to="/wilder-trails/location"
+            to="/explore"
             className="flex flex-col items-center gap-2 bg-forest text-white p-6 rounded-2xl"
           >
             <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
