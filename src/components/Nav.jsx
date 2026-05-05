@@ -57,20 +57,20 @@ export default function Nav() {
 
           {/* Desktop Nav Links */}
           <div className="hidden md:flex items-center gap-8">
-            {/* Wilder Trails */}
-            <Link
-              to="/wilder-trails"
-              className="font-sans font-medium text-sm uppercase tracking-[0.08em] text-ink hover:text-ember transition-colors"
-            >
-              Wilder Trails
-            </Link>
-
             {/* Wilder Homes */}
             <Link
               to="/wilder-homes"
               className="font-sans font-medium text-sm uppercase tracking-[0.08em] text-ink hover:text-ember transition-colors"
             >
               Wilder Homes
+            </Link>
+
+            {/* Wilder Trails */}
+            <Link
+              to="/wilder-trails"
+              className="font-sans font-medium text-sm uppercase tracking-[0.08em] text-ink hover:text-ember transition-colors"
+            >
+              Wilder Trails
             </Link>
 
             {/* Wilder Philosophy */}
