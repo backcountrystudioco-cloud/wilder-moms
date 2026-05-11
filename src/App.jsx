@@ -5,6 +5,7 @@ import { WilderTrailsProvider } from './wilder-trails/WilderTrailsContext'
 import AppLayout from './components/AppLayout'
 import AppLayoutWithoutFooter from './components/AppLayoutWithoutFooter'
 import HomePage from './pages/HomePage'
+import LandingPage from './pages/LandingPage'
 import MissionPage from './pages/MissionPage'
 import ExplorePage from './pages/ExplorePage'
 import LocationPage from './wilder-trails/LocationPage'
@@ -38,7 +39,8 @@ function App() {
         <WilderTrailsProvider>
           <LaunchPopup />
           <Routes>
-            <Route path="/" element={<HomePage />} />
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/home" element={<HomePage />} />
             <Route path="/join" element={<JoinPage />} />
             <Route element={<AppLayoutWithoutFooter />}>
               <Route path="/wilder-trails" element={<Navigate to="/wilder-trails/location" replace />} />

@@ -6,6 +6,28 @@ import './index.css'
 import { ClerkProvider } from '@clerk/react'
 
 const publishableKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
+const posthogKey = import.meta.env.VITE_POSTHOG_KEY
+
+// Initialize PostHog for session recording & heatmaps
+if (posthogKey && posthogKey !== 'your_posthog_key_here') {
+  // Dynamically load PostHog from CDN
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/posthog-js@3.12.4/+esm'
+  script.type = 'module'
+  script.onload = () => {
+    if (window.posthog) {
+      window.posthog.init(posthogKey, {
+        api_host: 'https://app.posthog.com',
+        person_profiles: 'identified_only',
+        session_recording: {
+          maskAllInputs: false
+        },
+        capture_pageview: true
+      })
+    }
+  }
+  document.head.appendChild(script)
+}
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
