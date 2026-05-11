@@ -8,6 +8,7 @@ import HomePage from './pages/HomePage'
 import LandingPage from './pages/LandingPage'
 import MissionPage from './pages/MissionPage'
 import ExplorePage from './pages/ExplorePage'
+import SurveyPage from './pages/SurveyPage'
 import LocationPage from './wilder-trails/LocationPage'
 import WhosComingPage from './wilder-trails/WhosComingPage'
 import SetupPage from './wilder-trails/SetupPage'
@@ -68,6 +69,7 @@ function App() {
               <Route path="/basecamp/activities" element={<ActivitiesPage />} />
               <Route path="/blueprint" element={<BlueprintPage />} />
               <Route path="/wilder-homes/eco-products" element={<EcoProductsInterestPage />} />
+              <Route path="/survey" element={<SurveyPage />} />
             </Route>
           </Routes>
         </WilderTrailsProvider>
