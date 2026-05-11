@@ -135,41 +135,27 @@ export default function SurveyPage() {
     setError('')
 
     try {
-      // Try Supabase first
       const { error } = await supabase
         .from('survey_responses')
-        .insert([{ 
-          answers,
-          submitted_at: new Date().toISOString()
-        }])
+        .insert([{ answers }])
 
       if (error) {
-        console.log('Supabase error (table may not exist):', error.message)
-        // If table doesn't exist, store in localStorage as backup
-        const storedResponses = JSON.parse(localStorage.getItem('survey_responses') || '[]')
-        storedResponses.push({
-          answers,
-          submitted_at: new Date().toISOString()
-        })
-        localStorage.setItem('survey_responses', JSON.stringify(storedResponses))
-        console.log('Saved to localStorage as backup')
+        console.log('Supabase insert error:', error)
+        throw error
       }
 
       setSubmitted(true)
     } catch (err) {
       console.error('Survey submit error:', err)
-      // Save to localStorage as fallback
-      try {
-        const storedResponses = JSON.parse(localStorage.getItem('survey_responses') || '[]')
-        storedResponses.push({
-          answers,
-          submitted_at: new Date().toISOString()
-        })
-        localStorage.setItem('survey_responses', JSON.stringify(storedResponses))
-        setSubmitted(true)
-      } catch (localErr) {
-        setError('Something went wrong. Please try again.')
-      }
+      setError('')
+      // Save to localStorage as backup
+      const storedResponses = JSON.parse(localStorage.getItem('survey_responses') || '[]')
+      storedResponses.push({
+        answers,
+        submitted_at: new Date().toISOString()
+      })
+      localStorage.setItem('survey_responses', JSON.stringify(storedResponses))
+      setSubmitted(true)
     } finally {
       setSubmitting(false)
     }
