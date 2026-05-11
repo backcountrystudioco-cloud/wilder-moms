@@ -3,102 +3,156 @@ import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { supabase } from '../utils/supabase'
 
+const buildProjects = [
+  // From Wild Room
+  'Mud kitchens', 'Garden beds', 'Forts & hideaways', 'Outdoor kitchens',
+  // From Wilder Lab
+  'Mycelium blocks', 'Living willow structures', 'Cob benches', 'Stone stacking',
+  // From crafts
+  'Nature crafts', 'Sensory stations', 'Fairy gardens', 'Bird houses',
+  // From architect
+  'Kid-only hideaways', 'Eco builds', 'Sensory sanctuaries', 'Apartment builds'
+]
+
 const questions = [
   {
-    section: 'About You',
+    section: 'Who You Are',
     questions: [
       {
-        id: 'childAge',
-        text: 'How old is your youngest child?',
-        type: 'radio',
-        options: ['Expecting', 'Under 1 year', '1–3 years', '4–6 years', '7–12 years', '13+']
-      },
-      {
-        id: 'frequency',
-        text: 'How often do you actively plan outdoor activities with your kids?',
-        type: 'radio',
-        options: ['Multiple times a week', 'Weekly', 'A few times a month', 'Rarely', 'Almost never']
-      }
-    ]
-  },
-  {
-    section: 'Pain Points',
-    questions: [
-      {
-        id: 'barriers',
-        text: "What's the biggest thing standing between you and getting outside more with your kids?",
-        type: 'radio',
-        options: ['Planning takes too much effort', 'Not knowing where to go', 'Kids lose interest quickly', 'Safety concerns', 'Weather uncertainty', 'Lack of time', 'Lack of community/support']
-      },
-      {
-        id: 'missing',
-        text: "What's missing from most parenting or outdoor family websites today?",
-        type: 'textarea'
-      }
-    ]
-  },
-  {
-    section: 'Wilder Build',
-    questions: [
-      {
-        id: 'projectTypes',
-        text: 'Which kinds of projects would you realistically do with your kids?',
-        sub: 'Pick up to 3.',
+        id: 'childAges',
+        text: "What ages are your kids?",
+        sub: 'Select all that apply',
         type: 'checkbox',
-        options: ['Fairy gardens', 'Mud kitchens', 'Raised garden beds', 'Bird feeders or bird houses', 'Nature play spaces', 'Backyard obstacle courses', 'Outdoor sensory stations', 'Forts or hideaways', 'Indoor nature crafts', 'Seasonal decorations using natural materials']
+        options: ['0-2 years', '3-5 years', '6-9 years', '10-12 years', '13+ years']
       },
       {
-        id: 'realisticLevel',
-        text: 'What level of project feels realistic for your family?',
+        id: 'activityFrequency',
+        text: 'How often does your family do outdoor activities?',
         type: 'radio',
-        options: ['10-minute mini activities', 'Simple weekend projects', 'Half-day outdoor builds', 'Larger multi-day projects', 'Depends on how guided it is']
+        options: ['Daily', 'Weekly', 'Monthly', 'Rarely']
       },
       {
-        id: 'projectWorth',
-        text: 'What would make a Wilder Build project worth doing?',
-        sub: 'Pick top 2.',
+        id: 'zipCode',
+        text: 'Your zip code (for local features)',
+        type: 'text',
+        placeholder: 'e.g., 90210'
+      }
+    ]
+  },
+  {
+    section: 'The Real Pain',
+    questions: [
+      {
+        id: 'frustration',
+        text: "What's your #1 frustration about getting outdoors with your kids?",
+        type: 'radio',
+        options: [
+          'Takes too much planning',
+          "Don't know what exists nearby",
+          'Kids get bored/demotivated',
+          'Weather is unpredictable',
+          'Just can\'t find the time'
+        ]
+      },
+      {
+        id: 'biggestProblem',
+        text: 'If you could solve ONE problem for your family outdoors, what would it be?',
+        type: 'textarea',
+        placeholder: 'Be honest - what\'s really holding you back?'
+      }
+    ]
+  },
+  {
+    section: 'Build Projects',
+    questions: [
+      {
+        id: 'buildInterest',
+        text: 'Which project types excite you most?',
+        sub: 'Pick up to 3',
         type: 'checkbox',
-        options: ['Easy setup', 'Uses inexpensive materials', 'Kids stay engaged', 'Educational value', 'Encourages outdoor play', 'Creates something lasting', 'Feels creative and meaningful', 'Helps reduce screen time']
+        options: buildProjects
+      },
+      {
+        id: 'timeCommitment',
+        text: 'What time commitment feels realistic?',
+        type: 'radio',
+        options: [
+          '15-minute crafts',
+          '1-2 hour weekend projects',
+          'Half-day builds',
+          'Multi-day projects (I love deep dives)'
+        ]
+      },
+      {
+        id: 'makeOrBreak',
+        text: 'What would make you ACTUALLY do a project?',
+        sub: 'Pick up to 2',
+        type: 'checkbox',
+        options: [
+          'Step-by-step video guide',
+          'Materials list with links',
+          'Kids stay engaged throughout',
+          'Weatherproof / holds up long-term',
+          'Budget under $50',
+          'Something my kids will remember forever'
+        ]
+      },
+      {
+        id: 'willingnessToPay',
+        text: 'Would you pay for a membership with build guides, video tutorials, and community support?',
+        type: 'radio',
+        options: [
+          'Free resources are fine',
+          'Maybe $5-10/month',
+          '$10-20/month',
+          "I'd pay $20+ for the right content"
+        ]
       }
     ]
   },
   {
-    section: 'Product Validation',
+    section: 'Trails (Light)',
     questions: [
       {
-        id: 'indispensable',
-        text: 'Which ONE feature would make Wilder Moms indispensable to you?',
+        id: 'trailFrequency',
+        text: 'How often does your family go on hikes or trails?',
         type: 'radio',
-        options: ['Nature-inspired build projects', 'Seasonal outdoor plans', 'Local parent community', 'Expert outdoor guidance', 'Printable resources', 'Events & meetups']
+        options: ['Weekly+', 'Monthly', 'Rarely', 'Never']
       },
       {
-        id: 'kits',
-        text: 'Would you be interested in pre-planned project kits or printable guides?',
-        type: 'radio',
-        options: ['Printable guides only', 'Physical kits with materials', 'Both', 'Neither']
-      },
-      {
-        id: 'membership',
-        text: 'If Wilder Moms genuinely saved you time and helped your family spend more meaningful time outdoors, would you pay for a membership?',
-        type: 'radio',
-        options: ['Definitely not', 'Probably not', 'Maybe', 'Probably yes', 'Definitely yes']
+        id: 'trailValue',
+        text: 'What would make a trail finder actually useful?',
+        sub: 'Pick up to 2',
+        type: 'checkbox',
+        options: [
+          'Matches by kids\' ages/abilities',
+          'Shows current weather & conditions',
+          'Stroller/wheelchair accessible filters',
+          'Shaded trails for hot days',
+          'Under 1 hour away',
+          'AI-powered personalized recommendations'
+        ]
       }
     ]
   },
   {
-    section: 'Brand & Growth',
+    section: 'Community',
     questions: [
       {
-        id: 'discovery',
-        text: 'Where are you most likely to discover or engage with Wilder Moms?',
+        id: 'communityJoin',
+        text: 'If we built a private community of moms sharing builds and trail adventures, would you join?',
         type: 'radio',
-        options: ['Instagram', 'TikTok', 'Pinterest', 'Email newsletter', 'Podcast', 'Word of mouth', 'Google search']
+        options: [
+          'Yes, I want that',
+          'Maybe',
+          "Not my thing"
+        ]
       },
       {
-        id: 'wouldMiss',
-        text: 'If Wilder Moms disappeared tomorrow, what would you miss most?',
-        sub: 'What feels most valuable, different, or emotionally meaningful?',
-        type: 'textarea'
+        id: 'email',
+        text: 'Your email (for early access updates)',
+        type: 'email',
+        placeholder: 'your@email.com'
       }
     ]
   }
@@ -137,24 +191,20 @@ export default function SurveyPage() {
     try {
       const { error } = await supabase
         .from('survey_responses')
-        .insert([{ answers }])
+        .insert([{ 
+          answers,
+          completed_at: new Date().toISOString()
+        }])
 
-      if (error) {
-        console.log('Supabase insert error:', error)
-        throw error
-      }
+      if (error) throw error
 
       setSubmitted(true)
     } catch (err) {
       console.error('Survey submit error:', err)
-      setError('')
       // Save to localStorage as backup
-      const storedResponses = JSON.parse(localStorage.getItem('survey_responses') || '[]')
-      storedResponses.push({
-        answers,
-        submitted_at: new Date().toISOString()
-      })
-      localStorage.setItem('survey_responses', JSON.stringify(storedResponses))
+      const stored = JSON.parse(localStorage.getItem('survey_responses') || '[]')
+      stored.push({ answers, completed_at: new Date().toISOString() })
+      localStorage.setItem('survey_responses', JSON.stringify(stored))
       setSubmitted(true)
     } finally {
       setSubmitting(false)
@@ -175,8 +225,11 @@ export default function SurveyPage() {
               </svg>
             </div>
             <h2 className="font-serif text-3xl text-ink mb-3">Thank you!</h2>
-            <p className="text-inkl text-lg mb-8">
+            <p className="text-inkl text-lg mb-4">
               Your feedback helps us build something that truly works for your family.
+            </p>
+            <p className="text-ember font-medium mb-8">
+              We'll email you when early access is available.
             </p>
             <Link
               to="/"
@@ -203,17 +256,17 @@ export default function SurveyPage() {
             ← Back to Home
           </Link>
           <h1 className="font-serif text-3xl md:text-4xl text-ink mb-3">
-            Wilder Moms Research Survey
+            Help Us Build Wilder Moms
           </h1>
           <p className="text-inkl">
-            We're learning what actually helps families spend more meaningful time outdoors — and what would make Wilder Moms genuinely useful long-term.
+            5 minutes to help us create something that actually works for your family.
           </p>
         </motion.div>
 
         {/* Progress */}
         <div className="mb-8">
           <div className="flex items-center justify-between text-sm text-inkl mb-2">
-            <span>Section {currentSection + 1} of {questions.length}</span>
+            <span>Step {currentSection + 1} of {questions.length}</span>
             <span>{Math.round(((currentSection + 1) / questions.length) * 100)}%</span>
           </div>
           <div className="h-2 bg-inkll/20 rounded-full">
@@ -243,9 +296,9 @@ export default function SurveyPage() {
           animate={{ opacity: 1, y: 0 }}
           className="bg-white rounded-3xl p-8 shadow-lg border border-inkll/10 mb-8"
         >
-          {currentSectionData.questions.map((question, qIndex) => (
+          {currentSectionData.questions.map((question) => (
             <div key={question.id} className="mb-8 last:mb-0">
-              <h3 className="font-serif text-xl text-ink mb-2">{question.text}</h3>
+              <h3 className="font-serif text-xl text-ink mb-1">{question.text}</h3>
               {question.sub && (
                 <p className="text-inkl text-sm mb-4">{question.sub}</p>
               )}
@@ -254,8 +307,16 @@ export default function SurveyPage() {
                 <textarea
                   value={answers[question.id] || ''}
                   onChange={(e) => handleAnswer(question.id, e.target.value)}
-                  placeholder="Your thoughts..."
+                  placeholder={question.placeholder || 'Your thoughts...'}
                   className="w-full min-h-[100px] p-4 rounded-xl border-2 border-inkll/20 focus:border-ember focus:outline-none text-ink resize-none"
+                />
+              ) : question.type === 'email' || question.type === 'text' ? (
+                <input
+                  type={question.type === 'email' ? 'email' : 'text'}
+                  value={answers[question.id] || ''}
+                  onChange={(e) => handleAnswer(question.id, e.target.value)}
+                  placeholder={question.placeholder}
+                  className="w-full px-4 py-3 rounded-xl border-2 border-inkll/20 focus:border-ember focus:outline-none text-ink"
                 />
               ) : question.type === 'checkbox' ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
@@ -283,7 +344,7 @@ export default function SurveyPage() {
                           }}
                           className="w-4 h-4 accent-ember"
                         />
-                        <span className="text-ink">{option}</span>
+                        <span className="text-ink text-sm">{option}</span>
                       </label>
                     )
                   })}
@@ -293,7 +354,7 @@ export default function SurveyPage() {
                   {question.options.map(option => (
                     <label
                       key={option}
-                      className={`flex items-center gap-3 p-3 rounded-xl border-2 cursor-pointer transition-all ${
+                      className={`flex items-center gap-3 p-4 rounded-xl border-2 cursor-pointer transition-all ${
                         answers[question.id] === option
                           ? 'border-ember bg-ember/5'
                           : 'border-inkll/20 hover:border-ember/30'
@@ -331,7 +392,7 @@ export default function SurveyPage() {
               disabled={submitting}
               className="px-8 py-3 bg-ember text-white rounded-full font-medium hover:bg-terra transition-colors disabled:opacity-50 flex items-center gap-2"
             >
-              {submitting ? 'Submitting...' : 'Submit Survey'}
+              {submitting ? 'Submitting...' : 'Submit'}
               {!submitting && (
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
