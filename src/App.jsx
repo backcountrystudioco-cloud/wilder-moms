@@ -39,8 +39,8 @@ function App() {
         <WilderTrailsProvider>
           <LaunchPopup />
           <Routes>
-            <Route path="/" element={<LandingPage />} />
-            <Route path="/home" element={<HomePage />} />
+            <Route path="/" element={<HomePage />} />
+            <Route path="/landing" element={<LandingPage />} />
             <Route path="/join" element={<JoinPage />} />
             <Route element={<AppLayoutWithoutFooter />}>
               <Route path="/wilder-trails" element={<Navigate to="/wilder-trails/location" replace />} />
