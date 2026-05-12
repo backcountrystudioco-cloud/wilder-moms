@@ -4,17 +4,64 @@ import { Link } from 'react-router-dom'
 import { supabase } from '../utils/supabase'
 
 const buildProjects = [
-  // From Wild Room
-  'Mud kitchens', 'Garden beds', 'Forts & hideaways', 'Outdoor kitchens',
-  // From Wilder Lab
-  'Mycelium blocks', 'Living willow structures', 'Cob benches', 'Stone stacking',
-  // From crafts
-  'Nature crafts', 'Sensory stations', 'Fairy gardens', 'Bird houses',
-  // From architect
-  'Kid-only hideaways', 'Eco builds', 'Sensory sanctuaries', 'Apartment builds'
+  // FREE / LOW COST
+  'Cardboard box village',
+  'Tarp tunnel fort',
+  'Bug hotel / pollinator palace',
+  'Bean pole teepee',
+  'Gutter water wall',
+  'Fairy door trail',
+  'Stump balance path',
+  
+  // MODERATE
+  'Mud kitchen',
+  'Ecobrick raised bed',
+  'Cob bench',
+  'Rock wall / stone stacking',
+  'Cozy reading nook',
+  'Rain garden',
+  
+  // PREMIUM (unique)
+  'Mycelium bricks',
+  'Living willow lodge',
+  'Star gazing platform',
+  'Hobbit hole house'
 ]
 
 const questions = [
+  {
+    section: 'The Problem',
+    questions: [
+      {
+        id: 'ideaSource',
+        text: 'When you want to do an outdoor project with your kids, where do you find ideas?',
+        type: 'radio',
+        options: [
+          'Pinterest',
+          'YouTube',
+          'Google',
+          'Instagram',
+          'I don\'t bother',
+          'Other'
+        ]
+      },
+      {
+        id: 'currentBarrier',
+        text: 'What\'s stopped you from building more outdoor projects?',
+        type: 'checkbox',
+        options: [
+          'Can\'t find good instructions',
+          'Don\'t know what to build',
+          'Takes too much planning',
+          'Materials cost too much',
+          'Kids lose interest quickly',
+          'Never seems to turn out right',
+          'Don\'t have the tools',
+          'Just haven\'t gotten around to it'
+        ]
+      }
+    ]
+  },
   {
     section: 'Who You Are',
     questions: [
@@ -26,92 +73,92 @@ const questions = [
         options: ['0-2 years', '3-5 years', '6-9 years', '10-12 years', '13+ years']
       },
       {
-        id: 'activityFrequency',
-        text: 'How often does your family do outdoor activities?',
+        id: 'homeType',
+        text: 'What type of home do you live in?',
         type: 'radio',
-        options: ['Daily', 'Weekly', 'Monthly', 'Rarely']
+        options: ['Apartment / Condo', 'Townhouse', 'House with yard', 'House without yard']
       },
       {
         id: 'zipCode',
-        text: 'Your zip code (for local features)',
+        text: 'Your zip code (helps us build local features)',
         type: 'text',
         placeholder: 'e.g., 90210'
       }
     ]
   },
   {
-    section: 'The Real Pain',
-    questions: [
-      {
-        id: 'frustration',
-        text: "What's your #1 frustration about getting outdoors with your kids?",
-        type: 'radio',
-        options: [
-          'Takes too much planning',
-          "Don't know what exists nearby",
-          'Kids get bored/demotivated',
-          'Weather is unpredictable',
-          'Just can\'t find the time'
-        ]
-      },
-      {
-        id: 'biggestProblem',
-        text: 'If you could solve ONE problem for your family outdoors, what would it be?',
-        type: 'textarea',
-        placeholder: 'Be honest - what\'s really holding you back?'
-      }
-    ]
-  },
-  {
-    section: 'Build Projects',
+    section: 'Build Demand',
     questions: [
       {
         id: 'buildInterest',
-        text: 'Which project types excite you most?',
-        sub: 'Pick up to 3',
+        text: 'Which builds excite you? Pick up to 5.',
+        sub: 'These are things you\'d want to do with your kids',
         type: 'checkbox',
         options: buildProjects
       },
       {
-        id: 'timeCommitment',
-        text: 'What time commitment feels realistic?',
-        type: 'radio',
-        options: [
-          '15-minute crafts',
-          '1-2 hour weekend projects',
-          'Half-day builds',
-          'Multi-day projects (I love deep dives)'
-        ]
-      },
-      {
-        id: 'makeOrBreak',
-        text: 'What would make you ACTUALLY do a project?',
-        sub: 'Pick up to 2',
+        id: 'buildIntent',
+        text: 'Which would you actually PAY for a blueprint guide?',
+        sub: 'Pick up to 2-3. This helps us prioritize what to build first.',
         type: 'checkbox',
-        options: [
-          'Step-by-step video guide',
-          'Materials list with links',
-          'Kids stay engaged throughout',
-          'Weatherproof / holds up long-term',
-          'Budget under $50',
-          'Something my kids will remember forever'
-        ]
+        options: buildProjects
       },
       {
-        id: 'willingnessToPay',
-        text: 'Would you pay for a membership with build guides, video tutorials, and community support?',
+        id: 'buildBudget',
+        text: 'What\'s your budget for a complete blueprint guide?',
+        sub: 'Includes materials list, step-by-step instructions, and tips',
         type: 'radio',
         options: [
-          'Free resources are fine',
-          'Maybe $5-10/month',
-          '$10-20/month',
-          "I'd pay $20+ for the right content"
+          'Free is fine',
+          '$9-15',
+          '$19-29',
+          '$30-49',
+          '$50+ for the right build'
         ]
       }
     ]
   },
   {
-    section: 'Trails (Light)',
+    section: 'Conversion Barriers',
+    questions: [
+      {
+        id: 'whyNotBuy',
+        text: 'What\'s stopped you from buying project guides before?',
+        sub: 'Be honest - we\'re trying to solve a real problem',
+        type: 'checkbox',
+        options: [
+          'Too expensive for what you get',
+          'Never know if it\'ll actually work',
+          'Don\'t have time to build even with a guide',
+          'Free YouTube videos are good enough',
+          'Never occurred to me to pay for this',
+          'Hard to trust online reviews'
+        ]
+      },
+      {
+        id: 'whyWilderBetter',
+        text: 'What would make Wilder Moms better than free YouTube/Pinterest?',
+        sub: 'Pick up to 2',
+        type: 'checkbox',
+        options: [
+          'Step-by-step video, not just text',
+          'Exact materials list with costs upfront',
+          'Kid-tested instructions that actually work',
+          'Community of moms who\'ve done it',
+          'Unique builds I can\'t find elsewhere',
+          'Done-for-you materials kit delivery'
+        ]
+      },
+      {
+        id: 'biggestBarrier',
+        text: 'If you could solve ONE problem that stops you from building, what would it be?',
+        type: 'textarea',
+        placeholder: 'Think: time, cost, confidence, planning...'
+      }
+    ]
+  },
+  {
+    section: 'Trails',
     questions: [
       {
         id: 'trailFrequency',
