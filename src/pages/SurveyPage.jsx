@@ -3,29 +3,12 @@ import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { supabase } from '../utils/supabase'
 
-const buildProjects = [
-  // FREE / LOW COST
-  'Cardboard box village',
-  'Tarp tunnel fort',
-  'Bug hotel / pollinator palace',
-  'Bean pole teepee',
-  'Gutter water wall',
-  'Fairy door trail',
-  'Stump balance path',
-  
-  // MODERATE
-  'Mud kitchen',
-  'Ecobrick raised bed',
-  'Cob bench',
-  'Rock wall / stone stacking',
-  'Cozy reading nook',
-  'Rain garden',
-  
-  // PREMIUM (unique)
-  'Mycelium bricks',
-  'Living willow lodge',
-  'Star gazing platform',
-  'Hobbit hole house'
+const buildCategories = [
+  'Cardboard, tarps & fabric (easy, often free)',
+  'Nature builds (sticks, stones, mud, leaves)',
+  'Growing projects (willow, beans, gardens)',
+  'Permanent builds (wood, stone, ecobricks)',
+  'Magical hideaways (forts, fairy trails, hobbit holes)'
 ]
 
 const questions = [
@@ -91,17 +74,17 @@ const questions = [
     questions: [
       {
         id: 'buildInterest',
-        text: 'Which builds excite you? Pick up to 5.',
-        sub: 'These are things you\'d want to do with your kids',
+        text: 'Which type of project sounds most fun?',
+        sub: 'Pick 1-2 that appeal to you',
         type: 'checkbox',
-        options: buildProjects
+        options: buildCategories
       },
       {
         id: 'buildIntent',
         text: 'Which would you actually PAY for a blueprint guide?',
-        sub: 'Pick up to 2-3. This helps us prioritize what to build first.',
+        sub: 'Pick 1-2. This helps us prioritize what to build first.',
         type: 'checkbox',
-        options: buildProjects
+        options: buildCategories
       },
       {
         id: 'buildBudget',

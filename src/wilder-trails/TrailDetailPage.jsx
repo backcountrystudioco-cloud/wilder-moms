@@ -10,6 +10,7 @@ import { useSavedTrails } from '../hooks/useSavedContent'
 import HourlyWeather from './HourlyWeather'
 import SmartChecklist from '../blueprint/SmartChecklist'
 import PackListGenerator from './PackListGenerator'
+import ActivityRecommendations from './ActivityRecommendations'
 import { packLists } from '../blueprint/packLists'
 import ProgressStepper from './ProgressStepper'
 
@@ -112,6 +113,40 @@ const difficultyLabels = {
   easy: 'Easy',
   moderate: 'Moderate',
   challenging: 'Challenging',
+}
+
+// Get location type from trail data for activity recommendations
+function getLocationType(hike) {
+  const terrain = hike.terrain?.toLowerCase() || ''
+  const title = hike.title.toLowerCase()
+  const description = hike.description.toLowerCase()
+  
+  if (terrain.includes('beach') || terrain.includes('coastal') || title.includes('beach') || title.includes('shore') || title.includes('coast')) {
+    return 'beach'
+  }
+  if (terrain.includes('river') || terrain.includes('creek') || terrain.includes('stream') || title.includes('river') || title.includes('creek')) {
+    return 'river'
+  }
+  if (terrain.includes('desert') || terrain.includes('scrub') || title.includes('desert') || title.includes('canyon')) {
+    return 'desert'
+  }
+  if (terrain.includes('mountain') || terrain.includes('alpine') || title.includes('mountain') || title.includes('peak') || title.includes('summit') || hike.elevation > 2000) {
+    return 'mountain'
+  }
+  if (terrain.includes('forest') || terrain.includes('woodland') || title.includes('forest') || title.includes('woods') || title.includes('grove')) {
+    return 'forest'
+  }
+  
+  // Default to forest based on typical trails
+  return 'forest'
+}
+
+function getCurrentSeason() {
+  const month = new Date().getMonth()
+  if (month >= 3 && month <= 5) return 'spring'
+  if (month >= 6 && month <= 8) return 'summer'
+  if (month >= 9 && month <= 11) return 'fall'
+  return 'winter'
 }
 
 export default function TrailDetailPage() {
@@ -442,6 +477,24 @@ export default function TrailDetailPage() {
             onClose={() => setShowPackList(false)} 
           />
         )}
+        
+        {/* AI Activity Recommendations */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6 }}
+          className="mb-6"
+        >
+          <ActivityRecommendations 
+            trailContext={{
+              difficulty: hike.difficulty,
+              duration: hike.duration > 90 ? 'half-day' : 'short',
+              childAges: familyInfo?.childAges || [5, 8]
+            }}
+            location={getLocationType(hike)}
+            season={getCurrentSeason()}
+          />
+        </motion.div>
         
         {/* Get Directions */}
         <motion.div
