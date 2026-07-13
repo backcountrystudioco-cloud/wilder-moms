@@ -54,7 +54,10 @@ export const drops = [
 ]
 
 // Flatten every drop's builds into a single list, newest first.
-export const premiumBuilds = (() => {
+// Memoized: only built on first access (avoids TDZ with buildCatalog below).
+let _premiumBuildsCache = null
+export function getPremiumBuilds() {
+  if (_premiumBuildsCache) return _premiumBuildsCache
   const flat = []
   for (const drop of drops) {
     for (const buildId of drop.builds) {
@@ -62,10 +65,35 @@ export const premiumBuilds = (() => {
       if (b) flat.push({ ...b, dropId: drop.id, dropMonth: drop.month, dropYear: drop.year, releaseDate: drop.releaseDate })
     }
   }
-  // Sort newest first by releaseDate
   flat.sort((a, b) => (a.releaseDate < b.releaseDate ? 1 : -1))
+  _premiumBuildsCache = flat
   return flat
-})()
+}
+
+// Backwards-compat: `premiumBuilds` is also exported as a function so existing
+// `.filter(...)` / `.map(...)` call sites continue to work. We can't export it
+// as an array without triggering the TDZ issue with `buildCatalog` below.
+// To freeze the array for a stable consumer (e.g. memoization), wrap calls in
+// `useMemo(() => getPremiumBuilds(), [])`.
+export const premiumBuilds = new Proxy([], {
+  get(_target, prop) {
+    const arr = getPremiumBuilds()
+    const value = arr[prop]
+    return typeof value === 'function' ? value.bind(arr) : value
+  },
+  has(_target, prop) {
+    return prop in getPremiumBuilds()
+  },
+  ownKeys() {
+    return Reflect.ownKeys(getPremiumBuilds())
+  },
+  getOwnPropertyDescriptor(_target, prop) {
+    return Reflect.getOwnPropertyDescriptor(getPremiumBuilds(), prop)
+  },
+  getPrototypeOf() {
+    return Array.prototype
+  },
+})
 
 export function getCurrentDrop() {
   // The newest drop, by releaseDate
