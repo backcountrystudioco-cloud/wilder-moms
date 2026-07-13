@@ -66,14 +66,6 @@ export default function Nav() {
               Wilder Homes
             </Link>
 
-            {/* Wilder Builds */}
-            <Link
-              to="/wilder-builds"
-              className="font-sans font-medium text-sm uppercase tracking-[0.08em] text-ink hover:text-ember transition-colors"
-            >
-              Wilder Builds
-            </Link>
-
             {/* Wilder Trails */}
             <Link
               to="/wilder-trails"
@@ -95,14 +87,14 @@ export default function Nav() {
           <div className="flex items-center gap-3">
             {isSignedIn && (
               <Link
-                to="/wilder-builds"
+                to="/wilder-homes?tab=premium"
                 className="hidden sm:inline-flex items-center gap-2 text-xs font-medium uppercase tracking-wider px-3 py-1.5 rounded-full transition-colors"
                 title={
                   hasAccess
-                    ? 'Your Wilder Builds library — click to view'
+                    ? 'Your Premium Builds library — click to view'
                     : status === 'expired'
-                    ? 'Renew your Wilder Builds subscription'
-                    : 'Subscribe to Wilder Builds — two PDFs every month'
+                    ? 'Renew your Premium Builds subscription'
+                    : 'Subscribe to Premium Builds — two PDFs every month'
                 }
               >
                 {hasAccess ? (
@@ -114,11 +106,11 @@ export default function Nav() {
                   </span>
                 ) : status === 'expired' ? (
                   <span className="bg-terra/15 text-terra border border-terra/30">
-                    Renew Wilder Builds
+                    Renew Premium
                   </span>
                 ) : (
                   <span className="bg-ember/10 text-ember border border-ember/25 relative">
-                    Wilder Builds
+                    Premium
                     <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-ember animate-pulse" />
                   </span>
                 )}

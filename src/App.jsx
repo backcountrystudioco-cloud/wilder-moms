@@ -14,7 +14,6 @@ import WhosComingPage from './wilder-trails/WhosComingPage'
 import SetupPage from './wilder-trails/SetupPage'
 import TrailsPage from './wilder-trails/TrailsPage'
 import TrailDetailPage from './wilder-trails/TrailDetailPage'
-import BuildsPage from './wilder-builds/BuildsPage'
 import GatedBuildDetailPage from './wilder-builds/GatedBuildDetailPage'
 import BlueprintPage from './blueprint/BlueprintPage'
 import JoinPage from './pages/JoinPage'
@@ -48,10 +47,11 @@ function App() {
               <Route path="/explore" element={<ExplorePage />} />
               <Route path="/wilder-homes" element={<WilderHomesPage />} />
               <Route path="/wilder-homes/builds/:slug" element={<BuildDetailPage />} />
+              <Route path="/wilder-homes/premium/:slug" element={<GatedBuildDetailPage />} />
               <Route path="/journal" element={<JournalPage />} />
               <Route path="/skills" element={<SkillsPassport />} />
-              <Route path="/wilder-builds" element={<BuildsPage />} />
-              <Route path="/wilder-builds/builds/:slug" element={<GatedBuildDetailPage />} />
+              <Route path="/wilder-builds" element={<Navigate to="/wilder-homes?tab=premium" replace />} />
+              <Route path="/wilder-builds/builds/:slug" element={<Navigate to="/wilder-homes/premium/:slug" replace />} />
               <Route path="/blueprint" element={<BlueprintPage />} />
               <Route path="/survey" element={<SurveyPage />} />
             </Route>

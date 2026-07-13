@@ -11,15 +11,17 @@ import {
   getCurrentDrop,
   getPastDrops,
   getFutureDrops,
-} from './buildsLibrary'
+} from '../wilder-builds/buildsLibrary'
 import PaywallCard from '../components/PaywallCard'
 
-// BuildsPage — /wilder-builds
-// ADAPTIVE. One page, knows who you are:
+// PremiumTab — the 6th tab on Wilder Homes ("Premium Builds").
+// Replaces the former /wilder-builds subscription landing.
+//
+// ADAPTIVE. Renders based on subscription status:
 //   status === 'loading' → SkeletonView (warm welcome card)
 //   status === 'active'  → LibraryView (your drops, your stuff)
 //   otherwise            → MarketingView (the pitch)
-// No separate /library route — the URL stays the same.
+// No separate /library route — the tab URL stays the same.
 
 // =====================================================================
 // SkeletonView — quiet, warm welcome card. Feels intentional, not waiting.
@@ -150,13 +152,13 @@ function LibraryView() {
         className="text-center mb-8 pt-4 max-w-3xl mx-auto px-4"
       >
         <p className="text-inkll text-xs font-medium uppercase tracking-widest mb-3">
-          WILDER BUILDS · YOUR LIBRARY
+          WILDER HOMES · YOUR LIBRARY
         </p>
         <h1 className="font-serif text-3xl md:text-4xl lg:text-5xl italic text-ember leading-tight">
           Welcome back.
         </h1>
         <p className="font-serif italic text-lg md:text-xl text-ink mt-2 leading-snug">
-          Your Wilder Builds library.
+          Your Premium Builds library.
         </p>
       </motion.div>
 
@@ -236,7 +238,7 @@ function MarketingView() {
         className="text-center mb-8 pt-4 max-w-3xl mx-auto px-4"
       >
         <p className="text-inkll text-xs font-medium uppercase tracking-widest mb-3">
-          {isExpired ? 'WILDER BUILDS · WELCOME BACK' : 'WILDER BUILDS · MONTHLY SUBSCRIPTION'}
+          {isExpired ? 'WILDER HOMES · WELCOME BACK' : 'WILDER HOMES · PREMIUM BUILDS'}
         </p>
         <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl italic text-ember leading-tight">
           {isExpired ? 'Pick up where you left off.' : 'Two new build PDFs every month.'}
@@ -277,7 +279,7 @@ function MarketingView() {
           </div>
           <div className="relative">
             <p className="text-xs font-medium uppercase tracking-widest text-white/70 mb-2">
-              Wilder Builds subscription
+              Wilder Homes · Premium Builds subscription
             </p>
             <h2 className="font-serif text-3xl md:text-5xl italic mb-4 leading-tight">
               Two new PDFs every month.<br />Your library grows.
@@ -334,7 +336,7 @@ function MarketingView() {
               What's the difference
             </p>
             <h3 className="font-serif text-2xl md:text-3xl text-ink italic">
-              Free guides vs the Wilder Builds library.
+              Free guides vs the Premium Builds library.
             </h3>
           </div>
           <div className="grid md:grid-cols-2 gap-5">
@@ -363,7 +365,7 @@ function MarketingView() {
                 Members
               </div>
               <p className="text-xs font-medium uppercase tracking-widest text-white/70 mb-2">
-                Wilder Builds Library
+                Wilder Homes · Premium Builds
               </p>
               <p className="font-serif text-2xl mb-1">Beautifully designed PDFs</p>
               <p className="text-3xl font-serif mb-1">
@@ -415,7 +417,7 @@ function MarketingView() {
           <div id="start" className="scroll-mt-24 mt-12">
             <PaywallCard
               variant="banner"
-              headline={isExpired ? 'Renew your Wilder Builds subscription' : 'Start the Wilder Builds subscription'}
+              headline={isExpired ? 'Renew your Premium Builds subscription' : 'Start the Premium Builds subscription'}
               subhead={
                 isExpired
                   ? "Pick up your library where you left off. Two themed PDFs every month, beautifully designed for tablet or print."
@@ -725,7 +727,7 @@ function PremiumBuildCard({ build, index, hasAccess, justUnlocked }) {
       }}
       className="bg-white rounded-3xl overflow-hidden shadow-lg border border-inkll/10 group flex flex-col"
     >
-      <Link to={`/wilder-builds/builds/${build.slug}`} className="block">
+      <Link to={`/wilder-homes/premium/${build.slug}`} className="block">
         <div className={`relative aspect-[4/3] bg-gradient-to-br ${build.coverGradient} overflow-hidden`}>
           <div className="absolute inset-0 flex items-center justify-center opacity-40 group-hover:opacity-60 transition-opacity">
             <span className="text-[8rem] leading-none">{build.heroEmoji}</span>
@@ -772,7 +774,7 @@ function PremiumBuildCard({ build, index, hasAccess, justUnlocked }) {
 
         <div className="flex items-center justify-between">
           <Link
-            to={`/wilder-builds/builds/${build.slug}`}
+            to={`/wilder-homes/premium/${build.slug}`}
             className="text-ember font-medium text-sm hover:text-terra inline-flex items-center gap-1"
           >
             {hasAccess ? 'View & download' : "See what's inside"}
@@ -886,10 +888,10 @@ function FreeSampleOptIn() {
 }
 
 // =====================================================================
-// Page entry — /wilder-builds is the Wilder Builds subscription landing.
+// Page entry — the "Premium Builds" tab content on Wilder Homes.
 // Adaptive shell: switches between LibraryView, MarketingView, SkeletonView.
 // =====================================================================
-export default function BuildsPage() {
+export default function PremiumTab() {
   const { status } = useBuildsAccess()
 
   if (status === 'loading') {

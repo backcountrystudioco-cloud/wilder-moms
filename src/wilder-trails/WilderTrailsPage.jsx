@@ -737,8 +737,8 @@ export default function WilderTrailsPage() {
                         <h3 className="font-serif text-xl text-ink mb-2">Not feeling the outdoors today?</h3>
                         <p className="font-sans text-inkl mb-4">Wilder Builds has everything you need for a perfect indoor day:</p>
                         <div className="flex flex-wrap gap-3">
-                          <a href="/wilder-builds" className="px-5 py-2.5 bg-ember text-white rounded-full font-sans text-sm hover:bg-terra transition-colors">
-                            Indoor Builds
+                          <a href="/wilder-homes?tab=premium" className="px-5 py-2.5 bg-ember text-white rounded-full font-sans text-sm hover:bg-terra transition-colors">
+                            Premium Builds
                           </a>
                           <a href="/wilder-homes?tab=activities" className="px-5 py-2.5 bg-white border border-inkll/20 text-ink rounded-full font-sans text-sm hover:border-ember transition-colors">
                             Nature Crafts
@@ -769,8 +769,8 @@ export default function WilderTrailsPage() {
                    weatherAssessment?.level === 'rain' ? "The weather isn't cooperating, mama." :
                    "We couldn't find trails matching your criteria. Try adjusting your filters."}
                 </p>
-                <a href="/wilder-builds" className="inline-flex items-center gap-2 px-6 py-3 bg-ember text-white rounded-full font-sans font-medium hover:bg-terra transition-colors">
-                  Check out Wilder Builds instead
+                <a href="/wilder-homes?tab=premium" className="inline-flex items-center gap-2 px-6 py-3 bg-ember text-white rounded-full font-sans font-medium hover:bg-terra transition-colors">
+                  Check out Premium Builds instead
                   <span>→</span>
                 </a>
               </motion.div>

@@ -175,7 +175,7 @@ export default function PaywallCard({
         </ul>
 
         {!isSignedIn ? (
-          <SignInButton mode="modal" fallbackRedirectUrl="/wilder-builds?subscribed=1">
+          <SignInButton mode="modal" fallbackRedirectUrl="/wilder-homes?tab=premium&subscribed=1">
             <button
               type="button"
               className={

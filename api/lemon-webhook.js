@@ -303,8 +303,8 @@ export default async function handler(req, res) {
       const { Resend } = await import('resend')
       const resend = new Resend(process.env.RESEND_API_KEY)
       const libraryUrl = process.env.LEMON_CHECKOUT_SUCCESS_URL
-        ? new URL(process.env.LEMON_CHECKOUT_SUCCESS_URL).origin + '/wilder-builds'
-        : 'https://your-domain.com/wilder-builds'
+        ? new URL(process.env.LEMON_CHECKOUT_SUCCESS_URL).origin + '/wilder-homes?tab=premium'
+        : 'https://your-domain.com/wilder-homes?tab=premium'
       const from = process.env.RESEND_FROM_ADDRESS || 'Wilder Moms <hello@wildermoms.com>'
       await resend.emails.send({
         from,

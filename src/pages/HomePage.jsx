@@ -26,7 +26,7 @@ const paths = [
     blobTo: '#96963C',
   },
   {
-    to: '/wilder-builds',
+    to: '/wilder-homes?tab=premium',
     eyebrow: 'FOR GROWING OUTDOORS EVERY MONTH',
     heading: 'Get monthly builds.',
     subtitle: 'Two themed PDFs every month on the 1st — one Architect Blueprint, one Lab Activity. Beautifully designed, kid-tested.',
@@ -68,7 +68,7 @@ function ChooseYourPathTiles() {
             className="mb-8"
           >
             <Link
-              to="/wilder-builds"
+              to="/wilder-homes?tab=premium"
               className="group flex items-center justify-between gap-4 bg-white border border-inkll/15 rounded-2xl p-5 hover:border-ember/40 transition-colors shadow-sm"
             >
               <div className="flex items-center gap-4 min-w-0">

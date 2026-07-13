@@ -8,6 +8,7 @@ import WildRoom from './WildRoom'
 import WilderCampArchitect from './WilderCampArchitect'
 import EcoProductsPage from './EcoProductsPage'
 import MaterialPicker, { getMatchedItems } from './MaterialPicker'
+import PremiumTab from './PremiumTab'
 import { activities } from './activities'
 import { crafts } from './crafts'
 import { fadeUpVariants } from '../hooks/useScrollReveal'
@@ -19,7 +20,7 @@ import { fadeUpVariants } from '../hooks/useScrollReveal'
 //   3. Wild Room — interactive space design tool
 //   4. Architect — Wilder Camp Architect ($35 premium blueprints)
 //   5. Eco — verified eco-friendly products
-// The premium subscription lives separately at /wilder-builds.
+//   6. Premium Builds — monthly PDF subscription (adaptive: marketing/library)
 
 const TABS = [
   { id: 'guides', label: 'Guides', accent: 'ember' },
@@ -27,6 +28,7 @@ const TABS = [
   { id: 'wildroom', label: 'Wild Room', accent: 'olive' },
   { id: 'architect', label: 'Architect', accent: 'gold' },
   { id: 'eco', label: 'Eco', accent: 'forest' },
+  { id: 'premium', label: 'Premium Builds', accent: 'ember' },
 ]
 
 export default function WilderHomesPage() {
@@ -59,7 +61,7 @@ export default function WilderHomesPage() {
           className="text-center mb-10 pt-8"
         >
           <Link
-            to="/wilder-builds"
+            to="/wilder-homes?tab=premium"
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-ember/10 text-ember border border-ember/25 text-xs font-medium uppercase tracking-widest hover:bg-ember/15 transition-colors mb-6"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-ember animate-pulse" />
@@ -88,6 +90,9 @@ export default function WilderHomesPage() {
               accent={tab.accent}
             >
               {tab.label}
+              {tab.id === 'premium' && (
+                <span className="ml-1.5 inline-flex items-center justify-center w-1.5 h-1.5 rounded-full bg-ember animate-pulse" />
+              )}
             </NavChip>
           ))}
         </div>
@@ -99,6 +104,7 @@ export default function WilderHomesPage() {
           {activeTab === 'wildroom' && <WildRoom />}
           {activeTab === 'architect' && <WilderCampArchitect />}
           {activeTab === 'eco' && <EcoProductsPage />}
+          {activeTab === 'premium' && <PremiumTab />}
         </div>
 
         {/* Cross-sell to subscription */}
@@ -107,17 +113,17 @@ export default function WilderHomesPage() {
             Want premium PDFs every month?
           </p>
           <h3 className="font-serif text-2xl md:text-3xl italic mb-2">
-            See Wilder Builds
+            See Premium Builds
           </h3>
           <p className="text-white/80 max-w-lg mx-auto mb-6">
             Two new themed PDFs every month on the 1st — printable, beautifully
             designed, kid-tested. From $9/month or $79/year.
           </p>
           <Link
-            to="/wilder-builds"
+            to="/wilder-homes?tab=premium"
             className="inline-flex items-center gap-2 bg-white text-forest px-6 py-3 rounded-full font-semibold hover:bg-cream transition-colors"
           >
-            See Wilder Builds →
+            See Premium Builds →
           </Link>
         </div>
       </div>

@@ -29,13 +29,13 @@ export default function GatedBuildDetailPage() {
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="font-serif text-3xl text-ink mb-4">Build Not Found</h1>
           <p className="text-inkl mb-8">
-            This build isn't in the Wilder Builds library. Try the free build guides.
+            This build isn't in the Premium Builds library. Try the free build guides.
           </p>
           <Link
-            to="/wilder-builds"
+            to="/wilder-homes"
             className="inline-flex items-center gap-2 bg-ember text-white px-6 py-3 rounded-full font-medium hover:bg-terra transition-colors"
           >
-            ← Back to Builds
+            ← Back to Wilder Homes
           </Link>
         </div>
       </div>
@@ -71,7 +71,7 @@ export default function GatedBuildDetailPage() {
         <div className="absolute bottom-0 left-0 right-0 p-6 md:p-10">
           <div className="max-w-4xl mx-auto">
             <Link
-              to="/wilder-builds"
+              to="/wilder-homes?tab=premium"
               className="inline-flex items-center gap-2 text-white/80 hover:text-white mb-4 transition-colors text-sm"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -274,7 +274,7 @@ export default function GatedBuildDetailPage() {
         {/* Back link */}
         <div className="mt-10 text-center">
           <Link
-            to="/wilder-builds"
+            to="/wilder-homes?tab=premium"
             className="text-ember font-medium text-sm hover:underline"
           >
             ← Back to all builds

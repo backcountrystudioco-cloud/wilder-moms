@@ -365,7 +365,7 @@ function LockedGuideCard({ guide }) {
           {guide.title}
         </h4>
         <Link
-          to="/wilder-builds"
+          to="/wilder-homes?tab=premium"
           className="mt-auto self-start inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-cream text-inkl border border-inkll/20 font-sans text-xs font-medium hover:bg-blush transition-colors"
         >
           Subscribe to unlock
@@ -810,7 +810,7 @@ export default function ProfilePage() {
                       Acquired Monthly Guides
                     </h3>
                     <Link
-                      to="/wilder-builds"
+                      to="/wilder-homes?tab=premium"
                       className="text-xs font-sans font-medium text-ember hover:text-terra transition-colors"
                     >
                       See Wilder Builds →
@@ -860,7 +860,7 @@ export default function ProfilePage() {
                           Two themed PDFs every month on the 1st — one Architect Blueprint, one Lab Activity. Your library grows forever.
                         </p>
                         <Link
-                          to="/wilder-builds"
+                          to="/wilder-homes?tab=premium"
                           className="inline-flex items-center gap-2 bg-ember hover:bg-terra text-white px-5 py-2.5 rounded-full font-sans text-sm font-medium transition-colors shadow-md"
                         >
                           Subscribe to unlock

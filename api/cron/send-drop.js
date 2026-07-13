@@ -58,7 +58,7 @@ function buildEmailHtml({ drop, builds, libraryUrl, baseFont = 'Georgia, serif' 
           <h2 style="font-family: ${baseFont}; font-style: italic; font-size: 28px; color: #3C1E00; margin: 0 0 8px; line-height: 1.2;">${escapeHtml(b.title)}</h2>
           <p style="font-size: 16px; line-height: 1.6; color: #783C1E; margin: 0 0 14px;">${escapeHtml(b.subtitle)}</p>
           <p style="margin: 0;">
-            <a href="${libraryUrl}/wilder-builds/builds/${b.slug}" style="background: #8C1E00; color: #FAF6EE; padding: 12px 24px; border-radius: 999px; text-decoration: none; font-weight: 600; display: inline-block; font-family: -apple-system, sans-serif;">Open the build →</a>
+            <a href="${libraryUrl}/wilder-homes/premium/${b.slug}" style="background: #8C1E00; color: #FAF6EE; padding: 12px 24px; border-radius: 999px; text-decoration: none; font-weight: 600; display: inline-block; font-family: -apple-system, sans-serif;">Open the build →</a>
           </p>
         </td>
       </tr>
@@ -82,14 +82,14 @@ function buildEmailHtml({ drop, builds, libraryUrl, baseFont = 'Georgia, serif' 
             Your library now has ${builds.length === 2 ? 'these two new builds plus' : 'this new build plus'} every drop you've ever been a member for.
           </p>
           <p style="margin: 24px 0 0;">
-            <a href="${libraryUrl}/wilder-builds" style="background: transparent; color: #8C1E00; padding: 12px 24px; border: 1.5px solid #8C1E00; border-radius: 999px; text-decoration: none; font-weight: 600; display: inline-block; font-family: -apple-system, sans-serif;">Open your full library →</a>
+            <a href="${libraryUrl}/wilder-homes?tab=premium" style="background: transparent; color: #8C1E00; padding: 12px 24px; border: 1.5px solid #8C1E00; border-radius: 999px; text-decoration: none; font-weight: 600; display: inline-block; font-family: -apple-system, sans-serif;">Open your full library →</a>
           </p>
           <p style="font-size: 13px; line-height: 1.6; color: #783C1E; margin: 36px 0 0; padding-top: 24px; border-top: 1px solid rgba(120,60,30,0.12);">
             With dirt under our nails,<br/>
             Melissa & the Wilder Moms team
           </p>
           <p style="font-size: 11px; line-height: 1.5; color: rgba(120,60,30,0.5); margin: 16px 0 0;">
-            You're getting this because you're a Wilder Builds subscriber. Manage your subscription anytime from your <a href="${libraryUrl}/wilder-builds" style="color: rgba(120,60,30,0.6);">library</a>.
+            You're getting this because you're a Wilder Builds subscriber. Manage your subscription anytime from your <a href="${libraryUrl}/wilder-homes?tab=premium" style="color: rgba(120,60,30,0.6);">library</a>.
           </p>
         </div>
       </body>
