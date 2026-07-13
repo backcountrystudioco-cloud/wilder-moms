@@ -58,6 +58,14 @@ export default function WilderHomesPage() {
           custom={0}
           className="text-center mb-10 pt-8"
         >
+          <Link
+            to="/wilder-builds"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-ember/10 text-ember border border-ember/25 text-xs font-medium uppercase tracking-widest hover:bg-ember/15 transition-colors mb-6"
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-ember animate-pulse" />
+            New: Wilder Builds · monthly PDFs
+            <span aria-hidden>→</span>
+          </Link>
           <p className="text-inkll text-xs font-medium uppercase tracking-widest mb-4">
             WILDER HOMES
           </p>

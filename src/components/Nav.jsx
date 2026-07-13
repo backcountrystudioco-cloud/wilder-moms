@@ -66,6 +66,14 @@ export default function Nav() {
               Wilder Homes
             </Link>
 
+            {/* Wilder Builds */}
+            <Link
+              to="/wilder-builds"
+              className="font-sans font-medium text-sm uppercase tracking-[0.08em] text-ink hover:text-ember transition-colors"
+            >
+              Wilder Builds
+            </Link>
+
             {/* Wilder Trails */}
             <Link
               to="/wilder-trails"
