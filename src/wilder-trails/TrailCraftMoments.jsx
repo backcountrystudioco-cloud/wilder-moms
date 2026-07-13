@@ -58,7 +58,7 @@ export default function TrailCraftMoments({
         {craftSuggestions.slice(0, 3).map((suggestion, i) => (
           <Link
             key={suggestion.craftId}
-            to={`/basecamp/activities`}
+            to={`/wilder-homes?tab=activities`}
             className="flex items-center gap-3 p-3 bg-cream/60 rounded-xl hover:bg-cream transition-colors"
           >
             <span className="text-lg">C</span>
@@ -151,7 +151,7 @@ export default function TrailCraftMoments({
             )}
             
             <Link
-              to="/basecamp/activities"
+              to="/wilder-homes?tab=activities"
               className="inline-flex items-center gap-1 text-ember text-xs font-medium hover:text-terra transition-colors"
             >
               View full instructions

@@ -24,11 +24,11 @@ const pillars = [
   {
     accent: 'bg-gold',
     numeral: 'III',
-    label: 'THE BASE CAMP',
+    label: 'WILDER BUILDS',
     title: "Staying home doesn't mean giving up on nature.",
     description:
-      "Some days the adventure is making it to the kitchen table. The Base Camp is for those days. Pressing the flowers you found last Sunday. Building a nature table with pinecones from your coat pocket. Nature isn't just out there — it's something you can bring inside.",
-    cta: { label: 'See Builds & Activities', to: '/basecamp', icon: null }
+      "Some days the adventure is making it to the kitchen table. The Wilder Builds library is for those days. Pressing the flowers you found last Sunday. Building a nature table with pinecones from your coat pocket. Nature isn't just out there — it's something you can bring inside.",
+    cta: { label: 'See Wilder Builds', to: '/wilder-builds', icon: null }
   },
   {
     accent: 'bg-slate',

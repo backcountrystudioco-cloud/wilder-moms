@@ -45,7 +45,7 @@ function getTimeMessage(timeContext, weatherLevel) {
       hot: "Cooling down nicely. Still time for a shorter trail.",
       cold: "Temps dropping. Short and sweet trails today, please.",
       drizzle: "Rain likely later — get out there now before it starts.",
-      rain: "Not ideal conditions. How about a cozy Base Camp afternoon?",
+      rain: "Not ideal conditions. How about a cozy Wilder Builds afternoon?",
       default: "Nice time to get outside with the family!"
     },
     evening: {
@@ -66,7 +66,7 @@ function getTimeMessage(timeContext, weatherLevel) {
 // Get best hike window based on weather - warmer messaging
 function getBestWindow(weather, timeContext) {
   if (weather.level === 'storm') return { label: 'Stay indoors', message: "Safety first today, mama." };
-  if (weather.level === 'rain') return { label: 'Indoor day', message: "Try a Base Camp activity instead." };
+  if (weather.level === 'rain') return { label: 'Indoor day', message: "Try a Wilder Builds activity instead." };
   if (weather.level === 'snow') return { label: 'Snow play!', message: "Bundle up and make memories." };
   
   if (weather.level === 'hot') {
@@ -735,12 +735,12 @@ export default function WilderTrailsPage() {
                       </div>
                       <div>
                         <h3 className="font-serif text-xl text-ink mb-2">Not feeling the outdoors today?</h3>
-                        <p className="font-sans text-inkl mb-4">Base Camp has everything you need for a perfect indoor day:</p>
+                        <p className="font-sans text-inkl mb-4">Wilder Builds has everything you need for a perfect indoor day:</p>
                         <div className="flex flex-wrap gap-3">
-                          <a href="/basecamp" className="px-5 py-2.5 bg-ember text-white rounded-full font-sans text-sm hover:bg-terra transition-colors">
+                          <a href="/wilder-builds" className="px-5 py-2.5 bg-ember text-white rounded-full font-sans text-sm hover:bg-terra transition-colors">
                             Indoor Builds
                           </a>
-                          <a href="/basecamp/activities" className="px-5 py-2.5 bg-white border border-inkll/20 text-ink rounded-full font-sans text-sm hover:border-ember transition-colors">
+                          <a href="/wilder-homes?tab=activities" className="px-5 py-2.5 bg-white border border-inkll/20 text-ink rounded-full font-sans text-sm hover:border-ember transition-colors">
                             Nature Crafts
                           </a>
                           <a href="/blueprint" className="px-5 py-2.5 bg-white border border-inkll/20 text-ink rounded-full font-sans text-sm hover:border-ember transition-colors">
@@ -769,8 +769,8 @@ export default function WilderTrailsPage() {
                    weatherAssessment?.level === 'rain' ? "The weather isn't cooperating, mama." :
                    "We couldn't find trails matching your criteria. Try adjusting your filters."}
                 </p>
-                <a href="/basecamp" className="inline-flex items-center gap-2 px-6 py-3 bg-ember text-white rounded-full font-sans font-medium hover:bg-terra transition-colors">
-                  Check out Base Camp instead
+                <a href="/wilder-builds" className="inline-flex items-center gap-2 px-6 py-3 bg-ember text-white rounded-full font-sans font-medium hover:bg-terra transition-colors">
+                  Check out Wilder Builds instead
                   <span>→</span>
                 </a>
               </motion.div>

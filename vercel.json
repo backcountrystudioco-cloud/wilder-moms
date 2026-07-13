@@ -3,5 +3,11 @@
   "outputDirectory": "dist",
   "rewrites": [
     { "source": "/(.*)", "destination": "/" }
+  ],
+  "crons": [
+    {
+      "path": "/api/cron/send-drop",
+      "schedule": "0 13 1 * *"
+    }
   ]
 }

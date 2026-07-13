@@ -146,7 +146,7 @@ export default function EcoProductsPage() {
           className="text-center mb-8 pt-8"
         >
           <p className="text-inkll text-xs font-medium uppercase tracking-widest mb-4">
-            THE BASE CAMP · ECO PRODUCTS
+            WILDER BUILDS · ECO PRODUCTS
           </p>
           <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl italic text-ember leading-tight mb-6">
             Build healthy. Build eco.

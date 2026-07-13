@@ -20,11 +20,11 @@ export default function Footer() {
             >
               Wilder Trails
             </Link>
-            <Link 
-              to="/basecamp"
+            <Link
+              to="/wilder-builds"
               className="text-white/30 hover:text-gold transition-colors font-sans text-sm"
             >
-              Base Camp
+              Wilder Builds
             </Link>
             <a 
               href="https://instagram.com" 

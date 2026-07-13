@@ -3,7 +3,7 @@
  * Adds trail-specific metadata to crafts from crafts.js
  */
 
-import { crafts } from '../basecamp/crafts';
+import { crafts } from '../wilder-homes/crafts';
 import { trailMoments, effortLevels } from '../wilder-trails/craftTrails';
 
 // Extend each craft with trail-specific data

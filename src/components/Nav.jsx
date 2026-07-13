@@ -2,11 +2,12 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useAuth, SignInButton, SignUpButton, UserButton } from '@clerk/react'
+import { useBuildsAccess } from '../hooks/useBuildsAccess'
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false)
-  const [baseCampDropdownOpen, setBaseCampDropdownOpen] = useState(false)
   const { isSignedIn, user } = useAuth()
+  const { hasAccess, status } = useBuildsAccess()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -83,39 +84,72 @@ export default function Nav() {
           </div>
 
           {/* Auth Buttons */}
-          <AnimatePresence mode="wait">
-            {isSignedIn ? (
-              <motion.div
-                key="user-button"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.2 }}
+          <div className="flex items-center gap-3">
+            {isSignedIn && (
+              <Link
+                to="/wilder-builds"
+                className="hidden sm:inline-flex items-center gap-2 text-xs font-medium uppercase tracking-wider px-3 py-1.5 rounded-full transition-colors"
+                title={
+                  hasAccess
+                    ? 'Your Wilder Builds library — click to view'
+                    : status === 'expired'
+                    ? 'Renew your Wilder Builds subscription'
+                    : 'Subscribe to Wilder Builds — two PDFs every month'
+                }
               >
-                <UserButton />
-              </motion.div>
-            ) : (
-              <motion.div
-                key="auth-buttons"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.2 }}
-                className="flex items-center gap-2"
-              >
-                <SignInButton>
-                  <button className="font-sans font-medium text-sm px-4 py-2 text-ink hover:text-ember transition-colors">
-                    Sign In
-                  </button>
-                </SignInButton>
-                <SignUpButton>
-                  <button className="bg-ember text-white font-sans font-medium text-sm px-5 py-2.5 rounded-full hover:bg-forest transition-colors duration-300">
-                    Join the Waitlist
-                  </button>
-                </SignUpButton>
-              </motion.div>
+                {hasAccess ? (
+                  <span className="bg-olive/15 text-olive border border-olive/30">
+                    <svg className="w-3.5 h-3.5" viewBox="0 0 20 20" fill="currentColor">
+                      <path d="M10 2a4 4 0 00-4 4v3H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-1V6a4 4 0 00-4-4zm-2 7V6a2 2 0 114 0v3H8z" />
+                    </svg>
+                    Library
+                  </span>
+                ) : status === 'expired' ? (
+                  <span className="bg-terra/15 text-terra border border-terra/30">
+                    Renew Wilder Builds
+                  </span>
+                ) : (
+                  <span className="bg-ember/10 text-ember border border-ember/25 relative">
+                    Wilder Builds
+                    <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-ember animate-pulse" />
+                  </span>
+                )}
+              </Link>
             )}
-          </AnimatePresence>
+            <AnimatePresence mode="wait">
+              {isSignedIn ? (
+                <motion.div
+                  key="user-button"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <UserButton />
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="auth-buttons"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.2 }}
+                  className="flex items-center gap-2"
+                >
+                  <SignInButton>
+                    <button className="font-sans font-medium text-sm px-4 py-2 text-ink hover:text-ember transition-colors">
+                      Sign In
+                    </button>
+                  </SignInButton>
+                  <SignUpButton>
+                    <button className="bg-ember text-white font-sans font-medium text-sm px-5 py-2.5 rounded-full hover:bg-forest transition-colors duration-300">
+                      Join the Waitlist
+                    </button>
+                  </SignUpButton>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
         </div>
       </div>
 

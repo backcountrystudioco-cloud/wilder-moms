@@ -14,23 +14,15 @@ import WhosComingPage from './wilder-trails/WhosComingPage'
 import SetupPage from './wilder-trails/SetupPage'
 import TrailsPage from './wilder-trails/TrailsPage'
 import TrailDetailPage from './wilder-trails/TrailDetailPage'
-import BuildsPage from './basecamp/BuildsPage'
-import BuildDetailPage from './basecamp/BuildDetailPage'
-import ActivitiesPage from './basecamp/ActivitiesPage'
+import BuildsPage from './wilder-builds/BuildsPage'
+import GatedBuildDetailPage from './wilder-builds/GatedBuildDetailPage'
 import BlueprintPage from './blueprint/BlueprintPage'
 import JoinPage from './pages/JoinPage'
 import LaunchPopup from './components/LaunchPopup'
 import JournalPage from './journal/JournalPage'
 import SkillsPassport from './skills/SkillsPassport'
-import WilderHomesPage from './wilderhomes/WilderHomesPage'
-import WilderActivitiesPage from './wilderhomes/ActivitiesPage'
-import WilderEnvironmentPage from './wilderhomes/EnvironmentPage'
-import WilderBuildDetailPage from './wilderhomes/BuildDetailPage'
-import EcoProductsInterestPage from './wilderhomes/EcoProductsInterestPage'
-import ArchivePage from './wilderhomes/ArchivePage'
-import ArchitectPage from './wilderhomes/ArchitectPage'
-import WildRoomPage from './wilderhomes/WildRoomPage'
-import CraftDetailPage from './wilderhomes/CraftDetailPage'
+import WilderHomesPage from './wilder-homes/WilderHomesPage'
+import BuildDetailPage from './wilder-homes/BuildDetailPage'
 import AITrailFinder from './wilder-trails/AITrailFinder'
 
 function App() {
@@ -55,20 +47,12 @@ function App() {
               <Route path="/wilder-philosophy" element={<MissionPage />} />
               <Route path="/explore" element={<ExplorePage />} />
               <Route path="/wilder-homes" element={<WilderHomesPage />} />
-              <Route path="/wilder-homes/activities" element={<WilderActivitiesPage />} />
-              <Route path="/wilder-homes/activities/craft/:craftId" element={<CraftDetailPage />} />
-              <Route path="/wilder-homes/activities/:buildId" element={<WilderBuildDetailPage />} />
-              <Route path="/wilder-homes/environment" element={<WilderEnvironmentPage />} />
-              <Route path="/wilder-homes/wild-room" element={<WildRoomPage />} />
-              <Route path="/wilder-homes/activities/archive" element={<ArchivePage />} />
-              <Route path="/wilder-homes/architect" element={<ArchitectPage />} />
+              <Route path="/wilder-homes/builds/:slug" element={<BuildDetailPage />} />
               <Route path="/journal" element={<JournalPage />} />
               <Route path="/skills" element={<SkillsPassport />} />
-              <Route path="/basecamp" element={<BuildsPage />} />
-              <Route path="/basecamp/:buildId" element={<BuildDetailPage />} />
-              <Route path="/basecamp/activities" element={<ActivitiesPage />} />
+              <Route path="/wilder-builds" element={<BuildsPage />} />
+              <Route path="/wilder-builds/builds/:slug" element={<GatedBuildDetailPage />} />
               <Route path="/blueprint" element={<BlueprintPage />} />
-              <Route path="/wilder-homes/eco-products" element={<EcoProductsInterestPage />} />
               <Route path="/survey" element={<SurveyPage />} />
             </Route>
           </Routes>

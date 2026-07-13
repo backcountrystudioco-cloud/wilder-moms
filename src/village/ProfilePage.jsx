@@ -1,9 +1,11 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import { useUser } from '../context/UserContext'
 import { hikes } from '../wilder-trails/hikes'
-import { crafts } from '../basecamp/crafts'
-import { builds } from '../basecamp/builds'
+import { crafts } from '../wilder-homes/crafts'
+import { builds } from '../wilder-homes/builds'
+import { premiumBuilds as allPremiumBuilds } from '../wilder-builds/buildsLibrary'
 
 const ageGroups = ['0-2', '3-5', '6-9', '10+']
 const numericAgeGroups = {
@@ -284,6 +286,118 @@ function EmptyState({ type }) {
   )
 }
 
+function AcquiredGuideCard({ guide }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      className="bg-white rounded-xl overflow-hidden shadow-sm border border-inkll/10 flex flex-col"
+    >
+      {/* Cover */}
+      <div
+        className={`relative h-32 bg-gradient-to-br ${guide.coverGradient || guide.accent || 'from-ember via-terra to-gold'} flex items-center justify-center`}
+      >
+        <span className="text-white/95 font-serif text-xl italic px-4 text-center">
+          {guide.title}
+        </span>
+        {guide.typeLabel && (
+          <span className="absolute top-3 left-3 text-[10px] uppercase tracking-widest font-medium px-2 py-1 rounded-full bg-white/85 text-ink">
+            {guide.typeLabel}
+          </span>
+        )}
+      </div>
+
+      {/* Content */}
+      <div className="p-4 flex flex-col flex-grow">
+        <p className="font-sans text-xs uppercase tracking-wider text-ember mb-1">
+          {guide.dropMonth ? `${guide.dropMonth} ${guide.dropYear} drop` : 'Premium PDF'}
+        </p>
+        <h4 className="font-serif text-base text-ink mb-1 line-clamp-2">
+          {guide.title}
+        </h4>
+        {guide.subtitle && (
+          <p className="font-sans text-xs text-inkl mb-3 line-clamp-2">{guide.subtitle}</p>
+        )}
+        <button
+          type="button"
+          className="mt-auto self-start inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-ember text-white font-sans text-xs font-medium hover:bg-terra transition-colors"
+        >
+          <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+          </svg>
+          Download PDF
+        </button>
+      </div>
+    </motion.div>
+  )
+}
+
+function LockedGuideCard({ guide }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      className="bg-white rounded-xl overflow-hidden shadow-sm border border-inkll/10 flex flex-col relative"
+    >
+      {/* Cover */}
+      <div
+        className={`relative h-32 bg-gradient-to-br ${guide.coverGradient || guide.accent || 'from-ember via-terra to-gold'} flex items-center justify-center opacity-70`}
+      >
+        <span className="text-white/90 font-serif text-xl italic px-4 text-center">
+          {guide.title}
+        </span>
+        <div className="absolute inset-0 bg-ink/30 flex items-center justify-center">
+          <span className="inline-flex items-center gap-1.5 bg-white/95 text-ink px-3 py-1 rounded-full font-sans text-xs font-medium">
+            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+            </svg>
+            Members only
+          </span>
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className="p-4 flex flex-col flex-grow">
+        <p className="font-sans text-xs uppercase tracking-wider text-inkll mb-1">
+          {guide.dropMonth ? `${guide.dropMonth} ${guide.dropYear} drop` : 'Premium PDF'}
+        </p>
+        <h4 className="font-serif text-base text-inkl mb-3 line-clamp-2">
+          {guide.title}
+        </h4>
+        <Link
+          to="/wilder-builds"
+          className="mt-auto self-start inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-cream text-inkl border border-inkll/20 font-sans text-xs font-medium hover:bg-blush transition-colors"
+        >
+          Subscribe to unlock
+        </Link>
+      </div>
+    </motion.div>
+  )
+}
+
+function LibrarySkeleton() {
+  return (
+    <div className="space-y-8">
+      <div>
+        <div className="h-5 w-40 bg-blush/60 rounded mb-4 animate-pulse" />
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {[1, 2].map(i => (
+            <div key={i} className="h-24 bg-blush/40 rounded-xl animate-pulse" />
+          ))}
+        </div>
+      </div>
+      <div>
+        <div className="h-5 w-48 bg-blush/60 rounded mb-4 animate-pulse" />
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {[1, 2, 3].map(i => (
+            <div key={i} className="h-64 bg-blush/40 rounded-xl animate-pulse" />
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export default function ProfilePage() {
   const { 
     familyName, setFamilyName,
@@ -295,6 +409,68 @@ export default function ProfilePage() {
 
   const [activeTab, setActiveTab] = useState('hikes')
   const [hikesViewMode, setHikesViewMode] = useState('all') // 'all' or 'byAge'
+
+  // Acquired Guides state
+  const [guidesState, setGuidesState] = useState({
+    loading: false,
+    subscribed: false,
+    acquired: [], // array of premium build ids the user has unlocked
+    error: null,
+  })
+
+  // Fetch acquired guides from API on mount
+  useEffect(() => {
+    let cancelled = false
+    const fetchGuides = async () => {
+      setGuidesState(prev => ({ ...prev, loading: true, error: null }))
+      try {
+        const res = await fetch('/api/my-guides', { credentials: 'include' })
+        if (cancelled) return
+        if (!res.ok) {
+          setGuidesState({
+            loading: false,
+            subscribed: false,
+            acquired: [],
+            error: `Could not load your guides (${res.status})`,
+          })
+          return
+        }
+        const data = await res.json().catch(() => ({}))
+        setGuidesState({
+          loading: false,
+          subscribed: Boolean(data?.hasAccess),
+          acquired: Array.isArray(data?.acquired) ? data.acquired : [],
+          error: null,
+        })
+      } catch (err) {
+        if (cancelled) return
+        setGuidesState({
+          loading: false,
+          subscribed: false,
+          acquired: [],
+          error: err?.message || 'Could not load your guides',
+        })
+      }
+    }
+    fetchGuides()
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
+  // Resolve which premium guides the user actually has access to
+  const myAcquiredGuides = useMemo(() => {
+    if (!guidesState.subscribed) return []
+    const acquiredSet = new Set(guidesState.acquired)
+    if (acquiredSet.size === 0) return allPremiumBuilds // subscribed but no explicit list => all
+    return allPremiumBuilds.filter(b => acquiredSet.has(b.id) || acquiredSet.has(b.slug))
+  }, [guidesState])
+
+  // Locked guides — premium builds the user hasn't unlocked yet
+  const lockedGuides = useMemo(() => {
+    if (guidesState.subscribed) return []
+    return allPremiumBuilds
+  }, [guidesState.subscribed])
 
   // Get saved items data
   const savedHikeItems = hikes.filter(h => savedHikes.includes(h.id))
@@ -352,6 +528,7 @@ export default function ProfilePage() {
     { id: 'hikes', label: 'Hikes', count: savedHikes.length, icon: null },
     { id: 'crafts', label: 'Crafts', count: savedCrafts.length, icon: null },
     { id: 'builds', label: 'Builds', count: savedBuilds.length, icon: null },
+    { id: 'library', label: 'My Library', count: null, icon: null },
     { id: 'survey', label: 'Survey', count: null, icon: null }
   ]
 
@@ -582,6 +759,134 @@ export default function ProfilePage() {
               ) : (
                 <EmptyState type="builds" />
               )
+            )}
+
+            {activeTab === 'library' && (
+              <div className="space-y-10">
+                {/* Saved Builds section */}
+                <section>
+                  <div className="flex items-center justify-between mb-3">
+                    <h3 className="font-serif text-lg text-ink flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-ember" />
+                      Saved Builds
+                    </h3>
+                    {savedBuildItems.length > 0 && (
+                      <span className="text-xs font-sans text-inkll">
+                        {savedBuildItems.length} saved
+                      </span>
+                    )}
+                  </div>
+                  {savedBuildItems.length > 0 ? (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      {savedBuildItems.map(build => (
+                        <SavedItemCard
+                          key={build.id}
+                          item={build}
+                          type="build"
+                          onRemove={toggleSavedBuild}
+                        />
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="bg-white rounded-xl border border-inkll/10 p-6 text-center">
+                      <p className="font-sans text-sm text-inkl">
+                        No saved builds yet. Tap the heart on any free build to save it here.
+                      </p>
+                      <Link
+                        to="/wilder-homes"
+                        className="inline-block mt-3 text-xs font-sans font-medium text-ember hover:text-terra transition-colors"
+                      >
+                        Browse Wilder Homes →
+                      </Link>
+                    </div>
+                  )}
+                </section>
+
+                {/* Acquired Guides section */}
+                <section>
+                  <div className="flex items-center justify-between mb-3">
+                    <h3 className="font-serif text-lg text-ink flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-gold" />
+                      Acquired Monthly Guides
+                    </h3>
+                    <Link
+                      to="/wilder-builds"
+                      className="text-xs font-sans font-medium text-ember hover:text-terra transition-colors"
+                    >
+                      See Wilder Builds →
+                    </Link>
+                  </div>
+
+                  {guidesState.loading ? (
+                    <LibrarySkeleton />
+                  ) : guidesState.error ? (
+                    <div className="bg-white rounded-xl border border-inkll/10 p-6 text-center">
+                      <p className="font-sans text-sm text-inkl mb-3">
+                        {guidesState.error}
+                      </p>
+                      <button
+                        type="button"
+                        onClick={() => window.location.reload()}
+                        className="text-xs font-sans font-medium text-ember hover:text-terra transition-colors"
+                      >
+                        Try again
+                      </button>
+                    </div>
+                  ) : guidesState.subscribed ? (
+                    myAcquiredGuides.length > 0 ? (
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        {myAcquiredGuides.map(guide => (
+                          <AcquiredGuideCard key={guide.id} guide={guide} />
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="bg-white rounded-xl border border-inkll/10 p-6 text-center">
+                        <p className="font-sans text-sm text-inkl">
+                          No guides unlocked yet — your first drop arrives on the 1st.
+                        </p>
+                      </div>
+                    )
+                  ) : (
+                    <div className="space-y-4">
+                      {/* Pitch card */}
+                      <div className="bg-gradient-to-br from-ink to-forest rounded-2xl p-6 text-white">
+                        <p className="text-[10px] uppercase tracking-[0.2em] text-gold font-medium mb-2">
+                          Wilder Builds · Members only
+                        </p>
+                        <h4 className="font-serif italic text-2xl mb-2">
+                          Subscribe to unlock monthly PDFs
+                        </h4>
+                        <p className="font-sans text-sm text-white/75 mb-5 max-w-md">
+                          Two themed PDFs every month on the 1st — one Architect Blueprint, one Lab Activity. Your library grows forever.
+                        </p>
+                        <Link
+                          to="/wilder-builds"
+                          className="inline-flex items-center gap-2 bg-ember hover:bg-terra text-white px-5 py-2.5 rounded-full font-sans text-sm font-medium transition-colors shadow-md"
+                        >
+                          Subscribe to unlock
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
+                        </Link>
+                      </div>
+
+                      {/* Locked preview cards */}
+                      {lockedGuides.length > 0 && (
+                        <div>
+                          <p className="font-sans text-xs uppercase tracking-wider text-inkll mb-3">
+                            What's waiting for you
+                          </p>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            {lockedGuides.map(guide => (
+                              <LockedGuideCard key={guide.id} guide={guide} />
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </section>
+              </div>
             )}
 
             {activeTab === 'survey' && (

@@ -398,7 +398,7 @@ export function useRecommendations(location, weather, preferences = {}) {
           message = "A little damp won't stop the adventure! Waterproof layers and shaded trails.";
           break;
         case 'drizzle-cold':
-          message = "Not ideal hiking weather - maybe a Base Camp day with warm crafts?";
+          message = "Not ideal hiking weather - maybe a Wilder Builds day with warm crafts?";
           break;
         case 'rain':
           message = "Wet trails today. We found paved or covered options for safer hiking.";
@@ -408,7 +408,7 @@ export function useRecommendations(location, weather, preferences = {}) {
           break;
         case 'snow-cold':
         case 'storm':
-          message = "Not safe for outdoor hiking today. Base Camp awaits!";
+          message = "Not safe for outdoor hiking today. Wilder Builds awaits!";
           break;
         default:
           message = "Here's what's waiting for you based on current conditions.";

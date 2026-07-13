@@ -109,7 +109,7 @@ export default function WhatsGrowing({ lat, lon }) {
       <div className="bg-parchment rounded-xl p-4 text-center">
         <p className="text-sm text-inkl mb-2">Want to plan your outdoor space?</p>
         <a
-          href="/basecamp#grow"
+          href="/wilder-homes"
           className="inline-flex items-center gap-2 text-ember font-medium text-sm hover:text-terra transition-colors"
         >
           Visit the Grow Room for more

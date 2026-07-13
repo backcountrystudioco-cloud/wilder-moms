@@ -75,12 +75,12 @@ function AccordionStep({ step, index, isOpen, onToggle }) {
 }
 
 export default function BuildDetailPage() {
-  const { buildId } = useParams()
+  const { slug } = useParams()
   const navigate = useNavigate()
-  const build = getBuildById(buildId)
-  const relatedBuilds = getRelatedBuilds(buildId)
+  const build = getBuildById(slug)
+  const relatedBuilds = getRelatedBuilds(slug)
   const [openSteps, setOpenSteps] = useState({})
-  const buildImage = `/images/builds/${buildId}.jpg`
+  const buildImage = `/images/builds/${slug}.jpg`
 
   if (!build) {
     return (
@@ -89,10 +89,10 @@ export default function BuildDetailPage() {
           <h1 className="font-serif text-3xl text-ink mb-4">Build Not Found</h1>
           <p className="text-inkl mb-8">The build you're looking for doesn't exist.</p>
           <Link
-            to="/basecamp"
+            to="/wilder-homes"
             className="inline-flex items-center gap-2 bg-ember text-white px-6 py-3 rounded-full font-medium hover:bg-terra transition-colors"
           >
-            Back to Builds
+            Back to Wilder Homes
           </Link>
         </div>
       </div>
@@ -135,7 +135,7 @@ export default function BuildDetailPage() {
         <div className="absolute inset-0 bg-gradient-to-t from-ink/60 via-ink/20 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
           <Link
-            to="/basecamp"
+            to="/wilder-homes"
             className="inline-flex items-center gap-2 text-white/80 hover:text-white mb-4 transition-colors"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -44,7 +44,7 @@ function getTimeMessage(timeContext, weatherLevel) {
       hot: "Cooling down nicely. Still time for a shorter trail.",
       cold: "Temps dropping. Short and sweet trails today, please.",
       drizzle: "Rain likely later — get out there now before it starts.",
-      rain: "Not ideal conditions. How about a cozy Base Camp afternoon?",
+      rain: "Not ideal conditions. How about a cozy Wilder Builds afternoon?",
       default: "Nice time to get outside with the family!"
     },
     evening: {

@@ -1,8 +1,8 @@
 import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { hikes } from '../wilder-trails/hikes'
-import { crafts } from '../basecamp/crafts'
-import { builds } from '../basecamp/builds'
+import { crafts } from '../wilder-homes/crafts'
+import { builds } from '../wilder-homes/builds'
 
 const STORAGE_KEY = 'nature-planner-state'
 

@@ -164,7 +164,7 @@ export default function WhatICollected({ collection = [], onCollectionChange }) 
                                 {craft.instructions.slice(0, 80)}...
                               </p>
                               <a 
-                                href="/basecamp/activities"
+                                href="/wilder-homes?tab=activities"
                                 className="inline-flex items-center gap-1 text-ember text-xs font-medium mt-2 hover:text-terra"
                               >
                                 Full instructions →
@@ -203,7 +203,7 @@ export default function WhatICollected({ collection = [], onCollectionChange }) 
             {collection.length > 0 && (
               <div className="p-4 bg-cream/50 text-center">
                 <a 
-                  href="/basecamp/activities"
+                  href="/wilder-homes?tab=activities"
                   className="inline-flex items-center gap-2 text-ember font-medium text-sm hover:text-terra transition-colors"
                 >
                   Browse all trail crafts

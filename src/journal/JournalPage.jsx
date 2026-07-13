@@ -143,12 +143,13 @@ export default function JournalPage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
+          id="all-entries"
           className="mb-8"
         >
           <div className="flex items-center justify-between mb-4">
             <h2 className="font-serif text-xl text-ink">Recent Entries</h2>
             {entries.length > 6 && (
-              <Link to="/journal/all" className="font-sans text-sm text-ember hover:text-terra">
+              <Link to="/journal#all-entries" className="font-sans text-sm text-ember hover:text-terra">
                 View all →
               </Link>
             )}
