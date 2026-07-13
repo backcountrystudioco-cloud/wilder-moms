@@ -144,6 +144,7 @@ const buildCatalog = {
     heroEmoji: 'Phial',
     coverGradient: 'from-[#F2A57B] via-[#D2961E] to-[#8C4A14]',
     pages: 38,
+    coverImage: '/builds/fairy-apothecary.png',
     season: 'Spring build, summer play',
     magicFact:
       'Lemon balm planted near the path releases its scent when little hands brush past — your kids will smell the apothecary before they see it.',
@@ -201,6 +202,7 @@ const buildCatalog = {
     heroEmoji: 'Mycelium',
     coverGradient: 'from-[#F0D2B4] via-[#96963C] to-[#5A6428]',
     pages: 32,
+    coverImage: '/builds/mycelium-donuts.jpeg',
     season: 'Year-round (indoor)',
     magicFact:
       'Mycelium is the largest living organism on Earth — one forest in Oregon spans 2,385 acres. Your donut farm is a tiny, edible window into that.',

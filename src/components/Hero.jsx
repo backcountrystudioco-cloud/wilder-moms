@@ -27,8 +27,8 @@ const avatarInitials = ['MH', 'JL', 'SR', 'KC']
 
 export default function Hero() {
   return (
-    <section className="min-h-screen bg-cream pt-24 md:pt-0">
-      <div className="grid md:grid-cols-2 min-h-screen">
+    <section className="bg-cream pt-24 md:pt-0 md:min-h-screen">
+      <div className="grid md:grid-cols-2 md:min-h-screen">
         {/* Left Column - Content */}
         <div className="flex flex-col justify-center px-6 md:px-12 lg:px-16 py-12 md:py-0">
           {/* Logo */}

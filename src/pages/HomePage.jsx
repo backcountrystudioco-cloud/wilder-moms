@@ -51,12 +51,23 @@ function CurrentDropShowcase() {
                 to={`/wilder-homes/premium/${build.slug}`}
                 className="group block bg-white rounded-3xl overflow-hidden border border-inkll/10 hover:border-ember/40 transition-all h-full"
               >
-                <div className={`relative aspect-[4/3] bg-gradient-to-br ${build.coverGradient} flex items-center justify-center`}>
-                  <span className="text-[10rem] leading-none opacity-30 group-hover:opacity-50 transition-opacity">
-                    {build.heroEmoji}
-                  </span>
+                <div className="relative aspect-[4/3] overflow-hidden">
+                  {build.coverImage ? (
+                    <img
+                      src={build.coverImage}
+                      alt={build.title}
+                      loading="lazy"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                  ) : (
+                    <div className={`w-full h-full bg-gradient-to-br ${build.coverGradient} flex items-center justify-center`}>
+                      <span className="text-[10rem] leading-none opacity-30">
+                        {build.heroEmoji}
+                      </span>
+                    </div>
+                  )}
                   <div className="absolute top-4 left-4">
-                    <span className={`text-[10px] font-medium uppercase tracking-widest px-2.5 py-1 rounded-full border ${
+                    <span className={`text-[10px] font-medium uppercase tracking-widest px-2.5 py-1 rounded-full border backdrop-blur-sm ${
                       build.type === 'architect'
                         ? 'bg-white/85 text-ember border-ember/30'
                         : 'bg-white/85 text-olive border-olive/30'
@@ -64,8 +75,8 @@ function CurrentDropShowcase() {
                       {build.typeLabel}
                     </span>
                   </div>
-                  <div className="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-ink/70 to-transparent">
-                    <p className="text-white/90 text-sm leading-snug line-clamp-2">
+                  <div className="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-ink/80 via-ink/40 to-transparent">
+                    <p className="text-white text-sm leading-snug line-clamp-2 font-medium">
                       {build.tagline}
                     </p>
                   </div>
