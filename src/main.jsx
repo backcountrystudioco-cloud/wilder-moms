@@ -12,8 +12,8 @@ const posthogKey = import.meta.env.VITE_POSTHOG_KEY
 if (posthogKey && posthogKey !== 'your_posthog_key_here') {
   // Dynamically load PostHog from CDN
   const script = document.createElement('script')
-  script.src = 'https://cdn.jsdelivr.net/npm/posthog-js@3.12.4/+esm'
-  script.type = 'module'
+  script.async = true
+  script.src = 'https://cdn.posthog.com/posthog.js'
   script.onload = () => {
     if (window.posthog) {
       window.posthog.init(posthogKey, {
