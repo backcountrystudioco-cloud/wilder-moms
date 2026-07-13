@@ -57,7 +57,7 @@ export default function Hero() {
             custom={1}
             className="text-ember font-sans font-medium text-sm uppercase tracking-[0.15em] mb-4"
           >
-            NOW BUILDING · JOIN US EARLY
+            Trails · Homes · Monthly PDFs
           </motion.p>
 
           {/* Headline */}
@@ -82,22 +82,28 @@ export default function Hero() {
             Wilder Moms is for the mother who wants a different kind of everyday — one that starts on the windowsill, grows into the backyard, and finds its way to the trailhead when you're ready.
           </motion.p>
 
-          {/* CTA Button */}
+          {/* CTA Buttons */}
           <motion.div
             variants={fadeUpVariants}
             initial="hidden"
             animate="visible"
             custom={4}
-            className="mb-8"
+            className="mb-8 flex flex-col sm:flex-row gap-3"
           >
             <Link
-              to="/join"
-              className="inline-flex items-center gap-2 bg-ember text-white px-8 py-3 rounded-full font-medium text-lg hover:bg-terra transition-colors"
+              to="/wilder-homes?tab=premium"
+              className="inline-flex items-center justify-center gap-2 bg-ember text-white px-7 py-3 rounded-full font-medium text-base hover:bg-terra transition-colors"
             >
-              Join the Village
+              See Premium Builds
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
+            </Link>
+            <Link
+              to="/wilder-trails"
+              className="inline-flex items-center justify-center gap-2 px-7 py-3 rounded-full font-medium text-base text-ember border border-ember hover:bg-ember/5 transition-colors"
+            >
+              Find a trail
             </Link>
           </motion.div>
 
@@ -109,7 +115,6 @@ export default function Hero() {
             custom={6}
             className="flex items-center gap-4"
           >
-            {/* Stacked Avatars */}
             <div className="flex -space-x-2">
               {avatarInitials.map((initials, i) => (
                 <div
@@ -124,7 +129,7 @@ export default function Hero() {
               ))}
             </div>
             <p className="text-inkl font-sans text-sm">
-              <span className="font-medium text-ink">240+</span> moms already on the waitlist
+              <span className="font-medium text-ink">240+</span> moms reading along
             </p>
           </motion.div>
         </div>
