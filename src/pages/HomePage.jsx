@@ -48,7 +48,7 @@ function CurrentDropShowcase() {
               transition={{ duration: 0.6, delay: 0.1 + i * 0.12 }}
             >
               <Link
-                to={`/wilder-homes/premium/${build.slug}`}
+                to="/wilder-homes?tab=premium"
                 className="group block bg-white rounded-3xl overflow-hidden border border-inkll/10 hover:border-ember/40 transition-all h-full"
               >
                 <div className="relative aspect-[4/3] overflow-hidden">
