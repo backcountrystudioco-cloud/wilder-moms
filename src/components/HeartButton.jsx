@@ -17,10 +17,12 @@ import { motion } from 'framer-motion'
 //   onToggle  - function (called when the user taps the heart)
 //   size      - 'sm' | 'md' | 'lg' (default 'md')
 //   className - optional extra classes for the wrapper
+// All sizes meet the 44px Apple HIG tap target minimum by adding min-h/min-w
+// to the button itself; visual icon size stays close to original.
 const SIZE_CLASSES = {
-  sm: { button: 'p-1.5', icon: 'w-4 h-4' },
-  md: { button: 'p-2',   icon: 'w-5 h-5' },
-  lg: { button: 'p-2.5', icon: 'w-6 h-6' },
+  sm: { button: 'p-2 min-h-[44px] min-w-[44px]', icon: 'w-5 h-5' },
+  md: { button: 'p-2.5 min-h-[44px] min-w-[44px]', icon: 'w-6 h-6' },
+  lg: { button: 'p-3 min-h-[48px] min-w-[48px]', icon: 'w-6 h-6' },
 }
 
 export default function HeartButton({

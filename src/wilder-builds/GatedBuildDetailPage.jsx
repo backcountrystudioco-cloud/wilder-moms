@@ -60,9 +60,9 @@ export default function GatedBuildDetailPage() {
   }
 
   return (
-    <div className="min-h-screen bg-cream pt-20 pb-20">
+    <div className="min-h-screen bg-cream pt-28 md:pt-32 pb-24 md:pb-20">
       {/* Hero */}
-      <div className={`relative h-80 md:h-96 overflow-hidden bg-gradient-to-br ${build.accent}`}>
+      <div className={`relative h-96 md:h-[28rem] overflow-hidden bg-gradient-to-br ${build.accent}`}>
         <div className="absolute inset-0 opacity-20 pointer-events-none flex items-center justify-center">
           <span className="text-[14rem] md:text-[18rem] leading-none">{build.heroEmoji}</span>
         </div>
@@ -72,7 +72,7 @@ export default function GatedBuildDetailPage() {
           <div className="max-w-4xl mx-auto">
             <Link
               to="/wilder-homes?tab=premium"
-              className="inline-flex items-center gap-2 text-white/80 hover:text-white mb-4 transition-colors text-sm"
+              className="inline-flex items-center gap-2 text-white/80 hover:text-white mb-4 transition-colors text-sm min-h-[44px]"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -275,7 +275,7 @@ export default function GatedBuildDetailPage() {
         <div className="mt-10 text-center">
           <Link
             to="/wilder-homes?tab=premium"
-            className="text-ember font-medium text-sm hover:underline"
+            className="inline-flex items-center text-ember font-medium text-sm hover:underline min-h-[44px]"
           >
             ← Back to all builds
           </Link>

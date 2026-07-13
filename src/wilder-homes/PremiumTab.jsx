@@ -29,7 +29,7 @@ import PaywallCard from '../components/PaywallCard'
 // =====================================================================
 function SkeletonView() {
   return (
-    <div className="min-h-screen bg-cream pt-12 pb-20">
+    <div className="min-h-screen bg-cream pt-28 md:pt-32 pb-24 md:pb-20">
       <div className="max-w-3xl mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -137,7 +137,7 @@ function LibraryView() {
   }, [showWelcome, setSearchParams])
 
   return (
-    <div className="min-h-screen bg-cream pt-12 pb-20">
+    <div className="min-h-screen bg-cream pt-28 md:pt-32 pb-24 md:pb-20">
       {/* Welcome animation overlay */}
       <AnimatePresence>
         {showWelcome && <WelcomeModal onDismiss={() => setShowWelcome(false)} />}
@@ -285,7 +285,7 @@ function MarketingView() {
               Two new PDFs every month.<br />Your library grows.
             </h2>
 
-            <div className="inline-flex items-center bg-white/15 backdrop-blur rounded-full p-1 my-2">
+            <div className="flex flex-col sm:inline-flex sm:flex-row items-stretch sm:items-center gap-2 sm:gap-0 bg-white/15 backdrop-blur rounded-2xl sm:rounded-full p-1 my-2">
               <PricePill
                 active
                 amount={pricing.monthly.formatted}
@@ -573,7 +573,7 @@ function DropTimeline({ hasAccess, justUnlocked, showUpcoming = true }) {
             key={opt.id}
             type="button"
             onClick={() => setFilter(opt.id)}
-            className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-colors ${
+            className={`px-4 py-2.5 min-h-[44px] inline-flex items-center rounded-full text-xs font-medium border transition-colors ${
               filter === opt.id
                 ? 'bg-ink text-cream border-ink'
                 : 'bg-white text-inkl border-inkll/30 hover:border-inkl/60 hover:text-ink'
