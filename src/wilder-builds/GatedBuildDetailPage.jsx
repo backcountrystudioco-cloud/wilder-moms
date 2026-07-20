@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import { useAuth } from '@clerk/react'
 import { useBuildsAccess } from '../hooks/useBuildsAccess'
 import { getPremiumBuildBySlug } from './buildsLibrary'
 import PaywallCard from '../components/PaywallCard'
@@ -20,6 +21,7 @@ export default function GatedBuildDetailPage() {
   const { slug } = useParams()
   const build = getPremiumBuildBySlug(slug)
   const { hasAccess, loading, status } = useBuildsAccess()
+  const { getToken } = useAuth()
   const [downloading, setDownloading] = useState(false)
   const [downloadError, setDownloadError] = useState(null)
 
@@ -46,7 +48,13 @@ export default function GatedBuildDetailPage() {
     setDownloading(true)
     setDownloadError(null)
     try {
-      const res = await fetch(`/api/builds-pdf?id=${encodeURIComponent(build.id)}`)
+      const token = await getToken()
+      if (!token) {
+        throw new Error('Your session is still loading. Please try again in a moment.')
+      }
+      const res = await fetch(`/api/builds-pdf?id=${encodeURIComponent(build.id)}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       const data = await res.json()
       if (!res.ok || !data?.url) {
         throw new Error(data?.error || 'Could not generate download link')

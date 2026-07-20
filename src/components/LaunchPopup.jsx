@@ -8,40 +8,45 @@ export default function LaunchPopup() {
     const hasSeenPopup = localStorage.getItem('wilderMoms_launchPopupSeen')
     if (!hasSeenPopup) {
       setIsOpen(true)
+      // Auto-dismiss after 6s so it can't trap the user behind a full-screen
+      // overlay that swallows clicks on links below it.
+      const t = setTimeout(handleClose, 6000)
+      return () => clearTimeout(t)
     }
   }, [])
 
   const handleClose = () => {
     setIsOpen(false)
-    localStorage.setItem('wilderMoms_launchPopupSeen', 'true')
+    if (typeof window !== 'undefined') {
+      try {
+        localStorage.setItem('wilderMoms_launchPopupSeen', 'true')
+      } catch (err) {
+        // ignore — private mode / storage disabled
+      }
+    }
   }
 
   return (
     <AnimatePresence>
       {isOpen && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.3 }}
-          className="fixed inset-0 z-[100] flex items-center justify-center p-4"
-        >
-          {/* Backdrop */}
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 pointer-events-none">
+          {/* Backdrop is purely visual — pointer-events-none lets clicks
+              pass through to the underlying page so visitors can navigate
+              even before they dismiss the welcome card. */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="absolute inset-0 bg-ink/60 backdrop-blur-sm"
-            onClick={handleClose}
+            className="absolute inset-0 bg-ink/40 backdrop-blur-sm pointer-events-none"
           />
 
-          {/* Modal */}
+          {/* Modal — receives pointer events so its buttons/links work. */}
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
             transition={{ duration: 0.3, ease: 'easeOut' }}
-            className="relative bg-cream rounded-2xl shadow-2xl shadow-ink/20 max-w-lg w-full p-8 md:p-10 text-center"
+            className="relative bg-cream rounded-2xl shadow-2xl shadow-ink/20 max-w-lg w-full p-8 md:p-10 text-center pointer-events-auto"
           >
             {/* Close Button */}
             <button
@@ -94,7 +99,7 @@ export default function LaunchPopup() {
               Continue to app
             </button>
           </motion.div>
-        </motion.div>
+        </div>
       )}
     </AnimatePresence>
   )

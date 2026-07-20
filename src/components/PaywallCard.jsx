@@ -15,7 +15,7 @@ export default function PaywallCard({
   defaultPlan = 'annual',
   onCheckoutStart,
 }) {
-  const { isSignedIn } = useAuth()
+  const { isSignedIn, getToken } = useAuth()
   const { status } = useBuildsAccess()
   const [plan, setPlan] = useState(defaultPlan)
   const [busy, setBusy] = useState(false)
@@ -26,12 +26,24 @@ export default function PaywallCard({
 
   const startCheckout = async () => {
     if (isMember) return
+    if (!isSignedIn) return
     setBusy(true)
     setError(null)
     try {
+      const token = await getToken()
+      if (!token) {
+        // Clerk has not yet hydrated a session token. Don't fire a doomed
+        // request the server will reject — surface a clear message so the
+        // user knows to retry in a moment instead of wondering why nothing
+        // happened.
+        throw new Error('Your session is still loading. Please try again in a moment.')
+      }
       const res = await fetch('/api/lemon-checkout', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
         body: JSON.stringify({ source: variant, plan }),
       })
       const data = await res.json()

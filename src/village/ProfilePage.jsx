@@ -1,6 +1,7 @@
 import { useState, useMemo, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
+import { useAuth } from '@clerk/react'
 import { useUser } from '../context/UserContext'
 import { hikes } from '../wilder-trails/hikes'
 import { crafts } from '../wilder-homes/crafts'
@@ -399,13 +400,14 @@ function LibrarySkeleton() {
 }
 
 export default function ProfilePage() {
-  const { 
+  const {
     familyName, setFamilyName,
     kids, addKid, removeKid, updateKid,
     savedHikes, savedCrafts, savedBuilds,
     toggleSavedHike, toggleSavedCraft, toggleSavedBuild,
     preferences, togglePreference
   } = useUser()
+  const { getToken } = useAuth()
 
   const [activeTab, setActiveTab] = useState('hikes')
   const [hikesViewMode, setHikesViewMode] = useState('all') // 'all' or 'byAge'
@@ -424,7 +426,18 @@ export default function ProfilePage() {
     const fetchGuides = async () => {
       setGuidesState(prev => ({ ...prev, loading: true, error: null }))
       try {
-        const res = await fetch('/api/my-guides', { credentials: 'include' })
+        const token = await getToken()
+        if (!token) {
+          // Clerk session not hydrated yet — skip silently; the next focus
+          // or re-mount will retry. Avoids spamming the API with doomed
+          // requests while the user is still landing.
+          setGuidesState({ loading: false, subscribed: false, acquired: [], error: null })
+          return
+        }
+        const res = await fetch('/api/my-guides', {
+          credentials: 'include',
+          headers: { Authorization: `Bearer ${token}` },
+        })
         if (cancelled) return
         if (!res.ok) {
           setGuidesState({

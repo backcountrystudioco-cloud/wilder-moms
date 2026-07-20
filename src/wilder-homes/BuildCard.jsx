@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import { useAuth } from '@clerk/react'
 import { fadeUpVariants } from '../hooks/useScrollReveal'
 import { useUser } from '../context/UserContext'
 import HeartButton from '../components/HeartButton'
@@ -44,19 +45,29 @@ export default function BuildCard({ build, index = 0 }) {
   const buildImage = `/images/builds/${build.id}.jpg`
 
   const { savedBuilds, toggleSavedBuild } = useUser()
+  const { getToken } = useAuth()
   const isSaved = savedBuilds.includes(build.id)
 
-  const handleToggleSave = (e) => {
+  const handleToggleSave = async (e) => {
     e?.preventDefault?.()
     e?.stopPropagation?.()
     toggleSavedBuild(build.id)
     // Best-effort sync to Supabase (heart still works without it)
-    fetch('/api/saved-builds', {
-      method: isSaved ? 'DELETE' : 'POST',
-      credentials: 'include',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ build_id: build.id, build_type: 'build' }),
-    }).catch(() => {})
+    try {
+      const token = await getToken()
+      if (!token) return // Clerk not hydrated yet — local toggle already applied
+      await fetch('/api/saved-builds', {
+        method: isSaved ? 'DELETE' : 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ build_id: build.id, build_type: 'build' }),
+      })
+    } catch (err) {
+      // swallow — local toggle already applied
+    }
   }
   
   return (
