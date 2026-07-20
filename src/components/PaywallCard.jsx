@@ -55,6 +55,15 @@ export default function PaywallCard({
     } catch (err) {
       setError(err.message || 'Something went wrong')
       setBusy(false)
+      // Bring the error banner into view so it's impossible to miss.
+      if (typeof window !== 'undefined') {
+        requestAnimationFrame(() => {
+          document.getElementById('paywall-error')?.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center',
+          })
+        })
+      }
     }
   }
 
@@ -204,7 +213,38 @@ export default function PaywallCard({
         )}
 
         {error && (
-          <p className="mt-3 text-sm text-terra">{error}</p>
+          <div
+            id="paywall-error"
+            role="alert"
+            className={
+              variant === 'banner'
+                ? 'mt-5 mx-auto max-w-md p-4 rounded-xl bg-terra text-white text-sm shadow-lg shadow-terra/30 flex items-start gap-3 text-left'
+                : 'mt-5 p-4 rounded-xl bg-terra/10 border border-terra/30 text-terra text-sm flex items-start gap-3 text-left'
+            }
+          >
+            <svg className="w-5 h-5 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"
+              />
+            </svg>
+            <div className="flex-1">
+              <p className="font-semibold mb-1">Checkout didn't open</p>
+              <p className="opacity-90">{error}</p>
+              {/configured|missing|not configured/i.test(error) && (
+                <p className="opacity-90 mt-2 text-xs">
+                  This means the site owner hasn't finished wiring Lemon Squeezy yet.
+                  Try again later or email{' '}
+                  <a href="mailto:hello@wildermoms.com" className="underline font-medium">
+                    hello@wildermoms.com
+                  </a>
+                  .
+                </p>
+              )}
+            </div>
+          </div>
         )}
 
         {variant === 'banner' && (
