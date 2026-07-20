@@ -1,5 +1,6 @@
 import { createClient } from '@supabase/supabase-js'
 import { getClerkUserFromRequest } from './_lib/clerkAuth.js'
+import { requireEnv, envMissingResponse } from './_lib/requiredEnv.js'
 
 // POST /api/lemon-checkout
 // Creates a Lemon Squeezy checkout URL for the Wilder Builds subscription.
@@ -10,10 +11,20 @@ import { getClerkUserFromRequest } from './_lib/clerkAuth.js'
 //   source?: string              // for analytics (e.g., 'paywall_card', 'comparison_column')
 // }
 
+const REQUIRED_LIT = [
+  'LEMON_API_KEY',
+  'LEMON_STORE_ID',
+  'LEMON_VARIANT_ID_ANNUAL',
+  'LEMON_VARIANT_ID_MONTHLY',
+]
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' })
   }
+
+  const check = requireEnv(REQUIRED_LIT)
+  if (!check.ok) return envMissingResponse(res, check.missing)
 
   const {
     LEMON_API_KEY,
@@ -23,15 +34,9 @@ export default async function handler(req, res) {
     LEMON_CHECKOUT_SUCCESS_URL,
     LEMON_CHECKOUT_CANCEL_URL,
   } = process.env
-  if (!LEMON_API_KEY || !LEMON_STORE_ID) {
-    return res.status(500).json({ error: 'Lemon Squeezy is not configured on this server.' })
-  }
 
   const requestedPlan = (req.body?.plan === 'monthly' || req.body?.plan === 'annual') ? req.body.plan : 'annual'
   const variantId = requestedPlan === 'monthly' ? LEMON_VARIANT_ID_MONTHLY : LEMON_VARIANT_ID_ANNUAL
-  if (!variantId) {
-    return res.status(500).json({ error: `Lemon Squeezy ${requestedPlan} variant is not configured.` })
-  }
 
   const auth = await getClerkUserFromRequest(req)
   if (!auth?.userId) {
