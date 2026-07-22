@@ -48,7 +48,14 @@ export default function PaywallCard({
       })
       const data = await res.json()
       if (!res.ok || !data?.url) {
-        throw new Error(data?.error || 'Could not start checkout')
+        const base = data?.error || 'Could not start checkout'
+        // Surface diagnostic info from the server so the alert banner
+        // shows exactly which leg of the wire is broken (e.g., a Clerk
+        // verifyToken failure reason).
+        const detail = data?.clerkAuthError || data?.missing?.length
+          ? ' (' + (data.clerkAuthError || `missing: ${data.missing.join(', ')}`) + ')'
+          : ''
+        throw new Error(base + detail)
       }
       if (onCheckoutStart) onCheckoutStart(data.url)
       window.location.href = data.url
