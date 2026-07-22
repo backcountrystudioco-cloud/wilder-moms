@@ -17,6 +17,11 @@ export function getClerkClient() {
 
 // Reads the Clerk session token from `Authorization: Bearer <token>` and
 // returns { userId, sessionId, claims } or null if no valid session.
+//
+// When verification fails, the catch block still returns null (callers
+// translate that to a 401) but stashes the failure reason on the request
+// via `req.__clerkAuthError` so handlers can surface it to the UI /
+// logs without losing triage info.
 export async function getClerkUserFromRequest(req) {
   const auth = req.headers?.authorization || req.headers?.Authorization
   if (!auth || typeof auth !== 'string') return null
@@ -33,7 +38,9 @@ export async function getClerkUserFromRequest(req) {
       claims: payload,
     }
   } catch (err) {
-    console.warn('Clerk verifyToken failed', err?.message)
+    const reason = err?.message || String(err)
+    console.warn('Clerk verifyToken failed', reason)
+    if (req && typeof req === 'object') req.__clerkAuthError = reason
     return null
   }
 }

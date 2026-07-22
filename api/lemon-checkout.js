@@ -40,7 +40,11 @@ export default async function handler(req, res) {
 
   const auth = await getClerkUserFromRequest(req)
   if (!auth?.userId) {
-    return res.status(401).json({ error: 'You must be signed in to subscribe.' })
+    const reason = req.__clerkAuthError
+    return res.status(401).json({
+      error: 'You must be signed in to subscribe.',
+      ...(reason ? { clerkAuthError: reason } : {}),
+    })
   }
 
   // Look up the user's email via Clerk so the checkout is prefilled and the
