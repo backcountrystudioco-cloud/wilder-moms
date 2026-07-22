@@ -1,7 +1,7 @@
 // Shared server-side helpers for Clerk auth + Supabase admin operations.
 // Use this from any /api/*.js handler that needs to identify the caller.
 
-import { createClerkClient } from '@clerk/backend'
+import { createClerkClient, verifyToken as clerkVerifyToken } from '@clerk/backend'
 
 let cachedClient = null
 
@@ -13,6 +13,12 @@ export function getClerkClient() {
   }
   cachedClient = createClerkClient({ secretKey })
   return cachedClient
+}
+
+function getSecretKey() {
+  const sk = process.env.CLERK_SECRET_KEY
+  if (!sk) throw new Error('CLERK_SECRET_KEY is not set')
+  return sk
 }
 
 // Reads the Clerk session token from `Authorization: Bearer <token>` and
@@ -29,8 +35,12 @@ export async function getClerkUserFromRequest(req) {
   if (!match) return null
   const token = match[1].trim()
   try {
-    const client = getClerkClient()
-    const payload = await client.verifyToken(token)
+    // In @clerk/backend >= 1.x, verifyToken is exported at the module top
+    // level. It accepts the JWT and a config (secretKey, clockSkew).
+    const payload = await clerkVerifyToken(token, {
+      secretKey: getSecretKey(),
+      clockSkewInMs: 5000,
+    })
     if (!payload?.sub) return null
     return {
       userId: payload.sub,
