@@ -7,9 +7,10 @@
 //   Both open Clerk's modal with forceRedirectUrl="/" so users land back
 //   at the index after auth.
 // - Signed in: "Hi, [firstName]" greeting + <UserButton /> avatar menu
-//   (sign out goes back to "/").
+//   (sign out navigates to "/landing").
 
-import { Link } from 'react-router-dom'
+import { useEffect, useRef } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import {
   SignInButton,
   SignUpButton,
@@ -22,10 +23,24 @@ import {
 export default function AuthCorner({ variant = 'overlay' }) {
   const { isSignedIn } = useAuth()
   const { user, isLoaded } = useUser()
+  const navigate = useNavigate()
   const firstName =
     user?.firstName ||
     (user?.username && user.username.split(' ')[0]) ||
     null
+
+  // When the user signs out (via the UserButton or anywhere else), we
+  // explicitly navigate them off the index. Clerk's UserButton also has
+  // afterSignOutUrl="/landing" set as a belt-and-suspenders fallback, but
+  // relying on a hard redirect here means we don't leave a signed-out user
+  // staring at their dashboard if the redirect is missed.
+  const prevSignedInRef = useRef(isSignedIn)
+  useEffect(() => {
+    if (prevSignedInRef.current && !isSignedIn && isLoaded) {
+      try { navigate('/landing', { replace: true }) } catch (e) {}
+    }
+    prevSignedInRef.current = isSignedIn
+  }, [isSignedIn, isLoaded, navigate])
 
   const brandLink = (
     <Link
