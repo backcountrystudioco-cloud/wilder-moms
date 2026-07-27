@@ -6,10 +6,10 @@
 // subscribers keep every drop they've ever been paid for.
 
 export const pricing = {
-  monthly: { amount: 9,  formatted: '$9',  cadence: '/month', lemonVariantEnv: 'LEMON_VARIANT_ID_MONTHLY', recommended: false },
-  annual:  { amount: 79, formatted: '$79', cadence: '/year',  lemonVariantEnv: 'LEMON_VARIANT_ID_ANNUAL',  recommended: true },
+  monthly: { amount: 19, formatted: '$19', cadence: '/month', lemonVariantEnv: 'LEMON_VARIANT_ID_MONTHLY', recommended: false },
+  annual:  { amount: 199, formatted: '$199', cadence: '/year',  lemonVariantEnv: 'LEMON_VARIANT_ID_ANNUAL',  recommended: true },
 }
-export const annualSavings = (pricing.monthly.amount * 12) - pricing.annual.amount // $108 - $79 = $29 / yr
+export const annualSavings = (pricing.monthly.amount * 12) - pricing.annual.amount // $228 - $199 = $29 / yr
 
 // Content type taxonomy. Both types live behind one Wilder Builds paywall;
 // subscribers see them together in their library, sorted/filtered by type.

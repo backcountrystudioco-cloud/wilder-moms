@@ -203,7 +203,7 @@ export default function WilderHomesPage() {
           </h3>
           <p className="text-white/80 max-w-lg mx-auto mb-6">
             Two new themed PDFs every month on the 1st — printable, beautifully
-            designed, kid-tested. From $9/month or $79/year.
+            designed, kid-tested. From $19/month or $199/year.
           </p>
           <Link
             to="/wilder-homes?tab=premium"
