@@ -112,6 +112,11 @@ export default function SellPage() {
       {/* HERO */}
       <section className="px-6 pt-14 md:pt-20 pb-14 md:pb-20">
         <div className="max-w-3xl mx-auto text-center">
+          <img
+            src="/wilder-moms-logo.jpeg"
+            alt="Wilder Moms"
+            className="h-32 md:h-40 w-auto mx-auto mb-8"
+          />
           <p className="text-ember text-xs font-medium uppercase tracking-[0.2em] mb-7">
             The full Wilder Habitat
           </p>

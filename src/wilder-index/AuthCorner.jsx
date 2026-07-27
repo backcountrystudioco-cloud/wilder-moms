@@ -30,9 +30,14 @@ export default function AuthCorner({ variant = 'overlay' }) {
   const brandLink = (
     <Link
       to="/"
-      className="font-serif text-lg md:text-xl text-ink tracking-tight"
+      className="inline-flex items-center"
+      aria-label="Wilder Moms — home"
     >
-      Wilder <span className="text-ember">Moms</span>
+      <img
+        src="/wilder-moms-logo.jpeg"
+        alt="Wilder Moms"
+        className="h-9 md:h-11 w-auto"
+      />
     </Link>
   )
 
@@ -43,7 +48,7 @@ export default function AuthCorner({ variant = 'overlay' }) {
           Hi, <span className="text-ink">{firstName}</span>
         </span>
       )}
-      <UserButton afterSignOutUrl="/" />
+      <UserButton afterSignOutUrl="/landing" />
     </div>
   ) : (
     <div className="flex items-center gap-2 md:gap-3">
