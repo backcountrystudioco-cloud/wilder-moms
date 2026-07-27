@@ -453,77 +453,118 @@ function ContextStep({ answers, onChange, onBack, onNext, isLast }) {
 function Welcome({ onStart }) {
   return (
     <div className="overflow-hidden">
-      {/* HERO */}
-      <section className="pt-16 md:pt-24 pb-14 md:pb-20 px-6">
+      {/* HERO — the lead question */}
+      <section className="pt-14 md:pt-20 pb-14 md:pb-20 px-6">
         <div className="max-w-3xl mx-auto text-center">
           <p className="text-ember text-xs font-medium uppercase tracking-[0.2em] mb-7">
-            Wilder Moms · A five-minute reading
+            Your Wilder Habitat
           </p>
           <h1 className="font-serif font-light text-5xl md:text-7xl text-ink leading-[0.95] mb-10">
-            Your <em className="text-ember">Wilder Habitat.</em>
+            <em className="text-ember">Five minutes.</em>
+            <br />A different childhood.
           </h1>
-          <p className="font-serif text-2xl md:text-3xl text-ink leading-snug max-w-2xl mx-auto">
-            The life you want for your family isn't built in one big moment. It's built in the small choices you make every day.
+          <p className="font-serif text-xl md:text-2xl text-ink leading-snug max-w-2xl mx-auto">
+            If we could help your family spend more time outside, reduce the daily
+            "what should we do?" conversations, create more independent play, and
+            build lasting family memories—all without moving, remodeling, or
+            adding more to your schedule—would it be worth five minutes?
           </p>
         </div>
       </section>
 
-      {/* BLUEPRINT */}
+      {/* BRIDGE */}
+      <section className="bg-parchment px-6 py-12 md:py-16 border-y border-inkll/10">
+        <div className="max-w-2xl mx-auto text-center">
+          <p className="font-serif text-xl md:text-2xl text-ink leading-snug">
+            That's exactly what <em className="text-ember">Your Wilder Habitat</em> is designed to do.
+          </p>
+        </div>
+      </section>
+
+      {/* VALUE PROP — what we analyze */}
+      <section className="px-6 py-16 md:py-20">
+        <div className="max-w-2xl mx-auto">
+          <p className="text-inkl text-lg md:text-xl leading-relaxed text-center">
+            We analyze your home, your neighborhood, and your family's routines
+            to identify the handful of changes that will have the biggest
+            impact on how your family actually lives.
+          </p>
+        </div>
+      </section>
+
+      {/* DIFFERENTIATION — we don't leave you with a report */}
       <section className="bg-parchment px-6 py-16 md:py-20 border-y border-inkll/10">
         <div className="max-w-2xl mx-auto text-center">
-          <p className="text-inkl text-lg md:text-xl leading-relaxed font-serif">
-            Your Wilder Habitat is a <em className="text-ember">personalized blueprint</em> for those choices.
+          <p className="text-ink text-xl md:text-2xl font-serif leading-snug mb-4">
+            Then we don't leave you with a report.
+          </p>
+          <p className="font-serif italic text-ember text-2xl md:text-4xl leading-tight">
+            We tell you exactly what to do next.
           </p>
         </div>
       </section>
 
-      {/* FIVE MINUTES + UPGRADES — two-column body */}
-      <section className="px-6 py-16 md:py-24">
-        <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-10 md:gap-16">
-          <p className="text-inkl text-base md:text-lg leading-relaxed">
-            In just five minutes, we'll learn how your family lives—your home, your
-            neighborhood, and your weekly rhythms. Then we'll create a living plan
-            that grows with you, delivering one <span className="text-ink">personalized Habitat Shift</span> at a time.
+      {/* WEEKLY MECHANISM */}
+      <section className="px-6 py-16 md:py-20">
+        <div className="max-w-2xl mx-auto">
+          <p className="text-inkl text-lg md:text-xl leading-relaxed text-center mb-6">
+            Every week, you'll receive one personalized recommendation designed
+            specifically for your family. No endless articles. No generic
+            parenting advice. No guessing.
           </p>
-          <p className="text-inkl text-base md:text-lg leading-relaxed">
-            Each habitat shift is simple, practical, and grounded in research, helping
-            you spend less time wondering what to do next and more time creating
-            the kind of childhood you've always imagined.
+          <p className="font-serif text-ink text-xl md:text-2xl leading-snug text-center">
+            Just one simple action with the highest likelihood of making life
+            easier, getting your family outside more often, and creating the kind
+            of childhood you've always wanted for your kids.
           </p>
         </div>
       </section>
 
-      {/* NO GRID */}
+      {/* WHAT YOU GET — checklist */}
       <section className="bg-parchment px-6 py-16 md:py-20 border-y border-inkll/10">
-        <div className="max-w-4xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10 text-center">
-            {['No moving.', 'No remodeling.', 'No packed schedules.', 'No guilt.'].map((line) => (
-              <p key={line} className="font-serif italic text-ink text-2xl md:text-3xl leading-snug">
-                {line}
-              </p>
+        <div className="max-w-xl mx-auto">
+          <p className="text-ember text-xs font-medium uppercase tracking-[0.2em] mb-7 text-center">
+            Here's what you get
+          </p>
+          <ul className="space-y-3 md:space-y-4">
+            {[
+              'A complete analysis of your family\'s Habitat',
+              'Your highest-impact opportunities',
+              'Weekly personalized Habitat recommendations',
+              'Local places chosen specifically for your family',
+              'Seasonal guidance that evolves with your children',
+              'Ongoing updates as your family and routines change',
+            ].map((line) => (
+              <li
+                key={line}
+                className="flex items-start gap-3 text-inkl text-base md:text-lg leading-relaxed"
+              >
+                <span
+                  aria-hidden="true"
+                  className="flex-shrink-0 mt-1.5 w-4 h-4 rounded-full bg-ember/15 border border-ember/40 flex items-center justify-center"
+                >
+                  <span className="block w-1.5 h-1.5 rounded-full bg-ember" />
+                </span>
+                <span>{line}</span>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
 
-      {/* JUST THOUGHTFUL */}
-      <section className="px-6 py-14 md:py-20">
-        <div className="max-w-2xl mx-auto text-center">
-          <p className="text-ink text-lg md:text-xl leading-relaxed">
-            Just thoughtful, high-impact improvements that make everyday life{' '}
-            <em className="font-serif">more connected, more adventurous, and more meaningful.</em>
-          </p>
-        </div>
-      </section>
-
-      {/* MANIFESTO */}
+      {/* MANIFESTO — dark closer */}
       <section className="bg-ink text-white px-6 py-20 md:py-28">
         <div className="max-w-2xl mx-auto text-center">
           <p className="font-serif font-light text-3xl md:text-5xl leading-tight">
-            Because the best childhoods aren't accidental.
+            Stop guessing.
           </p>
-          <p className="font-serif italic text-gold text-3xl md:text-5xl leading-tight mt-3">
-            They're built, one small decision at a time.
+          <p className="font-serif italic text-gold text-3xl md:text-5xl leading-tight mt-2">
+            Start building.
+          </p>
+          <p className="font-serif text-base md:text-lg text-cream/80 mt-10 leading-relaxed max-w-md mx-auto">
+            Because extraordinary childhoods aren't created by doing more.
+            <br />
+            They're created by doing the right things, consistently.
           </p>
         </div>
       </section>
@@ -542,8 +583,17 @@ function Welcome({ onStart }) {
             <span aria-hidden="true">→</span>
           </button>
           <Link
+            to="/discover"
+            className="block mt-4 text-ink font-medium text-sm hover:text-terra transition-colors"
+          >
+            Try the free 3-minute reading first →
+          </Link>
+          <p className="text-inkll text-[11px] mt-2 italic">
+            Get a taste of the reading before committing to the full thing.
+          </p>
+          <Link
             to="/"
-            className="block mt-5 text-inkll text-xs hover:text-ink transition-colors"
+            className="block mt-6 text-inkll text-xs hover:text-ink transition-colors"
           >
             Not now
           </Link>
