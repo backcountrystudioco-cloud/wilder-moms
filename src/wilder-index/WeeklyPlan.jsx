@@ -7,7 +7,7 @@ import { DIMENSIONS } from './dimensions'
 const KIND_META = {
   habitat: {
     eyebrow: 'At home',
-    title: 'Habitat Upgrade',
+    title: 'Habitat Shift',
     frameClass: 'bg-parchment',
     borderClass: 'border-forest/20',
     accentText: 'text-forest',
@@ -15,7 +15,7 @@ const KIND_META = {
   },
   neighborhood: {
     eyebrow: 'On the block',
-    title: 'Neighborhood Upgrade',
+    title: 'Habitat Shift',
     frameClass: 'bg-blush/30',
     borderClass: 'border-peach/40',
     accentText: 'text-terra',

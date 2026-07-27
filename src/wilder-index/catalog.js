@@ -65,7 +65,7 @@ export const HABITAT_UPGRADES = {
       time: 'A week',
       effort: 'low',
       lift: { belonging: 2, wonder: 1 },
-      copy: 'Pick three neighbors you and your child already see regularly. Use their names this week. Familiarity is the smallest and most powerful neighborhood upgrade.',
+      copy: 'Pick three neighbors you and your child already see regularly. Use their names this week. Familiarity is the smallest and most powerful habitat shift.',
       personalize() { return null },
     },
     {

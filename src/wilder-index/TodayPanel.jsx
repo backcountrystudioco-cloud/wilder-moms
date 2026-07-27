@@ -52,8 +52,8 @@ function recap(history, days) {
   const skip = inWindow.filter((h) => h.checkIn === 'not-today').length
   if (done + skip === 0) return null
   if (done === 0 && skip > 0) return `${skip} check-in${skip === 1 ? '' : 's'} this week`
-  if (done >= 4) return `${done} upgrades this week — your pattern is shaping`
-  if (done >= 1) return `${done} upgrade${done === 1 ? '' : 's'} this week — momentum starting`
+  if (done >= 4) return `${done} habitat shifts this week — your pattern is shaping`
+  if (done >= 1) return `${done} habitat shift${done === 1 ? '' : 's'} this week — momentum starting`
   return null
 }
 
@@ -107,7 +107,7 @@ export default function TodayPanel({ profile, scores }) {
       <p className="text-inkl text-sm mt-2 max-w-xl">
         {view.rec
           ? `${view.rec.charAt(0).toUpperCase()}${view.rec.slice(1)}. The pattern keeps moving.`
-          : 'No upgrades yet this week. One small thing today moves the pattern forward.'}
+          : 'No habitat shifts yet this week. One small thing today moves the pattern forward.'}
       </p>
 
       <div className="mt-6 grid md:grid-cols-2 gap-3">

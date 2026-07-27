@@ -6,7 +6,7 @@ import { DIMENSIONS } from './dimensions'
 const KIND_META = {
   habitat: {
     eyebrow: 'Today at home',
-    title: 'Habitat Upgrade',
+    title: 'Habitat Shift',
     frameClass: 'bg-parchment',
     borderClass: 'border-forest/20',
     accentText: 'text-forest',
@@ -15,7 +15,7 @@ const KIND_META = {
   },
   neighborhood: {
     eyebrow: 'Today in the neighborhood',
-    title: 'Neighborhood Upgrade',
+    title: 'Habitat Shift',
     frameClass: 'bg-blush/30',
     borderClass: 'border-peach/40',
     accentText: 'text-terra',
@@ -49,7 +49,7 @@ function UpgradeCard({ kind, selected, onSwap, onCheckIn, onDismiss, completedTo
           {meta.eyebrow}
         </p>
         <h3 className="font-serif text-2xl text-ink mt-2">All caught up.</h3>
-        <p className="text-inkl text-sm mt-2">No new upgrade is queued right now. Come back tomorrow.</p>
+        <p className="text-inkl text-sm mt-2">No new habitat shift is queued right now. Come back tomorrow.</p>
       </div>
     )
   }
@@ -167,7 +167,7 @@ function UpgradeCard({ kind, selected, onSwap, onCheckIn, onDismiss, completedTo
           >
             <h3 className="font-serif text-2xl text-ink leading-tight mb-2">Noted.</h3>
             <p className="text-inkl text-sm">
-              Tomorrow's upgrade will be picked with the next thing in mind. One small change at a time.
+              Tomorrow's habitat shift will be picked with the next thing in mind. One small change at a time.
             </p>
           </motion.div>
         )}

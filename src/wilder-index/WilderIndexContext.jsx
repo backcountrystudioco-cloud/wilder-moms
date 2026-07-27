@@ -1,9 +1,12 @@
-import { createContext, useContext, useEffect, useMemo, useState, useCallback } from 'react'
+import { createContext, useContext, useEffect, useMemo, useState, useCallback, useRef } from 'react'
+import { useAuth } from '@clerk/react'
 import { computeScores, summarize } from './scoring'
 import { evaluateAchievements } from './achievements'
 import { HABITAT_UPGRADES, NEIGHBORHOOD_UPGRADES } from './catalog'
 import { DIMENSION_ORDER } from './dimensions'
 
+const CLERK_META_KEY = 'wilderIndex'
+const CLOUD_DEBOUNCE_MS = 1500
 const STORAGE_KEY = 'wilder_moms_index_v1'
 const SHOWN_CAP = 6
 
@@ -45,7 +48,9 @@ function todayISO() {
 const IndexContext = createContext(null)
 
 export function WilderIndexProvider({ children }) {
+  const { user, isSignedIn, isLoaded } = useAuth()
   const [state, setState] = useState(getInitial)
+  const hydratedFromCloudRef = useRef(null) // user.id we last hydrated from
 
   useEffect(() => {
     try {
@@ -54,6 +59,55 @@ export function WilderIndexProvider({ children }) {
       // ignore quota errors
     }
   }, [state])
+
+  // Cloud sync: when signed in, hydrate once from unsafeMetadata and then
+  // write back on every meaningful state change (debounced). Localstorage
+  // remains the per-device cache for users who aren't signed in.
+  // Cloud sync: when signed in, hydrate once from unsafeMetadata and then
+  // write back on every meaningful state change (debounced). Localstorage
+  // remains the per-device cache for users who aren't signed in.
+  const [cloudStatus, setCloudStatus] = useState('idle') // 'idle' | 'pending' | 'saved'
+  const [lastSavedAt, setLastSavedAt] = useState(null)
+  const [cloudPulse, setCloudPulse] = useState(0) // increments on each successful save
+
+  useEffect(() => {
+    if (!isLoaded || !isSignedIn || !user) return
+    if (hydratedFromCloudRef.current === user.id) return
+    const remote = user.unsafeMetadata?.[CLERK_META_KEY]
+    if (remote && typeof remote === 'object') {
+      setState((prev) => {
+        // Don't clobber a more recent local profile.
+        if (prev.onboarding?.completed) return prev
+        return { ...initialState, ...remote }
+      })
+    }
+    hydratedFromCloudRef.current = user.id
+  }, [isLoaded, isSignedIn, user])
+
+  useEffect(() => {
+    if (!isLoaded || !isSignedIn || !user) {
+      setCloudStatus('idle')
+      return
+    }
+    // Skip until something worth saving exists.
+    if (!state.onboarding?.completed && (state.history || []).length === 0) {
+      setCloudStatus('idle')
+      return
+    }
+    setCloudStatus('pending')
+    const t = setTimeout(async () => {
+      try {
+        await user.updateUnsafeMetadata({ [CLERK_META_KEY]: state })
+        setLastSavedAt(new Date())
+        setCloudStatus('saved')
+        setCloudPulse((n) => n + 1)
+      } catch (e) {
+        // network/rate error — try again on the next state change.
+        setCloudStatus('idle')
+      }
+    }, CLOUD_DEBOUNCE_MS)
+    return () => clearTimeout(t)
+  }, [state, isLoaded, isSignedIn, user])
 
   const scores = useMemo(
     () => (state.onboarding.completed ? computeScores(state.onboarding.answers) : null),
@@ -232,6 +286,9 @@ export function WilderIndexProvider({ children }) {
     markUpgrade,
     setArchitecturalCurrent,
     acknowledgeArchitectural,
+    cloudStatus,
+    lastSavedAt,
+    cloudPulse,
   }
 
   return <IndexContext.Provider value={value}>{children}</IndexContext.Provider>

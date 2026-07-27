@@ -9,6 +9,7 @@ import ScoreDashboard from './ScoreDashboard'
 import WeeklyPlan from './WeeklyPlan'
 import MonthlyArchitectural from './MonthlyArchitectural'
 import AchievementsShelf from './AchievementsShelf'
+import { SyncIndicator, CloudSyncToast } from './CloudSyncIndicator'
 import { DIMENSIONS } from './dimensions'
 
 const REVEAL_KEY = 'wilder_moms_index_reveal_seen'
@@ -16,7 +17,7 @@ const REVEAL_KEY = 'wilder_moms_index_reveal_seen'
 function IndexHeader({ onReset, familyName }) {
   return (
     <div className="mb-6">
-      <div className="flex items-center gap-3 mb-3">
+      <div className="flex items-center gap-3 mb-3 flex-wrap">
         <span className="text-ember font-sans font-medium text-xs uppercase tracking-[0.2em]">
           The Wilder Index
         </span>
@@ -24,6 +25,7 @@ function IndexHeader({ onReset, familyName }) {
         <span className="text-inkll font-sans text-xs uppercase tracking-[0.15em]">
           For {familyName || 'your family'}
         </span>
+        <SyncIndicator />
       </div>
       <h1 className="font-serif font-light text-4xl md:text-5xl text-ink leading-tight">
         Read your <em className="text-ember">neighborhood.</em>
@@ -61,11 +63,12 @@ function Dashboard() {
   useEffect(() => {
     if (newlyUnlocked && newlyUnlocked.length > 0) {
       const a = newlyUnlocked[newlyUnlocked.length - 1]
-      setToast(a)
+      const found = (achievements || []).find((x) => x.id === a)
+      setToast(found ? found.title : a)
       const t = setTimeout(() => setToast(null), 4500)
       return () => clearTimeout(t)
     }
-  }, [newlyUnlocked])
+  }, [newlyUnlocked, achievements])
 
   return (
     <div className="min-h-screen bg-cream pt-24 pb-20 px-6">
@@ -99,7 +102,7 @@ function Dashboard() {
         </motion.div>
 
         <div className="grid grid-cols-3 gap-3 mt-5">
-          <TodayStat label="Upgrades done" value={totalUpgrades} sub="since you started" />
+          <TodayStat label="Habitat shifts done" value={totalUpgrades} sub="since you started" />
           <TodayStat label="Active days" value={totalActive} sub="any check-in counts" />
           <TodayStat
             label="Opportunity"
@@ -155,9 +158,11 @@ function Dashboard() {
             className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-ink text-cream px-5 py-3 rounded-full shadow-xl text-sm flex items-center gap-2"
           >
             <span>Unlocked:</span>
-            <span className="font-serif italic">{toast.replace(/-/g, ' ')}</span>
+            <span className="font-serif italic">{toast}</span>
           </motion.div>
         )}
+
+        <CloudSyncToast />
       </div>
     </div>
   )

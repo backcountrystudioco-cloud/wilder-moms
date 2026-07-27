@@ -309,7 +309,7 @@ export const SPECIFICS_QUESTIONS = [
     id: 'specifics.kids',
     chapter: 'Your Specifics',
     text: 'What ages are your kids?',
-    sub: 'Pick all that apply. The right upgrade at age 2 is not the right upgrade at age 9.',
+    sub: 'Pick all that apply. The right habitat shift at age 2 is not the right habitat shift at age 9.',
     type: 'checkbox',
     multi: true,
     options: [

@@ -1,6 +1,7 @@
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
+import { SignInButton, SignUpButton, UserButton, useAuth } from '@clerk/react'
 import { QUESTIONS, CONTEXT_QUESTIONS, SPECIFICS_QUESTIONS } from './questions'
 import { DIMENSIONS, DIMENSION_ORDER, bandFor } from './dimensions'
 import { computeScores, summarize } from './scoring'
@@ -167,13 +168,16 @@ function BrandCards({ cardIndex, onNext, onBack, onSkip }) {
 
 function ChapterIntro({ chapter, onContinue, onSkip }) {
   return (
-    <motion.div
+    <motion.button
+      type="button"
       key={`intro-${chapter.dim}`}
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -10 }}
       transition={{ duration: 0.4 }}
-      className="max-w-xl mx-auto text-center pt-16 pb-10"
+      onClick={onContinue}
+      className="max-w-xl mx-auto text-center pt-16 pb-10 px-4 w-full cursor-pointer group focus:outline-none focus-visible:ring-2 focus-visible:ring-ember/40 rounded-2xl"
+      aria-label={`Begin ${chapter.title}`}
     >
       <p className="text-ember text-xs font-medium uppercase tracking-[0.2em] mb-4">
         {chapter.eyebrow}
@@ -184,17 +188,28 @@ function ChapterIntro({ chapter, onContinue, onSkip }) {
       <p className="text-inkl text-base leading-relaxed max-w-md mx-auto mb-10">
         {chapter.line}
       </p>
-      <button
-        onClick={onContinue}
-        className="inline-flex items-center gap-2 bg-ember text-white px-7 py-3 rounded-full font-medium text-sm hover:bg-terra transition-colors"
+      <span
+        className="inline-flex items-center gap-2 bg-ember text-white px-7 py-3 rounded-full font-medium text-sm group-hover:bg-terra transition-colors"
       >
         Begin chapter
         <span aria-hidden="true">→</span>
-      </button>
-      <button onClick={onSkip} className="block mx-auto mt-4 text-inkll text-xs hover:text-ink">
+      </span>
+      <span
+        role="button"
+        tabIndex={0}
+        onClick={(e) => { e.stopPropagation(); onSkip() }}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.stopPropagation()
+            e.preventDefault()
+            onSkip()
+          }
+        }}
+        className="block mx-auto mt-4 text-inkll text-xs hover:text-ink transition-colors cursor-pointer"
+      >
         Skip the rest of the field check
-      </button>
-    </motion.div>
+      </span>
+    </motion.button>
   )
 }
 
@@ -436,37 +451,138 @@ function ContextStep({ answers, onChange, onBack, onNext, isLast }) {
 }
 
 function Welcome({ onStart }) {
+  const { isSignedIn } = useAuth()
   return (
-    <div className="max-w-2xl mx-auto text-center pt-12 md:pt-20 pb-12">
-      <p className="text-ember text-xs font-medium uppercase tracking-[0.2em] mb-6">
-        The Wilder Index
-      </p>
-      <h1 className="font-serif font-light text-4xl md:text-6xl text-ink leading-[0.95] mb-6">
-        Discover your family's <em className="text-ember">Wilder pattern.</em>
-      </h1>
-      <p className="text-inkl text-base md:text-lg leading-relaxed max-w-lg mx-auto mb-3">
-        About 5 minutes. A few short cards first, then quick choices about how your
-        week already feels, then a few specifics about your home and your block.
-      </p>
-      <p className="text-inkll text-sm max-w-md mx-auto mb-10">
-        We use it to read your neighborhood and your home, then suggest one small
-        change at a time — a chair by the door, a new route, a pot of mint.
-      </p>
-      <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-        <button
-          onClick={onStart}
-          className="inline-flex items-center gap-2 bg-ember text-white px-8 py-3 rounded-full font-medium text-sm hover:bg-terra transition-colors"
-        >
-          Begin with the reading
-          <span aria-hidden="true">→</span>
-        </button>
-        <Link
-          to="/"
-          className="text-inkll text-xs hover:text-ink transition-colors"
-        >
-          Not now
-        </Link>
-      </div>
+    <div className="overflow-hidden">
+      {/* TOP HEADER — auth controls so returning members can sign in from the landing */}
+      <header className="px-6 pt-6 md:pt-8">
+        <div className="max-w-6xl mx-auto flex items-center justify-between">
+          <Link to="/" className="font-serif text-lg md:text-xl text-ink tracking-tight">
+            Wilder <span className="text-ember">Moms</span>
+          </Link>
+          <div className="flex items-center gap-2 md:gap-3">
+            {isSignedIn ? (
+              <UserButton afterSignOutUrl="/" />
+            ) : (
+              <>
+                <SignInButton mode="modal" forceRedirectUrl="/">
+                  <button
+                    type="button"
+                    className="font-sans font-medium text-sm px-3 md:px-4 py-2 text-ink hover:text-ember transition-colors"
+                  >
+                    Sign In
+                  </button>
+                </SignInButton>
+                <SignUpButton mode="modal" forceRedirectUrl="/">
+                  <button
+                    type="button"
+                    className="bg-ember text-white font-sans font-medium text-sm px-4 md:px-5 py-2 md:py-2.5 rounded-full hover:bg-forest transition-colors duration-300"
+                  >
+                    Sign Up
+                  </button>
+                </SignUpButton>
+              </>
+            )}
+          </div>
+        </div>
+      </header>
+
+      {/* HERO */}
+      <section className="pt-16 md:pt-24 pb-14 md:pb-20 px-6">
+        <div className="max-w-3xl mx-auto text-center">
+          <p className="text-ember text-xs font-medium uppercase tracking-[0.2em] mb-7">
+            Wilder Moms · A five-minute reading
+          </p>
+          <h1 className="font-serif font-light text-5xl md:text-7xl text-ink leading-[0.95] mb-10">
+            Your <em className="text-ember">Wilder Habitat.</em>
+          </h1>
+          <p className="font-serif text-2xl md:text-3xl text-ink leading-snug max-w-2xl mx-auto">
+            The life you want for your family isn't built in one big moment. It's built in the small choices you make every day.
+          </p>
+        </div>
+      </section>
+
+      {/* BLUEPRINT */}
+      <section className="bg-parchment px-6 py-16 md:py-20 border-y border-inkll/10">
+        <div className="max-w-2xl mx-auto text-center">
+          <p className="text-inkl text-lg md:text-xl leading-relaxed font-serif">
+            Your Wilder Habitat is a <em className="text-ember">personalized blueprint</em> for those choices.
+          </p>
+        </div>
+      </section>
+
+      {/* FIVE MINUTES + UPGRADES — two-column body */}
+      <section className="px-6 py-16 md:py-24">
+        <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-10 md:gap-16">
+          <p className="text-inkl text-base md:text-lg leading-relaxed">
+            In just five minutes, we'll learn how your family lives—your home, your
+            neighborhood, and your weekly rhythms. Then we'll create a living plan
+            that grows with you, delivering one <span className="text-ink">personalized Habitat Shift</span> at a time.
+          </p>
+          <p className="text-inkl text-base md:text-lg leading-relaxed">
+            Each habitat shift is simple, practical, and grounded in research, helping
+            you spend less time wondering what to do next and more time creating
+            the kind of childhood you've always imagined.
+          </p>
+        </div>
+      </section>
+
+      {/* NO GRID */}
+      <section className="bg-parchment px-6 py-16 md:py-20 border-y border-inkll/10">
+        <div className="max-w-4xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10 text-center">
+            {['No moving.', 'No remodeling.', 'No packed schedules.', 'No guilt.'].map((line) => (
+              <p key={line} className="font-serif italic text-ink text-2xl md:text-3xl leading-snug">
+                {line}
+              </p>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* JUST THOUGHTFUL */}
+      <section className="px-6 py-14 md:py-20">
+        <div className="max-w-2xl mx-auto text-center">
+          <p className="text-ink text-lg md:text-xl leading-relaxed">
+            Just thoughtful, high-impact improvements that make everyday life{' '}
+            <em className="font-serif">more connected, more adventurous, and more meaningful.</em>
+          </p>
+        </div>
+      </section>
+
+      {/* MANIFESTO */}
+      <section className="bg-ink text-white px-6 py-20 md:py-28">
+        <div className="max-w-2xl mx-auto text-center">
+          <p className="font-serif font-light text-3xl md:text-5xl leading-tight">
+            Because the best childhoods aren't accidental.
+          </p>
+          <p className="font-serif italic text-gold text-3xl md:text-5xl leading-tight mt-3">
+            They're built, one small decision at a time.
+          </p>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="px-6 py-16 md:py-24">
+        <div className="max-w-md mx-auto text-center">
+          <p className="text-inkll text-xs uppercase tracking-[0.18em] mb-5">
+            Five minutes · Seven chapters
+          </p>
+          <button
+            onClick={onStart}
+            className="inline-flex items-center gap-2 bg-ember text-white px-10 py-4 rounded-full font-medium text-base hover:bg-terra transition-colors"
+          >
+            Build my Wilder Habitat
+            <span aria-hidden="true">→</span>
+          </button>
+          <Link
+            to="/"
+            className="block mt-5 text-inkll text-xs hover:text-ink transition-colors"
+          >
+            Not now
+          </Link>
+        </div>
+      </section>
     </div>
   )
 }
