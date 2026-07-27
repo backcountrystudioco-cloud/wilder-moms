@@ -1,6 +1,6 @@
-import { useState, useMemo, useCallback } from 'react'
+import { useState, useMemo, useCallback, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { QUESTIONS, CONTEXT_QUESTIONS, SPECIFICS_QUESTIONS } from './questions'
 import AuthCorner from './AuthCorner'
 import { DIMENSIONS, DIMENSION_ORDER, bandFor } from './dimensions'
@@ -451,6 +451,8 @@ function ContextStep({ answers, onChange, onBack, onNext, isLast }) {
 }
 
 function Welcome({ onStart }) {
+  const navigate = useNavigate()
+  const goToSell = () => navigate('/sell')
   return (
     <div className="overflow-hidden">
       {/* HERO — the lead question */}
@@ -576,7 +578,7 @@ function Welcome({ onStart }) {
             Five minutes · Seven chapters
           </p>
           <button
-            onClick={onStart}
+            onClick={goToSell}
             className="inline-flex items-center gap-2 bg-ember text-white px-10 py-4 rounded-full font-medium text-base hover:bg-terra transition-colors"
           >
             Build my Wilder Habitat
@@ -608,6 +610,18 @@ export default function OnboardingFlow({ onCompleted }) {
   const { chapters } = useMemo(buildQuestionPlan, [])
   const [step, setStep] = useState({ kind: 'welcome' })
   const [localContext, setLocalContext] = useState({ _index: 0 })
+
+  // When arriving from the /sell CTA, skip the welcome screen and start at
+  // the brand cards reading. The flag is set by SellPage and cleared once
+  // consumed so it doesn't apply on subsequent visits.
+  useEffect(() => {
+    let flag = null
+    try { flag = sessionStorage.getItem('wilder_habitat_skip_welcome') } catch {}
+    if (flag) {
+      try { sessionStorage.removeItem('wilder_habitat_skip_welcome') } catch {}
+      setStep({ kind: 'brand-cards', cardIndex: 0 })
+    }
+  }, [])
 
   const startChapter = useCallback(
     (dim) => setStep({ kind: 'chapter-intro', dim, qIndex: 0 }),
