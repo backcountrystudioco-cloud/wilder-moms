@@ -10,6 +10,7 @@ import WeeklyPlan from './WeeklyPlan'
 import MonthlyArchitectural from './MonthlyArchitectural'
 import AchievementsShelf from './AchievementsShelf'
 import { SyncIndicator, CloudSyncToast } from './CloudSyncIndicator'
+import AuthCorner from './AuthCorner'
 import { DIMENSIONS } from './dimensions'
 
 const REVEAL_KEY = 'wilder_moms_index_reveal_seen'
@@ -71,7 +72,11 @@ function Dashboard() {
   }, [newlyUnlocked, achievements])
 
   return (
-    <div className="min-h-screen bg-cream pt-24 pb-20 px-6">
+    <div className="min-h-screen bg-cream">
+      <div className="pt-6 md:pt-8">
+        <AuthCorner />
+      </div>
+      <div className="px-6 pt-10 pb-20">
       <div className="max-w-5xl mx-auto">
         <IndexHeader
           onReset={() => {
@@ -163,6 +168,7 @@ function Dashboard() {
         )}
 
         <CloudSyncToast />
+      </div>
       </div>
     </div>
   )

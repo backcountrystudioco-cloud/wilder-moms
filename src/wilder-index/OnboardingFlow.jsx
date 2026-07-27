@@ -1,8 +1,8 @@
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { SignInButton, SignUpButton, UserButton, useAuth } from '@clerk/react'
 import { QUESTIONS, CONTEXT_QUESTIONS, SPECIFICS_QUESTIONS } from './questions'
+import AuthCorner from './AuthCorner'
 import { DIMENSIONS, DIMENSION_ORDER, bandFor } from './dimensions'
 import { computeScores, summarize } from './scoring'
 import { useWilderIndex } from './WilderIndexContext'
@@ -451,42 +451,8 @@ function ContextStep({ answers, onChange, onBack, onNext, isLast }) {
 }
 
 function Welcome({ onStart }) {
-  const { isSignedIn } = useAuth()
   return (
     <div className="overflow-hidden">
-      {/* TOP HEADER — auth controls so returning members can sign in from the landing */}
-      <header className="px-6 pt-6 md:pt-8">
-        <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <Link to="/" className="font-serif text-lg md:text-xl text-ink tracking-tight">
-            Wilder <span className="text-ember">Moms</span>
-          </Link>
-          <div className="flex items-center gap-2 md:gap-3">
-            {isSignedIn ? (
-              <UserButton afterSignOutUrl="/" />
-            ) : (
-              <>
-                <SignInButton mode="modal" forceRedirectUrl="/">
-                  <button
-                    type="button"
-                    className="font-sans font-medium text-sm px-3 md:px-4 py-2 text-ink hover:text-ember transition-colors"
-                  >
-                    Sign In
-                  </button>
-                </SignInButton>
-                <SignUpButton mode="modal" forceRedirectUrl="/">
-                  <button
-                    type="button"
-                    className="bg-ember text-white font-sans font-medium text-sm px-4 md:px-5 py-2 md:py-2.5 rounded-full hover:bg-forest transition-colors duration-300"
-                  >
-                    Sign Up
-                  </button>
-                </SignUpButton>
-              </>
-            )}
-          </div>
-        </div>
-      </header>
-
       {/* HERO */}
       <section className="pt-16 md:pt-24 pb-14 md:pb-20 px-6">
         <div className="max-w-3xl mx-auto text-center">
@@ -750,8 +716,13 @@ export default function OnboardingFlow({ onCompleted }) {
   }
 
   return (
-    <div className="min-h-screen bg-cream px-6 pt-24 pb-20">
-      <AnimatePresence mode="wait">{body}</AnimatePresence>
+    <div className="min-h-screen bg-cream">
+      <div className="pt-6 md:pt-8">
+        <AuthCorner />
+      </div>
+      <div className="px-6 pt-10 pb-20">
+        <AnimatePresence mode="wait">{body}</AnimatePresence>
+      </div>
     </div>
   )
 }
