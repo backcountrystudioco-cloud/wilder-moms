@@ -4,6 +4,13 @@ import { DIMENSIONS } from './dimensions'
 import { generateReading } from './reading'
 import { generateWeeklyPlan } from './planGenerator'
 import { applyPersonalization } from './catalog'
+import { describeLocation } from './personalize'
+import { findPrototypeById } from './neighborhoodPrototypes'
+import {
+  buildRecommendationsRequest,
+  fetchLocalRecommendations,
+  KIND_LABELS,
+} from './localRecommendations'
 import ScoreArc from './ScoreArc'
 
 function MiniUpgradeCard({ upgrade, dimension }) {
@@ -32,6 +39,90 @@ function MiniUpgradeCard({ upgrade, dimension }) {
   )
 }
 
+function LocalRecommendationCard({ rec }) {
+  return (
+    <div className="bg-white border border-inkll/10 rounded-2xl p-5 h-full flex flex-col">
+      <p className="text-[10px] font-medium uppercase tracking-wider text-inkll mb-2">
+        {KIND_LABELS[rec.kind] || 'For your week'}
+      </p>
+      <h4 className="font-serif text-lg text-ink leading-tight mb-2">
+        {rec.title}
+      </h4>
+      <p className="text-inkl text-sm leading-relaxed mb-3 flex-1">
+        {rec.action}
+      </p>
+      <p className="text-inkll text-[11px] italic mb-1">{rec.why}</p>
+      <p className="text-inkll text-[10px] uppercase tracking-wider">{rec.time}</p>
+    </div>
+  )
+}
+
+function LocationRecommendations({ profile, scores }) {
+  const [state, setState] = useState({ status: 'idle', list: [], source: null })
+
+  useEffect(() => {
+    let cancelled = false
+    const loc = describeLocation(profile || {})
+    const payload = buildRecommendationsRequest({
+      profile,
+      scores,
+      location: {
+        displayName: loc.displayName,
+        prototypeId: loc.prototypeId,
+        prototypeName: loc.prototypeName,
+        climateBand: loc.climateBand,
+      },
+    })
+    setState({ status: 'loading', list: [], source: null })
+    fetchLocalRecommendations(payload).then((res) => {
+      if (cancelled) return
+      setState({ status: 'ready', list: res.recommendations, source: res.source })
+    })
+    return () => { cancelled = true }
+  }, [profile, scores])
+
+  if (state.status === 'idle') return null
+
+  return (
+    <motion.section
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: 1.95 }}
+      className="mb-12"
+    >
+      <p className="text-ember text-xs font-medium uppercase tracking-[0.2em] mb-2 text-center">
+        For {describeLocation(profile || {}).displayName}
+      </p>
+      <p className="text-inkl text-sm text-center max-w-md mx-auto mb-6">
+        Four small moves for this week, picked for your block and your week.
+        {state.source === 'fallback' && (
+          <span className="block text-inkll italic mt-1 text-xs">
+            Based on your block — refresh to refine once Wilder Companion is back.
+          </span>
+        )}
+      </p>
+      <div className="grid md:grid-cols-2 gap-3">
+        {state.status === 'loading'
+          ? Array.from({ length: 4 }).map((_, i) => (
+              <div
+                key={i}
+                className="bg-white/60 border border-inkll/10 rounded-2xl p-5 h-full"
+              >
+                <div className="h-3 w-16 bg-inkll/10 rounded mb-3" />
+                <div className="h-5 w-3/4 bg-inkll/10 rounded mb-3" />
+                <div className="h-3 w-full bg-inkll/10 rounded mb-1.5" />
+                <div className="h-3 w-5/6 bg-inkll/10 rounded mb-3" />
+                <div className="h-2.5 w-2/3 bg-inkll/10 rounded" />
+              </div>
+            ))
+          : state.list.map((rec, i) => (
+              <LocalRecommendationCard key={`${rec.kind}-${i}`} rec={rec} />
+            ))}
+      </div>
+    </motion.section>
+  )
+}
+
 export default function RevealScreen({ scores, summary, profile, onContinue }) {
   const [stagger, setStagger] = useState(0)
   useEffect(() => {
@@ -41,6 +132,8 @@ export default function RevealScreen({ scores, summary, profile, onContinue }) {
 
   const reading = generateReading(profile || {}, scores)
   const weeklyPlan = generateWeeklyPlan(profile || {}, scores)
+  const loc = describeLocation(profile || {})
+  const prototype = findPrototypeById(loc.prototypeId)
 
   const strengthNames = (summary?.strengths || []).map((id) => DIMENSIONS[id]?.name).filter(Boolean)
   const opportunityName = summary?.opportunity ? DIMENSIONS[summary.opportunity].name : null
@@ -81,10 +174,29 @@ export default function RevealScreen({ scores, summary, profile, onContinue }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.7, duration: 0.6 }}
-            className="text-center text-inkl font-serif italic text-base mb-10"
+            className="text-center text-inkl font-serif italic text-base mb-6"
           >
             One small opportunity: <span className="text-ember">{opportunityName}</span>.
           </motion.p>
+        )}
+
+        {prototype && (
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.85, duration: 0.5 }}
+            className="text-center mb-10"
+          >
+            <p className="text-ember text-[10px] font-medium uppercase tracking-[0.2em] mb-2">
+              Your neighborhood pattern
+            </p>
+            <h2 className="font-serif text-2xl md:text-3xl text-ink mb-1">
+              {loc.displayName !== 'your area' ? `${loc.displayName} · ` : ''}{prototype.name}
+            </h2>
+            <p className="text-inkl font-serif italic text-sm md:text-base max-w-md mx-auto">
+              {prototype.blurb}
+            </p>
+          </motion.div>
         )}
 
         <div className="grid grid-cols-3 gap-4 md:gap-8 mb-14">
@@ -155,10 +267,12 @@ export default function RevealScreen({ scores, summary, profile, onContinue }) {
           </motion.section>
         )}
 
+        <LocationRecommendations profile={profile} scores={scores} />
+
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 2.1, duration: 0.6 }}
+          transition={{ delay: 2.4, duration: 0.6 }}
           className="text-center"
         >
           <p className="text-inkll text-sm max-w-md mx-auto mb-6">

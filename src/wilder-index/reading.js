@@ -11,6 +11,7 @@ import {
   BLOCK_LABELS,
   describeHome,
   describeBlock,
+  describeLocation,
   kidsAges,
   obstacle,
   joinAnd,
@@ -61,6 +62,7 @@ export function generateReading(profile, scores) {
   if (!scores) return []
   const { area, home, out, hasOut } = describeHome(profile)
   const { has, lacks } = describeBlock(profile)
+  const loc = describeLocation(profile)
   const kids = kidsAges(profile)
   const kidsPhrase = describeKids(kids)
   const obst = obstacle(profile)
@@ -74,9 +76,20 @@ export function generateReading(profile, scores) {
   const hasLabels = has.map((b) => BLOCK_LABELS[b]).filter(Boolean)
   const lacksLabels = lacks.slice(0, 3).map((b) => BLOCK_LABELS[b]).filter(Boolean)
 
+  // The opening now anchors the family in their specific neighborhood
+  // prototype + place name, not just a generic "urban/suburban" label.
+  const placeClause = loc.hasLocation
+    ? `You live in ${loc.displayName}, in ${home}, with ${out}. `
+    : `You live in ${loc.prototypeName.toLowerCase()} territory, in ${home}, with ${out}. `
+  const prototypeClause = loc.prototypeBlurb
+    ? `The shape of your week — ${loc.prototypeBlurb.toLowerCase()} ` +
+      `That shape decides what kind of outside life is easy, and what kind takes more effort. `
+    : ''
+
   const p1 =
-    `You live in ${area}, in ${home}, with ${out}. ` +
+    placeClause +
     (kidsPhrase ? `You're raising ${kidsPhrase}, which means your outdoor life has to fit a specific kind of tired, on a specific kind of day. ` : '') +
+    prototypeClause +
     (hasLabels.length > 0
       ? `Your block has ${joinAnd(hasLabels.slice(0, 4))}${hasLabels.length > 4 ? ', and a few other things' : ''}. `
       : 'Your block is mostly unmapped in your head right now — a lot of what is there, you haven\'t walked to yet. ') +
@@ -87,11 +100,12 @@ export function generateReading(profile, scores) {
   const p2 =
     `You're strongest on ${joinAnd(strengths.map((id) => DIMENSIONS[id].name.toLowerCase()))} — ${joinAnd(strengthNotes)}. ` +
     `The biggest gap is ${oppDim.name.toLowerCase()}: ${OPPORTUNITY_NOTES[opp]}. ` +
-    `It's in the "${oppBand.label.toLowerCase()}" band, which means it's not a missing thing — it's a small, specific thing waiting to be added.`
+    `It's in the "${oppBand.label.toLowerCase()}" band, which means it's not a missing thing — it's a small, specific thing waiting to be added. ` +
+    `In a ${loc.prototypeName.toLowerCase()} neighborhood, that gap is best closed by using what's already close, not by chasing what's far.`
 
   const p3 = obst
-    ? `You said "${obst}" was the biggest thing in the way. That's a real constraint, not a planning problem. The right next step is small enough to fit around it, not in spite of it.`
-    : `There's no single thing standing in the way — there's a pattern waiting to be made. The first step is small and specific to your block.`
+    ? `You said "${obst}" was the biggest thing in the way. That's a real constraint, not a planning problem. The right next step is small enough to fit around it — and specific to ${loc.displayName}, not a generic list.`
+    : `There's no single thing standing in the way — there's a pattern waiting to be made. The first step is small and specific to your block in ${loc.displayName}.`
 
   return [p1, p2, p3]
 }

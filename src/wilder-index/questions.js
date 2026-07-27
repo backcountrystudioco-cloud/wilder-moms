@@ -375,16 +375,30 @@ export const SPECIFICS_QUESTIONS = [
 
 export const CONTEXT_QUESTIONS = [
   {
-    id: 'context.area',
-    text: 'Where do you live?',
-    sub: 'We use this to suggest the right kinds of nearby places.',
+    id: 'context.prototype',
+    text: 'Which description feels most like the place where your family lives?',
+    sub: 'We use this to read your neighborhood. The right answer is the one your week feels like.',
     type: 'radio',
     options: [
-      { label: 'Urban core', value: 'urban' },
-      { label: 'Suburban', value: 'suburban' },
-      { label: 'Small town', value: 'small_town' },
-      { label: 'Rural', value: 'rural' },
+      { label: 'City core — apartments, sidewalks, the city doing the parenting', value: 'urban_dense' },
+      { label: 'Walkable residential — smaller homes with stoops, neighbors who know each other', value: 'urban_family' },
+      { label: 'Suburban with a yard — detached homes, more space, car-oriented destinations', value: 'suburban_yard' },
+      { label: 'Suburban without much yard — townhouse or apartment, fewer walkable destinations', value: 'suburban_no_yard' },
+      { label: 'Small town — compact core, library, main street', value: 'small_town' },
+      { label: 'Rural — spread out, fields or woods, car dependence', value: 'rural' },
+      { label: 'Coastal — beach, water, tides, wind', value: 'coastal' },
+      { label: 'Mountain or foothill — slopes, elevation, weather shifts', value: 'mountain' },
+      { label: 'Dry climate — desert or arid, heat, sparse vegetation', value: 'dry' },
+      { label: 'College town — walkable core with student life mixed in', value: 'college_town' },
     ],
+  },
+  {
+    id: 'context.location',
+    text: 'What city or ZIP are you near?',
+    sub: 'Used only to read your climate and shape your reading. Stored on your device. Skip if you prefer.',
+    type: 'text',
+    optional: true,
+    placeholder: 'e.g., Tacoma, WA or 98402',
   },
   {
     id: 'context.homeType',

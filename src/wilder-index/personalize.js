@@ -1,5 +1,12 @@
 // Light helpers for reading the user's profile and producing human strings.
 
+import {
+  NEIGHBORHOOD_PROTOTYPES,
+  findPrototypeById,
+  inferPrototypeFromContext,
+  climateBandForPrototype,
+} from './neighborhoodPrototypes'
+
 export const AREA_LABELS = {
   urban: 'an urban block',
   suburban: 'a suburban block',
@@ -85,4 +92,32 @@ export const BLOCK_LABELS = {
   transit: 'public transit',
   trees: 'mature street trees on the block',
   cornerstore: 'a corner store',
+}
+
+// Re-export the prototype utilities so consumers can import everything from
+// `personalize.js` if they prefer.
+export {
+  NEIGHBORHOOD_PROTOTYPES,
+  findPrototypeById,
+  inferPrototypeFromContext,
+  climateBandForPrototype,
+}
+
+// Read the user's location + prototype from their profile. Falls back
+// gracefully when the data is partial.
+export function describeLocation(profile) {
+  const ctx = profile?.contextAnswers || {}
+  const raw = (ctx['context.location'] || '').trim()
+  const prototypeId = inferPrototypeFromContext(ctx)
+  const proto = findPrototypeById(prototypeId)
+  return {
+    prototypeId,
+    prototypeName: proto?.name || 'Your neighborhood',
+    prototypeBlurb: proto?.blurb || '',
+    climateBand: proto?.climateBand || 'general',
+    climateNotes: proto?.climateNotes || '',
+    rawLocation: raw,
+    displayName: raw || 'your area',
+    hasLocation: raw.length > 0,
+  }
 }
