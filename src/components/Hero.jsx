@@ -1,131 +1,103 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { fadeUpVariants, slideInRightVariants } from '../hooks/useScrollReveal'
-
-const dispatchCards = [
-  {
-    tag: 'AI dispatch · Sunday 9:41am',
-    title: 'A 2-hour window opens at 10am.',
-    desc: 'Perfect conditions for a solo morning roam through the preserve.',
-    pill: 'Roam with the pack →'
-  },
-  {
-    tag: 'Rainy Tuesday · Stay & Create',
-    title: 'Pressed flower nature table',
-    desc: 'Transform your window sills into living art installations.',
-    pill: 'Start the craft →'
-  },
-  {
-    tag: 'From the Village · This Week',
-    title: 'The Hard Season of Winter',
-    desc: 'When the dark months hit hard, one particular 1-mile loop became my weekly lifeline. It wasn\'t about the destination.',
-    pill: 'Read the story →'
-  }
-]
+import { fadeUpVariants } from '../hooks/useScrollReveal'
 
 const avatarInitials = ['MH', 'JL', 'SR', 'KC']
 
 export default function Hero() {
   return (
-    <section className="bg-cream pt-24 md:pt-0 md:min-h-screen">
-      <div className="grid md:grid-cols-2 md:min-h-screen">
-        {/* Left Column - Content */}
-        <div className="flex flex-col justify-center px-6 md:px-12 lg:px-16 py-12 md:py-0">
-          {/* Logo */}
+    <section className="relative overflow-hidden bg-cream pt-24 md:pt-0 md:min-h-screen">
+      <div className="grid md:grid-cols-[0.9fr_1.1fr] md:min-h-screen">
+        {/* Content */}
+        <div className="flex flex-col justify-center px-6 md:px-12 lg:px-16 py-14 md:py-24">
           <motion.div
             variants={fadeUpVariants}
             initial="hidden"
             animate="visible"
             custom={0}
-            className="mb-8"
+            className="flex items-center gap-3 mb-8"
           >
-            <img
-              src="/wilder_moms_logo.jpeg"
-              alt="Wilder Moms"
-              className="w-[110px] h-[110px] rounded-full object-cover shadow-ember/20"
-              onError={(e) => {
-                e.target.style.display = 'none'
-              }}
-            />
+            <span className="text-ember font-sans font-medium text-xs uppercase tracking-[0.2em]">
+              Wilder Moms
+            </span>
+            <span className="w-1 h-1 rounded-full bg-inkll" />
+            <span className="text-inkll font-sans text-xs uppercase tracking-[0.15em]">
+              For the second shift
+            </span>
           </motion.div>
 
-          {/* Eyebrow */}
-          <motion.p
-            variants={fadeUpVariants}
-            initial="hidden"
-            animate="visible"
-            custom={1}
-            className="text-ember font-sans font-medium text-sm uppercase tracking-[0.15em] mb-4"
-          >
-            For the mother who wants outside to be the everyday
-          </motion.p>
-
-          {/* Headline */}
           <motion.h1
             variants={fadeUpVariants}
             initial="hidden"
             animate="visible"
-            custom={2}
-            className="font-serif font-light text-4xl md:text-5xl lg:text-6xl text-ink leading-tight mb-6"
+            custom={1}
+            className="font-serif font-light text-5xl md:text-6xl lg:text-7xl text-ink leading-[0.95] mb-7 max-w-xl"
           >
-            Less screen time.<br />
-            <em className="text-ember">More childhood, in muddy shoes.</em>
+            The kind of outside<br />
+            <em className="text-ember">you choose over the couch.</em>
           </motion.h1>
 
-          {/* Subtext */}
           <motion.p
             variants={fadeUpVariants}
             initial="hidden"
             animate="visible"
-            custom={3}
-            className="text-inkl font-sans text-base md:text-lg leading-relaxed mb-4 max-w-md"
+            custom={2}
+            className="text-inkl font-sans text-base md:text-lg leading-relaxed mb-4 max-w-lg"
           >
-            Wilder Moms sends two new nature activities every month — printable,
-            kid-tested, made with what you already have. So mud, sticks, and
-            slow afternoons return to your Tuesday, not a Pinterest board.
+            For the after-work hour when you love them and have nothing left to organize.
+            Wilder finds the nearby places and open-ended ideas where kids can get absorbed
+            while you stay close, sit down, and stop being the cruise director.
           </motion.p>
 
           <motion.p
             variants={fadeUpVariants}
             initial="hidden"
             animate="visible"
-            custom={3.5}
-            className="text-inkll font-sans text-sm italic mb-8 max-w-md"
+            custom={2.5}
+            className="text-ink font-serif text-xl italic mb-8 max-w-md"
           >
-            You don't need a bigger yard, a clearer calendar, or all day. The doorway counts.
+            They get a longer stretch of play. You get a minute of being there without being on.
           </motion.p>
 
-          {/* CTA Buttons */}
           <motion.div
             variants={fadeUpVariants}
             initial="hidden"
             animate="visible"
-            custom={4}
-            className="mb-8 flex flex-col sm:flex-row gap-3"
+            custom={3}
+            className="mb-6 flex flex-col sm:flex-row gap-3"
           >
             <Link
-              to="/wilder-homes?tab=premium"
-              className="inline-flex items-center justify-center gap-2 bg-ember text-white px-7 py-3 rounded-full font-medium text-base hover:bg-terra transition-colors"
+              to="/wilder-trails"
+              className="inline-flex items-center justify-center gap-2 bg-ember text-white px-7 py-3 rounded-full font-medium text-sm hover:bg-terra transition-colors"
             >
-              See this month's builds
+              Find somewhere to stop
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
             </Link>
             <Link
-              to="/wilder-trails"
-              className="inline-flex items-center justify-center gap-2 px-7 py-3 rounded-full font-medium text-base text-ember border border-ember hover:bg-ember/5 transition-colors"
+              to="/wilder-homes"
+              className="inline-flex items-center justify-center gap-2 px-7 py-3 rounded-full font-medium text-sm text-ember border border-ember hover:bg-ember/5 transition-colors"
             >
-              Find a trail near you
+              Make it easy at home
             </Link>
           </motion.div>
 
-          {/* Social Proof */}
+          <motion.p
+            variants={fadeUpVariants}
+            initial="hidden"
+            animate="visible"
+            custom={4}
+            className="text-inkll font-sans text-xs mb-7"
+          >
+            No packing list. No activity to lead. Start close to home.
+          </motion.p>
+
           <motion.div
             variants={fadeUpVariants}
             initial="hidden"
             animate="visible"
-            custom={6}
+            custom={5}
             className="flex items-center gap-4"
           >
             <div className="flex -space-x-2">
@@ -142,45 +114,62 @@ export default function Hero() {
               ))}
             </div>
             <p className="text-inkl font-sans text-sm">
-              <span className="font-medium text-ink">240+</span> moms already in the pack
+              <span className="font-medium text-ink">240+</span> moms choosing small starts
             </p>
           </motion.div>
+
+          <motion.p
+            variants={fadeUpVariants}
+            initial="hidden"
+            animate="visible"
+            custom={6}
+            className="mt-6 max-w-md text-inkll font-serif italic text-sm leading-relaxed"
+          >
+            Children need daily freedom more than occasional adventure.
+          </motion.p>
         </div>
 
-        {/* Right Column - Visual Panel with Dispatch Cards */}
-        <div className="hidden md:flex items-center justify-center bg-gradient-to-br from-forest to-forest/80 relative overflow-hidden">
-          {/* Decorative background elements */}
-          <div className="absolute inset-0 opacity-10">
-            <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-gold rounded-full blur-3xl" />
-            <div className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-olive rounded-full blur-3xl" />
-          </div>
+        {/* Visual: a child-led place with a mother's view */}
+        <div className="relative min-h-[470px] md:min-h-0 overflow-hidden bg-forest">
+          <img
+            src="/builds/fairy-apothecary.png"
+            alt="Children absorbed in an open-ended garden activity"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-forest/40 via-transparent to-ink/80" />
+          <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-transparent to-transparent" />
 
-          {/* Dispatch Cards */}
-          <div className="relative z-10 flex flex-col gap-6 pr-12">
-            {dispatchCards.map((card, i) => (
-              <motion.div
-                key={i}
-                variants={slideInRightVariants}
-                initial="hidden"
-                animate="visible"
-                custom={i}
-                className="w-80 p-5 rounded-xl bg-white/8 border border-white/15 backdrop-blur-sm"
-              >
-                <p className="text-peach/80 font-sans text-xs uppercase tracking-wide mb-2">
-                  {card.tag}
-                </p>
-                <h3 className="text-white font-serif text-xl mb-2">
-                  {card.title}
-                </h3>
-                <p className="text-white/60 font-sans text-sm mb-4">
-                  {card.desc}
-                </p>
-                <span className="inline-block px-3 py-1.5 rounded-full bg-peach/20 text-peach font-sans text-xs">
-                  {card.pill}
-                </span>
-              </motion.div>
-            ))}
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: -16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.6 }}
+            className="absolute top-6 left-6 md:top-10 md:left-10"
+          >
+            <span className="inline-flex items-center gap-2 rounded-full bg-white/90 px-3 py-2 text-ink font-sans text-xs uppercase tracking-wider shadow-lg">
+              <span className="w-2 h-2 rounded-full bg-olive" />
+              The mother's view
+            </span>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 24 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.7, duration: 0.7 }}
+            className="absolute right-5 bottom-6 md:right-10 md:bottom-10 w-[min(20rem,calc(100%-2.5rem))] rounded-2xl bg-cream/95 p-5 shadow-2xl backdrop-blur-sm"
+          >
+            <p className="text-ember font-sans text-[10px] font-medium uppercase tracking-[0.2em] mb-2">
+              A 5:42 p.m. kind of place
+            </p>
+            <h2 className="font-serif text-2xl text-ink leading-tight mb-3">
+              Close enough to see. Far enough to let them begin.
+            </h2>
+            <div className="grid grid-cols-2 gap-2 text-inkl font-sans text-xs">
+              <span className="border-t border-inkll/50 pt-2">A seat in the shade</span>
+              <span className="border-t border-inkll/50 pt-2">Room to make a mess</span>
+              <span className="border-t border-inkll/50 pt-2">One easy way in</span>
+              <span className="border-t border-inkll/50 pt-2">No directing required</span>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>

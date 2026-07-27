@@ -8,6 +8,8 @@ import { useRecommendations } from '../hooks/useRecommendations'
 import { findTrailsWithAI, getRemainingQueries } from './aiTrailFinderUtils'
 import ProgressStepper from './ProgressStepper'
 import HikeCard from './HikeCard'
+import { useWilderIndex } from '../wilder-index/WilderIndexContext'
+import { pickTrailsForPattern, describeTimeBudget } from './trailsForPattern'
 
 // Time context helper
 function getTimeContext() {
@@ -101,6 +103,7 @@ const ageLabels = [
 export default function TrailsPage() {
   const navigate = useNavigate()
   const { location, familyInfo, timeWindow } = useWilderTrails()
+  const { state, scores } = useWilderIndex()
   
   // Weather hook - only if we have location
   const weather = useWeather(location?.lat, location?.lon)
@@ -138,6 +141,17 @@ export default function TrailsPage() {
     if (!weatherAssessment) return null;
     return getWeatherVibe(weatherAssessment, timeContext);
   }, [weatherAssessment, timeContext]);
+
+  // Pattern-based recommendations from the Wilder Index profile
+  const patternPicks = useMemo(() => {
+    if (!state?.onboarding?.completed) return []
+    return pickTrailsForPattern({
+      profile: state.onboarding.answers,
+      scores,
+      limit: 3,
+    })
+  }, [state?.onboarding?.completed, state?.onboarding?.answers, scores])
+  const patternBudgetLabel = describeTimeBudget(state?.onboarding?.answers?.['specifics.when'])
   
   // Fetch AI recommendations on mount
   useEffect(() => {
@@ -280,6 +294,69 @@ export default function TrailsPage() {
               <p className="font-sans text-inkl">Loading trails...</p>
             </div>
           </motion.div>
+        )}
+
+        {/* Starter Trails - Show these first while AI is thinking */}
+        {!aiLoading && aiRecommendations.length === 0 && isReady && recommendedHikes.length > 0 && (
+          <>
+            {/* Pattern-based picks from the Wilder Index (if profile complete) */}
+            {patternPicks.length > 0 && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="mb-8"
+              >
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 bg-ember/15 rounded-full flex items-center justify-center">
+                    <span className="w-2 h-2 rounded-full bg-ember animate-pulse" />
+                  </div>
+                  <div>
+                    <h2 className="font-serif text-xl text-ink">From your Wilder pattern</h2>
+                    <p className="font-sans text-xs text-inkl">
+                      Time budget {patternBudgetLabel}, picked for your lows on the chart
+                    </p>
+                  </div>
+                </div>
+                <div className="space-y-3">
+                  {patternPicks.map(({ hike, reasons }, index) => (
+                    <motion.div
+                      key={hike.id}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.08 }}
+                      onClick={() => handleTrailSelect(hike.id)}
+                      className="bg-cream rounded-xl p-4 border border-ember/20 hover:border-ember/40 hover:shadow-md transition-all cursor-pointer"
+                    >
+                      <div className="flex items-start gap-4">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${
+                              hike.difficulty === 'easy' ? 'bg-olive/20 text-forest' :
+                              hike.difficulty === 'moderate' ? 'bg-gold/20 text-ink' :
+                              'bg-ember/20 text-ember'
+                            }`}>
+                              {hike.difficulty}
+                            </span>
+                            <span className="text-xs text-inkl">{hike.durationLabel}</span>
+                          </div>
+                          <h3 className="font-serif text-lg text-ink">{hike.title}</h3>
+                          <p className="text-sm text-inkl">{hike.region}, {hike.state}</p>
+                          {reasons.length > 0 && (
+                            <p className="text-xs text-inkll italic mt-2">
+                              {reasons.slice(0, 2).join(' · ')}
+                            </p>
+                          )}
+                        </div>
+                        <svg className="w-5 h-5 text-ember flex-shrink-0 mt-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </>
         )}
 
         {/* Starter Trails - Show these first while AI is thinking */}

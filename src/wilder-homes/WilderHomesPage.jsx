@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import { Link, useSearchParams } from 'react-router-dom'
-import { buildCategories, getBuildsByCategory } from './builds'
+import { buildCategories, builds, getBuildsByCategory } from './builds'
 import BuildCard from './BuildCard'
 import CraftCard from './CraftCard'
 import WildRoom from './WildRoom'
@@ -12,6 +12,87 @@ import PremiumTab from './PremiumTab'
 import { activities } from './activities'
 import { crafts } from './crafts'
 import { fadeUpVariants } from '../hooks/useScrollReveal'
+import { useWilderIndex } from '../wilder-index/WilderIndexContext'
+import { DIMENSIONS, DIMENSION_ORDER } from '../wilder-index/dimensions'
+import { kidsAges } from '../wilder-index/personalize'
+
+// Map each build category to the dimensions it primarily supports. Used to
+// surface "for your pattern" recommendations from profile scores.
+const BUILD_DIM = {
+  'Mud Kitchens': ['adventure', 'dailyNature', 'wonder'],
+  'Garden Beds': ['dailyNature', 'restoration', 'wonder'],
+  'Nature Play': ['wonder', 'adventure', 'dailyNature'],
+  'Climbing Structures': ['adventure', 'independence'],
+  'Water Play': ['wonder', 'restoration', 'dailyNature'],
+  'Cozy Hideouts': ['restoration', 'belonging'],
+  'Weekend Builds': ['wonder', 'adventure'],
+}
+
+function ageFits(buildAge, kidAgeBuckets) {
+  if (!buildAge || kidAgeBuckets.length === 0) return true
+  // parse "2-6" ranges
+  const m = String(buildAge).match(/(\d+)\s*[-–]\s*(\d+)/)
+  if (!m) return true
+  const min = parseInt(m[1], 10)
+  const max = parseInt(m[2], 10)
+  // bucket midpoint years
+  const bucketMid = { '0-2': 1, '2-4': 3, '5-7': 6, '8-11': 9, '12+': 13 }
+  return kidAgeBuckets.some((b) => {
+    const mid = bucketMid[b]
+    return mid >= min - 1 && mid <= max + 1
+  })
+}
+
+function patternBuilds({ scores, kids, targetDims, builds, limit = 4 }) {
+  if (!scores) return []
+  const buckets = kidsAges({ answers: { 'specifics.kids': kids } })
+  return builds
+    .map((b) => {
+      const dims = BUILD_DIM[b.category] || []
+      let best = null
+      for (const d of targetDims) {
+        const idx = dims.indexOf(d)
+        if (idx >= 0 && (best == null || idx < best.idx)) {
+          best = { dim: d, idx }
+        }
+      }
+      return { build: b, score: best ? 100 - best.idx * 5 + (DIMENSIONS[best.dim] ? (100 - scores[best.dim]) : 0) : 0, dim: best ? best.dim : null }
+    })
+    .filter((x) => x.dim && ageFits(x.build.ageRange, buckets))
+    .sort((a, b) => b.score - a.score)
+    .slice(0, limit)
+    .map((x) => ({ ...x.build, _patternDim: x.dim }))
+}
+
+function PatternBanner() {
+  const { state, scores } = useWilderIndex()
+  if (!state.onboarding.completed || !scores) return null
+  const ranked = Object.keys(DIMENSIONS).sort((a, b) => scores[a] - scores[b])
+  const lows = ranked.slice(0, 2)
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4 }}
+      className="bg-cream border border-ember/20 rounded-3xl p-5 md:p-6 mb-8 text-left"
+    >
+      <p className="text-ember text-[10px] font-medium uppercase tracking-[0.2em] mb-2">
+        For your Wilder pattern
+      </p>
+      <p className="text-inkl text-sm leading-relaxed">
+        Based on the field check, your two lowest dimensions are{' '}
+        <span className="text-ink font-medium">{DIMENSIONS[lows[0]].name}</span>
+        {lows[1] && (
+          <>
+            {' '}and <span className="text-ink font-medium">{DIMENSIONS[lows[1]].name}</span>
+          </>
+        )}
+        . The Guides and Activities tabs are pre-filtered with that in mind;
+        the rest of the catalog is below.
+      </p>
+    </motion.div>
+  )
+}
 
 // WilderHomesPage — /wilder-homes
 // Unified 5-tab hub for the free Wilder Homes destination:
@@ -79,6 +160,11 @@ export default function WilderHomesPage() {
             products — everything you need to bring the outdoors in.
           </p>
         </motion.div>
+
+        {/* Pattern banner shown when the user has completed the field check */}
+        <div className="max-w-2xl mx-auto">
+          <PatternBanner />
+        </div>
 
         {/* Internal tab navigation */}
         <div className="flex flex-wrap gap-2 mb-10 justify-center">
@@ -156,6 +242,23 @@ function GuidesTab() {
   const [selectedCategory, setSelectedCategory] = useState('All')
   const [selectedMaterials, setSelectedMaterials] = useState([])
   const [showMaterialPicker, setShowMaterialPicker] = useState(false)
+  const { state, scores } = useWilderIndex()
+  const profile = state?.onboarding?.answers
+  const kids = profile?.['specifics.kids'] || []
+  const completed = state?.onboarding?.completed
+
+  const recommendedBuilds = useMemo(() => {
+    if (!completed || !scores) return []
+    const ranked = Object.keys(DIMENSIONS).sort((a, b) => scores[a] - scores[b])
+    const targetDims = ranked.slice(0, 3)
+    return patternBuilds({
+      scores,
+      kids,
+      targetDims,
+      builds: builds,
+      limit: 3,
+    })
+  }, [completed, scores, kids])
 
   const filteredBuilds = useMemo(() => {
     let result = getBuildsByCategory(selectedCategory)
@@ -263,6 +366,34 @@ function GuidesTab() {
                   <p className="text-xs text-inkl mt-1">
                     Missing {activity.missingMaterials.length}
                   </p>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {recommendedBuilds.length > 0 && (
+        <div className="mb-10 bg-cream rounded-2xl border border-ember/15 p-5 md:p-6">
+          <div className="flex items-baseline justify-between mb-4">
+            <div>
+              <p className="text-ember text-[10px] font-medium uppercase tracking-[0.2em] mb-1">
+                For your pattern
+              </p>
+              <h3 className="font-serif text-xl text-ink leading-tight">
+                Builds connected to your lowest dimensions
+              </h3>
+            </div>
+          </div>
+          <div className="grid md:grid-cols-3 gap-4">
+            {recommendedBuilds.map((build, i) => (
+              <div key={build.id} className="relative">
+                <BuildCard build={build} index={i} />
+                {build._patternDim && (
+                  <span className="absolute top-3 right-3 inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[10px] font-medium uppercase tracking-wider bg-white/90 border border-ember/30 text-ember">
+                    <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: DIMENSIONS[build._patternDim].color }} />
+                    {DIMENSIONS[build._patternDim].name}
+                  </span>
                 )}
               </div>
             ))}

@@ -10,6 +10,143 @@ import {
 } from '../wilder-builds/buildsLibrary'
 import { useScrollReveal, fadeUpVariants } from '../hooks/useScrollReveal'
 
+function AfterWorkHour() {
+  const [ref, visible] = useScrollReveal()
+
+  const principles = [
+    {
+      number: '01',
+      title: 'Easy to enter',
+      text: 'A nearby trail, a backyard corner, or a doorstep. No expedition required.',
+    },
+    {
+      number: '02',
+      title: 'Interesting enough',
+      text: 'Water, sticks, dirt, and room to make a world without an adult running it.',
+    },
+    {
+      number: '03',
+      title: 'A place to stop',
+      text: 'A seat, a sightline, and permission to be close without being constantly on.',
+    },
+  ]
+
+  return (
+    <section ref={ref} className="py-20 md:py-28 bg-ink text-white">
+      <div className="max-w-6xl mx-auto px-6">
+        <div className="grid md:grid-cols-[1.05fr_0.95fr] gap-12 md:gap-20 items-start">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={visible ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+            transition={{ duration: 0.7 }}
+          >
+            <p className="text-gold text-xs font-medium uppercase tracking-[0.2em] mb-4">
+              The question changed
+            </p>
+            <h2 className="font-serif font-light text-4xl md:text-5xl lg:text-6xl leading-tight mb-6">
+              What kind of outdoor place would a tired working mom choose over the couch?
+            </h2>
+            <p className="text-white/60 text-base md:text-lg leading-relaxed max-w-xl">
+              Not a playground that needs constant supervision. Not an activity that needs
+              one more thing from her. A place where children can become absorbed in their
+              own small world while their mother gets a minute to exhale.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={visible ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+            transition={{ duration: 0.7, delay: 0.15 }}
+            className="border-t border-white/20"
+          >
+            {principles.map((principle) => (
+              <div key={principle.number} className="grid grid-cols-[2.5rem_1fr] gap-4 py-5 border-b border-white/15">
+                <span className="font-serif italic text-gold text-xl">{principle.number}</span>
+                <div>
+                  <h3 className="font-serif text-2xl mb-1">{principle.title}</h3>
+                  <p className="text-white/55 text-sm leading-relaxed">{principle.text}</p>
+                </div>
+              </div>
+            ))}
+
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={visible ? { opacity: 1 } : { opacity: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="mt-8 text-white/45 font-serif italic text-sm"
+            >
+              The best play has no instructions.
+            </motion.p>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function ArchitectMotherSection() {
+  const [ref, visible] = useScrollReveal()
+
+  return (
+    <section ref={ref} className="py-20 md:py-28 bg-parchment">
+      <div className="max-w-6xl mx-auto px-6">
+        <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+          <motion.div
+            initial={{ opacity: 0, x: -18 }}
+            animate={visible ? { opacity: 1, x: 0 } : { opacity: 0, x: -18 }}
+            transition={{ duration: 0.7 }}
+            className="relative aspect-[4/3] overflow-hidden rounded-3xl"
+          >
+            <img
+              src="/images/Mission.png"
+              alt="A mother watching her children make something together"
+              className="w-full h-full object-cover"
+              loading="lazy"
+            />
+            <div className="absolute left-4 bottom-4 bg-cream/95 rounded-xl px-4 py-3 max-w-[14rem]">
+              <p className="text-ember text-[10px] uppercase tracking-[0.18em] font-medium mb-1">The design brief</p>
+              <p className="font-serif text-lg leading-tight text-ink">Make room for her, too.</p>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 18 }}
+            animate={visible ? { opacity: 1, x: 0 } : { opacity: 0, x: 18 }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+          >
+            <p className="text-ember text-xs font-medium uppercase tracking-[0.2em] mb-4">
+              From an architect + a mother
+            </p>
+            <h2 className="font-serif italic font-light text-4xl md:text-5xl text-ink leading-tight mb-5">
+              Design for the person who has been carrying the day.
+            </h2>
+            <p className="text-inkl text-base leading-relaxed mb-4">
+              I keep coming back to one question: what kind of outdoor place would I choose
+              over sitting on the couch after work? The answer is not a bigger adventure. It is
+              a place with enough invitation for my kids and enough quiet for me.
+            </p>
+            <p className="text-inkl text-base leading-relaxed mb-7">
+              When the environment restores the mother, children get longer, less interrupted
+              stretches of independent exploration too. That is the Wilder idea: better childhoods
+              can begin with giving her somewhere to sit.
+            </p>
+            <p className="text-inkll font-serif italic text-sm mb-7">
+              Connection happens in repeated places.
+            </p>
+            <Link
+              to="/wilder-philosophy"
+              className="inline-flex items-center gap-2 text-ember font-medium text-sm uppercase tracking-wider hover:text-terra transition-colors"
+            >
+              Read the design brief
+              <span aria-hidden="true">→</span>
+            </Link>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
 // ---------------------------------------------------------------------
 // This Month's Drop — show both PDFs from the current drop as preview
 // tiles with type badges. Helps visitors see the value before subscribing.
@@ -31,12 +168,18 @@ function CurrentDropShowcase() {
           className="text-center mb-10"
         >
           <p className="text-ember text-xs font-medium uppercase tracking-[0.2em] mb-3">
-            This month · {currentDrop.month} {currentDrop.year}
+            When your brain is done for the day
           </p>
           <h2 className="font-serif italic text-3xl md:text-4xl lg:text-5xl text-ink mb-3">
-            {currentDrop.title}
+            The plan is already made.
           </h2>
-          <p className="text-inkl max-w-2xl mx-auto">{currentDrop.subtitle}</p>
+          <p className="text-inkl max-w-2xl mx-auto">
+            Open-ended builds and experiments that let kids take the lead while you stay nearby,
+            not on duty. Two new ways to begin, without having to become the activity director.
+          </p>
+          <p className="text-inkll font-serif italic text-sm max-w-2xl mx-auto mt-5">
+            Parents need restoration too.
+          </p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
@@ -126,14 +269,15 @@ function PremiumSubscriptionPitch() {
           className="text-center mb-12"
         >
           <p className="text-white/70 text-xs font-medium uppercase tracking-[0.2em] mb-3">
-            The Wilder Builds subscription
+            For the 4:00 p.m. version of you
           </p>
           <h2 className="font-serif italic text-4xl md:text-5xl lg:text-6xl text-white mb-4 leading-tight">
-            Two new PDFs every month.<br />
-            <span className="text-gold">One Architect. One Lab.</span>
+            Less to organize.<br />
+            <span className="text-gold">More room to exhale.</span>
           </h2>
           <p className="text-white/80 text-lg max-w-2xl mx-auto leading-relaxed">
-            Beautifully designed, kid-tested, printable. Your library grows with every drop — past and future PDFs included.
+            One Architect Blueprint and one Lab Activity every month. Open-ended, printable,
+            and made for kids to begin without a parent becoming the cruise director.
           </p>
         </motion.div>
 
@@ -168,7 +312,7 @@ function PremiumSubscriptionPitch() {
             to="/wilder-homes?tab=premium"
             className="inline-flex items-center gap-2 bg-white text-forest px-8 py-4 rounded-full font-semibold text-lg hover:bg-cream transition-colors shadow-xl"
           >
-            See Premium Builds
+            See the monthly builds
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
@@ -209,27 +353,27 @@ function PricingPill({ amount, cadence, sub, badge, highlight = false }) {
 const paths = [
   {
     to: '/wilder-trails',
-    eyebrow: 'For exploring outdoors',
-    heading: 'Find a trail.',
-    subtitle: 'Curated hikes, kid-friendly by age, with magic moments to make every walk memorable.',
+    eyebrow: 'For the after-work hour',
+    heading: 'Find somewhere to stop.',
+    subtitle: 'A nearby route with places to sit, watch, and let them go on ahead without turning you into the trip leader.',
     accentClass: 'bg-ember/15',
     blobFrom: '#B43C1E',
     blobTo: '#F2A57B',
   },
   {
     to: '/wilder-homes',
-    eyebrow: 'For building outdoors-in',
-    heading: 'Make at home.',
-    subtitle: 'Free DIY guides, hands-on activities, an interactive design tool, and curated eco products.',
+    eyebrow: 'For a yes-space at home',
+    heading: 'Make room for play.',
+    subtitle: 'Backyard and balcony ideas where kids can start on their own, using sticks, water, scraps, and what is already around.',
     accentClass: 'bg-olive/15',
     blobFrom: '#5A6428',
     blobTo: '#96963C',
   },
   {
     to: '/wilder-homes?tab=premium',
-    eyebrow: 'For growing outdoors every month',
-    heading: 'Get monthly builds.',
-    subtitle: 'Two themed PDFs every month on the 1st — one Architect Blueprint, one Lab Activity.',
+    eyebrow: 'For when you have nothing left to invent',
+    heading: 'Open the monthly plan.',
+    subtitle: 'Two ready-made invitations a month. Set them out, step back, and let the play belong to them.',
     accentClass: 'bg-gold/15',
     blobFrom: '#D2961E',
     blobTo: '#F2A57B',
@@ -249,11 +393,14 @@ function ChooseYourPathTiles() {
           className="text-center mb-12"
         >
           <p className="text-ember text-xs font-medium uppercase tracking-[0.2em] mb-4">
-            Three ways to start
+            Use what you need today
           </p>
           <h2 className="font-serif italic text-3xl md:text-4xl lg:text-5xl text-ink">
-            Pick your path.
+            Outside, without the production.
           </h2>
+          <p className="text-inkll font-serif italic text-sm max-w-xl mx-auto mt-4">
+            A neighborhood matters more than a backyard.
+          </p>
         </motion.div>
 
         <div className="grid md:grid-cols-3 gap-6">
@@ -285,7 +432,7 @@ function ChooseYourPathTiles() {
                     {p.subtitle}
                   </p>
                   <div className="mt-6 flex items-center gap-2 text-inkll group-hover:text-ember transition-colors">
-                    <span className="font-sans text-xs uppercase tracking-wider">Explore</span>
+                    <span className="font-sans text-xs uppercase tracking-wider">See the option</span>
                     <svg
                       className="w-4 h-4 group-hover:translate-x-1 transition-transform"
                       fill="none"
@@ -329,7 +476,9 @@ export default function HomePage() {
   return (
     <>
       <Hero />
+      <AfterWorkHour />
       <CurrentDropShowcase />
+      <ArchitectMotherSection />
       <ChooseYourPathTiles />
       <PremiumSubscriptionPitch />
     </>
