@@ -36,7 +36,7 @@ export default function FreeReading() {
     <div className="relative">
       <div className="absolute top-5 left-5 z-10">
         <Link to="/" className="text-inkll text-xs hover:text-ink transition-colors">
-          ← Back to home
+          Back to home
         </Link>
       </div>
 

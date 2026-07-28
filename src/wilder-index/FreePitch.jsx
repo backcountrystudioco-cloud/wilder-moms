@@ -2,22 +2,18 @@ import { motion } from 'framer-motion'
 
 const PROMISES = [
   {
-    icon: '✨',
     title: 'Your Wilder Archetype',
     body: 'A snapshot of how your family naturally lives and plays.',
   },
   {
-    icon: '📍',
     title: 'Your Habitat Snapshot',
     body: 'See the hidden strengths of your home, neighborhood, and weekly rhythms.',
   },
   {
-    icon: '💡',
     title: 'Your Biggest Opportunity',
     body: 'The one area with the greatest potential to make family life easier and more connected.',
   },
   {
-    icon: '🌱',
     title: 'One Small Win',
     body: 'A simple idea you can try today.',
   },
@@ -76,7 +72,6 @@ export default function FreePitch({ onStart, onSkip }) {
                 key={p.title}
                 className="bg-parchment border border-inkll/10 rounded-2xl p-4"
               >
-                <p className="text-xl mb-1.5">{p.icon}</p>
                 <p className="font-serif text-ink text-base mb-1">{p.title}</p>
                 <p className="text-inkl text-sm leading-snug">{p.body}</p>
               </div>
@@ -89,7 +84,6 @@ export default function FreePitch({ onStart, onSkip }) {
               className="inline-flex items-center gap-2 bg-ember text-white px-9 py-3.5 rounded-full font-medium text-base hover:bg-terra transition-colors"
             >
               Begin the 3-minute reading
-              <span aria-hidden="true">→</span>
             </button>
             {onSkip && (
               <button

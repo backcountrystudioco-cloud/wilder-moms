@@ -303,7 +303,7 @@ export default function FreeAssessment({ onComplete }) {
             <div className="flex items-center justify-between text-xs">
               {index > 0 ? (
                 <button onClick={handleBack} className="text-inkll hover:text-ink transition-colors">
-                  ← Back
+                  Back
                 </button>
               ) : (
                 <span />
@@ -316,7 +316,7 @@ export default function FreeAssessment({ onComplete }) {
                     canAdvance ? 'text-ember hover:text-terra' : 'text-inkll/50 cursor-not-allowed'
                   }`}
                 >
-                  {isLast ? 'See your reading →' : 'Continue →'}
+                  {isLast ? 'See your reading' : 'Continue'}
                 </button>
               )}
             </div>

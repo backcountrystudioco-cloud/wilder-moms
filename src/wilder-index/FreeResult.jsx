@@ -49,7 +49,7 @@ export default function FreeResult({ reading, onUnlock, onRestart }) {
           className="bg-white rounded-3xl border border-inkll/10 p-7 md:p-9 mb-8"
         >
           <p className="text-ember text-[10px] font-medium uppercase tracking-[0.2em] mb-3">
-            ✨ Your Wilder Archetype
+            Your Wilder Archetype
           </p>
           <h2 className="font-serif text-3xl md:text-4xl text-ink leading-tight mb-3">
             {archetype.name}
@@ -66,7 +66,7 @@ export default function FreeResult({ reading, onUnlock, onRestart }) {
           className="mb-8"
         >
           <p className="text-ember text-[10px] font-medium uppercase tracking-[0.2em] mb-3">
-            📍 Your Habitat Snapshot
+            Your Habitat Snapshot
           </p>
           <p className="text-inkl text-base md:text-lg leading-relaxed font-serif">
             {snapshot}
@@ -80,7 +80,7 @@ export default function FreeResult({ reading, onUnlock, onRestart }) {
           className="mb-8"
         >
           <p className="text-ember text-[10px] font-medium uppercase tracking-[0.2em] mb-3">
-            💡 Your Biggest Opportunity
+            Your Biggest Opportunity
           </p>
           <p className="text-inkl text-base md:text-lg leading-relaxed font-serif">
             {opportunity}
@@ -95,7 +95,7 @@ export default function FreeResult({ reading, onUnlock, onRestart }) {
             className="bg-parchment rounded-3xl border border-forest/15 p-7 md:p-9 mb-12"
           >
             <p className="text-forest text-[10px] font-medium uppercase tracking-[0.2em] mb-3">
-              🌱 One Small Win
+              One Small Win
             </p>
             <h3 className="font-serif text-2xl text-ink leading-tight mb-3">
               {smallWin.title}
@@ -152,7 +152,6 @@ export default function FreeResult({ reading, onUnlock, onRestart }) {
               className="inline-flex items-center gap-2 bg-ember text-white px-8 py-3.5 rounded-full font-medium text-base hover:bg-terra transition-colors w-full sm:w-auto justify-center"
             >
               Unlock Your Wilder Habitat
-              <span aria-hidden="true">→</span>
             </button>
             {onRestart && (
               <button
