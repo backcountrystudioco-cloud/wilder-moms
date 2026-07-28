@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
+import { SignInButton, SignUpButton, useAuth } from '@clerk/react'
 import { WilderIndexProvider, useWilderIndex } from './WilderIndexContext'
 import OnboardingFlow from './OnboardingFlow'
 import RevealScreen from './RevealScreen'
@@ -178,14 +179,70 @@ function OnboardingGate({ onDone }) {
   return <OnboardingFlow onCompleted={onDone} />
 }
 
+function SignInGate() {
+  return (
+    <div className="min-h-screen bg-cream pt-24 pb-20 px-6">
+      <div className="pt-6 md:pt-8">
+        <AuthCorner />
+      </div>
+      <div className="max-w-xl mx-auto text-center mt-12 md:mt-16">
+        <p className="text-ember text-xs font-medium uppercase tracking-[0.2em] mb-5">
+          The Wilder Index
+        </p>
+        <h1 className="font-serif font-light text-4xl md:text-5xl text-ink leading-tight mb-5">
+          Sign in to read your <em className="text-ember">neighborhood.</em>
+        </h1>
+        <p className="text-inkl text-base md:text-lg leading-relaxed max-w-md mx-auto mb-8">
+          Your Wilder Index is a personal dashboard of your home, your block, and the small
+          changes that compound. Sign in to see yours, or take the free reading first.
+        </p>
+
+        <div className="flex flex-col sm:flex-row gap-3 items-center justify-center mb-6">
+          <SignUpButton mode="modal" forceRedirectUrl="/">
+            <button
+              type="button"
+              className="bg-ember text-white font-sans font-medium text-sm px-6 py-3 rounded-full hover:bg-forest transition-colors duration-300 w-full sm:w-auto"
+            >
+              Create your account
+            </button>
+          </SignUpButton>
+          <SignInButton mode="modal" forceRedirectUrl="/">
+            <button
+              type="button"
+              className="font-sans font-medium text-sm px-6 py-3 text-ink hover:text-ember transition-colors border border-inkll/20 rounded-full w-full sm:w-auto hover:border-ember/40"
+            >
+              I already have one
+            </button>
+          </SignInButton>
+        </div>
+
+        <Link
+          to="/discover"
+          className="text-inkll text-sm hover:text-ink transition-colors"
+        >
+          Or try the free 3-minute reading first →
+        </Link>
+      </div>
+    </div>
+  )
+}
+
 function IndexInner() {
   const { state, scores, summary } = useWilderIndex()
+  const { isSignedIn, isLoaded } = useAuth()
   const [seenReveal, setSeenReveal] = useState(() => {
     try { return window.localStorage.getItem(REVEAL_KEY) === '1' } catch (e) { return false }
   })
 
+  // The welcome / sales pitch is open to everyone — visitors see it whether
+  // or not they have a Clerk session. The dashboard itself still requires
+  // sign-in: signed-out users with a completed profile get the SignInGate.
   if (!state.onboarding.completed) {
     return <OnboardingGate onDone={() => { setSeenReveal(false) }} />
+  }
+
+  if (isLoaded && !isSignedIn) {
+    return <SignInGate />
   }
 
   if (!seenReveal && scores) {

@@ -11,7 +11,6 @@ import ExplorePage from './pages/ExplorePage'
 import SurveyPage from './pages/SurveyPage'
 import WilderIndexPage from './wilder-index/WilderIndexPage'
 import FreeReading from './wilder-index/FreeReading'
-import SellPage from './pages/SellPage'
 import { WilderIndexProvider } from './wilder-index/WilderIndexContext'
 import LocationPage from './wilder-trails/LocationPage'
 import WhosComingPage from './wilder-trails/WhosComingPage'
@@ -38,7 +37,7 @@ function App() {
           <Routes>
             <Route path="/" element={<WilderIndexPage />} />
             <Route path="/discover" element={<FreeReading />} />
-            <Route path="/sell" element={<SellPage />} />
+            <Route path="/join" element={<JoinPage />} />
             <Route path="/welcome" element={<HomePage />} />
             <Route path="/landing" element={<LandingPage />} />
             <Route path="/join" element={<JoinPage />} />

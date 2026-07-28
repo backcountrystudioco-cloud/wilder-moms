@@ -452,7 +452,7 @@ function ContextStep({ answers, onChange, onBack, onNext, isLast }) {
 
 function Welcome({ onStart }) {
   const navigate = useNavigate()
-  const goToSell = () => navigate('/sell')
+  const goToJoin = () => navigate('/join')
   return (
     <div className="overflow-hidden">
       {/* HERO — the lead question */}
@@ -583,7 +583,7 @@ function Welcome({ onStart }) {
             Five minutes · Seven chapters
           </p>
           <button
-            onClick={goToSell}
+            onClick={goToJoin}
             className="inline-flex items-center gap-2 bg-ember text-white px-10 py-4 rounded-full font-medium text-base hover:bg-terra transition-colors"
           >
             Build my Wilder Habitat
@@ -616,8 +616,8 @@ export default function OnboardingFlow({ onCompleted }) {
   const [step, setStep] = useState({ kind: 'welcome' })
   const [localContext, setLocalContext] = useState({ _index: 0 })
 
-  // When arriving from the /sell CTA, skip the welcome screen and start at
-  // the brand cards reading. The flag is set by SellPage and cleared once
+  // When arriving from the /join CTA, skip the welcome screen and start at
+  // the brand cards reading. The flag is set by JoinPage and cleared once
   // consumed so it doesn't apply on subsequent visits.
   useEffect(() => {
     let flag = null
