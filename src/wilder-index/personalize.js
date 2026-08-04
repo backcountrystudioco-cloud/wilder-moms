@@ -73,6 +73,79 @@ export function kidsAges(profile) {
   return profile?.answers?.['specifics.kids'] || []
 }
 
+// ──────────────────────────────────────────────────────────────────────
+// New context signals — added 2025 to capture what's most cited as "what's
+// actually in the way": schedule shape, partner alignment, the cost of an
+// hour outside, and access constraints. All are optional. When unset, the
+// helpers return empty strings so existing copy paths behave identically.
+// ──────────────────────────────────────────────────────────────────────
+
+export function scheduleAnswer(profile) {
+  return profile?.answers?.['specifics.schedule'] || null
+}
+
+export function partnerAnswer(profile) {
+  return profile?.answers?.['specifics.partner'] || null
+}
+
+export function energyAnswer(profile) {
+  return profile?.answers?.['specifics.energy'] || null
+}
+
+export function accessAnswer(profile) {
+  const raw = profile?.answers?.['specifics.access']
+  return Array.isArray(raw) ? raw : []
+}
+
+// Editorial string for the reading — only emits text when the answer is
+// "load-bearing" (work-week crunch, solo parenting, drained). Empty string
+// otherwise so the paragraphs read normally for users who didn't answer or
+// who fall in the neutral buckets.
+export function describeSchedule(profile) {
+  const s = scheduleAnswer(profile)
+  if (s === 'full_time_work' || s === 'part_time_work') return 'during the work-week crunch'
+  if (s === 'hybrid_work') return 'in the windows between work and home'
+  if (s === 'stay_at_home' || s === 'between_jobs') return 'on days that flow into one another'
+  return ''
+}
+
+export function describePartner(profile) {
+  const p = partnerAnswer(profile)
+  if (p === 'partner_aligned') return 'even when you\'re both fried'
+  if (p === 'partner_mixed') return 'even though you don\'t always agree'
+  if (p === 'partner_limited') return 'even with limited backup'
+  if (p === 'solo') return 'on your own'
+  if (p === 'other_caregivers') return 'with a wider village on call'
+  return ''
+}
+
+export function describeEnergy(profile) {
+  const e = energyAnswer(profile)
+  if (e === 'energized') return 'without you paying for it later'
+  if (e === 'tired_but_worth_it') return 'even when the hour costs you'
+  if (e === 'drained_unsure') return 'without leaving you spent'
+  if (e === 'drained_resentful') return 'without it costing you'
+  return ''
+}
+
+const ACCESS_PHRASES = {
+  mobility: 'with a stroller- or walker-friendly path',
+  sensory: 'around noise, crowds, or texture sensitivities',
+  allergies: 'around allergies',
+  language: 'in the language you actually speak at home',
+}
+
+export function describeAccess(profile) {
+  const list = accessAnswer(profile)
+  if (!list || list.length === 0) return ''
+  const filtered = list.filter((k) => k && k !== 'none')
+  if (filtered.length === 0) return ''
+  const phrases = filtered.map((k) => ACCESS_PHRASES[k]).filter(Boolean)
+  if (phrases.length === 0) return ''
+  if (phrases.length === 1) return phrases[0]
+  return `${phrases.slice(0, -1).join(', ')} and ${phrases[phrases.length - 1]}`
+}
+
 // Join an array of items with natural-language commas and "and".
 export function joinAnd(items) {
   const list = items.filter(Boolean)

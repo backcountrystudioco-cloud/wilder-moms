@@ -32,7 +32,28 @@ function pickFrom(dimension, kind, profile, usedIds, recentIds) {
   let candidates = pool.filter((u) => !usedIds.has(u.id) && !recentIds.has(u.id))
   if (candidates.length === 0) candidates = pool.filter((u) => !usedIds.has(u.id))
   if (candidates.length === 0) candidates = pool
+  // Soft profile-based reorder: solo parenting prefers independence/wonder
+  // moves (often doable alone), and full-time-work prefers low-effort moves.
+  if (profile) {
+    const partner = profile?.answers?.['specifics.partner']
+    const schedule = profile?.answers?.['specifics.schedule']
+    candidates = [...candidates].sort((a, b) => profileBias(a, b, { partner, schedule, kind }))
+  }
   return candidates[0] || null
+}
+
+// Score two candidates for ordering. Positive = a goes first.
+function profileBias(a, b, { partner, schedule, kind }) {
+  let score = 0
+  if (partner === 'solo') {
+    const dimRank = (u) => (u.lift && (u.lift.independence || u.lift.wonder)) ? 1 : 0
+    score += dimRank(b) - dimRank(a)
+  }
+  if (schedule === 'full_time_work') {
+    const effortRank = (u) => (u.effort === 'low' ? 1 : u.effort === 'high' ? -1 : 0)
+    score += effortRank(b) - effortRank(a)
+  }
+  return score
 }
 
 const DAY_COPY = [

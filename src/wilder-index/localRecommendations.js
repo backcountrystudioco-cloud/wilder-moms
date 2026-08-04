@@ -17,18 +17,34 @@ const OBSTACLE_MAX = 280
 /**
  * Build the request payload from the full Wilder Index state.
  * Pure function — no fetch, no side effects.
+ *
+ * previouslyShown + completedRecently are dedup signals — the API instructs
+ * the model to avoid anything that overlaps in title, kind, or core action.
  */
-export function buildRecommendationsRequest({ profile, scores, location } = {}) {
+export function buildRecommendationsRequest({
+  profile,
+  scores,
+  location,
+  previouslyShown = [],
+  completedRecently = [],
+} = {}) {
   const answers = profile?.answers || {}
   const obstacle = (answers['specifics.obstacle'] || '').trim().slice(0, OBSTACLE_MAX)
   const kids = answers['specifics.kids'] || []
   const block = answers['specifics.block'] || []
   const when = answers['specifics.when'] || null
   const car = answers['specifics.car'] || null
+  // New context signals — passed through as soft inputs to the prompt and to
+  // the deterministic fallback so recommendations fit the family's actual
+  // week (not just their score).
+  const schedule = answers['specifics.schedule'] || null
+  const partner = answers['specifics.partner'] || null
+  const energy = answers['specifics.energy'] || null
+  const access = Array.isArray(answers['specifics.access']) ? answers['specifics.access'] : []
 
   const proto = findPrototypeById(location?.prototypeId) || {}
   return {
-    profile: { kids, when, car, block, obstacle },
+    profile: { kids, when, car, block, obstacle, schedule, partner, energy, access },
     scores: {
       belonging: scores?.belonging ?? 0,
       independence: scores?.independence ?? 0,
@@ -45,7 +61,22 @@ export function buildRecommendationsRequest({ profile, scores, location } = {}) 
       prototypeFeatures: proto.features || [],
       prototypeObstacles: proto.obstacles || [],
     },
+    previouslyShown: sanitizeHistory(previouslyShown),
+    completedRecently: sanitizeHistory(completedRecently),
   }
+}
+
+function sanitizeHistory(list) {
+  if (!Array.isArray(list)) return []
+  return list
+    .filter((x) => x && typeof x === 'object')
+    .map((x) => ({
+      kind: typeof x.kind === 'string' ? x.kind : null,
+      title: typeof x.title === 'string' ? x.title.slice(0, 100) : null,
+      action: typeof x.action === 'string' ? x.action.slice(0, 280) : null,
+    }))
+    .filter((x) => x.title || x.action)
+    .slice(0, 12)
 }
 
 /**
@@ -83,7 +114,14 @@ export async function fetchLocalRecommendations(payload, { signal } = {}) {
 export function fallbackRecommendations(payload) {
   const block = Array.isArray(payload?.profile?.block) ? payload.profile.block : []
   const obstacle = typeof payload?.profile?.obstacle === 'string' ? payload.profile.obstacle : ''
+  const schedule = payload?.profile?.schedule || null
+  const partner = payload?.profile?.partner || null
+  const energy = payload?.profile?.energy || null
+  const access = Array.isArray(payload?.profile?.access) ? payload.profile.access : []
   const has = (slug) => block.includes(slug)
+  const timePressed = schedule === 'full_time_work' || schedule === 'part_time_work' || obstacle.toLowerCase().includes('time')
+  const drained = energy === 'drained_resentful' || energy === 'drained_unsure'
+  const solo = partner === 'solo'
   const recs = []
 
   if (has('trees') || has('park')) {
@@ -130,12 +168,16 @@ export function fallbackRecommendations(payload) {
     time: 'Today',
   })
 
-  if (!obstacle.toLowerCase().includes('time')) {
+  if (!timePressed) {
+    const title = solo ? 'A 5-minute sit alone' : 'A 5-minute sit'
+    const why = drained
+      ? 'Restoration is the move that pays you back later in the day.'
+      : 'Restoration needs a place, not a plan.'
     recs.push({
       kind: 'small_thing',
-      title: 'A 5-minute sit',
+      title,
       action: 'Find a bench, stoop, or patch of grass near home. Sit for five minutes without a destination. Do it once this week.',
-      why: 'Restoration needs a place, not a plan.',
+      why,
       time: '5 minutes',
     })
   }

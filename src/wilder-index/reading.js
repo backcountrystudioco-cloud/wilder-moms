@@ -12,6 +12,13 @@ import {
   describeHome,
   describeBlock,
   describeLocation,
+  describeSchedule,
+  describePartner,
+  describeEnergy,
+  describeAccess,
+  scheduleAnswer,
+  partnerAnswer,
+  energyAnswer,
   kidsAges,
   obstacle,
   joinAnd,
@@ -29,6 +36,28 @@ function lowestOne(scores) {
   return [...DIMENSION_ORDER]
     .map((id) => [id, scores?.[id] ?? 0])
     .sort((a, b) => a[1] - b[1])[0][0]
+}
+
+// Categorize the user's free-text obstacle into a gentle, non-echoing
+// descriptor. We never quote the obstacle verbatim in the reading —
+// instead we paraphrase into one of these short categories so the user
+// sees their concern acknowledged without it being printed back to them.
+function obstacleCategory(text) {
+  const t = (text || '').toLowerCase()
+  if (/energy|tired|exhaust|burn(ed|out)?|running on fumes|fuel/i.test(t)) {
+    return 'energy, and the cost of the hour'
+  }
+  if (/weather|rain|cold|snow|heat|wind|storm/i.test(t)) return 'weather and season'
+  if (/no time|busy|hours|schedule|commute|work/i.test(t)) return 'time in the work-week window'
+  if (/solo|alone|single|divorc|widow/i.test(t)) return 'doing it without backup'
+  if (/no nearby|park|drive|car|transit|far/i.test(t)) return 'getting there without a drive'
+  if (/partner|spouse|husband|wife|argue|disagree|align/i.test(t)) return 'partner alignment'
+  if (/screen|tablet|phone|video|youtube|ipad/i.test(t)) return 'screens as the default'
+  if (/kid|child|toddler|won|refuse|tantrum|meltdown/i.test(t)) return 'what your kid will or won\'t do'
+  if (/money|cost|budget|afford|expensive/i.test(t)) return 'the cost of getting out'
+  if (/safe|safety|crossing|traffic/i.test(t)) return 'how safe the routes feel'
+  if (/anxiety|anxious|stress|overwhelm|mental/i.test(t)) return 'your own capacity, not your kid\'s'
+  return 'the shape of your week'
 }
 
 const OPPORTUNITY_NOTES = {
@@ -103,9 +132,33 @@ export function generateReading(profile, scores) {
     `It's in the "${oppBand.label.toLowerCase()}" band, which means it's not a missing thing — it's a small, specific thing waiting to be added. ` +
     `In a ${loc.prototypeName.toLowerCase()} neighborhood, that gap is best closed by using what's already close, not by chasing what's far.`
 
+  // Weave 1-2 of the new context signals into P2 where they materially change
+  // the framing. Only one clause per gap is woven, so the paragraph doesn't
+  // grow noisy for users who answered several.
+  const scheduleClause = describeSchedule(profile)
+  const partnerClause = describePartner(profile)
+  const energyClause = describeEnergy(profile)
+  const accessClause = describeAccess(profile)
+  const woven = []
+  if (partnerClause && (partnerAnswer(profile) === 'partner_mixed' || partnerAnswer(profile) === 'solo')) {
+    woven.push(`Closing it ${partnerClause} is the version of "outside" that actually fits your week`)
+  }
+  if (scheduleClause && (scheduleAnswer(profile) === 'full_time_work' || scheduleAnswer(profile) === 'part_time_work')) {
+    woven.push(`the move has to land ${scheduleClause}`)
+  }
+  if (energyClause && (energyAnswer(profile) === 'drained_resentful' || energyAnswer(profile) === 'drained_unsure')) {
+    woven.push(`and it has to do it ${energyClause}`)
+  }
+  if (accessClause) {
+    woven.push(`— and it has to work ${accessClause}`)
+  }
+  const p2Tail = woven.length > 0 ? ` ${woven.join(', ')}.` : ''
+
+  const p2Final = p2 + p2Tail
+
   const p3 = obst
-    ? `You said "${obst}" was the biggest thing in the way. That's a real constraint, not a planning problem. The right next step is small enough to fit around it — and specific to ${loc.displayName}, not a generic list.`
+    ? `You told us the biggest thing in the way was around ${obstacleCategory(obst)}. That's a real constraint, not a planning problem. The right next step is small enough to fit around it, and specific to ${loc.displayName}, not a generic list.`
     : `There's no single thing standing in the way — there's a pattern waiting to be made. The first step is small and specific to your block in ${loc.displayName}.`
 
-  return [p1, p2, p3]
+  return [p1, p2Final, p3]
 }

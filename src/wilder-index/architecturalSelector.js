@@ -40,25 +40,69 @@ const OBSTACLE_BIAS = [
   { kw: 'no yard', bonus: 'independence' },
 ]
 
+// Newer context-signal biases — these float a dimension to the front of
+// the rank when the family has answered the corresponding specifics question.
+// They're additive with OBSTACLE_BIAS: if both fire, the obstacle wins on
+// rank, and the profile bias shapes the pick within each dimension.
+const PROFILE_BIAS = [
+  { match: (p) => p?.answers?.['specifics.energy'] === 'drained_resentful', bonus: 'restoration' },
+  { match: (p) => p?.answers?.['specifics.partner'] === 'solo', bonus: 'independence' },
+]
+
+function profileBonus(profile) {
+  return PROFILE_BIAS.find((b) => b.match(profile))
+}
+
 // Returns a ranked list of dimension ids, with the obstacle-biased dim floated
 // to the front (when present). Otherwise pure score-ascending.
 function rankDimensions(scores, profile) {
   const ob = obstacle(profile).toLowerCase()
   const bias = OBSTACLE_BIAS.find((b) => ob.includes(b.kw))
+  const profilePri = profileBonus(profile)
   const base = DIMENSION_ORDER
     .map((id) => ({ id, score: scores[id] ?? 0 }))
     .sort((a, b) => a.score - b.score)
-  if (!bias) return base.map((d) => d.id)
-  const float = base.find((d) => d.id === bias.bonus)
+  if (!bias && !profilePri) return base.map((d) => d.id)
+  const pickBonus = bias ? bias.bonus : profilePri.bonus
+  const float = base.find((d) => d.id === pickBonus)
   if (!float) return base.map((d) => d.id)
-  const rest = base.filter((d) => d.id !== bias.bonus)
+  const rest = base.filter((d) => d.id !== pickBonus)
   return [float.id, ...rest.map((d) => d.id)]
 }
 
 // Apartment with no outdoor space can only meaningfully do room-scale moves.
+// Mobility access constraints narrow further to 'room' (no landscape moves
+// that require navigating uneven terrain we don't know about).
 function allowedScales(profile) {
   if (isApt(profile) && !hasOutdoor(profile)) return ['room', 'medium']
+  const access = profile?.answers?.['specifics.access']
+  if (Array.isArray(access) && access.includes('mobility')) return ['room']
   return ['room', 'medium', 'landscape']
+}
+
+// Score candidate moves within a dimension so the profile signals shape the
+// pick. Positive = `a` preferred over `b`.
+function moveBias(a, b, profile) {
+  let score = 0
+  const energy = profile?.answers?.['specifics.energy']
+  const partner = profile?.answers?.['specifics.partner']
+  const schedule = profile?.answers?.['specifics.schedule']
+  if (energy === 'drained_resentful') {
+    const rank = (m) =>
+      m.dimension === 'restoration' || (m.move && /home|seat|chair|sit/i.test(m.move.title || ''))
+        ? 1
+        : 0
+    score += rank(b) - rank(a)
+  }
+  if (partner === 'solo') {
+    const rank = (m) => (m.dimension === 'independence' || m.dimension === 'wonder' ? 1 : 0)
+    score += rank(b) - rank(a)
+  }
+  if (schedule === 'full_time_work') {
+    const rank = (m) => (m.move?.effort === 'low' ? 1 : m.move?.effort === 'high' ? -1 : 0)
+    score += rank(b) - rank(a)
+  }
+  return score
 }
 
 export function pickMonthlyMove(profile, scores, shownIds = []) {
@@ -78,6 +122,8 @@ export function pickMonthlyMove(profile, scores, shownIds = []) {
       candidates.push({ move: personalized, dimension: dimId })
     }
     if (candidates.length > 0) {
+      // Apply profile-aware ordering, then take the top candidate.
+      candidates.sort((a, b) => moveBias(a, b, profile))
       return candidates[0]
     }
   }
@@ -85,12 +131,17 @@ export function pickMonthlyMove(profile, scores, shownIds = []) {
   // Everything shown or excluded — fall back to the lowest-dim move we have.
   for (const dimId of order) {
     const moves = ARCHITECTURAL_MOVES[dimId] || []
+    const candidates = []
     for (const move of moves) {
       if (!allowed.includes(move.scale)) continue
       const personalized = applyArchitecturalPersonalization(move, profile)
       if (personalized !== null) {
-        return { move: personalized, dimension: dimId }
+        candidates.push({ move: personalized, dimension: dimId })
       }
+    }
+    if (candidates.length > 0) {
+      candidates.sort((a, b) => moveBias(a, b, profile))
+      return candidates[0]
     }
   }
   return null
