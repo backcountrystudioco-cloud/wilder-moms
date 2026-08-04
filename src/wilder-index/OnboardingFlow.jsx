@@ -1,6 +1,7 @@
 import { useState, useMemo, useCallback, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link, useNavigate } from 'react-router-dom'
+import { SignInButton, SignUpButton, useAuth } from '@clerk/react'
 import { QUESTIONS, CONTEXT_QUESTIONS, SPECIFICS_QUESTIONS } from './questions'
 import AuthCorner from './AuthCorner'
 import { DIMENSIONS, DIMENSION_ORDER, bandFor } from './dimensions'
@@ -101,6 +102,58 @@ const PRINCIPLES = [
   'Parents need restoration too.',
   'Connection happens in repeated places.',
 ]
+
+// SignInGate — required step before the field check. We won't let anyone
+// take the full 5-minute quiz without an account so the reading, weekly
+// shifts, and local recommendations can sync across devices from the start,
+// and so progress is never lost mid-quiz if they close the tab.
+function SignInGate({ onComplete }) {
+  const { isSignedIn, isLoaded } = useAuth()
+  useEffect(() => {
+    if (isLoaded && isSignedIn) onComplete()
+  }, [isLoaded, isSignedIn, onComplete])
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="max-w-md mx-auto pt-12 md:pt-20 px-2 text-center"
+    >
+      <p className="text-ember text-xs font-medium uppercase tracking-[0.2em] mb-4">
+        Before the field check
+      </p>
+      <h2 className="font-serif font-light text-3xl md:text-5xl text-ink leading-tight mb-5">
+        Save where you're <em className="text-ember">starting from.</em>
+      </h2>
+      <p className="text-inkl text-base md:text-lg leading-relaxed mb-8 max-w-md mx-auto">
+        Create a free account to take the field check. Your answers
+        save automatically as you go, and once you're done you can sign
+        in anywhere to pick up your reading and weekly shifts.
+      </p>
+      <div className="flex flex-col sm:flex-row gap-3 items-center justify-center mb-5">
+        <SignUpButton mode="modal" forceRedirectUrl="/">
+          <button
+            type="button"
+            className="bg-ember text-white font-sans font-medium text-sm px-7 py-3 rounded-full hover:bg-forest transition-colors duration-300 w-full sm:w-auto"
+          >
+            Create your account
+          </button>
+        </SignUpButton>
+        <SignInButton mode="modal" forceRedirectUrl="/">
+          <button
+            type="button"
+            className="font-sans font-medium text-sm px-6 py-3 text-ink hover:text-ember transition-colors border border-inkll/20 rounded-full w-full sm:w-auto hover:border-ember/40"
+          >
+            I already have one
+          </button>
+        </SignInButton>
+      </div>
+      <p className="text-inkll text-xs italic">
+        No credit card. No newsletter. Just a place to keep your reading.
+      </p>
+    </motion.div>
+  )
+}
 
 function BrandCards({ cardIndex, onNext, onBack, onSkip }) {
   const card = BRAND_CARDS[cardIndex]
@@ -458,11 +511,13 @@ function Welcome({ onStart }) {
       {/* HERO — the lead question */}
       <section className="pt-14 md:pt-20 pb-14 md:pb-20 px-6">
         <div className="max-w-3xl mx-auto text-center">
-          <img
-            src="/wilder-moms-logo.jpeg"
-            alt="Wilder Moms"
-            className="h-32 md:h-40 w-auto mx-auto mb-8"
-          />
+          <div className="h-32 w-32 md:h-40 md:w-40 mx-auto mb-8 rounded-full overflow-hidden bg-parchment shadow-ember/15 shadow-lg">
+            <img
+              src="/wilder-moms-logo.jpeg"
+              alt="Wilder Moms"
+              className="w-full h-full object-cover"
+            />
+          </div>
           <p className="text-ember text-xs font-medium uppercase tracking-[0.2em] mb-7">
             Your Wilder Habitat
           </p>
@@ -612,21 +667,26 @@ function Welcome({ onStart }) {
 
 export default function OnboardingFlow({ onCompleted }) {
   const { setAnswer, setContextAnswer, completeOnboarding } = useWilderIndex()
+  const { isSignedIn, isLoaded } = useAuth()
   const { chapters } = useMemo(buildQuestionPlan, [])
   const [step, setStep] = useState({ kind: 'welcome' })
   const [localContext, setLocalContext] = useState({ _index: 0 })
 
-  // When arriving from the /join CTA, skip the welcome screen and start at
-  // the brand cards reading. The flag is set by JoinPage and cleared once
-  // consumed so it doesn't apply on subsequent visits.
+  // When arriving from the /join CTA, gate the field check behind a Clerk
+  // sign-in. Signed-out users see the SignInGate; signed-in users jump
+  // straight to the brand cards reading. The flag is set by JoinPage and
+  // cleared once consumed so it doesn't apply on subsequent visits.
   useEffect(() => {
     let flag = null
     try { flag = sessionStorage.getItem('wilder_habitat_skip_welcome') } catch {}
-    if (flag) {
-      try { sessionStorage.removeItem('wilder_habitat_skip_welcome') } catch {}
+    if (!flag) return
+    try { sessionStorage.removeItem('wilder_habitat_skip_welcome') } catch {}
+    if (isLoaded && isSignedIn) {
       setStep({ kind: 'brand-cards', cardIndex: 0 })
+    } else {
+      setStep({ kind: 'signin-required' })
     }
-  }, [])
+  }, [isLoaded, isSignedIn])
 
   const startChapter = useCallback(
     (dim) => setStep({ kind: 'chapter-intro', dim, qIndex: 0 }),
@@ -740,6 +800,12 @@ export default function OnboardingFlow({ onCompleted }) {
   let body = null
   if (step.kind === 'welcome') {
     body = <Welcome onStart={startBrandCards} />
+  } else if (step.kind === 'signin-required') {
+    body = (
+      <SignInGate
+        onComplete={() => setStep({ kind: 'brand-cards', cardIndex: 0 })}
+      />
+    )
   } else if (step.kind === 'brand-cards') {
     body = (
       <BrandCards
