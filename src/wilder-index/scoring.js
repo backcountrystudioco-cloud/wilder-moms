@@ -7,6 +7,9 @@ import { DIMENSION_ORDER } from './dimensions'
 const MAX_PER_QUESTION = 4
 const QUESTIONS_PER_DIM = 5
 const MAX_RAW = MAX_PER_QUESTION * QUESTIONS_PER_DIM // 20
+// Total accumulated lift per dimension, applied on top of the base score.
+// Past this, further completions have no further effect on that dimension.
+export const MAX_LIFT_PER_DIM = 20
 
 export function rawToScore(raw) {
   if (typeof raw !== 'number' || Number.isNaN(raw)) return 0
@@ -37,6 +40,43 @@ export function computeScores(answers = {}) {
       const scaled = (raw / count) * QUESTIONS_PER_DIM
       result[dim] = rawToScore(scaled)
     }
+  }
+  return result
+}
+
+// Add the lift contributed by completed upgrades to the base scores. Iterates
+// history items, sums lift per dimension, then caps the accumulated lift at
+// MAX_LIFT_PER_DIM (so repeated completions can't push a high score past 100).
+// The 100-point cap on the final score is a soft cap: any lift that would
+// push a dimension past 100 is discarded, not transferred.
+//
+// Returns a new scores map. If `scores` is missing, returns the all-zero map.
+export function applyHistoryLift(scores, history = []) {
+  const result = {}
+  const base = scores || {}
+  const accumulated = {}
+  for (const dim of DIMENSION_ORDER) accumulated[dim] = 0
+
+  if (Array.isArray(history)) {
+    for (const item of history) {
+      if (!item) continue
+      if (item.checkIn !== 'we-did-it' && item.checkIn !== 'changed') continue
+      const lift = item.lift
+      if (!lift || typeof lift !== 'object') continue
+      for (const dim of Object.keys(lift)) {
+        if (!DIMENSION_ORDER.includes(dim)) continue
+        const n = lift[dim]
+        if (typeof n !== 'number' || n <= 0) continue
+        accumulated[dim] += n
+      }
+    }
+  }
+
+  for (const dim of DIMENSION_ORDER) {
+    const lift = Math.min(MAX_LIFT_PER_DIM, accumulated[dim] || 0)
+    const baseScore = typeof base[dim] === 'number' ? base[dim] : 0
+    // Soft cap: lift past 100 is discarded, not transferred to other dims.
+    result[dim] = Math.min(100, Math.max(0, baseScore + lift))
   }
   return result
 }
