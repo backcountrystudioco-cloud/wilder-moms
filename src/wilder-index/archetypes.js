@@ -86,6 +86,27 @@ export const ARCHETYPES = [
   },
 ]
 
+// Map each neighborhood prototype to its closest archetype.
+// Used as the fallback when no dimension crosses the 60 threshold.
+const PROTOTYPE_TO_ARCHETYPE = {
+  urban_dense: 'urban_explorer',
+  urban_family: 'front_porch',
+  suburban_yard: 'rooted_home',
+  suburban_no_yard: 'exhale_seeker',
+  small_town: 'front_porch',
+  rural: 'rooted_home',
+  coastal: 'creek_walker',
+  mountain: 'edge_finder',
+  dry: 'exhale_seeker',
+  college_town: 'front_porch',
+}
+
+function archetypeByPrototype(prototypeId) {
+  const id = PROTOTYPE_TO_ARCHETYPE[prototypeId]
+  if (!id) return null
+  return ARCHETYPES.find((a) => a.id === id) || null
+}
+
 export function pickArchetype(scores, profile) {
   if (!scores) return ARCHETYPES[ARCHETYPES.length - 1]
   const ordered = Object.keys(scores)
@@ -99,8 +120,13 @@ export function pickArchetype(scores, profile) {
       if (match) return match
     }
   }
-  // No dimension hits the bar — pick by context.
+  // No dimension hits the bar — pick by neighborhood prototype first
+  // (full onboarding uses the 10-prototype taxonomy).
   const ctx = profile?.contextAnswers || {}
+  const byProto = archetypeByPrototype(ctx['context.prototype'])
+  if (byProto) return byProto
+  // Legacy fallback for profiles that only have the 4-area labels
+  // (the free assessment still uses these).
   const isApartment = ['apartment', 'townhouse'].includes(ctx['context.homeType'])
   const isUrban = ctx['context.area'] === 'urban'
   if (isUrban) return ARCHETYPES.find((a) => a.id === 'urban_explorer') || ARCHETYPES[1]

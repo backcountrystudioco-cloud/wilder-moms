@@ -14,10 +14,10 @@ const chapterIntro = {
     eyebrow: 'Chapter 1 of 7',
     line: 'Familiar faces, places to pause, a block that knows you. Five quick questions.',
   },
-  independence: {
-    title: 'Room to Roam',
+  dailyNature: {
+    title: 'Nearby Nature',
     eyebrow: 'Chapter 2 of 7',
-    line: 'Routes a child can describe. Crossings they can read. Five quick questions.',
+    line: 'Trees, leaves, bugs, weather — on the way, not on the itinerary. Five quick questions.',
   },
   wonder: {
     title: 'Everyday Wonder',
@@ -29,10 +29,10 @@ const chapterIntro = {
     eyebrow: 'Chapter 4 of 7',
     line: 'Where you can sit, breathe, and come back calmer. Five quick questions.',
   },
-  dailyNature: {
-    title: 'Nature in the Routine',
+  independence: {
+    title: 'Room to Roam',
     eyebrow: 'Chapter 5 of 7',
-    line: 'Trees, leaves, bugs, weather — on the way, not on the itinerary. Five quick questions.',
+    line: 'Routes a child can describe. Crossings they can read. Five quick questions.',
   },
   adventure: {
     title: 'Your Adventure Edge',
@@ -42,7 +42,7 @@ const chapterIntro = {
   specifics: {
     title: 'Your Specifics',
     eyebrow: 'Chapter 7 of 7',
-    line: 'A few details about your home, your block, and your actual days. This is what makes the suggestions specific.',
+    line: 'A few details about your home, your block, and your actual days. Most are skippable — they sharpen the suggestions, they don\'t gate them.',
   },
 }
 
@@ -362,12 +362,22 @@ function SpecificsCard({ question, value, onChange, onBack, onNext, isLast }) {
         <button onClick={onBack} className="text-inkll hover:text-ink transition-colors">
           ← Back
         </button>
-        <button
-          onClick={onNext}
-          className="text-ember hover:text-terra font-medium"
-        >
-          {isLast ? 'See your reading →' : 'Continue →'}
-        </button>
+        <div className="flex items-center gap-4">
+          {question.optional && (
+            <button
+              onClick={onNext}
+              className="text-inkll hover:text-ink transition-colors"
+            >
+              Skip
+            </button>
+          )}
+          <button
+            onClick={onNext}
+            className="text-ember hover:text-terra font-medium"
+          >
+            {isLast ? 'See your reading →' : 'Continue →'}
+          </button>
+        </div>
       </div>
     </motion.div>
   )
@@ -666,11 +676,12 @@ function Welcome({ onStart }) {
 }
 
 export default function OnboardingFlow({ onCompleted }) {
-  const { setAnswer, setContextAnswer, completeOnboarding } = useWilderIndex()
+  const { setAnswer, setContextAnswer, completeOnboarding, state } = useWilderIndex()
   const { isSignedIn, isLoaded } = useAuth()
   const { chapters } = useMemo(buildQuestionPlan, [])
   const [step, setStep] = useState({ kind: 'welcome' })
   const [localContext, setLocalContext] = useState({ _index: 0 })
+  const answers = state?.onboarding?.answers || {}
 
   // When arriving from the /join CTA, gate the field check behind a Clerk
   // sign-in. Signed-out users see the SignInGate; signed-in users jump
@@ -831,7 +842,7 @@ export default function OnboardingFlow({ onCompleted }) {
     body = (
       <Card
         question={question}
-        value={undefined}
+        value={answers[question.id]}
         onChange={(v) => onAnswer(question.id, v)}
         onBack={goBack}
         onNext={() => advanceChapter(step.dim, step.qIndex)}

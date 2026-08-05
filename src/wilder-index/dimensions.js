@@ -53,8 +53,8 @@ export const DIMENSIONS = {
   },
   dailyNature: {
     id: 'dailyNature',
-    name: 'Daily Nature',
-    chapter: 'Nature in the Routine',
+    name: 'Nearby Nature',
+    chapter: 'Nearby Nature',
     color: '#F2A57B', // peach
     accent: 'bg-peach/30',
     text: 'text-ink',
@@ -79,10 +79,10 @@ export const DIMENSIONS = {
 
 export const DIMENSION_ORDER = [
   'belonging',
-  'independence',
+  'dailyNature',
   'wonder',
   'restoration',
-  'dailyNature',
+  'independence',
   'adventure',
 ]
 

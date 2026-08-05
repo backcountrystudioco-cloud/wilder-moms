@@ -4,6 +4,25 @@
 // to 0-4 for scoring (Never=0, Sometimes=1, Often=2, Most weeks=3, Almost always=4).
 // Where a question needs different option sets, a per-question `options` is
 // provided and the index in the options array is the score.
+//
+// Research grounding (briefs in research/ and concepts/):
+//   - Belonging   → Sampson 1997 (Science); Coleman 1988 social capital;
+//                   Putnam 2000; Jacobs 1961 "eyes on the street".
+//   - Independence→ Hillman/Adams/Whitelegg 1990 "One False Move";
+//                   Karsten 2005; Shaw et al. 2013 cross-national;
+//                   SRTS evidence base.
+//   - Wonder      → Kaplan & Kaplan 1989 preference matrix;
+//                   Berman/Jonides/Kaplan 2008; Kellert/Heerwagen biophilia;
+//                   Tishman "Slow Looking" (least child-specific evidence).
+//   - Restoration → Kaplan 1995 ART; Ulrich 1984 surgery-window;
+//                   Barton & Pretty 2010 (5-min acute dose);
+//                   White et al. 2019 (120-min/week sustained dose).
+//   - Nearby Nature→ White et al. 2019 Sci Rep; Mitchell & Popham 2008 Lancet
+//                   (equity); Louv 2005; Wolf "nearby nature".
+//   - Adventure   → Sandseter 2007 (6 risky-play categories);
+//                   Brussoni 2015 IJERPH; Canadian Paediatric Society 2024;
+//                   Nicholson 1971 "Theory of Loose Parts";
+//                   Lady Allen of Hurtwood.
 
 const FREQUENCY = [
   { label: 'Never', value: 0 },
@@ -29,11 +48,15 @@ const COMFORT = [
 
 export const QUESTIONS = [
   // ────────────── BELONGING ──────────────
+  // Sampson 1997 + Coleman 1988: belonging is measured by repeat
+  // recognition + intergenerational closure (do nearby adults know your
+  // kid's name?). q5 is the behavioral consequence test — if no one
+  // would help, the belonging isn't real in the developmental sense.
   {
     id: 'belonging.q1',
     dimension: 'belonging',
     chapter: 'Your People',
-    text: 'On a short walk, how often do you and your kids run into someone you know?',
+    text: 'On a short walk, how often do you and your kids run into someone you know by name?',
     sub: 'The dog-walker, the barista, the grandparent down the block.',
     type: 'frequency',
     options: FREQUENCY,
@@ -42,8 +65,8 @@ export const QUESTIONS = [
     id: 'belonging.q2',
     dimension: 'belonging',
     chapter: 'Your People',
-    text: 'Is there somewhere nearby where you and another family can pause, sit, and just talk?',
-    sub: 'A bench, a stoop, a café that doesn\'t rush you.',
+    text: 'Could your child walk out the door and have at least one nearby adult know their name?',
+    sub: 'A neighbor, a regular at the corner store, the librarian. The intergenerational test.',
     type: 'frequency',
     options: FREQUENCY,
   },
@@ -55,11 +78,14 @@ export const QUESTIONS = [
     type: 'frequency',
     options: FREQUENCY,
   },
+  // Softened: the previous wording packed three variables into one
+  // question (stroller + young child + older relative = double-barreled).
+  // Splitting the ask into a single, observable test.
   {
     id: 'belonging.q4',
     dimension: 'belonging',
     chapter: 'Your People',
-    text: 'Can a stroller, a young child, and an older relative all comfortably use your main walking route?',
+    text: 'On your usual walking route, can you push a stroller without lifting it over curbs or into traffic?',
     type: 'frequency',
     options: FREQUENCY,
   },
@@ -67,17 +93,21 @@ export const QUESTIONS = [
     id: 'belonging.q5',
     dimension: 'belonging',
     chapter: 'Your People',
-    text: 'Do you have a place at home — porch, stoop, shared step — where neighbors can naturally stop?',
+    text: 'If your child got hurt or upset outside, is there someone nearby — not you — who would help?',
     type: 'frequency',
     options: FREQUENCY,
   },
 
   // ────────────── INDEPENDENCE ──────────────
+  // Hillman/Adams/Whitelegg 1990 found the dramatic UK 7-year-old
+  // independent-mobility decline (80% → 9% by 1990). Shaw et al. 2013
+  // shows Germany at 81% on the same metric — the gap is structural,
+  // not parental. q5 (reverse-scored) is the binding constraint.
   {
     id: 'independence.q1',
     dimension: 'independence',
     chapter: 'Room to Roam',
-    text: 'As your child grows, is there a place they could reach on their own — without needing you to drive?',
+    text: 'Without checking with you first, can your child get to one place they care about on their own?',
     sub: 'A friend\'s house, a park, a corner store, a library.',
     type: 'options',
     options: [
@@ -126,20 +156,27 @@ export const QUESTIONS = [
   },
 
   // ────────────── WONDER ──────────────
+  // Least child-specific evidence of the 6 dimensions. Anchored to
+  // Kaplan preference matrix (coherence/complexity/legibility/mystery)
+  // + biophilic-design patterns (Kellert/Heerwagen) for what actually
+  // captures child attention: movement, water, animals, change.
   {
     id: 'wonder.q1',
     dimension: 'wonder',
     chapter: 'Everyday Wonder',
-    text: 'During a short walk, can your child find at least one small thing to stop and look at?',
+    text: 'On your last few walks, did your child stop to look at something you didn\'t plan to stop for?',
     sub: 'A bug, a puddle, a strange leaf, a window display.',
     type: 'frequency',
     options: FREQUENCY,
   },
+  // Softened: the original phrasing was a "reasons to go" list, which
+  // asked parents to be tour guides. Reworded to the child-attention
+  // proxy — features that move, change, or do something.
   {
     id: 'wonder.q2',
     dimension: 'wonder',
     chapter: 'Everyday Wonder',
-    text: 'How many "little reasons to go" are nearby — a fountain, mural, climbing tree, book box, creek, bakery window?',
+    text: 'How many small features nearby move, change, or do something — a fountain, a creek, a shop window, a cat, a chalk drawing?',
     type: 'count',
     options: COUNT,
   },
@@ -151,12 +188,14 @@ export const QUESTIONS = [
     type: 'frequency',
     options: FREQUENCY,
   },
+  // Softened: the "trees, gardens, buildings that make the street feel
+  // shaped" phrasing was abstract. Replaced with the features that
+  // actually grab attention — water, animals, plants that move.
   {
     id: 'wonder.q4',
     dimension: 'wonder',
     chapter: 'Everyday Wonder',
-    text: 'Do your walking routes have trees, gardens, or buildings that make the street feel shaped — not just wide and exposed?',
-    sub: 'The kind of street a child can describe as a place.',
+    text: 'Do your walking routes have water, animals, or plants that move or change while you\'re there?',
     type: 'frequency',
     options: FREQUENCY,
   },
@@ -170,6 +209,12 @@ export const QUESTIONS = [
   },
 
   // ────────────── RESTORATION ──────────────
+  // Kaplan 1995 ART — directed-attention fatigue is restored by
+  // environments with "soft fascination" (birds, water, wind). Barton &
+  // Pretty 2010 dose-response shows 5 min of nature exposure gives an
+  // acute mood lift; White et al. 2019 puts sustained wellbeing at
+  // 120 min/week. q5 rewritten around "patience" — a parent-centered
+  // proxy for directed-attention restoration.
   {
     id: 'restoration.q1',
     dimension: 'restoration',
@@ -202,28 +247,39 @@ export const QUESTIONS = [
     type: 'frequency',
     options: FREQUENCY,
   },
+  // Softened: "calmer" was vague. "More patience" is an embodied,
+  // parent-relevant proxy for directed-attention restoration (ART).
   {
     id: 'restoration.q5',
     dimension: 'restoration',
     chapter: 'Places to Exhale',
-    text: 'After spending time outdoors nearby, does your family usually return calmer than when you left?',
+    text: 'After spending time at your nearest outdoor place, do you usually have more patience when you get home than when you left?',
     type: 'frequency',
     options: FREQUENCY,
   },
 
-  // ────────────── DAILY NATURE ──────────────
+  // ────────────── NEARBY NATURE (id kept as dailyNature) ──────────────
+  // White et al. 2019 Sci Rep: 120 min/week in nature is the threshold
+  // for sustained health/wellbeing in adults (the child dose is
+  // plausibly different — flagged in the dimension brief as the
+  // largest evidence gap). Mitchell & Popham 2008 Lancet: green space
+  // modifies the income gradient on mortality — the strongest equity
+  // finding in the literature. The questions are written to work in
+  // both leafy suburbs and 4th-floor walk-ups (a tree on the sidewalk
+  // counts; a stoop planter counts).
   {
     id: 'dailyNature.q1',
     dimension: 'dailyNature',
-    chapter: 'Nature in the Routine',
-    text: 'Can your child touch leaves, soil, bark, or water — not just look at them — on a normal day?',
+    chapter: 'Nearby Nature',
+    text: 'On most days, does your child see, touch, or smell something living — plant or animal — without you planning it?',
+    sub: 'A houseplant, a street tree, a stoop garden, a beetle on the sidewalk. Ambient nature.',
     type: 'frequency',
     options: FREQUENCY,
   },
   {
     id: 'dailyNature.q2',
     dimension: 'dailyNature',
-    chapter: 'Nature in the Routine',
+    chapter: 'Nearby Nature',
     text: 'Is there a small patch of nature close enough to use on an ordinary weekday without driving?',
     sub: 'A tree, a planter, a strip of grass, a stoop garden.',
     type: 'frequency',
@@ -232,7 +288,7 @@ export const QUESTIONS = [
   {
     id: 'dailyNature.q3',
     dimension: 'dailyNature',
-    chapter: 'Nature in the Routine',
+    chapter: 'Nearby Nature',
     text: 'Do your routine routes (to school, friends, coffee) include trees or gardens?',
     type: 'frequency',
     options: FREQUENCY,
@@ -240,7 +296,7 @@ export const QUESTIONS = [
   {
     id: 'dailyNature.q4',
     dimension: 'dailyNature',
-    chapter: 'Nature in the Routine',
+    chapter: 'Nearby Nature',
     text: 'Can your child regularly notice birds, insects, or other small wildlife?',
     type: 'frequency',
     options: FREQUENCY,
@@ -248,7 +304,7 @@ export const QUESTIONS = [
   {
     id: 'dailyNature.q5',
     dimension: 'dailyNature',
-    chapter: 'Nature in the Routine',
+    chapter: 'Nearby Nature',
     text: 'How often can your family have a meaningful nature experience without getting in a car?',
     sub: 'Higher score = more days outside that don\'t require a drive.',
     type: 'frequency',
@@ -256,6 +312,14 @@ export const QUESTIONS = [
   },
 
   // ────────────── ADVENTURE ──────────────
+  // Sandseter 2007: 6 categories of risky play (great heights, rapid
+  // speed, dangerous tools, dangerous elements, rough-and-tumble,
+  // disappear/get lost). Brussoni 2015 IJERPH: risky play has
+  // measurable physical and mental-health benefits; "good risk" vs
+  // "bad risk" depends on calibrability. Nicholson 1971 loose parts:
+  // the more movable stuff, the more creativity. q3 rewritten in
+  // the calibrable-risk frame — the binding constraint is usually
+  // adult permission, not the absence of physical space.
   {
     id: 'adventure.q1',
     dimension: 'adventure',
@@ -276,7 +340,8 @@ export const QUESTIONS = [
     id: 'adventure.q3',
     dimension: 'adventure',
     chapter: 'Your Adventure Edge',
-    text: 'Can older children explore a loop or nook while you stay nearby but not right next to them?',
+    text: 'Is there somewhere your child can move fast, climb high, or take a real risk without you needing to stop them?',
+    sub: 'The "calibrable risk" test — a place where the risk is real but the child can read it.',
     type: 'comfort',
     options: COMFORT,
   },
