@@ -121,7 +121,6 @@ export default function WhatICollected({ collection = [], onCollectionChange }) 
                       key={item.id}
                       className="flex items-center gap-1 bg-cream rounded-full px-3 py-1"
                     >
-                      <span>{item.emoji}</span>
                       <span className="font-sans text-xs text-ink">{item.label}</span>
                       <span className="font-sans text-xs text-ember font-medium">×{item.count}</span>
                       <button 
@@ -191,7 +190,6 @@ export default function WhatICollected({ collection = [], onCollectionChange }) 
                     onClick={() => addItem(item)}
                     className="flex items-center gap-1 bg-cream/60 hover:bg-cream rounded-full px-3 py-1.5 text-sm transition-colors"
                   >
-                    <span>{item.emoji}</span>
                     <span className="font-sans text-ink text-xs">{item.label}</span>
                     <span className="text-ember text-xs">+</span>
                   </button>

@@ -146,6 +146,38 @@ function Dashboard() {
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.18 }}
+          className="mt-6"
+          id="reset"
+        >
+          <section className="bg-forest text-cream rounded-3xl p-6 md:p-8">
+            <div className="flex items-baseline justify-between gap-3 mb-4 flex-wrap">
+              <p className="text-gold text-xs font-medium uppercase tracking-[0.2em]">
+                Wilder Trails
+              </p>
+            </div>
+            <h2 className="font-serif text-2xl md:text-3xl text-cream leading-tight mb-3">
+              Reset
+            </h2>
+            <p className="font-serif text-base md:text-lg text-cream/90 leading-relaxed mb-2 max-w-xl">
+              When your family needs a reset, we'll help you find it.
+            </p>
+            <p className="text-cream/70 text-sm md:text-base leading-relaxed mb-6 max-w-xl">
+              Curated trails, lakes, forests, and outdoor escapes worth the drive.
+            </p>
+            <Link
+              to="/wilder-trails"
+              className="inline-flex items-center gap-2 bg-cream text-forest px-5 py-2.5 rounded-full font-medium text-sm hover:bg-parchment transition-colors"
+            >
+              Find a reset
+              <span aria-hidden="true">→</span>
+            </Link>
+          </section>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
           className="mt-6"
         >

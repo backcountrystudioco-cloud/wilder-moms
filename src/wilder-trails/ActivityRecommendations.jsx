@@ -99,7 +99,6 @@ export default function ActivityRecommendations({ trailContext, location, season
             
             <div className="pt-2 border-t border-inkll/10">
               <div className="flex items-start gap-2">
-                <span className="text-ember text-sm">✨</span>
                 <p className="text-sm text-ember font-medium">{activity.magicMoment}</p>
               </div>
             </div>

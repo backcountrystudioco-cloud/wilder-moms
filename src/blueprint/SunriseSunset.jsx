@@ -85,12 +85,10 @@ export default function SunriseSunset({ onAddItems }) {
       {/* Sun Times */}
       <div className="grid grid-cols-2 gap-4 mb-6">
         <div className="p-4 bg-gold/10 rounded-xl text-center">
-          <span className="text-2xl block mb-1">🌅</span>
           <p className="font-sans text-xs text-inkl uppercase tracking-wide">Sunrise</p>
           <p className="font-serif text-2xl text-ink">{sunData.sunrise}</p>
         </div>
         <div className="p-4 bg-ember/10 rounded-xl text-center">
-          <span className="text-2xl block mb-1">🌇</span>
           <p className="font-sans text-xs text-inkl uppercase tracking-wide">Sunset</p>
           <p className="font-serif text-2xl text-ink">{sunData.sunset}</p>
         </div>
@@ -109,7 +107,6 @@ export default function SunriseSunset({ onAddItems }) {
       {/* Best Hiking Window */}
       <div className="p-4 bg-olive/10 rounded-xl mb-6">
         <div className="flex items-center gap-2 mb-2">
-          <span className="text-xl">⏰</span>
           <p className="font-sans text-sm font-medium text-ink">Best Hiking Window</p>
         </div>
         <p className="font-serif text-xl text-ink mb-1">

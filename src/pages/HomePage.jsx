@@ -203,11 +203,7 @@ function CurrentDropShowcase() {
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                     />
                   ) : (
-                    <div className={`w-full h-full bg-gradient-to-br ${build.coverGradient} flex items-center justify-center`}>
-                      <span className="text-[10rem] leading-none opacity-30">
-                        {build.heroEmoji}
-                      </span>
-                    </div>
+                    <div className={`w-full h-full bg-gradient-to-br ${build.coverGradient}`} />
                   )}
                   <div className="absolute top-4 left-4">
                     <span className={`text-[10px] font-medium uppercase tracking-widest px-2.5 py-1 rounded-full border backdrop-blur-sm ${

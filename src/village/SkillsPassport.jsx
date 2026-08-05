@@ -60,13 +60,13 @@ const BADGE_CATEGORIES = {
     description: 'Reach exciting milestones',
     color: 'bg-terra',
     badges: [
-      { id: 'first_mile', name: 'First Mile', description: 'Hike your first mile', icon: '🚶', criteria: { type: 'milestone', id: 'first_mile' } },
-      { id: 'five_mile', name: 'Five Miler', description: 'Complete a 5-mile hike', icon: '🏃', criteria: { type: 'milestone', id: 'five_mile' } },
-      { id: 'early_bird', name: 'Early Bird', description: 'Complete an early morning hike', icon: '🌅', criteria: { type: 'milestone', id: 'early_bird' } },
-      { id: 'overnight', name: 'Overnight Adventurer', description: 'Complete your first overnight camp', icon: '🌙', criteria: { type: 'milestone', id: 'overnight' } },
-      { id: 'lake_swim', name: 'Lake Swimmer', description: 'Swim in a lake for the first time', icon: '🏊', criteria: { type: 'milestone', id: 'lake_swim' } },
-      { id: 'trail_friend', name: 'Trail Friend', description: 'Make a friend on the trail', icon: '🤝', criteria: { type: 'milestone', id: 'trail_friend' } },
-      { id: 'gear_sharer', name: 'Gear Giver', description: 'Share your gear with someone', icon: '🎒', criteria: { type: 'milestone', id: 'gear_sharer' } },
+      { id: 'first_mile', name: 'First Mile', description: 'Hike your first mile', icon: '', criteria: { type: 'milestone', id: 'first_mile' } },
+      { id: 'five_mile', name: 'Five Miler', description: 'Complete a 5-mile hike', icon: '', criteria: { type: 'milestone', id: 'five_mile' } },
+      { id: 'early_bird', name: 'Early Bird', description: 'Complete an early morning hike', icon: '', criteria: { type: 'milestone', id: 'early_bird' } },
+      { id: 'overnight', name: 'Overnight Adventurer', description: 'Complete your first overnight camp', icon: '', criteria: { type: 'milestone', id: 'overnight' } },
+      { id: 'lake_swim', name: 'Lake Swimmer', description: 'Swim in a lake for the first time', icon: '', criteria: { type: 'milestone', id: 'lake_swim' } },
+      { id: 'trail_friend', name: 'Trail Friend', description: 'Make a friend on the trail', icon: '', criteria: { type: 'milestone', id: 'trail_friend' } },
+      { id: 'gear_sharer', name: 'Gear Giver', description: 'Share your gear with someone', icon: '', criteria: { type: 'milestone', id: 'gear_sharer' } },
     ]
   }
 }
@@ -227,7 +227,7 @@ function BadgeCard({ badge, earned, onClick }) {
         w-14 h-14 rounded-full flex items-center justify-center text-2xl mb-3 mx-auto
         ${earned ? 'bg-ember/10' : 'bg-gray-200'}
       `}>
-        {earned ? badge.icon : '🔒'}
+        {earned ? '' : ''}
       </div>
       
       {/* Badge name */}

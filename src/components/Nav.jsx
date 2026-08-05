@@ -49,11 +49,13 @@ export default function Nav() {
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo + Wordmark */}
           <Link to="/" className="flex items-center gap-3">
-            <img
-              src="/wilder_moms_logo.jpeg"
-              alt="Wilder Moms"
-              className="h-12 md:h-14 w-auto object-contain"
-            />
+            <div className="h-12 w-12 md:h-14 md:w-14 rounded-full overflow-hidden bg-parchment">
+              <img
+                src="/wilder_moms_logo.jpeg"
+                alt="Wilder Moms"
+                className="w-full h-full object-cover"
+              />
+            </div>
           </Link>
 
           {/* Desktop Nav Links */}

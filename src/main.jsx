@@ -36,7 +36,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         publishableKey={publishableKey}
         signInFallbackRedirectUrl="/explore"
         signUpFallbackRedirectUrl="/explore"
-        afterSignOutUrl="/"
+        afterSignOutUrl="/landing"
       >
         <App />
       </ClerkProvider>

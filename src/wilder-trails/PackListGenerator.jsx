@@ -3,13 +3,13 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 // Base essentials for any hike
 const BASE_ESSENTIALS = [
-  { id: 'water', label: 'Water bottle(s)', icon: '💧' },
-  { id: 'snacks', label: 'Healthy snacks', icon: '🍎' },
-  { id: 'phone', label: 'Fully charged phone', icon: '📱' },
-  { id: 'firstaid', label: 'Small first aid kit', icon: '🩹' },
-  { id: 'sunscreen', label: 'Sunscreen', icon: '☀️' },
-  { id: 'layers', label: 'Extra layer/jacket', icon: '🧥' },
-  { id: 'wipes', label: 'Wipes/hand sanitizer', icon: '🧻' },
+  { id: 'water', label: 'Water bottle(s)' },
+  { id: 'snacks', label: 'Healthy snacks' },
+  { id: 'phone', label: 'Fully charged phone' },
+  { id: 'firstaid', label: 'Small first aid kit' },
+  { id: 'sunscreen', label: 'Sunscreen' },
+  { id: 'layers', label: 'Extra layer/jacket' },
+  { id: 'wipes', label: 'Wipes/hand sanitizer' },
 ]
 
 // Duration-based items
@@ -17,62 +17,62 @@ const DURATION_ITEMS = {
   short: [], // < 1 hour
   medium: [], // 1-2 hours
   long: [ // > 2 hours
-    { id: 'lunch', label: 'Lunch/packed meal', icon: '🥪' },
-    { id: 'extra_water', label: 'Extra water', icon: '💧' },
+    { id: 'lunch', label: 'Lunch/packed meal' },
+    { id: 'extra_water', label: 'Extra water' },
   ],
 }
 
 // Trail feature items
 const FEATURE_ITEMS = {
   hasWater: [
-    { id: 'water_shoes', label: 'Water shoes/waterproof sandals', icon: '👟' },
-    { id: 'towel', label: 'Small towel for water play', icon: '🛁' },
-    { id: 'spare_clothes', label: 'Spare clothes for kids', icon: '👕' },
+    { id: 'water_shoes', label: 'Water shoes/waterproof sandals' },
+    { id: 'towel', label: 'Small towel for water play' },
+    { id: 'spare_clothes', label: 'Spare clothes for kids' },
   ],
   restrooms: [
-    { id: 'toilet_paper', label: 'Toilet paper (just in case)', icon: '🧻' },
+    { id: 'toilet_paper', label: 'Toilet paper (just in case)' },
   ],
   dogsAllowed: [
-    { id: 'dog_water', label: 'Water for dog', icon: '🐕' },
-    { id: 'dog_treats', label: 'Dog treats', icon: '🦴' },
-    { id: 'poop_bags', label: 'Poop bags', icon: '🗑️' },
+    { id: 'dog_water', label: 'Water for dog' },
+    { id: 'dog_treats', label: 'Dog treats' },
+    { id: 'poop_bags', label: 'Poop bags' },
   ],
 }
 
 // Age-based items
 const AGE_ITEMS = {
   baby: [ // < 1 year
-    { id: 'carrier', label: 'Baby carrier (not stroller)', icon: '👶' },
-    { id: 'diaper_bag', label: 'Diaper bag + extras', icon: '👶' },
-    { id: 'change_mat', label: 'Change mat', icon: '🛏️' },
+    { id: 'carrier', label: 'Baby carrier (not stroller)' },
+    { id: 'diaper_bag', label: 'Diaper bag + extras' },
+    { id: 'change_mat', label: 'Change mat' },
   ],
   toddler: [ // 1-3 years
-    { id: 'comfort_item', label: 'Comfort item (blanket/toy)', icon: '🧸' },
-    { id: 'snacks_extra', label: 'Extra snacks', icon: '🍎' },
+    { id: 'comfort_item', label: 'Comfort item (blanket/toy)' },
+    { id: 'snacks_extra', label: 'Extra snacks' },
   ],
   preschool: [ // 4-5 years
-    { id: 'binoculars', label: 'Kid binoculars', icon: '🔭' },
-    { id: 'nature_journal', label: 'Small nature journal', icon: '📓' },
+    { id: 'binoculars', label: 'Kid binoculars' },
+    { id: 'nature_journal', label: 'Small nature journal' },
   ],
   schoolAge: [ // 6+ years
-    { id: 'backpack', label: 'Small backpack', icon: '🎒' },
-    { id: 'camera_kid', label: 'Kid camera/binoculars', icon: '📷' },
+    { id: 'backpack', label: 'Small backpack' },
+    { id: 'camera_kid', label: 'Kid camera/binoculars' },
   ],
 }
 
 // Difficulty-based items
 const DIFFICULTY_ITEMS = {
   easy: [
-    { id: 'hiking_stick', label: 'Walking stick (optional)', icon: '🦯' },
+    { id: 'hiking_stick', label: 'Walking stick (optional)' },
   ],
   moderate: [
-    { id: 'hiking_boots', label: 'Sturdy shoes/boots', icon: '🥾' },
-    { id: 'hiking_poles', label: 'Hiking poles', icon: '🦯' },
+    { id: 'hiking_boots', label: 'Sturdy shoes/boots' },
+    { id: 'hiking_poles', label: 'Hiking poles' },
   ],
   challenging: [
-    { id: 'hiking_boots', label: 'Hiking boots (required)', icon: '🥾' },
-    { id: 'hiking_poles', label: 'Hiking poles', icon: '🦯' },
-    { id: 'trekking_plan', label: 'Trekking plan', icon: '📋' },
+    { id: 'hiking_boots', label: 'Hiking boots (required)' },
+    { id: 'hiking_poles', label: 'Hiking poles' },
+    { id: 'trekking_plan', label: 'Trekking plan' },
   ],
 }
 
@@ -115,12 +115,12 @@ export default function PackListGenerator({ trail, familyInfo, weather, onClose 
     if (age <= 0) {
       items.push(...AGE_ITEMS.baby)
       if (familyInfo?.needsStroller) {
-        items.push({ id: 'stroller', label: 'Stroller', icon: '🚼' })
+        items.push({ id: 'stroller', label: 'Stroller' })
       }
     } else if (age <= 3) {
       items.push(...AGE_ITEMS.toddler.filter(i => i.id !== 'stroller'))
       if (familyInfo?.needsStroller) {
-        items.push({ id: 'stroller', label: 'Stroller', icon: '🚼' })
+        items.push({ id: 'stroller', label: 'Stroller' })
       }
     } else if (age <= 5) {
       items.push(...AGE_ITEMS.preschool)
@@ -134,16 +134,16 @@ export default function PackListGenerator({ trail, familyInfo, weather, onClose 
 
     // Add weather-based items
     if (weather?.temp > 80) {
-      items.push({ id: 'cooling_towel', label: 'Cooling towel', icon: '🧊' })
-      items.push({ id: 'hat', label: 'Sun hat', icon: '👒' })
+      items.push({ id: 'cooling_towel', label: 'Cooling towel' })
+      items.push({ id: 'hat', label: 'Sun hat' })
     }
     if (weather?.temp < 50) {
-      items.push({ id: 'warm_layers', label: 'Extra warm layers', icon: '🧥' })
-      items.push({ id: 'gloves', label: 'Gloves (for kids)', icon: '🧤' })
+      items.push({ id: 'warm_layers', label: 'Extra warm layers' })
+      items.push({ id: 'gloves', label: 'Gloves (for kids)' })
     }
     if (weather?.level?.includes('rain') || weather?.level?.includes('drizzle')) {
-      items.push({ id: 'rain_gear', label: 'Rain jackets/cover', icon: '🌧️' })
-      items.push({ id: 'tarp', label: 'Small tarp/blanket', icon: '🛖' })
+      items.push({ id: 'rain_gear', label: 'Rain jackets/cover' })
+      items.push({ id: 'tarp', label: 'Small tarp/blanket' })
     }
 
     // Remove duplicates by id

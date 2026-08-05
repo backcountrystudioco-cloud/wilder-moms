@@ -229,7 +229,7 @@ export default function EcoProductsPage() {
                 }
               `}
             >
-              {showSmallBrandsOnly && '✓'} 🏪 Small Brands
+              {showSmallBrandsOnly && '✓'} Small Brands
             </button>
             <button
               onClick={() => setShowDIYOnly(!showDIYOnly)}
@@ -371,7 +371,7 @@ export default function EcoProductsPage() {
               <div className="flex items-center gap-2 mb-3">
                 <p className="text-inkll text-sm">{product.brand}</p>
                 {product.smallBrand && (
-                  <span className="text-xs bg-[#5A6428]/10 text-[#5A6428] px-2 py-0.5 rounded-full">🏪 Small Brand</span>
+                  <span className="text-xs bg-[#5A6428]/10 text-[#5A6428] px-2 py-0.5 rounded-full">Small Brand</span>
                 )}
                 {product.womenOwned && (
                   <span className="text-xs bg-purple-100 text-purple-700 px-2 py-0.5 rounded-full">Owned</span>

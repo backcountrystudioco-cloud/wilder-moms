@@ -233,7 +233,7 @@ export default function BuildDetailPage() {
           {/* Tips */}
           <div className="bg-parchment rounded-xl p-6 mb-8">
             <h2 className="font-serif text-2xl text-ink mb-4 flex items-center gap-2">
-              <span className="text-gold">✦</span> Pro Tips
+              Pro Tips
             </h2>
             <ul className="space-y-2">
               {build.tips.map((tip, index) => (

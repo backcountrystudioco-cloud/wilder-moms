@@ -37,10 +37,15 @@ export function SyncIndicator() {
 
   return (
     <span className="inline-flex items-center gap-1.5 text-[11px] text-inkll">
-      {cloudStatus === 'pending' ? (
+      {cloudStatus === 'pending' || cloudStatus === 'loading' ? (
         <>
           <span className="w-1.5 h-1.5 rounded-full bg-gold animate-pulse" />
-          Saving…
+          {cloudStatus === 'loading' ? 'Loading…' : 'Saving…'}
+        </>
+      ) : cloudStatus === 'error' ? (
+        <>
+          <span className="w-1.5 h-1.5 rounded-full bg-terra" />
+          Save failed
         </>
       ) : (
         <>

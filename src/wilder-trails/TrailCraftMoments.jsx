@@ -180,7 +180,6 @@ export default function TrailCraftMoments({
                 // Could add to forage collection
               }}
             >
-              <span>{item.emoji}</span>
               <span className="font-sans text-ink">{item.label}</span>
             </motion.button>
           ))}

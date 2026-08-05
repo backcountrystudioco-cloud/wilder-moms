@@ -66,7 +66,6 @@ export default function WhatsGrowing({ lat, lon }) {
           >
             <div className="flex items-start justify-between mb-2">
               <div className="flex items-center gap-2">
-                <span className="text-xl">{plant.emoji}</span>
                 <div>
                   <h4 className="font-serif text-ink font-medium">{plant.name}</h4>
                   <span className={`text-xs px-2 py-0.5 rounded-full ${typeColors[plant.type] || typeColors.other}`}>

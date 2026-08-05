@@ -763,7 +763,6 @@ const NaturePlanner = () => {
             >
               <div className="text-center mb-6">
                 <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-ember/10 flex items-center justify-center">
-                  <span className="text-3xl">📍</span>
                 </div>
                 <h2 className="font-serif text-xl text-ember mb-2">Where are you?</h2>
                 <p className="font-sans text-sm text-inkl">
@@ -1050,7 +1049,7 @@ const NaturePlanner = () => {
 
               {/* Tips */}
               <div className="mt-6 p-4 bg-parchment rounded-xl">
-                <h4 className="font-serif text-lg text-forest mb-2">💡 Mom tips</h4>
+                <h4 className="font-serif text-lg text-forest mb-2">Mom tips</h4>
                 <ul className="font-sans text-sm text-forest/80 space-y-1">
                   <li>• Check trail conditions before heading out</li>
                   <li>• Pack snacks, water, and a first-aid kit</li>

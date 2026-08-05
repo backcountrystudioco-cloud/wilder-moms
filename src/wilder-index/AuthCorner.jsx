@@ -48,11 +48,13 @@ export default function AuthCorner({ variant = 'overlay' }) {
       className="inline-flex items-center"
       aria-label="Wilder Moms — home"
     >
-      <img
-        src="/wilder-moms-logo.jpeg"
-        alt="Wilder Moms"
-        className="h-9 md:h-11 w-auto"
-      />
+      <div className="h-9 md:h-11 w-9 md:w-11 rounded-full overflow-hidden bg-parchment">
+        <img
+          src="/wilder-moms-logo.jpeg"
+          alt="Wilder Moms"
+          className="w-full h-full object-cover"
+        />
+      </div>
     </Link>
   )
 

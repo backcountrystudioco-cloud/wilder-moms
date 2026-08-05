@@ -9,28 +9,28 @@ export const ACHIEVEMENTS = [
     title: 'Field Noted',
     blurb: 'Completed the Wilder Index field check.',
     detail: 'You read your neighborhood. That\'s the whole game.',
-    icon: '🪶',
+    icon: '',
   },
   {
     id: 'first-upgrade',
     title: 'First Habitat Shift',
     blurb: 'Completed your first habitat shift.',
     detail: 'One small change. The hardest one is the first one.',
-    icon: '✦',
+    icon: '',
   },
   {
     id: 'creek-keeper',
     title: 'Creek Keeper',
     blurb: 'Completed 3 Daily Nature habitat shifts.',
     detail: 'A creek, a tree, a pot of mint — you\'ve made nature a habit.',
-    icon: '🌿',
+    icon: '',
   },
   {
     id: 'porch-season',
     title: 'Porch Season',
     blurb: 'Completed 3 Belonging habitat shifts.',
     detail: 'Neighbors, chairs, a chalk drawing. Your block knows you now.',
-    icon: '🪑',
+    icon: '',
   },
   {
     id: 'loop-walker',
@@ -58,7 +58,7 @@ export const ACHIEVEMENTS = [
     title: 'Steady Hand',
     blurb: 'Completed 5 total habitat shifts.',
     detail: 'Five small changes. The pattern is yours now.',
-    icon: '✺',
+    icon: '',
   },
 ]
 
