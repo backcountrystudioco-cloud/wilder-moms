@@ -199,14 +199,6 @@ export const QUESTIONS = [
     type: 'frequency',
     options: FREQUENCY,
   },
-  {
-    id: 'wonder.q5',
-    dimension: 'wonder',
-    chapter: 'Everyday Wonder',
-    text: 'Does your child spontaneously stop, investigate, or ask questions during walks?',
-    type: 'frequency',
-    options: FREQUENCY,
-  },
 
   // ────────────── RESTORATION ──────────────
   // Kaplan 1995 ART — directed-attention fatigue is restored by
@@ -282,14 +274,6 @@ export const QUESTIONS = [
     chapter: 'Nearby Nature',
     text: 'Is there a small patch of nature close enough to use on an ordinary weekday without driving?',
     sub: 'A tree, a planter, a strip of grass, a stoop garden.',
-    type: 'frequency',
-    options: FREQUENCY,
-  },
-  {
-    id: 'dailyNature.q3',
-    dimension: 'dailyNature',
-    chapter: 'Nearby Nature',
-    text: 'Do your routine routes (to school, friends, coffee) include trees or gardens?',
     type: 'frequency',
     options: FREQUENCY,
   },
@@ -546,13 +530,5 @@ export const CONTEXT_QUESTIONS = [
       { label: 'Yes, shared', value: 'shared' },
       { label: 'No', value: 'none' },
     ],
-  },
-  {
-    id: 'context.zip',
-    text: 'Optional: your zip code',
-    sub: 'Helps us suggest climate-appropriate plants and timing. Stored only on your device.',
-    type: 'text',
-    optional: true,
-    placeholder: 'e.g., 90210',
   },
 ]
