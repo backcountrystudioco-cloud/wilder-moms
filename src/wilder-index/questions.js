@@ -215,14 +215,9 @@ export const QUESTIONS = [
     type: 'frequency',
     options: FREQUENCY,
   },
-  {
-    id: 'restoration.q2',
-    dimension: 'restoration',
-    chapter: 'Places to Exhale',
-    text: 'Is there a place to stop near home with a chair, shade, and a view — that doesn\'t require planning?',
-    type: 'frequency',
-    options: FREQUENCY,
-  },
+  // q2 was dropped: it overlapped with q4 (both about shade + a place to
+  // sit). The remaining 4 probes cover distinct facets: sensory sit spot
+  // (q1), low-vigilance walk (q3), microclimate (q4), embodied outcome (q5).
   {
     id: 'restoration.q3',
     dimension: 'restoration',
@@ -302,16 +297,10 @@ export const QUESTIONS = [
   // measurable physical and mental-health benefits; "good risk" vs
   // "bad risk" depends on calibrability. Nicholson 1971 loose parts:
   // the more movable stuff, the more creativity. q3 rewritten in
-  // the calibrable-risk frame — the binding constraint is usually
-  // adult permission, not the absence of physical space.
-  {
-    id: 'adventure.q1',
-    dimension: 'adventure',
-    chapter: 'Your Adventure Edge',
-    text: 'Is there somewhere nearby where your child can climb, balance, or move fast without entering traffic?',
-    type: 'frequency',
-    options: FREQUENCY,
-  },
+  // The calibrable-risk frame — the binding constraint is usually
+  // adult permission, not the absence of physical space. q1 was dropped
+  // because it overlapped with q3 (both about climbing/moving fast);
+  // q3 now carries the "without traffic" condition too.
   {
     id: 'adventure.q2',
     dimension: 'adventure',
@@ -324,7 +313,7 @@ export const QUESTIONS = [
     id: 'adventure.q3',
     dimension: 'adventure',
     chapter: 'Your Adventure Edge',
-    text: 'Is there somewhere your child can move fast, climb high, or take a real risk without you needing to stop them?',
+    text: 'Is there somewhere your child can climb, run, or take a real risk — without traffic, and without you needing to stop them?',
     sub: 'The "calibrable risk" test — a place where the risk is real but the child can read it.',
     type: 'comfort',
     options: COMFORT,
