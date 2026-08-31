@@ -35,12 +35,11 @@ function App() {
           <LaunchPopup />
           <WilderIndexProvider>
           <Routes>
-            <Route path="/" element={<WilderIndexPage />} />
+            <Route path="/" element={<HomePage />} />
             <Route path="/discover" element={<FreeReading />} />
             <Route path="/join" element={<JoinPage />} />
-            <Route path="/welcome" element={<HomePage />} />
+            <Route path="/welcome" element={<WilderIndexPage />} />
             <Route path="/landing" element={<LandingPage />} />
-            <Route path="/join" element={<JoinPage />} />
             <Route element={<AppLayoutWithoutFooter />}>
               <Route path="/wilder-trails" element={<Navigate to="/wilder-trails/location" replace />} />
               <Route path="/wilder-trails/location" element={<LocationPage />} />
@@ -48,7 +47,7 @@ function App() {
               <Route path="/wilder-trails/trails" element={<TrailsPage />} />
               <Route path="/wilder-trails/ai-finder" element={<AITrailFinder />} />
               <Route path="/wilder-trails/:trailId" element={<TrailDetailPage />} />
-              <Route path="/wilder-index" element={<Navigate to="/" replace />} />
+              <Route path="/wilder-index" element={<Navigate to="/welcome" replace />} />
             </Route>
             <Route element={<AppLayout />}>
               <Route path="/wilder-philosophy" element={<MissionPage />} />

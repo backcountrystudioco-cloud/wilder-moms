@@ -88,7 +88,7 @@ function StartButton({ children, className = '' }) {
     } catch (e) {
       // ignore storage failures; OnboardingFlow still works without the flag
     }
-    navigate('/')
+    navigate('/welcome')
   }
   return (
     <button
