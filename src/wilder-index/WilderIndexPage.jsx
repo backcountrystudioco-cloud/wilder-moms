@@ -7,7 +7,6 @@ import OnboardingFlow from './OnboardingFlow'
 import RevealScreen from './RevealScreen'
 import TodayPanel from './TodayPanel'
 import ScoreDashboard from './ScoreDashboard'
-import WeeklyPlan from './WeeklyPlan'
 import MonthlyArchitectural from './MonthlyArchitectural'
 import AchievementsShelf from './AchievementsShelf'
 import { SyncIndicator, CloudSyncToast } from './CloudSyncIndicator'
@@ -116,19 +115,6 @@ function Dashboard() {
             sub="the one we'd grow"
           />
         </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="mt-6"
-          id="this-week"
-        >
-          <WeeklyPlan
-            profile={{ ...state.onboarding, answers: state.onboarding.answers }}
-            scores={scores}
-          />
-        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 12 }}
