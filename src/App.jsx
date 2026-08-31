@@ -39,7 +39,7 @@ function App() {
             <Route path="/discover" element={<FreeReading />} />
             <Route path="/join" element={<JoinPage />} />
             <Route path="/welcome" element={<WilderIndexPage />} />
-            <Route path="/landing" element={<LandingPage />} />
+            <Route path="/landing" element={<HomePage />} />
             <Route element={<AppLayoutWithoutFooter />}>
               <Route path="/wilder-trails" element={<Navigate to="/wilder-trails/location" replace />} />
               <Route path="/wilder-trails/location" element={<LocationPage />} />
