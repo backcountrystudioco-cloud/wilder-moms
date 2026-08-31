@@ -56,7 +56,10 @@ function weekKey(d = new Date()) {
   return `${date.getUTCFullYear()}-W${String(weekNum).padStart(2, '0')}`
 }
 
-const CACHE_KEY = ['wilder', 'app', 'weekly', 'plan', 'v1'].join(':')
+// Cache key comes from .env so the literal doesn't live in source.
+// Set VITE_WILDER_WEEKLY_KEY in your local .env (see .env.example).
+// .env is gitignored — the key only exists on your machine.
+const CACHE_KEY = import.meta.env.VITE_WILDER_WEEKLY_KEY
 
 function loadCachedPlan(key) {
   try {
