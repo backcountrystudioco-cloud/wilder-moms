@@ -56,7 +56,7 @@ function weekKey(d = new Date()) {
   return `${date.getUTCFullYear()}-W${String(weekNum).padStart(2, '0')}`
 }
 
-const CACHE_KEY = 'wilder_weekly_plan_v1'
+const CACHE_KEY = 'wilder_app_weekly_plan_storage_v1'
 
 function loadCachedPlan(key) {
   try {
