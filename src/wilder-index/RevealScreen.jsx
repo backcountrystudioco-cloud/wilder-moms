@@ -154,8 +154,8 @@ export default function RevealScreen({ scores, summary, profile, onContinue }) {
             This is your family's <em className="text-ember">pattern.</em>
           </h1>
           <p className="text-inkl text-base md:text-lg leading-relaxed max-w-xl mx-auto">
-            Six small readings, quietly drawn from the life you're already living.
-            Less a grade than a kind of beginning — for the regular outside kind.
+            Six small readings, drawn quietly from the life you're already living.
+            More a beginning than a grade.
           </p>
         </motion.div>
 
@@ -276,7 +276,6 @@ export default function RevealScreen({ scores, summary, profile, onContinue }) {
           className="text-center"
         >
           <p className="text-inkll text-sm max-w-md mx-auto mb-6">
-            Each small move belongs to your block. Each one leans into the next.
             The whole thing is the regular outside place — same trail walked often,
             neighbors closer than you'd think.
           </p>

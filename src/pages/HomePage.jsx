@@ -47,9 +47,8 @@ function AfterWorkHour() {
               Where can you actually take them tonight?
             </h2>
             <p className="text-white/60 text-base md:text-lg leading-relaxed max-w-xl">
-              Not the couch. Not a playground that needs your eyes on it. The kind of
-              outside where the kids walk in on their own and you can drift for a
-              minute — onto a bench, into the birds, away from the day.
+              Not the couch. Not a playground that needs your eyes on it. Somewhere
+              the kids walk in on their own, and you don't have to lead.
             </p>
           </motion.div>
 
@@ -121,14 +120,12 @@ function ArchitectMotherSection() {
               I built this for the 5 p.m. version of me.
             </h2>
             <p className="text-inkl text-base leading-relaxed mb-4">
-              There's a quieter version of me that shows up around five — a little
-              hollowed out by the day, not yet ready to call anyone. I wasn't looking
-              for an adventure. I was looking for a trail walked often enough that a
-              neighbor would be sitting a few benches over.
+              There is a quieter version of me that arrives around five. I wasn't
+              looking for an adventure. Just a trail walked often enough that a
+              neighbor sits a few benches over.
             </p>
             <p className="text-inkl text-base leading-relaxed mb-7">
-              And here's the quiet surprise — kids can play longer when the parent is
-              held too. The afternoon opens up around both of you.
+              Here is the quiet part: kids can play longer when the parent is held, too.
             </p>
             <Link
               to="/wilder-philosophy"

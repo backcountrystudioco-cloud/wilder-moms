@@ -44,10 +44,8 @@ export default function Hero() {
             custom={2}
             className="text-inkl font-sans text-base md:text-lg leading-relaxed mb-4 max-w-lg"
           >
-            There are evenings when the whole shape of motherhood is a closed door.
-            The couch is the softest one. Wilder is for the nights you want to open
-            a different door — a trail walked often, a neighbor you half know,
-            your kids beginning something without you.
+            Some nights the whole shape of motherhood is a closed door. The couch
+            is the softest one. Some nights, you want a third.
           </motion.p>
 
           <motion.p
