@@ -107,7 +107,7 @@ export default function TodayPanel({ profile, scores }) {
       <p className="text-inkl text-sm mt-2 max-w-xl">
         {view.rec
           ? `${view.rec.charAt(0).toUpperCase()}${view.rec.slice(1)}. Same place tomorrow.`
-          : 'No habitat shifts yet this week. One small outside thing today. Same place tomorrow.'}
+          : 'The week is still open. One small habitat shift today, and tomorrow, the same place.'}
       </p>
 
       <div className="mt-6 grid md:grid-cols-2 gap-3">

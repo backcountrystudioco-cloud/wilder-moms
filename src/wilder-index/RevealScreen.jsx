@@ -154,8 +154,8 @@ export default function RevealScreen({ scores, summary, profile, onContinue }) {
             This is your family's <em className="text-ember">pattern.</em>
           </h1>
           <p className="text-inkl text-base md:text-lg leading-relaxed max-w-xl mx-auto">
-            Six dimensions, read from the life you already live. Not a grade.
-            A starting place — for the regular outside kind.
+            Six small readings, quietly drawn from the life you're already living.
+            Less a grade than a kind of beginning — for the regular outside kind.
           </p>
         </motion.div>
 
@@ -276,9 +276,9 @@ export default function RevealScreen({ scores, summary, profile, onContinue }) {
           className="text-center"
         >
           <p className="text-inkll text-sm max-w-md mx-auto mb-6">
-            Each action is small, specific to your block, and connected to the next.
-            The point is the regular outside place — same trail, same neighbors,
-            half a bench away.
+            Each small move belongs to your block. Each one leans into the next.
+            The whole thing is the regular outside place — same trail walked often,
+            neighbors closer than you'd think.
           </p>
           <button
             onClick={onContinue}

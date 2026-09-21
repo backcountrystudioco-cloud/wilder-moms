@@ -44,10 +44,10 @@ export default function Hero() {
             custom={2}
             className="text-inkl font-sans text-base md:text-lg leading-relaxed mb-4 max-w-lg"
           >
-            Your day was full of rooms you couldn't leave. By 5 p.m. you love them,
-            you're tired, and the couch has your name on it. Wilder finds the nearby
-            places and small outside rituals where your kids get absorbed, you sit
-            down, and the same neighbors are doing the same thing.
+            There are evenings when the whole shape of motherhood is a closed door.
+            The couch is the softest one. Wilder is for the nights you want to open
+            a different door — a trail walked often, a neighbor you half know,
+            your kids beginning something without you.
           </motion.p>
 
           <motion.p
