@@ -155,7 +155,7 @@ export default function RevealScreen({ scores, summary, profile, onContinue }) {
           </h1>
           <p className="text-inkl text-base md:text-lg leading-relaxed max-w-xl mx-auto">
             Six dimensions, read from the life you already live. Not a grade.
-            A starting place.
+            A starting place — for the regular outside kind.
           </p>
         </motion.div>
 
@@ -276,8 +276,9 @@ export default function RevealScreen({ scores, summary, profile, onContinue }) {
           className="text-center"
         >
           <p className="text-inkll text-sm max-w-md mx-auto mb-6">
-            Each action is small, specific to your block, and connected to the next. The point
-            is the pattern, not the score.
+            Each action is small, specific to your block, and connected to the next.
+            The point is the regular outside place — same trail, same neighbors,
+            half a bench away.
           </p>
           <button
             onClick={onContinue}
