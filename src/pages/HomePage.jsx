@@ -47,9 +47,9 @@ function AfterWorkHour() {
               Where can you actually take them tonight?
             </h2>
             <p className="text-white/60 text-base md:text-lg leading-relaxed max-w-xl">
-              Not a playground that needs constant supervision. Not an activity that
-              needs one more thing from you. A place where the kids get absorbed in their
-              own small world, and you get to sit down.
+              Not the couch. Not a playground that needs constant supervision. A regular
+              nearby place where the kids get absorbed in their own small world, and you
+              get to sit down.
             </p>
           </motion.div>
 
@@ -121,14 +121,16 @@ function ArchitectMotherSection() {
               I built this for the 5 p.m. version of me.
             </h2>
             <p className="text-inkl text-base leading-relaxed mb-4">
-              The question I kept asking: what would I actually choose over the couch after
-              a long day? Not a bigger adventure. A place close to home where my kids could
-              start on their own and I could sit down.
+              The 5 p.m. version is the loneliest one. Between the last meeting and the
+              late-night scroll, too tired to call anyone, too wired to stop thinking.
+              I wasn't looking for a bigger adventure. I was looking for a regular
+              nearby place — where my kids could start on their own, where I could sit
+              down, and where the same neighbors kept showing up.
             </p>
             <p className="text-inkl text-base leading-relaxed mb-7">
-              When the place restores the parent, the kids get longer, less interrupted
-              stretches of independent play. That's the whole idea — better afternoons
-              start with somewhere for you to sit.
+              When the place restores you, the kids get longer, less interrupted
+              stretches of play too. That's the whole idea — better afternoons start
+              with somewhere for you to be.
             </p>
             <Link
               to="/wilder-philosophy"

@@ -44,9 +44,10 @@ export default function Hero() {
             custom={2}
             className="text-inkl font-sans text-base md:text-lg leading-relaxed mb-4 max-w-lg"
           >
-            For the after-work hour when you love them and have nothing left to organize.
-            Wilder finds the nearby places and open-ended ideas where kids can get absorbed
-            while you stay close, sit down, and stop being the cruise director.
+            Your day was full of rooms you couldn't leave. By 5 p.m. you love them,
+            you're tired, and the couch has your name on it. Wilder finds the nearby
+            places and small outside rituals where your kids get absorbed, you sit
+            down, and the same neighbors are doing the same thing.
           </motion.p>
 
           <motion.p
@@ -56,7 +57,7 @@ export default function Hero() {
             custom={2.5}
             className="text-ink font-serif text-xl italic mb-8 max-w-md"
           >
-            They get a longer stretch of play. You get a minute of being there without being on.
+            Same trail. Same neighbors. Same parent half a bench away.
           </motion.p>
 
           <motion.div
