@@ -64,13 +64,13 @@ export default function Hero() {
             initial="hidden"
             animate="visible"
             custom={3}
-            className="mb-6 flex flex-col sm:flex-row gap-3"
+            className="mb-4 flex flex-col sm:flex-row gap-3"
           >
             <Link
-              to="/wilder-trails"
+              to="/welcome"
               className="inline-flex items-center justify-center gap-2 bg-ember text-white px-7 py-3 rounded-full font-medium text-sm hover:bg-terra transition-colors"
             >
-              Find somewhere to stop
+              Find your wilder week
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
@@ -79,7 +79,7 @@ export default function Hero() {
               to="/wilder-homes"
               className="inline-flex items-center justify-center gap-2 px-7 py-3 rounded-full font-medium text-sm text-ember border border-ember hover:bg-ember/5 transition-colors"
             >
-              Make it easy at home
+              Browse wilder homes
             </Link>
           </motion.div>
 
@@ -91,6 +91,14 @@ export default function Hero() {
             className="text-inkll font-sans text-xs mb-7"
           >
             No packing list. No activity to lead. Start close to home.
+            <br />
+            <Link
+              to="/wilder-trails"
+              className="inline-flex items-center gap-1 mt-1 text-inkll hover:text-ember transition-colors"
+            >
+              Or check nearby trails
+              <span aria-hidden="true">→</span>
+            </Link>
           </motion.p>
 
           <motion.div
@@ -125,7 +133,7 @@ export default function Hero() {
             custom={6}
             className="mt-6 max-w-md text-inkll font-serif italic text-sm leading-relaxed"
           >
-            Children need daily freedom more than occasional adventure.
+            Daily outside beats occasional adventure.
           </motion.p>
         </div>
 
@@ -161,7 +169,7 @@ export default function Hero() {
               A 5:42 p.m. kind of place
             </p>
             <h2 className="font-serif text-2xl text-ink leading-tight mb-3">
-              Close enough to see. Far enough to let them begin.
+              You can see them. They can begin on their own.
             </h2>
             <div className="grid grid-cols-2 gap-2 text-inkl font-sans text-xs">
               <span className="border-t border-inkll/50 pt-2">A seat in the shade</span>

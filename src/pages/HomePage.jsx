@@ -16,18 +16,18 @@ function AfterWorkHour() {
   const principles = [
     {
       number: '01',
-      title: 'Easy to enter',
-      text: 'A nearby trail, a backyard corner, or a doorstep. No expedition required.',
+      title: 'Easy to get to',
+      text: 'A nearby trail, a backyard corner, or the front step. No packing, no plan.',
     },
     {
       number: '02',
-      title: 'Interesting enough',
-      text: 'Water, sticks, dirt, and room to make a world without an adult running it.',
+      title: 'Enough to do without you',
+      text: 'Water, sticks, dirt, loose parts — the stuff that becomes a whole world when no one runs it.',
     },
     {
       number: '03',
-      title: 'A place to stop',
-      text: 'A seat, a sightline, and permission to be close without being constantly on.',
+      title: 'A place for you to sit',
+      text: 'A seat, a sightline, and permission to be close without being on duty.',
     },
   ]
 
@@ -41,15 +41,15 @@ function AfterWorkHour() {
             transition={{ duration: 0.7 }}
           >
             <p className="text-gold text-xs font-medium uppercase tracking-[0.2em] mb-4">
-              The question changed
+              After the day is done
             </p>
             <h2 className="font-serif font-light text-4xl md:text-5xl lg:text-6xl leading-tight mb-6">
-              What kind of outdoor place would a tired working mom choose over the couch?
+              Where can you actually take them tonight?
             </h2>
             <p className="text-white/60 text-base md:text-lg leading-relaxed max-w-xl">
-              Not a playground that needs constant supervision. Not an activity that needs
-              one more thing from her. A place where children can become absorbed in their
-              own small world while their mother gets a minute to exhale.
+              Not a playground that needs constant supervision. Not an activity that
+              needs one more thing from you. A place where the kids get absorbed in their
+              own small world, and you get to sit down.
             </p>
           </motion.div>
 
@@ -75,7 +75,7 @@ function AfterWorkHour() {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="mt-8 text-white/45 font-serif italic text-sm"
             >
-              The best play has no instructions.
+              You don't have to lead it.
             </motion.p>
           </motion.div>
         </div>
@@ -104,7 +104,7 @@ function ArchitectMotherSection() {
               loading="lazy"
             />
             <div className="absolute left-4 bottom-4 bg-cream/95 rounded-xl px-4 py-3 max-w-[14rem]">
-              <p className="text-ember text-[10px] uppercase tracking-[0.18em] font-medium mb-1">The design brief</p>
+              <p className="text-ember text-[10px] uppercase tracking-[0.18em] font-medium mb-1">From us</p>
               <p className="font-serif text-lg leading-tight text-ink">Make room for her, too.</p>
             </div>
           </motion.div>
@@ -118,26 +118,23 @@ function ArchitectMotherSection() {
               From an architect + a mother
             </p>
             <h2 className="font-serif italic font-light text-4xl md:text-5xl text-ink leading-tight mb-5">
-              Design for the person who has been carrying the day.
+              I built this for the 5 p.m. version of me.
             </h2>
             <p className="text-inkl text-base leading-relaxed mb-4">
-              I keep coming back to one question: what kind of outdoor place would I choose
-              over sitting on the couch after work? The answer is not a bigger adventure. It is
-              a place with enough invitation for my kids and enough quiet for me.
+              The question I kept asking: what would I actually choose over the couch after
+              a long day? Not a bigger adventure. A place close to home where my kids could
+              start on their own and I could sit down.
             </p>
             <p className="text-inkl text-base leading-relaxed mb-7">
-              When the environment restores the mother, children get longer, less interrupted
-              stretches of independent exploration too. That is the Wilder idea: better childhoods
-              can begin with giving her somewhere to sit.
-            </p>
-            <p className="text-inkll font-serif italic text-sm mb-7">
-              Connection happens in repeated places.
+              When the place restores the parent, the kids get longer, less interrupted
+              stretches of independent play. That's the whole idea — better afternoons
+              start with somewhere for you to sit.
             </p>
             <Link
               to="/wilder-philosophy"
               className="inline-flex items-center gap-2 text-ember font-medium text-sm uppercase tracking-wider hover:text-terra transition-colors"
             >
-              Read the design brief
+              Read more about the idea
               <span aria-hidden="true">→</span>
             </Link>
           </motion.div>
@@ -174,11 +171,11 @@ function CurrentDropShowcase() {
             The plan is already made.
           </h2>
           <p className="text-inkl max-w-2xl mx-auto">
-            Open-ended builds and experiments that let kids take the lead while you stay nearby,
-            not on duty. Two new ways to begin, without having to become the activity director.
+            Two new open-ended ideas every month. Set them out, step back, and let
+            the play belong to your kids.
           </p>
           <p className="text-inkll font-serif italic text-sm max-w-2xl mx-auto mt-5">
-            Parents need restoration too.
+            You need to rest too.
           </p>
         </motion.div>
 
@@ -272,8 +269,8 @@ function PremiumSubscriptionPitch() {
             <span className="text-gold">More room to exhale.</span>
           </h2>
           <p className="text-white/80 text-lg max-w-2xl mx-auto leading-relaxed">
-            One Architect Blueprint and one Lab Activity every month. Open-ended, printable,
-            and made for kids to begin without a parent becoming the cruise director.
+            One Architect Blueprint and one Lab Activity every month. Printable, open-ended,
+            and made for kids to start without you leading.
           </p>
         </motion.div>
 
@@ -344,32 +341,33 @@ function PricingPill({ amount, cadence, sub, badge, highlight = false }) {
 }
 
 // ---------------------------------------------------------------------
-// 3 Destinations — Trails / Homes / Premium
+// 3 Destinations — Survey / Homes / Trails
 // ---------------------------------------------------------------------
 const paths = [
   {
-    to: '/wilder-trails',
-    eyebrow: 'For the after-work hour',
-    heading: 'Find somewhere to stop.',
-    subtitle: 'A nearby route with places to sit, watch, and let them go on ahead without turning you into the trip leader.',
+    to: '/welcome',
+    eyebrow: 'Start here',
+    heading: "What's your wilder week?",
+    subtitle: 'A few questions about your week and your block — get a starting spot, three small swaps, and one quiet reset.',
     accentClass: 'bg-ember/15',
     blobFrom: '#B43C1E',
     blobTo: '#F2A57B',
+    tag: '3 min · free',
   },
   {
     to: '/wilder-homes',
     eyebrow: 'For a yes-space at home',
     heading: 'Make room for play.',
-    subtitle: 'Backyard and balcony ideas where kids can start on their own, using sticks, water, scraps, and what is already around.',
+    subtitle: 'Backyard, balcony, and doorstep builds where kids can start on their own using sticks, water, scraps, and what is already around.',
     accentClass: 'bg-olive/15',
     blobFrom: '#5A6428',
     blobTo: '#96963C',
   },
   {
-    to: '/wilder-homes?tab=premium',
-    eyebrow: 'For when you have nothing left to invent',
-    heading: 'Open the monthly plan.',
-    subtitle: 'Two ready-made invitations a month. Set them out, step back, and let the play belong to them.',
+    to: '/wilder-trails',
+    eyebrow: 'For after-work',
+    heading: 'Find somewhere to stop.',
+    subtitle: 'A nearby route with a seat, some shade, and room to let them go on ahead without turning you into the trip leader.',
     accentClass: 'bg-gold/15',
     blobFrom: '#D2961E',
     blobTo: '#F2A57B',
@@ -418,7 +416,11 @@ function ChooseYourPathTiles() {
                   }}
                 />
                 <div className="relative z-10 flex flex-col h-full">
-                  <p className={`text-[10px] uppercase tracking-[0.2em] font-medium mb-4 ${p.accentClass} text-ember rounded-full px-3 py-1 inline-block self-start`}>
+                  <p className={`text-[10px] uppercase tracking-[0.2em] font-medium mb-4 rounded-full px-3 py-1 inline-block self-start ${
+                    p.tag
+                      ? 'bg-ember text-white'
+                      : `${p.accentClass} text-ember`
+                  }`}>
                     {p.eyebrow}
                   </p>
                   <h3 className="font-serif italic text-3xl md:text-4xl text-ink mb-4">
@@ -427,6 +429,11 @@ function ChooseYourPathTiles() {
                   <p className="font-sans text-inkl text-sm leading-relaxed flex-grow">
                     {p.subtitle}
                   </p>
+                  {p.tag && (
+                    <p className="mt-3 font-serif italic text-xs text-inkll">
+                      {p.tag}
+                    </p>
+                  )}
                   <div className="mt-6 flex items-center gap-2 text-inkll group-hover:text-ember transition-colors">
                     <span className="font-sans text-xs uppercase tracking-wider">See the option</span>
                     <svg
