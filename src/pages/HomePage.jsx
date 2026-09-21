@@ -10,86 +10,49 @@ import {
 } from '../wilder-builds/buildsLibrary'
 import { useScrollReveal, fadeUpVariants } from '../hooks/useScrollReveal'
 
-function AfterWorkHour() {
+function ManifestoCh1() {
   const [ref, visible] = useScrollReveal()
-
-  const principles = [
-    {
-      number: '01',
-      title: 'Easy to get to',
-      text: 'A nearby trail, a backyard corner, or the front step. No packing, no plan.',
-    },
-    {
-      number: '02',
-      title: 'Enough to do without you',
-      text: 'Water, sticks, dirt, loose parts — the stuff that becomes a whole world when no one runs it.',
-    },
-    {
-      number: '03',
-      title: 'A place for you to sit',
-      text: 'A seat, a sightline, and permission to be close without being on duty.',
-    },
-  ]
 
   return (
     <section ref={ref} className="py-20 md:py-28 bg-ink text-white">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="grid md:grid-cols-[1.05fr_0.95fr] gap-12 md:gap-20 items-start">
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={visible ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
-            transition={{ duration: 0.7 }}
-          >
-            <p className="text-gold text-xs font-medium uppercase tracking-[0.2em] mb-4">
-              After the day is done
-            </p>
-            <h2 className="font-serif font-light text-4xl md:text-5xl lg:text-6xl leading-tight mb-6">
-              Where can you actually take them tonight?
-            </h2>
-            <p className="text-white/60 text-base md:text-lg leading-relaxed max-w-xl">
-              Not the couch. Not a playground that needs your eyes on it. Somewhere
-              the kids walk in on their own, and you don't have to lead.
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={visible ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
-            transition={{ duration: 0.7, delay: 0.15 }}
-            className="border-t border-white/20"
-          >
-            {principles.map((principle) => (
-              <div key={principle.number} className="grid grid-cols-[2.5rem_1fr] gap-4 py-5 border-b border-white/15">
-                <span className="font-serif italic text-gold text-xl">{principle.number}</span>
-                <div>
-                  <h3 className="font-serif text-2xl mb-1">{principle.title}</h3>
-                  <p className="text-white/55 text-sm leading-relaxed">{principle.text}</p>
-                </div>
-              </div>
-            ))}
-
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={visible ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="mt-8 text-white/45 font-serif italic text-sm"
-            >
-              You don't have to lead it.
-            </motion.p>
-          </motion.div>
-        </div>
+      <div className="max-w-3xl mx-auto px-6 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={visible ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+          transition={{ duration: 0.7 }}
+        >
+          <p className="text-gold text-xs font-medium uppercase tracking-[0.2em] mb-6">
+            Why we made this
+          </p>
+          <h2 className="font-serif font-light text-4xl md:text-5xl lg:text-6xl leading-tight mb-10">
+            Motherhood is better with people.
+          </h2>
+          <p className="text-white/65 text-base md:text-lg leading-relaxed mb-8 max-w-2xl mx-auto">
+            Somewhere along the way, raising kids got strangely lonely. We live farther
+            from family. Our friends are scattered across town. Schedules are packed.
+            Playdates take planning. And somehow we're supposed to build a village
+            while also packing the snacks, finding the missing shoe, answering the
+            email, making dinner, and keeping tiny humans alive.
+          </p>
+          <p className="font-serif italic text-2xl md:text-3xl text-white/55 mb-8">
+            That's a lot.
+          </p>
+          <p className="text-white/85 text-base md:text-lg leading-relaxed max-w-2xl mx-auto">
+            So we made something simpler.
+          </p>
+        </motion.div>
       </div>
     </section>
   )
 }
 
-function ArchitectMotherSection() {
+function ManifestoCh2And3() {
   const [ref, visible] = useScrollReveal()
 
   return (
     <section ref={ref} className="py-20 md:py-28 bg-parchment">
       <div className="max-w-6xl mx-auto px-6">
-        <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+        <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center mb-20 md:mb-28">
           <motion.div
             initial={{ opacity: 0, x: -18 }}
             animate={visible ? { opacity: 1, x: 0 } : { opacity: 0, x: -18 }}
@@ -98,13 +61,17 @@ function ArchitectMotherSection() {
           >
             <img
               src="/images/Mission.png"
-              alt="A mother watching her children make something together"
+              alt="Moms and kids stepping outside together"
               className="w-full h-full object-cover"
               loading="lazy"
             />
             <div className="absolute left-4 bottom-4 bg-cream/95 rounded-xl px-4 py-3 max-w-[14rem]">
-              <p className="text-ember text-[10px] uppercase tracking-[0.18em] font-medium mb-1">From us</p>
-              <p className="font-serif text-lg leading-tight text-ink">Make room for her, too.</p>
+              <p className="text-ember text-[10px] uppercase tracking-[0.18em] font-medium mb-1">
+                Come outside
+              </p>
+              <p className="font-serif text-lg leading-tight text-ink">
+                Just come.
+              </p>
             </div>
           </motion.div>
 
@@ -114,28 +81,191 @@ function ArchitectMotherSection() {
             transition={{ duration: 0.7, delay: 0.1 }}
           >
             <p className="text-ember text-xs font-medium uppercase tracking-[0.2em] mb-4">
-              From an architect + a mother
+              The invitation
             </p>
-            <h2 className="font-serif italic font-light text-4xl md:text-5xl text-ink leading-tight mb-5">
-              I built this for the 5 p.m. version of me.
+            <h2 className="font-serif font-light text-4xl md:text-5xl text-ink leading-tight mb-5">
+              Come outside.
             </h2>
-            <p className="text-inkl text-base leading-relaxed mb-4">
-              There is a quieter version of me that arrives around five. I wasn't
-              looking for an adventure. Just a trail walked often enough that a
-              neighbor sits a few benches over.
+            <p className="text-inkl text-base md:text-lg leading-relaxed mb-5">
+              Wilder Moms brings moms and kids together for easy, local adventures outside.
             </p>
-            <p className="text-inkl text-base leading-relaxed mb-7">
-              Here is the quiet part: kids can play longer when the parent is held, too.
+            <p className="text-inkl text-base md:text-lg leading-relaxed mb-5">
+              A walk. A trail. A creek. A morning at the park.
             </p>
-            <Link
-              to="/wilder-philosophy"
-              className="inline-flex items-center gap-2 text-ember font-medium text-sm uppercase tracking-wider hover:text-terra transition-colors"
-            >
-              Read more about the idea
-              <span aria-hidden="true">→</span>
-            </Link>
+            <p className="font-serif italic text-base text-inkl mb-5">
+              Nothing impressive required.
+            </p>
+            <ul className="text-inkl text-base leading-relaxed mb-6 space-y-1.5">
+              <li>You don't need to be outdoorsy.</li>
+              <li>You don't need fancy gear.</li>
+              <li>You don't need to know anyone.</li>
+              <li>And you definitely don't need to have it together.</li>
+            </ul>
+            <p className="font-serif text-2xl text-ink mb-5">
+              Just come.
+            </p>
+            <p className="text-inkl text-base leading-relaxed mb-5">
+              Your kids can wander. You can talk to another grown-up. Maybe everyone
+              gets a little muddy. Maybe somebody has a meltdown. Maybe you meet the
+              person you'll text next Tuesday when the afternoon feels approximately
+              nine hours long.
+            </p>
+            <p className="font-serif italic text-base text-inkl">
+              That's kind of the idea.
+            </p>
           </motion.div>
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={visible ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+          transition={{ duration: 0.7, delay: 0.15 }}
+          className="text-center max-w-3xl mx-auto"
+        >
+          <h3 className="font-serif font-light text-3xl md:text-4xl text-ink leading-tight mb-8">
+            This isn't really about hiking.
+          </h3>
+          <div className="text-inkl text-base md:text-lg leading-relaxed space-y-3 mb-10 max-w-2xl mx-auto">
+            <p>It's about having somewhere to go.</p>
+            <p>It's about recognizing a face when you arrive.</p>
+            <p>It's about someone else remembering your kid's name.</p>
+            <p>It's about conversations that start on the trail and eventually become:</p>
+          </div>
+          <p className="font-serif italic text-2xl text-ink mb-10">
+            We're heading outside. Want to come?
+          </p>
+          <p className="text-inkl text-base md:text-lg leading-relaxed mb-10 max-w-2xl mx-auto">
+            Because motherhood was never meant to happen alone. And finding your people
+            shouldn't feel like another thing you have to accomplish.
+          </p>
+          <Link
+            to="/welcome"
+            className="inline-flex items-center gap-2 bg-ember text-white px-8 py-3 rounded-full font-medium text-sm hover:bg-terra transition-colors"
+          >
+            We'll meet you outside. Find your local Wilder Moms
+            <span aria-hidden="true">→</span>
+          </Link>
+        </motion.div>
+      </div>
+    </section>
+  )
+}
+
+function ManifestoCh4To6() {
+  const [ref, visible] = useScrollReveal()
+
+  return (
+    <section ref={ref} className="py-20 md:py-28 bg-cream">
+      <div className="max-w-3xl mx-auto px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={visible ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+          transition={{ duration: 0.7 }}
+          className="mb-16 md:mb-20"
+        >
+          <p className="text-ember text-xs font-medium uppercase tracking-[0.2em] mb-4">
+            No experience necessary
+          </p>
+          <h2 className="font-serif font-light text-3xl md:text-4xl text-ink leading-tight mb-7">
+            No experience necessary.
+          </h2>
+          <p className="text-inkl text-base md:text-lg leading-relaxed mb-5">
+            Seriously.
+          </p>
+          <p className="text-inkl text-base md:text-lg leading-relaxed mb-5">
+            You do not have to be a hiking family.
+          </p>
+          <p className="text-inkl text-base md:text-lg leading-relaxed mb-5">
+            Some of us have backpack carriers. Some of us have goldfish crackers crushed
+            into every surface of the car. Most of us have both.
+          </p>
+          <p className="text-inkl text-base md:text-lg leading-relaxed mb-5">
+            Wilder Moms outings are meant to be easy enough to say yes to.
+          </p>
+          <p className="text-inkl text-base md:text-lg leading-relaxed mb-5">
+            Come late. Turn around early. Carry the toddler. Let the five-year-old
+            spend twenty minutes investigating one rock.
+          </p>
+          <p className="text-inkl text-base md:text-lg leading-relaxed mb-7">
+            There is nowhere important we need to get.
+          </p>
+          <p className="font-serif italic text-xl md:text-2xl text-ink">
+            The point is being there together.
+          </p>
+        </motion.div>
+
+        <hr className="border-inkll/15 mb-16 md:mb-20" />
+
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={visible ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+          transition={{ duration: 0.7, delay: 0.05 }}
+          className="mb-16 md:mb-20"
+        >
+          <h2 className="font-serif font-light text-3xl md:text-4xl text-ink leading-tight mb-2">
+            Kids need outside.
+          </h2>
+          <p className="font-serif italic text-2xl md:text-3xl text-ember leading-snug mb-8">
+            So do moms.
+          </p>
+          <p className="text-inkl text-base md:text-lg leading-relaxed mb-6">
+            Outside gives kids room to move, explore, get dirty, invent things, and be kids.
+          </p>
+          <p className="text-inkl text-base md:text-lg leading-relaxed mb-6">
+            But something happens for us, too.
+          </p>
+          <p className="text-inkl text-base md:text-lg leading-relaxed mb-8">
+            There are fewer walls. Less stuff to manage. No house to clean before
+            someone comes over. No toys to share perfectly. No pressure to make the
+            afternoon magical.
+          </p>
+          <p className="font-serif text-xl md:text-2xl text-ink leading-snug mb-2">
+            We walk.
+          </p>
+          <p className="font-serif text-xl md:text-2xl text-ink leading-snug mb-2">
+            We talk.
+          </p>
+          <p className="font-serif text-xl md:text-2xl text-ink leading-snug mb-8">
+            We breathe.
+          </p>
+          <p className="text-inkl text-base md:text-lg leading-relaxed">
+            And for a little while, motherhood feels less like something we're carrying
+            individually and more like something we're doing together.
+          </p>
+        </motion.div>
+
+        <hr className="border-inkll/15 mb-16 md:mb-20" />
+
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={visible ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+          transition={{ duration: 0.7, delay: 0.1 }}
+        >
+          <h2 className="font-serif font-light text-3xl md:text-4xl text-ink leading-tight mb-7">
+            You can come alone.
+          </h2>
+          <p className="text-inkl text-base md:text-lg leading-relaxed mb-6">
+            Actually, we hope you do.
+          </p>
+          <p className="text-inkl text-base md:text-lg leading-relaxed mb-6">
+            Walking into something where everyone seems to know each other can feel
+            weird. We know.
+          </p>
+          <p className="text-inkl text-base md:text-lg leading-relaxed mb-5">
+            So here's what you need to know:
+          </p>
+          <ul className="text-inkl text-base md:text-lg leading-relaxed mb-8 space-y-1.5">
+            <li>There will be other new moms.</li>
+            <li>There will be kids having feelings.</li>
+            <li>There will be snacks.</li>
+            <li>Nobody cares what you're wearing.</li>
+            <li>Nobody is counting miles.</li>
+            <li>And nobody expects you to already belong.</li>
+          </ul>
+          <p className="font-serif italic text-2xl md:text-3xl text-ink">
+            That's the whole invitation.
+          </p>
+        </motion.div>
       </div>
     </section>
   )
@@ -476,9 +606,10 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <AfterWorkHour />
+      <ManifestoCh1 />
       <CurrentDropShowcase />
-      <ArchitectMotherSection />
+      <ManifestoCh2And3 />
+      <ManifestoCh4To6 />
       <ChooseYourPathTiles />
       <PremiumSubscriptionPitch />
     </>
