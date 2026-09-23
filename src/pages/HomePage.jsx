@@ -41,7 +41,7 @@ function WilderMomsIntro() {
             to="/welcome"
             className="inline-flex items-center gap-2 bg-ember text-white px-8 py-3 rounded-full font-medium text-sm hover:bg-terra transition-colors"
           >
-            Find your wilder
+            Find your wilder habitat
             <span aria-hidden="true">→</span>
           </Link>
         </motion.div>

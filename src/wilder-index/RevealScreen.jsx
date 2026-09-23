@@ -148,7 +148,7 @@ export default function RevealScreen({ scores, summary, profile, onContinue }) {
           className="text-center mb-10"
         >
           <p className="text-ember text-xs font-medium uppercase tracking-[0.2em] mb-4">
-            Your Wilder Index
+            Your Wilder Habitat
           </p>
           <h1 className="font-serif font-light text-4xl md:text-6xl text-ink leading-[0.95] mb-5">
             This is your family's <em className="text-ember">pattern.</em>

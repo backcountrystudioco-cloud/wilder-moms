@@ -20,7 +20,7 @@ function IndexHeader({ onReset, familyName }) {
     <div className="mb-6">
       <div className="flex items-center gap-3 mb-3 flex-wrap">
         <span className="text-ember font-sans font-medium text-xs uppercase tracking-[0.2em]">
-          The Wilder Index
+          The Wilder Habitat
         </span>
         <span className="w-1 h-1 rounded-full bg-inkll" />
         <span className="text-inkll font-sans text-xs uppercase tracking-[0.15em]">
@@ -80,7 +80,7 @@ function Dashboard() {
       <div className="max-w-5xl mx-auto">
         <IndexHeader
           onReset={() => {
-            if (window.confirm('Reset the Wilder Index? Your scores and history will be cleared.')) {
+            if (window.confirm('Reset the Wilder Habitat? Your scores and history will be cleared.')) {
               resetIndex()
               try { window.localStorage.removeItem(REVEAL_KEY) } catch (e) {}
             }
@@ -205,13 +205,13 @@ function SignInGate() {
       </div>
       <div className="max-w-xl mx-auto text-center mt-12 md:mt-16">
         <p className="text-ember text-xs font-medium uppercase tracking-[0.2em] mb-5">
-          The Wilder Index
+          The Wilder Habitat
         </p>
         <h1 className="font-serif font-light text-4xl md:text-5xl text-ink leading-tight mb-5">
           Sign in to read your <em className="text-ember">neighborhood.</em>
         </h1>
         <p className="text-inkl text-base md:text-lg leading-relaxed max-w-md mx-auto mb-8">
-          Your Wilder Index is a personal dashboard of your home, your block, and the small
+          Your Wilder Habitat is a personal dashboard of your home, your block, and the small
           changes that compound. Sign in to see yours, or take the free reading first.
         </p>
 

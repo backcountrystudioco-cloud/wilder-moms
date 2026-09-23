@@ -7,7 +7,7 @@ export const ACHIEVEMENTS = [
   {
     id: 'field-noted',
     title: 'Field Noted',
-    blurb: 'Completed the Wilder Index field check.',
+    blurb: 'Completed the Wilder Habitat field check.',
     detail: 'You read your neighborhood. That\'s the whole game.',
     icon: '',
   },

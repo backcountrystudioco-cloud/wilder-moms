@@ -506,7 +506,7 @@ function ContextStep({ answers, onChange, onBack, onNext, isLast }) {
           onClick={onNext}
           className="text-ember hover:text-terra font-medium"
         >
-          {isLast ? 'See my Wilder Index →' : 'Continue →'}
+          {isLast ? 'See my Wilder Habitat →' : 'Continue →'}
         </button>
       </div>
     </motion.div>

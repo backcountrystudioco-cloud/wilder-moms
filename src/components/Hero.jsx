@@ -69,7 +69,7 @@ export default function Hero() {
               to="/welcome"
               className="inline-flex items-center justify-center gap-2 bg-ember text-white px-7 py-3 rounded-full font-medium text-sm hover:bg-terra transition-colors"
             >
-              Find your wilder week
+              Find your wilder habitat
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
