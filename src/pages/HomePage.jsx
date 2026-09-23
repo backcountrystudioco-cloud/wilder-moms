@@ -10,7 +10,7 @@ import {
 } from '../wilder-builds/buildsLibrary'
 import { useScrollReveal, fadeUpVariants } from '../hooks/useScrollReveal'
 
-function ManifestoCh1() {
+function WilderMomsIntro() {
   const [ref, visible] = useScrollReveal()
 
   return (
@@ -22,37 +22,41 @@ function ManifestoCh1() {
           transition={{ duration: 0.7 }}
         >
           <p className="text-gold text-xs font-medium uppercase tracking-[0.2em] mb-6">
-            Why we made this
+            Wilder Moms
           </p>
           <h2 className="font-serif font-light text-4xl md:text-5xl lg:text-6xl leading-tight mb-10">
-            Motherhood is better with people.
+            A little more wild in everyday motherhood.
           </h2>
+          <p className="font-serif text-xl md:text-2xl text-white/90 leading-relaxed mb-10">
+            Go outside. Bring some of it home. Make something. Meet someone.
+          </p>
           <p className="text-white/65 text-base md:text-lg leading-relaxed mb-8 max-w-2xl mx-auto">
-            Somewhere along the way, raising kids got strangely lonely. We live farther
-            from family. Our friends are scattered across town. Schedules are packed.
-            Playdates take planning. And somehow we're supposed to build a village
-            while also packing the snacks, finding the missing shoe, answering the
-            email, making dinner, and keeping tiny humans alive.
+            Wilder Moms is about creating more room for kids to explore, make,
+            wander, and wonder — and more ways for moms to do it together.
           </p>
-          <p className="font-serif italic text-2xl md:text-3xl text-white/55 mb-8">
-            That's a lot.
+          <p className="font-serif italic text-base text-white/55 mb-10">
+            Nothing elaborate required.
           </p>
-          <p className="text-white/85 text-base md:text-lg leading-relaxed max-w-2xl mx-auto">
-            So we made something simpler.
-          </p>
+          <Link
+            to="/welcome"
+            className="inline-flex items-center gap-2 bg-ember text-white px-8 py-3 rounded-full font-medium text-sm hover:bg-terra transition-colors"
+          >
+            Find your wilder
+            <span aria-hidden="true">→</span>
+          </Link>
         </motion.div>
       </div>
     </section>
   )
 }
 
-function ManifestoCh2And3() {
+function WilderTrailsSection() {
   const [ref, visible] = useScrollReveal()
 
   return (
     <section ref={ref} className="py-20 md:py-28 bg-parchment">
       <div className="max-w-6xl mx-auto px-6">
-        <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center mb-20 md:mb-28">
+        <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
           <motion.div
             initial={{ opacity: 0, x: -18 }}
             animate={visible ? { opacity: 1, x: 0 } : { opacity: 0, x: -18 }}
@@ -60,17 +64,17 @@ function ManifestoCh2And3() {
             className="relative aspect-[4/3] overflow-hidden rounded-3xl"
           >
             <img
-              src="/images/Mission.png"
-              alt="Moms and kids stepping outside together"
+              src="/images/mom-hiking.jpg"
+              alt="A mom and kids on a local trail"
               className="w-full h-full object-cover"
               loading="lazy"
             />
             <div className="absolute left-4 bottom-4 bg-cream/95 rounded-xl px-4 py-3 max-w-[14rem]">
               <p className="text-ember text-[10px] uppercase tracking-[0.18em] font-medium mb-1">
-                Come outside
+                Wilder Trails
               </p>
               <p className="font-serif text-lg leading-tight text-ink">
-                Just come.
+                Somewhere to go.
               </p>
             </div>
           </motion.div>
@@ -81,190 +85,151 @@ function ManifestoCh2And3() {
             transition={{ duration: 0.7, delay: 0.1 }}
           >
             <p className="text-ember text-xs font-medium uppercase tracking-[0.2em] mb-4">
-              The invitation
+              Wilder Trails
             </p>
             <h2 className="font-serif font-light text-4xl md:text-5xl text-ink leading-tight mb-5">
-              Come outside.
+              Somewhere to go.
             </h2>
             <p className="text-inkl text-base md:text-lg leading-relaxed mb-5">
-              Wilder Moms brings moms and kids together for easy, local adventures outside.
+              Easy, local ways to get outside with your kids and other moms.
             </p>
             <p className="text-inkl text-base md:text-lg leading-relaxed mb-5">
-              A walk. A trail. A creek. A morning at the park.
+              A trail. A creek. A walk around the neighborhood. A place to
+              stop and stay awhile.
             </p>
-            <p className="font-serif italic text-base text-inkl mb-5">
-              Nothing impressive required.
+            <p className="text-inkl text-base md:text-lg leading-relaxed mb-5">
+              Come late. Turn around early. Let them spend twenty minutes with one rock.
             </p>
-            <ul className="text-inkl text-base leading-relaxed mb-6 space-y-1.5">
-              <li>You don't need to be outdoorsy.</li>
-              <li>You don't need fancy gear.</li>
-              <li>You don't need to know anyone.</li>
-              <li>And you definitely don't need to have it together.</li>
-            </ul>
-            <p className="font-serif text-2xl text-ink mb-5">
-              Just come.
+            <p className="font-serif italic text-base text-inkl mb-7">
+              There is nowhere important we need to get.
             </p>
-            <p className="text-inkl text-base leading-relaxed mb-5">
-              Your kids can wander. You can talk to another grown-up. Maybe everyone
-              gets a little muddy. Maybe somebody has a meltdown. Maybe you meet the
-              person you'll text next Tuesday when the afternoon feels approximately
-              nine hours long.
-            </p>
-            <p className="font-serif italic text-base text-inkl">
-              That's kind of the idea.
-            </p>
+            <Link
+              to="/wilder-trails"
+              className="inline-flex items-center gap-2 bg-ember text-white px-7 py-3 rounded-full font-medium text-sm hover:bg-terra transition-colors"
+            >
+              Explore Wilder Trails
+              <span aria-hidden="true">→</span>
+            </Link>
           </motion.div>
         </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={visible ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
-          transition={{ duration: 0.7, delay: 0.15 }}
-          className="text-center max-w-3xl mx-auto"
-        >
-          <h3 className="font-serif font-light text-3xl md:text-4xl text-ink leading-tight mb-8">
-            This isn't really about hiking.
-          </h3>
-          <div className="text-inkl text-base md:text-lg leading-relaxed space-y-3 mb-10 max-w-2xl mx-auto">
-            <p>It's about having somewhere to go.</p>
-            <p>It's about recognizing a face when you arrive.</p>
-            <p>It's about someone else remembering your kid's name.</p>
-            <p>It's about conversations that start on the trail and eventually become:</p>
-          </div>
-          <p className="font-serif italic text-2xl text-ink mb-10">
-            We're heading outside. Want to come?
-          </p>
-          <p className="text-inkl text-base md:text-lg leading-relaxed mb-10 max-w-2xl mx-auto">
-            Because motherhood was never meant to happen alone. And finding your people
-            shouldn't feel like another thing you have to accomplish.
-          </p>
-          <Link
-            to="/welcome"
-            className="inline-flex items-center gap-2 bg-ember text-white px-8 py-3 rounded-full font-medium text-sm hover:bg-terra transition-colors"
-          >
-            We'll meet you outside. Find your local Wilder Moms
-            <span aria-hidden="true">→</span>
-          </Link>
-        </motion.div>
       </div>
     </section>
   )
 }
 
-function ManifestoCh4To6() {
+function WilderHomeSection() {
   const [ref, visible] = useScrollReveal()
 
   return (
     <section ref={ref} className="py-20 md:py-28 bg-cream">
-      <div className="max-w-3xl mx-auto px-6">
+      <div className="max-w-6xl mx-auto px-6">
+        <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+          <motion.div
+            initial={{ opacity: 0, x: -18 }}
+            animate={visible ? { opacity: 1, x: 0 } : { opacity: 0, x: -18 }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="order-2 md:order-1"
+          >
+            <p className="text-ember text-xs font-medium uppercase tracking-[0.2em] mb-4">
+              Wilder Home
+            </p>
+            <h2 className="font-serif font-light text-4xl md:text-5xl text-ink leading-tight mb-5">
+              Make a little wild where you are.
+            </h2>
+            <p className="text-inkl text-base md:text-lg leading-relaxed mb-5">
+              Bring nature home. Build something together. Turn an overlooked
+              corner into somewhere your kids want to be.
+            </p>
+            <ul className="text-inkl text-base md:text-lg leading-relaxed mb-5 space-y-1.5">
+              <li>A making table by the window.</li>
+              <li>A tiny nook under the stairs.</li>
+              <li>A place for rocks, sticks, leaves, and whatever came home in their pockets.</li>
+              <li>A backyard build that changes with the seasons.</li>
+            </ul>
+            <p className="text-inkl text-base md:text-lg leading-relaxed mb-7">
+              Small ideas for creating homes that invite curiosity, independence,
+              making, and connection.
+            </p>
+            <Link
+              to="/wilder-homes"
+              className="inline-flex items-center gap-2 bg-ember text-white px-7 py-3 rounded-full font-medium text-sm hover:bg-terra transition-colors"
+            >
+              Explore Wilder Home
+              <span aria-hidden="true">→</span>
+            </Link>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 18 }}
+            animate={visible ? { opacity: 1, x: 0 } : { opacity: 0, x: 18 }}
+            transition={{ duration: 0.7 }}
+            className="relative aspect-[4/3] overflow-hidden rounded-3xl order-1 md:order-2"
+          >
+            <img
+              src="/images/Mission.png"
+              alt="A making corner at home where kids can build and explore"
+              className="w-full h-full object-cover"
+              loading="lazy"
+            />
+            <div className="absolute left-4 bottom-4 bg-cream/95 rounded-xl px-4 py-3 max-w-[14rem]">
+              <p className="text-ember text-[10px] uppercase tracking-[0.18em] font-medium mb-1">
+                Wilder Home
+              </p>
+              <p className="font-serif text-lg leading-tight text-ink">
+                Make a little wild where you are.
+              </p>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function MotherhoodClosingManifesto() {
+  const [ref, visible] = useScrollReveal()
+
+  return (
+    <section ref={ref} className="py-20 md:py-28 bg-ink text-white">
+      <div className="max-w-3xl mx-auto px-6 text-center">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={visible ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
           transition={{ duration: 0.7 }}
-          className="mb-16 md:mb-20"
         >
-          <p className="text-ember text-xs font-medium uppercase tracking-[0.2em] mb-4">
-            No experience necessary
-          </p>
-          <h2 className="font-serif font-light text-3xl md:text-4xl text-ink leading-tight mb-7">
-            No experience necessary.
+          <h2 className="font-serif font-light text-3xl md:text-5xl text-white leading-tight mb-10">
+            Motherhood is better with people.
           </h2>
-          <p className="text-inkl text-base md:text-lg leading-relaxed mb-5">
-            Seriously.
+          <div className="text-white/70 text-base md:text-lg leading-relaxed space-y-4 mb-10 max-w-2xl mx-auto text-left">
+            <p>It shouldn't take six texts and a perfectly planned playdate to see another grown-up.</p>
+            <p>Sometimes you just need somewhere to go.</p>
+            <p>Something to make.</p>
+            <p>A reason to step outside.</p>
+            <p>A place where the kids can begin on their own and you can sit beside another mom for a minute.</p>
+          </div>
+          <p className="font-serif italic text-2xl text-white/85 mb-3">
+            That's Wilder.
           </p>
-          <p className="text-inkl text-base md:text-lg leading-relaxed mb-5">
-            You do not have to be a hiking family.
+          <p className="font-serif text-xl text-gold mb-14">
+            Come as you are.
           </p>
-          <p className="text-inkl text-base md:text-lg leading-relaxed mb-5">
-            Some of us have backpack carriers. Some of us have goldfish crackers crushed
-            into every surface of the car. Most of us have both.
-          </p>
-          <p className="text-inkl text-base md:text-lg leading-relaxed mb-5">
-            Wilder Moms outings are meant to be easy enough to say yes to.
-          </p>
-          <p className="text-inkl text-base md:text-lg leading-relaxed mb-5">
-            Come late. Turn around early. Carry the toddler. Let the five-year-old
-            spend twenty minutes investigating one rock.
-          </p>
-          <p className="text-inkl text-base md:text-lg leading-relaxed mb-7">
-            There is nowhere important we need to get.
-          </p>
-          <p className="font-serif italic text-xl md:text-2xl text-ink">
-            The point is being there together.
-          </p>
-        </motion.div>
-
-        <hr className="border-inkll/15 mb-16 md:mb-20" />
-
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={visible ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
-          transition={{ duration: 0.7, delay: 0.05 }}
-          className="mb-16 md:mb-20"
-        >
-          <h2 className="font-serif font-light text-3xl md:text-4xl text-ink leading-tight mb-2">
-            Kids need outside.
-          </h2>
-          <p className="font-serif italic text-2xl md:text-3xl text-ember leading-snug mb-8">
-            So do moms.
-          </p>
-          <p className="text-inkl text-base md:text-lg leading-relaxed mb-6">
-            Outside gives kids room to move, explore, get dirty, invent things, and be kids.
-          </p>
-          <p className="text-inkl text-base md:text-lg leading-relaxed mb-6">
-            But something happens for us, too.
-          </p>
-          <p className="text-inkl text-base md:text-lg leading-relaxed mb-8">
-            There are fewer walls. Less stuff to manage. No house to clean before
-            someone comes over. No toys to share perfectly. No pressure to make the
-            afternoon magical.
-          </p>
-          <p className="font-serif text-xl md:text-2xl text-ink leading-snug mb-2">
-            We walk.
-          </p>
-          <p className="font-serif text-xl md:text-2xl text-ink leading-snug mb-2">
-            We talk.
-          </p>
-          <p className="font-serif text-xl md:text-2xl text-ink leading-snug mb-8">
-            We breathe.
-          </p>
-          <p className="text-inkl text-base md:text-lg leading-relaxed">
-            And for a little while, motherhood feels less like something we're carrying
-            individually and more like something we're doing together.
-          </p>
-        </motion.div>
-
-        <hr className="border-inkll/15 mb-16 md:mb-20" />
-
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={visible ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
-          transition={{ duration: 0.7, delay: 0.1 }}
-        >
-          <h2 className="font-serif font-light text-3xl md:text-4xl text-ink leading-tight mb-7">
-            You can come alone.
-          </h2>
-          <p className="text-inkl text-base md:text-lg leading-relaxed mb-6">
-            Actually, we hope you do.
-          </p>
-          <p className="text-inkl text-base md:text-lg leading-relaxed mb-6">
-            Walking into something where everyone seems to know each other can feel
-            weird. We know.
-          </p>
-          <p className="text-inkl text-base md:text-lg leading-relaxed mb-5">
-            So here's what you need to know:
-          </p>
-          <ul className="text-inkl text-base md:text-lg leading-relaxed mb-8 space-y-1.5">
-            <li>There will be other new moms.</li>
-            <li>There will be kids having feelings.</li>
-            <li>There will be snacks.</li>
-            <li>Nobody cares what you're wearing.</li>
-            <li>Nobody is counting miles.</li>
-            <li>And nobody expects you to already belong.</li>
-          </ul>
-          <p className="font-serif italic text-2xl md:text-3xl text-ink">
-            That's the whole invitation.
-          </p>
+          <div className="border-t border-white/20 pt-10 max-w-md mx-auto">
+            <p className="font-serif italic text-base text-white/65 mb-1">
+              Wilder Trails
+            </p>
+            <p className="text-white/85 mb-6">
+              Go somewhere.
+            </p>
+            <p className="font-serif italic text-base text-white/65 mb-1">
+              Wilder Home
+            </p>
+            <p className="text-white/85 mb-6">
+              Make somewhere.
+            </p>
+            <p className="font-serif italic text-sm text-white/45">
+              Either way, start close to home.
+            </p>
+          </div>
         </motion.div>
       </div>
     </section>
@@ -468,121 +433,6 @@ function PricingPill({ amount, cadence, sub, badge, highlight = false }) {
 }
 
 // ---------------------------------------------------------------------
-// 3 Destinations — Survey / Homes / Trails
-// ---------------------------------------------------------------------
-const paths = [
-  {
-    to: '/welcome',
-    eyebrow: 'Start here',
-    heading: "What's your wilder week?",
-    subtitle: 'A few questions about your week and your block — get a starting spot, three small swaps, and one quiet reset.',
-    accentClass: 'bg-ember/15',
-    blobFrom: '#B43C1E',
-    blobTo: '#F2A57B',
-    tag: '3 min · free',
-  },
-  {
-    to: '/wilder-homes',
-    eyebrow: 'For a yes-space at home',
-    heading: 'Make room for play.',
-    subtitle: 'Backyard, balcony, and doorstep builds where kids can start on their own using sticks, water, scraps, and what is already around.',
-    accentClass: 'bg-olive/15',
-    blobFrom: '#5A6428',
-    blobTo: '#96963C',
-  },
-  {
-    to: '/wilder-trails',
-    eyebrow: 'For after-work',
-    heading: 'Find somewhere to stop.',
-    subtitle: 'A nearby route with a seat, some shade, and room to let them go on ahead without turning you into the trip leader.',
-    accentClass: 'bg-gold/15',
-    blobFrom: '#D2961E',
-    blobTo: '#F2A57B',
-  },
-]
-
-function ChooseYourPathTiles() {
-  const [ref, visible] = useScrollReveal()
-
-  return (
-    <section ref={ref} className="py-20 md:py-28 bg-blush/30">
-      <div className="max-w-6xl mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={visible ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
-          transition={{ duration: 0.7 }}
-          className="text-center mb-12"
-        >
-          <p className="text-ember text-xs font-medium uppercase tracking-[0.2em] mb-4">
-            Use what you need today
-          </p>
-          <h2 className="font-serif italic text-3xl md:text-4xl lg:text-5xl text-ink">
-            Outside, without the production.
-          </h2>
-          <p className="text-inkll font-serif italic text-sm max-w-xl mx-auto mt-4">
-            A neighborhood matters more than a backyard.
-          </p>
-        </motion.div>
-
-        <div className="grid md:grid-cols-3 gap-6">
-          {paths.map((p, i) => (
-            <motion.div
-              key={p.to}
-              initial={{ opacity: 0, y: 16 }}
-              animate={visible ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
-              transition={{ duration: 0.7, delay: 0.1 + i * 0.1 }}
-            >
-              <Link
-                to={p.to}
-                className="group relative block bg-white rounded-3xl p-8 border-2 border-inkll/10 hover:border-ember/50 transition-all h-full"
-              >
-                <div
-                  className="absolute -top-10 -right-10 w-40 h-40 rounded-full opacity-50 blur-2xl pointer-events-none"
-                  style={{
-                    background: `radial-gradient(circle at center, ${p.blobFrom} 0%, ${p.blobTo} 60%, transparent 100%)`,
-                  }}
-                />
-                <div className="relative z-10 flex flex-col h-full">
-                  <p className={`text-[10px] uppercase tracking-[0.2em] font-medium mb-4 rounded-full px-3 py-1 inline-block self-start ${
-                    p.tag
-                      ? 'bg-ember text-white'
-                      : `${p.accentClass} text-ember`
-                  }`}>
-                    {p.eyebrow}
-                  </p>
-                  <h3 className="font-serif italic text-3xl md:text-4xl text-ink mb-4">
-                    {p.heading}
-                  </h3>
-                  <p className="font-sans text-inkl text-sm leading-relaxed flex-grow">
-                    {p.subtitle}
-                  </p>
-                  {p.tag && (
-                    <p className="mt-3 font-serif italic text-xs text-inkll">
-                      {p.tag}
-                    </p>
-                  )}
-                  <div className="mt-6 flex items-center gap-2 text-inkll group-hover:text-ember transition-colors">
-                    <span className="font-sans text-xs uppercase tracking-wider">See the option</span>
-                    <svg
-                      className="w-4 h-4 group-hover:translate-x-1 transition-transform"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </div>
-                </div>
-              </Link>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-// ---------------------------------------------------------------------
 // Page
 // ---------------------------------------------------------------------
 export default function HomePage() {
@@ -606,11 +456,11 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <ManifestoCh1 />
+      <WilderMomsIntro />
       <CurrentDropShowcase />
-      <ManifestoCh2And3 />
-      <ManifestoCh4To6 />
-      <ChooseYourPathTiles />
+      <WilderTrailsSection />
+      <WilderHomeSection />
+      <MotherhoodClosingManifesto />
       <PremiumSubscriptionPitch />
     </>
   )
