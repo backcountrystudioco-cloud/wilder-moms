@@ -137,8 +137,8 @@ export default function Hero() {
         {/* Visual: a child-led place with a mother's view */}
         <div className="relative min-h-[470px] md:min-h-0 overflow-hidden bg-forest">
           <img
-            src="/builds/fairy-apothecary.png"
-            alt="Children absorbed in an open-ended garden activity"
+            src="/images/Gemini_Generated_Image_e4ehc0e4ehc0e4eh.jpg"
+            alt="A mother's view of her kids outside"
             className="absolute inset-0 w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-br from-forest/40 via-transparent to-ink/80" />
