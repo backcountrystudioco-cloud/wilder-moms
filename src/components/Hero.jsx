@@ -33,7 +33,7 @@ export default function Hero() {
             custom={1}
             className="font-serif font-light text-5xl md:text-6xl lg:text-7xl text-ink leading-[0.95] mb-7 max-w-xl"
           >
-            The kind of outside<br />
+            The outside<br />
             <em className="text-ember">you choose over the couch.</em>
           </motion.h1>
 
@@ -44,8 +44,8 @@ export default function Hero() {
             custom={2}
             className="text-inkl font-sans text-base md:text-lg leading-relaxed mb-4 max-w-lg"
           >
-            Some nights the whole shape of motherhood is a closed door. The couch
-            is the softest one. Some nights, you want a third.
+            Motherhood has more closed doors than open ones. The couch is the
+            softest kind. Some nights, you want a third.
           </motion.p>
 
           <motion.p
@@ -63,7 +63,7 @@ export default function Hero() {
             initial="hidden"
             animate="visible"
             custom={3}
-            className="mb-4 flex flex-col sm:flex-row gap-3"
+            className="mb-7 flex flex-col sm:flex-row gap-3"
           >
             <Link
               to="/welcome"
@@ -89,11 +89,9 @@ export default function Hero() {
             custom={4}
             className="text-inkll font-sans text-xs mb-7"
           >
-            No packing list. No activity to lead. Start close to home.
-            <br />
             <Link
               to="/wilder-trails"
-              className="inline-flex items-center gap-1 mt-1 text-inkll hover:text-ember transition-colors"
+              className="inline-flex items-center gap-1 text-inkll hover:text-ember transition-colors"
             >
               Or check nearby trails
               <span aria-hidden="true">→</span>

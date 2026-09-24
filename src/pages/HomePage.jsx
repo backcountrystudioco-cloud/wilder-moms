@@ -64,8 +64,8 @@ function WilderTrailsSection() {
             className="relative aspect-[4/3] overflow-hidden rounded-3xl"
           >
             <img
-              src="/images/mom-hiking.jpg"
-              alt="A mom and kids on a local trail"
+              src="/images/builds/rock-cairn.jpg"
+              alt="A rock cairn marking a local trail"
               className="w-full h-full object-cover"
               loading="lazy"
             />
