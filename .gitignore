@@ -9,5 +9,5 @@ dist
 # Source PDFs (live in Supabase Storage)
 PDFs/
 HIKES/
-IMAGES/
+/IMAGES/
 LOGO/
