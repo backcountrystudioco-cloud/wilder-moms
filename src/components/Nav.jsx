@@ -76,12 +76,12 @@ export default function Nav() {
               Wilder Trails
             </Link>
 
-            {/* Wilder Homes */}
+            {/* Trail Craft */}
             <Link
-              to="/wilder-homes"
+              to="/trail-craft"
               className="font-sans font-medium text-sm uppercase tracking-[0.08em] text-ink hover:text-ember transition-colors"
             >
-              Wilder Homes
+              Trail Craft
             </Link>
 
             {/* Wilder Philosophy */}

@@ -186,6 +186,44 @@ function WilderHomeSection() {
   )
 }
 
+function TrailCraftSection() {
+  const [ref, visible] = useScrollReveal()
+
+  return (
+    <section ref={ref} className="py-20 md:py-28 bg-cream">
+      <div className="max-w-3xl mx-auto px-6 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={visible ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+          transition={{ duration: 0.7 }}
+        >
+          <p className="text-ember text-xs font-medium uppercase tracking-[0.2em] mb-4">
+            Trail Craft
+          </p>
+          <h2 className="font-serif font-light text-4xl md:text-5xl text-ink leading-tight mb-5">
+            What did your kids bring home?
+          </h2>
+          <p className="text-inkl text-base md:text-lg leading-relaxed mb-8 max-w-2xl mx-auto">
+            Drop in a photo of what you collected on the trail — leaves, sticks,
+            feathers, rocks. Wilder sketches a simple craft, lists what you need,
+            and walks you through it step by step.
+          </p>
+          <Link
+            to="/trail-craft"
+            className="inline-flex items-center gap-2 bg-ember text-white px-8 py-3 rounded-full font-medium text-sm hover:bg-terra transition-colors"
+          >
+            Make a trail craft
+            <span aria-hidden="true">→</span>
+          </Link>
+          <p className="text-inkll font-serif italic text-sm mt-5">
+            Takes about 30 seconds.
+          </p>
+        </motion.div>
+      </div>
+    </section>
+  )
+}
+
 function MotherhoodClosingManifesto() {
   const [ref, visible] = useScrollReveal()
 
@@ -459,7 +497,7 @@ export default function HomePage() {
       <WilderMomsIntro />
       <CurrentDropShowcase />
       <WilderTrailsSection />
-      <WilderHomeSection />
+      <TrailCraftSection />
       <MotherhoodClosingManifesto />
       <PremiumSubscriptionPitch />
     </>

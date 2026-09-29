@@ -75,10 +75,10 @@ export default function Hero() {
               </svg>
             </Link>
             <Link
-              to="/wilder-homes"
+              to="/trail-craft"
               className="inline-flex items-center justify-center gap-2 px-7 py-3 rounded-full font-medium text-sm text-ember border border-ember hover:bg-ember/5 transition-colors"
             >
-              Browse wilder homes
+              Make a trail craft
             </Link>
           </motion.div>
 
