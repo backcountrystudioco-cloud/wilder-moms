@@ -11,6 +11,7 @@ import ExplorePage from './pages/ExplorePage'
 import SurveyPage from './pages/SurveyPage'
 import WilderIndexPage from './wilder-index/WilderIndexPage'
 import FreeReading from './wilder-index/FreeReading'
+import TrailCraftPage from './pages/TrailCraftPage'
 import { WilderIndexProvider } from './wilder-index/WilderIndexContext'
 import LocationPage from './wilder-trails/LocationPage'
 import WhosComingPage from './wilder-trails/WhosComingPage'
@@ -39,6 +40,7 @@ function App() {
             <Route path="/discover" element={<FreeReading />} />
             <Route path="/join" element={<JoinPage />} />
             <Route path="/welcome" element={<WilderIndexPage />} />
+            <Route path="/trail-craft" element={<TrailCraftPage />} />
             <Route path="/landing" element={<HomePage />} />
             <Route element={<AppLayoutWithoutFooter />}>
               <Route path="/wilder-trails" element={<Navigate to="/wilder-trails/location" replace />} />
