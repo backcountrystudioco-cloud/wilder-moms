@@ -1,66 +1,15 @@
 import { motion } from 'framer-motion'
-import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { fadeUpVariants } from '../hooks/useScrollReveal'
 
 const avatarInitials = ['MH', 'JL', 'SR', 'KC']
 
 export default function Hero() {
-  const videoRef = useRef(null)
-  const heroRef = useRef(null)
-  const [isFloating, setIsFloating] = useState(false)
-
-  useEffect(() => {
-    const video = videoRef.current
-    let animationFrame = 0
-
-    const syncVideo = () => {
-      animationFrame = 0
-      const footer = document.querySelector('footer, aside[aria-labelledby="photo-footer-title"]')
-      const isFixedFooter = footer && getComputedStyle(footer).position === 'fixed'
-      const footerHeight = isFixedFooter ? footer.offsetHeight : 0
-      setIsFloating(window.scrollY > 0 && heroRef.current.getBoundingClientRect().bottom <= footerHeight + 240)
-      if (!Number.isFinite(video.duration) || video.duration <= 0) return
-
-      // A fixed footer is always visible; finish at the end of page content.
-      const footerTop = footer && !isFixedFooter
-        ? footer.getBoundingClientRect().top + window.scrollY
-        : document.documentElement.scrollHeight
-      const scrollDistance = Math.max(1, footerTop - window.innerHeight)
-      const progress = Math.min(1, Math.max(0, window.scrollY / scrollDistance))
-      // Seek inside the last frame instead of past the end of the media.
-      const time = progress * Math.max(0, video.duration - 0.001)
-      if (Math.abs(video.currentTime - time) > 0.001) video.currentTime = time
-    }
-
-    const scheduleSync = () => {
-      if (!animationFrame) animationFrame = window.requestAnimationFrame(syncVideo)
-    }
-
-    video.pause()
-    video.addEventListener('loadedmetadata', scheduleSync)
-    video.addEventListener('loadeddata', scheduleSync)
-    window.addEventListener('scroll', scheduleSync, { passive: true })
-    window.addEventListener('resize', scheduleSync)
-    const observer = new ResizeObserver(scheduleSync)
-    observer.observe(document.body)
-    scheduleSync()
-
-    return () => {
-      window.cancelAnimationFrame(animationFrame)
-      video.removeEventListener('loadedmetadata', scheduleSync)
-      video.removeEventListener('loadeddata', scheduleSync)
-      window.removeEventListener('scroll', scheduleSync)
-      window.removeEventListener('resize', scheduleSync)
-      observer.disconnect()
-    }
-  }, [])
-
   return (
-    <section ref={heroRef} className="relative bg-cream pt-24 md:pt-0 md:min-h-screen">
+    <section className="relative overflow-hidden bg-cream pt-24 md:pt-0 md:min-h-screen">
       <div className="grid md:grid-cols-[0.9fr_1.1fr] md:min-h-screen">
         {/* Content */}
-        <div className="order-2 md:order-1 flex flex-col justify-center px-6 md:px-12 lg:px-16 py-14 md:py-24">
+        <div className="flex flex-col justify-center px-6 md:px-12 lg:px-16 py-14 md:py-24">
           <motion.div
             variants={fadeUpVariants}
             initial="hidden"
@@ -186,27 +135,20 @@ export default function Hero() {
         </div>
 
         {/* Visual: a child-led place with a mother's view */}
-        <div className="order-1 md:order-2 relative min-h-[470px] md:min-h-0 overflow-hidden bg-forest">
-          <div className={isFloating
-            ? 'fixed z-40 bottom-[calc(var(--photo-footer-height,80px)+1rem)] right-4 md:right-6 w-64 md:w-96 aspect-video overflow-hidden rounded-xl bg-forest shadow-2xl'
-            : 'absolute inset-0 overflow-hidden'}>
-          <video
-            ref={videoRef}
-            src="/videos/little-magic-space.mp4?v=20261003-1327"
-            preload="auto"
-            muted
-            playsInline
-            aria-label="Little Magic Space"
+        <div className="relative min-h-[470px] md:min-h-0 overflow-hidden bg-forest">
+          <img
+            src="/images/Gemini_Generated_Image_6ki03n6ki03n6ki0.jpeg"
+            alt="A mother's view of her kids outside"
             className="absolute inset-0 w-full h-full object-cover"
           />
-          <div className={`${isFloating ? 'hidden' : ''} absolute inset-0 bg-gradient-to-br from-forest/40 via-transparent to-ink/80`} />
-          <div className={`${isFloating ? 'hidden' : ''} absolute inset-0 bg-gradient-to-t from-ink/80 via-transparent to-transparent`} />
+          <div className="absolute inset-0 bg-gradient-to-br from-forest/40 via-transparent to-ink/80" />
+          <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-transparent to-transparent" />
 
           <motion.div
             initial={{ opacity: 0, y: -16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.6 }}
-            className={`${isFloating ? 'hidden' : ''} absolute top-6 left-6 md:top-10 md:left-10`}
+            className="absolute top-6 left-6 md:top-10 md:left-10"
           >
             <span className="inline-flex items-center gap-2 rounded-full bg-white/90 px-3 py-2 text-ink font-sans text-xs uppercase tracking-wider shadow-lg">
               <span className="w-2 h-2 rounded-full bg-olive" />
@@ -218,7 +160,7 @@ export default function Hero() {
             initial={{ opacity: 0, x: 24 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.7, duration: 0.7 }}
-            className={`${isFloating ? 'hidden' : ''} absolute right-5 bottom-6 md:right-10 md:bottom-10 w-[min(20rem,calc(100%-2.5rem))] rounded-2xl bg-cream/95 p-5 shadow-2xl backdrop-blur-sm`}
+            className="absolute right-5 bottom-6 md:right-10 md:bottom-10 w-[min(20rem,calc(100%-2.5rem))] rounded-2xl bg-cream/95 p-5 shadow-2xl backdrop-blur-sm"
           >
             <p className="text-ember font-sans text-[10px] font-medium uppercase tracking-[0.2em] mb-2">
               A 5:42 p.m. kind of place
@@ -233,7 +175,6 @@ export default function Hero() {
               <span className="border-t border-inkll/50 pt-2">No directing required</span>
             </div>
           </motion.div>
-          </div>
         </div>
       </div>
     </section>
