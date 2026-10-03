@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import Hero from '../components/Hero'
@@ -187,40 +187,56 @@ function WilderHomeSection() {
 }
 
 function TrailCraftSection() {
-  const [ref, visible] = useScrollReveal()
+  const ref = useRef(null)
+
+  useEffect(() => {
+    const footer = ref.current
+    const updateHeight = () => {
+      document.documentElement.style.setProperty('--photo-footer-height', `${footer.offsetHeight}px`)
+    }
+    const observer = new ResizeObserver(updateHeight)
+    observer.observe(footer)
+    updateHeight()
+    return () => {
+      observer.disconnect()
+      document.documentElement.style.removeProperty('--photo-footer-height')
+    }
+  }, [])
 
   return (
-    <section ref={ref} className="py-20 md:py-28 bg-cream">
-      <div className="max-w-3xl mx-auto px-6 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={visible ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
-          transition={{ duration: 0.7 }}
-        >
-          <p className="text-ember text-xs font-medium uppercase tracking-[0.2em] mb-4">
+    <aside
+      ref={ref}
+      aria-labelledby="photo-footer-title"
+      className="fixed inset-x-0 bottom-0 z-40 border-t border-inkll/40 bg-cream shadow-[0_-8px_32px_rgba(60,30,0,0.08)] px-5 pt-4 pb-[max(1rem,env(safe-area-inset-bottom))] md:px-8 md:pt-5 md:pb-[max(1.25rem,env(safe-area-inset-bottom))]"
+    >
+      <div className="max-w-6xl mx-auto flex flex-col gap-3 md:flex-row md:items-center md:justify-between md:gap-8">
+        <div className="max-w-2xl">
+          <p className="text-ember text-[10px] font-medium uppercase tracking-[0.2em] mb-1">
             Trail Craft
           </p>
-          <h2 className="font-serif font-light text-4xl md:text-5xl text-ink leading-tight mb-5">
+          <h2 id="photo-footer-title" className="font-serif font-light text-2xl md:text-3xl text-ink leading-tight mb-1.5">
             What did your kids bring home?
           </h2>
-          <p className="text-inkl text-base md:text-lg leading-relaxed mb-8 max-w-2xl mx-auto">
+          <p className="text-inkl text-sm leading-relaxed">
             Drop in a photo of what you collected on the trail — leaves, sticks,
             feathers, rocks. Wilder sketches a simple craft, lists what you need,
             and walks you through it step by step.
           </p>
+        </div>
+        <div className="flex items-center gap-3 md:flex-col md:gap-2 md:shrink-0">
           <Link
             to="/trail-craft"
-            className="inline-flex items-center gap-2 bg-ember text-white px-8 py-3 rounded-full font-medium text-sm hover:bg-terra transition-colors"
+            className="inline-flex flex-1 md:flex-none items-center justify-center gap-2 bg-ember text-white px-5 md:px-8 py-3 rounded-full font-medium text-sm hover:bg-terra transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ember"
           >
-            Make a trail craft
+            Upload your photo
             <span aria-hidden="true">→</span>
           </Link>
-          <p className="text-inkll font-serif italic text-sm mt-5">
+          <p className="text-inkl font-serif italic text-sm max-w-24 md:max-w-none">
             Takes about 30 seconds.
           </p>
-        </motion.div>
+        </div>
       </div>
-    </section>
+    </aside>
   )
 }
 
@@ -492,14 +508,14 @@ export default function HomePage() {
   }, [])
 
   return (
-    <>
+    <div style={{ paddingBottom: 'var(--photo-footer-height, 240px)' }}>
       <Hero />
       <WilderMomsIntro />
       <CurrentDropShowcase />
       <WilderTrailsSection />
-      <TrailCraftSection />
       <MotherhoodClosingManifesto />
       <PremiumSubscriptionPitch />
-    </>
+      <TrailCraftSection />
+    </div>
   )
 }
